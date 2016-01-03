@@ -71,7 +71,9 @@ any preliminary processing of user-input data should go to formatter's proc - th
 important thing to notice about constructing custom filter! if using custom filter most likely you will supply some collection which will be displayed by AA in dropdown menu (or whatever). if collection member is an array itself the 1st element of that array will be used as a title while the 2nd one will be passed for further processing (e.g. this is what formatter's proc will receive):
 
 ```ruby
-filter :seo_specialist_eq, as: :select, collection: [['Не назначен', :not_assigned]].concat(User.seo_specialists.pluck(:email))
+filter :seo_specialist_eq,
+  as: :select,
+  collection: [['Не назначен', :not_assigned]].concat(User.seo_specialists.pluck(:email))
 ```
 
 in this case AA will display the following options: 'Любой' (displayed by default for any collection), 'Не назначен', 'seo_specialist1@ingate.ru', etc. if user selects option 'Любой' ransacker won't be called at all. Also don't use nil value as the 2nd element of collection member - AA (or ransack) will just ignore filter when user selects this option (no filter will be applied at all).
@@ -94,7 +96,9 @@ class Order < ActiveRecord::Base
   belongs_to :seo_specialist, class_name: User.name
 
   ransacker :seo_specialist,
-    formatter: -> (email) { email == 'not_assigned' ? nil : User.find_by(email: email).id } do |parent|
+    formatter: -> (email) {
+      email == 'not_assigned' ? nil : User.find_by(email: email).id
+    } do |parent|
     parent.table[:seo_specialist_id]
   end
 end
@@ -129,7 +133,9 @@ end
 *active admin page for order*:
 
 ```ruby
-filter :seo_specialist_eq, as: :select, label: 'Специалист',
+filter :seo_specialist_eq,
+  as: :select,
+  label: 'Специалист',
   collection: [['Не назначен', :not_assigned]].concat(User.seo_specialists.pluck(:email))
 ```
 

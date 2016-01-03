@@ -11,10 +11,10 @@ permalink:            pretty
 # Syntax highlighting
 #------------------------------------------------------------------------------
 
-markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
+#markdown: kramdown
+#kramdown:
+  #input: GFM
+  #syntax_highlighter: rouge
 
 #------------------------------------------------------------------------------
 # Setup

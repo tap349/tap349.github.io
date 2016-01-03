@@ -1,26 +1,26 @@
-# Dependencies
-markdown:         redcarpet
-highlighter:      pygments
-
 # Permalinks
-permalink:        pretty
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:            tap349
-#tagline:          'A Jekyll theme'
-#description:      "tap349's blog"
-url:              tap349.github.io
-baseurl:          /
+title:               tap349
+#tagline:             The Jekyll Butler
+url:                 http://tap349.github.io
+paginate:            5
+baseurl:             ''
 
+# Assets
+#
+# We specify the directory for Jekyll so we can use @imports.
+sass:
+  sass_dir:          _sass
+  style:            :compressed
+
+# About/contact
 author:
-  name:           tap
-  #url:            https://twitter.com/mdo
-
-paginate:         5
+  name:              tap349
 
 # Custom vars
-version:          2.1.0
-
-#github:
-  #repo:           https://github.com/poole/hyde
+pages_list:           { 'About': '/about', 'Archive': '/archive' }

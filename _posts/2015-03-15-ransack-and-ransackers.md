@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ransack and ransackers"
+title: ransack and ransackers
 date: 2015-03-15 18:55:28 +0300
 access: public
 categories: [ransack, arel, active admin]
@@ -10,7 +10,7 @@ Active Record uses Arel inside to construct SQL queries.
 
 ransack is a gem to search for specific records of given model - pretty much the way custom scopes operate. it relies upon arel library to perform custom searching.
 
-<!--more-->
+<!-- more -->
 
 the point is that AA uses ransack inside and would apply all search conditions to resulting collection in the end. or else we can do it manually towards any model class or AR relation - ransack monkeypatches ActiveRecord::Base with its `#search` method aliased to `#ransack` (we should pass search conditions from `params[:q]` about which we'll talk next) - this method will return standard AR relation. these search conditions are located inside `params[:q]` hash and this is where they would be placed after applying any particular filter on AA page. every search condition has the form `key => value` where `key` is composed of model attribute and search predicate separated by underscore while `value` contains, well, value to filter by. in case of standard filter specifying existing model attribute AA in filter definition would append search predicate to attribute name by itself - in this case query string would contain the following substring:
 

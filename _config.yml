@@ -9,7 +9,7 @@ url:                  http://tap349.github.io
 baseurl:              /
 
 paginate:             5
-excerpt_separator:    <!--more-->
+excerpt_separator:    <!-- more -->
 
 #==============================================================================
 # About/contact

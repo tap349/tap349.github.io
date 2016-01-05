@@ -220,12 +220,12 @@ a.sidebar-nav-item:focus {
 
 /* Blue */
 .theme-base-0d .sidebar {
-  background-color: #2a657f;
+  background-color: #6a9fb5;
 }
-/*.theme-base-0d .content a,*/
-/*.theme-base-0d .related-posts li a:hover {*/
-  /*color: #333333;*/
-/*}*/
+.theme-base-0d .content a,
+.theme-base-0d .related-posts li a:hover {
+  color: #6a9fb5;
+}
 
 /* Magenta */
 .theme-base-0e .sidebar {
@@ -243,4 +243,9 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .content a,
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
+}
+
+/* tap */
+.theme-base-tap .sidebar {
+  background-color: #2a657f;
 }

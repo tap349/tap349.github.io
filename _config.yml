@@ -1,4 +1,14 @@
 #------------------------------------------------------------------------------
+# Syntax highlighting
+#------------------------------------------------------------------------------
+
+markdown:             kramdown
+
+kramdown:
+  input:              GFM
+  syntax_highlighter: rouge
+
+#------------------------------------------------------------------------------
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
@@ -8,23 +18,17 @@ permalink:            pretty
 #relative_permalinks: true
 
 #------------------------------------------------------------------------------
-# Syntax highlighting
-#------------------------------------------------------------------------------
-
-highlighter: pygments
-#markdown: kramdown
-#kramdown:
-  #input: GFM
-  #syntax_highlighter: rouge
-
-#------------------------------------------------------------------------------
 # Setup
 #------------------------------------------------------------------------------
 
 title:                tap349
+tagline:              my blog
+description:          my blog
 url:                  http://tap349.github.io
+baseurl:              /
+
 paginate:             5
-baseurl:              ''
+excerpt_separator:    <!--more-->
 
 #------------------------------------------------------------------------------
 # Assets
@@ -41,15 +45,16 @@ sass:
 #------------------------------------------------------------------------------
 
 author:
-  name:               tap349
+  name:               tap
+  url:                https://github.com/tap349
 
-#------------------------------------------------------------------------------
-# Custom vars
-#------------------------------------------------------------------------------
+version:              1.0.0
 
-pages_list:           { 'Archive': '/archive' }
+#github:
+  #repo:              https://github.com/poole/hyde
 
 #------------------------------------------------------------------------------
 # Gems
 #------------------------------------------------------------------------------
-gems:                 [jekyll-paginate]
+
+gems:                 [jekyll-paginate, jekyll-gist]

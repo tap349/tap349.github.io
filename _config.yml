@@ -2,11 +2,12 @@
 # Syntax highlighting
 #------------------------------------------------------------------------------
 
-markdown:             kramdown
+markdown:             redcarpet
+highlighter:          pygments
 
-kramdown:
-  input:              GFM
-  syntax_highlighter: rouge
+#kramdown:
+  #input:              GFM
+  #syntax_highlighter: rouge
 
 #------------------------------------------------------------------------------
 # Permalinks

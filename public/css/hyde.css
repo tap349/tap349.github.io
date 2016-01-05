@@ -220,11 +220,11 @@ a.sidebar-nav-item:focus {
 
 /* Blue */
 .theme-base-0d .sidebar {
-  background-color: #2a5f75;
+  background-color: #2a657f;
 }
 .theme-base-0d .content a,
 .theme-base-0d .related-posts li a:hover {
-  color: #2a5f75;
+  color: #333333;
 }
 
 /* Magenta */

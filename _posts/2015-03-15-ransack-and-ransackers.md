@@ -76,7 +76,7 @@ filter :seo_specialist_eq,
   collection: [['Не назначен', :not_assigned]].concat(User.seo_specialists.pluck(:email))
 ```
 
-in this case AA will display the following options: 'Любой' (displayed by default for any collection), 'Не назначен', 'seo_specialist1@ingate.ru', etc. if user selects option 'Любой' ransacker won't be called at all. Also don't use nil value as the 2nd element of collection member - AA (or ransack) will just ignore filter when user selects this option (no filter will be applied at all).
+in this case AA will display the following options: 'Любой' (displayed by default for any collection), 'Не назначен', 'seo_specialist1@company.ru', etc. if user selects option 'Любой' ransacker won't be called at all. Also don't use nil value as the 2nd element of collection member - AA (or ransack) will just ignore filter when user selects this option (no filter will be applied at all).
 
 fake morr's ransackers just provided dummy methods so that chaining is possible but they wouldn't produce any valid results of course. in GroupedReportHelper all custom filter names are converted to standard ones which are happily applied by ransack. while all customs filters end up doing nothing because of dummy ransackers defined inside correspoding model (a class inheriting from model to be precise).
 
@@ -111,9 +111,9 @@ context :ransacker do
   describe 'seo_specialist' do
     let!(:order) { create :order, seo_specialist: seo_specialist }
 
-    context 'with email seo_specialist@ingate.ru' do
+    context 'with email seo_specialist@company.ru' do
       let(:seo_specialist) { create :user, :seo_specialist, email: email }
-      let(:email) { 'seo_specialist@ingate.ru' }
+      let(:email) { 'seo_specialist@company.ru' }
       subject { Order.search({ seo_specialist_eq: email }).result }
 
       it { expect(subject.first).to eq order }

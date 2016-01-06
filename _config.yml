@@ -35,6 +35,7 @@ highlighter:          pygments
 redcarpet:
   extensions:
     - autolink
+    - fenced_code_blocks
     - highlight
     - no_intra_emphasis
     - strikethrough

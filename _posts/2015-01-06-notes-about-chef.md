@@ -66,7 +66,7 @@ ______
 - chef-repo
 - located on workstation
 
-```shell
+```sh
 $ knife solo init .
 ```
 
@@ -93,13 +93,13 @@ Berksfile         | like Gemfile for rubygems
 cookbook 'apache2'
 ```
 
-```shell
+```sh
 $ berks install
 ```
 
 or just
 
-```shell
+```sh
 $ berks
 ```
 
@@ -107,7 +107,7 @@ this will install cookbook into *`~/.bershelf/cookbooks/`*
 
 to install cookbook inside chef-repo run:
 
-```shell
+```sh
 $ berks vendor cookbooks
 ```
 

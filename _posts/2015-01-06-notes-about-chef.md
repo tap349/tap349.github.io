@@ -88,11 +88,11 @@ Berksfile         | like Gemfile for rubygems
 
 #### install vendor cookbooks
 
-*`Berksfile`*:
+_`Berksfile`_
 
     cookbook 'apache2'
 
-``` sh aoeu
+```sh
 $ berks install
 ```
 

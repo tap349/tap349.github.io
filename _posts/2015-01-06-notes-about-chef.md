@@ -224,6 +224,6 @@ set environment in node file:
 
 or else environment can be applied using `-E` knife argument:
 
-```shell
+```sh
 $ knife solo cook -E development
 ```

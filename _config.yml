@@ -41,8 +41,8 @@ redcarpet:
     - strikethrough
     - superscript
     - tables
-    - with_toc_data
     - underline
+    - with_toc_data
 
 #------------------------------------------------------------------------------
 # kramdown

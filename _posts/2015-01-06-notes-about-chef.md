@@ -156,7 +156,7 @@ sample node file:
 structure:
 
 key                   | required? | description
-----------------------|-----------|-------------------------------------------------------------
+----------------------|:---------:|-------------------------------------------------------------
 `name`                | yes       | unique name (usually the same as file name)
 `description`         | yes       |
 `chef_type`           | yes       | 'role'
@@ -203,7 +203,7 @@ NOTE: attributes in node file are normal attributes.
 structure:
 
 key                   | required? | description
-----------------------|-----------|-------------------------------------------------------------
+----------------------|:---------:|-------------------------------------------------------------
 `name`                | yes       | unique name (usually the same as file name)
 `description`         | yes       |
 `chef_type`           | yes       | 'environment'

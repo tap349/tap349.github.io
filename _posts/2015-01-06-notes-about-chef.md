@@ -31,9 +31,9 @@ participants:
 - installed on each node managed by chef server
 - used to bring the node into the expected state
 
-______
-### Chef Solo
-______
+___
+### [Chef Solo](https://docs.chef.io/chef_solo.html)
+___
 
 **chef-solo**
 
@@ -118,10 +118,13 @@ as well I can't figure out how you might end up having cookbook installed locall
 
 #### [NODES](https://docs.chef.io/nodes.html)
 
+NOTE: probably nodes are configured in node files for chef-solo only -
+chef-client interacts with chef server to retrieve node configuration.
+
 **node**
 
 - represents machine (physical, virtual, etc.)
-- create separate json file for each node in _nodes/_
+- create separate JSON file for each node in _nodes/_
 - node file name (as a rule): _DOMAIN.json_
 
 `run_list`
@@ -145,13 +148,13 @@ sample node file:
 }
 ```
 
-#### ROLES
+#### [ROLES](https://docs.chef.io/roles.html)
 
 **role**
 
 - server template (web, database, etc.)
 - contains server specific run list and attributes
-- create separate json file for each role in _roles/_
+- create separate JSON file for each role in _roles/_
 
 structure:
 
@@ -182,6 +185,7 @@ use role in node file:
 
 - specific detail about node
 - defined in:
+  - node files
   - cookbooks (attribute files or recipes)
   - roles
   - environments
@@ -190,12 +194,12 @@ use role in node file:
 
 NOTE: attributes in node file are normal attributes.
 
-#### ENVIRONMENTS
+#### [ENVIRONMENTS](https://docs.chef.io/environments.html)
 
 - environment template (development, staging, production, etc.)
 - contains environment specific attributes
 - doesn't have run list - attributes only
-- create separate json file for each role in _environments/_
+- create separate JSON file for each environment in _environments/_
 - default environment is `_default` - all nodes are placed there
   unless another environment is specified
 - each node can be in exactly one environment
@@ -227,3 +231,26 @@ or else environment can be applied using `-E` knife argument:
 ```sh
 $ knife solo cook -E development
 ```
+
+#### [DATA BAGS](https://docs.chef.io/data_bags.html)
+
+**data bag**
+
+- global variable stored as JSON data
+- data bag consists of data bag items: _DATA_BAG/DATA_BAG_ITEM.json_
+
+structure (according to official doc data bag item should contain only the contents of `raw_data`):
+
+key                   | required? | description
+----------------------|:---------:|-------------------------------------------------------------
+`name`                | yes       | unique name (usually the same as file name)
+`chef_type`           | yes       | 'data_bag_item'
+`json_class`          | yes       | 'Chef::DataBagItem'
+`data_bag`            | yes       | data bag name
+`raw_data`            | yes       | attributes of data bag item (`id` attribute is required)
+
+___
+### Cookbook
+___
+
+

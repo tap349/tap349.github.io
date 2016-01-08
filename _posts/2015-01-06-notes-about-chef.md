@@ -50,7 +50,7 @@ ___
 
 - installs knife as dependency
 - adds 5 subcommands to knife:
-  - `knife solo init` (create new kitchen)
+  - `knife solo init` (create a new kitchen)
   - `knife solo prepare` (install chef-solo on target host)
   - `knife solo cook` (upload current kitchen to target host and run chef-solo there)
   - `knife solo boostrap` (prepare + cook)
@@ -66,7 +66,7 @@ ___
 - chef-repo
 - located on workstation
 
-create new kitchen in current directory:
+create a new kitchen in current directory:
 
 ```sh
 $ knife solo init .
@@ -243,9 +243,10 @@ $ knife solo cook -E development
 **data bag**
 
 - global variable stored as JSON data
+- often used to store sensitive data (credentials, etc.)
 - data bag consists of data bag items: _DATA\_BAG/DATA\_BAG\_ITEM.json_
 
-structure (according to official doc data bag item should contain only the contents of `raw_data`):
+structure (according to official docs data bag item should contain only the contents of `raw_data`):
 
 key                   | required? | description
 ----------------------|:---------:|---------------------------------------------

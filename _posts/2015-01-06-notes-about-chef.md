@@ -72,7 +72,7 @@ $ knife solo init .
 
 directory or file   | usage
 --------------------|-----------------------------------------------------------
-_.chef/_            | stores .pem files and knife.rb
+_.chef/_            | stores .pem files and _knife.rb_
 _cookbooks/_        | vendor cookbooks installed with berkshelf
 _data\_bags/_       | data bags
 _environments/_     | environments
@@ -89,8 +89,9 @@ _.chef/knife.rb_
 #### COOKBOOKS
 
 _Berksfile_
-
-    cookbook 'apache2'
+```
+cookbook 'apache2'
+```
 
 install cookbook globally into _~/.bershelf/cookbooks/_:
 

@@ -237,7 +237,7 @@ $ knife solo cook -E development
 **data bag**
 
 - global variable stored as JSON data
-- data bag consists of data bag items: _DATA_BAG/DATA_BAG_ITEM.json_
+- data bag consists of data bag items: _DATA\_BAG/DATA\_BAG\_ITEM.json_
 
 structure (according to official doc data bag item should contain only the contents of `raw_data`):
 

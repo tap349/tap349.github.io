@@ -88,7 +88,7 @@ _.chef/knife.rb_
 
 #### COOKBOOKS
 
-_Berksfile_
+_Berksfile_:
 
 ```
 cookbook 'apache2'
@@ -120,7 +120,7 @@ as well I can't figure out how you might end up having cookbook installed locall
 
 #### [NODES](https://docs.chef.io/nodes.html)
 
-NOTE: probably nodes are configured in node files for chef-solo only -
+**NOTE**: probably nodes are configured in node files for chef-solo only -
 chef-client interacts with chef server to retrieve node configuration.
 
 **node**

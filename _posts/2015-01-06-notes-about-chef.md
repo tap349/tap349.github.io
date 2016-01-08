@@ -38,7 +38,7 @@ ___
 **chef-solo**
 
 - open-source version of chef-client with limited functionality
-- doesn't require access to server
+- doesn't require access to chef server
 - requires that a cookbook be on the same physical disk as the node
 - doesn't support authentication and authorization
 
@@ -50,7 +50,7 @@ ___
 
 - installs knife as dependency
 - adds 5 subcommands to knife:
-  - `knife solo init`
+  - `knife solo init` (create new kitchen)
   - `knife solo prepare` (install chef-solo on target host)
   - `knife solo cook` (upload current kitchen to target host and run chef-solo there)
   - `knife solo boostrap` (prepare + cook)
@@ -66,9 +66,13 @@ ___
 - chef-repo
 - located on workstation
 
+create new kitchen in current directory:
+
 ```sh
 $ knife solo init .
 ```
+
+file structure:
 
 directory or file   | usage
 --------------------|-----------------------------------------------------------

@@ -70,16 +70,16 @@ ___
 $ knife solo init .
 ```
 
-directory or file | usage
-------------------|-------------------------------------------------------------
-.chef/            | stores .pem files and knife.rb
-cookbooks/        | vendor cookbooks installed with berkshelf
-data\_bags/       | data bags
-environments/     | environments
-nodes/            | nodes
-roles/            | roles
-site-cookbooks/   | custom cookbooks
-Berksfile         | like Gemfile for rubygems
+directory or file   | usage
+--------------------|-----------------------------------------------------------
+_.chef/_            | stores .pem files and knife.rb
+_cookbooks/_        | vendor cookbooks installed with berkshelf
+_data\_bags/_       | data bags
+_environments/_     | environments
+_nodes/_            | nodes
+_roles/_            | roles
+_site-cookbooks/_   | custom cookbooks
+_Berksfile_         | like Gemfile for rubygems
 
 _.chef/knife.rb_
 
@@ -159,7 +159,7 @@ sample node file:
 structure:
 
 key                   | required? | description
-----------------------|:---------:|-------------------------------------------------------------
+----------------------|:---------:|---------------------------------------------
 `name`                | yes       | unique name (usually the same as file name)
 `description`         | yes       |
 `chef_type`           | yes       | 'role'
@@ -207,7 +207,7 @@ NOTE: attributes in node file are normal attributes.
 structure:
 
 key                   | required? | description
-----------------------|:---------:|-------------------------------------------------------------
+----------------------|:---------:|---------------------------------------------
 `name`                | yes       | unique name (usually the same as file name)
 `description`         | yes       |
 `chef_type`           | yes       | 'environment'
@@ -242,7 +242,7 @@ $ knife solo cook -E development
 structure (according to official doc data bag item should contain only the contents of `raw_data`):
 
 key                   | required? | description
-----------------------|:---------:|-------------------------------------------------------------
+----------------------|:---------:|---------------------------------------------
 `name`                | yes       | unique name (usually the same as file name)
 `chef_type`           | yes       | 'data_bag_item'
 `json_class`          | yes       | 'Chef::DataBagItem'

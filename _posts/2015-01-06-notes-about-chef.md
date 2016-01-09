@@ -90,7 +90,7 @@ _.chef/knife.rb_
 - chef-repo specific knife settings (primarily paths to cookbooks, node files, etc.)
 - loaded every time knife is run
 
-#### COOKBOOKS
+#### [INSTALLING COOKBOOKS](https://docs.chef.io/cookbooks.html)
 
 _Berksfile_:
 
@@ -125,7 +125,7 @@ as well I can't figure out how you might end up having cookbook installed locall
 #### [NODES](https://docs.chef.io/nodes.html)
 
 **NOTE**: probably nodes are configured in node files for chef-solo only -
-chef-client interacts with chef server to retrieve node configuration.
+          chef-client interacts with chef server to retrieve node configuration.
 
 **node**
 
@@ -198,7 +198,7 @@ use role in node file:
 
 ![attribute precendence table](https://docs.chef.io/_images/overview_chef_attributes_table.png)
 
-NOTE: attributes in node file are normal attributes.
+**NOTE**: attributes in node file are normal attributes.
 
 #### [ENVIRONMENTS](https://docs.chef.io/environments.html)
 
@@ -257,7 +257,100 @@ key                   | required? | description
 `raw_data`            | yes       | attributes of data bag item (`id` attribute is required)
 
 ___
-### Cookbook
+### [COOKBOOK](https://docs.chef.io/cookbooks.html)
 ___
 
+- fundamential unit of configuration and policy distribution
 
+create custom cookbook:
+
+```sh
+$ cd site-cookbooks/
+$ knife cookbook create my-cookbook
+```
+
+structure:
+
+directory or file |
+------------------|
+_attributes/_     |
+_definitions/_    |
+_files/_          |
+_libraries/_      |
+_providers/_      |
+_recipes/_        |
+_resources/_      |
+_templates/_      |
+_metadata.rb_     |
+
+#### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
+
+- lives at the top of each cookbook's directory
+- provides hints to chef server to deploy cookbook correctly
+
+setting            | description
+-------------------|------------------------------------------------------------
+`name`             | cookbook name (main setting)
+`maintainer`       |
+`maintainer_email` |
+`description`      |
+`long_description` | usually the contents of README.md
+`version`          | three-number version sequence
+`chef_version`     | range of chef-client versions supported by cookbook
+`attribute`        | attribute required to configure cookbook
+`provides`         | recipe or resource provided by cookbook (auxilliary)
+`recipe`           | description for recipe (cosmetic value)
+`depends`          | cookbook dependency on another cookbook
+`conflicts`        | FIO. conflicting cookbook or cookbook version
+`recommends`       | FIO. recommended cookbook
+`suggests`         | FIO. suggested cookbook (weaker than `recommends`)
+`replaces`         | FIO. cookbook to be replaced by this cookbook
+`supports`         | supported platform
+
+#### [RESOURCE](https://docs.chef.io/resource.html)
+
+- describes desired state for configuration item
+- declares steps required to bring configuration item to desired state
+- resources are grouped into recipes
+- during chef-client run each resource is associated with **provider** (platform specific)
+- provider does actual job defined by the resource
+
+has:
+
+- type (package, template, service, etc.)
+- name
+
+consists of:
+
+- attributes (one or more) - aka properties
+- actions (one or more)
+
+syntax:
+
+```ruby
+type 'name' do
+  attribute 'value'
+  action :type_of_action
+end
+```
+
+- most properties have default values
+- all actions have default values
+
+only non-default properties and actions must be specified.
+
+platform resources (available from chef-client directly and don't require a cookbook):
+
+resource        | description
+----------------|---------------------------------------------------------------
+`bash`          | execute script using bash interpretor (see `script` resource for general case)
+`cron`          | modify cron entries
+`directory`     | manage directories
+`link`          | create sym or hard links
+`cookbook_file` | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _COOKBOOK/files/_
+`template`      | transfer files from subdirectory of _COOKBOOK/templates/_ (i.e. static files generated from ERB templates)
+`script`        | execute script using specified interpretor
+`user`          | manage users
+
+**NOTE**: for all resources dealing with files (`directory`, `cookbook_file`, etc.)
+          path on chef node is designated with resource name.

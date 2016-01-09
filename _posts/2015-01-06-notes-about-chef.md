@@ -347,8 +347,8 @@ resource        | description
 `cron`          | modify cron entries
 `directory`     | manage directories
 `link`          | create sym or hard links
-`cookbook_file` | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _COOKBOOK/files/_
-`template`      | transfer files from subdirectory of _COOKBOOK/templates/_ (i.e. static files generated from ERB templates)
+`cookbook_file` | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _files/_
+`template`      | transfer files from subdirectory of _templates/_ (i.e. static files generated from ERB templates)
 `script`        | execute script using specified interpretor
 `user`          | manage users
 

@@ -16,7 +16,7 @@ participants:
 2. chef server (absent when using chef-solo)
 3. workstation (from which knife or knife-solo is run)
 
-##### core principles:
+#### core principles:
 
 * *idempotence*
 * *thick clients, thin server*
@@ -32,7 +32,7 @@ participants:
 - used to bring the node into the expected state
 
 ___
-### [Chef Solo](https://docs.chef.io/chef_solo.html)
+## [Chef Solo](https://docs.chef.io/chef_solo.html)
 ___
 
 **chef-solo**
@@ -90,7 +90,7 @@ _.chef/knife.rb_
 - chef-repo specific knife settings (primarily paths to cookbooks, node files, etc.)
 - loaded every time knife is run
 
-#### [INSTALLING COOKBOOKS](https://docs.chef.io/cookbooks.html)
+### [INSTALLING COOKBOOKS](https://docs.chef.io/cookbooks.html)
 
 _Berksfile_:
 
@@ -122,7 +122,7 @@ but since `berks vendor` command installs cookbook into _~/.bershelf/cookbooks/_
 as well I can't figure out how you might end up having cookbook installed locally only
 (which would justify existence of `knife[:berkshelf_path]` option).
 
-#### [NODES](https://docs.chef.io/nodes.html)
+### [NODES](https://docs.chef.io/nodes.html)
 
 **NOTE**: probably nodes are configured in node files for chef-solo only -
           chef-client interacts with chef server to retrieve node configuration.
@@ -154,12 +154,12 @@ sample node file:
 }
 ```
 
-#### [ROLES](https://docs.chef.io/roles.html)
+### [ROLES](https://docs.chef.io/roles.html)
 
 **role**
 
 - server template (web, database, etc.)
-- contains server specific run list and attributes
+- contains server specific run-list and attributes
 - create separate JSON file for each role in _roles/_
 
 structure:
@@ -172,8 +172,8 @@ key                   | required? | description
 `json_class`          | yes       | 'Chef::Role'
 `default_attributes`  |           | role specific attributes, can be overidden in node files
 `override_attributes` |           | role specific forced attributes, cannot be overidden in node files
-`run_list`            | yes       | role specific run list (may include other roles)
-`env_run_lists`       |           | environment specific run lists
+`run_list`            | yes       | role specific run-list (may include other roles)
+`env_run_lists`       |           | environment specific run-lists
 
 use role in node file:
 
@@ -185,12 +185,12 @@ use role in node file:
 }
 ```
 
-#### [ATTRIBUTES](https://docs.chef.io/attributes.html)
+### [ATTRIBUTES](https://docs.chef.io/attributes.html)
 
 **attribute**
 
 - specific detail about node
-- defined in:
+- can be defined in:
   - node files
   - cookbooks (attribute files or recipes)
   - roles
@@ -200,11 +200,18 @@ use role in node file:
 
 **NOTE**: attributes in node file are normal attributes.
 
-#### [ENVIRONMENTS](https://docs.chef.io/environments.html)
+accessor methods are automatically defined for attributes in ruby files:
+
+```ruby
+default['apache']['dir'] = '/etc/apache2'
+default.apache.dir = '/etc/apache2'
+```
+
+### [ENVIRONMENTS](https://docs.chef.io/environments.html)
 
 - environment template (development, staging, production, etc.)
 - contains environment specific attributes
-- doesn't have run list - attributes only
+- doesn't have run-list - attributes only
 - create separate JSON file for each environment in _environments/_
 - default environment is `_default` - all nodes are placed there
   unless another environment is specified
@@ -238,7 +245,7 @@ or else environment can be applied using `-E` knife argument:
 $ knife solo cook -E development
 ```
 
-#### [DATA BAGS](https://docs.chef.io/data_bags.html)
+### [DATA BAGS](https://docs.chef.io/data_bags.html)
 
 **data bag**
 
@@ -257,7 +264,7 @@ key                   | required? | description
 `raw_data`            | yes       | attributes of data bag item (`id` attribute is required)
 
 ___
-### [COOKBOOK](https://docs.chef.io/cookbooks.html)
+## [COOKBOOK](https://docs.chef.io/cookbooks.html)
 ___
 
 - fundamential unit of configuration and policy distribution
@@ -266,7 +273,7 @@ create custom cookbook:
 
 ```sh
 $ cd site-cookbooks/
-$ knife cookbook create my-cookbook
+$ knife cookbook create COOKBOOK
 ```
 
 structure:
@@ -283,7 +290,7 @@ _resources/_      |
 _templates/_      |
 _metadata.rb_     |
 
-#### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
+### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
 
 - lives at the top of each cookbook's directory
 - provides hints to chef server to deploy cookbook correctly
@@ -307,13 +314,13 @@ setting            | description
 `replaces`         | FIO. cookbook to be replaced by this cookbook
 `supports`         | supported platform
 
-#### [RESOURCE](https://docs.chef.io/resource.html)
+### [RESOURCE](https://docs.chef.io/resource.html)
 
 - describes desired state for configuration item
 - declares steps required to bring configuration item to desired state
 - resources are grouped into recipes
 - during chef-client run each resource is associated with **provider** (platform specific)
-- provider does actual job defined by the resource
+- provider does actual job described in the resource
 
 has:
 
@@ -353,4 +360,58 @@ resource        | description
 `user`          | manage users
 
 **NOTE**: for all resources dealing with files (`directory`, `cookbook_file`, etc.)
-          path on chef node is designated with resource name.
+          path on chef node is specified as resource name.
+
+sample resource:
+
+```ruby
+directory '/tmp/something' do
+  owner 'root'
+  group 'root'
+  mode 00755
+  action :create
+end
+```
+
+### [RECIPE](https://docs.chef.io/recipes.html)
+
+- most fundamental configuration element
+- written in ruby
+- stored in cookbook
+- consists of resources
+- may be included in other recipes
+- may depend on other recipes
+- must be added to run-list before it can be used by chef-client
+
+default recipe - _default.rb_.
+
+#### include other recipes
+
+recipe can include other recipes from other cookbooks using `include_recipe` method:
+
+```ruby
+include_recipe 'apache2::mod_ssl'
+```
+
+included recipe must be declared as dependency in _metadata.rb_:
+
+```ruby
+depends 'apache2'
+```
+
+- included recipe is just inlined at the point where it's included
+- only the first inclusion within recipe is processed - subsequent ones are ignored
+
+#### write to log from within a recipe
+
+log levels:
+
+- debug
+- info
+- warn
+- error
+- fatal
+
+```ruby
+Chef::Log.info 'some useful information'
+```

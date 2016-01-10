@@ -201,7 +201,7 @@ use role in node file:
 
 **NOTE**: attributes in node file are normal attributes.
 
-accessor methods are automatically defined for attributes in ruby files:
+accessor methods are automatically defined for attributes in Ruby files:
 
 ```ruby
 default['apache']['dir'] = '/etc/apache2'
@@ -351,13 +351,16 @@ platform resources (available from chef-client directly and don't require a cook
 
 resource        | description
 ----------------|---------------------------------------------------------------
-`bash`          | execute script using bash interpretor (see `script` resource for general case)
-`cron`          | modify cron entries
-`directory`     | manage directories
+`script`        | execute script using specified interpretor
+`bash`          | execute script using Bash interpretor
+`ruby`          | execute script using Ruby interpretor
 `link`          | create sym or hard links
+`directory`     | manage directories
 `cookbook_file` | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _files/_
 `template`      | transfer files from subdirectory of _templates/_ (i.e. static files generated from ERB templates)
-`script`        | execute script using specified interpretor
+`gem_package`   | install gem system-wide
+`chef_gem`      | install gem into the instance of Ruby dedicated to chef-client (can be required immediatelly after it's installed)
+`cron`          | modify cron entries
 `user`          | manage users
 
 **NOTE**: for all resources dealing with files (`directory`, `cookbook_file`, etc.)
@@ -377,7 +380,7 @@ end
 ### [RECIPE](https://docs.chef.io/recipes.html)
 
 - most fundamental configuration element
-- written in ruby
+- written in Ruby
 - stored in cookbook
 - consists of resources
 - may be included in other recipes

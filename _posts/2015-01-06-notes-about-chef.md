@@ -12,9 +12,9 @@ summary from book 'Cooking infrastructure by Chef' by Alexey Vasiliev
 
 participants:
 
-1. chef node (this is what configured, has chef-client or chef-solo installed)
-2. chef server (absent when using chef-solo)
-3. workstation (from which knife or knife-solo is run)
+1. chef node (deployment target - this is what configured, has chef-client or chef-solo installed)
+2. chef server (combined with chef node using chef-solo)
+3. workstation (from which knife or knife-solo is run - can be remote machine as well)
 
 #### core principles:
 
@@ -155,6 +155,32 @@ sample node file:
 }
 ```
 
+### [ATTRIBUTES](https://docs.chef.io/attributes.html)
+
+**attribute**
+
+- specific detail about node
+- provided from the following locations:
+  - node files
+  - attribute files (in cookbook)
+  - recipes (in cookbook)
+  - roles
+  - environments
+
+![attribute precendence table](https://docs.chef.io/_images/overview_chef_attributes_table.png)
+
+normal attributes:
+
+- attributes in node file are normal attributes
+- they are not reset before each chef-client run unlike other attributes
+
+accessor methods are automatically defined for attributes in Ruby files:
+
+```ruby
+default['apache']['dir'] = '/etc/apache2'
+default.apache.dir = '/etc/apache2'
+```
+
 ### [ROLES](https://docs.chef.io/roles.html)
 
 **role**
@@ -184,28 +210,6 @@ use role in node file:
     'role[web]'
   ]
 }
-```
-
-### [ATTRIBUTES](https://docs.chef.io/attributes.html)
-
-**attribute**
-
-- specific detail about node
-- can be defined in:
-  - node files
-  - cookbooks (attribute files or recipes)
-  - roles
-  - environments
-
-![attribute precendence table](https://docs.chef.io/_images/overview_chef_attributes_table.png)
-
-**NOTE**: attributes in node file are normal attributes.
-
-accessor methods are automatically defined for attributes in Ruby files:
-
-```ruby
-default['apache']['dir'] = '/etc/apache2'
-default.apache.dir = '/etc/apache2'
 ```
 
 ### [ENVIRONMENTS](https://docs.chef.io/environments.html)
@@ -291,31 +295,54 @@ _resources/_      |
 _templates/_      |
 _metadata.rb_     |
 
-### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
+### [RECIPES](https://docs.chef.io/recipes.html)
 
-- lives at the top of each cookbook's directory
-- provides hints to chef server to deploy cookbook correctly
+**recipe**
 
-setting            | description
--------------------|------------------------------------------------------------
-`name`             | cookbook name (main setting)
-`maintainer`       |
-`maintainer_email` |
-`description`      |
-`long_description` | usually the contents of README.md
-`version`          | three-number version sequence
-`chef_version`     | range of chef-client versions supported by cookbook
-`attribute`        | attribute required to configure cookbook
-`provides`         | recipe or resource provided by cookbook (auxilliary)
-`recipe`           | description for recipe (cosmetic value)
-`depends`          | cookbook dependency on another cookbook
-`conflicts`        | FIO. conflicting cookbook or cookbook version
-`recommends`       | FIO. recommended cookbook
-`suggests`         | FIO. suggested cookbook (weaker than `recommends`)
-`replaces`         | FIO. cookbook to be replaced by this cookbook
-`supports`         | supported platform
+- the most fundamental configuration element
+- written in Ruby
+- stored in cookbook
+- consists of resources
+- may be included in other recipes
+- may depend on other recipes
+- must be added to run-list before it can be used by chef-client
 
-### [RESOURCE](https://docs.chef.io/resource.html)
+default recipe - _default.rb_.
+
+#### include other recipes
+
+recipe can include other recipes from other cookbooks using `include_recipe` method:
+
+```ruby
+include_recipe 'apache2::mod_ssl'
+```
+
+included recipe must be declared as dependency in _metadata.rb_:
+
+```ruby
+depends 'apache2'
+```
+
+- included recipe is just inlined at the point where it's included
+- only the first inclusion within recipe is processed - subsequent ones are ignored
+
+#### write to log from within a recipe
+
+log levels:
+
+- debug
+- info
+- warn
+- error
+- fatal
+
+```ruby
+Chef::Log.info 'some useful information'
+```
+
+### [RESOURCES](https://docs.chef.io/resource.html)
+
+**resource**
 
 - describes desired state for configuration item
 - declares steps required to bring configuration item to desired state
@@ -377,45 +404,80 @@ directory '/tmp/something' do
 end
 ```
 
-### [RECIPE](https://docs.chef.io/recipes.html)
+### [ATTRIBUTE FILES](https://docs.chef.io/attributes.html)
 
-- the most fundamental configuration element
-- written in Ruby
-- stored in cookbook
-- consists of resources
-- may be included in other recipes
-- may depend on other recipes
-- must be added to run-list before it can be used by chef-client
+- when cookbook is run against a node attributes
+  inside **all** attribute files are evaluated in the context of node object
+- cookbook attributes are usually placed into
+  _attributes/default.rb_ -
+  file name _default.rb_ is just a convention here.
+  if necessary attributes can be grouped into several
+  attribute files with arbitrary names
 
-default recipe - _default.rb_.
-
-#### include other recipes
-
-recipe can include other recipes from other cookbooks using `include_recipe` method:
+sample attribute file:
 
 ```ruby
-include_recipe 'apache2::mod_ssl'
+default['apache']['dir']          = '/etc/apache2'
+default['apache']['listen_ports'] = [ '80','443' ]
 ```
 
-included recipe must be declared as dependency in _metadata.rb_:
+use of node object (`node`) is implicit here - it can be specified explicitly:
 
 ```ruby
-depends 'apache2'
+node.default['apache']['dir']          = '/etc/apache2'
+node.default['apache']['listen_ports'] = [ '80','443' ]
 ```
 
-- included recipe is just inlined at the point where it's included
-- only the first inclusion within recipe is processed - subsequent ones are ignored
-
-#### write to log from within a recipe
-
-log levels:
-
-- debug
-- info
-- warn
-- error
-- fatal
+as mentioned above dot syntax can be used instead of hash keys:
 
 ```ruby
-Chef::Log.info 'some useful information'
+default.apache.dir          = '/etc/apache2'
+default.apache.listen_ports = [ '80','443' ]
 ```
+
+`default` is attribute type here - it has nothing to do with attribute file name.
+it's also possible to use other attribute types:
+
+```ruby
+# override
+override['apache']['dir'] = '/etc/apache2'
+
+# normal
+set['apache']['dir']    = '/etc/apache2'
+normal['apache']['dir'] = '/etc/apache2' # set is an alias of normal
+```
+
+**NOTE**: in recipe and node file use of node object must be explicit -
+          these files are not evaluated in the context of node object
+          like attribute files!
+
+```ruby
+node.set['apache']['dir']    = '/etc/apache2'
+node.normal['apache']['dir'] = '/etc/apache2' # same as above
+node['apache']['dir']        = '/etc/apache2' # same as above
+```
+
+### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
+
+- lives at the top of each cookbook's directory
+- provides hints to chef server to deploy cookbook correctly
+
+setting            | description
+-------------------|------------------------------------------------------------
+`name`             | cookbook name (main setting)
+`maintainer`       |
+`maintainer_email` |
+`description`      |
+`long_description` | usually the contents of README.md
+`version`          | three-number version sequence
+`chef_version`     | range of chef-client versions supported by cookbook
+`attribute`        | attribute required to configure cookbook
+`provides`         | recipe or resource provided by cookbook (auxilliary)
+`recipe`           | description for recipe (cosmetic value)
+`depends`          | cookbook dependency on another cookbook
+`conflicts`        | FIO. conflicting cookbook or cookbook version
+`recommends`       | FIO. recommended cookbook
+`suggests`         | FIO. suggested cookbook (weaker than `recommends`)
+`replaces`         | FIO. cookbook to be replaced by this cookbook
+`supports`         | supported platform
+

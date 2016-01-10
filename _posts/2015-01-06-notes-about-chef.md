@@ -243,6 +243,9 @@ node.set['apache']['dir']    = '/etc/apache2'
 node['apache']['dir']        = '/etc/apache2'
 ```
 
+**TODO**: the same syntax `node['cookbook']['attribute']` is used to read final
+          node attribute value after all precedence rules have been applied.
+
 ### [ROLES](https://docs.chef.io/roles.html)
 
 **role**
@@ -308,7 +311,7 @@ set environment in node file:
 }
 ```
 
-or else environment can be applied using `-E` knife argument:
+or else environment can be set using `-E` knife argument:
 
 ```sh
 $ knife solo cook -E development

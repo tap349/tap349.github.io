@@ -65,6 +65,7 @@ ___
 
 - chef-repo
 - located on workstation
+- uploaded to chef server (or chef node when using chef-solo)
 
 create a new kitchen in current directory:
 
@@ -90,7 +91,7 @@ _.chef/knife.rb_
 - chef-repo specific knife settings (primarily paths to cookbooks, node files, etc.)
 - loaded every time knife is run
 
-### [INSTALLING COOKBOOKS](https://docs.chef.io/cookbooks.html)
+### [VENDOR COOKBOOKS](https://docs.chef.io/cookbooks.html)
 
 _Berksfile_:
 
@@ -264,7 +265,7 @@ key                   | required? | description
 `raw_data`            | yes       | attributes of data bag item (`id` attribute is required)
 
 ___
-## [COOKBOOK](https://docs.chef.io/cookbooks.html)
+## [SITE COOKBOOK](https://docs.chef.io/cookbooks.html)
 ___
 
 - fundamential unit of configuration and policy distribution

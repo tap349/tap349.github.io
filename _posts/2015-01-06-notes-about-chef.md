@@ -379,7 +379,7 @@ end
 
 ### [RECIPE](https://docs.chef.io/recipes.html)
 
-- most fundamental configuration element
+- the most fundamental configuration element
 - written in Ruby
 - stored in cookbook
 - consists of resources

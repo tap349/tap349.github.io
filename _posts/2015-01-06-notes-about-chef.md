@@ -115,7 +115,7 @@ $ berks vendor cookbooks
 **NOTE**: command `berks install --path cookbooks` does the same but is deprecated.
 
 it's necessary to specify directory (_cookbooks/_) -
-otherwise berkshelf will install cookbook into _berks-cookbooks/_ directory.
+otherwise berkshelf will install cookbook into _berks-cookbooks/_.
 
 `knife[:berkshelf_path]` option has no effect on where berkshelf installs cookbooks
  - most likely it's used by knife to search for cookbooks while provisioning.
@@ -167,18 +167,80 @@ sample node file:
   - roles
   - environments
 
-![attribute precendence table](https://docs.chef.io/_images/overview_chef_attributes_table.png)
-
-normal attributes:
-
-- attributes in node file are normal attributes
-- they are not reset before each chef-client run unlike other attributes
-
-accessor methods are automatically defined for attributes in Ruby files:
+accessor methods are automatically defined for attributes in Ruby files
+(that is it's possible to use dot syntax instead of hash keys):
 
 ```ruby
 default['apache']['dir'] = '/etc/apache2'
 default.apache.dir = '/etc/apache2'
+```
+
+#### attribute precedence
+
+in general **attribute precedence** is organized in such a way as:
+
+- to enable cookbooks and roles to define attribute defaults
+- for normal attributes to define the values that should be specific for a node
+- and for override attributes to force a certain value,
+  even when a node already has that value specified
+
+![attribute precendence table](https://docs.chef.io/_images/overview_chef_attributes_table.png)
+
+#### attribute types
+
+- default
+- force_default
+- normal
+- override
+- force_override
+- automatic
+
+attribute type is specified when using attributes by calling appropriate
+function of node object:
+
+```ruby
+# default
+node.default['apache']['dir'] = '/etc/apache2'
+
+# override
+node.override['apache']['dir'] = '/etc/apache2'
+```
+
+**NOTE**: cookbook attribute files are evaluated in the context of node object -
+          that is why it's not necessary (but possible) to use it explicitly:
+
+```ruby
+# default
+default['apache']['dir'] = '/etc/apache2'
+
+# override
+override['apache']['dir'] = '/etc/apache2'
+```
+
+**normal attribute**
+
+- is a setting that persists in node object
+- is not reset before each chef-client run unlike other attributes
+
+syntax in recipe or node file:
+
+```ruby
+node.normal['apache']['dir'] = '/etc/apache2'
+node.set['apache']['dir']    = '/etc/apache2' # set is an alias of normal
+node['apache']['dir']        = '/etc/apache2' # same as above
+```
+
+syntax in cookbook attribute file:
+
+```ruby
+# use of node object is implicit
+normal['apache']['dir']      = '/etc/apache2'
+set['apache']['dir']         = '/etc/apache2'
+
+# use of node object is explicit
+node.normal['apache']['dir'] = '/etc/apache2'
+node.set['apache']['dir']    = '/etc/apache2'
+node['apache']['dir']        = '/etc/apache2'
 ```
 
 ### [ROLES](https://docs.chef.io/roles.html)
@@ -213,6 +275,8 @@ use role in node file:
 ```
 
 ### [ENVIRONMENTS](https://docs.chef.io/environments.html)
+
+**environment**
 
 - environment template (development, staging, production, etc.)
 - contains environment specific attributes
@@ -272,6 +336,8 @@ ___
 ## [SITE COOKBOOK](https://docs.chef.io/cookbooks.html)
 ___
 
+**cookbook**
+
 - fundamential unit of configuration and policy distribution
 
 create custom cookbook:
@@ -295,6 +361,28 @@ _resources/_      |
 _templates/_      |
 _metadata.rb_     |
 
+### [ATTRIBUTE FILES](https://docs.chef.io/attributes.html)
+
+- when cookbook is run against a node attributes
+  inside **all** attribute files are evaluated in the context of node object
+- cookbook attributes are usually placed into _attributes/default.rb_ -
+  file name _default.rb_ is just a convention here.
+  if necessary attributes can be grouped into several
+  attribute files with arbitrary names
+
+sample attribute file:
+
+```ruby
+default['apache']['dir']          = '/etc/apache2'
+default['apache']['listen_ports'] = [ '80','443' ]
+```
+
+`default` is attribute type here - it has nothing to do with attribute file name
+(see Chef Solo/ATTRIBUTES section for more information).
+
+use of node object (`node`) is implicit here though it can be used explicitly
+(see Chef Solo/ATTRIBUTES section for more information).
+
 ### [RECIPES](https://docs.chef.io/recipes.html)
 
 **recipe**
@@ -307,7 +395,7 @@ _metadata.rb_     |
 - may depend on other recipes
 - must be added to run-list before it can be used by chef-client
 
-default recipe - _default.rb_.
+default recipe - _default.rb_ (see Chef Solo/NODES for information about default recipe).
 
 #### include other recipes
 
@@ -384,11 +472,14 @@ resource        | description
 `link`          | create sym or hard links
 `directory`     | manage directories
 `cookbook_file` | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _files/_
-`template`      | transfer files from subdirectory of _templates/_ (i.e. static files generated from ERB templates)
+`template`      | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _templates/_
 `gem_package`   | install gem system-wide
 `chef_gem`      | install gem into the instance of Ruby dedicated to chef-client (can be required immediatelly after it's installed)
 `cron`          | modify cron entries
 `user`          | manage users
+
+**NOTE**: for `template` resource transfer not ERB templates themselves
+          but static files generated from those templates.
 
 **NOTE**: for all resources dealing with files (`directory`, `cookbook_file`, etc.)
           path on chef node is specified as resource name.
@@ -404,60 +495,9 @@ directory '/tmp/something' do
 end
 ```
 
-### [ATTRIBUTE FILES](https://docs.chef.io/attributes.html)
-
-- when cookbook is run against a node attributes
-  inside **all** attribute files are evaluated in the context of node object
-- cookbook attributes are usually placed into
-  _attributes/default.rb_ -
-  file name _default.rb_ is just a convention here.
-  if necessary attributes can be grouped into several
-  attribute files with arbitrary names
-
-sample attribute file:
-
-```ruby
-default['apache']['dir']          = '/etc/apache2'
-default['apache']['listen_ports'] = [ '80','443' ]
-```
-
-use of node object (`node`) is implicit here - it can be specified explicitly:
-
-```ruby
-node.default['apache']['dir']          = '/etc/apache2'
-node.default['apache']['listen_ports'] = [ '80','443' ]
-```
-
-as mentioned above dot syntax can be used instead of hash keys:
-
-```ruby
-default.apache.dir          = '/etc/apache2'
-default.apache.listen_ports = [ '80','443' ]
-```
-
-`default` is attribute type here - it has nothing to do with attribute file name.
-it's also possible to use other attribute types:
-
-```ruby
-# override
-override['apache']['dir'] = '/etc/apache2'
-
-# normal
-set['apache']['dir']    = '/etc/apache2'
-normal['apache']['dir'] = '/etc/apache2' # set is an alias of normal
-```
-
-**NOTE**: in recipe and node file use of node object must be explicit -
-          these files are not evaluated in the context of node object
-          like attribute files!
-
-```ruby
-node.set['apache']['dir']    = '/etc/apache2'
-node.normal['apache']['dir'] = '/etc/apache2' # same as above
-node['apache']['dir']        = '/etc/apache2' # same as above
-```
-
 ### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
+
+**metadata.rb**
 
 - lives at the top of each cookbook's directory
 - provides hints to chef server to deploy cookbook correctly
@@ -480,4 +520,3 @@ setting            | description
 `suggests`         | FIO. suggested cookbook (weaker than `recommends`)
 `replaces`         | FIO. cookbook to be replaced by this cookbook
 `supports`         | supported platform
-

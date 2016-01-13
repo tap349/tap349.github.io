@@ -7,6 +7,7 @@ categories: [chef]
 ---
 
 summary from book 'Cooking infrastructure by Chef' by Alexey Vasiliev
+and official chef documentation.
 
 <!-- more -->
 
@@ -496,6 +497,48 @@ directory '/tmp/something' do
   mode 00755
   action :create
 end
+```
+
+### [TEMPLATES](https://docs.chef.io/templates.html)
+
+**template**
+
+- ERB template
+
+to use template:
+
+- add `template` resource to recipe
+- add corresponding ERB template file in _templates/_
+
+ERB basics:
+
+<%= %> - expressions (=)
+<%  %> - statements (-)
+
+#### variables inside template file
+
+1. defined in `template` resource's `variables` parameter:
+
+```ruby
+template '/etc/sudoers' do
+  ...
+  variables(
+    {
+      sudoers_groups: node[:authorization][:sudo][:groups],
+      sudoers_users: node[:authorization][:sudo][:users]
+    }
+  )
+end
+```
+
+these variables are accessible in template file as instance variables (@).
+<br><br>
+2. node object properties (using the same syntax as in recipe)
+
+sample template file:
+
+```erb
+Site <%= node[:fqdn] %> welcomes new user <%= @username %>!
 ```
 
 ### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)

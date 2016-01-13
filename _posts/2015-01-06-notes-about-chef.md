@@ -220,8 +220,8 @@ override['apache']['dir'] = '/etc/apache2'
 
 **normal attribute**
 
-- is a setting that persists in node object
-- is not reset before each chef-client run unlike other attributes
+- a setting that persists in node object
+- not reset before each chef-client run unlike other attributes
 
 syntax in recipe or node file:
 
@@ -517,7 +517,7 @@ ERB basics:
 
 #### variables inside template file
 
-1. defined in `template` resource's `variables` parameter:
+1) defined in `template` resource's `variables` parameter:
 
 ```ruby
 template '/etc/sudoers' do
@@ -532,13 +532,51 @@ end
 ```
 
 these variables are accessible in template file as instance variables (@).
-<br><br>
-2. node object properties (using the same syntax as in recipe)
+
+2) node object properties (using the same syntax as in recipe)
 
 sample template file:
 
 ```erb
-Site <%= node[:fqdn] %> welcomes new user <%= @username %>!
+<% if @username.present? %>
+  Site <%= node[:fqdn] %> welcomes new user <%= @username %>!
+<% end %>
+```
+
+#### file specificity
+
+specific template file might be targeted for specific platform.
+
+template file is looked up in the following locations within _templates/_
+(the first one that matches wins):
+
+- _host-FQDN/_
+- _PLATFORM-VERSION/_
+- _PLATFORM/_
+- _default/_
+
+**NOTE**: FQDN must match literally!
+
+#### partials
+
+**partial**
+
+- just a template file rendered from another (top-level) template file
+- doesn't have any special naming rules - it's just an ordinary template file
+- rendered with `render` command
+
+`render`
+
+- by default partial is looked up in current cookbook using normal rules
+  (that is taking file specificity into account)
+- instance variables (defined in template resource) are available in partial
+  only when passed through `variables` option
+- node object is available in partial automatically
+
+render partial from top-level template file:
+
+```ruby
+<%= render 'another_template.erb', variables: { user: @user } %>
 ```
 
 ### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)

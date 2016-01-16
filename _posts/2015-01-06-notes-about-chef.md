@@ -11,14 +11,14 @@ and official chef documentation.
 
 <!-- more -->
 
-- [CHEF SOLO](#chef-solo)
+1. [CHEF SOLO](#chef-solo)
   - [VENDOR COOKBOOKS](#vendor-cookbooks)
   - [NODES](#nodes)
   - [ATTRIBUTES](#attributes)
   - [ROLES](#roles)
   - [ENVIRONMENTS](#environments)
   - [DATA BAGS](#data-bags)
-- [SITE COOKBOOK](#site-cookbook)
+2. [SITE COOKBOOK](#site-cookbook)
   - [ATTRIBUTE FILES](#attribute-files)
   - [RECIPES](#recipes)
   - [RESOURCES](#resources)

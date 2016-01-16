@@ -13,25 +13,18 @@ and official chef documentation.
 
 TOC
 
-- [CHEF SOLO](#chef-solo)
+1. [CHEF SOLO](#chef-solo)
   - [VENDOR COOKBOOKS](#vendor-cookbooks)
   - [NODES](#nodes)
   - [ATTRIBUTES](#attributes)
-    - [attribute precedence](#attribute-precedence)
-    - [attribute types](#attribute-types)
   - [ROLES](#roles)
   - [ENVIRONMENTS](#environments)
   - [DATA BAGS](#data-bags)
-- [SITE COOKBOOK](#site-cookbook)
+2. [SITE COOKBOOK](#site-cookbook)
   - [ATTRIBUTE FILES](#attribute-files)
   - [RECIPES](#recipes)
-    - [include other recipes](#include-other-recipes)
-    - [write to log from within a recipe](#write-to-log-from-within-a-recipe)
   - [RESOURCES](#resources)
   - [TEMPLATES](#templates)
-    - [write to log from within a recipe](#write-to-log-from-within-a-recipe)
-    - [file specificity](#file-specificity)
-    - [partials](#partials)
   - [METADATA.RB](#metadata.rb)
 
 participants:

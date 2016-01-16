@@ -11,6 +11,29 @@ and official chef documentation.
 
 <!-- more -->
 
+TOC
+
+1. [CHEF SOLO](#chef-solo)
+  1. [VENDOR COOKBOOKS](#vendor-cookbooks)
+  2. [NODES](#nodes)
+  3. [ATTRIBUTES](#attributes)
+    - [attribute precedence](#attribute-precedence)
+    - [attribute types](#attribute-types)
+  4. [ROLES](#roles)
+  5. [ENVIRONMENTS](#environments)
+  6. [DATA BAGS](#data-bags)
+2. [SITE COOKBOOK](#site-cookbook)
+  1. [ATTRIBUTE FILES](#attribute-files)
+  2. [RECIPES](#recipes)
+    - [include other recipes](#include-other-recipes)
+    - [write to log from within a recipe](#write-to-log-from-within-a-recipe)
+  3. [RESOURCES](#resources)
+  4. [TEMPLATES](#templates)
+    - [write to log from within a recipe](#write-to-log-from-within-a-recipe)
+    - [file specificity](#file-specificity)
+    - [partials](#partials)
+  5. [METADATA.RB](#metadata.rb)
+
 participants:
 
 1. chef node (deployment target - this is what configured, has chef-client or chef-solo installed)
@@ -33,7 +56,7 @@ participants:
 - used to bring the node into the expected state
 
 ___
-## [Chef Solo](https://docs.chef.io/chef_solo.html)
+## [CHEF SOLO](https://docs.chef.io/chef_solo.html)
 ___
 
 **chef-solo**

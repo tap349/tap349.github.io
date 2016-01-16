@@ -13,7 +13,7 @@ and official chef documentation.
 
 TOC
 
-1. [CHEF SOLO](#chef-solo)
+- [CHEF SOLO](#chef-solo)
   - [VENDOR COOKBOOKS](#vendor-cookbooks)
   - [NODES](#nodes)
   - [ATTRIBUTES](#attributes)
@@ -22,7 +22,7 @@ TOC
   - [ROLES](#roles)
   - [ENVIRONMENTS](#environments)
   - [DATA BAGS](#data-bags)
-2. [SITE COOKBOOK](#site-cookbook)
+- [SITE COOKBOOK](#site-cookbook)
   - [ATTRIBUTE FILES](#attribute-files)
   - [RECIPES](#recipes)
     - [include other recipes](#include-other-recipes)

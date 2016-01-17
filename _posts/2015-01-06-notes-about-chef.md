@@ -526,8 +526,10 @@ to use template:
 
 ERB basics:
 
-<%= %> - expressions (=)
-<%  %> - statements (-)
+syntax   | description
+---------|----------------
+`<%= %>` | expressions (=)
+`<% %>`  | statements (=)
 
 #### variables inside template file
 

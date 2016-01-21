@@ -6,7 +6,9 @@ access: public
 categories: [pinboard]
 ---
 
-tags related to education:
+tags related to education
+
+<!-- more -->
 
 - **learning**:
   1. material related to the process or mechanics of learning

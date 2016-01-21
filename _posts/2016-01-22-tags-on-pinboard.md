@@ -1,12 +1,12 @@
 ---
 layout: post
-title: tags in pinboard
+title: tags on pinboard
 date: 2016-01-22 01:19:00 +0300
 access: public
 categories: [pinboard]
 ---
 
-tags related to education
+tags related to education on pinboard
 
 <!-- more -->
 

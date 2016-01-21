@@ -63,6 +63,10 @@ ___
 
 **knife-solo**
 
+```sh
+$ gem install knife-solo
+```
+
 - installs knife as dependency
 - adds 5 subcommands to knife:
   - `knife solo init` (create a new kitchen)
@@ -140,13 +144,14 @@ as well I can't figure out how you might end up having cookbook installed locall
 
 ### [NODES](https://docs.chef.io/nodes.html)
 
-**NOTE**: probably nodes are configured in node files for chef-solo only -
+**NOTE**: nodes are configured in node files for chef-solo only -
           chef-client interacts with chef server to retrieve node configuration.
 
 **node**
 
+- contains node-specific attributes and run-list
 - represents machine (physical, virtual, etc.)
-- create separate JSON file for each node in _nodes/_
+- separate JSON file for each node in _nodes/_
 - node file name (as a rule): _DOMAIN.json_
 
 `run_list`
@@ -448,6 +453,15 @@ Chef::Log.info 'some useful information'
 
 ### [RESOURCES](https://docs.chef.io/resource.html)
 
+2 types of resources:
+
+1. platform (built-in) resources
+2. custom (provided by cookbook) resources
+
+LWRP/HWRP paradigm is replaced with custom resources - see
+[Custom Resources in Chef Client 12.5](https://www.chef.io/blog/2015/11/06/custom-resources-in-chef-client-12-5/)
+for details.
+
 **resource**
 
 - describes desired state for configuration item
@@ -463,15 +477,15 @@ has:
 
 consists of:
 
-- attributes (one or more) - aka properties
+- properties (one or more)
 - actions (one or more)
 
 syntax:
 
 ```ruby
-type 'name' do
-  attribute 'value'
-  action :type_of_action
+TYPE 'NAME' do
+  PROPERTY_NAME 'PROPERTY_VALUE'
+  action :TYPE_OF_ACTION
 end
 ```
 

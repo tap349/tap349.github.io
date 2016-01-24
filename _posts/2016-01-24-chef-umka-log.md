@@ -8,14 +8,14 @@ categories: [chef]
 
 on local workstation:
 
-```bash
+```sh
 $ brew cask update
 $ brew cask install chefdk
 ```
 
 on remote node:
 
-```bash
+```sh
 # useradd deploy -m -p deploy -G sudo
 # su - deploy
 # groups deploy
@@ -23,7 +23,7 @@ on remote node:
 
 on local workstation:
 
-```bash
+```sh
 $ chef generate repo umka
 $ tree -aF -L 3 -I .git umka
 

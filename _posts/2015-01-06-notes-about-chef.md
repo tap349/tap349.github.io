@@ -486,27 +486,15 @@ TYPE 'NAME' do
 end
 ```
 
-- type
-
-    platform resource types: `package`, `template`, `service`, etc.
-
-    custom resource type syntax: `COOKBOOK_RESOURCE` where
-    `COOKBOOK` is a site cookbook name and
-    `RESOURCE` is a resource file name.
-    this name can be overriden with `resource_name` method
-    at the top of resource file
-    (see [custom resource files](#custom-resource-files) for example)
-
-- name (in general depends on speficic resource type)
-
-    for platform resources dealing with files (`directory`, `cookbook_file`, etc.)
-    this is usually the path of corresponding file on chef node.
-
-    for custom resources this is the value of the property declared with
-    `name_property: true` in resource file (unless overidden).
-
-- properties (one or more) - most properties have default values
-- actions (one or more) - all actions have default values
+- type:
+    - platform resource types: `package`, `template`, `service`, etc.
+    - on custom resource type - see [custom resource files](#custom-resource-files)
+- name (in general depends on specific resource type):
+    - for platform resources dealing with files (`directory`, `cookbook_file`, etc.)
+      this is usually the path of corresponding file on chef node.
+    - on custom resource name - see [custom resource files](#custom-resource-files)
+- properties (1+) - most properties have default values
+- actions (1+) - all actions have default values
 
 only non-default properties and actions must be specified.
 
@@ -551,32 +539,39 @@ resource        | description
 
 - declares properties of custom resource
 - loads current properties if resource already exists
-- defines all resource actions
+- defines all resource actions (the first one is default)
+- resource name syntax: `COOKBOOK_RESOURCE` where
+  `COOKBOOK` is a site cookbook name and `RESOURCE` is a resource file name.
 
 syntax:
 
 ```ruby
 resource_name :httpd
 
+property :instance_name, String, name_property: true
 property :name, RubyType, default: 'value'
+
+default_action :action_2
 
 load_current_value do
   # some Ruby
 end
 
-action :name do
+action :action_1 do
  # a mix of built-in Chef resources and Ruby
 end
 
-action :name do
+action :action_2 do
  # a mix of built-in Chef resources and Ruby
 end
 ```
 
-- `resource_name` specifies resource name instead of default one (optional)
-- `load_current_value` block loads current values for all properties (optional)
-- the first action listed is default one
-  (unless specified explicitly with `default_action` method)
+usage of all these methods and parameters is optional:
+
+- `resource_name` overrides default resource name
+- `name_property: true` makes this property to use resource name as its value
+- `load_current_value` block loads current values for all properties
+- `default_action` overrides default action
 
 ## [TEMPLATES](https://docs.chef.io/templates.html)
 

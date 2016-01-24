@@ -460,13 +460,10 @@ Chef::Log.info 'some useful information'
 
 2 types of resources:
 
-- platform (built-in) resources
-- custom (provided by cookbook) resources
-
-1. **platform resource**
+1. **platform resource** (built-in)
   - available from chef-client directly
   - doesn't require a cookbook
-2. **custom resource**
+2. **custom resource** (provided by cookbook)
   - must be defined in resource file located in _resources/_
   - can use platform resources inside its definition
   - used in a recipe in the same way as platform resource

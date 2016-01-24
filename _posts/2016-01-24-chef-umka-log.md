@@ -6,6 +6,8 @@ access: public
 categories: [chef]
 ---
 
+<!-- more -->
+
 on local workstation:
 
 ```sh

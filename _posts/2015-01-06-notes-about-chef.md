@@ -458,6 +458,11 @@ Chef::Log.info 'some useful information'
 - describes desired state for configuration item
 - resources are grouped into recipes
 
+2 types of resources:
+
+- platform (built-in) resources
+- custom (provided by cookbook) resources
+
 **platform resource**
 
 - available from chef-client directly
@@ -468,11 +473,6 @@ Chef::Log.info 'some useful information'
 - must be defined in resource file located in _resources/_
 - can use platform resources inside its definition
 - used in a recipe in the same way as platform resource
-
-2 types of resources:
-
-- platform (built-in) resources
-- custom (provided by cookbook) resources
 
 usage and definition:
 
@@ -493,13 +493,13 @@ end
 
 - type
 
-  platform resource types: `package`, `template`, `service`, etc.
+    platform resource types: `package`, `template`, `service`, etc.
 
-  custom resource type syntax: `COOKBOOK_RESOURCE` where
-  `COOKBOOK` is a site cookbook name and
-  `RESOURCE` is a resource file name.
-  this name can be overriden with `resource_name` method
-  at the top of resource file.
+    custom resource type syntax: `COOKBOOK_RESOURCE` where
+    `COOKBOOK` is a site cookbook name and
+    `RESOURCE` is a resource file name.
+    this name can be overriden with `resource_name` method
+    at the top of resource file.
 
 - name (depends on specific resource)
 - properties (one or more) - most properties have default values

@@ -465,7 +465,7 @@ Chef::Log.info 'some useful information'
   - doesn't require a cookbook
 2. **custom resource** (provided by cookbook)
   - must be defined in resource file located in _resources/_
-  - can use platform resources inside its definition
+  - can use platform resources in resource file
   - used in a recipe in the same way as platform resource
 
 usage and definition:
@@ -473,8 +473,9 @@ usage and definition:
 - resources are used in recipes (both platform and custom resources)
 - resources are defined in resource files (custom resources only)
 
-**NOTE**: henceforth we'll talk about usage of resources only.
-          there's a special section on how to define custom resources.
+**NOTE**: this section describes how to use platform and custom resources.
+          see [custom resource files](#custom-resource-files) on how to
+          define custom resources.
 
 usage syntax:
 
@@ -493,9 +494,17 @@ end
     `COOKBOOK` is a site cookbook name and
     `RESOURCE` is a resource file name.
     this name can be overriden with `resource_name` method
-    at the top of resource file.
+    at the top of resource file
+    (see [custom resource files](#custom-resource-files) for example)
 
-- name (depends on specific resource)
+- name (in general depends on speficic resource type)
+
+    for platform resources dealing with files (`directory`, `cookbook_file`, etc.)
+    this is usually the path of corresponding file on chef node.
+
+    for custom resources this is the value of the property declared with
+    `name_property: true` in resource file (unless overidden).
+
 - properties (one or more) - most properties have default values
 - actions (one or more) - all actions have default values
 
@@ -532,16 +541,13 @@ resource        | description
 **NOTE**: for `template` resource transfer not ERB templates themselves
           but static files generated from those templates.
 
-**NOTE**: for all resources dealing with files (`directory`, `cookbook_file`, etc.)
-          path on chef node is specified as resource name.
-
 ### [custom resource files](https://docs.chef.io/custom_resources.html)
 
 **NOTE**: LWRP/HWRP paradigm is replaced with custom resources - see
           [Custom Resources in Chef Client 12.5](https://www.chef.io/blog/2015/11/06/custom-resources-in-chef-client-12-5/)
           for details.
 
-**resource file**:
+**resource file**
 
 - declares properties of custom resource
 - loads current properties if resource already exists
@@ -567,11 +573,10 @@ action :name do
 end
 ```
 
-- `resource_name` specifies resource name instead of
-  default one (optional)
-- `load_current_value` block loads current values for all
-  specified properties (optional)
+- `resource_name` specifies resource name instead of default one (optional)
+- `load_current_value` block loads current values for all properties (optional)
 - the first action listed is default one
+  (unless specified explicitly with `default_action` method)
 
 ## [TEMPLATES](https://docs.chef.io/templates.html)
 

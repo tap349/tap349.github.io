@@ -31,7 +31,7 @@ participants:
 2. chef server (combined with chef node using chef-solo)
 3. workstation (from which knife or knife-solo is run - can be remote machine as well)
 
-#### core principles
+### core principles
 
 * *idempotence*
 * *thick clients, thin server*
@@ -47,7 +47,7 @@ participants:
 - used to bring the node into the expected state
 
 ___
-## [CHEF SOLO](https://docs.chef.io/chef_solo.html)
+# [CHEF SOLO](https://docs.chef.io/chef_solo.html)
 ___
 
 **chef-solo**
@@ -110,7 +110,7 @@ _.chef/knife.rb_
 - chef-repo specific knife settings (primarily paths to cookbooks, node files, etc.)
 - loaded every time knife is run
 
-### [VENDOR COOKBOOKS](https://docs.chef.io/cookbooks.html)
+## [VENDOR COOKBOOKS](https://docs.chef.io/cookbooks.html)
 
 _Berksfile_:
 
@@ -142,7 +142,7 @@ but since `berks vendor` command installs cookbook into _~/.bershelf/cookbooks/_
 as well I can't figure out how you might end up having cookbook installed locally only
 (which would justify existence of `knife[:berkshelf_path]` option).
 
-### [NODES](https://docs.chef.io/nodes.html)
+## [NODES](https://docs.chef.io/nodes.html)
 
 **NOTE**: nodes are configured in node files for chef-solo only -
           chef-client interacts with chef server to retrieve node configuration.
@@ -175,7 +175,7 @@ sample node file:
 }
 ```
 
-### [ATTRIBUTES](https://docs.chef.io/attributes.html)
+## [ATTRIBUTES](https://docs.chef.io/attributes.html)
 
 **attribute**
 
@@ -195,7 +195,7 @@ default['apache']['dir'] = '/etc/apache2'
 default.apache.dir = '/etc/apache2'
 ```
 
-#### attribute precedence
+### attribute precedence
 
 in general **attribute precedence** is organized in such a way as:
 
@@ -206,7 +206,7 @@ in general **attribute precedence** is organized in such a way as:
 
 ![attribute precendence table](https://docs.chef.io/_images/overview_chef_attributes_table.png)
 
-#### attribute types
+### attribute types
 
 - default
 - force_default
@@ -266,7 +266,7 @@ node['apache']['dir']        = '/etc/apache2'
 **TODO**: the same syntax `node['cookbook']['attribute']` is used to read final
           node attribute value after all precedence rules have been applied.
 
-### [ROLES](https://docs.chef.io/roles.html)
+## [ROLES](https://docs.chef.io/roles.html)
 
 **role**
 
@@ -297,7 +297,7 @@ use role in node file:
 }
 ```
 
-### [ENVIRONMENTS](https://docs.chef.io/environments.html)
+## [ENVIRONMENTS](https://docs.chef.io/environments.html)
 
 **environment**
 
@@ -337,7 +337,7 @@ or else environment can be set using `-E` knife argument:
 $ knife solo cook -E development
 ```
 
-### [DATA BAGS](https://docs.chef.io/data_bags.html)
+## [DATA BAGS](https://docs.chef.io/data_bags.html)
 
 **data bag**
 
@@ -356,7 +356,7 @@ key                   | required? | description
 `raw_data`            | yes       | attributes of data bag item (`id` attribute is required)
 
 ___
-## [SITE COOKBOOK](https://docs.chef.io/cookbooks.html)
+# [SITE COOKBOOK](https://docs.chef.io/cookbooks.html)
 ___
 
 **cookbook**
@@ -384,7 +384,7 @@ _resources/_      |
 _templates/_      |
 _metadata.rb_     |
 
-### [ATTRIBUTE FILES](https://docs.chef.io/attributes.html)
+## [ATTRIBUTE FILES](https://docs.chef.io/attributes.html)
 
 - when cookbook is run against a node attributes
   inside **all** attribute files are evaluated in the context of node object
@@ -406,7 +406,7 @@ default['apache']['listen_ports'] = [ '80','443' ]
 use of node object (`node`) is implicit here though it can be used explicitly
 (see Chef Solo/ATTRIBUTES section for more information).
 
-### [RECIPES](https://docs.chef.io/recipes.html)
+## [RECIPES](https://docs.chef.io/recipes.html)
 
 **recipe**
 
@@ -420,7 +420,7 @@ use of node object (`node`) is implicit here though it can be used explicitly
 
 default recipe - _default.rb_ (see Chef Solo/NODES for information about default recipe).
 
-#### include other recipes
+### include other recipes
 
 recipe can include other recipes from other cookbooks using `include_recipe` method:
 
@@ -437,7 +437,7 @@ depends 'apache2'
 - included recipe is just inlined at the point where it's included
 - only the first inclusion within recipe is processed - subsequent ones are ignored
 
-#### write to log from within a recipe
+### write to log from within a recipe
 
 log levels:
 
@@ -451,7 +451,7 @@ log levels:
 Chef::Log.info 'some useful information'
 ```
 
-### [RESOURCES](https://docs.chef.io/resource.html)
+## [RESOURCES](https://docs.chef.io/resource.html)
 
 **resource**
 
@@ -518,7 +518,7 @@ directory '/tmp/something' do
 end
 ```
 
-#### popular platform resources
+### popular platform resources
 
 resource        | description
 ----------------|---------------------------------------------------------------
@@ -541,7 +541,7 @@ resource        | description
 **NOTE**: for all resources dealing with files (`directory`, `cookbook_file`, etc.)
           path on chef node is specified as resource name.
 
-#### [custom resource files](https://docs.chef.io/custom_resources.html)
+### [custom resource files](https://docs.chef.io/custom_resources.html)
 
 **NOTE**: LWRP/HWRP paradigm is replaced with custom resources - see
           [Custom Resources in Chef Client 12.5](https://www.chef.io/blog/2015/11/06/custom-resources-in-chef-client-12-5/)
@@ -579,7 +579,7 @@ end
   specified properties (optional)
 - the first action listed is default one
 
-### [TEMPLATES](https://docs.chef.io/templates.html)
+## [TEMPLATES](https://docs.chef.io/templates.html)
 
 **template**
 
@@ -597,7 +597,7 @@ syntax   | description
 `<%= %>` | expressions (=)
 `<% %>`  | statements (=)
 
-#### variables inside template file
+### variables inside template file
 
 1) defined in `template` resource's `variables` parameter:
 
@@ -625,7 +625,7 @@ sample template file:
 <% end %>
 ```
 
-#### file specificity
+### file specificity
 
 specific template file might be targeted for specific platform.
 
@@ -639,7 +639,7 @@ template file is looked up in the following locations within _templates/_
 
 **NOTE**: FQDN must match literally!
 
-#### partials
+### partials
 
 **partial**
 
@@ -661,7 +661,7 @@ render partial from top-level template file:
 <%= render 'another_template.erb', variables: { user: @user } %>
 ```
 
-### [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
+## [METADATA.RB](https://docs.chef.io/cookbook_repo.html)
 
 **metadata.rb**
 

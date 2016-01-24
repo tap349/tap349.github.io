@@ -31,7 +31,7 @@ participants:
 2. chef server (combined with chef node using chef-solo)
 3. workstation (from which knife or knife-solo is run - can be remote machine as well)
 
-#### core principles:
+#### core principles
 
 * *idempotence*
 * *thick clients, thin server*
@@ -453,34 +453,36 @@ Chef::Log.info 'some useful information'
 
 ### [RESOURCES](https://docs.chef.io/resource.html)
 
-2 types of resources:
-
-1. platform (built-in) resources
-2. custom (provided by cookbook) resources
-
-LWRP/HWRP paradigm is replaced with custom resources - see
-[Custom Resources in Chef Client 12.5](https://www.chef.io/blog/2015/11/06/custom-resources-in-chef-client-12-5/)
-for details.
-
 **resource**
 
 - describes desired state for configuration item
-- declares steps required to bring configuration item to desired state
 - resources are grouped into recipes
-- during chef-client run each resource is associated with **provider** (platform specific)
-- provider does actual job described in the resource
 
-has:
+**platform resource**
 
-- type (package, template, service, etc.)
-- name
+- available from chef-client directly
+- doesn't require a cookbook
 
-consists of:
+**custom resource**
 
-- properties (one or more)
-- actions (one or more)
+- must be defined in resource file located in _resources/_
+- can use platform resources inside its definition
+- used in a recipe in the same way as platform resource
 
-syntax:
+2 types of resources:
+
+- platform (built-in) resources
+- custom (provided by cookbook) resources
+
+usage and definition:
+
+- resources are used in recipes (both platform and custom resources)
+- resources are defined in resource files (custom resources only)
+
+**NOTE**: henceforth we'll talk about usage of resources only.
+          there's a special section on how to define custom resources.
+
+usage syntax:
 
 ```ruby
 TYPE 'NAME' do
@@ -489,12 +491,34 @@ TYPE 'NAME' do
 end
 ```
 
-- most properties have default values
-- all actions have default values
+- type
+
+  platform resource types: `package`, `template`, `service`, etc.
+
+  custom resource type syntax: `COOKBOOK_RESOURCE` where
+  `COOKBOOK` is a site cookbook name and
+  `RESOURCE` is a resource file name.
+  this name can be overriden with `resource_name` method
+  at the top of resource file.
+
+- name (depends on specific resource)
+- properties (one or more) - most properties have default values
+- actions (one or more) - all actions have default values
 
 only non-default properties and actions must be specified.
 
-platform resources (available from chef-client directly and don't require a cookbook):
+sample resource usage:
+
+```ruby
+directory '/tmp/something' do
+  owner 'root'
+  group 'root'
+  mode 00755
+  action :create
+end
+```
+
+#### popular platform resources
 
 resource        | description
 ----------------|---------------------------------------------------------------
@@ -503,8 +527,9 @@ resource        | description
 `ruby`          | execute script using Ruby interpretor
 `link`          | create sym or hard links
 `directory`     | manage directories
-`cookbook_file` | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _files/_
-`template`      | transfer files from subdirectory (_PLATFORM_ or _default_ for any platform) of _templates/_
+`cookbook_file` | transfer files from subdirectory of _files/_ (_PLATFORM_ or _default_ for any platform)
+`template`      | transfer files from subdirectory of _templates/_ (_PLATFORM_ or _default_ for any platform)
+`package`       | install package (rpm, deb, etc.)
 `gem_package`   | install gem system-wide
 `chef_gem`      | install gem into the instance of Ruby dedicated to chef-client (can be required immediatelly after it's installed)
 `cron`          | modify cron entries
@@ -516,16 +541,43 @@ resource        | description
 **NOTE**: for all resources dealing with files (`directory`, `cookbook_file`, etc.)
           path on chef node is specified as resource name.
 
-sample resource:
+#### [custom resource files](https://docs.chef.io/custom_resources.html)
+
+**NOTE**: LWRP/HWRP paradigm is replaced with custom resources - see
+          [Custom Resources in Chef Client 12.5](https://www.chef.io/blog/2015/11/06/custom-resources-in-chef-client-12-5/)
+          for details.
+
+**resource file**:
+
+- declares properties of custom resource
+- loads current properties if resource already exists
+- defines all resource actions
+
+syntax:
 
 ```ruby
-directory '/tmp/something' do
-  owner 'root'
-  group 'root'
-  mode 00755
-  action :create
+resource_name :httpd
+
+property :name, RubyType, default: 'value'
+
+load_current_value do
+  # some Ruby
+end
+
+action :name do
+ # a mix of built-in Chef resources and Ruby
+end
+
+action :name do
+ # a mix of built-in Chef resources and Ruby
 end
 ```
+
+- `resource_name` specifies resource name instead of
+  default one (optional)
+- `load_current_value` block loads current values for all
+  specified properties (optional)
+- the first action listed is default one
 
 ### [TEMPLATES](https://docs.chef.io/templates.html)
 

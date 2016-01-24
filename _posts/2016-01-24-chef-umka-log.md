@@ -6,6 +6,8 @@ access: public
 categories: [chef]
 ---
 
+list of commands required to prepare and cook umka node
+
 <!-- more -->
 
 on local workstation:

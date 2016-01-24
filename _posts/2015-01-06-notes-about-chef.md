@@ -463,16 +463,13 @@ Chef::Log.info 'some useful information'
 - platform (built-in) resources
 - custom (provided by cookbook) resources
 
-**platform resource**
-
-- available from chef-client directly
-- doesn't require a cookbook
-
-**custom resource**
-
-- must be defined in resource file located in _resources/_
-- can use platform resources inside its definition
-- used in a recipe in the same way as platform resource
+1. **platform resource**
+  - available from chef-client directly
+  - doesn't require a cookbook
+2. **custom resource**
+  - must be defined in resource file located in _resources/_
+  - can use platform resources inside its definition
+  - used in a recipe in the same way as platform resource
 
 usage and definition:
 

@@ -372,13 +372,13 @@ $ knife cookbook create COOKBOOK
 
 structure:
 
-directory or file |
-------------------|
+directory or file | deprecated?
+------------------|-------------
 _attributes/_     |
-_definitions/_    |
+_definitions/_    | yes
 _files/_          |
 _libraries/_      |
-_providers/_      |
+_providers/_      | yes
 _recipes/_        |
 _resources/_      |
 _templates/_      |
@@ -534,6 +534,9 @@ resource        | description
 **NOTE**: LWRP/HWRP paradigm is replaced with custom resources - see
           [Custom Resources in Chef Client 12.5](https://www.chef.io/blog/2015/11/06/custom-resources-in-chef-client-12-5/)
           for details.
+
+**NOTE**: [definitions](https://docs.chef.io/definitions.html) are also
+          deprecated in favor of custom resources.
 
 **resource file**
 

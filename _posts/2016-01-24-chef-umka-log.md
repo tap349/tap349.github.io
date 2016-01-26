@@ -29,20 +29,15 @@ _/etc/chef/client.rb_:
 chef_server_url  "chefzero://localhost:8889"
 ```
 
-## remote node
+# remote node
 
 NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       and local private key added to authorized keys on remote node.
 
-- login:
-
-    ```sh
-    # ssh tap349
-    ```
-
 - create `deploy` user and add him to `sudo` group:
 
     ```sh
+    # ssh tap349
     # useradd deploy -m -G sudo
     # passwd deploy
       Enter new UNIX password: deploy
@@ -53,7 +48,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       deploy sudo
     ```
 
-## local workstation
+# local workstation
 
 - install chefdk:
 

@@ -29,7 +29,7 @@ _/etc/chef/client.rb_:
 chef_server_url  "chefzero://localhost:8889"
 ```
 
-# remote node
+## remote node
 
 NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       and local private key added to authorized keys on remote node.
@@ -48,7 +48,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       deploy sudo
     ```
 
-# local workstation
+## local workstation
 
 - install chefdk:
 

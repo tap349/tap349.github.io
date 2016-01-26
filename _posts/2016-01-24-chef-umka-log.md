@@ -50,7 +50,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
 
 ## local workstation
 
-- install chefdk:
+- install `chefdk`:
 
     ```sh
     $ brew cask update
@@ -58,7 +58,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     ```
 
 
-- update chef inside chef-dk since knife-zero needs chef ~> 12.6.0:
+- update `chef` inside `chefdk` since `knife-zero` needs `chef` ~> 12.6.0:
 
   - https://github.com/chef/appbundle-updater
   - https://rvm.io/integration/sudo
@@ -73,7 +73,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       kitchen version: 1.4.2
     ```
 
-- install knife-zero chef plugin:
+- install `knife-zero` chef plugin:
 
   - http://www.creationline.com/en/lab/8323
   - https://github.com/higanworks/knife-zero

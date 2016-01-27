@@ -226,23 +226,25 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     $ berks cookbook umka-locale
     ```
 
-    _umka/cookbooks/umka-locale/attributes/default.rb_:
+    - umka-locale cookbook
 
-    ```ruby
-    override['locale']['lang'] = 'en_US.UTF-8'
-    ```
+        _umka/cookbooks/umka-locale/attributes/default.rb_:
 
-    _umka/cookbooks/umka-locale/recipes/default.rb_:
+        ```ruby
+        override['locale']['lang'] = 'en_US.UTF-8'
+        ```
 
-    ```ruby
-    include_recipe 'locale'
-    ```
+        _umka/cookbooks/umka-locale/recipes/default.rb_:
 
-    _umka/cookbooks/umka-locale/metadata.rb_:
+        ```ruby
+        include_recipe 'locale'
+        ```
 
-    ```ruby
-    depends 'locale'
-    ```
+        _umka/cookbooks/umka-locale/metadata.rb_:
+
+        ```ruby
+        depends 'locale'
+        ```
 
     _umka/Berksfile_:
 
@@ -293,6 +295,10 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       Vendoring locale (1.0.2) to /Users/tap/ingate/3_chef/umka/berks-cookbooks/locale
       Vendoring umka-locale (0.1.0) to /Users/tap/ingate/3_chef/umka/berks-cookbooks/umka-locale
     ```
+
+    http://stackoverflow.com/questions/20269623:
+    >Berkshelf in general is very cookbook-centric.
+    >Chef, however, is cookbook-repo centric.
 
     add _umka/berks-cookbooks/_ to `cookbook_path` in _knife.rb_:
 
@@ -366,3 +372,103 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
 
     it's not allowed to edit attribute values here as they may be overwritten
     after chef-client run.
+
+- create base role:
+
+    - http://dougireton.com/blog/2013/02/16/chef-cookbook-anti-patterns
+
+    use roles as kind of lightweight proxy to application cookbooks -
+    role shouldn't specify any attributes or have long and detailed run_list
+
+    _umka/roles/base.json_:
+
+    ```yaml
+    {
+      "name": "base",
+      "description": "Basic server setup",
+      "chef_type": "role",
+      "json_class": "Chef::Role",
+
+      "default_attributes": {
+      },
+
+      "override_attributes": {
+      },
+
+      "run_list": [
+        "recipe[umka-base]"
+      ]
+    }
+    ```
+
+    ```sh
+    $ knife cookbook create umka-base -o cookbooks/
+    ```
+
+    - umka-base cookbook
+
+        _umka/cookbooks/umka-base/recipes/default.rb_:
+
+        ```ruby
+        include_recipe 'umka-base::system'
+        include_recipe 'umka-base::packages'
+        ```
+
+        _umka/cookbooks/umka-base/recipes/system.rb_:
+
+        ```ruby
+        include_recipe 'umka-locale'
+        include_recipe 'umka-timezone-ii'
+        ```
+
+        _umka/cookbooks/umka-base/recipes/packages.rb_:
+
+        ```ruby
+        # sudo apt-get update
+        include_recipe 'apt'
+
+        package 'imagemagick'
+        ```
+
+        _umka/cookbooks/umka-base/metadata.rb_:
+
+        ```ruby
+        ...
+        %w(
+          apt
+          umka-locale
+          umka-timezone-ii
+        ).each { |cookbook| depends cookbook }
+        ```
+
+    now _umka/nodes/tap349.json_ can look like this:
+
+    ```yaml
+    "run_list": [
+      "role[base]"
+    ]
+    ```
+
+    and _umka/Berksfile_:
+
+    ```ruby
+    source 'https://supermarket.chef.io'
+
+    cookbook 'umka-base', path: 'cookbooks/umka-base'
+    cookbook 'umka-locale', path: 'cookbooks/umka-locale'
+    cookbook 'umka-timezone-ii', path: 'cookbooks/umka-timezone-ii'
+    ```
+
+    NOTE: it's still necessary to specify all cookbooks even though the last
+          2 cookbooks are pulled as dependencies - otherwise `berks install`
+          won't be able to resolve cookbook dependencies.
+
+- refactor _umka/Berksfile_:
+
+    ```ruby
+    source 'https://supermarket.chef.io'
+
+    Dir['cookbooks/**'].each do |path|
+      cookbook File.basename(path), path: path
+    end
+    ```

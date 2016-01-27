@@ -2,7 +2,7 @@
 layout: post
 title: chef umka log
 date: 2016-01-24 20:42:00 +0300
-access: private
+access: public
 categories: [chef]
 ---
 
@@ -79,6 +79,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
 
   - http://www.creationline.com/en/lab/8323
   - https://github.com/higanworks/knife-zero
+  - https://knife-zero.github.io/20_getting_started
   - https://www.coveros.com/knife-zero/
 
     ```sh
@@ -213,16 +214,14 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
 
 - create wrapper cookbooks for community cookbooks:
 
-    - https://github.com/higanworks/knife-zero/issues/19
+    - (!) https://github.com/higanworks/knife-zero/issues/19
 
-    e.g. for `locale` communite cookbook
+    e.g. for `locale` community cookbook
 
     ```sh
     $ cd umka
     $ knife cookbook create umka-locale -o cookbooks/
-
     or
-
     $ cd umka/cookbooks
     $ berks cookbook umka-locale
     ```
@@ -253,6 +252,13 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     cookbook 'umka-locale', path: 'cookbooks/umka-locale'
     ```
 
+    of course it's possible to store cookbook anywhere - e.g. in default
+    chef location _~/.chef/cookbooks/_ (`knife cookbook create` installs there
+    by default) or even on github (use `git:` option instead of `path:`).
+    in my case wrapper cookbooks are stored in chef repo for the sake of
+    convience (though it's not recommended by berkshelf - see
+    https://github.com/berkshelf/berkshelf/issues/535).
+
     ```sh
     $ berks install
     Resolving cookbook dependencies...
@@ -273,18 +279,36 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     dependencies of cookbooks inside _Berksfile_ (including wrapper cookbooks)
     into _~/.berkshelf/cookbooks_
 
-    vendor cookbooks into _umka/berks-cookbooks/_ so that they are available
-    for knife-zero during converge:
+    vendor dependency cookbooks into _umka/berks-cookbooks/_ so that
+    they are available for knife-zero during converge:
 
     ```sh
     $ cd umka
     $ berks vendor
+      Resolving cookbook dependencies...
+      Fetching 'umka-locale' from source at cookbooks/umka-locale
+      Fetching cookbook index from https://supermarket.chef.io...
+      Using umka-locale (0.1.0) from source at cookbooks/umka-locale
+      Using locale (1.0.2)
+      Vendoring locale (1.0.2) to /Users/tap/ingate/3_chef/umka/berks-cookbooks/locale
+      Vendoring umka-locale (0.1.0) to /Users/tap/ingate/3_chef/umka/berks-cookbooks/umka-locale
     ```
 
     add _umka/berks-cookbooks/_ to `cookbook_path` in _knife.rb_:
 
     ```ruby
     cookbook_path ['berks-cookbooks']
+    ```
+
+    you cannot just include _~/.berkshelf/cookbooks_ because it stores
+    installed cookbooks along with their versions - these versions are
+    stripped when vendoring.
+
+    add _umka/berks-cookbooks/_ to _.gitignore_:
+
+    ```sh
+    $ cd umka
+    $ echo 'berks-cookbooks/' >> .gitignore
     ```
 
     add new wrapper cookbook to node run_list:
@@ -294,3 +318,51 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       tap349:
         run_list: recipe[umka-locale]
     ```
+
+    converge:
+
+    ```sh
+    $ knife zero converge 'name:tap349'
+      tap349 Starting Chef Client, version 12.6.0
+      tap349 resolving cookbooks for run list: ["umka-locale"]
+      tap349 Synchronizing Cookbooks:
+      tap349   - locale (1.0.2)
+      tap349   - umka-locale (0.1.0)
+      tap349 Compiling Cookbooks...
+      tap349 Converging 3 resources
+      tap349 Recipe: locale::default
+      tap349   * apt_package[locales] action install (up to date)
+      tap349   * execute[Generate locale] action run
+      tap349     - execute locale-gen en_US.UTF-8
+      tap349   * execute[Update locale] action run
+      tap349     - execute update-locale LANG=en_US.UTF-8 LC_ALL=en_US.utf8
+      tap349
+      tap349 Running handlers:
+      tap349 Running handlers complete
+      tap349 Chef Client finished, 2/3 resources updated in 04 seconds
+    ```
+
+    NOTE: if you make any modification to wrapper cookbooks it's necessary
+          to vendor and converge again (in loop).
+
+    after converging node file is automatically populated with the following:
+
+    ```yaml
+    ...
+    "override": {
+      "locale": {
+        "lang": "en_US.UTF-8"
+      }
+    },
+    ...
+    "default": {
+      "locale": {
+        "lang": "en_US.utf8",
+        "lc_all": "en_US.utf8"
+      }
+    }
+    ...
+    ```
+
+    it's not allowed to edit attribute values here as they may be overwritten
+    after chef-client run.

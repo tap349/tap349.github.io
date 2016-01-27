@@ -1,6 +1,6 @@
 ---
 layout: post
-title: actions to converge umka with chef
+title: chef umka log
 date: 2016-01-24 20:42:00 +0300
 access: public
 categories: [chef]
@@ -24,9 +24,9 @@ list of commands required to prepare and cook umka node
 the point why remote node "tries to http connect to itself":
 
 _/etc/chef/client.rb_:
-```ruby
-chef_server_url  "chefzero://localhost:8889"
-```
+  ```ruby
+  chef_server_url  "chefzero://localhost:8889"
+  ```
 
 ## remote node
 

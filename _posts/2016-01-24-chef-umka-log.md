@@ -434,6 +434,10 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
 
         ```ruby
         ...
+        recipe 'redis::default', 'Installs all non-default recipes'
+        recipe 'redis::system', 'Installs system packages and configures system'
+        recipe 'redis::packages', 'Installs common userland packages'
+
         %w(
           apt
           umka-locale

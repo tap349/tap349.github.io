@@ -24,7 +24,6 @@ list of commands required to prepare and cook umka node
 the point why remote node "tries to http connect to itself":
 
 _/etc/chef/client.rb_:
-
 ```ruby
 chef_server_url  "chefzero://localhost:8889"
 ```
@@ -48,7 +47,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       deploy sudo
     ```
 
-## local workstation
+## local ws
 
 - install `chefdk`:
 
@@ -57,6 +56,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     $ brew cask install chefdk
     ```
 
+    NOTE: berkshelf is included as part chefdk
 
 - update `chef` inside `chefdk` since `knife-zero` needs `chef` ~> 12.6.0:
 
@@ -66,6 +66,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     ```sh
     $ gem install appbundle-updater
     $ rvmsudo appbundle-updater chefdk chef master
+    $ rvmsudo appbundle-updater chefdk berkshelf master
     $ chef --version
       Chef Development Kit Version: 0.10.0
       chef-client version: 12.6.0
@@ -84,6 +85,24 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     ```
 
 - generate chef repo:
+
+    - http://blog.vialstudios.com/the-environment-cookbook-pattern
+
+    repo is used to orchestrate provisioning target nodes, it stores:
+
+    - _Berksfile_
+    - environments
+    - data_bags
+    - node file itselfs
+
+    _Berksfile_ is used to specify cookbook dependencies:
+
+    - community cookbooks from chef supermarket
+    - wrapper or environment cookbooks (with either `path` or `git` option)
+
+    community cookbooks should not be vendored inside chef repo -
+    they should be strored in _~/.bershelf/cookbooks/_ (this is default
+    when running `berks install`)
 
     ```sh
     $ chef generate repo umka
@@ -127,7 +146,7 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
     ServerAliveInterval 180
     ```
 
-- add your public key to authorized keys on remote node:
+- add your public key to authorized keys for deploy user on remote node:
 
     ```sh
     $ ssh deploy@tap349-deploy 'mkdir -p ~/.ssh'
@@ -186,4 +205,91 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
       tap349-deploy Running handlers:
       tap349-deploy Running handlers complete
       tap349-deploy Chef Client finished, 0/0 resources updated in 03 seconds
+    ```
+
+    after bootstrapping new node file _tap349.json_ is created with automatic
+    attributes collected by ohai.
+
+- create wrapper cookbooks for community cookbooks:
+
+    - https://github.com/higanworks/knife-zero/issues/19
+
+    e.g. for `locale` communite cookbook
+
+    ```sh
+    $ cd umka
+    $ knife cookbook create umka-locale -o cookbooks/
+
+    or
+
+    $ cd umka/cookbooks
+    $ berks cookbook umka-locale
+    ```
+
+    _umka/cookbooks/umka-locale/attributes/default.rb_:
+
+    ```ruby
+    override['locale']['lang'] = 'en_US.UTF-8'
+    ```
+
+    _umka/cookbooks/umka-locale/recipes/default.rb_:
+
+    ```ruby
+    include_recipe 'locale'
+    ```
+
+    _umka/cookbooks/umka-locale/metadata.rb_:
+
+    ```ruby
+    depends 'locale'
+    ```
+
+    _umka/Berksfile_:
+
+    ```ruby
+    source 'https://supermarket.chef.io'
+
+    cookbook 'umka-locale', path: 'cookbooks/umka-locale'
+    ```
+
+    ```sh
+    $ berks install
+    Resolving cookbook dependencies...
+    Fetching 'umka-locale' from source at cookbooks/umka-locale
+    Fetching cookbook index from https://supermarket.chef.io...
+    Using build-essential (2.2.4)
+    Using dmg (2.3.0)
+    Using chef_handler (1.2.0)
+    Using git (4.3.6)
+    Using umka-locale (0.1.0) from source at cookbooks/umka-locale
+    Installing locale (1.0.2)
+    Using windows (1.39.1)
+    Using yum (3.9.0)
+    Using yum-epel (0.6.5)
+    ```
+
+    berkshelf automatically installs community cookbooks listed as
+    dependencies of cookbooks inside _Berksfile_ (including wrapper cookbooks)
+    into _~/.berkshelf/cookbooks_
+
+    vendor cookbooks into _umka/berks-cookbooks/_ so that they are available
+    for knife-zero during converge:
+
+    ```sh
+    $ cd umka
+    $ berks vendor
+    ```
+
+    add _umka/berks-cookbooks/_ to `cookbook_path` in _knife.rb_:
+
+    ```ruby
+    cookbook_path ['berks-cookbooks']
+    ```
+
+    add new wrapper cookbook to node run_list:
+
+    ```sh
+    $ knife node run_list add tap349 umka-locale -z
+      tap349:
+        run_list: recipe[umka-locale]
     ```

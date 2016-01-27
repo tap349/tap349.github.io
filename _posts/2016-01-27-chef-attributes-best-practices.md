@@ -1,0 +1,31 @@
+---
+layout: post
+title: chef attributes best practices
+date: 2016-01-27 14:06:00 +0300
+access: public
+categories: [chef]
+---
+
+## guidelines for attributes
+
+- (!) cookbooks must not require attributes to be set outside of the cookbook itself to function
+
+  - http://bytearrays.com/chef-cookbook-patterns/
+
+- override community cookbook attributes in wrapper cookbooks using `override`
+
+  - http://bytearrays.com/chef-cookbook-patterns/
+
+- don't store attributes in roles at all
+
+  - http://dougireton.com/blog/2013/02/16/chef-cookbook-anti-patterns/
+  - http://bytearrays.com/chef-cookbook-patterns/
+
+- store environment specific attributes in environment files
+
+- don't store attributes in recipes - keep them in attribute files:
+  to initialize attributes in environment cookbooks or
+  override attributes in wrapper cookbooks
+
+  - http://deadunicornz.org/blog/2014/06/11/chef-attribute-overrides-in-recipes-is-a-bad-idea
+  - http://agiletesting.blogspot.ru/2010/11/working-with-chef-attributes.html

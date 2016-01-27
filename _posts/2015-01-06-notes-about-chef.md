@@ -118,7 +118,7 @@ _Berksfile_:
 cookbook 'apache2'
 ```
 
-install cookbook globally into _~/.bershelf/cookbooks/_:
+install cookbook globally into _~/.berkshelf/cookbooks/_:
 
 ```sh
 $ berks install
@@ -208,12 +208,14 @@ in general **attribute precedence** is organized in such a way as:
 
 ### attribute types
 
+see also http://stackoverflow.com/a/20835500
+
 - default
-- force_default
+- force_default (cannot be set in node file)
 - normal
 - override
-- force_override
-- automatic
+- force_override (cannot be set in node file)
+- automatic (cannot be set manually, collected by Ohai)
 
 attribute type is specified when using attributes by calling appropriate
 function of node object:

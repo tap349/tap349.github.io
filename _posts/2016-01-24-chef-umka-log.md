@@ -481,7 +481,7 @@ users:
 
 - add environment
 
-    e.g.
+    e.g. for staging environment:
 
     _umka/environments/staging.json_:
 

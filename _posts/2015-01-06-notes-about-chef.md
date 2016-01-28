@@ -195,6 +195,13 @@ default['apache']['dir'] = '/etc/apache2'
 default.apache.dir = '/etc/apache2'
 ```
 
+or else it's possible to use symbols instead of strings as hash keys:
+
+```ruby
+default['apache']['dir'] = '/etc/apache2'
+default[:apache][:dir] = '/etc/apache2'
+```
+
 ### attribute precedence
 
 in general **attribute precedence** is organized in such a way as:
@@ -546,7 +553,8 @@ resource        | description
 - loads current properties if resource already exists
 - defines all resource actions (the first one is default)
 - resource name syntax: `COOKBOOK_RESOURCE` where
-  `COOKBOOK` is a site cookbook name and `RESOURCE` is a resource file name.
+  `COOKBOOK` is a site cookbook name and `RESOURCE` is a resource file name
+  (hyphens in cookbook name are replaced with underscores).
 
 syntax:
 

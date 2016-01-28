@@ -478,3 +478,44 @@ users:
       cookbook File.basename(path), path: path
     end
     ```
+
+- add environment
+
+    e.g.
+
+    _umka/environments/staging.json_:
+
+    ```yaml
+    {
+      "name": "staging",
+      "description": "staging environment",
+      "chef_type": "environment",
+      "json_class": "Chef::Environment",
+
+      "cookbook_versions": {
+      },
+
+      "default_attributes": {
+      },
+
+      "override_attributes": {
+        "locale": {
+          "lang": "ru_RU.UTF-8"
+        }
+      }
+    }
+    ```
+
+    set environment for node:
+
+    ```sh
+    $ knife node environment_set tap349 staging -z
+    ```
+
+    get current environment in recipe:
+
+    ```ruby
+    node.chef_environment
+    ```
+
+    NOTE: this is a method - not a property.

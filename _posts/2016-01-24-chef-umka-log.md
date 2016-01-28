@@ -506,6 +506,10 @@ users:
     }
     ```
 
+    NOTE: for some reason chef-client doesn't find environment if it's
+          written in Ruby DSL and you converge with knife-zero -
+          stick with JSON format.
+
     set environment for node:
 
     ```sh

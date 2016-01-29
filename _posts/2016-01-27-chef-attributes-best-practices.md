@@ -29,3 +29,10 @@ categories: [chef]
 
   - http://deadunicornz.org/blog/2014/06/11/chef-attribute-overrides-in-recipes-is-a-bad-idea
   - http://agiletesting.blogspot.ru/2010/11/working-with-chef-attributes.html
+
+- use only default and override attributes in cookbooks and recipes
+
+  - https://docs.chef.io/ruby.html
+
+- don't use local variables inside attribute files - they are eagerly evaluated
+  and some node attributes might be not available yet

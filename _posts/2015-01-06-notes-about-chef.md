@@ -395,12 +395,16 @@ _metadata.rb_     |
 
 ## [ATTRIBUTE FILES](https://docs.chef.io/attributes.html)
 
-- when cookbook is run against a node attributes
-  inside **all** attribute files are evaluated in the context of node object
+- when cookbook is run against a node attributes inside **all** attribute files
+  are evaluated in the context of node object
 - cookbook attributes are usually placed into _attributes/default.rb_ -
   file name _default.rb_ is just a convention here.
   if necessary attributes can be grouped into several
   attribute files with arbitrary names
+- attribute files are loaded in alphabetical order except for _default.rb_ -
+  it's loaded first (http://stackoverflow.com/questions/19628418)
+- attributes that haven't been loaded yet are not available in attribute files -
+  you can load them manually with `include_attribute` directive
 
 sample attribute file:
 

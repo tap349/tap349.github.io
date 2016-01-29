@@ -36,3 +36,8 @@ categories: [chef]
 
 - don't use local variables inside attribute files - they are eagerly evaluated
   and some node attributes might be not available yet
+
+- prefer strings to symbols as attribute names,
+  in any case don't mix different notations
+
+  - https://docs.chef.io/ruby.html

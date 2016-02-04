@@ -542,6 +542,10 @@ resource        | description
 **NOTE**: for `template` resource transfer not ERB templates themselves
           but static files generated from those templates.
 
+**NOTE**: for `directory` resource try not to use `recursive` option since
+          `group`, `owner` and `mode` properties are not applied to parent
+          directories - they are owned by `root:root`!
+
 ### [custom resource files](https://docs.chef.io/custom_resources.html)
 
 **NOTE**: LWRP/HWRP paradigm is replaced with custom resources - see

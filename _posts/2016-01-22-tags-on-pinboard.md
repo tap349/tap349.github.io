@@ -6,9 +6,11 @@ access: public
 categories: [pinboard]
 ---
 
-tags related to education on pinboard
+differences between similar tags on pinboard
 
 <!-- more -->
+
+### tags related to education
 
 - **learning**:
   1. material related to the process or mechanics of learning
@@ -29,3 +31,9 @@ tags related to education on pinboard
      but not structured as a book
   4. many courses but not mooc
 - **mooc** - many courses, mooc
+
+### tags related to code style
+
+- **refactoring**:
+- **best_practice**:
+- **styleguide**:

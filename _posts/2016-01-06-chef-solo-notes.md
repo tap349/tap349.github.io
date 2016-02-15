@@ -693,7 +693,7 @@ setting            | description
 `version`          | three-number version sequence
 `chef_version`     | range of chef-client versions supported by cookbook
 `attribute`        | attribute required to configure cookbook
-`provides`         | recipe or resource provided by cookbook (auxilliary)
+`provides`         | recipe or resource provided by cookbook
 `recipe`           | description for recipe (cosmetic value)
 `depends`          | cookbook dependency on another cookbook
 `conflicts`        | FIO. conflicting cookbook or cookbook version

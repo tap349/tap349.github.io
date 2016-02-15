@@ -13,7 +13,8 @@ list of commands required to prepare and cook umka node
 - http://www.creationline.com/en/lab/8323
 >knife-zero starts chef-zero server locally (it's used to store node policies),
 >logs into remote node via ssh and runs chef-client there using policies from
->local chef-zero server.
+>local chef-zero server (chef-client accesses chef-zero server with SSH port
+>forwarding - it thinks that chef-zero server is installed locally on the node)
 
 - https://www.coveros.com/knife-zero/
 >This plugin creates an ssh tunnel so that

@@ -28,7 +28,7 @@ and official chef documentation.
 participants:
 
 1. chef node (deployment target - this is what configured, has chef-client or chef-solo installed)
-2. chef server (combined with chef node using chef-solo)
+2. chef server (combined with chef node when using chef-solo)
 3. workstation (from which knife or knife-solo is run - can be remote machine as well)
 
 ### core principles
@@ -610,7 +610,7 @@ ERB basics:
 syntax   | description
 ---------|----------------
 `<%= %>` | expressions (=)
-`<% %>`  | statements (=)
+`<% %>`  | statements (-)
 
 ### variables inside template file
 

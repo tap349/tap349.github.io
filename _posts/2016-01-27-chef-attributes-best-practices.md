@@ -1,6 +1,6 @@
 ---
 layout: post
-title: chef attributes best practices
+title: chef attributes
 date: 2016-01-27 14:06:00 +0300
 access: public
 categories: [chef]

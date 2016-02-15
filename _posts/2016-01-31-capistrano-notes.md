@@ -1,7 +1,7 @@
 ---
 layout: post
 title: capistrano notes
-date: 2016-02-15 23:39:00 +0300
+date: 2016-01-31 23:39:00 +0300
 access: public
 categories: [capistrano]
 ---

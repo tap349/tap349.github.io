@@ -1,6 +1,6 @@
 ---
 layout: post
-title: notes about chef
+title: chef-solo notes
 date: 2016-01-06 00:42:00 +0300
 access: public
 categories: [chef]

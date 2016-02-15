@@ -1,6 +1,6 @@
 ---
 layout: post
-title: tags on pinboard
+title: pinboard tags
 date: 2016-01-22 01:19:00 +0300
 access: public
 categories: [pinboard]

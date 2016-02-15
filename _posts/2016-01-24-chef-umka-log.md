@@ -37,8 +37,8 @@ NOTE: `tap349` is a preconfigured host in _~/.ssh/config_ with root user
 
 users:
 
-- deploy - used by capistrano
 - devops - used by chef
+- deploy - used by capistrano
 
 - create `devops` user:
 
@@ -71,7 +71,7 @@ users:
     ```sh
     $ ssh devops@tap349-devops 'mkdir -p ~/.ssh'
       devops@DIGITAL_OCEAN_IP's password: devops
-    $ cat ~/.ssh/home/id_rsa.pub | ssh devops@tap349-devops "cat >> ~/.ssh/authorized_keys"
+    $ cat ~/.ssh/home/id_rsa.pub | ssh tap349-devops "cat >> ~/.ssh/authorized_keys"
       devops@DIGITAL_OCEAN_IP's password: devops
     ```
 
@@ -122,7 +122,7 @@ users:
     - _Berksfile_
     - environments
     - data_bags
-    - node file itselfs
+    - node files themselves
 
     _Berksfile_ is used to specify cookbook dependencies:
 
@@ -280,6 +280,7 @@ users:
     Using yum-epel (0.6.5)
     ```
 
+    <!-- TODO -->
     berkshelf automatically installs community cookbooks listed as
     dependencies of cookbooks inside _Berksfile_ (including wrapper cookbooks)
     into _~/.berkshelf/cookbooks_
@@ -470,15 +471,38 @@ users:
           2 cookbooks are pulled as dependencies - otherwise `berks install`
           won't be able to resolve cookbook dependencies.
 
-- refactor _umka/Berksfile_:
+    we need to specify `path` because application and wrapper cookbooks are
+    stored locally (not retrieved from default source - chef supermarket).
+    we need to specify all application and wrapper cookbooks in _Berksfile_
+    because these cookbooks are later vendored into _berks-cookbooks_ directory
+    - the **only** cookbooks directory used by `knife` (see _.chef/knife.rb_)
+    when provisioning the node.
+
+    dependencies from cookbook's _metadata.rb_ are installed
+    (and vendored into _berks-cookbooks_) by Berkshelf automatically -
+    but if we need cookbook from github we need to specify it inside cookbook's
+    _Berksfile_ and the latter is not processed by Berkshelf when run in the root
+    of chef-repo. thus we need to use a special hack in chef-repo's _Berksfile_
+    to load each cookbook's _Berkfile_:
 
     ```ruby
     source 'https://supermarket.chef.io'
 
+    # https://coderwall.com/p/j72egw
+    def cookbook_dependencies path
+      berksfile = "#{path}/Berksfile"
+      return unless File.exists? berksfile
+
+      instance_eval File.read(berksfile)
+    end
+
     Dir['cookbooks/**'].each do |path|
+      cookbook_dependencies path
       cookbook File.basename(path), path: path
     end
     ```
+
+    pay attention to refactored code to add application and wrapper cookbooks.
 
 - add environment
 

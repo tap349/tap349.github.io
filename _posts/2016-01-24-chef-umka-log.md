@@ -69,7 +69,7 @@ users:
 - add your public key to authorized keys for devops user on remote node:
 
     ```sh
-    $ ssh devops@tap349-devops 'mkdir -p ~/.ssh'
+    $ ssh tap349-devops 'mkdir -p ~/.ssh'
       devops@DIGITAL_OCEAN_IP's password: devops
     $ cat ~/.ssh/home/id_rsa.pub | ssh tap349-devops "cat >> ~/.ssh/authorized_keys"
       devops@DIGITAL_OCEAN_IP's password: devops
@@ -227,6 +227,9 @@ users:
     or
     $ cd umka/cookbooks
     $ berks cookbook umka-locale
+    or
+    $ cd umka
+    $ chef generate cookbook cookbooks/umka-locale
     ```
 
     - umka-locale cookbook

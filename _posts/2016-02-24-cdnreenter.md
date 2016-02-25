@@ -6,7 +6,7 @@ access: public
 categories: [chef]
 ---
 
-acions log to provision cdnreenter.
+actions log to provision cdnreenter.
 
 <!-- more -->
 

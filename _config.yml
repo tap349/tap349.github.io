@@ -30,7 +30,7 @@ author:
 # suppress warning about using redcarpt instead of kramdown
 # (it will not be supported by github in the future)
 #markdown:             redcarpet
-highlighter:          pygments
+#highlighter:          pygments
 
 # NOTE: hard_wrap is no longer available as extension
 # https://github.com/vmg/redcarpet

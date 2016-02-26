@@ -3,7 +3,7 @@ layout: post
 title: cdnreenter
 date: 2016-02-24 20:41:00 +0300
 access: public
-categories: [chef]
+categories: [chef, capistrano]
 ---
 
 actions log to provision cdnreenter.

@@ -23,6 +23,9 @@ author:
 # Syntax highlighting
 #==============================================================================
 
+markdown:             kramdown
+highlighter:          rouge
+
 #------------------------------------------------------------------------------
 # redcarpet
 #------------------------------------------------------------------------------
@@ -34,17 +37,17 @@ author:
 
 # NOTE: hard_wrap is no longer available as extension
 # https://github.com/vmg/redcarpet
-redcarpet:
-  extensions:
-    - autolink
-    - fenced_code_blocks
-    - highlight
-    - no_intra_emphasis
-    - strikethrough
-    - superscript
-    - tables
-    - underline
-    - with_toc_data
+#redcarpet:
+  #extensions:
+    #- autolink
+    #- fenced_code_blocks
+    #- highlight
+    #- no_intra_emphasis
+    #- strikethrough
+    #- superscript
+    #- tables
+    #- underline
+    #- with_toc_data
 
 #------------------------------------------------------------------------------
 # kramdown

@@ -26,7 +26,9 @@ author:
 markdown:             kramdown
 highlighter:          rouge
 
+# http://kramdown.gettalong.org/options.html
 kramdown:
+  autolink:           true
   hard_wrap:          false
   input:              GFM
 

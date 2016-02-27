@@ -26,6 +26,10 @@ author:
 markdown:             kramdown
 highlighter:          rouge
 
+kramdown:
+  hard_wrap:          false
+  input:              GFM
+
 #------------------------------------------------------------------------------
 # redcarpet
 #------------------------------------------------------------------------------
@@ -48,18 +52,6 @@ highlighter:          rouge
     #- tables
     #- underline
     #- with_toc_data
-
-#------------------------------------------------------------------------------
-# kramdown
-#------------------------------------------------------------------------------
-
-#markdown:             KramdownPygments
-#markdown:             kramdown
-
-#kramdown:
-  #hard_wrap:          true
-  #input:              GFM
-  #syntax_highlighter: pygments
 
 #==============================================================================
 # Permalinks

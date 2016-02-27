@@ -14,12 +14,12 @@ categories: [chef]
 
 - override community cookbook attributes in wrapper cookbooks using `override`
 
-  - http://bytearrays.com/chef-cookbook-patterns/
+  - <http://bytearrays.com/chef-cookbook-patterns/>
 
 - don't store attributes in roles at all
 
-  - http://dougireton.com/blog/2013/02/16/chef-cookbook-anti-patterns/
-  - http://bytearrays.com/chef-cookbook-patterns/
+  - <http://dougireton.com/blog/2013/02/16/chef-cookbook-anti-patterns/>
+  - <http://bytearrays.com/chef-cookbook-patterns/>
 
 - store environment specific attributes in environment files
 
@@ -27,12 +27,12 @@ categories: [chef]
   to initialize attributes in environment cookbooks or
   override attributes in wrapper cookbooks
 
-  - http://deadunicornz.org/blog/2014/06/11/chef-attribute-overrides-in-recipes-is-a-bad-idea
-  - http://agiletesting.blogspot.ru/2010/11/working-with-chef-attributes.html
+  - <http://deadunicornz.org/blog/2014/06/11/chef-attribute-overrides-in-recipes-is-a-bad-idea>
+  - <http://agiletesting.blogspot.ru/2010/11/working-with-chef-attributes.html>
 
 - use only default and override attributes in cookbooks and recipes
 
-  - https://docs.chef.io/ruby.html
+  - <https://docs.chef.io/ruby.html>
 
 - don't use local variables inside attribute files - they are eagerly evaluated
   and some node attributes might be not available yet
@@ -40,4 +40,4 @@ categories: [chef]
 - prefer strings to symbols as attribute names,
   in any case don't mix different notations
 
-  - https://docs.chef.io/ruby.html
+  - <https://docs.chef.io/ruby.html>

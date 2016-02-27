@@ -27,7 +27,6 @@ markdown:             kramdown
 highlighter:          rouge
 
 kramdown:
-  autolink:           true
   hard_wrap:          false
   input:              GFM
 

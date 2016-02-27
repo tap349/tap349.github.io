@@ -10,7 +10,7 @@ categories: [chef]
 
 - cookbooks must not require attributes to be set outside of the cookbook itself to function
 
-  - http://bytearrays.com/chef-cookbook-patterns/
+  - <http://bytearrays.com/chef-cookbook-patterns/>
 
 - override community cookbook attributes in wrapper cookbooks using `override`
 

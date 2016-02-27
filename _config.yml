@@ -27,19 +27,19 @@ markdown:             kramdown
 highlighter:          rouge
 
 kramdown:
+  autolink:           true
   hard_wrap:          false
   input:              GFM
 
 #------------------------------------------------------------------------------
 # redcarpet
+# NOTE: no longer supported by github pages!
 #------------------------------------------------------------------------------
 
-# suppress warning about using redcarpt instead of kramdown
-# (it will not be supported by github in the future)
 #markdown:             redcarpet
 #highlighter:          pygments
 
-# NOTE: hard_wrap is no longer available as extension
+# hard_wrap is no longer available as extension
 # https://github.com/vmg/redcarpet
 #redcarpet:
   #extensions:

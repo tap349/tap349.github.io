@@ -8,7 +8,7 @@ categories: [chef]
 
 ## guidelines for attributes
 
-- (!) cookbooks must not require attributes to be set outside of the cookbook itself to function
+- cookbooks must not require attributes to be set outside of the cookbook itself to function
 
   - http://bytearrays.com/chef-cookbook-patterns/
 

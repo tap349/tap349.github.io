@@ -187,20 +187,20 @@ in this case `partner_transactions` is an alias of some table inside query of cu
 
 ### ransack:
 
-* https://github.com/activerecord-hackery/ransack
-* https://github.com/activerecord-hackery/ransack/wiki/Basic-Searching
-* https://github.com/activerecord-hackery/ransack/wiki/Using-Ransackers
-* https://github.com/activerecord-hackery/ransack/blob/master/lib/ransack/constants.rb (list of ransack predicates with their definitions)
-* http://nikhgupta.com/code/activeadmin/custom-filters-using-ransacker-in-activeadmin-interfaces/ (turned out pretty useless in the end)
-* http://stackoverflow.com/questions/22473391/custom-search-with-ransacker (example of custom processing inside formatter)
-* http://railscasts.com/episodes/370-ransack (introduction screencast)
+* <https://github.com/activerecord-hackery/ransack>
+* <https://github.com/activerecord-hackery/ransack/wiki/Basic-Searching>
+* <https://github.com/activerecord-hackery/ransack/wiki/Using-Ransackers>
+* <https://github.com/activerecord-hackery/ransack/blob/master/lib/ransack/constants.rb> (list of ransack predicates with their definitions)
+* <http://nikhgupta.com/code/activeadmin/custom-filters-using-ransacker-in-activeadmin-interfaces/> (turned out pretty useless in the end)
+* <http://stackoverflow.com/questions/22473391/custom-search-with-ransacker> (example of custom processing inside formatter)
+* <http://railscasts.com/episodes/370-ransack> (introduction screencast)
 
 ### arel:
 
-* http://jpospisil.com/2014/06/16/the-definitive-guide-to-arel-the-sql-manager-for-ruby.html (the most comprehensive guide to arel)
-* http://www.slideshare.net/flah00/activerecord-arel (very informative slideshow on arel - it makes sense to start with it)
-* https://github.com/rails/arel
-* http://erniemiller.org/2010/05/11/activerecord-relation-vs-arel/ (difference between AR and arel with many examples)
-* http://rubydoc.info/github/rails/arel/master/Arel/Predications#matches_any-instance_method (list of arel predications)
-* http://pivotallabs.com/using-arel-to-build-complex-sql-expressions/ (brief but has some examples - in particular about InfixOperation)
-* http://robots.thoughtbot.com/using-arel-to-compose-sql-queries (haven't read yet)
+* <http://jpospisil.com/2014/06/16/the-definitive-guide-to-arel-the-sql-manager-for-ruby.html> (the most comprehensive guide to arel)
+* <http://www.slideshare.net/flah00/activerecord-arel> (very informative slideshow on arel - it makes sense to start with it)
+* <https://github.com/rails/arel>
+* <http://erniemiller.org/2010/05/11/activerecord-relation-vs-arel/> (difference between AR and arel with many examples)
+* <http://rubydoc.info/github/rails/arel/master/Arel/Predications#matches_any-instance_method> (list of arel predications)
+* <http://pivotallabs.com/using-arel-to-build-complex-sql-expressions/> (brief but has some examples - in particular about InfixOperation)
+* <http://robots.thoughtbot.com/using-arel-to-compose-sql-queries> (haven't read yet)

@@ -6,7 +6,7 @@ access: public
 categories: [capistrano]
 ---
 
-https://github.com/capistrano/capistrano/blob/master/README.md
+<https://github.com/capistrano/capistrano/blob/master/README.md>
 
 - It's just SSH
 

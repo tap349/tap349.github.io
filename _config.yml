@@ -34,7 +34,7 @@ kramdown:
 
 #------------------------------------------------------------------------------
 # redcarpet
-# NOTE: no longer supported by github pages!
+# NOTE: redcarpet and pygments are no longer supported by github pages!
 #------------------------------------------------------------------------------
 
 #markdown:             redcarpet

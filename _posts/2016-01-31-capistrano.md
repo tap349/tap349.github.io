@@ -6,6 +6,10 @@ access: public
 categories: [capistrano]
 ---
 
+miscellaneous notes about capistrano (general information, troubleshooting).
+
+<!-- more -->
+
 <https://github.com/capistrano/capistrano/blob/master/README.md>
 
 - It's just SSH

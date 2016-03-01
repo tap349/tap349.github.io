@@ -6,7 +6,7 @@ access: public
 categories: [chef]
 ---
 
-guidelines for attributes
+guidelines for attributes:
 
 <!-- more -->
 

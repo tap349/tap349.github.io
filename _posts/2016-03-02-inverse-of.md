@@ -6,7 +6,7 @@ access: public
 categories: [rails]
 ---
 
-this is specific example when `inverse_of` is useful:
+one example when `inverse_of` is useful
 
 spec:
 
@@ -15,7 +15,7 @@ let(:site) { create :site }
 let!(:gl_account) { create :gl_account, site: site }
 ```
 
-in this case `gl_account` won't found for `site` in ruby file:
+in this case `gl_account` won't be found for `site` in ruby file:
 
 ```ruby
 site.gl_account # nil

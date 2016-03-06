@@ -1,16 +1,15 @@
 ---
 layout: post
-title: chef FAQ
+title: how knife connects to node
 date: 2016-02-27 01:16:00 +0300
 access: public
 categories: [chef]
 ---
 
-FAQ
+how knife-solo and knife-zero connect to the node
+when bootstrapping and cooking.
 
 <!-- more -->
-
-## how knife connects to node?
 
 ### knife-solo
 
@@ -50,7 +49,7 @@ they depend on what was used when bootstrapping the node:
 when using knife-solo and chef-solo there is no chef server where
 information about nodes might be stored.
 that is why knife connects to node in the same way as described above
-for bootstraping.
+for bootstrapping.
 
 cooking itself:
 
@@ -62,6 +61,13 @@ cooking itself:
   chef-solo creates a new one with empty run-list
 - chef-solo provisions the node using node file
   (it is created if it doesn't exist - see previous step)
+
+it's possible to specify alternate node file whose name differs from
+domain or IP address used to connect to the node:
+
+```sh
+$ knife solo cook tap349 nodes/tap349-2.json
+```
 
 ### knife-zero
 

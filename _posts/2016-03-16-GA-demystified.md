@@ -29,7 +29,7 @@ configuration of google analytics and some background information.
 
   - in GA API response (`profileInfo` section):
     - `profileId` (`\d{8}`)
-    - `tableId` (`mcf:\d{8}` - with `mcf` prefix when querying for MCF stats)
+    - `tableId` (`mcf:\d{8}` - with `mcf:` prefix when querying for MCF stats)
   - `ids` parameter in GA API query (`ga:\d{8}` - with `ga:` prefix)
   - stored in `AnalyticsCounter` in Pumba (`ga:\d{8}` - with `ga:` prefix)
 

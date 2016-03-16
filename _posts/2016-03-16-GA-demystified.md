@@ -57,5 +57,5 @@ when app needs access to GA counter statistics:
 OAuth token allows to access user's data provided by any GA service
 (e.g. `Google Analytics API v3`) for which granted set of scopes is sufficient.
 app is identified by client id and client secret - these parameters along with
-refresh token are passed in every request. refresh token is acquired based on
+refresh token are passed in every request. refresh token is acquired using
 OAuth token and has limited expiration period during which it can be reused.

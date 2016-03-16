@@ -16,17 +16,22 @@ configuration of google analytics and some background information.
 
   `Admin -> Property -> Tracking Info -> Tracking Code`
 
-  - used in Universal Analytics tracking code (GA script embedded on each tracked page)
-  - aka `webPropertyId` in GA API response (`profileInfo` section)
+  - in GA API response (`profileInfo` section):
+    - `accountId` (`\d{8}` - without `UA-` prefix and `-1` suffix)
+    - `webPropertyId` (`UA-\d{8}-1`)
+  - used in Universal Analytics tracking code -
+    GA js script embedded on each tracked page (`UA-\d{8}-1`)
   - currently not stored in Pumba at all
 
 - **View ID** (`\d{8}`)
 
   `Admin -> View -> View Settings`
 
-  - used in GA API as counter id with `ga:` prefix
-  - aka `internalWebPropertyId` in GA API response (`profileInfo` section)
-  - stored in `AnalyticsCounter` in Pumba as `ga:\d{8}`
+  - in GA API response (`profileInfo` section):
+    - `profileId` (`\d{8}`)
+    - `tableId` (`mcf:\d{8}` - with `mcf` prefix when querying for MCF stats)
+  - `ids` parameter in GA API query (`ga:\d{8}` - with `ga:` prefix)
+  - stored in `AnalyticsCounter` in Pumba (`ga:\d{8}` - with `ga:` prefix)
 
 ### <https://console.developers.google.com>
 

@@ -35,8 +35,8 @@ configuration of google analytics and some background information.
 generate OAuth 2.0 client IDs for each stage (Development, Staging, Production) -
 they are stored in _secrets.yml_:
 
-Client ID - `oauth/google_analytics/app_id`
-Client secret - `oauth/google_analytics/app_secret`
+- Client ID - `oauth/google_analytics/app_id`
+- Client secret - `oauth/google_analytics/app_secret`
 
 when app needs access to GA counter statistics:
 

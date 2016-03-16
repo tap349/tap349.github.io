@@ -12,26 +12,22 @@ configuration of google analytics and some background information.
 
 ### <http://analytics.google.com>
 
-- **Tracking ID** (`UA-\d{8}-1`)
+- **Tracking ID** (`UA-XXXX-1`)
 
   `Admin -> Property -> Tracking Info -> Tracking Code`
 
-  - used in Universal Analytics tracking code -
-    GA js script embedded on each tracked page (`UA-\d{8}-1`)
-  - in GA API response (`profileInfo` section):
-    - `accountId` (`\d{8}` - without `UA-` prefix and `-1` suffix)
-    - `webPropertyId` (`UA-\d{8}-1`)
+  - `XXXX` - account id
+  - tracking id is used in Universal Analytics tracking code
+    (GA js script embedded on each tracked page)
   - currently not stored in Pumba at all
 
-- **View ID** (`\d{8}`)
+- **View (Profile) ID** (`XXXX`)
 
   `Admin -> View -> View Settings`
 
-  - `ids` parameter in GA API query (`ga:\d{8}` - with `ga:` prefix)
-  - in GA API response (`profileInfo` section):
-    - `profileId` (`\d{8}`)
-    - `tableId` (`mcf:\d{8}` - with `mcf:` prefix when querying for MCF stats)
-  - stored in `AnalyticsCounter` in Pumba (`ga:\d{8}` - with `ga:` prefix)
+  - `ga:XXXX` - unique table id for retrieving analytics data
+  - unique table id is used as `ids` parameter in GA API query
+  - stored in `AnalyticsCounter` in Pumba 
 
 ### <https://console.developers.google.com>
 

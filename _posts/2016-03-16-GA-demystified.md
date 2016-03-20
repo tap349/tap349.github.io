@@ -39,19 +39,28 @@ they are stored in _secrets.yml_:
 - Client ID - `oauth/google_analytics/app_id`
 - Client secret - `oauth/google_analytics/app_secret`
 
-when app needs access to GA counter statistics:
+client ID and client secret uniquely identify application
 
-- it goes to GA site
-- user is asked to sign in using his google account if necessary
-- OAuth consent screen is displayed with scopes required for selected API
-  service that must be granted to app by user to use this service -
-  different google API services require different scopes to be granted
-- if user grants requested permissions (scopes) GA site returns OAuth token
-  that is stored in database (`OauthToken`) and can be used later
-  to perform requests to GA API
+each google API service (e.g. `Google Analytics API v3`)
+defines one or more scopes that declare a set of operations permitted
 
-OAuth token allows to access user's data provided by any GA service
-(e.g. `Google Analytics API v3`) for which granted set of scopes is sufficient.
-app is identified by client id and client secret - these parameters along with
-refresh token are passed in every request. refresh token is acquired using
-OAuth token and has limited expiration period during which it can be reused.
+general workflow
+(<https://developers.google.com/api-client-library/ruby/start/get_started>):
+
+- application requests access to user data (using `omniauth-google-oauth2` gem) -
+  request includes one or more scopes
+- application is authenticated with client ID and client secret
+- user must authenticate himself - google account login screen is displayed
+- user needs to approve scopes application is requesting -
+  OAuth 2.0 consent screen is displayed to user
+- when user grants access for application OAuth 2.0 authorization server
+  provides application with refresh and access tokens -
+  tokens are valid for the scopes requested only
+- refresh token is stored in database as `OauthToken`
+- access token is stored in Rails cache only and fetched again when it expires
+- application uses refresh token to acquire new access token
+- access token is used to authorize API calls
+- access token expires but refresh token doesn't
+
+client ID, client secret and refresh token are used to fetch new access token -
+when making API call only access token is used.

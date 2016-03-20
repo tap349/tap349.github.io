@@ -18,7 +18,5 @@ namespace :post do
         ---
       ".gsub(/^\s+/, '')
     end
-
-    `mvim #{filename} &`
   end
 end

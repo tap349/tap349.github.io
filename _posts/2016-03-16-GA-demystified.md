@@ -56,11 +56,14 @@ general workflow
 - when user grants access for application OAuth 2.0 authorization server
   provides application with refresh and access tokens -
   tokens are valid for the scopes requested only
-- refresh token is stored in database as `OauthToken`
-- access token is stored in Rails cache only and fetched again when it expires
-- application uses refresh token to acquire new access token
-- access token is used to authorize API calls
-- access token expires but refresh token doesn't
+- refresh token:
+  - used to acquire new access token
+  - stored in database as `OauthToken`
+  - never expires
+- access token:
+  - used to authorize API calls
+  - stored in Rails cache only and fetched again when it expires
+  - expires after period of time specified by authorization server
 
 client ID, client secret and refresh token are used to fetch new access token -
 when making API call only access token is used.

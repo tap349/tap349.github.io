@@ -56,7 +56,7 @@ data attribute to the link.
 <https://habrahabr.ru/post/167161/>
 <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
 
-### ready
+### `ready`
 
 usually `ready` event is used to register event handlers/listeners
 on page elements inside a DOM tree.

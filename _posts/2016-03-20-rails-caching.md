@@ -14,7 +14,7 @@ notes about caching in rails and turbolinks.
 
 <https://github.com/rails/cache_digests>
 
-*cache digests* were included in rails 4 and had been available as a gem before.
+**cache digests** were included in rails 4 and had been available as a gem before.
 
 prior to cache digests it was necessary to expire fragment caches explicitly
 when changing template by adding, say, version `v1` to cache key.
@@ -23,7 +23,7 @@ all of its dependencies) - whenever template changes cache expires.
 
 <https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>
 
-*russian doll caching* is simply using key-based cache expiration.
+**russian doll caching** is simply using key-based cache expiration.
 
 using `touch` option on `belongs_to` associations allows to update
 associated object whenever current object is touched or saved.
@@ -162,12 +162,12 @@ ALL functions inside event handler for `turbolinks:load` must be IDEMPOTENT!
 
 #### event listeners
 
-still this doesn't apply to event listeners since they are discarded by
-turbolinks when saving a copy of page to cache (before rendering a new page)
+still this doesn't concerns event listeners since they are discarded by
+turbolinks when saving a copy of the page to cache (before rendering a new page)
 and thusly may be safely bound again when page is restored from cache.
 
 it's recommended to avoid using `turbolinks:load` event to add
-event listeners directly to page elements - use `event delegation`
+event listeners directly to page elements - use **event delegation**
 instead to register event listeners once on `document` or `window`.
 
 > **event delegation** refers to the process of using event propagation (bubbling)

@@ -122,9 +122,9 @@ visit actions:
 - `advance` (default) - new history entry is created
 - `replace` - topmost history entry is replaced
 
-- turbolinks caches visited pages
-- when visiting new page turbolinks first tries to render preview of the page
-  from cache if it's available
+turbolinks caches visited pages - when visiting new page turbolinks first
+tries to render preview of the page from cache if it's available while
+simultaneously loading a fresh copy of the page from server.
 
 ##### restoration visit
 
@@ -132,8 +132,8 @@ visit actions:
 
 - `restore` - shouldn't be invoked manually
 
-turbolinks renders a copy of the page from cache without making a request
-if it's available - otherwise retrieves a fresh copy of the page from server.
+if possible, turbolinks renders a copy of the page from cache without
+making a request - otherwise retrieves a fresh copy of the page from server.
 
 #### turbolinks:load
 

@@ -71,7 +71,7 @@ DOM tree has changed but event handlers are not bound to new page elements.
 
 we can fix this problem using turbolinks events: `page:load` or `page:change`.
 
-### page:load
+### `page:load`
 
 it's possible to fix it by using `page:load` event - it's triggered when:
 
@@ -82,7 +82,7 @@ BUT it's NOT triggered:
 - on partial replacement
 - when page is restored from client-side cache (clicking *back* in browser)
 
-### page:change
+### `page:change`
 
 USE `page:change` instead - it's triggered when:
 
@@ -135,7 +135,7 @@ visit actions:
 if possible, turbolinks renders a copy of the page from cache without
 making a request - otherwise retrieves a fresh copy of the page from server.
 
-### turbolinks:load
+### `turbolinks:load`
 
 `turbolinks:load` event fires:
 

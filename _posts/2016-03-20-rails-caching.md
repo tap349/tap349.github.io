@@ -12,18 +12,18 @@ notes about caching in rails and turbolinks.
 
 ## cache digests
 
-<https://github.com/rails/cache_digests>:
+<https://github.com/rails/cache_digests>
 
-cache digests were included in rails 4 and had been available as a gem before.
+*cache digests* were included in rails 4 and had been available as a gem before.
 
 prior to cache digests it was necessary to expire fragment caches explicitly
 when changing template by adding, say, version `v1` to cache key.
 now cache key contains MD5 sum of template tree (template file itself and
 all of its dependencies) - whenever template changes cache expires.
 
-<https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>:
+<https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>
 
-russian doll caching is simply using key-based cache expiration.
+*russian doll caching* is simply using key-based cache expiration.
 
 using `touch` option on `belongs_to` associations allows to update
 associated object whenever current object is touched or saved.
@@ -37,7 +37,7 @@ used to speed up page rendering.
 ### installation
 
 - install as gem
-- require in application js/coffeescript manifest file
+- require in application js/coffeescript manifest file (_application.coffee_)
 
 turbolinks can be disabled for certain links by adding `data-to-turbolink`
 data attribute to the link.
@@ -56,7 +56,7 @@ data attribute to the link.
 <https://habrahabr.ru/post/167161/>
 <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
 
-#### `ready`
+#### ready
 
 usually `ready` event is used to register event handlers/listeners
 on page elements inside a DOM tree.
@@ -71,7 +71,7 @@ DOM tree has changed but event handlers are not bound to new page elements.
 
 we can fix this problem using turbolinks events: `page:load` or `page:change`.
 
-#### `page:load`
+#### page:load
 
 it's possible to fix it by using `page:load` event - it's triggered when:
 
@@ -82,7 +82,7 @@ BUT it's NOT triggered:
 - on partial replacement
 - when page is restored from client-side cache (clicking *back* in browser)
 
-#### `page:change`
+#### page:change
 
 USE `page:change` instead - it's triggered when:
 
@@ -135,7 +135,7 @@ visit actions:
 turbolinks renders a copy of the page from cache without making a request
 if it's available - otherwise retrieves a fresh copy of the page from server.
 
-#### `turbolinks:load`
+#### turbolinks:load
 
 `turbolinks:load` event fires:
 

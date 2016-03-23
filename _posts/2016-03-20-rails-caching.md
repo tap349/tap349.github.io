@@ -10,6 +10,9 @@ notes about caching in rails and turbolinks.
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 # cache digests
 
 <https://github.com/rails/cache_digests>

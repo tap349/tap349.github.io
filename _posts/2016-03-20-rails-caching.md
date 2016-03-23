@@ -10,7 +10,7 @@ notes about caching in rails and turbolinks.
 
 <!-- more -->
 
-## cache digests
+# cache digests
 
 <https://github.com/rails/cache_digests>
 
@@ -28,13 +28,13 @@ all of its dependencies) - whenever template changes cache expires.
 using `touch` option on `belongs_to` associations allows to update
 associated object whenever current object is touched or saved.
 
-## turbolinks
+# turbolinks
 
 <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
 
 used to speed up page rendering.
 
-### installation
+## installation
 
 - install as gem
 - require in application js/coffeescript manifest file (_application.coffee_)
@@ -42,7 +42,7 @@ used to speed up page rendering.
 turbolinks can be disabled for certain links by adding `data-to-turbolink`
 data attribute to the link.
 
-### how it works
+## how it works
 
 - attaches click handler to all `a` on the page
 - makes Ajax (XHR) request for the page
@@ -50,13 +50,13 @@ data attribute to the link.
 - replaces current `body` with `body` from response
 - changes URL to correct one
 
-### events
+## events
 
 <http://railscasts.com/episodes/390-turbolinks?view=asciicast>
 <https://habrahabr.ru/post/167161/>
 <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
 
-#### ready
+### ready
 
 usually `ready` event is used to register event handlers/listeners
 on page elements inside a DOM tree.
@@ -71,7 +71,7 @@ DOM tree has changed but event handlers are not bound to new page elements.
 
 we can fix this problem using turbolinks events: `page:load` or `page:change`.
 
-#### page:load
+### page:load
 
 it's possible to fix it by using `page:load` event - it's triggered when:
 
@@ -82,7 +82,7 @@ BUT it's NOT triggered:
 - on partial replacement
 - when page is restored from client-side cache (clicking *back* in browser)
 
-#### page:change
+### page:change
 
 USE `page:change` instead - it's triggered when:
 
@@ -104,18 +104,18 @@ $(document).on 'page:change', ->
   alert 'page has loaded!'
 ```
 
-### turbolinks 5
+## turbolinks 5
 
 <https://github.com/turbolinks/turbolinks>
 
-#### visits
+### visits
 
 2 types of visits:
 
 - applications visit
 - restoration visit
 
-##### application visit
+#### application visit
 
 visit actions:
 
@@ -126,7 +126,7 @@ turbolinks caches visited pages - when visiting new page turbolinks first
 tries to render preview of the page from cache if it's available while
 simultaneously loading a fresh copy of the page from server.
 
-##### restoration visit
+#### restoration visit
 
 visit actions:
 
@@ -135,7 +135,7 @@ visit actions:
 if possible, turbolinks renders a copy of the page from cache without
 making a request - otherwise retrieves a fresh copy of the page from server.
 
-#### turbolinks:load
+### turbolinks:load
 
 `turbolinks:load` event fires:
 
@@ -150,7 +150,7 @@ $(document).on 'turbolinks:load', ->
 
 that is `turbolinks:load` is a full replacement of `page:change`.
 
-#### non-idempotent transformations
+### non-idempotent transformations
 
 this is the same problem as in turbolinks classic:
 
@@ -160,7 +160,7 @@ when page is restored from cache.
 
 ALL functions inside event handler for `turbolinks:load` must be IDEMPOTENT!
 
-#### event listeners
+### event listeners
 
 still this doesn't concerns event listeners since they are discarded by
 turbolinks when saving a copy of the page to cache (before rendering a new page)

@@ -57,7 +57,7 @@ data attribute to the link.
   - merges the contents of `head` element
 - `window`, `document` objects and `html` element persist between visits
 
-see also [visits]().
+see also [visits](#visits).
 
 CAUTION: you'll have a long-running, persistent session with maintained state -
 pay additional care not leak memory or otherwise bloat that long-running state.

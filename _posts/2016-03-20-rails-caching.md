@@ -57,6 +57,8 @@ data attribute to the link.
   - merges the contents of `head` element
 - `window`, `document` objects and `html` element persist between visits
 
+see also [visits][].
+
 CAUTION: you'll have a long-running, persistent session with maintained state -
 pay additional care not leak memory or otherwise bloat that long-running state.
 
@@ -120,6 +122,14 @@ $(document).on 'page:change', ->
 <https://github.com/turbolinks/turbolinks>
 
 ### visits
+
+visit represents the entire navigation lifecycle from click to render:
+
+- change browse history
+- issue network request
+- restore a copy of the page from cache
+- render final response
+- update scroll position
 
 2 types of visits:
 

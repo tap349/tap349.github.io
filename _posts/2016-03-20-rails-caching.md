@@ -118,7 +118,7 @@ whenever todo is added/removed/changed cache expires.
 
 prior to cache digests it was necessary to expire fragment caches explicitly
 when changing template by adding, say, version `v1` to cache key.
-now cache key contains MD5 sum of template tree (template file itself and
+now cache key contains md5 sum of template tree (template file itself and
 all of its dependencies) - whenever template changes cache expires.
 
 # cache backends

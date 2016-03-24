@@ -34,8 +34,10 @@ associated object whenever current object is touched or saved.
 # turbolinks
 
 <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
+<http://railscasts.com/episodes/390-turbolinks?view=asciicast>
+<https://habrahabr.ru/post/167161/>
 
-used to speed up page rendering.
+turbolinks is used to speed up page rendering.
 
 ## installation
 
@@ -47,19 +49,22 @@ data attribute to the link.
 
 ## how it works
 
-- attaches click handler to all `a` on the page
-- makes Ajax (XHR) request for the page
-- parses the response
-- replaces current `body` with `body` from response
-- changes URL to correct one
+- intercepts all clicks on `a` links to the same domain
+- changes browser's URL
+- requests new page with XHR (Ajax) request
+- renders response:
+  - replaces current `body` element entirely
+  - merges the contents of `head` element
+- `window`, `document` objects and `html` element persist between visits
 
-## events
+CAUTION: you'll have a long-running, persistent session with maintained state -
+pay additional care not leak memory or otherwise bloat that long-running state.
 
-<http://railscasts.com/episodes/390-turbolinks?view=asciicast>
-<https://habrahabr.ru/post/167161/>
-<http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
+## turbolinks classic
 
-### `ready`
+<https://github.com/turbolinks/turbolinks-classic/blob/master/README.md>
+
+### `ready` event
 
 usually `ready` event is used to register event handlers/listeners
 on page elements inside a DOM tree.
@@ -74,7 +79,7 @@ DOM tree has changed but event handlers are not bound to new page elements.
 
 we can fix this problem using turbolinks events: `page:load` or `page:change`.
 
-### `page:load`
+### `page:load` event
 
 it's possible to fix it by using `page:load` event - it's triggered when:
 
@@ -85,7 +90,7 @@ BUT it's NOT triggered:
 - on partial replacement
 - when page is restored from client-side cache (clicking *back* in browser)
 
-### `page:change`
+### `page:change` event
 
 USE `page:change` instead - it's triggered when:
 
@@ -138,7 +143,7 @@ visit actions:
 if possible, turbolinks renders a copy of the page from cache without
 making a request - otherwise retrieves a fresh copy of the page from server.
 
-### `turbolinks:load`
+### `turbolinks:load` event
 
 `turbolinks:load` event fires:
 

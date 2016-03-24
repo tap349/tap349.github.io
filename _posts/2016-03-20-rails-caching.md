@@ -64,7 +64,7 @@ pay additional care not leak memory or otherwise bloat that long-running state.
 
 <https://github.com/turbolinks/turbolinks-classic/blob/master/README.md>
 
-### evets
+### events
 
 #### `ready`
 

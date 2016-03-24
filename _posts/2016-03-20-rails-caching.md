@@ -6,7 +6,7 @@ access: public
 categories: [rails, caching]
 ---
 
-notes about caching in rails.
+notes about caching in Rails.
 
 <!-- more -->
 
@@ -54,7 +54,7 @@ applications must be profiled:
 - wrk
 - apache bench
 
-## rails logs
+## Rails logs
 
 total time is the important one.
 
@@ -92,13 +92,29 @@ concatenated version of everything in the array (with `/` as delimiter).
 
 ## russian doll caching
 
-**russian doll caching** is simply using key-based cache expiration.
+**russian doll caching**:
+
+- coined by DHH
+- nesting cache fragments inside each other
+- uses key-based cache expiration
+
+2 ways to make key-based cache expiration work:
+
+1. use compound cache key like:
+
+```ruby
+cache ["todo_list", @todos.map(&:id), @todos.maximum(:updated_at)]
+```
+
+whenever todo is added/removed/changed cache expires.
+
+2. use `touch` option on `belongs_to` associations as described above
 
 # cache digests
 
 <https://github.com/rails/cache_digests>
 
-**cache digests** were included in rails 4 and had been available as a gem before.
+**cache digests** were included in Rails 4 and had been available as a gem before.
 
 prior to cache digests it was necessary to expire fragment caches explicitly
 when changing template by adding, say, version `v1` to cache key.
@@ -106,3 +122,89 @@ now cache key contains MD5 sum of template tree (template file itself and
 all of its dependencies) - whenever template changes cache expires.
 
 # cache backends
+
+- ActiveSupport::FileStore
+- ActiveSupport::MemoryStore
+- Memcache and dalli
+- Redis and redis-store
+- LRURedux - performant memory-based cache store
+
+## ActiveSupport::FileStore
+
+- default cache store in Rails
+- stores all of your cache in _tmp/cache_ by default
+
+pros:
+
++ works across processes
++ disk space is cheaper than RAM (especially when using hosting)
++ suitable for a very large cache (> 100 MB)
+
+cons:
+
+- filesystems are slow
+- cache can't be shared across hosts
+- not an LRU cache (LRU algorithms work much better for key-based cache expiration)
+- doesn't get on with heroku
+
+## ActiveSupport::MemoryStore
+
+- stores cache directly in RAM in the form of big hash
+
+pros:
+
++ fast (the best one after LRURedux)
++ easy to set up
+
+cons:
+
+- cache can't be shared across processes or hosts
+- adds to your RAM usage (might be concern when using hosting)
+
+## Memcache and dalli
+
+- in-memory, key-value data store
+
+pros:
+
++ distributed: cache can be shared across processes and hosts
+
+cons:
+
+- network issues and latency (when using not local memcache store)
+- commercial memcache services are expensive
+- cache values are limited to 1 MB, cache keys - to 250 bytes
+
+## Redis and redis-store
+
+- in-memory, key-value data store
+
+pros:
+
++ distributed: cache can be shared across processes and hosts
++ allows different eviction policies beyond LRU
++ can persist to disk allowing hot restarts
+
+cons:
+
+- network issues and latency (when using not local memcache store)
+- commercial redis services are expensive
+- redis supports several data types, redis-store supports only strings
+  (memcache can store strings only)
+
+## LRURedux
+
+- highly optimized version of ActiveSupport::MemoryStore
+- cannot be configured as default cache store in Rails
+  (doesn't provide ActiveSupport-compatible interface) - can be used
+  on a low-level only
+
+pros:
+
++ ridiculously fast (the best one)
+
+cons:
+
+- cache can't be shared across processes or hosts
+- adds to your RAM usage (might be concern when using hosting)
+- can't be used as a Rails cache store yet

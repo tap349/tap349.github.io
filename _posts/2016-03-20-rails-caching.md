@@ -64,22 +64,25 @@ pay additional care not leak memory or otherwise bloat that long-running state.
 
 <https://github.com/turbolinks/turbolinks-classic/blob/master/README.md>
 
-### `ready` event
+### evets
+
+#### `ready`
+
+`ready` is jQuery specific event - it uses `DOMContentLoaded` event or
+emulates it if the former is not available in the browser.
+
+`ready` event occurs when HTML document is finished loading (or reloading)
+but content such as images might not be loaded yet.
 
 usually `ready` event is used to register event handlers/listeners
 on page elements inside a DOM tree.
-
-`ready` event (jQuery specific event - it uses `DOMContentLoaded` event or
-emulates it if the former is not available in the browser) occurs when HTML
-document is finished loading (or reloading) but content such as images
-might not be loaded yet.
 
 but with turbolinks page is not loaded again when clicking the link:
 DOM tree has changed but event handlers are not bound to new page elements.
 
 we can fix this problem using turbolinks events: `page:load` or `page:change`.
 
-### `page:load` event
+#### `page:load`
 
 it's possible to fix it by using `page:load` event - it's triggered when:
 
@@ -90,7 +93,7 @@ BUT it's NOT triggered:
 - on partial replacement
 - when page is restored from client-side cache (clicking *back* in browser)
 
-### `page:change` event
+#### `page:change`
 
 USE `page:change` instead - it's triggered when:
 
@@ -143,7 +146,9 @@ visit actions:
 if possible, turbolinks renders a copy of the page from cache without
 making a request - otherwise retrieves a fresh copy of the page from server.
 
-### `turbolinks:load` event
+### events
+
+#### `turbolinks:load`
 
 `turbolinks:load` event fires:
 

@@ -127,7 +127,7 @@ all of its dependencies) - whenever template changes cache expires.
 - ActiveSupport::MemoryStore
 - Memcache and dalli
 - Redis and redis-store
-- LRURedux - performant memory-based cache store
+- LRURedux
 
 ## ActiveSupport::FileStore
 

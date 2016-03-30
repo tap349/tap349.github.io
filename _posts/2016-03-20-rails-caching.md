@@ -13,7 +13,7 @@ notes about caching in Rails.
 * TOC
 {:toc}
 
-<https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>
+- <https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>
 
 # general
 
@@ -112,7 +112,7 @@ whenever todo is added/removed/changed cache expires.
 
 # cache digests
 
-<https://github.com/rails/cache_digests>
+- <https://github.com/rails/cache_digests>
 
 **cache digests** were included in Rails 4 and had been available as a gem before.
 

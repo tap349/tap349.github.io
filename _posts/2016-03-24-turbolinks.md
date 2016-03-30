@@ -13,9 +13,9 @@ notes about turbolinks.
 * TOC
 {:toc}
 
-<http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
-<http://railscasts.com/episodes/390-turbolinks?view=asciicast>
-<https://habrahabr.ru/post/167161/>
+- <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
+- <http://railscasts.com/episodes/390-turbolinks?view=asciicast>
+- <https://habrahabr.ru/post/167161/>
 
 turbolinks is used to speed up page rendering.
 
@@ -44,7 +44,7 @@ pay additional care not leak memory or otherwise bloat that long-running state.
 
 ## turbolinks classic
 
-<https://github.com/turbolinks/turbolinks-classic/blob/master/README.md>
+- <https://github.com/turbolinks/turbolinks-classic/blob/master/README.md>
 
 ### events
 
@@ -99,7 +99,7 @@ $(document).on 'page:change', ->
 
 ## turbolinks 5
 
-<https://github.com/turbolinks/turbolinks>
+- <https://github.com/turbolinks/turbolinks>
 
 ### visits
 

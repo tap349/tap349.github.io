@@ -24,7 +24,7 @@ turbolinks is used to speed up page rendering.
 - install as gem
 - require in application js/coffeescript manifest file (_application.coffee_)
 
-turbolinks can be disabled for certain links by adding `data-to-turbolink`
+turbolinks can be disabled for certain links by adding `data-no-turbolink`
 data attribute to the link.
 
 ## how it works

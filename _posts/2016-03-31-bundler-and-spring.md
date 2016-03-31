@@ -145,6 +145,6 @@ to use spring preloader:
   ```
 
   sidekiq and guard are run with `bundle exec` because there are no
-  spring binstub for them (and it doesn't make sense to make one
+  spring binstubs for them (and it doesn't make sense to make one
   for guard since it's using `rspec` spring binstub inside) - still
   we need to run their version from bundle.

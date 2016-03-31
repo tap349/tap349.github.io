@@ -46,10 +46,14 @@ you run gem commands:
   alias rails='bundle exec rails'
   alias rake='bundle exec rake'
   alias rspec='bundle exec rspec'
-  ```
 
-  also make sure these commands are run with `bundle exec` in other aliases
-  (alias definitions are non-recursive - like `noremap` mappings in vim).
+  # other aliases with rails, rake and rspec inside
+  # must use them with `bundle exec` as well -
+  # alias definitions are non-recursive
+
+  alias guard='bundle exec guard'
+  alias sidekiq='bundle exec sidekiq --config ./config/sidekiq.yml'
+  ```
 
 - run `rspec` with `bundle exec` in _Guardfile_:
 
@@ -124,7 +128,7 @@ to use spring preloader:
     ...
   end
   ```
-- run `guard` as is - without any binstubs or `bundle exec`
+
 - add these (or similar) aliases in _.zshrc_:
 
   ```sh
@@ -132,16 +136,15 @@ to use spring preloader:
   alias rake='bin/rake'
   alias rspec='bin/rspec'
 
-  alias r='bin/rails'
-  alias rc='bin/rails console'
-  alias rd='bin/rails dbconsole'
-  alias rs='bin/rails server'
+  # other aliases with rails, rake and rspec inside
+  # must use their spring binstub counterparts as well -
+  # alias definitions are non-recursive
 
-  alias migrate='bin/rake db:migrate && RAILS_ENV=test bin/rake db:migrate'
-  alias rollback='bin/rake db:rollback && RAILS_ENV=test bin/rake db:rollback'
-
+  alias guard='bundle exec guard'
   alias sidekiq='bundle exec sidekiq --config ./config/sidekiq.yml'
   ```
 
-  **NOTE**: run sidekiq with `bundle exec` because there is no spring binstub for it.
-
+  sidekiq and guard are run with `bundle exec` because there are no
+  spring binstub for them (and it doesn't make sense to make one
+  for guard since it's using `rspec` spring binstub inside) - still
+  we need to run their version from bundle.

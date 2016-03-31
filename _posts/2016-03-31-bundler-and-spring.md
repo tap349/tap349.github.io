@@ -114,7 +114,7 @@ to use spring preloader:
   don't use bundler and spring binstubs at the same time since they are
   both stored in _bin_ directory by default and might overwrite each other.
 
-## okay, wtf to do with all this stuff about bundler and spring in the end?
+## okay, wtf to do with all this stuff about bundler and spring?
 
 - generate spring binstubs for `rails`, `rake` and `rspec`
 - use `rspec` spring binstub in _Guardfile_:

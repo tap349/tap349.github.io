@@ -115,7 +115,7 @@ to use spring preloader:
   spring binstubs are run in context of bundle -
   no need to use `bundle exec` or bundler binstubs.
   don't use bundler and spring binstubs at the same time since they are
-  both stored in _bin_ directory by default and might overwrite each other.
+  both stored in _bin/_ directory by default and might overwrite each other.
 
 ## okay, wtf to do with all this stuff about bundler and spring?
 

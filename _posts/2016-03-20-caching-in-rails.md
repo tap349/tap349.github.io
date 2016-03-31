@@ -132,7 +132,7 @@ all of its dependencies) - whenever template changes cache expires.
 ## ActiveSupport::FileStore
 
 - default cache store in Rails
-- stores all of your cache in _tmp/cache_ by default
+- stores all of your cache in _tmp/cache/_ by default
 
 pros:
 

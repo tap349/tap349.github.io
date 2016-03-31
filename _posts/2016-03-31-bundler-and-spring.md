@@ -25,12 +25,11 @@ also bundler is used to manage application dependencies (gemsets) -
 RVM provides functionality to do it as well but bundler is a better way.
 rbenv doesn't manage gemsets in contrast with RVM.
 
-there might be multiple versions of the same gem installed for particular
-ruby version but project uses gem versions from bundle
-(specified in _Gemfile.lock_).
+there might be multiple versions of the same gem installed for particular ruby
+version but project uses gem versions from bundle (specified in _Gemfile.lock_).
 
-when running commands (`rake`, etc.) from within project directory it's necessary
-to use gem versions from bundle - this can be done in 2 ways:
+when running commands (`rake`, etc.) from within project directory
+it's necessary to use bundle gem versions - this can be done in 2 ways:
 
 - run commands with `bundle exec`
 - use bundler binstubs
@@ -147,4 +146,4 @@ to use spring preloader:
   sidekiq and guard are run with `bundle exec` because there are no
   spring binstubs for them (and it doesn't make sense to make one
   for guard since it's using `rspec` spring binstub inside) - still
-  we need to run their version from bundle.
+  we need to run their bundle versions.

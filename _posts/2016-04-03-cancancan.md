@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CanCanCan
+title: cancancan
 date: 2016-04-03 15:42:14 +0300
 access: public
 categories: [rails, cancancan]
@@ -8,7 +8,7 @@ categories: [rails, cancancan]
 
 <https://github.com/ryanb/cancan/wiki/authorizing-controller-actions>
 
-when using `load_and_authorize_resource` CanCanCan tries to guess resource
+when using `load_and_authorize_resource` cancancan tries to guess resource
 class based on controller name.
 
 but if they differ it will fail to do so and will prevent controller

@@ -31,10 +31,10 @@ how to bundle assets in cell's view directory.
 
   ```sass
   /*
-  * require all concept stylesheets explicitly
-  *
-  *= require billing/accounting_act/accounting_act
-  */
+   * require all concept stylesheets explicitly
+   *
+   *= require billing/accounting_act/accounting_act
+   */
   ```
 
 - precompile _cells.css_
@@ -52,7 +52,7 @@ how to bundle assets in cell's view directory.
 
   - by requiring it in _application.coffee_:
 
-    ```coffee
+    ```coffeescript
     /*
      *= require cells
      */

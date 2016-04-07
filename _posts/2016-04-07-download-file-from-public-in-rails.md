@@ -6,6 +6,8 @@ access: public
 categories: [rails]
 ---
 
+that is prevent browser from opening it instead.
+
 view:
 
 ```slim

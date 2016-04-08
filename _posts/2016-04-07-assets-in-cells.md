@@ -23,9 +23,17 @@ how to bundle assets in cell's view directory.
   ```
 
   now it's possible to `require` assets in application manifests
-  relative to _app/cells/_.
+  specifying their paths relative to _app/cells/_.
 
 - create _cells.sass_ and _cells.coffee_ and require them in application manifests
+
+  _application.sass_:
+
+  ```sass
+  /*
+   *= require cells
+   */
+  ```
 
   _cells.sass_:
 
@@ -37,7 +45,9 @@ how to bundle assets in cell's view directory.
    */
   ```
 
-- precompile _cells.css_
+  the same for _cells.coffee_.
+
+- make _cells.css_ and _cells.coffee_ be precompiled in production
 
   <http://guides.rubyonrails.org/asset_pipeline.html#how-to-use-the-asset-pipeline>
 
@@ -55,20 +65,16 @@ how to bundle assets in cell's view directory.
   in _app/assets/_ are precompiled (assets to be precompiled must be
   specified using final compiled file names with JS/CSS extension).
 
-  it's possible to compile _cells.sass_ for production in 2 ways:
+  2 ways to precompile _cells.sass_ (the same is true for _cells.coffee_):
 
-  - add to precompile array in _config/initializers/assets.rb_:
+  - if it is required in application manifest it will be precompiled
+    automatically and included into compiled application manifest
+  - if it is not required in application manifest it's possible to
+    precompile it manually by adding it to precompile array in
+    _config/initializers/assets.rb_:
 
     ```ruby
     Rails.application.config.assets.precompile += %w(cells.css)
-    ```
-
-  - require it in _application.sass_:
-
-    ```sass
-    /*
-     *= require cells
-     */
     ```
 
 ## using asset tag helpers

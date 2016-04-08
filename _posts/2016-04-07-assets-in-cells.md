@@ -90,10 +90,10 @@ including `ActionView::Helpers::AssetTagHelper` into cell doesn't help.
 
 **solution**: use original asset tag helpers provided by controller's view context.
 
-_cells/billing/accounting_act_cell.rb_:
+_app/cells/my_cell.rb_:
 
 ```ruby
-class Billing::AccountingActCell < Cell::ViewModel
+class MyCell < Cell::ViewModel
   delegate :wicked_pdf_stylesheet_link_tag, to: :view_context
   ...
 private
@@ -101,6 +101,29 @@ private
   def view_context
     parent_controller.view_context
   end
+  ...
+end
+```
+
+in specs either stub `view_context`:
+
+_app/cells/my_cell_spec.rb_:
+
+```ruby
+describe MyCell do
+  let(:view_context) { double wicked_pdf_stylesheet_link_tag: nil }
+  before { allow(act_cell).to receive(:view_context).and_return view_context }
+
+  ...
+end
+```
+
+or specify controller to make `view_context` available:
+
+```ruby
+describe MyCell do
+  controller Billing::AccountingActsController
+
   ...
 end
 ```

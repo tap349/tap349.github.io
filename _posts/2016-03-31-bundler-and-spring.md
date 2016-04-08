@@ -50,6 +50,7 @@ you run gem commands:
   # must use them with `bundle exec` as well -
   # alias definitions are non-recursive
 
+  alias cap='bundle exec cap'
   alias guard='bundle exec guard'
   alias sidekiq='bundle exec sidekiq --config ./config/sidekiq.yml'
   ```
@@ -139,6 +140,7 @@ to use spring preloader:
   # must use their spring binstub counterparts as well -
   # alias definitions are non-recursive
 
+  alias cap='bundle exec cap'
   alias guard='bundle exec guard'
   alias sidekiq='bundle exec sidekiq --config ./config/sidekiq.yml'
   ```

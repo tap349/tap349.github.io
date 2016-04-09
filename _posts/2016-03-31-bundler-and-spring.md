@@ -16,14 +16,21 @@ intricacies of using `bundle exec`, bundler and spring binstubs.
 
 ## bundler
 
-- <http://bundler.io/man/bundle-exec.1.html>:
+<http://bundler.io/man/bundle-exec.1.html>:
 
 > bundle exec command executes the command, making all gems specified
 > in the Gemfile(5) available to require in Ruby programs.
 
+bundler setup for Rails application takes place in _config/boot.rb_:
+
+```ruby
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
+require 'bundler/setup' # Set up gems listed in the Gemfile.
+```
+
 also bundler is used to manage application dependencies (gemsets) -
 RVM provides functionality to do it as well but bundler is a better way.
-rbenv doesn't manage gemsets in contrast with RVM.
+rbenv doesn't manage gemsets at all in contrast with RVM.
 
 there might be multiple versions of the same gem installed for particular ruby
 version but project uses gem versions from bundle (specified in _Gemfile.lock_).

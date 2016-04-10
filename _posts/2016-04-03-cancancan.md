@@ -11,8 +11,8 @@ categories: [rails, cancancan]
 when using `load_and_authorize_resource` cancancan tries to guess resource
 class based on controller name.
 
-but if they differ it will fail to do so and will prevent controller
-from rendering a view - silently!
+but if they differ cancancan will fail to find resource class and
+will prevent controller from rendering a view - silently!
 
 _app/models/billing/accounting_act.rb_:
 

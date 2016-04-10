@@ -95,12 +95,14 @@ _app/cells/my_cell.rb_:
 ```ruby
 class MyCell < Cell::ViewModel
   delegate :wicked_pdf_stylesheet_link_tag, to: :view_context
+
   ...
 private
 
   def view_context
     parent_controller.view_context
   end
+
   ...
 end
 ```

@@ -6,7 +6,7 @@ access: public
 categories: [rails]
 ---
 
-one example when `inverse_of` is useful
+one example when `inverse_of` is useful.
 
 spec:
 

@@ -130,8 +130,8 @@ describe MyCell do
 end
 ```
 
-**!** only precompiled assets that have their compiled versions in
-_public/assets/_ can be referenced by asset tag helpers - in application
+**IMPORTANT!** only precompiled assets (having their compiled versions in
+_public/assets/_) can be referenced by asset tag helpers - in application
 layout file asset tag helpers usually reference application manifests only
 which are precompiled by default without adding them to precompile array.
 otherwise these assets won't be found by generated script or stylesheet tags -

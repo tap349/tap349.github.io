@@ -6,6 +6,7 @@ access: public
 categories: [rails, assets, cells]
 ---
 
+some background information about assets in Rails and
 how to bundle assets in cell's view directory.
 
 <!-- more -->

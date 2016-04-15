@@ -130,10 +130,18 @@ describe MyCell do
 end
 ```
 
-also when using assets tag helpers outside of application layout don't forget
-to add referenced assets to precompile array in _config/initializers/assets.rb_.
+! only precompiled assets that have their compiled versions in
+_public/assets/_ can be referenced by asset tag helpers - in application
+layout file asset tag helpers usually reference application manifests only
+which are precompiled by default without adding them to precompile array.
+otherwise these assets won't be found by generated script or stylesheet tags -
+even if they are required in application manifests and thusly included into
+their compiled versions.
 
-otherwise these assets won't have their own compiled counterparts in
-_public/assets/_ after compilation and consequently won't be found by
-generated script or stylesheet tags - even if they are required in
-application manifests and thusly included into their compiled counterparts.
+but this is not the case for all other assets - to include other assets
+using asset tag helpers it's necessary to add referenced assets to precompile
+array manually in _config/initializers/assets.rb_. it doesn't matter where
+you use these asset tag helpers - in application layout file or anywhere else.
+
+in example above it's necessary to add whatever asset is referenced by
+`wicked_pdf_stylesheet_link_tag` to precompile array manually.

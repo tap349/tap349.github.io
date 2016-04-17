@@ -42,4 +42,4 @@ Problems when deploying:
 - `sidekiq:start` task hangs, just hangs
 
   problem was solved by removing command to source RVM script
-  from sidekiq init.d script.
+  from Sidekiq init.d script.

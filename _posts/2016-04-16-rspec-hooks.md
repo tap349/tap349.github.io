@@ -1,6 +1,6 @@
 ---
 layout: post
-title: rspec before hooks
+title: RSpec before hooks
 date: 2016-04-16 15:49:59 +0300
 access: public
 categories: [rspec]

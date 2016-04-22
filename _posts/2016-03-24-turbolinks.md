@@ -144,7 +144,7 @@ making a request - otherwise retrieves a fresh copy of the page from server.
 
 - once on the initial page load
 - again after every turbolinks visit
-- when navigating by history
+- when navigating by history (clicking *back* in browser)
 
 ```coffeescript
 $(document).on 'turbolinks:load', ->

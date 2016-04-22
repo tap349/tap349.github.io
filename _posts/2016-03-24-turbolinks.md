@@ -113,7 +113,7 @@ visit represents the entire navigation lifecycle from click to render:
 
 2 types of visits:
 
-- applications visit
+- application visit
 - restoration visit
 
 #### application visit

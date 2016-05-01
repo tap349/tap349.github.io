@@ -64,7 +64,7 @@ html {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 16rem;
+    width: 15rem;
     text-align: left;
   }
 }
@@ -119,9 +119,9 @@ a.sidebar-nav-item:focus {
  * with a 25%-wide `.sidebar`.
  */
 
-.content {
-  padding: 2rem 0.3rem 0.5rem 0.5rem;
-}
+/*.content {*/
+  /*padding: 2rem 0.3rem 0.5rem 0.5rem;*/
+/*}*/
 
 @media (min-width: 48em) {
   .content {
@@ -132,8 +132,8 @@ a.sidebar-nav-item:focus {
 
 @media (min-width: 64em) {
   .content {
-    margin-left: 17.5rem;
-    margin-right: 1rem;
+    margin-left: 17rem;
+    margin-right: 0.5rem;
   }
 }
 

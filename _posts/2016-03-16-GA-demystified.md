@@ -31,15 +31,15 @@ configuration of google analytics and some background information.
 
 ### <https://console.developers.google.com>
 
-`Enable APIs and get credentials like keys -> Credentials -> Credentials`
+`Credentials (left sidebar) -> Credentials -> Credentials (tab)`
 
-generate OAuth 2.0 client IDs for each stage (Development, Staging, Production) -
+create OAuth 2.0 client IDs for each stage (Development, Staging, Production) -
 they are stored in _secrets.yml_:
 
 - Client ID - `oauth/google_analytics/app_id`
 - Client secret - `oauth/google_analytics/app_secret`
 
-client ID and client secret uniquely identify application
+client ID and client secret uniquely identify application.
 
 each google API service (e.g. `Google Analytics API v3`)
 defines one or more scopes that declare a set of operations permitted

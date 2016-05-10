@@ -27,7 +27,7 @@ configuration of google analytics and some background information.
 
   - `ga:XXXX` - unique table id for retrieving analytics data
   - unique table id is used as `ids` parameter in GA API query
-  - stored in `Google::Analytics::Counter` in Pumba (as `ga:XXXX`)
+  - stored in `Google::Analytics::Counter` in Pumba as `counter_id`
 
 ### <https://console.developers.google.com>
 

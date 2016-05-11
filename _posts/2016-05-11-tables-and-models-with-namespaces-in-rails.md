@@ -1,6 +1,6 @@
 ---
 layout: post
-title: models with namespaces and tables in Rails
+title: tables and models with namespaces in Rails
 date: 2016-05-11 19:03:23 +0300
 access: public
 categories: [rails]

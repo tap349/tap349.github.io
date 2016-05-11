@@ -32,7 +32,7 @@ as shown above table name prefix doesn't have to match module hierarchy exactly.
 
 **NOTE**: don't use `::` notation when defining custom table name prefixes!
 
-#### different table name prefixes for different nested modules
+### different table name prefixes for different nested modules
 
 table name prefix for high level module will override one for any nested module!
 

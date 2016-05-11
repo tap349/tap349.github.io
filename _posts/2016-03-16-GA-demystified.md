@@ -10,11 +10,11 @@ configuration of google analytics and some background information.
 
 <!-- more -->
 
-### <https://analytics.google.com>
+## [Google Analytics](https://analytics.google.com)
 
 **Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
 
-#### ACCOUNT (1st column)
+### ACCOUNT (1st column)
 
   **Account ID**
 
@@ -24,7 +24,7 @@ configuration of google analytics and some background information.
   - usage: API (e.g. `analytics.management.goals.*`)
   - pumba: not stored
 
-#### PROPERTY (2nd column)
+### PROPERTY (2nd column)
 
   **Tracking ID**
 
@@ -35,10 +35,10 @@ configuration of google analytics and some background information.
   - usage:
     - API (e.g. `analytics.management.goals.*`)
     - in Universal Analytics tracking code
-      (GA js script embedded on each tracked page)
+      (GA JS script embedded on each tracked page)
   - pumba: not stored
 
-#### VIEW (3rd column)
+### VIEW (3rd column)
 
   **View ID (Profile ID)**
 
@@ -56,7 +56,7 @@ configuration of google analytics and some background information.
   - usage: API (e.g. `analytics.data.ga.get`)
   - pumba: `counter_id` in `Google::Analytics::Counter`
 
-### <https://console.developers.google.com>
+## [API Manager](https://console.developers.google.com)
 
 `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
 

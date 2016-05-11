@@ -6,13 +6,16 @@ access: public
 categories: [rails]
 ---
 
-when searching for table ActiveRecord always uses model name without namespaces.
+in Rails modules are namespaces - I will use the term `module` onward only.
+
+when searching for table ActiveRecord always uses model name without modules.
 e.g. for `Stats::Google::Analytics::McfStat` it will search for `mcf_stats` table.
 
-to use modules as table name prefixes it's necessary to define `table_name_prefix`:
+to use module name as table name prefix it's necessary to define
+table name prefix for this module:
 
 - create file named as top-level module
-- define table name prefix for any module inside top-level module
+- define table name prefix for top-level module or any nested module
 
 e.g. for `Stats::Google::Analytics::McfStat` create _app/models/stats/stats.rb_:
 
@@ -30,7 +33,7 @@ end
 
 as shown above table name prefix doesn't have to match module hierarchy exactly.
 
-**NOTE**: don't use `::` notation when defining custom table name prefixes!
+**NOTE**: don't use `::` notation when defining table name prefixes!
 
 ### different table name prefixes for different nested modules
 
@@ -38,7 +41,7 @@ table name prefix for high level module will override one for any nested module!
 
 to have different table name prefixes for different nested modules define all
 of them in the same file starting with table name prefix for inner-most module -
-this way it's not overriden with table name prefixes for modules at higher level.
+this way it's not overriden with table name prefixes for modules at higher levels.
 
 e.g. in _app/models/stats/stats.rb_: 
 

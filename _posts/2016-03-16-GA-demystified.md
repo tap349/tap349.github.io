@@ -12,22 +12,49 @@ configuration of google analytics and some background information.
 
 ### <http://analytics.google.com>
 
-- **Tracking ID** (`UA-XXXX-1`)
+**Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
 
-  `Admin -> Property -> Tracking Info -> Tracking Code`
+- **ACCOUNT** (1st column)
 
-  - `XXXX` - account id
-  - tracking id is used in Universal Analytics tracking code
-    (GA js script embedded on each tracked page)
-  - currently not stored in Pumba at all
+  Account ID
 
-- **View (Profile) ID** (`XXXX`)
+  - path: `Account Settings → Basic Settings → Account Id`
+  - format: `\d+`
+  - parametr in API: `accountId`
+  - usage: API (e.g. `analytics.management.goals.*`)
+  - pumba: not stored
 
-  `Admin -> View -> View Settings`
+- **PROPERTY** (2nd column)
 
-  - `ga:XXXX` - unique table id for retrieving analytics data
-  - unique table id is used as `ids` parameter in GA API query
-  - stored in `Google::Analytics::Counter` in Pumba as `counter_id`
+  Tracking ID
+
+  - path: `Property Settings → Basic Settings → Tracking Id`
+    (or `Tracking Info → Tracking Code → Tracking ID`)
+  - format: `UA-XXXX-1` where `XXXX` - Account ID (see above)
+  - parameter in API: `webPropertyId`
+  - usage:
+    - API (e.g. `analytics.management.goals.*`)
+    - in Universal Analytics tracking code
+      (GA js script embedded on each tracked page)
+  - pumba: not stored
+
+- **VIEW** (3rd column)
+
+  View ID (Profile ID)
+
+  - path: `View Settings → Basic Settings → View ID`
+  - format: `\d+`
+  - parameter in API: `profileId`
+  - usage: API (e.g. `analytics.management.goals.*`)
+  - pumba: not stored
+
+  Table ID
+
+  - path: not displayed in UI
+  - format: `ga:XXXX` where `XXXX` - View ID
+  - parameter in API: `ids` (in `analytics.data.ga.get`)
+  - usage: API (e.g. `analytics.data.ga.get`)
+  - pumba: `counter_id` in `Google::Analytics::Counter`
 
 ### <https://console.developers.google.com>
 

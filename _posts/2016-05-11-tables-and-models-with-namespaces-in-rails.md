@@ -31,7 +31,7 @@ module Stats
 end
 ```
 
-as shown above table name prefix doesn't have to match module hierarchy exactly.
+as shown above table name prefix doesn't have to match module hierarchy.
 
 **NOTE**: don't use `::` notation when defining table name prefixes!
 

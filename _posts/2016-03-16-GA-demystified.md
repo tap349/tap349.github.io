@@ -10,7 +10,7 @@ configuration of google analytics and some background information.
 
 <!-- more -->
 
-### <http://analytics.google.com>
+### <https://analytics.google.com>
 
 **Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
 

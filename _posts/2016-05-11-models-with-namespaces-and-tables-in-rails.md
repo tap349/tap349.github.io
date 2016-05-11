@@ -31,3 +31,5 @@ end
 as shown above table name prefix doesn't have to match module hierarchy exactly.
 
 **NOTE**: table name prefix for high level module will override one for any nested module!
+
+**NOTE**: don't use `::` notation when defining custom table name prefixes!

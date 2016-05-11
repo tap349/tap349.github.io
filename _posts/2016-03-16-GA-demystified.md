@@ -14,9 +14,9 @@ configuration of google analytics and some background information.
 
 **Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
 
-- **ACCOUNT** (1st column)
+#### ACCOUNT (1st column)
 
-  Account ID
+  **Account ID**
 
   - path: `Account Settings → Basic Settings → Account Id`
   - format: `\d+`
@@ -24,9 +24,9 @@ configuration of google analytics and some background information.
   - usage: API (e.g. `analytics.management.goals.*`)
   - pumba: not stored
 
-- **PROPERTY** (2nd column)
+#### PROPERTY (2nd column)
 
-  Tracking ID
+  **Tracking ID**
 
   - path: `Property Settings → Basic Settings → Tracking Id`
     (or `Tracking Info → Tracking Code → Tracking ID`)
@@ -38,9 +38,9 @@ configuration of google analytics and some background information.
       (GA js script embedded on each tracked page)
   - pumba: not stored
 
-- **VIEW** (3rd column)
+#### VIEW (3rd column)
 
-  View ID (Profile ID)
+  **View ID (Profile ID)**
 
   - path: `View Settings → Basic Settings → View ID`
   - format: `\d+`
@@ -48,7 +48,7 @@ configuration of google analytics and some background information.
   - usage: API (e.g. `analytics.management.goals.*`)
   - pumba: not stored
 
-  Table ID
+  **Table ID**
 
   - path: not displayed in UI
   - format: `ga:XXXX` where `XXXX` - View ID

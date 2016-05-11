@@ -22,7 +22,7 @@ configuration of google analytics and some background information.
   - format: `\d+`
   - parametr in API: `accountId`
   - usage: API (e.g. `analytics.management.goals.*`)
-  - pumba: not stored
+  - pumba: `additional_ids['account_id']` in `Google::Analytics::Counter`
 
 ### PROPERTY (2nd column)
 
@@ -37,7 +37,7 @@ configuration of google analytics and some background information.
     - API (e.g. `analytics.management.goals.*`)
     - in Universal Analytics tracking code
       (GA JS script embedded on each tracked page)
-  - pumba: not stored
+  - pumba: `additional_ids['web_property_id']` in `Google::Analytics::Counter`
 
 ### VIEW (3rd column)
 

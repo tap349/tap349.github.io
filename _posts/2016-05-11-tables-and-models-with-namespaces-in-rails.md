@@ -9,7 +9,7 @@ categories: [rails]
 when searching for table ActiveRecord always uses model name without namespaces.
 e.g. for `Stats::Google::Analytics::McfStat` it will search for `mcf_stats` table.
 
-to use modules as table prefixes it's necessary to define `table_name_prefix`:
+to use modules as table name prefixes it's necessary to define `table_name_prefix`:
 
 - create file named as top-level module
 - define table name prefix for any module inside top-level module

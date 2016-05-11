@@ -28,8 +28,9 @@ configuration of google analytics and some background information.
 
   **Tracking ID**
 
-  - path: `Property Settings → Basic Settings → Tracking Id`
-    (or `Tracking Info → Tracking Code → Tracking ID`)
+  - path (displayed in both places):
+    - `Property Settings → Basic Settings → Tracking Id`
+    - `Tracking Info → Tracking Code → Tracking ID`
   - format: `UA-XXXX-1` where `XXXX` - Account ID (see above)
   - parameter in API: `webPropertyId`
   - usage:

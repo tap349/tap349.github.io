@@ -84,7 +84,7 @@ defines one or more scopes that declare a set of operations permitted.
 
 ## [APIs Explorer](https://developers.google.com/apis-explorer/#p/)
 
-APIs Explorer by default supplies its own default credentials
+APIs Explorer supplies its own default credentials
 (client ID and client secret) when executing queries.
 or else it's possible to supply custom credentials:
 

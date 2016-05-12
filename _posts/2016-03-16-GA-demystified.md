@@ -112,6 +112,12 @@ API methods currently used in pumba:
 - `analytics.management.profiles.*`
 - `analytics.management.goals.*` (goals, goal completions)
 
+API methods don't match actual HTTP requests exactly. e.g.:
+
+API method                        | HTTP request
+----------------------------------|---------------------------------------------
+`analytics.management.goals.list` | `https://www.googleapis.com/analytics/v3/management/accounts/accountId/webproperties/webPropertyId/profiles/profileId/goals`
+
 ### scopes
 
 scopes are used to grant an application different levels of access to data

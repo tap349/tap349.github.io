@@ -98,7 +98,7 @@ to execute query it's necessary to get access to user data -
 for this to happen user must authenticate himself (log in) and approve
 [scopes](#scopes) application (either default one or pumba) is requesting.
 
-currently all user counters (== user data) are stored in
+currently all user counters (that is user data) are stored in
 `re***2015@gmail.com` account - it's necessary to log in as that user
 when Google account login screen is displayed.
 

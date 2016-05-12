@@ -121,15 +121,15 @@ Google Analytics API declares a set of scopes:
 
 - `https://www.googleapis.com/auth/analytics`<br>
   (view and manage your Google Analytics data)
-- `https://www.googleapis.com/auth/analytics.edit`
+- `https://www.googleapis.com/auth/analytics.edit`<br>
   (edit Google Analytics management entities)
-- `https://www.googleapis.com/auth/analytics.manage.users`
+- `https://www.googleapis.com/auth/analytics.manage.users`<br>
   (manage Google Analytics Account users by email address)
-- `https://www.googleapis.com/auth/analytics.manage.users.readonly`
+- `https://www.googleapis.com/auth/analytics.manage.users.readonly`<br>
   (view Google Analytics user permissions)
-- `https://www.googleapis.com/auth/analytics.provision`
+- `https://www.googleapis.com/auth/analytics.provision`<br>
   (create a new Google Analytics account along with its default property and view)
-- `https://www.googleapis.com/auth/analytics.readonly`
+- `https://www.googleapis.com/auth/analytics.readonly`<br>
   (view your Google Analytics data)
 
 to get Google Analytics data it's necessary to grant at least the last scope.

@@ -17,7 +17,7 @@ information about [Google Analytics](https://analytics.google.com) and its API.
 
 <https://analytics.google.com/analytics/web/#management/Settings>
 
-**Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
+Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 ### ACCOUNT (1st column)
 
@@ -119,7 +119,7 @@ on behalf of the end user. each API may declare one or more scopes.
 
 Google Analytics API declares a set of scopes:
 
-- `https://www.googleapis.com/auth/analytics`
+- `https://www.googleapis.com/auth/analytics`<br>
   (view and manage your Google Analytics data)
 - `https://www.googleapis.com/auth/analytics.edit`
   (edit Google Analytics management entities)

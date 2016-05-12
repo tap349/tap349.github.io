@@ -6,15 +6,16 @@ access: public
 categories: [ga]
 ---
 
-configuration of [Google Analytics](https://analytics.google.com)
-and some background information.
+information about [Google Analytics](https://analytics.google.com) and its API.
 
 <!-- more -->
 
 * TOC
 {:toc}
 
-## Google Analytics IDs
+## Google Analytics (account, tracking and view IDs)
+
+<https://analytics.google.com/analytics/web/#management/Settings>
 
 **Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
 
@@ -24,7 +25,7 @@ and some background information.
 
   - path: `Account Settings → Basic Settings → Account Id`
   - format: `\d+`
-  - parametr in API: `accountId`
+  - parameter in API: `accountId`
   - usage: API (e.g. `analytics.management.goals.*`)
   - pumba: `additional_ids['account_id']` in `Google::Analytics::Counter`
 
@@ -61,17 +62,19 @@ and some background information.
   - usage: API (e.g. `analytics.data.ga.get`)
   - pumba: `counter_id` in `Google::Analytics::Counter`
 
-## Google Analytics terminology
+## API Manager (client IDs)
 
-### OAuth 2.0 client ID
+<https://console.developers.google.com>
 
-client ID:
+OAuth 2.0 client IDs:
 
-- is used to authenticate application via OAuth 2.0
-- has client secret (aka API key)
-- is created in [API Manager](https://console.developers.google.com):
+- are used to authenticate application via OAuth 2.0
+- have corresponding client secrets (aka API keys)
+- are managed in API Manager:
 
   `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
+
+### pumba client IDs
 
 pumba client IDs for all 3 stages (Development, Staging, Production)
 were created in `finga***88@gmail.com` account!
@@ -83,44 +86,71 @@ client ID for Development is stored in _secrets.yml_:
 
 client IDs for Staging and Production are stored in chef.
 
+## APIs Explorer
+
+<https://developers.google.com/apis-explorer>
+
+### services
+
+all services available in APIs Explorer are listed
+[here](https://developers.google.com/apis-explorer) -
+select `Google Analytics API v3` service.
+
 ### API methods
 
-all Google Analytics API methods for `Google Analytics API v3` service
-are listed [here](https://developers.google.com/apis-explorer/#p/analytics/v3/).
+all API methods for `Google Analytics API v3` service are listed
+[here](https://developers.google.com/apis-explorer/#p/analytics/v3/).
 
 API methods currently used in pumba:
 
-- `analytics.data.ga.get`
-- `analytics.data.mcf.get`
+- `analytics.data.ga.get` (visits, visitors)
+- `analytics.data.mcf.get` (assisted conversions)
 - `analytics.management.accounts.list`
 - `analytics.management.profiles.*`
-- `analytics.management.goals.*`
+- `analytics.management.goals.*` (goals, goal completions)
 
-### scope
+### scopes
 
-each Google API service (e.g. `Google Analytics API v3`)
-defines one or more scopes that declare a set of operations permitted.
+scopes are used to grant an application different levels of access to data
+on behalf of the end user. each API may declare one or more scopes.
 
-## using [APIs Explorer](https://developers.google.com/apis-explorer/#p/)
+Google Analytics API declares a set of scopes:
 
-APIs Explorer supplies its own default credentials
+- https://www.googleapis.com/auth/analytics
+  (view and manage your Google Analytics data)
+- https://www.googleapis.com/auth/analytics.edit
+  (edit Google Analytics management entities)
+- https://www.googleapis.com/auth/analytics.manage.users
+  (manage Google Analytics Account users by email address)
+- https://www.googleapis.com/auth/analytics.manage.users.readonly
+  (view Google Analytics user permissions)
+- https://www.googleapis.com/auth/analytics.provision
+  (create a new Google Analytics account along with its default property and view)
+- https://www.googleapis.com/auth/analytics.readonly
+  (view your Google Analytics data)
+
+to get Google Analytics data it's necessary to grant at least the last scope.
+
+### application and user authentication
+
+APIs Explorer provides its own default credentials
 (client ID and client secret) when executing queries.
-or else it's possible to supply custom credentials:
+or else it's possible to provide custom credentials:
 
 `Settings icon in upper right corner -> Set API key / OAuth 2.0 Client ID -> Custom credentials`
 
-as a rule using default credentials must be enough as it's all the same
+as a rule using default credentials must be sufficient as it's all the same
 it's necessary to grant access to application when OAuth 2.0 consent screen
 is displayed - it doesn't matter whether this is pumba application or not.
 
 to execute query it's necessary to get access to user data -
 for this to happen user must authenticate himself (log in) and approve
-[scopes](#scope) application (either default one or pumba) is requesting.
+scopes application (either default one or pumba) is requesting.
 
 **NOTE**: beware of the situation when user is already logged (either in Chrome
           browser or on website) and this is wrong user - log out in this case.
 
-### pumba
+### pumba accounts
 
 in pumba user counters are created in:
 
@@ -133,7 +163,7 @@ consequently it's necessary to log in one of these accounts
 - information related to user counters (e.g. goals)
 - and counter statistics itself
 
-## API usage workflow
+## acquiring refresh and access tokens for application
 
 <https://developers.google.com/api-client-library/ruby/start/get_started>
 

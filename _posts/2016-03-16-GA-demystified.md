@@ -6,14 +6,15 @@ access: public
 categories: [ga]
 ---
 
-configuration of Google Analytics and some background information.
+configuration of [Google Analytics](https://analytics.google.com)
+and some background information.
 
 <!-- more -->
 
 * TOC
 {:toc}
 
-## [Google Analytics](https://analytics.google.com)
+## Google Analytics IDs
 
 **Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
 
@@ -60,7 +61,9 @@ configuration of Google Analytics and some background information.
   - usage: API (e.g. `analytics.data.ga.get`)
   - pumba: `counter_id` in `Google::Analytics::Counter`
 
-## OAuth 2.0 client ID
+## Google Analytics terms
+
+### OAuth 2.0 client ID
 
 client ID:
 
@@ -80,12 +83,25 @@ client ID for Development is stored in _secrets.yml_:
 
 client IDs for Staging and Production are stored in chef.
 
-## scopes
+### API methods
+
+all Google Analytics API methods for `Google Analytics API v3` service
+are listed [here](https://developers.google.com/apis-explorer/#p/analytics/v3/).
+
+API methods currently used in pumba:
+
+- `analytics.data.ga.get`
+- `analytics.data.mcf.get`
+- `analytics.management.accounts.list`
+- `analytics.management.profiles.*`
+- `analytics.management.goals.*`
+
+### scope
 
 each Google API service (e.g. `Google Analytics API v3`)
 defines one or more scopes that declare a set of operations permitted.
 
-## [APIs Explorer](https://developers.google.com/apis-explorer/#p/)
+## using [APIs Explorer](https://developers.google.com/apis-explorer/#p/)
 
 APIs Explorer supplies its own default credentials
 (client ID and client secret) when executing queries.
@@ -99,16 +115,23 @@ is displayed - it doesn't matter whether this is pumba application or not.
 
 to execute query it's necessary to get access to user data -
 for this to happen user must authenticate himself (log in) and approve
-[scopes](#scopes) application (either default one or pumba) is requesting.
-
-currently all user counters (that is user data) are stored in
-`re***2015@gmail.com` account - it's necessary to log in as that user
-when Google account login screen is displayed.
+[scopes](#scope) application (either default one or pumba) is requesting.
 
 **NOTE**: beware of the situation when user is already logged (either in Chrome
-          browser and on website) and this is wrong user - log out in this case.
+          browser or on website) and this is wrong user - log out in this case.
 
-next user data are retrieved.
+### using APIs Explorer in pumba
+
+in pumba user counters are created in:
+
+- `re***2015@gmail.com` account - primary counters (for visits/visitors statistics)
+- `re***.counter@gmail.com` account - MCF counters (for assisted conversions statistics)
+
+consequently it's necessary to log in one of these accounts
+(when Google account login screen is displayed) to get access to:
+
+- information related to user counters (e.g. goals)
+- and counter statistics itself
 
 ## API usage workflow
 

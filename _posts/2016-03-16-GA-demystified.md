@@ -114,9 +114,9 @@ API methods currently used in pumba:
 
 API methods don't match actual HTTP requests exactly. e.g.:
 
-API method                        | HTTP request
-----------------------------------|---------------------------------------------
-`analytics.management.goals.list` | `https://www.googleapis.com/analytics/v3/management/accounts/accountId/webproperties/webPropertyId/profiles/profileId/goals`
+`analytics.management.goals.list` API method corresponds to
+`https://www.googleapis.com/analytics/v3/management/accounts/accountId/webproperties/webPropertyId/profiles/profileId/goals`
+HTTP request.
 
 ### scopes
 

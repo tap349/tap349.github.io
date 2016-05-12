@@ -90,9 +90,12 @@ client IDs for Staging and Production are stored in chef.
 
 <https://developers.google.com/apis-explorer>
 
-### services
+APIs Explorer allows to make API requests to different API services
+(optionally with OAuth 2.0 authorization).
 
-all services available in APIs Explorer are listed
+### API services
+
+all API services available in APIs Explorer are listed
 [here](https://developers.google.com/apis-explorer) -
 select `Google Analytics API v3` service.
 
@@ -116,17 +119,17 @@ on behalf of the end user. each API may declare one or more scopes.
 
 Google Analytics API declares a set of scopes:
 
-- https://www.googleapis.com/auth/analytics
+- `https://www.googleapis.com/auth/analytics`
   (view and manage your Google Analytics data)
-- https://www.googleapis.com/auth/analytics.edit
+- `https://www.googleapis.com/auth/analytics.edit`
   (edit Google Analytics management entities)
-- https://www.googleapis.com/auth/analytics.manage.users
+- `https://www.googleapis.com/auth/analytics.manage.users`
   (manage Google Analytics Account users by email address)
-- https://www.googleapis.com/auth/analytics.manage.users.readonly
+- `https://www.googleapis.com/auth/analytics.manage.users.readonly`
   (view Google Analytics user permissions)
-- https://www.googleapis.com/auth/analytics.provision
+- `https://www.googleapis.com/auth/analytics.provision`
   (create a new Google Analytics account along with its default property and view)
-- https://www.googleapis.com/auth/analytics.readonly
+- `https://www.googleapis.com/auth/analytics.readonly`
   (view your Google Analytics data)
 
 to get Google Analytics data it's necessary to grant at least the last scope.

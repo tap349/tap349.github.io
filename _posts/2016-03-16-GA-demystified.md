@@ -61,7 +61,7 @@ and some background information.
   - usage: API (e.g. `analytics.data.ga.get`)
   - pumba: `counter_id` in `Google::Analytics::Counter`
 
-## Google Analytics terms
+## Google Analytics terminology
 
 ### OAuth 2.0 client ID
 
@@ -120,7 +120,7 @@ for this to happen user must authenticate himself (log in) and approve
 **NOTE**: beware of the situation when user is already logged (either in Chrome
           browser or on website) and this is wrong user - log out in this case.
 
-### using APIs Explorer in pumba
+### pumba
 
 in pumba user counters are created in:
 

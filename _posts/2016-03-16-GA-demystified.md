@@ -10,6 +10,9 @@ configuration of Google Analytics and some background information.
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ## [Google Analytics](https://analytics.google.com)
 
 **Admin (3-column page: ACCOUNT - PROPERTY - VIEW)**
@@ -107,7 +110,7 @@ when Google account login screen is displayed.
 
 next user data are retrieved.
 
-## general workflow when using API
+## API usage workflow
 
 <https://developers.google.com/api-client-library/ruby/start/get_started>
 

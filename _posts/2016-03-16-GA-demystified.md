@@ -6,7 +6,7 @@ access: public
 categories: [ga]
 ---
 
-configuration of google analytics and some background information.
+configuration of Google Analytics and some background information.
 
 <!-- more -->
 
@@ -57,28 +57,64 @@ configuration of google analytics and some background information.
   - usage: API (e.g. `analytics.data.ga.get`)
   - pumba: `counter_id` in `Google::Analytics::Counter`
 
-## [API Manager](https://console.developers.google.com)
+## OAuth 2.0 client ID
 
-`Credentials (left sidebar) -> Credentials -> Credentials (tab)`
+client ID:
 
-create OAuth 2.0 client IDs for each stage (Development, Staging, Production) -
-they are stored in _secrets.yml_:
+- is used to authenticate application via OAuth 2.0
+- has client secret (aka API key)
+- is created in [API Manager](https://console.developers.google.com):
 
-- Client ID - `oauth/google_analytics/app_id`
-- Client secret - `oauth/google_analytics/app_secret`
+  `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
 
-client ID and client secret uniquely identify application.
+pumba client IDs for all 3 stages (Development, Staging, Production)
+were created in `finga***88@gmail.com` account!
 
-each google API service (e.g. `Google Analytics API v3`)
-defines one or more scopes that declare a set of operations permitted
+client ID for Development is stored in _secrets.yml_:
 
-general workflow
-(<https://developers.google.com/api-client-library/ruby/start/get_started>):
+- client ID - `oauth/google_analytics/app_id`
+- client secret - `oauth/google_analytics/app_secret`
+
+client IDs for Staging and Production are stored in chef.
+
+## scopes
+
+each Google API service (e.g. `Google Analytics API v3`)
+defines one or more scopes that declare a set of operations permitted.
+
+## [APIs Explorer](https://developers.google.com/apis-explorer/#p/)
+
+APIs Explorer by default supplies its own default credentials
+(client ID and client secret) when executing queries.
+or else it's possible to supply custom credentials:
+
+`Settings icon in upper right corner -> Set API key / OAuth 2.0 Client ID -> Custom credentials`
+
+as a rule using default credentials must be enough as it's all the same
+it's necessary to grant access to application when OAuth 2.0 consent screen
+is displayed - it doesn't matter whether this is pumba application or not.
+
+to execute query it's necessary to get access to user data -
+for this to happen user must authenticate himself (log in) and approve
+[scopes](#scopes) application (either default one or pumba) is requesting.
+
+currently all user counters (== user data) are stored in
+`re***2015@gmail.com` account - it's necessary to log in as that user
+when Google account login screen is displayed.
+
+**NOTE**: beware of the situation when user is already logged (either in Chrome
+          browser and on website) and this is wrong user - log out in this case.
+
+next user data are retrieved.
+
+## general workflow when using API
+
+<https://developers.google.com/api-client-library/ruby/start/get_started>
 
 - application requests access to user data (using `omniauth-google-oauth2` gem) -
   request includes one or more scopes
 - application is authenticated with client ID and client secret
-- user must authenticate himself - google account login screen is displayed
+- user must authenticate himself - Google account login screen is displayed
 - user needs to approve scopes application is requesting -
   OAuth 2.0 consent screen is displayed to user
 - when user grants access for application OAuth 2.0 authorization server
@@ -86,7 +122,7 @@ general workflow
   tokens are valid for the scopes requested only
 - refresh token:
   - used to acquire new access token (client ID and client secret must be passed as well)
-  - stored in database as `OauthToken`
+  - stored in database as `token` in `Google::Analytics::Token`
   - never expires
 - access token:
   - used to authorize API calls

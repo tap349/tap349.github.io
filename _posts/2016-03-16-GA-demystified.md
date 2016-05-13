@@ -201,7 +201,7 @@ consequently it's necessary to log in one of these accounts
   tokens are valid for the scopes requested only
 - refresh token:
   - used to acquire new access token (client ID and client secret must be passed as well)
-  - stored in database as `token` in `Google::Analytics::Token`
+  - stored in database as `token` in `OauthToken` (`Google::Analytics::Token`, etc.)
   - never expires
 - access token:
   - used to authorize API calls

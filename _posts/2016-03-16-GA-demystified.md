@@ -36,7 +36,8 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
   - path (displayed in both places):
     - `Property Settings → Basic Settings → Tracking Id`
     - `Tracking Info → Tracking Code → Tracking ID`
-  - format: `UA-XXXX-1` where `XXXX` - Account ID (see above)
+  - format: `UA-XXXX-Y` where `XXXX` - account ID (see above),
+    `Y` - ordinal number of tracking ID (1, 2, etc.)
   - parameter in API: `webPropertyId`
   - usage:
     - API (e.g. `analytics.management.goals.*`)

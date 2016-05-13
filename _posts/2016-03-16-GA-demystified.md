@@ -122,6 +122,11 @@ e.g. calling `analytics.data.ga.get` method with `ids=ga:12345` argument is
 equivalent to making `https://www.googleapis.com/analytics/v3/data/ga?ids=ga:12345`
 HTTP request (indeed this method has more required arguments than shown here).
 
+when making HTTP request arguments can be supplied as:
+
+- URL params (`...?ids=ga:12345`)
+- inside URL path (`.../accounts/accountId/...`)
+
 **NOTE**: in pumba we don't use a client library and make HTTP requests directly.
 
 ### scopes

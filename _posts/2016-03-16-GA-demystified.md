@@ -91,20 +91,21 @@ client IDs for Staging and Production are stored in chef.
 <https://developers.google.com/apis-explorer>
 
 APIs Explorer allows to make API requests to different API services
-(optionally with OAuth 2.0 authorization).
+(optionally with OAuth 2.0 authorization) and exposes the same methods
+as those available in client libraries.
 
 ### API services
 
-all API services available in APIs Explorer are listed
+all services available in APIs Explorer are listed
 [here](https://developers.google.com/apis-explorer) -
 select `Google Analytics API v3` service.
 
 ### API methods
 
-all API methods for `Google Analytics API v3` service are listed
+all methods for `Google Analytics API v3` service are listed
 [here](https://developers.google.com/apis-explorer/#p/analytics/v3/).
 
-API methods currently used in pumba:
+methods currently used in pumba:
 
 - `analytics.data.ga.get` (visits, visitors)
 - `analytics.data.mcf.get` (assisted conversions)
@@ -112,11 +113,16 @@ API methods currently used in pumba:
 - `analytics.management.profiles.*`
 - `analytics.management.goals.*` (goals, goal completions)
 
-API methods don't match actual HTTP requests precisely. e.g.:
+these methods are exposed in client libraries for different languages
+and have language specific interfaces to set query parameters.
 
-API method:   | `analytics.management.goals.list`
---------------|-------------------------------------------------------------------
-HTTP request: | `https://www.googleapis.com/analytics/v3/management/accounts/accountId/webproperties/webPropertyId/profiles/profileId/goals`
+API can also be queried as REST-ful endpoint by making HTTP request:
+
+e.g. calling `analytics.data.ga.get` method with `ids=ga:12345` argument is
+equivalent to making `https://www.googleapis.com/analytics/v3/data/ga?ids=ga:12345`
+HTTP request (indeed this method has more required arguments than shown here).
+
+**NOTE**: in pumba we don't use a client library and make HTTP requests directly.
 
 ### scopes
 

@@ -21,7 +21,7 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 ### ACCOUNT (1st column)
 
-  **Account ID**
+  **account ID**
 
   - path: `Account Settings → Basic Settings → Account Id`
   - format: `\d+`
@@ -31,7 +31,7 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 ### PROPERTY (2nd column)
 
-  **Tracking ID**
+  **tracking ID**
 
   - path (displayed in both places):
     - `Property Settings → Basic Settings → Tracking Id`
@@ -46,7 +46,7 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 ### VIEW (3rd column)
 
-  **View ID (Profile ID)**
+  **view ID (profile ID)**
 
   - path: `View Settings → Basic Settings → View ID`
   - format: `\d+`
@@ -54,7 +54,7 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
   - usage: API (e.g. `analytics.management.goals.*`)
   - pumba: not stored
 
-  **Table ID**
+  **table ID**
 
   - path: not displayed in UI
   - format: `ga:XXXX` where `XXXX` - View ID

@@ -112,11 +112,11 @@ API methods currently used in pumba:
 - `analytics.management.profiles.*`
 - `analytics.management.goals.*` (goals, goal completions)
 
-API methods don't match actual HTTP requests exactly. e.g.:
+API methods don't match actual HTTP requests precisely. e.g.:
 
-`analytics.management.goals.list` API method corresponds to
-`https://www.googleapis.com/analytics/v3/management/accounts/accountId/webproperties/webPropertyId/profiles/profileId/goals`
-HTTP request.
+API method:   | `analytics.management.goals.list`
+--------------|-------------------------------------------------------------------
+HTTP request: | `https://www.googleapis.com/analytics/v3/management/accounts/accountId/webproperties/webPropertyId/profiles/profileId/goals`
 
 ### scopes
 

@@ -100,10 +100,25 @@ all services available in APIs Explorer are listed
 [here](https://developers.google.com/apis-explorer) -
 select `Google Analytics API v3` service.
 
-### API methods
+### API methods vs HTTP requests
 
 all methods for `Google Analytics API v3` service are listed
 [here](https://developers.google.com/apis-explorer/#p/analytics/v3/).
+
+these methods are exposed in client libraries for different languages
+and have language specific interfaces to set query parameters.
+
+API can also be queried as REST-ful endpoint by making HTTP request:
+
+e.g. calling `analytics.data.ga.get` method with `ids=ga:12345` argument
+(either in client library or APIs Explorer) is equivalent to making
+`https://www.googleapis.com/analytics/v3/data/ga?ids=ga:12345` HTTP request
+(in fact this method has more required arguments than shown here).
+
+when making HTTP request arguments can be supplied as:
+
+- parameters in URL query string (`...?ids=ga:12345`)
+- segments in URL path (`.../accounts/accountId/...`)
 
 methods currently used in pumba:
 
@@ -113,21 +128,8 @@ methods currently used in pumba:
 - `analytics.management.profiles.*`
 - `analytics.management.goals.*` (goals, goal completions)
 
-these methods are exposed in client libraries for different languages
-and have language specific interfaces to set query parameters.
-
-API can also be queried as REST-ful endpoint by making HTTP request:
-
-e.g. calling `analytics.data.ga.get` method with `ids=ga:12345` argument is
-equivalent to making `https://www.googleapis.com/analytics/v3/data/ga?ids=ga:12345`
-HTTP request (indeed this method has more required arguments than shown here).
-
-when making HTTP request arguments can be supplied as:
-
-- URL params (`...?ids=ga:12345`)
-- inside URL path (`.../accounts/accountId/...`)
-
-**NOTE**: in pumba we don't use a client library and make HTTP requests directly.
+**NOTE**: in pumba we don't use client libraries and make HTTP requests directly -
+          methods are listed above for the sake of clarity only.
 
 ### scopes
 

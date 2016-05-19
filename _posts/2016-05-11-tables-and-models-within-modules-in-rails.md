@@ -10,8 +10,11 @@ about models within modules and corresponding table names in Rails.
 
 <!-- more -->
 
-when searching for table ActiveRecord always uses model name without modules.
+when searching for table AR always uses model name without modules.
 e.g. for `Stats::Google::Analytics::McfStat` it will search for `mcf_stats` table.
+
+**NOTE**: AR still finds table `sites_descriptions` for `Site::Description` model -
+          when module (`Site`) is a class of existing model (`Site::Description`).
 
 to use module name as table name prefix it's necessary to define
 table name prefix for this module:

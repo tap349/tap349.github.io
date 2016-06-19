@@ -70,10 +70,11 @@ it's possible to fix it by using `page:load` event - it's triggered when:
 
 - page is loaded with turbolinks (new `body` is loaded into the DOM)
 
-BUT it's NOT triggered:
+BUT it's NOT triggered when:
 
-- on partial replacement
-- when page is restored from client-side cache (clicking *back* in browser)
+- page is loaded normally (`ready`, `DOMContentLoaded`)
+- page is restored from client-side cache (clicking *back* in browser)
+- on turbolinks partial replacement
 
 #### `page:change`
 

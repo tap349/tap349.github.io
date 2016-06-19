@@ -74,7 +74,7 @@ BUT it's NOT triggered when:
 
 - page is loaded normally (`ready`, `DOMContentLoaded`)
 - page is restored from client-side cache (clicking *back* in browser)
-- on turbolinks partial replacement
+- page is partially replaced with turbolinks
 
 #### `page:change`
 

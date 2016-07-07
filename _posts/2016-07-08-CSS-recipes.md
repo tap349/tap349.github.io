@@ -31,7 +31,7 @@ _app/assets/stylesheets/globals/icons.sass_:
   width: 15px
 ```
 
-USAGE:
+**USAGE**:
 
 - _app/views/sites/show.html.slim_:
 
@@ -41,7 +41,7 @@ USAGE:
     = t '.success_text'
   ```
 
-### mixin
+### mixin with before pseudo element
 
 _app/assets/stylesheets/mixins/before_icon.sass_:
 
@@ -49,7 +49,7 @@ _app/assets/stylesheets/mixins/before_icon.sass_:
 @import v2/mixins/retina
 
 =before_icon($image_path, $w: auto, $h: auto, $position: 0 0, $vertical_align: text-bottom)
-  &:before
+  &::before
     +background_inline_retina($image_path, 'png', $w: $w, $h: $h, $position: $position)
     content: ''
     display: inline-block
@@ -59,7 +59,7 @@ _app/assets/stylesheets/mixins/before_icon.sass_:
     width: $w
 ```
 
-USAGE:
+**USAGE**:
 
 - _app/views/sites/show.html.slim_:
 

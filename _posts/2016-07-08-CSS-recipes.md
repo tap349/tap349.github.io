@@ -6,9 +6,16 @@ access: public
 categories: [css]
 ---
 
+solutions to common problems related to CSS.
+
+<!-- more -->
+
+* TOC
+{:toc}
+
 ## using icons
 
-- global classes
+### global classes
 
   _app/assets/stylesheets/globals/icons.sass_:
 
@@ -34,7 +41,7 @@ categories: [css]
       = t '.success_text'
     ```
 
-- mixin
+### mixin
 
   _app/assets/stylesheets/mixins/before_icon.sass_:
 

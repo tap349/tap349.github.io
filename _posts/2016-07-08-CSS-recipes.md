@@ -31,7 +31,7 @@ _app/assets/stylesheets/globals/icons.sass_:
   width: 15px
 ```
 
-**USAGE**:
+USAGE:
 
 - _app/views/sites/show.html.slim_:
 
@@ -59,7 +59,7 @@ _app/assets/stylesheets/mixins/before_icon.sass_:
     width: $w
 ```
 
-**USAGE**:
+USAGE:
 
 - _app/views/sites/show.html.slim_:
 

@@ -27,6 +27,7 @@ _app/assets/stylesheets/globals/icons.sass_:
   +background_inline_retina('#{$image_global_path}/success', 'png', $w: 15px, $h: 16px)
   display: inline-block
   height: 16px
+  margin-right: 5px
   vertical-align: baseline
   width: 15px
 ```

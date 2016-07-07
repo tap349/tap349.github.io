@@ -33,7 +33,7 @@ _app/assets/stylesheets/globals/icons.sass_:
 
 USAGE:
 
-- `app/views/sites/show.html.slim`:
+- _app/views/sites/show.html.slim_:
 
   ```slim
   li
@@ -61,14 +61,14 @@ _app/assets/stylesheets/mixins/before_icon.sass_:
 
 USAGE:
 
-- `app/views/sites/show.html.slim`:
+- _app/views/sites/show.html.slim_:
 
   ```slim
   li.success
     = t '.success_text'
   ```
 
-- `app/assets/stylesheets/pages/sites.sass`:
+- _app/assets/stylesheets/pages/sites.sass_:
 
   ```sass
   li

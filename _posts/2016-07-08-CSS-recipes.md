@@ -18,8 +18,8 @@ solutions to common problems related to CSS.
 ### global classes (text div is next to icon div)
 
 this method doesn't allow to have multiline text next to icon:
-icon and text are located on the same line - text will wrap to
-the next line below the line containing icon.
+icon and text divs are located on the same line -
+text will wrap to the next line below the line with icon div.
 
 _app/assets/stylesheets/globals/icons.sass_:
 
@@ -48,7 +48,7 @@ USAGE:
 
 ### global classes (text element is nested in icon div)
 
-this method allows to have multiline text next to icon since
+this method allows to have multiline text next to icon:
 text element is located in icon div (div with icon as background).
 
 _app/assets/stylesheets/globals/icons.sass_:
@@ -74,6 +74,8 @@ USAGE:
   ```
 
 ### mixin with before pseudo element
+
+this method doesn't allow to have multiline text next to icon.
 
 _app/assets/stylesheets/mixins/before_icon.sass_:
 

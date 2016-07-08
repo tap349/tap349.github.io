@@ -15,7 +15,11 @@ solutions to common problems related to CSS.
 
 ## using icons
 
-### global classes
+### global classes (text div is next to icon div)
+
+this method doesn't allow to have multiline text next to icon:
+icon and text are located on the same line - text will wrap to
+the next line below the line containing icon.
 
 _app/assets/stylesheets/globals/icons.sass_:
 
@@ -39,6 +43,33 @@ USAGE:
   ```slim
   li
     .success-icon
+    = t '.success_text'
+  ```
+
+### global classes (text element is nested in icon div)
+
+this method allows to have multiline text next to icon since
+text element is located in icon div (div with icon as background).
+
+_app/assets/stylesheets/globals/icons.sass_:
+
+```sass
+@import v2/globals/variables
+@import v2/mixins/retina
+
+.success-icon
+  +background_inline_retina('#{$image_global_path}/success', 'png', $w: 15px, $h: 16px)
+  display: inline-block
+  min-height: 16px
+  padding-left: 20px
+```
+
+USAGE:
+
+- _app/views/sites/show.html.slim_:
+
+  ```slim
+  li.success-icon
     = t '.success_text'
   ```
 

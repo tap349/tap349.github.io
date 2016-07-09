@@ -41,7 +41,7 @@ USAGE:
 - _app/views/sites/show.html.slim_:
 
   ```slim
-  li
+  .success
     .success-icon
     = t '.success_text'
   ```
@@ -69,11 +69,14 @@ USAGE:
 - _app/views/sites/show.html.slim_:
 
   ```slim
-  li.success-icon
+  .success-icon
     = t '.success_text'
   ```
 
-### mixin with before pseudo element
+even though this method allows for miltiline html but naming is a bit
+misleading: `.success-icon` div contains not only icon but text as well.
+
+### mixin with before pseudo-element
 
 this method doesn't allow to have multiline text next to icon.
 
@@ -98,14 +101,13 @@ USAGE:
 - _app/views/sites/show.html.slim_:
 
   ```slim
-  li.success
+  .success
     = t '.success_text'
   ```
 
 - _app/assets/stylesheets/pages/sites.sass_:
 
   ```sass
-  li
-    &.success
-      +before_icon('#{$image_global_path}/success', $w: 16px, $h: 16px)
+  .success
+    +before_icon('#{$image_global_path}/success', $w: 16px, $h: 16px)
   ```

@@ -73,8 +73,8 @@ USAGE:
     = t '.success_text'
   ```
 
-even though this method allows for miltiline html but naming is a bit
-misleading: `.success-icon` div contains not only icon but text as well.
+even though this method allows for miltiline text html is a bit misleading:
+`.success-icon` div contains not only icon but text as well.
 
 ### mixin with before pseudo-element
 

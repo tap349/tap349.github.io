@@ -10,17 +10,26 @@ anonymization tips.
 
 <!-- more -->
 
-sites to check anonymity and browser leaks:
+# sites to check anonymity and browser leaks
 
 - <https://whoer.net/ru>
-- <https://www.browserleaks.com/> (pay attention to WebRTC)
+- <https://www.browserleaks.com/>
 
-# chrome
+# chrome browser
+
+## WebRTC
+
+WebRTC protocol leaks your ISP address even when behind proxy or VPN server.
+
+uBlock extensions allows to disable WebRTC but only when behind VPN server
+(that is it doesn't work when using Browsec extension).
 
 ## extensions
 
+- Browsec
 - AdBlock
 - Ghostery
+- uBlock
 
 ## settings
 

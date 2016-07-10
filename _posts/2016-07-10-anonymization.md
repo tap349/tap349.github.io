@@ -34,6 +34,8 @@ local IP address is no longer available (unlike when using Browsec extension).
 
 ## settings
 
+### leave only English language (chrome://settings/languages)
+
 ### check `Send a "Do Not Track" request with your browsing traffic`
 
 ### disable flash (chrome://plugins)

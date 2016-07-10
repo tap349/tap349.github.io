@@ -21,8 +21,9 @@ anonymization tips.
 
 WebRTC protocol leaks your ISP address even when behind proxy or VPN server.
 
-uBlock extensions allows to disable WebRTC but only when behind VPN server
-(that is it doesn't work when using Browsec extension).
+uBlock extensions allows to disable WebRTC but it doesn't seem to work -
+even when using VPN <https://whoer.net/ru> shows that WebRTC is enabled but
+local IP address is no longer available (unlike when using Browsec extension).
 
 ## extensions
 

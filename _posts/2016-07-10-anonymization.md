@@ -12,8 +12,9 @@ anonymization tips.
 
 # sites to check anonymity and browser leaks
 
-- <https://whoer.net/ru>
-- <https://www.browserleaks.com/>
+- <https://whoer.net>
+- <https://www.browserleaks.com>
+- <https://2ip.ru>
 
 # chrome browser
 

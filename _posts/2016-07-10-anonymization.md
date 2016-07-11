@@ -53,7 +53,13 @@ disable:
 
 # VPN
 
-## use DNS servers not bound to specific country:
+## use DNS servers not bound to specific country
 
 - 8.8.8.8, 8.8.4.4 (Google’s DNS)
 - 208.67.222.222, 208.67.220.220 (OpenDNS)
+
+## disable IPv6
+
+```sh
+$ networksetup -setv6off Wi-Fi
+```

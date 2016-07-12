@@ -152,7 +152,7 @@ Google Analytics API declares a set of scopes:
 - `https://www.googleapis.com/auth/analytics.readonly`<br>
   (view your Google Analytics data)
 
-to get Google Analytics data it's necessary to grant at least the last scope.
+to get Google Analytics data it's necessary to approve at least the last scope.
 
 ### application and user authentication
 
@@ -175,12 +175,17 @@ scopes application (either default one or pumba) is requesting.
 
 ### pumba accounts
 
-in pumba user counters are created in:
+in pumba user counters are accessed via these pumba accounts:
 
 - `re***2015@gmail.com` account - primary counters (for visits/visitors statistics)
 - `re***.counter@gmail.com` account - MCF counters (for assisted conversions statistics)
 
-consequently it's necessary to log in one of these accounts
+primary counters are created by users in their accounts and just shared
+with our `re***2015@gmail.com` account.
+MCF counters are created by ourselves in `re***.counter@gmail.com` account
+(manually - not automatically in pumba).
+
+consequently it's necessary to log in one of pumba accounts
 (when Google account login screen is displayed) to get access to:
 
 - information related to user counters (e.g. goals)

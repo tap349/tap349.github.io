@@ -67,8 +67,6 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 <https://console.developers.google.com>
 
-**NOTE**: select pumba project (`Re***`) in top menu beforehand.
-
 OAuth client ID:
 
 - is used to identify your application (project)
@@ -86,6 +84,8 @@ API key:
   `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
 
 ### pumba client IDs
+
+**NOTE**: select pumba project (`Re***`) in top menu beforehand.
 
 pumba client IDs for all 3 stages (Development, Staging, Production)
 were created in `finga***88@gmail.com` account!

@@ -67,11 +67,21 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 <https://console.developers.google.com>
 
-OAuth 2.0 client IDs:
+**NOTE**: select pumba project (`Re***`) in top menu beforehand.
 
-- are used to authenticate application via OAuth 2.0
-- have corresponding client secrets (aka API keys)
-- are managed in API Manager:
+OAuth client ID:
+
+- is used to identify your application (project)
+- has corresponding client secrets (don't confuse with API keys!)
+- is managed in API Manager:
+
+  `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
+
+API key:
+
+- is used to identify your application (project)
+- doesn't request user consent unlike OAuth client ID
+- is managed in API Manager:
 
   `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
 
@@ -87,9 +97,17 @@ client ID for Development is stored in _secrets.yml_:
 
 client IDs for Staging and Production are stored in chef.
 
+### pumba API keys
+
+API keys are not used in pumba.
+
 ## APIs Explorer
 
 <https://developers.google.com/apis-explorer>
+
+<https://ga-dev-tools.appspot.com/query-explorer> - Query Explorer
+(almost the same as APIs Explorer but somewhat easier to use since it requires
+authorization and prefetches existing values - accounts, properties, views)
 
 APIs Explorer allows to make API requests to different API services
 (optionally with OAuth 2.0 authorization) and exposes the same methods

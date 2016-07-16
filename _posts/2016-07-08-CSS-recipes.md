@@ -15,7 +15,7 @@ solutions to common problems related to CSS.
 
 ## using icons
 
-### global classes (text div is next to icon div)
+### global classes (text or text div is next to icon div)
 
 this method doesn't allow to have multiline text next to icon:
 icon and text divs are located on the same line -

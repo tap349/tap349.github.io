@@ -6,14 +6,15 @@ access: public
 categories: [dry-rb, rom-rb, roda]
 ---
 
-dry-rb, rom-rb and roda resources
+dry-rb, rom-rb and roda resources.
 
 <!-- more -->
 
 ## [dry-rb](http://dry-rb.org/)
 
-- <http://dry-rb.org/gems/>
-- <https://github.com/dry-rb>:
+github: <https://github.com/dry-rb>
+
+- <http://dry-rb.org/>:
   * [Introducing dry-system](http://dry-rb.org/news/2016/08/15/introducing-dry-system/)
 - <http://dry-rb.org/resources/reddotrubyconf-2016/>:
   * [My past and future Ruby](http://icelab.com.au/articles/my-past-and-future-ruby/)
@@ -28,10 +29,13 @@ dry-rb, rom-rb and roda resources
 
 ## [rom-rb](http://rom-rb.org/)
 
+github: <https://github.com/rom-rb>
+
 - <http://rom-rb.org/learn/>
-- <https://github.com/rom-rb>
 
 ## [roda](http://roda.jeremyevans.net/)
+
+github: <https://github.com/jeremyevans/roda>
 
 - <http://roda.jeremyevans.net/documentation.html>
   (readme, conventions, description of plugins)

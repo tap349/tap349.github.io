@@ -12,7 +12,7 @@ dry-rb, rom-rb and roda resources.
 
 ## [dry-rb](http://dry-rb.org/)
 
-github: <https://github.com/dry-rb>
+**github**: <https://github.com/dry-rb>
 
 - <http://dry-rb.org/>:
   * [Introducing dry-system](http://dry-rb.org/news/2016/08/15/introducing-dry-system/)
@@ -29,13 +29,13 @@ github: <https://github.com/dry-rb>
 
 ## [rom-rb](http://rom-rb.org/)
 
-github: <https://github.com/rom-rb>
+**github**: <https://github.com/rom-rb>
 
 - <http://rom-rb.org/learn/>
 
 ## [roda](http://roda.jeremyevans.net/)
 
-github: <https://github.com/jeremyevans/roda>
+**github**: <https://github.com/jeremyevans/roda>
 
 - <http://roda.jeremyevans.net/documentation.html>
   (readme, conventions, description of plugins)

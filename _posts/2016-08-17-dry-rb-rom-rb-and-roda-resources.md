@@ -12,6 +12,7 @@ dry-rb, rom-rb and roda resources
 
 ## [dry-rb](http://dry-rb.org/)
 
+- <http://dry-rb.org/gems/>
 - <https://github.com/dry-rb>:
   * [Introducing dry-system](http://dry-rb.org/news/2016/08/15/introducing-dry-system/)
 - <http://dry-rb.org/resources/reddotrubyconf-2016/>:
@@ -27,14 +28,15 @@ dry-rb, rom-rb and roda resources
 
 ## [rom-rb](http://rom-rb.org/)
 
+- <http://rom-rb.org/learn/>
 - <https://github.com/rom-rb>
 
 ## [roda](http://roda.jeremyevans.net/)
 
-- <https://twin.github.io/introduction-to-roda/>
-- <https://binarapps.com/blog/from-rails-to-roda-framework-a-quick-guide>
 - <http://roda.jeremyevans.net/documentation.html>
   (readme, conventions, description of plugins)
+- <https://twin.github.io/introduction-to-roda/>
+- <https://binarapps.com/blog/from-rails-to-roda-framework-a-quick-guide>
 - <https://github.com/jeremyevans/rodauth> (authentication)
 - <http://mrcook.uk/>:
   * [Up and Going in Roda: Static Ruby Websites](http://mrcook.uk/static-websites-with-roda-framework)
@@ -47,11 +49,8 @@ dry-rb, rom-rb and roda resources
 ## using together
 
 - (!) <https://github.com/dry-rb/dry-web-roda> (dry-rb, roda)
-- (!) <https://github.com/icelab/dry-web-skeleton> (dry-rb, rom-rb, roda, que)
-
-  see <https://github.com/icelab/dry-web-skeleton/tree/master/docs>
-  for docs on application structure, using assets and rom-rb!
-
+- (!) <https://github.com/icelab/dry-web-skeleton> (dry-rb, rom-rb, roda, que):
+  * <https://github.com/icelab/dry-web-skeleton/tree/master/docs> (structure, assets, rom-rb)
 - <https://leanpub.com/web-development-with-rom-and-roda> (book, not released)
 - <https://github.com/rom-rb/rom-roda> (rom-rb, roda)
 

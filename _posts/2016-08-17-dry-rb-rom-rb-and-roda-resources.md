@@ -57,6 +57,7 @@ dry-rb, rom-rb and roda resources.
   * <https://github.com/icelab/dry-web-skeleton/tree/master/docs> (structure, assets, rom-rb)
 - <https://leanpub.com/web-development-with-rom-and-roda> (book, not released)
 - <https://github.com/rom-rb/rom-roda> (rom-rb, roda)
+- <https://github.com/solnic/rom-rails-skeleton> (dry-rb, rom-rb, rails)
 
 ## sample projects
 
@@ -65,4 +66,4 @@ dry-rb, rom-rb and roda resources.
 - <https://github.com/binarapps/slack-integrator> (roda, sequel, react, bootstrap)
 - <https://github.com/solnic/rodakase-blog> (rodakase (dry-web now) - can be outdated)
 - <https://github.com/solnic/rom-demo> (rom-rb - can be outdated)
-- <https://github.com/solnic/rom-rails-skeleton> (dry-rb, rom-rb, rails - can be outdated)
+- <https://github.com/solnic/rom-rails-skeleton> (dry-rb, rom-rb, rails)

@@ -189,7 +189,7 @@ for this to happen user must authenticate himself (log in) and approve
 scopes application (either default one or pumba) is requesting.
 
 **NOTE**: beware of the situation when user is already logged in (either in Chrome
-          browser or via website) and this is wrong user - log out in this case.
+          browser or via website) and this is a wrong user - log out in this case.
 
 ### pumba accounts
 

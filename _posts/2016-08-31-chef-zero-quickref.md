@@ -23,11 +23,16 @@ categories: [chef, chef-zero, knife-zero]
   (remote)# exit
   ```
 
-  add new ssh host (say, builder) to _~./ssh/config_ with devops user
-  and remote ip address on workstation.
+  add new ssh host to _~./ssh/config_: host itself and user must be
+  equal to the name of application you're going to deploy on that host
+  (say, builder). if it's necessary to deploy another application on
+  the same host create a separate ssh host named as that new application.
+  to login as devops specify ssh user explicitly: `ssh devops@builder`.
+  when bootstrapping and converging ssh user is also specified explicitly
+  in _.chef/knife.rb_ with `knife[:ssh_user]` option.
 
   ```sh
-  (ws)$ ssh devops
+  (ws)$ ssh devops@builder
   / enter devops password
   (remote)$ mkdir ~/.ssh
   (remote)$ vi ~/.ssh/authorized_keys
@@ -46,3 +51,18 @@ categories: [chef, chef-zero, knife-zero]
 
   if you don't specify node name FQDN will be used by default -
   this is the name by which node is registered in chef-zero server.
+
+- vendor cookbooks and converge
+
+  ```sh
+  (ws)$ berks vendor
+  (ws)$ knife zero converge 'name:builder'
+  ```
+
+  berks vendors cookbooks to _berks-cookbooks/_ by default (both community
+  and application cookbooks) and knife when converging searches exactly in
+  this directory as specified in _.chef/knife.rb_:
+
+  ```ruby
+  cookbook_path ['berks-cookbooks']
+  ```

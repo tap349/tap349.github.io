@@ -21,10 +21,20 @@ categories: [chef, chef-zero, knife-zero]
   ```sh
   (local)$ ssh devops
   / enter devops password
-  (remote)# mkdir ~/.ssh
-  (remote)# vi ~/.ssh/authorized_keys
+  (remote)$ mkdir ~/.ssh
+  (remote)$ vi ~/.ssh/authorized_keys
   / paste your public key (say, ~/.ssh/id_rsa.pub)
-  (remote)# exit
+  (remote)$ exit
   ```
 
   now you can login to remote node without password.
+
+- bootstrap remote node:
+
+  ```sh
+  (local)$ knife zero bootstrap builder --node-name builder
+  / enter devops password for sudo command
+  ```
+
+  if you don't specify node name FQDN will be used by default -
+  this is the name by which node is registered in chef-zero server.

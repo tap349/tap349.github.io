@@ -6,28 +6,28 @@ access: public
 categories: [chef, chef-zero, knife-zero]
 ---
 
-- install chefdk and knife-zero on local machine:
+- install chefdk and knife-zero on workstation:
 
   ```sh
-  (local)$ brew cask update
-  (local)$ brew cask install chefdk
-  (local)$ chef gem install knife-zero
+  (ws)$ brew cask update
+  (ws)$ brew cask install chefdk
+  (ws)$ chef gem install knife-zero
   ```
 
 - configure devops user on remote node:
 
   ```sh
-  (local)$ ssh root@<remote-ip>
+  (ws)$ ssh root@<remote-ip>
   (remote)# useradd devops -m -s /bin/bash -G sudo
   (remote)# passwd devops
   (remote)# exit
   ```
 
   add new ssh host (say, builder) to _~./ssh/config_ with devops user
-  and remote ip address on local machine.
+  and remote ip address on workstation.
 
   ```sh
-  (local)$ ssh devops
+  (ws)$ ssh devops
   / enter devops password
   (remote)$ mkdir ~/.ssh
   (remote)$ vi ~/.ssh/authorized_keys
@@ -40,7 +40,7 @@ categories: [chef, chef-zero, knife-zero]
 - bootstrap remote node:
 
   ```sh
-  (local)$ knife zero bootstrap builder --node-name builder
+  (ws)$ knife zero bootstrap builder --node-name builder
   / enter devops password for sudo command
   ```
 

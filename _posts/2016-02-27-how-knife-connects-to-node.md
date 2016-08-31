@@ -90,7 +90,7 @@ when cooking we **search** for node on chef-zero server using node name
 assigned to the node during bootstrapping:
 
 ```sh
-$ knife zero converge 'name:tap349'
+$ knife zero converge 'name:tap349' -z
 ```
 
 when cooking knife-zero tries to connect to node using FQDN by default
@@ -105,7 +105,7 @@ the connection to the node by specifying `-a, --attribute` option
 > The attribute to use for opening the connection
 
 ```sh
-$ knife zero converge 'name:tap349' -a ipaddress
+$ knife zero converge 'name:tap349' -a ipaddress -z
 ```
 
 or set attribute permanently in _knife.rb_:

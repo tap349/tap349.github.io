@@ -6,6 +6,14 @@ access: public
 categories: [chef, chef-zero, knife-zero]
 ---
 
+- install chefdk and knife-zero on local machine:
+
+  ```sh
+  (local)$ brew cask update
+  (local)$ brew cask install chefdk
+  (local)$ chef gem install knife-zero
+  ```
+
 - configure devops user on remote node:
 
   ```sh

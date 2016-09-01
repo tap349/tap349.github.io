@@ -6,6 +6,10 @@ access: public
 categories: [chef, chef-zero, knife-zero]
 ---
 
+refined and focused quickref for chef-zero and knife-zero.
+
+<!-- more -->
+
 - install chefdk and knife-zero on workstation:
 
   ```sh

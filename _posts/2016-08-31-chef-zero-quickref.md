@@ -52,6 +52,11 @@ categories: [chef, chef-zero, knife-zero]
   if you don't specify node name FQDN will be used by default -
   this is the name by which node is registered in chef-zero server.
 
+  NOTE: you cannot change node name by renaming node file and changing the name
+  inside this file - node name is also stored in _/etc/chef/client.rb_ on remote
+  node: if you change it locally new node file with node name from
+  _/etc/chef/client.rb_ will be created after converging (with empty run_list).
+
 - vendor cookbooks and converge
 
   ```sh

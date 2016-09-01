@@ -70,7 +70,7 @@ refined and focused quickref for chef-zero and knife-zero.
   (ws)$ knife node environment_set builder staging
   (ws)$ berks vendor
   (ws)$ knife zero converge 'name:builder'
-  / enter devops password for sudo command on first converge
+  / enter devops password for sudo command (on first converge only)
   ```
 
   berks vendors cookbooks to _berks-cookbooks/_ by default (both community

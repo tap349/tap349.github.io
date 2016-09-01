@@ -80,3 +80,16 @@ refined and focused quickref for chef-zero and knife-zero.
   ```ruby
   cookbook_path ['berks-cookbooks']
   ```
+
+- update attribute whitelist:
+
+  <https://github.com/higanworks/knife-zero/issues/99>
+
+  - update corresponding attribute whitelist in _.chef/knife.rb_
+  - update changes to _/etc/chef/client.rb_ on remote node:
+
+    ```sh
+    (ws)$ knife zero bootstrap builder --node-name builder --no-converge 
+    ```
+
+    without `--no-converge` option command would overwrite node file.

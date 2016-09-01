@@ -49,6 +49,8 @@ categories: [chef, chef-zero, knife-zero]
   / enter devops password for sudo command
   ```
 
+  here first `builder` is a host name from ssh config.
+
   if you don't specify node name FQDN will be used by default -
   this is the name by which node is registered in chef-zero server.
 
@@ -57,11 +59,14 @@ categories: [chef, chef-zero, knife-zero]
   node: if you change it locally new node file with node name from
   _/etc/chef/client.rb_ will be created after converging (with empty run_list).
 
-- vendor cookbooks and converge
+- converge remote node:
 
   ```sh
+  (ws)$ knife node run_list add builder 'recipe[builder_app]'
+  (ws)$ knife node environment_set builder staging
   (ws)$ berks vendor
   (ws)$ knife zero converge 'name:builder'
+  / enter devops password for sudo command on first converge
   ```
 
   berks vendors cookbooks to _berks-cookbooks/_ by default (both community

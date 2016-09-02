@@ -56,7 +56,7 @@ refined and focused quickref for chef-zero and knife-zero.
   here first `builder` is a host name from ssh config.
 
   if you don't specify node name FQDN will be used by default -
-  this is the name by which node is registered in chef-zero server.
+  this is the name by which node is registered in a chef-zero server.
 
   NOTE: you cannot change node name by renaming node file and changing the name
   inside this file - node name is also stored in _/etc/chef/client.rb_ on remote

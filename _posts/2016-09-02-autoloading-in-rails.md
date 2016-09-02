@@ -89,8 +89,8 @@ and `eager_load_paths` to avoid loading errors in production.
             ...
   ```
 
-  Rails might complain that `Config` is not a class if it first
-  loads `Operations::Google::Adwords::Config::Create` and knows that
+  Rails might complain that `Config` is not a class if it loads
+  `Operations::Google::Adwords::Config::Create` first and knows that
   `Config` is a module but later you try to define it as a class.
 
   in some cases when top-level modules don't overlap you can type them

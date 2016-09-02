@@ -1,6 +1,6 @@
 ---
 layout: post
-title: autoloading in rails
+title: autoloading in Rails
 date: 2016-09-02 18:27:48 +0300
 access: public
 categories: [rails]
@@ -10,7 +10,7 @@ using non-standard directories in Rails project (_lib/_, _system/_, etc.).
 
 <!-- more -->
 
-## `autoload_paths` and `eager_load_paths`
+## autoload_paths and eager_load_paths
 
 - <http://urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell>
 - <http://blog.arkency.com/2014/11/dont-forget-about-eager-load-when-extending-autoload>

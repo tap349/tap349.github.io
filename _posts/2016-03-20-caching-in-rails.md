@@ -1,6 +1,6 @@
 ---
 layout: post
-title: caching in rails
+title: caching in Rails
 date: 2016-03-20 16:17:42 +0300
 access: public
 categories: [rails, caching]

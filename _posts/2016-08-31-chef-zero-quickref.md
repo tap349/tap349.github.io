@@ -60,7 +60,7 @@ refined and focused quickref for chef-zero and knife-zero.
 
   NOTE: you cannot change node name by renaming node file and changing the name
   inside this file - node name is also stored in _/etc/chef/client.rb_ on remote
-  node: if you change it locally new node file with node name from
+  node: if you change it locally new node file with the name from
   _/etc/chef/client.rb_ will be created after converging (with empty run_list).
 
 - converge remote node:

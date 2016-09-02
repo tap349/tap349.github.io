@@ -57,7 +57,7 @@ and `eager_load_paths` to avoid loading errors in production.
   amount of modules. also this way requires to use fully qualified names
   when referencing other classes inside class definition.
 
-- nest class inside modules:
+- nest class name inside modules:
 
   ```ruby
   module Forms

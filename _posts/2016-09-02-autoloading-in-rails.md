@@ -35,8 +35,8 @@ config.paths.add 'lib', eager_load: true
 ```
 
 not adding them to `eager_load_paths` not only causes performance issues
-(classes inside _lib/_ are lazy loaded in production) but also might cause
-weird uninitialized constant errors.
+(classes inside _lib/_ are lazy loaded in production) but also might be the
+source of weird uninitialized constant errors.
 
 to sum up **always** add non-standard directories to both `autoload_paths`
 and `eager_load_paths` to avoid loading errors in production.

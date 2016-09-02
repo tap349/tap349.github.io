@@ -41,9 +41,9 @@ source of weird uninitialized constant errors.
 to sum up **always** add non-standard directories to both `autoload_paths`
 and `eager_load_paths` to avoid loading errors in production.
 
-## using modules to namespace classes inside non-standard directories
+## using modules to namespace classes
 
-2 ways to organize code:
+2 ways to organize code in non-standard directories:
 
 - always use fully qualified class names:
 

@@ -78,7 +78,7 @@ and `eager_load_paths` to avoid loading errors in production.
           ...
   ```
 
-  otherwise in this case:
+  since otherwise:
 
   ```ruby
   module Operations

@@ -19,9 +19,9 @@ by default only subdirectories of _app/_ are added to `autoload_paths` and
 `eager_load_paths` (the latter is used in environments with eager loading -
 staging or production).
 
-other directories (say, _lib/_) added to `autoload_paths` are not added
-to `eager_load_paths` automatically - it's necessary to do it manually in
-_config/application.rb_:
+other directories (say, _lib/_) added manually to `autoload_paths` are not
+added to `eager_load_paths` automatically - it's necessary to do it explicitly
+in _config/application.rb_:
 
 ```ruby
 config.autoload_paths += Dir["#{config.root}/lib/**/"]
@@ -34,7 +34,7 @@ the same in one go (note it's not necessary to add all nested directories):
 config.paths.add 'lib', eager_load: true
 ```
 
-not adding them to `eager_load_paths` not only causes performance issue
+not adding them to `eager_load_paths` not only causes performance issues
 (classes inside _lib/_ are lazy loaded in production) but also might cause
 weird uninitialized constant errors.
 
@@ -55,7 +55,7 @@ and `eager_load_paths` to avoid loading errors in production.
   this allows to avoid loading problems but might be very inconvenient when
   class has a lot of modules and inherits from another class with the same
   amount of modules. also this way requires to use fully qualified names
-  when references other classes inside its class definition.
+  when referencing other classes inside class definition.
 
 - nest class inside modules:
 
@@ -68,7 +68,7 @@ and `eager_load_paths` to avoid loading errors in production.
   ```
 
   note if project has some class with `Config` module you must inline it
-  (use as a part of class name):
+  (use it as a part of class name):
 
   ```ruby
   module Operations

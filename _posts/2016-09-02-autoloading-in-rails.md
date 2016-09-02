@@ -55,7 +55,7 @@ and `eager_load_paths` to avoid loading errors in production.
   this allows to avoid loading problems but might be very inconvenient when
   class has a lot of modules and inherits from another class with the same
   amount of modules. also this way requires to use fully qualified names
-  when referencing other classes inside class definition.
+  when referencing other classes from inside class definition.
 
 - nest class name inside modules:
 

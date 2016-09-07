@@ -103,3 +103,10 @@ and `eager_load_paths` to avoid loading errors in production.
         class Configs < Base[:google_adwords_configs]
           ...
   ```
+
+  also controller classes are loaded fine without nesting:
+
+  ```ruby
+  class Google::Adwords::ConfigsController < ApplicationController
+    ...
+  ```

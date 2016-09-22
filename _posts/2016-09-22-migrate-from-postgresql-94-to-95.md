@@ -67,3 +67,8 @@ start 9.5 service:
 ```sh
 $ brew services start postgresql
 ```
+
+P.S. also 2 scripts are generated after `pg_upgrade` in PWD:
+
+- _analyze_new_cluster.sh_ (generate statistics for 9.5)
+- _delete_old_cluster.sh_ (delete 9.4 data - same command as above)

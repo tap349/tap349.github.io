@@ -25,7 +25,8 @@ $ brew install postgresql
 $ brew link postgresql
 ```
 
-this will also initialize new database but you can always do it manually:
+install command will also initialize new database but
+you can always do it manually if something goes wrong:
 
 ```sh
 $ initdb /usr/local/var/postgres

@@ -34,21 +34,21 @@ $ initdb /usr/local/var/postgres
 make sure you are using pg_upgrade from 9.5:
 
 ```sh
-$ pg_upgrade --version                                                                                                                                                                                                          tap@MacBook
+$ pg_upgrade --version
 pg_upgrade (PostgreSQL) 9.5.4
 ```
 
-migrate data:
+migrate 9.4 data:
 
 ```sh
-pg_upgrade \
+$ pg_upgrade \
   -d /usr/local/var/postgres94.backup \
   -D /usr/local/var/postgres \
   -b /usr/local/Cellar/postgresql94/9.4.9/bin \
   -B /usr/local/Cellar/postgresql/9.5.4/bin
 ```
 
-uninstall 9.4 (this will also remove all 9.4 versions):
+uninstall 9.4 (and remove any 9.4 versions manually if any left):
 
 ```sh
 $ brew uninstall postgresql94
@@ -59,4 +59,10 @@ remove 9.5 data (optionally):
 
 ```sh
 $ rm -rf /usr/local/var/postgresql94.backup
+```
+
+start 9.5 service:
+
+```sh
+$ brew services start postgresql
 ```

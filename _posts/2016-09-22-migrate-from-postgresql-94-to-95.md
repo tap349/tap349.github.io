@@ -56,7 +56,7 @@ $ brew uninstall postgresql94
 $ rm -rf /usr/local/Cellar/postgresql94
 ```
 
-remove 9.5 data (optionally):
+remove 9.4 data (optionally):
 
 ```sh
 $ rm -rf /usr/local/var/postgresql94.backup

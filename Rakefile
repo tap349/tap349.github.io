@@ -16,6 +16,8 @@ namespace :post do
         access: #{args.access}
         categories: []
         ---
+
+        <!-- more -->
       ".gsub(/^\s+/, '')
     end
   end

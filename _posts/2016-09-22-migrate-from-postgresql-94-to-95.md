@@ -55,11 +55,11 @@ the same in one line (for copy-paste):
 $ pg_upgrade -d /usr/local/var/postgresql94.backup -D /usr/local/var/postgres -b /usr/local/Cellar/postgresql94/9.4.9/bin -B /usr/local/Cellar/postgresql/9.5.4/bin
 ```
 
-uninstall 9.4 (and remove any 9.4 versions manually if any left):
+uninstall 9.4 (remove all versions and
+_/usr/local/Cellar/postgresql94/_ directory itself):
 
 ```sh
-$ brew uninstall postgresql94
-$ rm -rf /usr/local/Cellar/postgresql94
+$ brew uninstall --force postgresql94
 ```
 
 remove 9.4 data (optionally):

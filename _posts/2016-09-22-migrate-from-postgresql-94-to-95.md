@@ -43,10 +43,16 @@ migrate 9.4 data:
 
 ```sh
 $ pg_upgrade \
-  -d /usr/local/var/postgres94.backup \
+  -d /usr/local/var/postgresql94.backup \
   -D /usr/local/var/postgres \
   -b /usr/local/Cellar/postgresql94/9.4.9/bin \
   -B /usr/local/Cellar/postgresql/9.5.4/bin
+```
+
+the same in one line (for copy-paste):
+
+```sh
+$ pg_upgrade -d /usr/local/var/postgresql94.backup -D /usr/local/var/postgres -b /usr/local/Cellar/postgresql94/9.4.9/bin -B /usr/local/Cellar/postgresql/9.5.4/bin
 ```
 
 uninstall 9.4 (and remove any 9.4 versions manually if any left):

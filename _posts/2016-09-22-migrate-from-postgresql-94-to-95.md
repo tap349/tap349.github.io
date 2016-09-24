@@ -16,7 +16,7 @@ backup 9.4 data:
 $ mv /usr/local/var/postgres /usr/local/var/postgresql94.backup
 ```
 
-install 9.5 (the last step is optional most likely):
+install 9.5 (the last step is optional):
 
 ```sh
 $ brew services stop postgresql94

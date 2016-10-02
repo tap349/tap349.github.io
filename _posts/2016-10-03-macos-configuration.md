@@ -1,12 +1,12 @@
 ---
 layout: post
-title: macos configuration
+title: macOS configuration
 date: 2016-10-03 01:42:54 +0300
 access: public
 categories: [macos]
 ---
 
-steps to configure new macos installation.
+steps to configure new macOS installation.
 
 <!-- more -->
 

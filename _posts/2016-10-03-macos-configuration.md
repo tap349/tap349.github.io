@@ -1,0 +1,35 @@
+---
+layout: post
+title: macos configuration
+date: 2016-10-03 01:42:54 +0300
+access: public
+categories: [macos]
+---
+
+steps to configure new macos installation.
+
+<!-- more -->
+
+- install all updates in App Store
+- install brew (<http://brew.sh/index.html>):
+
+  ```sh
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ```
+
+- copy ssh keys into _~/.ssh_
+- `git clone git@github.com:tap349/dotfiles.git ~/.dotfiles`
+- `git clone git@github.com:tap349/tap349.github.io.git ~/blog`
+- `cd ~/.dotfiles && brew bundle` and postinstallation setup
+  (see comments in _Brewfile_)
+- `~/.dotfiles/make_symlinks.sh`
+- configure PureVPN connection
+  (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
+- configure Dock (position on screen: right):
+  - App Store
+  - System Preferences
+  - Safari
+  - Google Chrome
+  - MacVim
+  - iTerm
+  - 2Do

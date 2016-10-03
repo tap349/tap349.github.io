@@ -20,11 +20,15 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   ```
 
+  NOTE: it will also download and install CLT for Xcode.
+
 - `brew install gpg git` (for decrypting ssh archive and cloning git repos)
-- copy ssh keys into _~/.ssh_
+- copy ssh keys into _~/.ssh_:
+  - `gpg -d --output ssh.tar.gz ssh.tar.gz.gpg`
+  - `tar xvzf ssh.tar.gz`
 - `git clone git@github.com:tap349/dotfiles.git ~/.dotfiles`
 - `git clone git@github.com:tap349/tap349.github.io.git ~/blog`
-- `cd ~/.dotfiles && brew bundle` and postinstallation setup
+- `cd ~/.dotfiles && brew bundle -v` and postinstallation setup
   (see comments in _Brewfile_)
 - `~/.dotfiles/make_symlinks.sh`
 - PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
@@ -49,6 +53,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 ### Keyboard
 
   - Keyboard:
+    - Key Repeat: Fast (max)
+    - Delay Until Repeat: Short (max)
     - [x] Use all F1, F2, etc. keys as standard function keys
     - Modifier Keys:
       - Caps Lock Key: <C>

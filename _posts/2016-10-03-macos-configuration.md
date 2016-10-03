@@ -64,6 +64,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 ### Trackpad
 
   - Point and click:
+    - [x] Look up & data detectors
     - [x] Secondary click: Click or tap with two fingers
     - [x] Tap to click
 

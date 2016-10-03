@@ -79,6 +79,13 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
     - Dvorak
     - Russian - PC
 
+### Mouse
+
+  - Point & Click:
+    - [x] Secondary click: Click on right side
+  - More Gestures:
+    - [x] Swipe between pages: Scroll left or right with one finger
+
 ### Trackpad
 
   - Point and click:

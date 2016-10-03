@@ -41,6 +41,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Skype
   - iTerm
   - 2Do
+- Battery: Show percentage
 
 ## System Preferences
 
@@ -49,6 +50,10 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Position on screen: Right
   - [x] Minimize windows into application icon
   - [x] Automatically hide and show the Dock
+
+### Displays
+
+  - [ ] Show mirroring options in the menu bar when available
 
 ### Keyboard
 

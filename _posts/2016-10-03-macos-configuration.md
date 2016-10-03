@@ -27,9 +27,10 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - `cd ~/.dotfiles && brew bundle` and postinstallation setup
   (see comments in _Brewfile_)
 - `~/.dotfiles/make_symlinks.sh`
-- configure PureVPN connection
-  (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
-- configure Dock (position on screen: right):
+- PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
+- System Preferences -> Dock -> Position on screen: Right
+
+  Applications in Dock:
   - App Store
   - System Preferences
   - Safari
@@ -38,3 +39,4 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Skype
   - iTerm
   - 2Do
+- System Preferences -> Sharing -> Computer Name: MacBook Pro Personal

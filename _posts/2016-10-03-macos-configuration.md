@@ -13,7 +13,7 @@ steps to configure new macOS installation.
 NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
       (<http://www.seagate.com/support/downloads/item/ntfs-driver-for-mac-os-master-dl/>).
 
-- install all updates in App Store
+- install all system updates in App Store
 - install brew (<http://brew.sh/index.html>):
 
   ```sh
@@ -31,6 +31,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - `cd ~/.dotfiles && brew bundle -v` and postinstallation setup
   (see comments in _Brewfile_)
 - `~/.dotfiles/make_symlinks.sh`
+- Battery: Show percentage
 - PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
 - application icons in Dock:
   - App Store
@@ -41,7 +42,6 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Skype
   - iTerm
   - 2Do
-- Battery: Show percentage
 
 ## System Preferences
 

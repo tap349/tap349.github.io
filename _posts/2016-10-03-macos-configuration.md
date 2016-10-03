@@ -43,6 +43,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 ### Dock
 
   - Position on screen: Right
+  - [x] Minimize windows into application icon
+  - [x] Automatically hide and show the Dock
 
 ### Keyboard
 

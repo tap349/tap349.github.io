@@ -28,9 +28,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   (see comments in _Brewfile_)
 - `~/.dotfiles/make_symlinks.sh`
 - PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
-- System Preferences -> Dock -> Position on screen: Right
-
-  Applications in Dock:
+- application icons in Dock:
   - App Store
   - System Preferences
   - Safari
@@ -39,4 +37,36 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Skype
   - iTerm
   - 2Do
-- System Preferences -> Sharing -> Computer Name: MacBook Pro Personal
+
+## System Preferences
+
+### Dock
+
+  - Position on screen: Right
+
+### Keyboard
+
+  - Keyboard:
+    - [x] Use all F1, F2, etc. keys as standard function keys
+    - Modifier Keys:
+      - Caps Lock Key: <C>
+  - Text:
+    - [ ] Correct spelling automatically
+  - Shortcuts:
+    - Input Sources:
+      - [x] Select the previous input source: <D-Space>
+    - Spotlight:
+      - [x] Show Spotlight search: <C-Space>
+  - Shortcuts:
+    - Dvorak
+    - Russian - PC
+
+### Trackpad
+
+  - Point and click:
+    - [x] Secondary click: Click or tap with two fingers
+    - [x] Tap to click
+
+### Sharing
+
+  - Computer Name: MacBook Pro Personal

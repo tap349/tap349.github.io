@@ -67,14 +67,14 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
     - Delay Until Repeat: Short (max)
     - [x] Use all F1, F2, etc. keys as standard function keys
     - Modifier Keys:
-      - Caps Lock Key: <C>
+      - Caps Lock Key: Control
   - Text:
     - [ ] Correct spelling automatically
   - Shortcuts:
     - Input Sources:
-      - [x] Select the previous input source: <D-Space>
+      - [x] Select the previous input source: Command-Space
     - Spotlight:
-      - [x] Show Spotlight search: <C-Space>
+      - [x] Show Spotlight search: Control-Space
   - Shortcuts:
     - Dvorak
     - Russian - PC

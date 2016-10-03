@@ -51,6 +51,11 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - [x] Minimize windows into application icon
   - [x] Automatically hide and show the Dock
 
+### Security & Privacy
+
+  - General:
+    - [x] Require password 5 seconds after sleep or screen saver begins
+
 ### Displays
 
   - [ ] Show mirroring options in the menu bar when available

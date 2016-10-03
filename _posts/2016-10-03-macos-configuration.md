@@ -67,6 +67,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
     - [x] Look up & data detectors
     - [x] Secondary click: Click or tap with two fingers
     - [x] Tap to click
+  - More gestures:
+    - [x] App Expose: Swipe down with three fingers
 
 ### Sharing
 

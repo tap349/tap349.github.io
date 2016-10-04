@@ -39,8 +39,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Safari
   - Google Chrome
   - MacVim
-  - Skype
   - iTerm
+  - Skype
   - 2Do
 - Dictionary:
   - Select 'New Oxford American Dictionary (American English)' only

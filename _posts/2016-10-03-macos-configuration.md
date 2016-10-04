@@ -42,6 +42,9 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Skype
   - iTerm
   - 2Do
+- Dictionary:
+  - Select 'New Oxford American Dictionary (American English)' only
+- add second Desktop
 
 ## System Preferences
 

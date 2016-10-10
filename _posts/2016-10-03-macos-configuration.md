@@ -78,7 +78,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
       - [x] Select the previous input source: Command-Space
     - Spotlight:
       - [x] Show Spotlight search: Control-Space
-  - Shortcuts:
+  - Input Sources:
     - Dvorak
     - Russian - PC
 

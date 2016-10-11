@@ -1,6 +1,6 @@
 ---
 layout: post
-title: turbolinks
+title: Turbolinks
 date: 2016-03-24 00:17:42 +0300
 access: public
 categories: [rails, turbolinks]
@@ -165,6 +165,8 @@ when page is restored from cache.
 ALL functions inside event handler for `turbolinks:load` must be IDEMPOTENT!
 
 ### event listeners
+
+- <http://api.jquery.com/on/#direct-and-delegated-events>
 
 still this doesn't concerns event listeners since they are discarded by
 turbolinks when saving a copy of the page to cache (before rendering a new page)

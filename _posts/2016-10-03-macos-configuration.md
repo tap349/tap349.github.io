@@ -31,6 +31,9 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - `cd ~/.dotfiles && brew bundle -v` and postinstallation setup
   (see comments in _Brewfile_)
 - `~/.dotfiles/make_symlinks.sh`
+- additional software (must be downloaded manually):
+  - Paragon Driver for Mac OS (see above)
+  - Adobe Lightroom 5 (latest version as of now - 5.7.1)
 - Battery: Show percentage
 - PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
 - application icons in Dock:

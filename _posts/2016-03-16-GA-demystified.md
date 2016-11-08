@@ -87,7 +87,7 @@ API keys:
 
 **NOTE**: select pumba project (`Re***`) in top left menu beforehand
           (here you can also switch between projects targeted either
-          for GA or GAW - this grouping is our own one, not Google's one).
+          for GA or GAW - this grouping is our own, not Google's one).
 
 pumba client IDs for all 3 stages (Development, Staging, Production)
 were created in `finga***88@gmail.com` account!

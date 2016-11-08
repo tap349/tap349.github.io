@@ -1,6 +1,6 @@
 ---
 layout: post
-title: create new gaw credentials
+title: create new GAW credentials
 date: 2016-11-08 14:03:10 +0300
 access: public
 categories: [gaw]
@@ -63,5 +63,5 @@ here you can find developer token.
 
 - run `ruby setup_oauth2.rb` and follow on-screen instructions
 
-as a result of executing this script new _adwords_api.yml_ will be generated
-with access and refresh tokens populated.
+  as a result of executing this script new _adwords_api.yml_ will be generated
+  with access and refresh tokens populated.

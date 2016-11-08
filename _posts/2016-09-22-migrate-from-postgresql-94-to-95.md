@@ -32,7 +32,7 @@ you can always do it manually if something goes wrong:
 $ initdb /usr/local/var/postgres
 ```
 
-make sure you are using pg_upgrade from 9.5:
+make sure you are using `pg_upgrade` from 9.5:
 
 ```sh
 $ pg_upgrade --version

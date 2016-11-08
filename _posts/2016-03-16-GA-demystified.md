@@ -67,7 +67,7 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 <https://console.developers.google.com>
 
-OAuth client IDs:
+OAuth 2.0 client IDs:
 
 - are used to identify your application (project)
 - have corresponding client secrets (don't confuse with API keys!)
@@ -78,7 +78,7 @@ OAuth client IDs:
 API keys:
 
 - are used to identify your application (project)
-- don't request user consent unlike OAuth client ID
+- don't request user consent unlike OAuth 2.0 client ID
 - are managed in API Manager:
 
   `Credentials (left sidebar) -> Credentials -> Credentials (tab)`

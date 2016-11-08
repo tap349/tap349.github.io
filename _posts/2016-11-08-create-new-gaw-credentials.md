@@ -10,7 +10,7 @@ steps to get new GAW credentials.
 
 <!-- more -->
 
-- <https://github.com/googleads/google-api-ads-ruby/wiki/API-access-using-own-credentials-%28installed-application-flow%29>
+<https://github.com/googleads/google-api-ads-ruby/wiki/API-access-using-own-credentials-%28installed-application-flow%29>
 
 ### create (or get) OAuth 2.0 credentials in Google API Console
 

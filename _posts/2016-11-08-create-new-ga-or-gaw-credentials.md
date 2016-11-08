@@ -1,12 +1,12 @@
 ---
 layout: post
-title: create new GAW credentials
+title: create new GAW or GA credentials
 date: 2016-11-08 14:03:10 +0300
 access: public
 categories: [gaw]
 ---
 
-steps to get new GAW credentials.
+steps to get new GAW or GA credentials.
 
 <!-- more -->
 

@@ -10,6 +10,7 @@ notes about phoenix (maybe this article will be split into several parts later).
 
 <!-- more -->
 
-equivalent of `rails console` is `iex -S mix phoenix.server` - not just `iex`:
-the former is used to run your app inside IEx, the latter just launches
-interactive console that is not aware of your application.
+- `iex` - doesn't load your app (equivalent of `irb`)
+- `iex -S mix` - loads your app (equivalent of `rails console`)
+- `iex -S mix phoenix.server` - loads your app and launches web server
+  (`rails console` inside `rails server` - or vice versa)

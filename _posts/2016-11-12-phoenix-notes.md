@@ -129,7 +129,7 @@ if it's nil it means global prefix is used
 
 ```elixir
 > [video] = Rumbl.Repo.all Rumbl.Video
-[%Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "videos">, ...]
+[%Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "videos">, ...}
 > new_prefix_video = Ecto.put_meta(video, prefix: "new_prefix")
 %Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "new_prefix", "videos">, ...}
 ```

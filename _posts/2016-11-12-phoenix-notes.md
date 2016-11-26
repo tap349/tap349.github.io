@@ -6,7 +6,7 @@ access: public
 categories: [phoenix, rails]
 ---
 
-extracts from different books (primarily "Programming Phoenix" by Dave Thomas).
+extracts from different books (primarily from "Programming Phoenix" by Dave Thomas).
 maybe this article will be split into several parts later.
 
 <!-- more -->

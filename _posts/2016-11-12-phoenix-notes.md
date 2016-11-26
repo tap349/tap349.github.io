@@ -11,6 +11,9 @@ maybe this article will be split into several parts later.
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ### IEx
 
 - `iex` - doesn't load your app (equivalent of `irb`)
@@ -59,7 +62,7 @@ load association without storing it in model struct:
 > videos = Repo.all(query)
 ```
 
-### query prefixes
+### prefixes
 
 NOTE: it's not possible to perform joins across prefixes -
 data in different prefixes must be completely isolated.

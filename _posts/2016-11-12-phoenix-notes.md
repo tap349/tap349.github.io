@@ -149,3 +149,10 @@ Ecto.Query
 > Ecto.Adapters.SQL.to_sql :all, Rumbl.Repo, query
 {"SELECT u0.\"id\", u0.\"name\", u0.\"username\", u0.\"password_hash\", u0.\"inserted_at\", u0.\"updated_at\" FROM \"users\" AS u0", []}
 ```
+
+### models vs changesets
+
+<http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:
+
+    Typically, you'd work with a changeset for making modifications to a model
+    via the repo, and you'd work with the model when fetching the data for display.

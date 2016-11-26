@@ -154,5 +154,5 @@ Ecto.Query
 
 <http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:
 
-    Typically, you'd work with a changeset for making modifications to a model
-    via the repo, and you'd work with the model when fetching the data for display.
+> Typically, you'd work with a changeset for making modifications to a model
+> via the repo, and you'd work with the model when fetching the data for display.

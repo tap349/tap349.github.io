@@ -136,7 +136,7 @@ if it's nil it means global prefix is used
 
 ### get query SQL
 
-https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3
+<https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
 
 ```elixir
 > import Ecto.Query

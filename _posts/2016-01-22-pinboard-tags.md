@@ -37,3 +37,4 @@ differences between similar tags on pinboard
 - **refactoring**:
 - **best_practice**:
 - **styleguide**:
+- **tips**:

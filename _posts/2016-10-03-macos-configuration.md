@@ -104,3 +104,11 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 ### Sharing
 
   - Computer Name: MacBook Pro Personal
+
+## Troubleshooting
+
+### battery percentage is not properly updating
+
+reset the SMC:
+
+<https://support.apple.com/en-us/HT201295>

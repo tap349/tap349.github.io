@@ -26,17 +26,32 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - copy ssh keys into _~/.ssh_:
   - `gpg -d --output ssh.tar.gz ssh.tar.gz.gpg`
   - `tar xvzf ssh.tar.gz`
+  - `rm ssh.tar.gz`
 - `git clone git@github.com:tap349/dotfiles.git ~/.dotfiles`
 - `git clone git@github.com:tap349/tap349.github.io.git ~/blog`
-- `cd ~/.dotfiles && brew bundle -v` and postinstallation setup
-  (see comments in _Brewfile_)
-- `~/.dotfiles/make_symlinks.sh`
+- `cd ~/.dotfiles && brew bundle -v`
+  (rerun command if download request for any app from App Store fails)
+- postinstallation setup (see comments in _Brewfile_)
+- `~/.dotfiles/install.sh`
+  script must be run after completing postinstallation setup!
+
+  e.g. `~/.oh-my-zsh` must be created before running the script:
+  - _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
+  - oh-my-zsh installation script will rename existing _.zshrc_ config file
+    into _.zshrc.pre-oh-my-zsh_ -> symlink _.zshrc_ into home directory after
+    oh-my-zsh is installed
+
+  this script:
+  - creats symlinks for all config files and directories
+  - copies fonts into _~/Library/Fonts/_
+- `mkdir ~/dev` and git clone all repos
 - additional software (must be downloaded manually):
   - Paragon Driver for Mac OS (see above)
   - Adobe Lightroom 5 (latest version as of now - 5.7.1)
 - Battery: Show percentage
 - PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
 - application icons in Dock:
+  - Finder
   - App Store
   - System Preferences
   - Safari
@@ -77,7 +92,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Text:
     - [ ] Correct spelling automatically
   - Shortcuts:
-    - Input Sources:
+    - Input Sources (available after adding 2nd input source):
       - [x] Select the previous input source: Command-Space
     - Spotlight:
       - [x] Show Spotlight search: Control-Space
@@ -97,9 +112,17 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Point & click:
     - [x] Look up & data detectors
     - [x] Secondary click: Click or tap with two fingers
+      (default value after checking `Tap to click` option)
     - [x] Tap to click
   - More gestures:
     - [x] App Expose: Swipe down with three fingers
+
+### Sound
+
+  - Sound Effects:
+    - [ ] Play user interface sound effects
+  - Input:
+    - Input volume: min (disable microphone)
 
 ### Sharing
 

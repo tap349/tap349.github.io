@@ -70,6 +70,11 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Adobe Lightroom 5 (latest version as of now - 5.7.1)
 - copy other files from backup (to name a few):
   - _~/Pictures/Lightroom/_
+  - _~/backup/_
+  - _~/docs/_
+  - _~/edev/_
+  - _~/media/_
+  - _~/soft/_
 
 ## System Preferences
 

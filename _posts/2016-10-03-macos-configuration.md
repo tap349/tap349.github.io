@@ -45,9 +45,6 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - creats symlinks for all config files and directories
   - copies fonts into _~/Library/Fonts/_
 - `mkdir ~/dev` and git clone all repos
-- additional software (must be downloaded manually):
-  - Paragon Driver for Mac OS (see above)
-  - Adobe Lightroom 5 (latest version as of now - 5.7.1)
 - Battery: Show percentage
 - PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
 - application icons in Dock:
@@ -64,6 +61,15 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Select `New Oxford American Dictionary (American English)` only
 - add second Desktop
 - install ruby and gems: [rbenv]({{ site.url }}{% post_url 2016-03-30-rbenv %})
+- copy history files from backup:
+  - _.pry_history_
+  - _.psql_history_
+  - _.zsh_history_
+- install additional software (must be downloaded manually):
+  - Paragon Driver for Mac OS (see above)
+  - Adobe Lightroom 5 (latest version as of now - 5.7.1)
+- copy other files from backup (to name a few):
+  - _~/Pictures/Lightroom/_
 
 ## System Preferences
 

@@ -88,6 +88,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - _~/edev/_
   - _~/media/_
   - _~/soft/_
+- sign in to iTunes Store
 
 ## System Preferences
 

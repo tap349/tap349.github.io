@@ -30,10 +30,12 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - `git clone git@github.com:tap349/dotfiles.git ~/.dotfiles`
 - `git clone git@github.com:tap349/tap349.github.io.git ~/blog`
 - `cd ~/.dotfiles && brew bundle -v`
+
   (rerun command if download request for any app from App Store fails)
 - postinstallation setup (see comments in _Brewfile_)
 - `~/.dotfiles/install.sh`
-  script must be run after completing postinstallation setup!
+
+  NOTE: script must be run after completing postinstallation setup!
 
   e.g. `~/.oh-my-zsh` must be created before running the script:
   - _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
@@ -68,6 +70,13 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - install additional software (must be downloaded manually):
   - Paragon Driver for Mac OS (see above)
   - Adobe Lightroom 5 (latest version as of now - 5.7.1)
+
+    <https://forums.adobe.com/thread/1639590>
+
+    NOTE: app might fail to launch if you opted for case-sensitive filesystem
+          when installing macOS. rename offensive directories to lower case
+          (see report details for specific path that failed) and don't forget
+          to update symlinks.
 - copy other files from backup (to name a few):
   - _~/Pictures/Lightroom/_
   - _~/backup/_

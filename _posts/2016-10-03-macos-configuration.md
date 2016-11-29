@@ -38,14 +38,16 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   NOTE: script must be run after completing postinstallation setup!
 
   e.g. `~/.oh-my-zsh` must be created before running the script:
-  * _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
-  * oh-my-zsh installation script will rename existing _.zshrc_ config file
+
+  - _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
+  - oh-my-zsh installation script will rename existing _.zshrc_ config file
     into _.zshrc.pre-oh-my-zsh_ -> symlink _.zshrc_ into home directory after
     oh-my-zsh is installed
 
   this script:
-  * creats symlinks for all config files and directories
-  * copies fonts into _~/Library/Fonts/_
+
+  - creats symlinks for all config files and directories
+  - copies fonts into _~/Library/Fonts/_
 - `mkdir ~/dev` and git clone all repos
 - Battery: Show percentage
 - add PureVPN service:

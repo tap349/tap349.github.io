@@ -31,24 +31,26 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - `git clone git@github.com:tap349/tap349.github.io.git ~/blog`
 - `cd ~/.dotfiles && brew bundle -v`
 
-  (rerun command if download request for any app from App Store fails)
+  rerun command if download request for any app from App Store fails
 - postinstallation setup (see comments in _Brewfile_)
 - `~/.dotfiles/install.sh`
 
   NOTE: script must be run after completing postinstallation setup!
 
   e.g. `~/.oh-my-zsh` must be created before running the script:
-  - _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
-  - oh-my-zsh installation script will rename existing _.zshrc_ config file
+  * _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
+  * oh-my-zsh installation script will rename existing _.zshrc_ config file
     into _.zshrc.pre-oh-my-zsh_ -> symlink _.zshrc_ into home directory after
     oh-my-zsh is installed
 
   this script:
-  - creats symlinks for all config files and directories
-  - copies fonts into _~/Library/Fonts/_
+  * creats symlinks for all config files and directories
+  * copies fonts into _~/Library/Fonts/_
 - `mkdir ~/dev` and git clone all repos
 - Battery: Show percentage
-- PureVPN (<https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>)
+- add PureVPN service:
+
+  <https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>
 - application icons in Dock:
   - Finder
   - App Store

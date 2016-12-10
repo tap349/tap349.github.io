@@ -46,7 +46,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
   this script:
 
-  - creats symlinks for all config files and directories
+  - creates symlinks for all config files and directories
   - copies fonts into _~/Library/Fonts/_
 - `mkdir ~/dev` and git clone all repos
 - Battery: Show percentage

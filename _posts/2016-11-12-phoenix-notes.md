@@ -21,6 +21,19 @@ maybe this article will be split into several parts later.
 - `iex -S mix phoenix.server` - loads your app and launches web server
   (`rails console` inside `rails server` - or vice versa)
 
+#### enable shell history
+
+<http://nithinbekal.com/posts/elixir-shell-history/>:
+
+```sh
+$ git clone https://github.com/ferd/erlang-history.git
+$ cd erlang-history
+$ sudo make install
+```
+
+shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
+(it's a binary file - not plain text).
+
 ### associations
 
 associations are always loaded explicitly!

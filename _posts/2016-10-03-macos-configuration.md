@@ -161,3 +161,16 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 reset the SMC:
 
 <https://support.apple.com/en-us/HT201295>
+
+### active developer directory is a CLT instance
+
+> xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer
+> directory '/Library/Developer/CommandLineTools' is a command line tools instance
+
+<http://stackoverflow.com/questions/17980759#17980786>
+
+just switch to Xcode directory:
+
+```sh
+$ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```

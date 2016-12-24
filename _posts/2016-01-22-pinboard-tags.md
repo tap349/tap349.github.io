@@ -23,7 +23,7 @@ differences between similar tags on pinboard
 - **lecture** (mostly videos):
   1. single lecture (e.g. on youtube or vimeo)
   2. series of lectures not comprising a single course
-  3. conference presentation
+  3. conference talk
 - **course**
   1. offline course
   2. online series of lectures comprising a single course

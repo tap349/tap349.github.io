@@ -22,10 +22,10 @@ differences between similar tags on pinboard
   3. online book (even if it's not published)
 - **lecture** (mostly videos):
   1. single lecture (e.g. on youtube or vimeo)
-  2. series of lectures not comprising a single course
-  3. not conference talk
+  2. series of such lectures not comprising a single course
+  3. not conference or meetup talk
 - **talk**:
-  1. conference talk
+  1. conference or meetup talk
 - **course**
   1. offline course
   2. online series of lectures comprising a single course
@@ -40,3 +40,4 @@ differences between similar tags on pinboard
 - **best_practice**:
 - **styleguide**:
 - **tips**:
+- **reference**:

@@ -32,6 +32,40 @@ $ sudo make install
 shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
 (it's a binary file - not plain text).
 
+NOTE: you need to compile it for each new version of Erlang/OTP kernel!
+
+- get current version of Kernel library:
+
+  ```sh
+  $ erl
+  1> application:which_applications().
+  [{stdlib,"ERTS  CXC 138 10","3.2"},
+  {kernel,"ERTS  CXC 138 10","5.1.1"}]
+  ```
+  current version is 5.1.1.
+
+- update `erlang-history` repo:
+
+  ```sh
+  $ cd erlang-history
+  $ git up
+  ```
+
+- make and install:
+
+  ```sh
+  $ cd erlang-history
+  $ sudo make install
+  Password:
+  erl -make
+  Recompile: src/5.1.1/group_history
+  Recompile: src/5.1.1/group
+  ...
+  ebin/5.1.1/group.beam
+  ebin/5.1.1/group_history.beam
+  2 file(s) copied
+  ```
+
 ### running `exs` files
 
 - `iex> c "test.exs"`

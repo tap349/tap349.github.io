@@ -6,34 +6,21 @@ access: public
 categories: [phoenix, rails]
 ---
 
-extracts from different books (primarily from "Programming Phoenix" by Dave Thomas).
-maybe this article will be split into several parts later.
+extracts from different books
+(primarily from "Programming Phoenix" by Dave Thomas).
 
 <!-- more -->
 
 * TOC
 {:toc}
 
-### IEx
+### running app
 
 - `iex` - doesn't load your app (equivalent of `irb`)
 - `iex -S mix` - loads your app by executing _mix.exs_ script
   (equivalent of `rails console`)
 - `iex -S mix phoenix.server` - loads your app and launches web server
   (`rails console` inside `rails server` - or vice versa)
-
-#### enable shell history
-
-<http://nithinbekal.com/posts/elixir-shell-history/>:
-
-```sh
-$ git clone https://github.com/ferd/erlang-history.git
-$ cd erlang-history
-$ sudo make install
-```
-
-shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
-(it's a binary file - not plain text).
 
 ### associations
 

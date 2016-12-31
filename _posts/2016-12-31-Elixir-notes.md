@@ -10,9 +10,24 @@ Elixir notes.
 
 <!-- more -->
 
+## IEx
+
 - Erlang shell - Eshell (`erl`)
 - Elixir shell - IEx (`iex`)
 - UNIX shell - bash, etc.
+
+### shell history
+
+<http://nithinbekal.com/posts/elixir-shell-history/>:
+
+```sh
+$ git clone https://github.com/ferd/erlang-history.git
+$ cd erlang-history
+$ sudo make install
+```
+
+shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
+(it's a binary file - not plain text).
 
 ### running `exs` files
 
@@ -28,7 +43,7 @@ Elixir notes.
 
   it's like running any other script in UNIX shell
 
-### function capturing (& notation aka capture syntax)
+## function capturing (& notation aka capture syntax)
 
 `&` - function capture operator
 

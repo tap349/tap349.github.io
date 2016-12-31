@@ -126,6 +126,7 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   :ok
   ```
 
-  it's useful when you want pass existing function as another function argument:
+  it's useful when you want to pass named function
+  (either standard or your own one) as another function argument:
 
   `Enum.each [1, 2, 3, 4], &IO.inspect/1`

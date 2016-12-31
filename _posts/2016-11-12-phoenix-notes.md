@@ -3,10 +3,10 @@ layout: post
 title: Phoenix notes
 date: 2016-11-12 16:21:40 +0300
 access: public
-categories: [phoenix, rails]
+categories: [phoenix]
 ---
 
-extracts from different books
+Phoenix notes - extracts from different books
 (primarily from "Programming Phoenix" by Dave Thomas).
 
 <!-- more -->

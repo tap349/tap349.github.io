@@ -10,6 +10,9 @@ Elixir notes.
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ## IEx
 
 - Erlang shell - Eshell (`erl`)

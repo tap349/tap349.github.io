@@ -14,7 +14,7 @@ Phoenix notes - extracts from different books
 * TOC
 {:toc}
 
-### running app
+### using IEx with Phoenix app
 
 - `iex` - doesn't load your app (equivalent of `irb`)
 - `iex -S mix` - loads your app by executing _mix.exs_ script

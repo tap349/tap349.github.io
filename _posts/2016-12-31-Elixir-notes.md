@@ -14,19 +14,19 @@ Elixir notes.
 - Elixir shell - IEx (`iex`)
 - UNIX shell - bash, etc.
 
-### running `exs` files in IEx
+### running `exs` files
 
 - `iex> c "test.exs"`
 
-  compiles file in memory (without creating beam file) and runs it.
+  compiles file in memory (without creating beam file) and runs it
 
 - `iex> import_file "test.exs"`
 
-  evaluates file in IEx (it's like typing it in IEx line by line).
+  evaluates file in context of IEx (it's like typing it in IEx line by line)
 
 - `$ elixir "file.exs"`
 
-  it's like running any other script in UNIX shell.
+  it's like running any other script in UNIX shell
 
 ### function capturing (& notation)
 

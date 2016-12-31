@@ -28,10 +28,9 @@ Elixir notes.
 
   it's like running any other script in UNIX shell
 
-### function capturing (& notation)
+### function capturing (& notation aka capture syntax)
 
 `&` - function capture operator
-`&()` - capture syntax
 
 - create anonymous function using provided expression
 

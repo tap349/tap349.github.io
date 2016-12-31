@@ -108,6 +108,7 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
   ```elixir
   puts = &IO.puts/1
+  puts.("Hello world")
   ```
 
   Elixir Guide:

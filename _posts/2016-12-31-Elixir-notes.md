@@ -10,6 +10,24 @@ Elixir notes.
 
 <!-- more -->
 
+Erlang shell - Eshell (`erl`)
+Elixir shell - IEx (`iex`)
+UNIX shell - bash, etc.
+
+### running `exs` files in IEx
+
+- `iex> c "test.exs"`
+
+  compiles file in memory (without creating beam file) and runs it.
+
+- `iex> import_file "test.exs"`
+
+  evaluates file in IEx (it's like typing it in IEx line by line).
+
+- `$ elixir "file.exs"`
+
+  it's like running any other script in UNIX shell.
+
 ### anonymous functions
 
 anonymous functions defined with & notation must have at least one argument

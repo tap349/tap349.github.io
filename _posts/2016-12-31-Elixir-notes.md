@@ -62,7 +62,7 @@ Elixir notes.
 
   Programming Elixir:
 
-  > You can give it (& operator) the name and arity of an existing
+  > you can give it (& operator) the name and arity of an existing
   > function, and it will return an anonymous function that calls it
 
   to my mind it's like getting reference to existing named function.

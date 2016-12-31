@@ -86,9 +86,11 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
 - create anonymous function using provided expression
 
-  - `add_one = &(&1 + 1)` (form with parentheses)
-  - `add_one = & &1 + 1` (form without parentheses)
-  - `to_tuple = & {&1, &2}`
+  ```elixir
+  add_one = &(&1 + 1) # form with parentheses
+  add_one = & &1 + 1 # form without parentheses
+  to_tuple = & {&1, &2}
+  ```
 
   anonymous functions defined using & operator must have at least
   one argument (placeholders &1, &2, etc.):
@@ -104,7 +106,9 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
 - get anonymous function that calls existing named function
 
-  - `puts = &IO.puts/1`
+  ```elixir
+  puts = &IO.puts/1
+  ```
 
   Elixir Guide:
 
@@ -129,4 +133,6 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   it's useful when you want to pass named function
   (either standard or your own one) as another function argument:
 
-  `Enum.each [1, 2, 3, 4], &IO.inspect/1`
+  ```elixir
+  Enum.each [1, 2, 3, 4], &IO.inspect/1
+  ```

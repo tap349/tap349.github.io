@@ -66,19 +66,29 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   2 file(s) copied
   ```
 
-### running `exs` files
+### loading/running Elixir files
 
-- `iex> c "test.exs"`
+`beam` file is created as a result of compilation for `ex` files only.
 
-  compiles file in memory (without creating beam file) and runs it
+- `$ iex test.exs`
 
-- `iex> import_file "test.exs"`
-
-  evaluates file in context of IEx (it's like typing it in IEx line by line)
+  compiles file in memory and loads it into IEx
+  (`beam` file is not created)
 
 - `$ elixir "file.exs"`
 
   it's like running any other script in UNIX shell
+  (`beam` file is not created)
+
+- `iex> c "test.exs"`
+
+  compiles file and loads it into IEx
+  (`beam` file is created)
+
+- `iex> import_file "test.exs"`
+
+  evaluates file in context of IEx - it's like typing it in IEx line by line
+  (`beam` file is not created)
 
 ## function capturing (& notation aka capture syntax)
 

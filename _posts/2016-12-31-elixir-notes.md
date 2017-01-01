@@ -75,7 +75,7 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   compiles file in memory and loads it into IEx
   (`beam` file is not created)
 
-- `$ elixir "file.exs"`
+- `$ elixir file.exs`
 
   it's like running any other script in UNIX shell
   (`beam` file is not created).

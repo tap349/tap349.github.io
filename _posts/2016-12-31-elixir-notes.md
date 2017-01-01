@@ -78,7 +78,12 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 - `$ elixir "file.exs"`
 
   it's like running any other script in UNIX shell
-  (`beam` file is not created)
+  (`beam` file is not created).
+
+  usually it makes sense to run only `exs` this way since
+  they are meant to contain some actions to be performed.
+  on the other hand `ex` files contain modules to be loaded -
+  not actions to be performed.
 
 - `iex> c "test.exs"`
 

@@ -157,23 +157,69 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
 `do...end` block is a way to group expressions treating them as a single entity.
 
-actual syntax:
+- actual syntax:
 
-```elixir
-# single line
-def double(n), do: n * 2
+  ```elixir
+  # enclose multiline do...end block in ()
+  defmodule Times, do: (
+    # single line do...end block
+    def double(n), do: n * 2
+    def triple(n), do: n * 3
+  )
+  ```
 
-# multiple lines
-def double(n), do: (
-  IO.puts "argument: #{n}"
-  n * 2
-)
-```
+  NOTE: if using actual syntax function parameters MUST BE
+        enclosed in parentheses!
 
-syntactic sugar:
+- with syntactic sugar:
 
-```elixir
-def double n do
-  n * 2
-end
-```
+  ```elixir
+  defmodule Times do
+    def double n do
+      n * 2
+    end
+
+    def triple do
+      n * 3
+    end
+  end
+  ```
+
+## multiple clauses
+
+both anonymous and named functions can have multiple clauses - these are
+not multiple function definitions but multiple clauses of the same function
+definition (I assume 'function clause' == 'function definition clause').
+
+- anonymous functions:
+
+  ```elixir
+  fn
+    parameter-list -> body
+    parameter-list -> body
+  end
+
+  # or:
+
+  fn
+    parameter-list ->
+      body
+    parameter-list ->
+      body
+  end
+  ```
+
+- named functions:
+
+  ```elixir
+  defmodule MyModule do
+    def name(parameter-list), do: body
+    def name(parameter-list), do: body
+  end
+  ```
+
+NOTE:
+
+- multiple clauses of named functions must be adjacent (grouped together)
+  in the source file
+- all clauses of both anonymous and named functions must have the same arity

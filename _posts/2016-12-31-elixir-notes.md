@@ -82,8 +82,8 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
   usually it makes sense to run only `exs` this way since
   they are meant to contain some actions to be performed.
-  on the other hand `ex` files contain modules to be loaded -
-  not actions to be performed.
+  on the other hand `ex` files are meant to contain modules
+  to be loaded - not actions to be performed.
 
 - `iex> c "test.exs"`
 
@@ -152,3 +152,28 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   ```elixir
   Enum.each [1, 2, 3, 4], &IO.inspect/1
   ```
+
+## do...end block
+
+`do...end` block is a way to group expressions treating them as a single entity.
+
+actual syntax:
+
+```elixir
+# single line
+def double(n), do: n * 2
+
+# multiple lines
+def double(n), do: (
+  IO.puts "argument: #{n}"
+  n * 2
+)
+```
+
+syntactic sugar:
+
+```elixir
+def double n do
+  n * 2
+end
+```

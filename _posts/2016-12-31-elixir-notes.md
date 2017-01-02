@@ -70,8 +70,9 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
 <https://github.com/elixir-lang/elixir/issues/5073>
 
-> - `ex` files are meant to be compiled
-> - `exs` files are used for scripting
+> `ex` files are meant to be compiled
+> <br>
+> `exs` files are used for scripting
 
 each module is compiled into its own bytecode (`beam`) file:
 

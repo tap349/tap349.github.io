@@ -73,6 +73,13 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 > `ex` files are meant to be compiled
 > `exs` files are used for scripting
 
+each module is compiled into its own bytecode (`beam`) file:
+
+- if file doesn't contain modules no bytecode files are generated
+- it doesn't matter if module is defined in `exs` or `ex` file<br>
+  (file extension doesn't matter at all - module can be defined in `rb` file)
+- module `MyModule` is compiled into `Elixir.MyModule.beam` file
+
 #### evaluate
 
 - code typed in IEx is always evaluated - not compiled
@@ -99,13 +106,6 @@ bytecode modules are not written to disk - only loaded in memory.
   in spite of what is said above imported file is compiled in memory
 
 #### compile
-
-each module is compiled into its own bytecode (`beam`) file:
-
-1. if file doesn't contain modules no bytecode files are generated
-2. it doesn't matter if module is defined in `exs` or `ex` file
-  (file extension doesn't matter at all - module can be defined in `rb` file)
-3. module `MyModule` is compiled into `Elixir.MyModule.beam` file
 
 - `$ elixirc file.exs`
 

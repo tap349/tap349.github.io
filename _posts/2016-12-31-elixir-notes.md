@@ -17,7 +17,7 @@ Elixir notes.
 
 - Erlang shell - Eshell (`erl`)
 - Elixir shell - IEx (`iex`)
-- UNIX shell - bash, etc.
+- UNIX shell - Bash, etc.
 
 ### shell history
 
@@ -66,12 +66,11 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   2 file(s) copied
   ```
 
-### evaluate vs compile vs compile in memory
+### evaluate vs. compile in memory vs. compile
 
 <https://github.com/elixir-lang/elixir/issues/5073>
 
-> `ex` files are meant to be compiled
-> <br>
+> `ex` files are meant to be compiled<br>
 > `exs` files are used for scripting
 
 each module is compiled into its own bytecode (`beam`) file:

@@ -82,7 +82,7 @@ each module is compiled into its own bytecode (`beam`) file:
 - if file doesn't contain modules no bytecode files are generated
 - it doesn't matter if module is defined in `exs` or `ex` file<br>
   (file extension doesn't matter at all - module can be defined in `rb` file)
-- module `MyModule` is compiled into `Elixir.MyModule.beam` file
+- module `Example` is compiled into `Elixir.Example.beam` file
 
 #### evaluate
 
@@ -246,7 +246,7 @@ definition (I assume 'function clause' == 'function definition clause').
 - named functions:
 
   ```elixir
-  defmodule MyModule do
+  defmodule Example do
     def name(parameter-list), do: body
     def name(parameter-list), do: body
   end
@@ -259,6 +259,44 @@ NOTE:
 - all clauses of both anonymous and named functions must have the same arity
 
 ## modules
+
+all named functions must be defined inside modules!
+
+module names are just atoms: any name (not necessarily module name) starting
+with an uppercase letter is converted into an atom prefixed with `Elixir`:
+
+```elixir
+iex> is_atom IO
+true
+iex> to_string IO
+"Elixir.IO"
+iex> to_string Example
+"Elixir.Example"
+iex> :"Elixir.Example" == Example
+true
+```
+
+`Example` module might be even not defined - it's just an arbitrary name.
+
+=> it's possible to call any module function this way:
+
+```elixir
+iex> :"Elixir.IO".puts 123
+```
+
+in Erlang atoms are lowercase names, all module names are atoms
+=> to call function from Erlang module in Elixir just convert
+Erlang module name into valid Elixir atom:
+
+```elixir
+iex> :io.format("number is ~3.1f~n", [5.123])
+```
+
+in Erlang it's equivalent to:
+
+```erlang
+1> io:format("number is ~3.1f~n", [5.123]).
+```
 
 ### nested modules
 
@@ -282,7 +320,7 @@ enclosing scope.
   use module functions without specifying module name:
 
   ```elixir
-  defmodule MyModule do
+  defmodule Example do
     def func do
       import List, only: [flatten: 1]
       flatten [1, [2, 3], 4]
@@ -300,7 +338,7 @@ enclosing scope.
   create alias for module (to cut down on typing):
 
   ```elixir
-  defmodule MyModule do
+  defmodule Example do
     def func date do
       alias Google.Adwords.Importer, as: Importer
       date |> Importer.import()
@@ -321,3 +359,10 @@ enclosing scope.
 - `require`
 
   make macro definitions available when code is compiled.
+
+### module attributes
+
+used:
+
+- for configuration and metadata (see `dsl_attribute` in our projects)
+- like constants in Ruby

@@ -276,7 +276,7 @@ iex> :"Elixir.Example" == Example
 true
 ```
 
-`Example` module is not defined here - it's just an arbitrary name.
+`Example` module is not defined - it's just an arbitrary name here.
 
 => it's possible to call any module function this way:
 

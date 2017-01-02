@@ -187,6 +187,16 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
 ## multiple clauses
 
+function consists of head and body:
+
+<dl>
+  <dt>head</dt>
+  <dd>function name, parameter list, optional guard clause</dd>
+
+  <dt>body</dt>
+  <dd>sequence of expressions</dd>
+</dl>
+
 both anonymous and named functions can have multiple clauses - these are
 not multiple function definitions but multiple clauses of the same function
 definition (I assume 'function clause' == 'function definition clause').

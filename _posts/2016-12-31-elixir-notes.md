@@ -66,6 +66,10 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   2 file(s) copied
   ```
 
+  make sure `2 file(s) are copied` - if no files are copied it means
+  current version of Kernel library is not supported and you should
+  probably update `erlang-history` repo.
+
 ### evaluate vs. compile in memory vs. compile
 
 <https://github.com/elixir-lang/elixir/issues/5073>

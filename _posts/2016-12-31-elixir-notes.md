@@ -257,3 +257,67 @@ NOTE:
 - multiple clauses of named functions must be adjacent (grouped together)
   in the source file
 - all clauses of both anonymous and named functions must have the same arity
+
+## modules
+
+### nested modules
+
+Programming Elixir:
+
+> Module nesting is an illusion - all modules are defined at the top level.
+> When we define a module inside another, Elixir simply prepends the outer
+> module name to the inner module name, putting a dot between the two.
+
+=> there is no particular relationship between, say, modules
+`Google.Adwords.Importer` and `Google`!
+
+### module directives
+
+Elixir has 3 directives for modules, all of them are lexically scoped -
+they are effective from the point they are encountered till the end of
+enclosing scope.
+
+- `import`
+
+  use module functions without specifying module name:
+
+  ```elixir
+  defmodule MyModule do
+    def func do
+      import List, only: [flatten: 1]
+      flatten [1, [2, 3], 4]
+    end
+  end
+  ```
+
+  tips:
+
+  - use in the smallest possible scope
+  - use `only:` to import only the functions you need
+
+- `alias`
+
+  create alias for module (to cut down on typing):
+
+  ```elixir
+  defmodule MyModule do
+    def func date do
+      alias Google.Adwords.Importer, as: Importer
+      date |> Importer.import()
+    end
+  end
+  ```
+
+  other usage examples:
+
+  ```elixir
+  # same as above
+  # (last part of module name is used by default)
+  alias Google.Adwords.Importer
+  # alias multiple module at once
+  alias Google.Adwords.{Importer, Parser}
+  ```
+
+- `require`
+
+  make macro definitions available when code is compiled.

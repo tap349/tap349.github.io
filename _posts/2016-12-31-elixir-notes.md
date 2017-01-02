@@ -66,34 +66,54 @@ NOTE: you need to compile it for each new version of Erlang/OTP kernel!
   2 file(s) copied
   ```
 
-### loading/running Elixir files
+### evaluate vs compile vs compile in memory
 
-`beam` file is created as a result of compilation for `ex` files only.
+<https://github.com/elixir-lang/elixir/issues/5073>
+
+> `ex` files are meant to be compiled
+> `exs` files are used for scripting
+
+#### evaluate
+
+- code typed in IEx is always evaluated - not compiled
+- code is evaluated iff when typed in IEx directly
+- never benchmark by typing code in IEx directly
+
+#### compile in memory
+
+bytecode modules are not written to disk - only loaded in memory.
 
 - `$ iex test.exs`
 
   compiles file in memory and loads it into IEx
-  (`beam` file is not created)
 
 - `$ elixir file.exs`
 
-  it's like running any other script in UNIX shell
-  (`beam` file is not created).
+  compiles file in memory and executes it
+  (it's like running any other script in UNIX shell)
 
-  usually it makes sense to run only `exs` this way since
-  they are meant to contain some actions to be performed.
-  on the other hand `ex` files are meant to contain modules
-  to be loaded - not actions to be performed.
+- `iex> import_file "test.exs"`
+
+  > evaluates the contents of the file as if it were directly typed into IEx
+
+  in spite of what is said above imported file is compiled in memory
+
+#### compile
+
+each module is compiled into its own bytecode (`beam`) file:
+
+1. if file doesn't contain modules no bytecode files are generated
+2. it doesn't matter if module is defined in `exs` or `ex` file
+  (file extension doesn't matter at all - module can be defined in `rb` file)
+3. module `MyModule` is compiled into `Elixir.MyModule.beam` file
+
+- `$ elixirc file.exs`
+
+  compiles file and executes it
 
 - `iex> c "test.exs"`
 
   compiles file and loads it into IEx
-  (`beam` file is created)
-
-- `iex> import_file "test.exs"`
-
-  evaluates file in context of IEx - it's like typing it in IEx line by line
-  (`beam` file is not created)
 
 ## function capturing (& notation aka capture syntax)
 

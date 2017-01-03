@@ -178,7 +178,7 @@ function consists of head and body:
   > this notation can actually be used to retrieve a named function
   > as a function type
 
-  Programming Elixir:
+  "Programming Elixir":
 
   > you can give it (& operator) the name and arity of an existing
   > function, and it will return an anonymous function that calls it
@@ -275,8 +275,8 @@ NOTE:
 
 naming convention for private functions with the same name as public functions:
 
-- prefix with `_` (Programming Elixir)
-- prefix with `do_` (The Elixir Style Guide)
+- prefix with `_` ("Programming Elixir")
+- prefix with `do_` ("The Elixir Style Guide")
 
 ```elixir
 def sum(list), do: _sum(list, 0)
@@ -332,7 +332,7 @@ in Erlang it's equivalent to:
 
 ### nested modules
 
-Programming Elixir:
+"Programming Elixir":
 
 > Module nesting is an illusion - all modules are defined at the top level.
 > When we define a module inside another, Elixir simply prepends the outer

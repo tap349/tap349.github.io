@@ -377,3 +377,10 @@ used:
 
 - for configuration and metadata (like `dsl_attribute` in our projects)
 - instead of constants in other programming languages
+
+## lists
+
+```elixir
+iex> [1 | [2 | [3 | []]]]
+[1, 2, 3]
+```

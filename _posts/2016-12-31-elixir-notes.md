@@ -96,28 +96,28 @@ bytecode modules are not written to disk - only loaded in memory.
 
 - `$ iex test.exs`
 
-  compiles file in memory and loads it into IEx
+  compiles file in memory and loads it into IEx.
 
 - `$ elixir file.exs`
 
   compiles file in memory and executes it
-  (it's like running any other script in UNIX shell)
+  (it's like running any other script in UNIX shell).
 
 - `iex> import_file "test.exs"`
 
   > evaluates the contents of the file as if it were directly typed into IEx
 
-  in spite of what is said above imported file is compiled in memory
+  in spite of what is said above imported file is compiled in memory.
 
 #### compile
 
 - `$ elixirc file.exs`
 
-  compiles file and executes it
+  compiles file and executes it.
 
 - `iex> c "test.exs"`
 
-  compiles file and loads it into IEx
+  compiles file and loads it into IEx.
 
 ## function capturing (& notation aka capture syntax)
 
@@ -364,5 +364,5 @@ enclosing scope.
 
 used:
 
-- for configuration and metadata (see `dsl_attribute` in our projects)
-- like constants in Ruby
+- for configuration and metadata (like `dsl_attribute` in our projects)
+- instead of constants in other programming languages

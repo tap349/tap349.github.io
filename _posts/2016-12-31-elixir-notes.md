@@ -130,7 +130,19 @@ iex> 2 = b
 ** (CompileError) iex:2: undefined function b/0
 ```
 
-## function capturing (& notation aka capture syntax)
+## functions
+
+function consists of head and body:
+
+<dl>
+  <dt>head</dt>
+  <dd>function name, parameter list, optional guard clause</dd>
+
+  <dt>body</dt>
+  <dd>sequence of expressions</dd>
+</dl>
+
+### function capturing (& notation aka capture syntax)
 
 `&` - function capture operator
 
@@ -188,7 +200,7 @@ iex> 2 = b
   Enum.each [1, 2, 3, 4], &IO.inspect/1
   ```
 
-## do...end block
+### do...end block
 
 `do...end` block is a way to group expressions treating them as a single entity.
 
@@ -220,17 +232,7 @@ iex> 2 = b
   end
   ```
 
-## multiple clauses
-
-function consists of head and body:
-
-<dl>
-  <dt>head</dt>
-  <dd>function name, parameter list, optional guard clause</dd>
-
-  <dt>body</dt>
-  <dd>sequence of expressions</dd>
-</dl>
+### multiple clauses
 
 both anonymous and named functions can have multiple clauses - these are
 not multiple function definitions but multiple clauses of the same function
@@ -268,6 +270,25 @@ NOTE:
 - multiple clauses of named functions must be adjacent (grouped together)
   in the source file
 - all clauses of both anonymous and named functions must have the same arity
+
+### private functions
+
+naming convention for private functions with the same name as public functions:
+
+- prefix with `_` (Programming Elixir)
+- prefix with `do_` (The Elixir Style Guide)
+
+```elixir
+def sum(list), do: _sum(list, 0)
+
+# Programming Elixir
+defp _sum([], total), do: total
+defp _sum([head | tail], total), do: _sum(tail, head + total)
+
+# The Elixir Style Guide
+defp do_sum([], total), do: total
+defp do_sum([head | tail], total), do: do_sum(tail, head + total)
+```
 
 ## modules
 

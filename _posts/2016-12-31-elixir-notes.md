@@ -262,8 +262,8 @@ NOTE:
 
 all named functions must be defined inside modules!
 
-module names are just atoms: any name (not necessarily module name) starting
-with an uppercase letter is converted into an atom prefixed with `Elixir`:
+module names are just atoms: any name (not necessarily module name) starting with
+an uppercase letter is converted internally into an atom prefixed with `Elixir.`:
 
 ```elixir
 iex> is_atom IO
@@ -276,7 +276,7 @@ iex> :"Elixir.Example" == Example
 true
 ```
 
-`Example` module is not defined - it's just an arbitrary name here.
+NOTE: `Example` module is not even defined - it's just an arbitrary name here.
 
 => it's possible to call any module function this way:
 

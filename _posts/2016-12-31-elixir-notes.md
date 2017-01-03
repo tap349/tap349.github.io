@@ -119,6 +119,17 @@ bytecode modules are not written to disk - only loaded in memory.
 
   compiles file and loads it into IEx.
 
+## pattern matching
+
+during pattern matching all unbound variables must be on LHS of an equals sign:
+
+```elixir
+iex> a = 1
+1
+iex> 2 = b
+** (CompileError) iex:2: undefined function b/0
+```
+
 ## function capturing (& notation aka capture syntax)
 
 `&` - function capture operator

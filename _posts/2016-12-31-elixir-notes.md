@@ -405,3 +405,15 @@ used:
 iex> [1 | [2 | [3 | []]]]
 [1, 2, 3]
 ```
+
+### char lists
+
+char list is just a list of codepoints (integers) internally -
+in IEx it's printed as a list of characters if all characters are printable.
+
+add non printable character (say, `0`) to force print as codepoints:
+
+```elixir
+iex> 'z' ++ [0]
+[122, 0]
+```

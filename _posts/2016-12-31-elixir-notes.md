@@ -471,7 +471,7 @@ choosing between maps and keyword lists (both are dictionaries):
 | use to store options            |       | ✓            |
 | use as general key/value store  | ✓     |              |
 
-pattern matching cannot bind value to key:
+pattern matching cannot bind values to keys:
 
 ```elixir
 iex> %{a => :ok} = %{1 => :ok, 2 => :error}

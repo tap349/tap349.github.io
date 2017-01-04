@@ -407,6 +407,16 @@ enclosing scope.
 
 ### module attributes
 
+```elixir
+defmodule MyList do
+  @z_ascii_code 122
+
+  def caeser([head | tail], n) when head <= @z_ascii_code + n do
+    [head + n | caeser(tail, n)]
+  end
+end
+```
+
 used:
 
 - for configuration and metadata (like `dsl_attribute` in our projects)

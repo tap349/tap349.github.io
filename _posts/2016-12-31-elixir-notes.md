@@ -450,7 +450,7 @@ end
 char list is just a list of codepoints (integers) internally -
 in IEx it's printed as a list of characters if all characters are printable.
 
-add non printable character (say, `0`) to force print as codepoints:
+add non printable character codepoint (say, `0`) to force print as codepoints:
 
 ```elixir
 iex> 'z' ++ [0]

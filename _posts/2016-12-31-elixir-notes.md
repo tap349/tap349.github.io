@@ -138,7 +138,7 @@ def for_location([head = [_, target_loc, _, _] | tail], target_loc) do
 end
 ```
 
-if `target_loc` argument matches the 2nd element of list head
+if `target_loc` argument matches the 2nd element of list head,
 `head` variable matches the whole list head (is getting bound to it).
 
 ## functions
@@ -165,12 +165,14 @@ function consists of head and body:
   to_tuple = & {&1, &2}
   ```
 
-  anonymous functions defined using & operator must have at least
+  anonymous functions defined using `&` operator must have at least
   one argument (placeholders &1, &2, etc.):
 
   ```sh
   iex> a = &(1)
-  ** (CompileError) iex:29: invalid args for &, expected an expression in the format of &Mod.fun/arity, &local/arity or a capture containing at least one argument as &1, got: {1}
+  ** (CompileError) iex:29: invalid args for &, expected an expression in the
+  format of &Mod.fun/arity, &local/arity or a capture containing at least one
+  argument as &1, got: {1}
   iex> a = &(&1)
   #Function<6.52032458/1 in :erl_eval.expr/5>
   iex> a.(1)
@@ -429,6 +431,20 @@ iex> [1 | [2 | [3 | []]]]
 [1, 2, 3]
 ```
 
+### keyword lists
+
+`Keyword` module is used to manipulate keyword lists,
+
+keyword lists are usually used to store options passed to functions:
+
+```elixir
+def draw_text(text, options \\ []) do
+  options = Keyword.merge(@defaults, options)
+  ...
+end
+```
+
+
 ### char lists
 
 char list is just a list of codepoints (integers) internally -
@@ -439,4 +455,36 @@ add non printable character (say, `0`) to force print as codepoints:
 ```elixir
 iex> 'z' ++ [0]
 [122, 0]
+```
+
+## maps
+
+`Map` module is used to manipulate maps.
+
+choosing between maps and keyword lists (both are dictionaries):
+
+|                                 | map   | keyword list |
+|:--------------------------------|:-----:|:------------:|
+| use in pattern matching         | ✓     |              |
+| allow duplicate keys            |       | ✓            |
+| preserve order of elements      | ✓     |              |
+| use to store options            |       | ✓            |
+| use as general key/value store  | ✓     |              |
+
+pattern matching cannot bind value to key:
+
+```elixir
+iex> %{a => :ok} = %{1 => :ok, 2 => :error}
+** (CompileError) iex:27: illegal use of variable a inside map key match,
+maps can only match on existing variable by using ^a
+```
+
+use `^` pin operator for keys to prohibit binding explicitly
+(= use current variable value and don't even try to rebind):
+
+```elixir
+iex> a = 1
+1
+iex> %{^a => :ok} = %{1 => :ok, 2 => :error}
+%{1 => :ok, 2 => :error}
 ```

@@ -273,7 +273,9 @@ NOTE:
 
 ### private functions
 
-naming convention for private functions with the same name as public functions:
+naming convention for private functions with the same name as public functions
+(such private functions usually have higher arity than public functions -
+e.g. to pass accumulator around):
 
 - prefix with `_` ("Programming Elixir")
 - prefix with `do_` ("The Elixir Style Guide")

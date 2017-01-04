@@ -130,6 +130,17 @@ iex> 2 = b
 ** (CompileError) iex:2: undefined function b/0
 ```
 
+pattern matching is recursive - we can match patterns inside patterns:
+
+```elixir
+def for_location([head = [_, target_loc, _, _] | tail], target_loc) do
+  [head | for_location(tail, target_loc)]
+end
+```
+
+if `target_loc` argument matches the 2nd element of list head
+`head` variable matches the whole list head (is getting bound to it).
+
 ## functions
 
 function consists of head and body:

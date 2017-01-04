@@ -471,20 +471,53 @@ choosing between maps and keyword lists (both are dictionaries):
 | use to store options            |       | ✓            |
 | use as general key/value store  | ✓     |              |
 
-pattern matching cannot bind values to keys:
+### pattern matching with maps
 
-```sh
-iex> %{a => :ok} = %{1 => :ok, 2 => :error}
-** (CompileError) iex:27: illegal use of variable a inside map key match,
-maps can only match on existing variable by using ^a
-```
+- empty map matches any map (empty map must be on LHS)
 
-use `^` pin operator for keys to prohibit binding explicitly
-(= use current variable value and don't even try to rebind):
+  ```sh
+  iex> %{} = %{1 => :ok, 2 => :error}
+  %{1 => :ok, 2 => :error}
+  iex> %{1 => :ok, 2 => :error} = %{}
+  ** (MatchError) no match of right hand side value: %{}
+  ```
 
-```sh
-iex> a = 1
-1
-iex> %{^a => :ok} = %{1 => :ok, 2 => :error}
-%{1 => :ok, 2 => :error}
+- pattern matching cannot bind values to keys
+
+  ```sh
+  iex> %{a => :ok} = %{1 => :ok, 2 => :error}
+  ** (CompileError) iex:27: illegal use of variable a inside map key match,
+  maps can only match on existing variable by using ^a
+  ```
+
+  use `^` pin operator for keys to prohibit binding explicitly
+  (= use current variable value and don't even try to rebind):
+
+  ```sh
+  iex> a = 1
+  1
+  iex> %{^a => :ok} = %{1 => :ok, 2 => :error}
+  %{1 => :ok, 2 => :error}
+  ```
+
+### structs
+
+struct is kind of a named map with associated behaviour which is
+defined in a module by using `defstruct` macro inside it
+(internally it's a bare map with `__struct__` key that holds
+the name of the struct).
+
+```elixir
+# User is a name of the struct
+defmodule User do
+  # keys with default values (keyword list)
+  defstruct name: "", email: "", is_admin: false
+  # keys without default values (list of atoms) -
+  # nil is assumed
+  #defstruct [:name, :email, :is_admin]
+
+  def admin? when name != ""
+    is_admin
+  end
+end
 ```

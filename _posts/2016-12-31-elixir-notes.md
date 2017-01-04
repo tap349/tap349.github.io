@@ -123,7 +123,7 @@ bytecode modules are not written to disk - only loaded in memory.
 
 during pattern matching all unbound variables must be on LHS of an equals sign:
 
-```elixir
+```sh
 iex> a = 1
 1
 iex> 2 = b
@@ -312,7 +312,7 @@ all named functions must be defined inside modules!
 module names are just atoms: any name (not necessarily module name) starting with
 an uppercase letter is converted internally into an atom prefixed with `Elixir.`:
 
-```elixir
+```sh
 iex> is_atom IO
 true
 iex> to_string IO
@@ -327,7 +327,7 @@ NOTE: `Example` module is not even defined - it's just an arbitrary name here.
 
 => it's possible to call any module function this way:
 
-```elixir
+```sh
 iex> :"Elixir.IO".puts 123
 ```
 
@@ -335,7 +335,7 @@ in Erlang atoms are lowercase names, all module names are atoms
 => to call function from Erlang module in Elixir just convert
 Erlang module name into valid Elixir atom:
 
-```elixir
+```sh
 iex> :io.format("number is ~3.1f~n", [5.123])
 ```
 
@@ -426,7 +426,7 @@ used:
 
 ## lists
 
-```elixir
+```sh
 iex> [1 | [2 | [3 | []]]]
 [1, 2, 3]
 ```
@@ -452,7 +452,7 @@ in IEx it's printed as a list of characters if all characters are printable.
 
 add non printable character codepoint (say, `0`) to force print as codepoints:
 
-```elixir
+```sh
 iex> 'z' ++ [0]
 [122, 0]
 ```
@@ -473,7 +473,7 @@ choosing between maps and keyword lists (both are dictionaries):
 
 pattern matching cannot bind values to keys:
 
-```elixir
+```sh
 iex> %{a => :ok} = %{1 => :ok, 2 => :error}
 ** (CompileError) iex:27: illegal use of variable a inside map key match,
 maps can only match on existing variable by using ^a
@@ -482,7 +482,7 @@ maps can only match on existing variable by using ^a
 use `^` pin operator for keys to prohibit binding explicitly
 (= use current variable value and don't even try to rebind):
 
-```elixir
+```sh
 iex> a = 1
 1
 iex> %{^a => :ok} = %{1 => :ok, 2 => :error}

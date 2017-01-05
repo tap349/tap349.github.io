@@ -528,8 +528,8 @@ end
 
 they work with dictionaries (maps and keyword lists):
 
-|                   | accessors                                      |
 |                   | macro                    | function            |
+|                   | 123                    | 345            |
 |-------------------|--------------------------|---------------------|
 | get_in            | no                       | (dict, keys)        |
 | put_in            | (path, value)            | (dict, keys, value) |

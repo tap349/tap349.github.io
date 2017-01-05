@@ -536,12 +536,11 @@ they work with dictionaries (maps and keyword lists):
 | update_in         | (path, fn)               | (dict, keys, fn)    |
 | get_and_update_in | (path, fn)               | (dict, keys, fn)    |
 
-macros are more concise but functions allow to determine the number
-and set of keys at runtime =>
-we can say that macros are static nested accessors while
+macros are more concise but functions allow to determine the set of
+keys at runtime => hence macros are static nested accessors while
 functions are dynamic ones.
 
-path in macros is extracted using accessed key in the dictionary:
+path in macros is extracted using accessed key in the dictionary (via macro):
 
 ```elixir
 put_in(opts[:foo][:bar], :baz)

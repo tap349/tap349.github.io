@@ -521,3 +521,32 @@ defmodule User do
   end
 end
 ```
+
+### nested accessors (from `Kernel` module)
+
+<https://hexdocs.pm/elixir/Kernel.html>
+
+they work with dictionaries (maps and keyword lists):
+
+|                   | accessors                                     ||
+|                   | macro                    | function            |
+|-------------------|--------------------------|---------------------|
+| get_in            | no                       | (dict, keys)        |
+| put_in            | (path, value)            | (dict, keys, value) |
+| update_in         | (path, fn)               | (dict, keys, fn)    |
+| get_and_update_in | (path, fn)               | (dict, keys, fn)    |
+
+macros are more concise but functions allow to determine the number
+and set of keys at runtime =>
+we can say that macros are static nested accessors while
+functions are dynamic ones.
+
+path in macros is extracted using accessed key in the dictionary:
+
+```elixir
+put_in(opts[:foo][:bar], :baz)
+# or
+put_in(opts.foo.bar, :baz)
+# is equivalent to
+put_in(opts, [:foo, :bar], :baz)
+```

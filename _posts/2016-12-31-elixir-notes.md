@@ -528,7 +528,7 @@ end
 
 they work with dictionaries (maps and keyword lists):
 
-|                   | accessors                                     ||
+|                   | accessors                                      |
 |                   | macro                    | function            |
 |-------------------|--------------------------|---------------------|
 | get_in            | no                       | (dict, keys)        |

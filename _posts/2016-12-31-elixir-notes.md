@@ -529,7 +529,7 @@ end
 they work with dictionaries (maps and keyword lists):
 
 |                   | macro                    | function            |
-|                   | 123                    | 345            |
+|                   | (static accessors)       | (dynamic accessors) |
 |-------------------|--------------------------|---------------------|
 | get_in            | no                       | (dict, keys)        |
 | put_in            | (path, value)            | (dict, keys, value) |

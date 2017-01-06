@@ -533,10 +533,19 @@ defmodule User do
   # nil is assumed
   #defstruct [:name, :email, :is_admin]
 
-  def admin? when name != ""
-    is_admin
-  end
+  def admin?(%User{name: name, is_admin: is_admin})
+      when name != "",
+      do: is_admin
 end
+```
+
+NOTE: [access syntax](#access-module) cannot be used to access struct fields:
+
+```sh
+iex> user = %User{}
+iex> user[:name]
+** (UndefinedFunctionError) function User.fetch/2 is undefined
+(User does not implement the Access behaviour)
 ```
 
 ### nested accessors (from `Kernel` module)
@@ -572,7 +581,13 @@ NOTE: `get_in(opts, [:foo, :bar])` equals to `opts.dig(:foo, :bar)` in Ruby.
 #### `Access` module
 
 `Access` module provides functions to be used with `get_in` and
-`get_and_update_in` functions to filter elements of lists or tuples.
+`get_and_update_in` functions to filter elements in lists and tuples or
+keys in dictionaries.
+
+<https://github.com/elixir-lang/elixir/blob/v1.2.2/lib/elixir/lib/access.ex#L50>:
+
+> `foo[bar]` - access syntax (named after `Access` module where it's implemented)
+> `foo.bar` - field-based lookup
 
 functions for lists:
 

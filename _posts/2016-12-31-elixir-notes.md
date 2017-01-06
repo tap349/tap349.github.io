@@ -586,3 +586,20 @@ opts = %{foo: 1, bar: %{baz: 2}}
 get_in(opts, [Access.key(:bar, nil), :baz]) # 2
 Access.pop opts, :foo # {1, %{bar: %{baz: 2}}}
 ```
+
+## sets
+
+```sh
+iex> set_1 = MapSet.new [1, 2, 3]
+iex> set_2 = MapSet.new [3, 4, 5]
+iex> MapSet.member? set_1, 1
+true
+iex> MapSet.union set_1, set_2
+#MapSet<[1, 2, 3, 4, 5]>
+iex> MapSet.difference set_1, set_2
+#MapSet<[1, 2]>
+iex> MapSet.difference set_2, set_1
+#MapSet<[4, 5]>
+iex> MapSet.intersection set_1, set_2
+#MapSet<[3]>
+```

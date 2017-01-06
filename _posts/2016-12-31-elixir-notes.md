@@ -119,6 +119,23 @@ bytecode modules are not written to disk - only loaded in memory.
 
   compiles file and loads it into IEx.
 
+## types
+
+- value types:
+  - integers
+  - floats
+  - atoms (booleans are just atoms)
+  - ranges
+  - regular expressions
+- system types:
+  - PIDs and ports
+  - references
+- collection types:
+  - tuples
+  - lists
+  - maps
+  - binaries
+
 ## pattern matching
 
 during pattern matching all unbound variables must be on LHS of an equals sign:
@@ -550,6 +567,8 @@ put_in(opts.foo.bar, :baz)
 put_in(opts, [:foo, :bar], :baz)
 ```
 
+#### `Access` module
+
 `Access` module provides functions to be used with `get_in` and
 `get_and_update_in` functions to filter elements of lists or tuples.
 
@@ -584,14 +603,14 @@ functions for dictionaries:
 opts = %{foo: 1, bar: %{baz: 2}}
 # this is equivalent to opts.bar.baz:
 get_in(opts, [Access.key(:bar, nil), :baz]) # 2
-Access.pop opts, :foo # {1, %{bar: %{baz: 2}}}
+Access.pop(opts, :foo) # {1, %{bar: %{baz: 2}}}
 ```
 
 ## sets
 
 ```sh
 iex> set_1 = MapSet.new [1, 2, 3]
-iex> set_2 = MapSet.new [3, 4, 5]
+iex> set_2 = 3..5 |> Enum.into(MapSet.new)
 iex> MapSet.member? set_1, 1
 true
 iex> MapSet.union set_1, set_2

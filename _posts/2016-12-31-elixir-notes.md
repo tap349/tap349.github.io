@@ -484,7 +484,7 @@ choosing between maps and keyword lists (both are dictionaries):
 |:--------------------------------|:-----:|:------------:|
 | use in pattern matching         | ✓     |              |
 | allow duplicate keys            |       | ✓            |
-| preserve order of elements      | ✓     |              |
+| preserve order of elements      |       | ✓            |
 | use to store options            |       | ✓            |
 | use as general key/value store  | ✓     |              |
 

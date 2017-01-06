@@ -569,14 +569,15 @@ functions are dynamic ones.
 path in macros is extracted using, well, macro this way:
 
 ```elixir
+# using access syntax (maps and keyword lists)
 put_in(opts[:foo][:bar], :baz)
-# or
+# using field-based lookup (maps only)
 put_in(opts.foo.bar, :baz)
-# is equivalent to
+# both are equivalent to
 put_in(opts, [:foo, :bar], :baz)
 ```
 
-NOTE: `get_in(opts, [:foo, :bar])` equals to `opts.dig(:foo, :bar)` in Ruby.
+BTW `get_in(opts, [:foo, :bar])` equals to `opts.dig(:foo, :bar)` in Ruby.
 
 #### `Access` module
 
@@ -584,10 +585,11 @@ NOTE: `get_in(opts, [:foo, :bar])` equals to `opts.dig(:foo, :bar)` in Ruby.
 `get_and_update_in` functions to filter elements in lists and tuples or
 keys in dictionaries.
 
-<https://github.com/elixir-lang/elixir/blob/v1.2.2/lib/elixir/lib/access.ex#L50>:
+- <https://dockyard.com/blog/2016/02/01/elixir-best-practices-deeply-nested-maps>
+- <https://github.com/elixir-lang/elixir/blob/v1.2.2/lib/elixir/lib/access.ex#L50>
 
 > `foo[bar]` - access syntax (named after `Access` module where it's implemented)
-> `foo.bar` - field-based lookup
+> `foo.bar` - field-based lookup (aka path form)
 
 functions for lists:
 
@@ -601,6 +603,7 @@ get_in(opts, [Access.all(), :foo]) # [:bar, :baz]
 # get all elements of the list opts
 get_in(opts, [Access.at(0), :foo]) # :bar
 ```
+
 functions for tuples:
 
 - `Access.elem/1`

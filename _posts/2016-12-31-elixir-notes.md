@@ -540,7 +540,7 @@ macros are more concise but functions allow to determine the set of
 keys at runtime => hence macros are static nested accessors while
 functions are dynamic ones.
 
-path in macros is extracted using accessed key in the dictionary (via macro):
+path in macros is extracted using, well, macro this way:
 
 ```elixir
 put_in(opts[:foo][:bar], :baz)
@@ -548,4 +548,41 @@ put_in(opts[:foo][:bar], :baz)
 put_in(opts.foo.bar, :baz)
 # is equivalent to
 put_in(opts, [:foo, :bar], :baz)
+```
+
+`Access` module provides functions to be used with `get_in` and
+`get_and_update_in` functions to filter elements of lists or tuples.
+
+functions for lists:
+
+- `Access.all/0`
+- `Access.at/1`
+
+```elixir
+opts = [%{foo: :bar}, %{foo: :baz}]
+# get all elements of the list opts
+get_in(opts, [Access.all(), :foo]) # [:bar, :baz]
+# get all elements of the list opts
+get_in(opts, [Access.at(0), :foo]) # :bar
+```
+functions for tuples:
+
+- `Access.elem/1`
+
+```elixir
+opts = [%{foo: {1, 2}}, %{foo: {3, 4}}]
+get_in(opts, [Access.all(), :foo, Access.elem(1)]) # [2, 4]
+```
+
+functions for dictionaries:
+
+- `Access.key/2` (provide default value for missing key)
+- `Access.key!/1` (expects key to be always available)
+- `Access.pop/1`
+
+```elixir
+opts = %{foo: 1, bar: %{baz: 2}}
+# this is equivalent to opts.bar.baz:
+get_in(opts, [Access.key(:bar, nil), :baz]) # 2
+Access.pop opts, :foo # {1, %{bar: %{baz: 2}}}
 ```

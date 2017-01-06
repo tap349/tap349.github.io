@@ -567,6 +567,8 @@ put_in(opts.foo.bar, :baz)
 put_in(opts, [:foo, :bar], :baz)
 ```
 
+NOTE: `get_in(opts, [:foo, :bar])` equals to `opts.dig(:foo, :bar)` in Ruby.
+
 #### `Access` module
 
 `Access` module provides functions to be used with `get_in` and

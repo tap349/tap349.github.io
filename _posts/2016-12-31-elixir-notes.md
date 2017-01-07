@@ -150,13 +150,13 @@ iex> 2 = b
 pattern matching is recursive - we can match patterns inside patterns:
 
 ```elixir
-def for_location([head = [_, target_loc, _, _] | tail], target_loc) do
-  [head | for_location(tail, target_loc)]
+def for_location([h = [_, target_loc, _, _] | t], target_loc) do
+  [h | for_location(t, target_loc)]
 end
 ```
 
 if `target_loc` argument matches the 2nd element of list head,
-`head` variable matches the whole list head (is getting bound to it).
+`h` variable matches the whole list head (is getting bound to it).
 
 ## functions
 
@@ -315,11 +315,11 @@ def sum(list), do: _sum(list, 0)
 
 # Programming Elixir
 defp _sum([], total), do: total
-defp _sum([head | tail], total), do: _sum(tail, head + total)
+defp _sum([h | t], total), do: _sum(t, h + total)
 
 # The Elixir Style Guide
 defp do_sum([], total), do: total
-defp do_sum([head | tail], total), do: do_sum(tail, head + total)
+defp do_sum([h | t], total), do: do_sum(t, h + total)
 ```
 
 ## modules
@@ -430,8 +430,8 @@ enclosing scope.
 defmodule MyList do
   @z_ascii_code 122
 
-  def caeser([head | tail], n) when head <= @z_ascii_code + n do
-    [head + n | caeser(tail, n)]
+  def caeser([h | t], n) when h <= @z_ascii_code + n do
+    [h + n | caeser(t, n)]
   end
 end
 ```

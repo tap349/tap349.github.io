@@ -6,8 +6,7 @@ access: public
 categories: [phoenix]
 ---
 
-Phoenix notes - extracts from different books
-(primarily from "Programming Phoenix" by Dave Thomas).
+Phoenix notes (mostly based on "Programming Phoenix" by Chris McCord).
 
 <!-- more -->
 

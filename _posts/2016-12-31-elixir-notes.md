@@ -577,7 +577,7 @@ put_in(opts.foo.bar, :baz)
 put_in(opts, [:foo, :bar], :baz)
 ```
 
-BTW `get_in(opts, [:foo, :bar])` equals to `opts.dig(:foo, :bar)` in Ruby.
+BTW `get_in(opts, [:foo, :bar])` is equal to `opts.dig(:foo, :bar)` in Ruby.
 
 #### `Access` module
 
@@ -645,8 +645,15 @@ iex> MapSet.intersection set_1, set_2
 
 ## streams
 
-to get lazy behaviour when dealing with collections just replace `Enum`
-module with `Stream` one and call, say, `Enum.to_list` in the end:
+can be used when you need:
+
+- to defer processing until you need the data
+- to deal with large collections, big files or remote resources<br>
+  (when you don't need all the data at once or just cannot get all
+  the data - like in case of remote resources)
+
+to get lazy behaviour when dealing with collections just replace `Enum` module
+with `Stream` one and call, say, `Enum.to_list/0` or `Enum.take/1` in the end:
 
 ```sh
 iex> [1, 2, 3, 4, 4] |> Enum.map(&(&1 * &1)) |> Enum.with_index
@@ -687,7 +694,7 @@ IO.puts File.stream!("test.txt") |> Enum.to_list
 
 - `Stream.repeatedly`
 
-  invokes supplied function each time new value is requested:
+  calls supplied function each time new value is requested:
 
   ```sh
   iex> Stream.repeatedly(&:random.uniform/0) |> Enum.take(3)
@@ -696,7 +703,7 @@ IO.puts File.stream!("test.txt") |> Enum.to_list
 
 - `Stream.iterate`
 
-  generates values infinitely using initial value and supplied function:
+  generates values infinitely using initial value and iteration function:
 
   ```sh
   iex> Stream.iterate(0, &(&1 + 1)) |> Enum.take(5)
@@ -707,7 +714,7 @@ IO.puts File.stream!("test.txt") |> Enum.to_list
 
 - `Stream.unfold`
 
-  general form of the function to be supplied:
+  general form of iteration function:
 
   ```elixir
   fn state -> {stream_value, new_state} end
@@ -715,7 +722,7 @@ IO.puts File.stream!("test.txt") |> Enum.to_list
 
   almost same as above but:
 
-  - function has to be invoked to get the 1st stream value<br>
+  - iteration function has to be called to get the 1st stream value<br>
     (in `Stream.iterate` initial value is the 1st stream value)
   - stream value doesn't have to be equal to new state<br>
     (in `Stream.iterate` new state is current stream value)
@@ -725,4 +732,26 @@ IO.puts File.stream!("test.txt") |> Enum.to_list
   ```sh
   iex> Stream.unfold({0, 1}, fn {n1, n2} -> {n1, {n2, n1 + n2}} end) |> Enum.take(8)
   [0, 1, 1, 2, 3, 5, 8, 13]
+  ```
+
+- `Stream.resource`
+
+  this function builds upon `Stream.unfold` and is intended to work with
+  resources.
+
+  it has 3 arguments:
+
+  - function to get resource (instead of initial value in `Stream.unfold`)
+  - iteration function
+  - function to deallocate resource
+
+  ```elixir
+  Stream.resource(fn -> File.open!("test.txt") end,
+                  fn file ->
+                    case IO.read(file, :line) do
+                      data when is_binary(data) -> {[data], file}
+                      _ -> {:halt, file}
+                    end
+                  end,
+                  fn file -> File.close(file) end)
   ```

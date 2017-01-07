@@ -6,7 +6,7 @@ access: public
 categories: [elixir]
 ---
 
-Elixir notes.
+Elixir notes (mostly based on "Programming Elixir" by Dave Thomas).
 
 <!-- more -->
 
@@ -669,7 +669,7 @@ iex(12)> stream |> Enum.to_list
 benefit of using stream is that we don't store any intermediate results -
 we just pass successive elements from one function to the next in the chain.
 
-apart from `Stream` more and more modules also support streams:
+apart from `Stream` more and more modules now also support streams:
 
 ```elixir
 IO.puts File.open!("test.txt") |> IO.stream(:line) |> Enum.to_list

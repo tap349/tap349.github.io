@@ -507,8 +507,8 @@ choosing between maps and keyword lists (both are dictionaries):
   maps can only match on existing variable by using ^a
   ```
 
-  use `^` pin operator for keys to prohibit binding explicitly
-  (= use current variable value and don't even try to rebind):
+  use `^` pin operator for keys to explicitly prohibit binding
+  (= use current variable value and don't even try to rebind variable):
 
   ```sh
   iex> a = 1

@@ -642,3 +642,87 @@ iex> MapSet.difference set_2, set_1
 iex> MapSet.intersection set_1, set_2
 #MapSet<[3]>
 ```
+
+## streams
+
+to get lazy behaviour when dealing with collections just replace `Enum`
+module with `Stream` one and call, say, `Enum.to_list` in the end:
+
+```sh
+iex> [1, 2, 3, 4, 4] |> Enum.map(&(&1 * &1)) |> Enum.with_index
+[{1, 0}, {4, 1}, {9, 2}, {16, 3}, {16, 4}]
+iex> stream = [1, 2, 3, 4, 4] |> Stream.map(&(&1 * &1)) |> Stream.with_index
+#Stream<[enum: [1, 2, 3, 4, 4],
+ funs: [#Function<47.36862645/1 in Stream.map/2>,
+  #Function<64.36862645/1 in Stream.with_index/2>]]>
+iex(12)> stream |> Enum.to_list
+[{1, 0}, {4, 1}, {9, 2}, {16, 3}, {16, 4}]
+```
+
+benefit of using stream is that we don't store any intermediate results -
+we just pass successive elements from one function to the next in the chain.
+
+apart from `Stream` more and more modules also support streams:
+
+```elixir
+IO.puts File.open!("test.txt") |> IO.stream(:line) |> Enum.to_list
+# is equivalent to:
+IO.puts File.stream!("test.txt") |> Enum.to_list
+```
+
+`Stream` functions to build your own streams:
+
+- `Stream.cycle`
+
+  cycles through collection elements infinitely:
+
+  ```elixir
+  Stream.cycle(~w{green white})
+  |> Stream.zip(1..5)
+  |> Enum.map(fn {class, index} ->
+    ~s{<tr class="#{class}"><td>#{index}</td></tr>\n}
+  end)
+  |> IO.puts
+  ```
+
+- `Stream.repeatedly`
+
+  invokes supplied function each time new value is requested:
+
+  ```sh
+  iex> Stream.repeatedly(&:random.uniform/0) |> Enum.take(3)
+  [0.4435846174457203, 0.7230402056221108, 0.94581636451987]
+  ```
+
+- `Stream.iterate`
+
+  generates values infinitely using initial value and supplied function:
+
+  ```sh
+  iex> Stream.iterate(0, &(&1 + 1)) |> Enum.take(5)
+  [0, 1, 2, 3, 4]
+  ```
+
+  useful to generate all kinds of progressions (arithmetic, geometric, etc.).
+
+- `Stream.unfold`
+
+  general form of the function to be supplied:
+
+  ```elixir
+  fn state -> {stream_value, new_state} end
+  ```
+
+  almost same as above but:
+
+  - function has to be invoked to get the 1st stream value<br>
+    (in `Stream.iterate` initial value is the 1st stream value)
+  - stream value doesn't have to be equal to new state<br>
+    (in `Stream.iterate` new state is current stream value)
+
+  example:
+
+  ```sh
+  iex> Stream.unfold({0, 1}, fn {n1, n2} -> {n1, {n2, n1 + n2}} end) |> Enum.take(8)
+  [0, 1, 1, 2, 3, 5, 8, 13]
+  ```

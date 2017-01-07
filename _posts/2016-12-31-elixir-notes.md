@@ -650,7 +650,7 @@ can be used when you need:
 - to defer processing until you need the data
 - to deal with large collections, big files or remote resources<br>
   (when you don't need all the data at once or just cannot get all
-  the data - like in case of remote resources)
+  the data physically - like in case of remote resources)
 
 to get lazy behaviour when dealing with collections just replace `Enum` module
 with `Stream` one and call, say, `Enum.to_list/0` or `Enum.take/1` in the end:

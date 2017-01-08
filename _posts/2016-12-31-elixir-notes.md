@@ -835,37 +835,37 @@ possible delimiters: `<>, {}, [], (), ||, //, "", ''`
 
 sigil types:
 
- sigil type | description
-------------|------------------------------------------------
-~C          | character list without escaping and interpolation
-~c          | character list with escaping and interpolation
-~D          | Date in format yyyy-mm-dd
-~N          | naive DateTime in format yyyy-mm-dd dd:mm:ss[.ddd]
-~R          | regexp without escaping and interpolation
-~r          | regexp with escaping and interpolation
-~S          | string without escaping and interpolation
-~s          | string with escaping and interpolation
-~T          | Time in format hh:mm:ss[.dddd]
-~W          | list of words without escaping and interpolation
-~w          | list of words with escaping and interpolation
+| sigil type  | description
+|-------------|------------------------------------------------
+| ~C          | character list without escaping and interpolation
+| ~c          | character list with escaping and interpolation
+| ~D          | Date in format yyyy-mm-dd
+| ~N          | naive DateTime in format yyyy-mm-dd dd:mm:ss[.ddd]
+| ~R          | regexp without escaping and interpolation
+| ~r          | regexp with escaping and interpolation
+| ~S          | string without escaping and interpolation
+| ~s          | string with escaping and interpolation
+| ~T          | Time in format hh:mm:ss[.dddd]
+| ~W          | list of words without escaping and interpolation
+| ~w          | list of words with escaping and interpolation
 
 modifiers for ~W and ~w sigils:
 
- modifier | sigils returns
-----------|------------------------------------------------
-a         | list of atoms
-c         | list of character lists
-s         | list of strings
+| modifier  | sigils returns
+|-----------|------------------------------------------------
+| a         | list of atoms
+| c         | list of character lists
+| s         | list of strings
 
 modifiers for ~R and ~r sigils:
 
- modifier | meaning
-----------|------------------------------------------------
-f         | force pattern to start to match on the 1st line of miltiline string
-g         | support named groups
-i         | make matches case insensitive
-m         | ^ and $ match start and end of lines of multiline string
-s         | allow . to match newline characters
-U         | make * and + modifiers ungreedy (same as *? and +?)
-u         | enable unicode-specific patterns like \p
-x         | extended mode (ignore whitespaces and comments)
+| modifier  | meaning
+|-----------|------------------------------------------------
+| f         | force pattern to start to match on the 1st line of miltiline string
+| g         | support named groups
+| i         | make matches case insensitive
+| m         | ^ and $ match start and end of lines of multiline string
+| s         | allow . to match newline characters
+| U         | make * and + modifiers ungreedy (same as *? and +?)
+| u         | enable unicode-specific patterns like \p
+| x         | extended mode (ignore whitespaces and comments)

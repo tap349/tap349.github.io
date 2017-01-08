@@ -450,7 +450,7 @@ iex> [1 | [2 | [3 | []]]]
 
 ### keyword lists
 
-`Keyword` module is used to manipulate keyword lists,
+`Keyword` module is used to manipulate keyword lists.
 
 keyword lists are usually used to store options passed to functions:
 
@@ -755,3 +755,110 @@ IO.puts File.stream!("test.txt") |> Enum.to_list
                   end,
                   fn file -> File.close(file) end)
   ```
+
+## comprehensions
+
+they are used to map and/or filter collections.
+
+general form:
+
+```
+result = for generator{, generator}{, filter}[, into: value], do: expression
+generator = pattern <- enumerable_thing
+```
+
+example (it works like nested for loops do):
+
+```sh
+iex> first8 = [1, 2, 3, 4, 5, 6, 7, 8]
+iex> for x <- first8, y <- first8, x >= y, rem(x * y, 10) == 0, do: {x, y}
+[{5, 2}, {5, 4}, {6, 5}, {8, 5}]
+```
+
+using comprehensions with binaries:
+
+```sh
+iex> for <<char <- "hello">>, do: char
+'hello'
+```
+
+`into` parameter allows to save the result of comprehensions into specified
+collection (it must implement `Collectable` protocol):
+
+```sh
+iex> for x <- ~w{cat dog}, into: %{}, do: {x, String.upcase(x)}
+%{"cat" => "CAT", "dog" => "DOG"}
+```
+
+## binaries
+
+"hello" - string
+'hello' - character list
+
+both strings and character lists:
+
+- can hold characters in UTF-8 encoding
+- may contain escape sequences
+- allow interpolation
+- allow to espace special characters with backslash
+- support heredocs
+
+### heredocs
+
+heredoc is string contents delimited with triple single (''') or
+double (""") quotes on separate lines:
+
+```elixir
+IO.puts """
+  hello
+  world!
+  """
+```
+
+NOTE: trailing delimiter must be indented to the same level as string contents.
+
+heredocs are used extensively to add documentation for functions and modules.
+
+### sigils
+
+sigil is a symbol with magical powers. it starts with a tilde, followed by
+letter (sigil type), delimited content and optionally some modifiers.
+
+possible delimiters: <>, {}, [], (), ||, //, "", ''
+
+sigil types:
+
+ sigil type | description
+------------|------------------------------------------------
+~C          | character list without escaping and interpolation
+~c          | character list with escaping and interpolation
+~D          | Date in format yyyy-mm-dd
+~N          | naive DateTime in format yyyy-mm-dd dd:mm:ss[.ddd]
+~R          | regexp without escaping and interpolation
+~r          | regexp with escaping and interpolation
+~S          | string without escaping and interpolation
+~s          | string with escaping and interpolation
+~T          | Time in format hh:mm:ss[.dddd]
+~W          | list of words without escaping and interpolation
+~w          | list of words with escaping and interpolation
+
+modifiers for ~W and ~w sigils:
+
+ modifier | sigils returns
+----------|------------------------------------------------
+a         | list of atoms
+c         | list of character lists
+s         | list of strings
+
+modifiers for ~R and ~r sigils:
+
+ modifier | meaning
+----------|------------------------------------------------
+f         | force pattern to start to match on the 1st line of miltiline string
+g         | support named groups
+i         | make matches case insensitive
+m         | ^ and $ match start and end of lines of multiline string
+s         | allow . to match newline characters
+U         | make * and + modifiers ungreedy (same as *? and +?)
+u         | enable unicode-specific patterns like \p
+x         | extended mode (ignore whitespaces and comments)

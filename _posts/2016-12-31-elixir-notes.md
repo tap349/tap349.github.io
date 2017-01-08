@@ -807,7 +807,7 @@ both strings and character lists:
 - can hold characters in UTF-8 encoding
 - may contain escape sequences
 - allow interpolation
-- allow to espace special characters with backslash
+- allow to escape special characters with backslash
 - support heredocs
 
 ### heredocs

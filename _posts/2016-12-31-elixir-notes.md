@@ -450,6 +450,14 @@ iex> [1 | [2 | [3 | []]]]
 
 ### keyword lists
 
+keyword list is a list of tuples where the 1st element is atom.
+
+```elixir
+[a: 1, b: 2]
+# is equivalent to
+[{:a, 1}, {:b, 2}]
+```
+
 `Keyword` module is used to manipulate keyword lists.
 
 keyword lists are usually used to store options passed to functions:
@@ -461,10 +469,9 @@ def draw_text(text, options \\ []) do
 end
 ```
 
+### character lists
 
-### char lists
-
-char list is just a list of codepoints (integers) internally -
+character list (or char list) is just a list of codepoints (integers) internally -
 in IEx it's printed as a list of characters if all characters are printable.
 
 add non printable character codepoint (say, `0`) to force print as codepoints:

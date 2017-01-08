@@ -822,7 +822,7 @@ heredocs are used extensively to add documentation for functions and modules.
 ### sigils
 
 sigil is a symbol with magical powers - it starts with a tilde, followed by
-letter (sigil type), delimited content and optionally some modifiers.
+a letter (sigil type), delimited content and optionally some modifiers.
 
 possible delimiters: `<>, {}, [], (), ||, //, "", ''`
 

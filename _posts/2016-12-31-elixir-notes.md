@@ -92,7 +92,7 @@ each module is compiled into its own bytecode (`beam`) file:
 
 #### compile in memory
 
-bytecode modules are not written to disk - only loaded in memory.
+in these cases bytecode modules are not written to disk - only loaded in memory:
 
 - `$ iex test.exs`
 

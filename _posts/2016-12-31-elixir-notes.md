@@ -505,6 +505,8 @@ force print char list as collection of codepoints:
   ```sh
   iex> ?c
   99
+  iex> ?\s
+  32
   ```
 
 ## maps

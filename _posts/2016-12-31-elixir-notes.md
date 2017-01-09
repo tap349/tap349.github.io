@@ -450,15 +450,15 @@ iex> [1 | [2 | [3 | []]]]
 
 ### keyword lists
 
-keyword list is a list of tuples where the 1st element is atom.
+`Keyword` module is used to manipulate keyword lists.
+
+keyword list is a list of tuples where the 1st element is atom:
 
 ```elixir
 [a: 1, b: 2]
 # is equivalent to
 [{:a, 1}, {:b, 2}]
 ```
-
-`Keyword` module is used to manipulate keyword lists.
 
 keyword lists are usually used to store options passed to functions:
 
@@ -471,15 +471,41 @@ end
 
 ### character lists
 
-character list (or char list) is just a list of codepoints (integers) internally -
+character list (or char list) is just a list of integers (codepoints) internally -
 in IEx it's printed as a list of characters if all characters are printable.
 
-add non printable character codepoint (say, `0`) to force print as codepoints:
+force print char list as collection of codepoints:
 
-```sh
-iex> 'z' ++ [0]
-[122, 0]
-```
+- `:io.format/2`
+
+  `~w` forces 'cat' to be written as an Erlang term:
+
+  ```sh
+  iex> :io.format "~w~n", ['cat']
+  [99,97,116]
+  :ok
+  ```
+
+- `List.to_tuple/1`
+
+  ```sh
+  iex> List.to_tuple 'cat'
+  {99, 97, 116}
+  ```
+
+- add non printable character codepoint (say, `0`)
+
+  ```sh
+  iex> 'z' ++ [0]
+  [122, 0]
+  ```
+
+- ? notation to get codepoint of single character
+
+  ```sh
+  iex> ?c
+  99
+  ```
 
 ## maps
 

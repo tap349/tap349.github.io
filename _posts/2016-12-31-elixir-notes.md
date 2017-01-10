@@ -827,8 +827,8 @@ iex> for x <- ~w{cat dog}, into: %{}, do: {x, String.upcase(x)}
 
 ## binaries
 
-"hello" - string
-'hello' - character list
+- "hello" - string
+- 'hello' - character list
 
 both strings and character lists:
 

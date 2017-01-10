@@ -688,7 +688,8 @@ can be used when you need:
   the data physically - like in case of remote resources)
 
 to get lazy behaviour when dealing with collections just replace `Enum` module
-with `Stream` one and call, say, `Enum.to_list/0` or `Enum.take/1` in the end:
+with `Stream` one (since all stream implement `Enumerable` protocol) and call,
+say, `Enum.to_list/0` or `Enum.take/1` in the end:
 
 ```sh
 iex> [1, 2, 3, 4, 4] |> Enum.map(&(&1 * &1)) |> Enum.with_index
@@ -697,7 +698,7 @@ iex> stream = [1, 2, 3, 4, 4] |> Stream.map(&(&1 * &1)) |> Stream.with_index
 #Stream<[enum: [1, 2, 3, 4, 4],
  funs: [#Function<47.36862645/1 in Stream.map/2>,
   #Function<64.36862645/1 in Stream.with_index/2>]]>
-iex(12)> stream |> Enum.to_list
+iex> stream |> Enum.to_list
 [{1, 0}, {4, 1}, {9, 2}, {16, 3}, {16, 4}]
 ```
 
@@ -826,6 +827,35 @@ iex> for x <- ~w{cat dog}, into: %{}, do: {x, String.upcase(x)}
 ```
 
 ## binaries
+
+binary - sequence of bits in the form:
+
+```
+<<term[::modifier], ...>>
+```
+
+by default each term occupies 1 byte - excess bits are stripped:
+
+```sh
+iex> <<255>>
+<<255>>
+iex> <<256>>
+<<0>>
+iex> <<257>>
+<<1>>
+```
+
+```elixir
+# integers
+<<0, 1, 255>>
+# integers with size modifier
+<<1::size(3), 2::size(2)>> # 001 10 => <<6::size(5)>>
+# floats
+# https://www.doc.ic.ac.uk/~eedwards/compsys/float/
+<<2.5::float>> # <<64, 4, 0, 0, 0, 0, 0, 0>>
+```
+
+### strings and character lists
 
 - "hello" - string
 - 'hello' - character list

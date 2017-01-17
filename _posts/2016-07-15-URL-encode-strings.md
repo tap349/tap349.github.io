@@ -1,14 +1,15 @@
 ---
 layout: post
-title: URL-encode/decode query string
+title: URL-encode/decode strings
 date: 2016-07-15 19:15:52 +0300
 access: public
-categories: [rails]
+categories: [rails, html]
 ---
 
 ways to:
 
-- generate URL-encoded query string from hash, array or string
+- generate URL-encoded string (used primarily for query strigs) from hash,
+  array or string
 - decode it back into either array or string
 
 <!-- more -->
@@ -20,7 +21,7 @@ ways to:
 `#to_query` (aliased to `#to_param`):
 
 ```ruby
-pumba(dev)> { redirect_url: 'http://test.com?message=привет' }.to_query
+(dev)> { redirect_url: 'http://test.com?message=привет' }.to_query
 "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
 ```
 
@@ -29,7 +30,7 @@ pumba(dev)> { redirect_url: 'http://test.com?message=привет' }.to_query
 `URI.encode_www_form`:
 
 ```ruby
-pumba(dev)> URI.encode_www_form [['redirect_url', 'http://test.com?message=привет']]
+(dev)> URI.encode_www_form [['redirect_url', 'http://test.com?message=привет']]
 "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
 ```
 
@@ -38,14 +39,14 @@ pumba(dev)> URI.encode_www_form [['redirect_url', 'http://test.com?message=пр�
 - `CGI.escape`:
 
   ```ruby
-  pumba(dev)> CGI.escape 'redirect_url=http://test.com?message=привет'
+  (dev)> CGI.escape 'redirect_url=http://test.com?message=привет'
   "redirect_url%3Dhttp%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
   ```
 
 - `ERB::Util.url_encode`:
 
   ```ruby
-  pumba(dev)> ERB::Util.url_encode 'redirect_url=http://test.com?message=привет'
+  (dev)> ERB::Util.url_encode 'redirect_url=http://test.com?message=привет'
   "redirect_url%3Dhttp%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
   ```
 
@@ -56,7 +57,7 @@ pumba(dev)> URI.encode_www_form [['redirect_url', 'http://test.com?message=пр�
 `URI.decode_www_form`:
 
 ```ruby
-pumba(dev)> URI.decode_www_form "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+(dev)> URI.decode_www_form "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
 [
     [0] [
         [0] "redirect_url",
@@ -70,6 +71,6 @@ pumba(dev)> URI.decode_www_form "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D
 `CGI.unescape`:
 
 ```ruby
-pumba(dev)> CGI.unescape 'redirect_url%3Dhttp%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82'
+(dev)> CGI.unescape 'redirect_url%3Dhttp%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82'
 "redirect_url=http://test.com?message=привет"
 ```

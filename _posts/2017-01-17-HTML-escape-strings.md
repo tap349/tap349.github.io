@@ -9,7 +9,7 @@ categories: [rails, html]
 ways to:
 
 - escape special characters in HTML string (namely `&"<>`)
-- unescape HTML-escaped string back (`&quot;` -> `"`, `&lt;` -> `<`, etc.)
+- unescape HTML-escaped string back (`&quot;` => `"`, `&lt;` => `<`, etc.)
 
 <!-- more -->
 

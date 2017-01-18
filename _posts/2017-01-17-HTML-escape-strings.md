@@ -28,6 +28,19 @@ ways to:
   = raw 'hello "world"!'
   ```
 
+- `Rails::Html::FullSanitizer.new.sanitize`
+
+  though its primary purpose is to sanitize HTML string
+  it can also be used to unescape HTML entities which is part
+  of sanitization process (with some caveats - see below).
+
+  ```ruby
+  (dev)> Rails::Html::FullSanitizer.new.sanitize("hello &gt; &quot;world&quot;")
+  "hello &gt; \"world\""
+  ```
+
+  NOTE: it doesn't unescape all HTML entities! (e.g. it concerns `&lt;`/`&gt;`)
+
 ## unescape
 
 - `CGI.escapeHTML`

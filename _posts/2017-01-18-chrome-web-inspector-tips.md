@@ -1,12 +1,12 @@
 ---
 layout: post
-title: chrome web inspector tips
+title: Chrome web inspector tips
 date: 2017-01-18 14:47:40 +0300
 access: public
 categories: [chrome]
 ---
 
-chrome web inspector tips.
+Chrome web inspector tips.
 
 <!-- more -->
 

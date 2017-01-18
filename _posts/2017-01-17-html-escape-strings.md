@@ -39,7 +39,7 @@ ways to:
   "hello &gt; \"world\""
   ```
 
-  NOTE: it doesn't unescape all HTML entities! (e.g. it concerns `&lt;`/`&gt;`)
+  NOTE: it doesn't unescape all HTML entities! (e.g. as is the case with `&lt;`/`&gt;`)
 
 ## unescape
 

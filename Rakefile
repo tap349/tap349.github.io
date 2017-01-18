@@ -3,7 +3,7 @@ namespace :post do
   task :create, [:title, :access] do |_t, args|
     args.with_defaults access: :public
 
-    title = args.title.gsub ' ', '-'
+    title = args.title.gsub(' ', '-').downcase
     date = Time.new.strftime '%Y-%m-%d'
     filename = "_posts/#{date}-#{title}.md"
 

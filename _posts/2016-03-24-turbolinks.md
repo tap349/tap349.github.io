@@ -86,14 +86,14 @@ USE `page:change` instead - it's triggered when:
 
 in general just replace:
 
-```coffeescript
+```coffee
 $(document).ready ->
   alert 'page has loaded!'
 ```
 
 with
 
-```coffeescript
+```coffee
 $(document).on 'page:change', ->
   alert 'page has loaded!'
 ```
@@ -147,7 +147,7 @@ making a request - otherwise retrieves a fresh copy of the page from server.
 - again after every turbolinks visit
 - when navigating by history (clicking *back* in browser)
 
-```coffeescript
+```coffee
 $(document).on 'turbolinks:load', ->
   alert 'page has loaded!'
 ```
@@ -181,7 +181,7 @@ instead to register event listeners once on `document` or `window`.
 > the event originated. it allows us to attach a single event listener for
 > elements that exist now or in the future:
 
-```coffeescript
+```coffee
 $('#list').on 'click', 'a', (event) ->
   event.preventDefault()
   ...

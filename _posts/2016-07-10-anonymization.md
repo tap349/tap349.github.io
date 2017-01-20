@@ -13,6 +13,8 @@ anonymization tips.
 # sites to check anonymity and browser leaks
 
 - <https://whoer.net>
+- <https://ipleak.net>
+- <http://iknowwhatyoudownload.com>
 - <https://www.browserleaks.com>
 - <https://2ip.ru>
 

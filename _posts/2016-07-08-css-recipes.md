@@ -6,7 +6,7 @@ access: public
 categories: [css]
 ---
 
-solutions to common problems related to CSS.
+CSS recipes.
 
 <!-- more -->
 

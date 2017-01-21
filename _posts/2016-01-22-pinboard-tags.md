@@ -41,3 +41,11 @@ differences between similar tags on pinboard
 - **styleguide**:
 - **tips**:
 - **reference**:
+
+### tags related to IT security
+
+- **security**: general tag for resources related to IT security
+- **censorship**: how to access resources banned by government
+- **torrent**: all about torrents (not necessarily about IT security)
+- **anonymous**: privacy and related matters
+- **vpn**: all about vpn

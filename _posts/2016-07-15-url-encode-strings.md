@@ -18,35 +18,35 @@ ways to:
 
 #### hash
 
-`#to_query` (aliased to `#to_param`):
+- `#to_query` (aliased to `#to_param`):
 
-```ruby
-(dev)> { redirect_url: 'http://test.com?message=привет' }.to_query
-"redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
-```
+  ```ruby
+  (dev)> { redirect_url: 'http://test.com?message=привет' }.to_query
+  "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+  ```
 
-`Addressable::URI.form_encode`:
+- `Addressable::URI.form_encode`:
 
-```ruby
-(dev)> Addressable::URI.form_encode({ 'redirect_url' => 'http://test.com?message=привет' })
-"redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
-```
+  ```ruby
+  (dev)> Addressable::URI.form_encode({ 'redirect_url' => 'http://test.com?message=привет' })
+  "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+  ```
 
 #### array
 
-`URI.encode_www_form`:
+- `URI.encode_www_form`:
 
-```ruby
-(dev)> URI.encode_www_form [['redirect_url', 'http://test.com?message=привет']]
-"redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
-```
+  ```ruby
+  (dev)> URI.encode_www_form [['redirect_url', 'http://test.com?message=привет']]
+  "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+  ```
 
-`Addressable::URI.form_encode`:
+- `Addressable::URI.form_encode`:
 
-```ruby
-(dev)> Addressable::URI.form_encode [['redirect_url', 'http://test.com?message=привет']]
-"redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
-```
+  ```ruby
+  (dev)> Addressable::URI.form_encode [['redirect_url', 'http://test.com?message=привет']]
+  "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+  ```
 
 #### string
 
@@ -68,17 +68,29 @@ ways to:
 
 #### to array
 
-`URI.decode_www_form`:
+- `URI.decode_www_form`:
 
-```ruby
-(dev)> URI.decode_www_form "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
-[
-    [0] [
-        [0] "redirect_url",
-        [1] "http://test.com?message=привет"
-    ]
-]
-```
+  ```ruby
+  (dev)> URI.decode_www_form "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+  [
+      [0] [
+          [0] "redirect_url",
+          [1] "http://test.com?message=привет"
+      ]
+  ]
+  ```
+
+- `Addressable::URI.form_unencode`:
+
+  ```ruby
+  (dev)> Addressable::URI.form_unencode "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+  [
+      [0] [
+          [0] "redirect_url",
+          [1] "http://test.com?message=привет"
+      ]
+  ]
+  ```
 
 #### to string
 

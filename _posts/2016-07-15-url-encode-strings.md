@@ -25,12 +25,26 @@ ways to:
 "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
 ```
 
+`Addressable::URI.form_encode`:
+
+```ruby
+(dev)> Addressable::URI.form_encode({ 'redirect_url' => 'http://test.com?message=привет' })
+"redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+```
+
 #### array
 
 `URI.encode_www_form`:
 
 ```ruby
 (dev)> URI.encode_www_form [['redirect_url', 'http://test.com?message=привет']]
+"redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+```
+
+`Addressable::URI.form_encode`:
+
+```ruby
+(dev)> Addressable::URI.form_encode [['redirect_url', 'http://test.com?message=привет']]
 "redirect_url=http%3A%2F%2Ftest.com%3Fmessage%3D%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
 ```
 

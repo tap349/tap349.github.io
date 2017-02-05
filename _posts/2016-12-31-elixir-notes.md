@@ -230,6 +230,33 @@ function consists of head and body:
   Enum.each [1, 2, 3, 4], &IO.inspect/1
   ```
 
+- get partially applied named function (currying)
+
+  - <http://blog.patrikstorm.com/function-currying-in-elixir>
+  - <https://github.com/Qqwy/elixir_currying>
+
+  it's possible to apply named function partially and pass it as another
+  function argument (named function becomes anonymous one in this case).
+  unlike real currying you cannot further apply more arguments - only
+  once when passing partially applied named function to another function.
+
+  ```sh
+  iex> defmodule Example do
+  ...>   def pad_leading word, padding do
+  ...>     String.pad_leading(word, String.length(word) + padding)
+  ...>   end
+  ...> end
+  {:module, Example, ..., {:pad_leading, 2}}
+  iex> partially_applied_fun = &Example.pad_leading(&1, 3)
+  #Function<6.52032458/1 in :erl_eval.expr/5>
+  iex> partially_applied_fun.("foo")
+  "   foo"
+  iex> partially_applied_fun = &Example.pad_leading("foo", &1)
+  #Function<6.52032458/1 in :erl_eval.expr/5>
+  iex> partially_applied_fun.(4)
+  "    foo"
+  ```
+
 ### do...end block
 
 `do...end` block is a way to group expressions treating them as a single entity.
@@ -633,9 +660,9 @@ functions for lists:
 
 ```elixir
 opts = [%{foo: :bar}, %{foo: :baz}]
-# get all elements of the list opts
+# get all :foo values of the list opts
 get_in(opts, [Access.all(), :foo]) # [:bar, :baz]
-# get all elements of the list opts
+# get the 1st :foo value of the list opts
 get_in(opts, [Access.at(0), :foo]) # :bar
 ```
 
@@ -855,7 +882,31 @@ iex> <<257>>
 <<2.5::float>> # <<64, 4, 0, 0, 0, 0, 0, 0>>
 ```
 
-### strings and character lists
+### strings
+
+string (aka dqs - double-quoted string) is UTF-8 encoded binary
+(which is a bitstring where the number of bits is divisible by 8).
+
+from <https://hexdocs.pm/elixir/String.html>:
+
+- codepoint is a single Unicode character
+  (may be represented by 1+ bytes)
+- grapheme can consist of multiple codepoints
+  (that may be perceived as a single character by readers)
+
+```sh
+iex> string = "\u0065\u0301"
+iex> byte_size(string)
+3
+iex> String.length(string)
+1
+iex> String.codepoints(string)
+["e", "́"]
+iex> String.graphemes(string)
+["é"]
+```
+
+#### strings vs. character lists
 
 - "hello" - string
 - 'hello' - character list

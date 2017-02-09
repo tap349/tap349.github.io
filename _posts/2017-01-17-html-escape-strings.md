@@ -43,7 +43,7 @@ ways to:
 
 ## unescape
 
-- `CGI.escapeHTML`
+- `CGI.unescapeHTML`
 
   ```ruby
   (dev)> CGI.unescapeHTML 'hello &quot;world&quot;!'

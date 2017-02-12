@@ -30,7 +30,7 @@ require 'bundler/setup' # Set up gems listed in the Gemfile.
 
 also bundler is used to manage application dependencies (gemsets) -
 RVM provides functionality to do it as well but bundler is a better way.
-rbenv doesn't manage gemsets at all in contrast with RVM.
+rbenv doesn't manage gemsets at all in contrast to RVM.
 
 there might be multiple versions of the same gem installed for particular ruby
 version but project uses gem versions from bundle (specified in _Gemfile.lock_).

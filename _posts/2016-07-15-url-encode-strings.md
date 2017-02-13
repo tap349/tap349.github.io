@@ -12,6 +12,8 @@ ways to:
   array or string
 - decode it back into either array or string
 
+NOTE: this type of encoding is sometimes referred to as percent-encoding.
+
 <!-- more -->
 
 ## encode

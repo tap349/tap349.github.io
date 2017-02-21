@@ -601,13 +601,16 @@ defmodule User do
 end
 ```
 
-NOTE: [access syntax](#access-module) cannot be used to access struct fields:
+NOTE: [access syntax](#access-module) cannot be used to access struct fields
+(only field-based lookup):
 
 ```sh
 iex> user = %User{}
 iex> user[:name]
 ** (UndefinedFunctionError) function User.fetch/2 is undefined
 (User does not implement the Access behaviour)
+iex> user.name
+nil
 ```
 
 ### nested accessors (from `Kernel` module)
@@ -631,9 +634,9 @@ functions are dynamic ones.
 path in macros is extracted using, well, macro this way:
 
 ```elixir
-# using access syntax (maps and keyword lists)
+# using access syntax (maps and keyword lists - but not structs)
 put_in(opts[:foo][:bar], :baz)
-# using field-based lookup (maps only)
+# using field-based lookup (maps only - including structs)
 put_in(opts.foo.bar, :baz)
 # both are equivalent to
 put_in(opts, [:foo, :bar], :baz)

@@ -634,7 +634,7 @@ functions are dynamic ones.
 path in macros is extracted using, well, macro this way:
 
 ```elixir
-# using access syntax (maps and keyword lists - but not structs)
+# using access syntax (keyword lists and maps - but not structs)
 put_in(opts[:foo][:bar], :baz)
 # using field-based lookup (maps only - including structs)
 put_in(opts.foo.bar, :baz)

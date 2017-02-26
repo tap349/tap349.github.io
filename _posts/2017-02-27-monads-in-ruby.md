@@ -27,7 +27,7 @@ monad is created by defining:
   to lift a value is to create a monad from a plain value: `Either::Right(5)`.
   lifted value is called a monadic value.
 
-- operations (only the first is obligatory for all monads):
+- operations (only the first one is obligatory for all monads):
 
   - `bind: m a -> (a -> m b) -> m b`
 

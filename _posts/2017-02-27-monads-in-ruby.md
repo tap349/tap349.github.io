@@ -12,9 +12,9 @@ notes on using [dry-monads](http://dry-rb.org/gems/dry-monads/).
 
 ## definition of monad
 
+- https://vimeo.com/97344498
 - https://en.wikipedia.org/wiki/Monad_(functional_programming)
 - http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html
-- https://vimeo.com/97344498
 
 monad is created by defining:
 
@@ -25,7 +25,7 @@ monad is created by defining:
   but it's just a Ruby-specific implementation detail).
 
   to lift a value is to create a monad from a plain value: `Either::Right(5)`.
-  lifted value is called a monadic value.
+  lifted value is also a monadic value.
 
 - operations (only the first one is obligatory for all monads):
 
@@ -67,7 +67,10 @@ each one has 2 type constructors:
 
 ### usage example
 
-here I use monad and monadic value interchangeably though it's not the same:
+- http://blog.reverberate.org/2015/08/monads-demystified.html
+
+here I use monad and monadic value interchangeably though it's not the same
+(monadic value is an instance of the monad's type):
 
 ```ruby
 class Site::Create < CreateBase

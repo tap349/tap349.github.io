@@ -45,7 +45,7 @@ monad is created by defining:
 
   - `fmap: m a -> (a -> b) -> m b`
 
-    it's used for single-track function (term from ROP) -
+    it's used for single-track function (term from [ROP](http://fsharpforfunandprofit.com/rop/)) -
     they are supposed to succeed all the time.
     it just lifts the result for you (wraps return value in monad).
 

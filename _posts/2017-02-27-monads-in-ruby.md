@@ -94,23 +94,20 @@ class Site::Create < CreateBase
   # function call in the pipeline - if it was successful of course)
   def after_create model, force_collect
     Right(model)
-      .tee(method(:update_email)).to_either
+      .tee(method(:update_email))
       .tee(method(:send_email))
       .bind(method(:set_main_mirror))
       .bind(method(:_create_site_setting))
       .fmap(method(:collect_products), force_collect)
   end
 
-  # Try monad doesn't have tee method - convert it to Either monad
-  # if you need to chain on result using tee method
-  # (strictly speaking it's necessary only if exception occurs -
-  # otherwise input Either::Right is returned because of using tee
-  # and you don't have to use to_either)
+  # convert Try monad to Either one using Try#to_either when
   #
-  # also always convert Try monad to Either monad if it's the last call
-  # in the pipeline because Try::Failure#value always returns nil while
-  # Either::Left#value will contain exception itself (Try::Failure#exception)
-  # - this is what we need later when generating error message
+  # - you need to chain on result using tee method
+  #   (Try monad doesn't implement it)
+  # - this is the last call in the pipeline
+  #   (Try::Failure#value returns nil while Either::Left#value returns exception
+  #   itself from Try::Failure#exception - we need it to generate error message)
   #
   # I call model.update! here to demonstrate usage of Try monad only -
   # it's much better either to call operation that returns Either monad
@@ -120,7 +117,7 @@ class Site::Create < CreateBase
   # as a rule use Try monad when the code you call can throw exception and
   # you can't control it (e.g. can't make it return Either monad instead)
   def update_email! model
-    Try(ActiveRecord::RecordInvalid) { model.update! email: model.user.email }
+    Try(ActiveRecord::RecordInvalid) { model.update! email: model.user.email }.to_either
   end
 
   # must return monad if used with tee

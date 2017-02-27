@@ -95,6 +95,8 @@ class Site::Create < CreateBase
 
   # Try monad doesn't have tee method - convert it to Either monad
   # if you need to chain using tee method on result
+  # (strictly speaking it's necessary only if exception occurs -
+  # otherwise input Either::Right is returned because of using tee)
   #
   # also always convert Try monad to Either monad if it's the last call
   # in the pipeline because Try::Failure#value always returns nil while
@@ -104,11 +106,10 @@ class Site::Create < CreateBase
   # I call model.update! here to demonstrate usage of Try monad only -
   # it's much better either to call operation that returns Either monad
   # or call model.update and return Either monad explicitly
-  # (in both cases use bind instead of tee - Either monad would wrap
-  # model itself in case of success or error messages in case of failure).
+  # (in both cases use bind instead of tee - see example below)
   #
-  # as a rule use Try monad when the code you call can throw exception
-  # and you can't control it (e.g. make it return Either monad instead)
+  # as a rule use Try monad when the code you call can throw exception and
+  # you can't control it (e.g. can't make it return Either monad instead)
   def update_email! model
     Try(ActiveRecord::RecordInvalid) { model.update! email: model.user.email }
   end
@@ -118,7 +119,10 @@ class Site::Create < CreateBase
     Right SiteMailer.site_created(model).deliver_later
   end
 
-  # example of returning Either monad explicitly after updating model
+  # - generate custom error message if fetching main mirror failed:
+  #   service always returns url (original url in case of failure)
+  # - return Either monad explicitly after updating model
+  #   (wraps model in case of success and error message in case of failure)
   def set_main_mirror model
     result = fetch_main_mirror.(model.domain)
     return Left(MAIN_MIRROR_NOT_FETCHED) if result.failure?

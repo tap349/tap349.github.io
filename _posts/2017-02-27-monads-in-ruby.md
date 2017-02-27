@@ -73,7 +73,12 @@ here I use monad and monadic value interchangeably though it's not the same
 (monadic value is an instance of the monad's type):
 
 ```ruby
+require 'my_app/inject'
+
 class Site::Create < CreateBase
+  include Dry::Monads::Either::Mixin
+  include Dry::Monads::Try::Mixin
+
   include MyApp::Inject[
     'svcs.fetch_main_mirror',
     'ops.create_site_setting'

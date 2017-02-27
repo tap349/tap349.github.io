@@ -33,14 +33,15 @@ monad is created by defining:
 
     `bind` function is often aliased as `>>=` (like in Haskell).
 
-    it takes one monad (wrapping `a`) and a function transforming `a`
-    into another monad (wrapping `b`) and returns that another monad.
+    it takes one monadic value (wrapping `a`) and a function transforming `a` into
+    another monadic value (wrapping `b`) and returns that another monadic value.
 
-    in other words: it allows for a function accepting plain value to have
-    monadic value as input - next `bind` function either unlifts monadic value
-    (if monadic value is of one type - `Either::Right` for `Either` monad)
-    feeding plain value to the function or immediately returns original monadic
-    value (if it's of another type - `Either::Left` for `Either` monad).
+    it allows for a function accepting plain value to have monadic value as input:
+    `bind` function either
+    (1) unlifts monadic value feeding wrapped plain value to the function
+    (when success - monadic value has `Either::Right` type for `Either` monad)
+    or (2) immediately returns original monadic value
+    (when failure - monadic value has `Either::Left` type for `Either` monad).
 
   - `fmap: m a -> (a -> b) -> m b`
 
@@ -64,5 +65,79 @@ each one has 2 type constructors:
 - `Either`: `Right`/`Left`
 - `Try`: `Success`/`Failure`
 
-note that you cannot create `Try` monadic value (`Success` or `Failure`)
-explicitly - it's implicitly returned by wrapping some code into `Try` monad.
+### usage example
+
+here I use monad and monadic value interchangeably though it's not the same:
+
+```ruby
+class Site::Create < CreateBase
+  include MyApp::Inject[
+    'svcs.fetch_main_mirror',
+    'ops.create_site_setting'
+  ]
+
+  MAIN_MIRROR_NOT_FETCHED = 'error fetching main mirror'
+  DB_SITE_SETTING_NOT_CREATED = 'site setting not created'
+
+  # pass procs (Method objects) instead of blocks to monad methods
+  #
+  # pass additional function arguments after the proc argument
+  # (the first function argument is unlifted return value from previous
+  # function call in the pipeline - if it was successful of course)
+  def after_create model, force_collect
+    Right(model)
+      .tee(method(:update_email)).to_either
+      .tee(method(:send_email))
+      .bind(method(:set_main_mirror))
+      .bind(method(:_create_site_setting))
+      .fmap(method(:collect_products), force_collect)
+  end
+
+  # Try monad doesn't have tee method - convert it to Either monad
+  # if you need to chain using tee method on result
+  #
+  # also always convert Try monad to Either monad if it's the last call
+  # in the pipeline because Try::Failure#value always returns nil while
+  # Either::Left#value will contain exception itself (Try::Failure#exception)
+  # - this is what we need later when generating error message
+  #
+  # I call model.update! here to demonstrate usage of Try monad only -
+  # it's much better either to call operation that returns Either monad
+  # or call model.update and return Either monad explicitly
+  # (in both cases use bind instead of tee - Either monad would wrap
+  # model itself in case of success or error messages in case of failure).
+  #
+  # as a rule use Try monad when the code you call can throw exception
+  # and you can't control it (e.g. make it return Either monad instead)
+  def update_email! model
+    Try(ActiveRecord::RecordInvalid) { model.update! email: model.user.email }
+  end
+
+  # must return monad even though it's not used (bug in dry-monads?)
+  def send_email model
+    Right SiteMailer.site_created(model).deliver_later
+  end
+
+  # example of returning Either monad explicitly after updating model
+  def set_main_mirror model
+    result = fetch_main_mirror.(model.domain)
+    return Left(MAIN_MIRROR_NOT_FETCHED) if result.failure?
+
+    model.update(domain: URL.host(result.value))
+    model.errors.none? ? Right(model) : Left(model.errors.full_messages)
+  end
+
+  # TODO: add site setting error messages if it's not created
+  def _create_site_setting model
+    result = create_site_setting.(site_id: model.id)
+    result.success? ? Right(model) : Left(DB_SITE_SETTING_NOT_CREATED)
+  end
+
+  # we don't care about the result here and thus can use just fmap that
+  # lifts the result for us (that is wraps any return value into Right)
+  def collect_products model, force_collect
+    return unless model.data_source_SITE?
+    Diffbot::AnalyzeJob.perform_assured(model.site_setting, force_collect)
+  end
+end
+```

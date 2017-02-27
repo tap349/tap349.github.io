@@ -118,8 +118,10 @@ class Site::Create < CreateBase
   #
   # as a rule use Try monad when the code you call can throw exception and
   # you can't control it (e.g. can't make it return Either monad instead)
+  #
+  # it's better to list checked exceptions explicitly in Try()
   def update_email! model
-    Try(ActiveRecord::RecordInvalid) { model.update! email: model.user.email }.to_either
+    Try { model.update! email: model.user.email }.to_either
   end
 
   # must return monad if used with tee

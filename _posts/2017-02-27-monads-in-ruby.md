@@ -94,7 +94,7 @@ class Site::Create < CreateBase
   end
 
   # Try monad doesn't have tee method - convert it to Either monad
-  # if you need to chain using tee method on result
+  # if you need to chain on result using tee method
   # (strictly speaking it's necessary only if exception occurs -
   # otherwise input Either::Right is returned because of using tee)
   #

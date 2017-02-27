@@ -53,8 +53,8 @@ monad is created by defining:
 
     in case of dry-monads `tee` function is supposed to take monadic value
     (`Try` monad doesn't implement it - only `Maybe` and `Either` monads do)
-    and return monadic value as well - even though return value is discarded
-    since input monadic value is always returned.
+    and return monadic value as well - the latter is used only in case of
+    failure otherwise input monadic value is returned.
 
 ## monads in dry-monads
 
@@ -104,7 +104,8 @@ class Site::Create < CreateBase
   # Try monad doesn't have tee method - convert it to Either monad
   # if you need to chain on result using tee method
   # (strictly speaking it's necessary only if exception occurs -
-  # otherwise input Either::Right is returned because of using tee)
+  # otherwise input Either::Right is returned because of using tee
+  # and you don't have to use to_either)
   #
   # also always convert Try monad to Either monad if it's the last call
   # in the pipeline because Try::Failure#value always returns nil while
@@ -122,7 +123,7 @@ class Site::Create < CreateBase
     Try(ActiveRecord::RecordInvalid) { model.update! email: model.user.email }
   end
 
-  # must return monad even though it's not used (bug in dry-monads?)
+  # must return monad if used with tee
   def send_email model
     Right SiteMailer.site_created(model).deliver_later
   end

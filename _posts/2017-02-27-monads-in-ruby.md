@@ -84,6 +84,8 @@ class Site::Create < CreateBase
     'ops.create_site_setting'
   ]
 
+  alias :m :method
+
   MAIN_MIRROR_NOT_FETCHED = 'error fetching main mirror'
   DB_SITE_SETTING_NOT_CREATED = 'site setting not created'
 
@@ -94,11 +96,11 @@ class Site::Create < CreateBase
   # function call in the pipeline - if it was successful of course)
   def after_create model, force_collect
     Right(model)
-      .tee(method(:update_email))
-      .tee(method(:send_email))
-      .bind(method(:set_main_mirror))
-      .bind(method(:_create_site_setting))
-      .fmap(method(:collect_products), force_collect)
+      .tee(m(:update_email))
+      .tee(m(:send_email))
+      .bind(m(:set_main_mirror))
+      .bind(m(:_create_site_setting))
+      .fmap(m(:collect_products), force_collect)
   end
 
   # convert Try monad to Either one using Try#to_either when

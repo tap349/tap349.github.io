@@ -65,7 +65,7 @@ each one has 2 type constructors:
 - `Either`: `Right`/`Left`
 - `Try`: `Success`/`Failure`
 
-### usage example
+### using dry-monads
 
 - http://blog.reverberate.org/2015/08/monads-demystified.html
 
@@ -151,6 +151,33 @@ class Site::Create < CreateBase
   def collect_products model, force_collect
     return unless model.data_source_SITE?
     Diffbot::AnalyzeJob.perform_assured(model.site_setting, force_collect)
+  end
+end
+```
+
+### using dry-matcher to match on result
+
+```ruby
+require 'dry/matcher/either_matcher'
+
+class OperationBase
+  def raise_on_failure! result, model
+    # works both with Either and Try monads
+    Dry::Matcher::EitherMatcher.(result) do |m|
+      m.failure do |value|
+        raise OperationError, error_message(value, model)
+      end
+    end
+  end
+end
+```
+
+in this simple case it's possible to avoid using matcher at all:
+
+```ruby
+class OperationBase
+  def raise_on_failure! result, model
+    raise OperationError, error_message(value, model) if result.failure?
   end
 end
 ```

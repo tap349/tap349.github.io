@@ -12,9 +12,9 @@ notes on using [dry-monads](http://dry-rb.org/gems/dry-monads/).
 
 ## definition of monad
 
-- https://vimeo.com/97344498
-- https://en.wikipedia.org/wiki/Monad_(functional_programming)
-- http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html
+- <https://vimeo.com/97344498>
+- <https://en.wikipedia.org/wiki/Monad_(functional_programming)>
+- <http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html>
 
 monad is created by defining:
 

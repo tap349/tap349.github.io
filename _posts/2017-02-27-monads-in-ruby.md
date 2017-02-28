@@ -58,35 +58,57 @@ monad is created by defining:
 
 ## monads in dry-monads
 
-3 monads are available in dry-monads: `Maybe`, `Either` and `Try`.
-each has 2 type constructors:
+### monads
+
+3 monads are available in dry-monads: `Maybe`, `Either` and `Try`
+each having 2 type constructors:
 
 - `Maybe`: `Some`/`None`
 - `Either`: `Right`/`Left`
+
+  convert all other monads to `Either` monad for uniform processing.
+
 - `Try`: `Success`/`Failure`
+
+  use it to wrap function that:
+
+  - calls some library code that might throw exceptions and you
+    can't control it in any other way
+  - creates and updates model in place with method that throws exception
+    (`create!`/`update!`/etc.)
+
+  `Try` monad block unless used in conjunction with `tee` must return
+  something meaningful (e.g. model in operation methods).
+  it's recommended to specify expected exceptions in `Try` constructor.
+
+### monad methods
+
+monads have the following methods:
 
 - `bind` (all monads)
 
-  use `bind` when you need to pass function output down the chain:
+  use `bind` when you need to pass function result down the chain:
 
   - function updates operation model
-    (in any case return `Either` monad - either wrap model/error in `Either`
-    monad or convert `Try` monad to `Either` one when using the former)
+
+    function must always return `Either` monad:
+    either wrap model/error in `Either` monad manually or
+    convert `Try` monad to `Either` one if using the former
 
 - `fmap` (all monads)
 
-  use `fmap` when you need to pass function output down the chain
+  use `fmap` when you need to pass function result down the chain
   and nothing can go wrong in that function:
 
   - function normalizes url or adds utm tags to url
 
 - `tee` (`Maybe` and `Either` monads only)
 
-  use `tee` when wrapped function is called for side effects only and
-  doesn't return anything meaningful that needs to be passed down the chain:
+  use `tee` when function is called for side effects only and
+  doesn't return anything meaningful that must be passed down the chain:
 
-  - function queues asynchronous tasks (e.g. Sidekiq)
-  - function creates or updates related models (e.g. associations)
+  - function queues asynchronous tasks (Sidekiq)
+  - function creates or updates related models (associations)
     but not operation model itself
 
 ### using dry-monads

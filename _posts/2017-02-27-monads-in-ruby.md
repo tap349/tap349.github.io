@@ -113,7 +113,7 @@ monads have the following methods:
 
 ### using dry-monads
 
-- http://blog.reverberate.org/2015/08/monads-demystified.html
+- <http://blog.reverberate.org/2015/08/monads-demystified.html>
 
 here I use monad and monadic value interchangeably though it's not the same
 (monadic value is an instance of the monad's type):

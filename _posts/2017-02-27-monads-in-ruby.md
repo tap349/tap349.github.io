@@ -60,26 +60,19 @@ monad is created by defining:
 
 ### monads
 
-3 monads are available in dry-monads: `Maybe`, `Either` and `Try`
+3 monads are available in dry-monads: `Maybe`, `Either` and `Try` -
 each having 2 type constructors:
 
 - `Maybe`: `Some`/`None`
 - `Either`: `Right`/`Left`
-
-  convert all other monads to `Either` monad for uniform processing.
-
 - `Try`: `Success`/`Failure`
 
-  use it to wrap function that:
+  use it to call function that:
 
-  - calls some library code that might throw exceptions and you
-    can't control it in any other way
+  - uses some library functions (gems) that might throw exceptions and
+    you can't control it in any other way
   - creates and updates model in place with method that throws exception
     (`create!`/`update!`/etc.)
-
-  `Try` monad block unless used in conjunction with `tee` must return
-  something meaningful (e.g. model in operation methods).
-  it's recommended to specify expected exceptions in `Try` constructor.
 
 ### monad methods
 
@@ -90,10 +83,6 @@ monads have the following methods:
   use `bind` when you need to pass function result down the chain:
 
   - function updates operation model
-
-    function must always return `Either` monad:
-    either wrap model/error in `Either` monad manually or
-    convert `Try` monad to `Either` one if using the former
 
 - `fmap` (all monads)
 
@@ -110,6 +99,42 @@ monads have the following methods:
   - function queues asynchronous tasks (Sidekiq)
   - function creates or updates related models (associations)
     but not operation model itself
+
+### tips
+
+- always convert `Try` monad to `Either` one using `Try#to_either` because:
+
+  - `Try` monad doesn't implement `tee` method
+    (if you need to chain on result using `tee` method)
+  - `Try::Failure#value` returns nil while `Either::Left#value` returns exception
+    itself from `Try::Failure#exception` - we need it to generate error message
+    (in case of failure this result is eventually returned from the chain)
+
+- function should always return `Either` monad for uniform processing:
+
+  - for `bind` return:
+    - `Right(model)` or `Left(error_message)` if nothing returns monad
+    - result of calling another function if it returns `Either` monad
+      (say, some service or operation from DI container)
+    - `Try` monad converted to `Either` one if the former is used
+      (`Try` monad block must return something meaningful - e.g. model)
+
+  - for `tee` return:
+    - dummy `Right(nil)` or `Left(error_message)` if nothing returns monad
+      (since we don't care about the result in case of success)
+    - result of calling another function if it returns `Either` monad
+      (say, some service or operation from DI container)
+    - `Try` monad converted to `Either` one if the former is used
+      (`Try` monad block can return anything - it won't be used anyway)
+
+- when updating model in place it's better to use methods that throw exceptions
+  (`create!`/`update!`/etc.) and wrap them in `Try` monad
+  (don't forget to convert it to `Either` monad - see the first tip)
+  than to use their counterparts without `!` and check for errors manually
+  (returning either `Right(model)` or `Left(model.errors.full_messages)`).
+  rationale: exception contains all the necessary validation error messages.
+
+- it's recommended to specify expected exceptions when using `Try` monad
 
 ### using dry-monads
 
@@ -149,28 +174,10 @@ class Site::Create < CreateBase
       .fmap(m(:collect_products), force_collect)
   end
 
-  # convert Try monad to Either one using Try#to_either all the time because:
-  #
-  # - Try monad doesn't implement tee method
-  #   (if you need to chain on result using tee method)
-  # - Try::Failure#value returns nil while Either::Left#value returns exception
-  #   itself from Try::Failure#exception - we need it to generate error message
-  #   (in case of failure this result is eventually returned from the chain)
-  #
-  # I call model.update! here to demonstrate usage of Try monad only -
-  # it's much better either to call operation that returns Either monad
-  # or call model.update and return Either monad explicitly
-  # (in both cases use bind instead of tee - see example below)
-  #
-  # as a rule use Try monad when the code you call can throw exception and
-  # you can't control it (e.g. can't make it return Either monad instead)
-  #
-  # it's better to list checked exceptions explicitly in Try()
   def update_email! model
     Try { model.update! email: model.user.email }.to_either
   end
 
-  # must return monad if used with tee
   def send_email model
     Right SiteMailer.site_created(model).deliver_later
   end

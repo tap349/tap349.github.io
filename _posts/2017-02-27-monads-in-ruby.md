@@ -59,11 +59,35 @@ monad is created by defining:
 ## monads in dry-monads
 
 3 monads are available in dry-monads: `Maybe`, `Either` and `Try`.
-each one has 2 type constructors:
+each has 2 type constructors:
 
 - `Maybe`: `Some`/`None`
 - `Either`: `Right`/`Left`
 - `Try`: `Success`/`Failure`
+
+- `bind` (all monads)
+
+  use `bind` when you need to pass function output down the chain:
+
+  - function updates operation model
+    (in any case return `Either` monad - either wrap model/error in `Either`
+    monad or convert `Try` monad to `Either` one when using the former)
+
+- `fmap` (all monads)
+
+  use `fmap` when you need to pass function output down the chain
+  and nothing can go wrong in that function:
+
+  - function normalizes url or adds utm tags to url
+
+- `tee` (`Maybe` and `Either` monads only)
+
+  use `tee` when wrapped function is called for side effects only and
+  doesn't return anything meaningful that needs to be passed down the chain:
+
+  - function queues asynchronous tasks (e.g. Sidekiq)
+  - function creates or updates related models (e.g. associations)
+    but not operation model itself
 
 ### using dry-monads
 

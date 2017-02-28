@@ -103,13 +103,13 @@ class Site::Create < CreateBase
       .fmap(m(:collect_products), force_collect)
   end
 
-  # convert Try monad to Either one using Try#to_either when
+  # convert Try monad to Either one using Try#to_either all the time because:
   #
-  # - you need to chain on result using tee method
-  #   (Try monad doesn't implement it)
-  # - this is the last call in the pipeline
-  #   (Try::Failure#value returns nil while Either::Left#value returns exception
-  #   itself from Try::Failure#exception - we need it to generate error message)
+  # - Try monad doesn't implement tee method
+  #   (if you need to chain on result using tee method)
+  # - Try::Failure#value returns nil while Either::Left#value returns exception
+  #   itself from Try::Failure#exception - we need it to generate error message
+  #   (in case of failure this result is eventually returned from the chain)
   #
   # I call model.update! here to demonstrate usage of Try monad only -
   # it's much better either to call operation that returns Either monad

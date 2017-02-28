@@ -113,14 +113,14 @@ monads have the following methods:
 - function should always return `Either` monad for uniform processing:
 
   - for `bind` return:
-    - `Right(model)` or `Left(error_message)` if nothing returns monad
+    - `Right(model)` or `Left(error_message)` if nothing else returns monad
     - result of calling another function if it returns `Either` monad
       (say, some service or operation from DI container)
     - `Try` monad converted to `Either` one if the former is used
       (`Try` monad block must return something meaningful - e.g. model)
 
   - for `tee` return:
-    - dummy `Right(nil)` or `Left(error_message)` if nothing returns monad
+    - `Right(nil)` or `Left(error_message)` if nothing else returns monad
       (since we don't care about the result in case of success)
     - result of calling another function if it returns `Either` monad
       (say, some service or operation from DI container)

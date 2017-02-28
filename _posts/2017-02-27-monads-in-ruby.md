@@ -67,12 +67,10 @@ each having 2 type constructors:
 - `Either`: `Right`/`Left`
 - `Try`: `Success`/`Failure`
 
-  use it to call function that:
+  use it to call function that might throw exception. e.g. when function:
 
-  - uses some library functions (gems) that might throw exceptions and
-    you can't control it in any other way
-  - creates and updates model in place with method that throws exception
-    (`create!`/`update!`/etc.)
+  - uses external library (gem)
+  - creates or updates model with bang methods (`create!`/`update!`/etc.)
 
 ### monad methods
 

@@ -177,11 +177,10 @@ monads have the following methods:
 
   such functions are not supposed to throw exceptions and
   should not be wrapped in `Try` monad at all.
-
   moreover their result (`Either` value) will be always wrapped in `Success`
-  thus plain value will be double wrapped in 2 monads: first `Either`,
-  then `Try` (`Success(Right(model)).to_either => Right(Right(model))`).
-  in the end it will be unlifted to monadic value - not plain value.
+  thus plain value will be double wrapped in 2 monads:
+  first `Either`, then `Try` (`Success(Right(model))`).
+  in the end this will be unlifted to monadic value - not plain value.
 
 - monadic value can be created either by passing method proc or block
 

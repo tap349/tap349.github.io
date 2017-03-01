@@ -108,22 +108,43 @@ monads have the following methods:
     itself from `Try::Failure#exception` - we need it to generate error message
     (in case of failure this result is eventually returned from the chain)
 
-- function should always return `Either` monad for uniform processing:
+- function should always return `Either` monad for uniform processing
 
-  - for `bind` return:
-    - `Right(model)` or `Left(error_message)` if nothing else returns monad
-    - result of calling another function if it returns `Either` monad
-      (say, some service or operation from DI container)
-    - `Try` monad converted to `Either` one if the former is used
-      (`Try` monad block must return something meaningful - e.g. model)
+  for all monad methods:
 
-  - for `tee` return:
-    - `Right(nil)` or `Left(error_message)` if nothing else returns monad
-      (since we don't care about the result in case of success)
-    - result of calling another function if it returns `Either` monad
-      (say, some service or operation from DI container)
-    - `Try` monad converted to `Either` one if the former is used
-      (`Try` monad block can return anything - it won't be used anyway)
+  - if calling another service or operation (say, from DI container)
+    that returns `Either` monad return either that monad if it wraps
+    what we need for further processing:
+
+    ```ruby
+    def _update_site_status model
+      update_site.(site_id: model.id, status: 'ACTIVE')
+    end
+    ```
+
+    or new `Either` monad that wraps what we need
+    (probably leaving original `Either::Left` monadic value intact
+    if it contains comprehensive error message with error source):
+
+    ```ruby
+    def _create_site_setting model
+      result = create_site_setting.(site_id: model.id)
+      result.success? ? Right(model) : result
+    end
+    ```
+
+  for `bind` return:
+
+  - `Right(model)` or `Left(error_message)` if nothing else returns monad
+  - `Try` monad converted to `Either` one if the former is used
+    (`Try` monad block must return something meaningful - e.g. model)
+
+  for `tee` return:
+
+  - `Right(nil)` or `Left(error_message)` if nothing else returns monad
+    (since we don't care about the result in case of success)
+  - `Try` monad converted to `Either` one if the former is used
+    (`Try` monad block can return anything - it won't be used anyway)
 
 - when updating model in place it's better to use methods that throw exceptions
   (`create!`/`update!`/etc.) and wrap them in `Try` monad
@@ -133,6 +154,31 @@ monads have the following methods:
   rationale: exception contains all the necessary validation error messages.
 
 - it's recommended to specify expected exceptions when using `Try` monad
+
+- monadic value can be created either by passing method proc or block
+
+  `Method` objects can be passed as well (obtained with `Object.method`) -
+  I guess anything that responds to `call` will do:
+
+  ```ruby
+  Right(model).bind { |model| set_main_mirror(model) } # block
+  Right(model).bind(method(:set_main_mirror)) # method object
+  Right(model).bind(&method(:set_main_mirror)) # proc
+  ```
+
+- pass additional function arguments after the proc argument
+  (the first function argument is unlifted return value from previous
+  function call in the pipeline - if it was successful of course)
+
+  ```ruby
+  Right(model).tee(method(:collect_products), force_collect)
+
+  def collect_products model, force_collect
+    ...
+  end
+  ```
+
+  IDK how to pass additional arguments when using blocks.
 
 ### using dry-monads
 
@@ -144,65 +190,43 @@ here I use monad and monadic value interchangeably though it's not the same
 ```ruby
 require 'my_app/inject'
 
-class Site::Create < CreateBase
+class Site::Create
   include Dry::Monads::Either::Mixin
   include Dry::Monads::Try::Mixin
 
-  include MyApp::Inject[
-    'svcs.fetch_main_mirror',
-    'ops.create_site_setting'
-  ]
+  include MyApp::Inject['svcs.fetch_main_mirror', 'ops.create_site_setting']
 
   alias :m :method
 
   MAIN_MIRROR_NOT_FETCHED = 'error fetching main mirror'
-  DB_SITE_SETTING_NOT_CREATED = 'site setting not created'
 
-  # pass procs (Method objects) instead of blocks to monad methods
-  #
-  # pass additional function arguments after the proc argument
-  # (the first function argument is unlifted return value from previous
-  # function call in the pipeline - if it was successful of course)
   def after_create model, force_collect
     Right(model)
-      .tee(m(:update_email))
-      .tee(m(:send_email))
       .bind(m(:set_main_mirror))
       .bind(m(:_create_site_setting))
-      .fmap(m(:collect_products), force_collect)
+      .tee(m(:collect_products), force_collect)
   end
 
-  def update_email! model
-    Try { model.update! email: model.user.email }.to_either
-  end
-
-  def send_email model
-    Right SiteMailer.site_created(model).deliver_later
-  end
-
-  # - generate custom error message if fetching main mirror failed:
-  #   service always returns url (original url in case of failure)
-  # - return Either monad explicitly after updating model
-  #   (wraps model in case of success and error message in case of failure)
   def set_main_mirror model
     result = fetch_main_mirror.(model.domain)
     return Left(MAIN_MIRROR_NOT_FETCHED) if result.failure?
 
-    model.update(domain: URL.host(result.value))
-    model.errors.none? ? Right(model) : Left(model.errors.full_messages)
+    Try do
+      model.update!(domain: URL.host(result.value))
+      model
+    end.to_either
   end
 
-  # TODO: add site setting error messages if it's not created
   def _create_site_setting model
     result = create_site_setting.(site_id: model.id)
-    result.success? ? Right(model) : Left(DB_SITE_SETTING_NOT_CREATED)
+    result.success? ? Right(model) : result
   end
 
-  # we don't care about the result here and thus can use just fmap that
-  # lifts the result for us (that is wraps any return value into Right)
-  def collect_products model, force_collect
-    return unless model.data_source_SITE?
-    Diffbot::AnalyzeJob.perform_assured(model.site_setting, force_collect)
+  def collect_products model
+    return Right(nil) unless model.data_source_SITE?
+    Diffbot::AnalyzeJob.perform_assured(model.site_setting)
+
+    Right(nil)
   end
 end
 ```

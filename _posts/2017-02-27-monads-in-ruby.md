@@ -183,7 +183,7 @@ monads have the following methods:
   then `Try` (`Success(Right(model)).to_either => Right(Right(model))`).
   in the end it will be unlifted to monadic value - not plain value.
 
-- monadic value can be created either by passing method proc or block
+6) monadic value can be created either by passing method proc or block
 
   `Method` objects can be passed as well (obtained with `Object.method`) -
   I guess anything that responds to `call` will do:
@@ -194,7 +194,7 @@ monads have the following methods:
   Right(model).bind(&method(:set_main_mirror)) # proc
   ```
 
-6) pass additional function arguments after the proc argument
+7) pass additional function arguments after the proc argument
   (the first function argument is unlifted return value from previous
   function call in the pipeline - if it was successful of course)
 

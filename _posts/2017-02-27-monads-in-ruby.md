@@ -47,7 +47,8 @@ monad is created by defining:
 
   - `fmap: m a -> (a -> b) -> m b`
 
-    it's used for single-track function (term from [ROP](http://fsharpforfunandprofit.com/rop/)) -
+    it's used for single-track function
+    (term from [ROP](http://fsharpforfunandprofit.com/rop/)) -
     they are supposed to succeed all the time.
     it just lifts the result for you (wraps return value in monad).
 
@@ -60,14 +61,28 @@ monad is created by defining:
 
 ## monads in dry-monads
 
+NOTE: terms 'monad' and 'monadic value' will be used interchangeably
+      when I'll be talking about returning monadic value from function
+      (I'll just say 'return that monad from function' though
+      strictly speaking it might be not correct).
+
 ### monads
 
 3 monads are available in dry-monads: `Maybe`, `Either` and `Try` -
-each having 2 type constructors (types):
+each having 2 types (subclasses):
 
-- `Maybe`: `Some`/`None`
-- `Either`: `Right`/`Left`
-- `Try`: `Success`/`Failure`
+- `Maybe`: `Maybe::Some`/`Maybe::None`
+- `Either`: `Either::Right`/`Either::Left`
+
+  `Either::Right` and `Either::Left` will be abbreviated as
+  `Right` and `Left` accordingly in this article
+  (this is how they are available after including corresponding mixin).
+
+- `Try`: `Try::Success`/`Try::Failure`
+
+  `Try::Success` and `Try::Failure` will be abbreviated as
+  `Success` and `Failure` accordingly in this article
+  (this is how they are available after including corresponding mixin).
 
   use it to call function that might throw exception. e.g. when function:
 
@@ -106,8 +121,8 @@ monads have the following methods:
 
   - `Try` monad doesn't implement `tee` method
     (if you need to chain on result using `tee` method)
-  - `Try::Failure#value` returns nil while `Either::Left#value` returns exception
-    itself from `Try::Failure#exception` - we need it to generate error message
+  - `Failure#value` returns nil while `Left#value` returns exception
+    itself from `Failure#exception` - we need it to generate error message
     (in case of failure this result is eventually returned from the chain)
 
 - function should always return `Either` monad for uniform processing
@@ -143,8 +158,7 @@ monads have the following methods:
 
   for `fmap` return:
 
-  - not lifted value which is supposed to be passed down the chain
-    (it will be wrapped with `Either::Right` monad type for `Either#fmap`)
+  - plain value which is supposed to be passed down the chain
 
   for `tee` return:
 
@@ -161,6 +175,14 @@ monads have the following methods:
   rationale: exception contains all the necessary validation error messages.
 
 - it's recommended to specify expected exceptions when using `Try` monad
+
+- don't call functions that return `Either` monad inside `Try` monad blocks
+
+  such functions are not supposed to throw exceptions and should not
+  be handled using `Try` monad at all.
+
+  moreover their result (`Either` monad) will be always wrapped in
+  `Success` class: `Success(Right(model)).to_either => Right(Right(model))`
 
 - monadic value can be created either by passing method proc or block
 

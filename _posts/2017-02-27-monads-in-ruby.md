@@ -181,6 +181,7 @@ monads have the following methods:
   such functions are not supposed to throw exceptions and should not
   be handled using `Try` monad at all.
 
+  # TODO
   moreover their result (`Either` monad) will be always wrapped in
   `Success` class: `Success(Right(model)).to_either => Right(Right(model))`
 

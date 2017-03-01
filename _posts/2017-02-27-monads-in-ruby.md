@@ -246,7 +246,7 @@ class Site::Create
 
   def collect_products model
     return Right(nil) unless model.data_source_SITE?
-    Diffbot::AnalyzeJob.perform_assured(model.site_setting)
+    CollectProductsJob.perform_assured(model.site_setting)
 
     Right(nil)
   end

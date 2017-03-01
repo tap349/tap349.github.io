@@ -16,6 +16,7 @@ notes on using [dry-monads](http://dry-rb.org/gems/dry-monads) and
 - <https://vimeo.com/97344498>
 - <https://en.wikipedia.org/wiki/Monad_(functional_programming)>
 - <http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html>
+- <http://blog.reverberate.org/2015/08/monads-demystified.html>
 
 monad is created by defining:
 
@@ -25,8 +26,8 @@ monad is created by defining:
   `Either::Right` and `Either::Left` (they are subclasses of `Either` class -
   but it's just a Ruby-specific implementation detail).
 
-  to lift a value is to create a monad from a plain value: `Either::Right(5)`.
-  lifted value is also a monadic value.
+  monadic value (aka lifted value) is an instance of the monad's type.
+  to lift a value is to wrap plain value in monad: `Either::Right(5)`.
 
 - operations (only the first one is obligatory for all monads):
 
@@ -62,7 +63,7 @@ monad is created by defining:
 ### monads
 
 3 monads are available in dry-monads: `Maybe`, `Either` and `Try` -
-each having 2 type constructors:
+each having 2 type constructors (types):
 
 - `Maybe`: `Some`/`None`
 - `Either`: `Right`/`Left`
@@ -140,6 +141,11 @@ monads have the following methods:
   - `Try` monad converted to `Either` one if the former is used
     (`Try` monad block must return something meaningful - e.g. model)
 
+  for `fmap` return:
+
+  - not lifted value which is supposed to be passed down the chain
+    (it will be wrapped with `Either::Right` monad type for `Either#fmap`)
+
   for `tee` return:
 
   - `Right(nil)` or `Left(error_message)` if nothing else returns monad
@@ -181,12 +187,7 @@ monads have the following methods:
 
   IDK how to pass additional arguments when using blocks.
 
-### using dry-monads
-
-- <http://blog.reverberate.org/2015/08/monads-demystified.html>
-
-here I use monad and monadic value interchangeably though it's not the same
-(monadic value is an instance of the monad's type):
+### example of using dry-monads
 
 ```ruby
 require 'my_app/inject'
@@ -232,7 +233,7 @@ class Site::Create
 end
 ```
 
-### using dry-matcher to match on result
+### example of using dry-matcher to match on result
 
 ```ruby
 require 'dry/matcher/either_matcher'

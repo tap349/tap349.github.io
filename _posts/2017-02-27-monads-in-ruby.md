@@ -114,7 +114,7 @@ monads have the following methods:
 
 ### tips
 
-- always convert `Try` value to `Either` one using `Try#to_either` because:
+1) always convert `Try` value to `Either` one using `Try#to_either` because:
 
   - `Try` monad doesn't implement `tee` method
     (if you need to chain on result using `tee` method)
@@ -122,7 +122,7 @@ monads have the following methods:
     itself from `Failure#exception` - we need it to generate error message
     (in case of failure this result is eventually returned from the chain)
 
-- function should always return `Either` value for uniform processing
+2) function should always return `Either` value for uniform processing
 
   for all monad methods:
 
@@ -164,16 +164,16 @@ monads have the following methods:
   - `Try` value converted to `Either` one if the former is used
     (`Try` monad block can return anything - it won't be used anyway)
 
-- when updating model in place it's better to use methods that throw exceptions
+3) when updating model in place it's better to use methods that throw exceptions
   (`create!`/`update!`/etc.) and wrap them in `Try` monad
   (don't forget to convert the latter to `Either` value - see previous tips)
   than to use their counterparts without `!` and check for errors manually
   (returning either `Right(model)` or `Left(model.errors.full_messages)`).
   rationale: exception contains all the necessary validation error messages.
 
-- it's recommended to specify expected exceptions when using `Try` monad
+4) it's recommended to specify expected exceptions when using `Try` monad
 
-- don't call functions that return `Either` value inside `Try` monad blocks
+5) don't call functions that return `Either` value inside `Try` monad blocks
 
   such functions are not supposed to throw exceptions and should not
   be handled using `Try` monad at all.
@@ -192,7 +192,7 @@ monads have the following methods:
   Right(model).bind(&method(:set_main_mirror)) # proc
   ```
 
-- pass additional function arguments after the proc argument
+6) pass additional function arguments after the proc argument
   (the first function argument is unlifted return value from previous
   function call in the pipeline - if it was successful of course)
 

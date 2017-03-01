@@ -276,7 +276,7 @@ in this simple case it's possible to avoid using matcher at all:
 class OperationBase
   def raise_on_failure! result, model
     if result.failure?
-      raise OperationError, error_message(result, model)
+      raise OperationError, error_message(result.value, model)
     end
   end
 end

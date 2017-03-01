@@ -27,6 +27,8 @@ monad is created by defining:
   but it's just a Ruby-specific implementation detail).
 
   monadic value (aka lifted value) is an instance of the monad's type.
+  when some monad value is mentioned it's monadic value that is implied -
+  (`Either` value is monadic value - not plain value wrapped into this monad).
   to lift a value is to wrap plain value in monad: `Either::Right(5)`.
 
 - operations (only the first one is obligatory for all monads):
@@ -60,11 +62,6 @@ monad is created by defining:
     failure otherwise input monadic value is returned.
 
 ## monads in dry-monads
-
-NOTE: terms 'monad' and 'monadic value' will be used interchangeably
-      when I'll be talking about returning monadic value from function
-      (I'll just say 'return that monad from function' though
-      strictly speaking it might be not correct).
 
 ### monads
 
@@ -117,7 +114,7 @@ monads have the following methods:
 
 ### tips
 
-- always convert `Try` monad to `Either` one using `Try#to_either` because:
+- always convert `Try` value to `Either` one using `Try#to_either` because:
 
   - `Try` monad doesn't implement `tee` method
     (if you need to chain on result using `tee` method)
@@ -125,13 +122,13 @@ monads have the following methods:
     itself from `Failure#exception` - we need it to generate error message
     (in case of failure this result is eventually returned from the chain)
 
-- function should always return `Either` monad for uniform processing
+- function should always return `Either` value for uniform processing
 
   for all monad methods:
 
   - if calling another service or operation (say, from DI container)
-    that returns `Either` monad return either that monad if it wraps
-    what we need for further processing:
+    that returns `Either` value return either that monadic value if it
+    wraps what we need for further processing:
 
     ```ruby
     def _update_site_status model
@@ -139,9 +136,9 @@ monads have the following methods:
     end
     ```
 
-    or new `Either` monad that wraps what we need
-    (probably leaving original `Left` monadic value intact
-    if it contains comprehensive error message with error source):
+    or new `Either` value that wraps what we need
+    (probably leaving original `Left` value intact if it
+    contains comprehensive error message with error source):
 
     ```ruby
     def _create_site_setting model
@@ -152,8 +149,8 @@ monads have the following methods:
 
   for `bind` return:
 
-  - `Right(model)` or `Left(error_message)` if nothing else returns monad
-  - `Try` monad converted to `Either` one if the former is used
+  - `Right(model)` or `Left(error_message)` if nothing else returns monadic value
+  - `Try` value converted to `Either` one if the former is used
     (`Try` monad block must return something meaningful - e.g. model)
 
   for `fmap` return:
@@ -162,28 +159,27 @@ monads have the following methods:
 
   for `tee` return:
 
-  - `Right(nil)` or `Left(error_message)` if nothing else returns monad
+  - `Right(nil)` or `Left(error_message)` if nothing else returns monadic value
     (since we don't care about the result in case of success)
-  - `Try` monad converted to `Either` one if the former is used
+  - `Try` value converted to `Either` one if the former is used
     (`Try` monad block can return anything - it won't be used anyway)
 
 - when updating model in place it's better to use methods that throw exceptions
   (`create!`/`update!`/etc.) and wrap them in `Try` monad
-  (don't forget to convert it to `Either` monad - see the first tip)
+  (don't forget to convert the latter to `Either` value - see previous tips)
   than to use their counterparts without `!` and check for errors manually
   (returning either `Right(model)` or `Left(model.errors.full_messages)`).
   rationale: exception contains all the necessary validation error messages.
 
 - it's recommended to specify expected exceptions when using `Try` monad
 
-- don't call functions that return `Either` monad inside `Try` monad blocks
+- don't call functions that return `Either` value inside `Try` monad blocks
 
   such functions are not supposed to throw exceptions and should not
   be handled using `Try` monad at all.
 
-  # TODO
-  moreover their result (`Either` monad) will be always wrapped in
-  `Success` class: `Success(Right(model)).to_either => Right(Right(model))`
+  moreover their result (`Either` value) will be always wrapped in `Success`:
+  `Success(Right(model)).to_either => Right(Right(model))`
 
 - monadic value can be created either by passing method proc or block
 
@@ -263,7 +259,7 @@ require 'dry/matcher/either_matcher'
 
 class OperationBase
   def raise_on_failure! result, model
-    # works both with Either and Try monads
+    # works both with Either and Try values
     Dry::Matcher::EitherMatcher.(result) do |m|
       m.failure do |value|
         raise OperationError, error_message(value, model)

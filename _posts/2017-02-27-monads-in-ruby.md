@@ -114,7 +114,7 @@ monads have the following methods:
 
 ### tips
 
-1) always convert `Try` value to `Either` one using `Try#to_either` because:
+- always convert `Try` value to `Either` one using `Try#to_either` because:
 
   - `Try` monad doesn't implement `tee` method
     (if you need to chain on result using `tee` method)
@@ -122,7 +122,7 @@ monads have the following methods:
     itself from `Failure#exception` - we need it to generate error message
     (in case of failure this result is eventually returned from the chain)
 
-2) function should always return `Either` value for uniform processing
+- function should always return `Either` value for uniform processing
 
   for all monad methods:
 
@@ -164,16 +164,16 @@ monads have the following methods:
   - `Try` value converted to `Either` one if the former is used
     (`Try` monad block can return anything - it won't be used anyway)
 
-3) when updating model in place it's better to use methods that throw exceptions
+- when updating model in place it's better to use methods that throw exceptions
   (`create!`/`update!`/etc.) and wrap them in `Try` monad
   (don't forget to convert the latter to `Either` value - see previous tips)
   than to use their counterparts without `!` and check for errors manually
   (returning either `Right(model)` or `Left(model.errors.full_messages)`).
   rationale: exception contains all the necessary validation error messages.
 
-4) it's recommended to specify expected exceptions when using `Try` monad
+- it's recommended to specify expected exceptions when using `Try` monad
 
-5) don't call functions that return `Either` value inside `Try` monad blocks
+- don't call functions that return `Either` value inside `Try` monad blocks
 
   such functions are not supposed to throw exceptions and
   should not be wrapped in `Try` monad at all.
@@ -183,7 +183,7 @@ monads have the following methods:
   then `Try` (`Success(Right(model)).to_either => Right(Right(model))`).
   in the end it will be unlifted to monadic value - not plain value.
 
-6) monadic value can be created either by passing method proc or block
+- monadic value can be created either by passing method proc or block
 
   `Method` objects can be passed as well (obtained with `Object.method`) -
   I guess anything that responds to `call` will do:
@@ -194,7 +194,7 @@ monads have the following methods:
   Right(model).bind(&method(:set_main_mirror)) # proc
   ```
 
-7) pass additional function arguments after the proc argument
+- pass additional function arguments after the proc argument
   (the first function argument is unlifted return value from previous
   function call in the pipeline - if it was successful of course)
 

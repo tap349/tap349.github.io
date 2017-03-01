@@ -275,7 +275,9 @@ in this simple case it's possible to avoid using matcher at all:
 ```ruby
 class OperationBase
   def raise_on_failure! result, model
-    raise OperationError, error_message(value, model) if result.failure?
+    if result.failure?
+      raise OperationError, error_message(result, model)
+    end
   end
 end
 ```

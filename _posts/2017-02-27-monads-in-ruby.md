@@ -6,7 +6,8 @@ access: public
 categories: [dry-rb, ruby]
 ---
 
-notes on using [dry-monads](http://dry-rb.org/gems/dry-monads/).
+notes on using [dry-monads](http://dry-rb.org/gems/dry-monads) and
+[dry-matcher](http://dry-rb.org/gems/dry-matcher).
 
 <!-- more -->
 
@@ -123,7 +124,7 @@ monads have the following methods:
     ```
 
     or new `Either` monad that wraps what we need
-    (probably leaving original `Either::Left` monadic value intact
+    (probably leaving original `Left` monadic value intact
     if it contains comprehensive error message with error source):
 
     ```ruby

@@ -283,6 +283,32 @@ class Site::Create
 end
 ```
 
+```ruby
+class MergeXpaths
+  include Dry::Monads::Either::Mixin
+
+  alias :m :method
+
+  def call xpaths
+    Right(xpaths)
+      .fmap(m(:filter))
+      .fmap(m(:sort))
+      .value
+      .join('|')
+  end
+
+  private
+
+  def filter xpaths
+    xpaths.select(&:present?).uniq
+  end
+
+  def sort xpaths
+    xpaths.sort_by(&:size)
+  end
+end
+```
+
 ### example of using dry-matcher to match on result
 
 ```ruby

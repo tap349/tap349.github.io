@@ -132,7 +132,16 @@ monads have the following methods:
 
     ```ruby
     def _update_site_status model
-      update_site.(site_id: model.id, status: 'ACTIVE')
+      result = update_site.(site_id: model.id, status: 'ACTIVE')
+
+      if result.success?
+        # return model from operation
+        Right(result.value)
+      else
+        # but still need to generate error message because
+        # operation returns model with errors in case of failure
+        Left(operation_error_message(update_site, result.value))
+      end
     end
     ```
 
@@ -143,9 +152,25 @@ monads have the following methods:
     ```ruby
     def _create_site_setting model
       result = create_site_setting.(site_id: model.id)
-      result.success? ? Right(model) : result
+
+      if result.success?
+        # return input model because operation returns another model
+        Right(model)
+      else
+        # generate error message as usual in case of failure
+        Left(operation_error_message(create_site_setting, result.value))
+      end
     end
     ```
+
+    error handling is organized as follows (for `Create` operation):
+    if model is invalid after calling `create` return `Left(model)`
+    (model with errors is required for rendering form once again).
+    if model is valid call `after_create` that might return either
+    `Right(model)` or `Left(error_message)`:
+
+    - if success return wrapped model from the whole operation
+    - if failure error is raised with supplied error message
 
   for `bind` return:
 
@@ -241,7 +266,12 @@ class Site::Create
 
   def _create_site_setting model
     result = create_site_setting.(site_id: model.id)
-    result.success? ? Right(model) : result
+
+    if result.success?
+      Right(model)
+    else
+      Left(operation_error_message(create_site_setting, result.value))
+    end
   end
 
   def collect_products model

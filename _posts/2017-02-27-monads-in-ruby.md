@@ -232,6 +232,22 @@ monads have the following methods:
 
   IDK how to pass additional arguments when using blocks.
 
+- use `fmap` when you would need pipe operator (which Ruby doesn't have)
+  to chain functions as an alternative to
+  [chainable_methods](https://github.com/akitaonrails/chainable_methods/):
+
+  ```ruby
+  # chainable_methods
+  chain_from([1, 3, 2]).filter.sort.unwrap
+
+  # fmap from dry-monads
+  Right([1, 2, 3]).fmap(method(:filter)).fmap(method(:sort)).value
+  ```
+
+  advantage over `chainable_methods` in this case is that `method(:sort)` will
+  return `Method` object that references `sort` method defined in current class
+  while calling `sort` in the first example will call `Enumerable#sort` instead.
+
 ### example of using dry-monads
 
 ```ruby

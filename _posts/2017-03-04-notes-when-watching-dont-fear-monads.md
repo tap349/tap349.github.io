@@ -2,7 +2,7 @@
 layout: post
 title: notes when watching dont fear monads
 date: 2017-03-04 13:22:57 +0300
-access: public
+access: private
 categories: [monad]
 ---
 

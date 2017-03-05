@@ -208,16 +208,40 @@ monads have the following methods:
   first `Either`, then `Try` (`Success(Right(model))`).
   in the end this will be unlifted to monadic value - not plain value.
 
-- monadic value can be created either by passing method proc or block
+- monadic value can be created either by passing proc or block
 
-  `Method` objects can be passed as well (obtained with `Object.method`) -
-  I guess anything that responds to `call` will do:
+  - <http://stackoverflow.com/a/35713455/3632318>
+  - <http://www.iain.nl/going-crazy-with-to_proc>
+  - <http://www.skorks.com/2013/04/ruby-ampersand-parameter-demystified/>
+
+  `Method` objects can be passed as well (obtained with `Object.method`):
 
   ```ruby
+  # block is given and will be called with `yield` inside `bind`
+  # (&foo in method call == foo.to_proc and use it as method block)
   Right(model).bind { |model| set_main_mirror(model) } # block
+  Right(model).bind(&method(:set_main_mirror)) # method object used as block
+
+  # if no block is given the 1st argument (say, proc or method object)
+  # will be called with `call` using remaining arguments to `bind` as
+  # its own arguments
   Right(model).bind(method(:set_main_mirror)) # method object
-  Right(model).bind(&method(:set_main_mirror)) # proc
+  Right(model).bind(method(:set_main_mirror).to_proc) # proc
+  # you can even pass method object that references method in another class:
+  Right(model).bind(AnotherClass.method(:set_main_mirror)) # method object
+
+  # in this case `foo` string is not passed as argument to block but rather
+  # used as receiver of `upcase` message because of special `Symbol#to_proc`
+  # implementation (it's in C now) which is roughly equivalent to:
+  #
+  # Proc.new { |obj, *args| obj.send(self, *args) }
+  #
+  # where `obj` is `foo` string, and `self` is `upcase` symbol.
+  Right('foo').bind(&:upcase)
   ```
+
+  see `bind` implementation for details: [Dry::Monads::RightBiased::Right#bind]
+  (https://github.com/dry-rb/dry-monads/blob/master/lib/dry/monads/right_biased.rb#L21).
 
 - pass additional function arguments after the proc argument
   (the first function argument is unlifted return value from previous

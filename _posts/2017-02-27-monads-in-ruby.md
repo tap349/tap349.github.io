@@ -211,8 +211,8 @@ monads have the following methods:
 - monadic value can be created either by passing proc or block
 
   - <http://stackoverflow.com/a/35713455/3632318>
-  - <http://www.iain.nl/going-crazy-with-to_proc>
   - <http://www.skorks.com/2013/04/ruby-ampersand-parameter-demystified/>
+  - <http://www.iain.nl/going-crazy-with-to_proc>
 
   `Method` objects can be passed as well (obtained with `Object.method`):
 

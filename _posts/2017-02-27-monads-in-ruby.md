@@ -243,9 +243,13 @@ monads have the following methods:
   see `bind` implementation for details:
   [Dry::Monads::RightBiased::Right#bind](https://github.com/dry-rb/dry-monads/blob/master/lib/dry/monads/right_biased.rb#L21).
 
-- pass additional function arguments after the proc argument
-  (the first function argument is unlifted return value from previous
-  function call in the pipeline - if it was successful of course)
+- pass additional arguments to wrapped function as additional arguments of
+  monad method - after the 1st argument of the latter which is either block
+  or proc (see previous tip)
+
+  both block and proc inside monad method will receive those additional
+  arguments after the 1st argument - unlifted return value from previous
+  function call in the pipeline (if it was successful of course).
 
   ```ruby
   Right(model).tee(method(:collect_products), force_collect)
@@ -255,7 +259,13 @@ monads have the following methods:
   end
   ```
 
-  IDK how to pass additional arguments when using blocks.
+  when using block pass additional arguments as `tee` parameters:
+
+  ```ruby
+  Right(model).tee(force_collect) do |model, force_collect|
+    CollectProducts.perform_later(model, force_collect)
+  end
+  ```
 
 - use `fmap` when you would need pipe operator (which Ruby doesn't have)
   to chain functions as an alternative to

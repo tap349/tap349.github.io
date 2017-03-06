@@ -16,6 +16,10 @@ differences between similar tags on pinboard
   1. material related to the process or mechanics of learning
 - **tutorial**:
   1. article or series of articles on some particular topic
+- **doc**:
+  1. some reference or documentation (both official and unofficial one)
+- **cheatsheet**:
+  1. cheatsheet (concise reference - sometimes in tabular form)
 - **book**:
   1. link to published book
   2. comprehensive tutorial that is structurally close to a book
@@ -40,8 +44,6 @@ differences between similar tags on pinboard
 - **best_practice**:
 - **styleguide**:
 - **tips**:
-- **cheatsheet**:
-- **doc**:
 
 ### tags related to IT security
 

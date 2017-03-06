@@ -40,7 +40,8 @@ differences between similar tags on pinboard
 - **best_practice**:
 - **styleguide**:
 - **tips**:
-- **reference**:
+- **cheatsheet**:
+- **doc**:
 
 ### tags related to IT security
 

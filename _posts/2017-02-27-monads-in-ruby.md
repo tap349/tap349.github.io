@@ -251,17 +251,18 @@ monads have the following methods:
   arguments after the 1st argument - unlifted return value from previous
   function call in the pipeline (if it was successful of course).
 
+
   ```ruby
+  # using method object (or proc - it doesn't matter)
+
   Right(model).tee(method(:collect_products), force_collect)
 
   def collect_products model, force_collect
     ...
   end
-  ```
 
-  when using block pass additional arguments as `tee` parameters:
+  # using block
 
-  ```ruby
   Right(model).tee(force_collect) do |model, force_collect|
     CollectProducts.perform_later(model, force_collect)
   end

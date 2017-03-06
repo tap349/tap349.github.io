@@ -240,8 +240,8 @@ monads have the following methods:
   Right('foo').bind(&:upcase)
   ```
 
-  see `bind` implementation for details: [Dry::Monads::RightBiased::Right#bind]
-  (https://github.com/dry-rb/dry-monads/blob/master/lib/dry/monads/right_biased.rb#L21).
+  see `bind` implementation for details:
+  [Dry::Monads::RightBiased::Right#bind](https://github.com/dry-rb/dry-monads/blob/master/lib/dry/monads/right_biased.rb#L21).
 
 - pass additional function arguments after the proc argument
   (the first function argument is unlifted return value from previous

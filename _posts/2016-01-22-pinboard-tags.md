@@ -44,6 +44,7 @@ differences between similar tags on pinboard
 - **best_practice**:
 - **styleguide**:
 - **tips**:
+  1. tips and tricks
 
 ### tags related to IT security
 

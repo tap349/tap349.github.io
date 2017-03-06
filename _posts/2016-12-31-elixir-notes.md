@@ -858,13 +858,14 @@ iex> for x <- ~w{cat dog}, into: %{}, do: {x, String.upcase(x)}
 
 ## binaries
 
-binary - sequence of bits in the form:
+binary is a bitstring (sequence of bits) where the number of bits is divisible
+by 8 (that is each term occupies 1 byte). it has the form:
 
 ```
 <<term[::modifier], ...>>
 ```
 
-by default each term occupies 1 byte - excess bits are stripped:
+excess bits in binary are stripped:
 
 ```sh
 iex> <<255>>
@@ -873,6 +874,13 @@ iex> <<256>>
 <<0>>
 iex> <<257>>
 <<1>>
+```
+
+if you change the size of term with modifier it's no longer a binary:
+
+```elixir
+<<256>> # binary (size is 8 bits) => <<0>>
+<<256::size(9)>> # bitstring (size is 9 bits) => <<128, 0::size(1)>>
 ```
 
 ```elixir
@@ -887,8 +895,7 @@ iex> <<257>>
 
 ### strings
 
-string (aka dqs - double-quoted string) is UTF-8 encoded binary
-(which is a bitstring where the number of bits is divisible by 8).
+string (aka dqs - double-quoted string) is UTF-8 encoded binary.
 
 from <https://hexdocs.pm/elixir/String.html>:
 

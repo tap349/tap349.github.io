@@ -1,12 +1,12 @@
 ---
 layout: post
-title: loading order of zsh configuration files
+title: zsh startup files
 date: 2017-03-07 12:58:19 +0300
 access: public
 categories: [zsh]
 ---
 
-loading order of zsh configuration files:
+loading order of zsh startup files:
 
 | _~/.zshenv_ -> _~/.zshrc_ -> _~/.zlogin_
 

@@ -67,7 +67,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - Dictionary:
   - Select `New Oxford American Dictionary (American English)` only
 - add second Desktop
-- install ruby and gems: [rbenv]({{ site.url }}{% post_url 2016-03-30-rbenv %})
+- install ruby and gems: [rbenv]({% post_url 2016-03-30-rbenv %})
 - copy history files from backup:
   - _.pry_history_
   - _.psql_history_

@@ -156,3 +156,40 @@ Ecto.Query
 
 > Typically, you'd work with a changeset for making modifications to a model
 > via the repo, and you'd work with the model when fetching the data for display.
+
+### Ecto.Multi
+
+- <https://hexdocs.pm/ecto/Ecto.Multi.html>
+- <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>
+
+use it when you would need callbacks in AR: Ecto.Multi allows to pack functions
+that should be called after main action (like `create` or `update`) - all these
+functions are named operations in Ecto.Multi parlance.
+
+moreover using Ecto.Multi allows to stop chaining if some operation fails and
+returns `{:error, reason}` - this error can be returned either automatically
+from `Repo` function or manually from functions passed to `Ecto.Multi.run`.
+
+in the end Ecto.Multi struct is passed to `Repo.transaction/1` which rollbacks
+transaction if any operation fails but calling `Repo.transaction/1` in the end
+is not obligatory.
+
+it all resembles using monads to handle errors in general and using
+`dry-monads` and `dry-matcher` gems in Ruby in particular
+([monads in Ruby]({% post_url 2017-02-27-monads-in-ruby %})).
+
+but unlike `dry-matcher` Ecto.Multi stores additional information in case of
+failure - not only do we have error itself but also operation name and changes
+accumulated in previous succeeded operations.
+
+in this regard Ecto.Multi acts more like `dry-transaction` gem which allows to
+handle errors arising from particular steps (= operations) with the difference
+that `dry-transaction` holds operations (service objects that respond to `call`)
+from DI container while multi packs operations (`Repo` or arbitrary functions).
+
+also don't forget that there exist several monad libraries for Elixir
+(e.g. [MonadEx](https://github.com/rob-brown/MonadEx)) which allow to use
+this error handling mechanism in any module while Ecto.Multi is used when
+you deal with persistence and need something to replace callbacks
+(that Ecto.Multi is alternative to our custom operations in Rails projects
+which both persist data and run `after_*` callbacks manually).

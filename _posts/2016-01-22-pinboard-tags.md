@@ -30,6 +30,8 @@ differences between similar tags on pinboard
   3. not conference or meetup talk
 - **talk**:
   1. conference or meetup talk
+- **blog**:
+  1. main page of someone's blog (not a separate article from this blog)
 - **course**
   1. offline course
   2. online series of lectures comprising a single course

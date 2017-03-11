@@ -443,7 +443,7 @@ enclosing scope.
   # same as above
   # (last part of module name is used by default)
   alias Google.Adwords.Importer
-  # alias multiple module at once
+  # alias multiple modules at once
   alias Google.Adwords.{Importer, Parser}
   ```
 

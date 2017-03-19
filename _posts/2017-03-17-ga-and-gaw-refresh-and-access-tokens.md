@@ -13,7 +13,7 @@ how we use them in our apps.
 
 - GA
 
-  we don't use any oficial google gem and provide both tokens manually when
+  we don't use any official google gem and provide both tokens manually when
   making API call to GA (access token is stored in Rails cache and manually
   updated when expired).
 

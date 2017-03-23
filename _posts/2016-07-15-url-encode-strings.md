@@ -16,6 +16,10 @@ NOTE: this type of encoding is sometimes referred to as percent-encoding.
 
 <!-- more -->
 
+NOTE: all functions expect query string (its form may vary depending on specific
+      function) to be passed as parameter - if passed complete URL they will either
+      try to encode the whole URL (for `encode`) or do nothing (for `decode`).
+
 ## encode
 
 #### hash

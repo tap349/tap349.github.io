@@ -8,12 +8,46 @@ categories: [postgresql]
 
 <!-- more -->
 
-### `psql not found` after upgrading postgresql with brew
+### use new homebrew versioning
 
-`psql` must have symlink in _/usr/local/bin_ directory
-(it has been added to `PATH` in _~/.zshenv_ by myself).
+- <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
-but symlink doesn't exist after `brew upgrade` for some reason:
+running `brew upgrade` has created quite a mess for me because of a new
+versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`.
+but this migration was not smooth and resulted in many errors to name a few:
 
-- `brew switch postgresql@9.5 9.5.6` to switch to latest 9.5 version
-- `brew link postgresql@9.5 --force` to create link in _/usr/local/bin_
+- `invalid value for parameter "TimeZone": "UTC"`
+
+  should by fixed by restarting service or the whole system according to SO.
+
+- `command not found: psql`
+
+  `psql` must have symlink in _/usr/local/bin_ directory
+  (it has been added to $PATH in _~/.zshenv_ in my case) -
+  it's gone now for some mysterious reason.
+
+- `psql: FATAL:  database "db_name" does not exist`
+
+  this is because running `brew upgrade` has created new data directory for
+  `postgresql@9.5` (_/usr/local/var/postgresql@9.5_) while all my databases
+  are stored in _/usr/local/var/postgres_.
+
+so this is what I did to fix problems mentioned above:
+
+- `brew untap 'homebrew/versions'` (since it's deprecated)
+- `brew untap 'caskroom/versions'` (since it's deprecated)
+- `brew uninstall postgresql postgresql@9.5`
+- `brew install postgresql@9.5` (install latest 9.5 version)
+- `brew switch postgresql@9.5 9.5.6` (switch to latest 9.5 version)
+- `brew prune postgresql@9.5` (remove old 9.5 versions - if any)
+- `brew link postgresql@9.5 --force` (create symlink in _/usr/local/bin_)
+
+  though it's not recommended - I guess it's better to add _bin_ directory
+  of specific postgresql installation to `PATH` explicitly in _~/.zshenv_.
+
+- `cd /usr/local/var && mv postgres postgresql@9.5`
+  (rename directory with databases to new format)
+
+  it might be necessary to remove existing _postgresql@9.5_ directory
+  that was created when upgrading postgresql to new versioning scheme
+  but still double check it doesn't contain your databases.

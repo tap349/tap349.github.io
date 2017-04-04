@@ -51,3 +51,5 @@ so this is what I did to fix problems mentioned above:
   it might be necessary to remove existing _postgresql@9.5_ directory
   that was created when upgrading postgresql to new versioning scheme
   but still double check it doesn't contain your databases.
+
+- `rm /usr/local/Cellar/postgresql95` (symlink to `postgresql@9.5`)

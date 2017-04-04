@@ -24,7 +24,7 @@ but this migration was not smooth and resulted in many errors, to name a few:
 - `command not found: psql`
 
   `psql` must have symlink in _/usr/local/bin_ directory
-  (it has been added to $PATH in _~/.zshenv_ in my case) -
+  (it has been added to `PATH` in _~/.zshenv_ in my case) -
   it's gone now for some mysterious reason.
 
 - `psql: FATAL:  database "db_name" does not exist`
@@ -35,15 +35,15 @@ but this migration was not smooth and resulted in many errors, to name a few:
 
 so this is what I did to fix problems mentioned above:
 
-- `brew untap 'homebrew/versions'` (since it's deprecated)
-- `brew untap 'caskroom/versions'` (since it's deprecated)
-- `brew uninstall postgresql postgresql@9.5`
+- `brew untap 'homebrew/versions'` (it's deprecated now)
+- `brew untap 'caskroom/versions'` (it's deprecated now)
+- `brew uninstall postgresql postgresql95 postgresql@9.5` (remove everything)
 - `brew install postgresql@9.5` (install latest 9.5 version)
 - `brew switch postgresql@9.5 9.5.6` (switch to latest 9.5 version)
 - `brew prune postgresql@9.5` (remove old 9.5 versions - if any)
 - `brew link postgresql@9.5 --force` (create symlink in _/usr/local/bin_)
 
-  though it's not recommended - I guess it's better to add _bin_ directory
+  it's not recommended though - it must be better to add _bin_ directory
   of specific postgresql installation to `PATH` explicitly in _~/.zshenv_.
 
 - `cd /usr/local/var && mv postgres postgresql@9.5`
@@ -53,4 +53,8 @@ so this is what I did to fix problems mentioned above:
   that was created when upgrading postgresql to use new version format
   (but still double check it doesn't contain any databases).
 
-- `rm /usr/local/Cellar/postgresql95` (symlink to `postgresql@9.5`)
+- `rm /usr/local/Cellar/postgresql95` (remove symlink to `postgresql@9.5`)
+
+  I guess it has been created for compatibility reasons.
+
+- `gem uninstall pg && bundle` (reinstall `pg` gem)

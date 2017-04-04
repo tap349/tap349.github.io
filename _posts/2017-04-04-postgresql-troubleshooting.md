@@ -53,7 +53,7 @@ so this is what I did to fix problems mentioned above:
 - `cd /usr/local/var && mv postgres postgresql@9.5` (rename directory with databases)
 
   it might be necessary to remove existing _postgresql@9.5_ directory
-  that must have been created when upgrading postgresql
+  beforehand that could be created when upgrading postgresql
   (but still double check it doesn't contain any databases).
 
 - `rm /usr/local/Cellar/postgresql95` (remove symlink to `postgresql@9.5`)

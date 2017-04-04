@@ -15,7 +15,7 @@ categories: [postgresql]
 running `brew upgrade` has created quite a mess for me because of a new
 versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`
 (this is because homebrew/core now supports multiple versions).
-but this migration was not smooth and resulted in many errors to name a few:
+but this migration was not smooth and resulted in many errors, to name a few:
 
 - `invalid value for parameter "TimeZone": "UTC"`
 

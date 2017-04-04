@@ -61,3 +61,8 @@ so this is what I did to fix problems mentioned above:
   I guess it has been created for compatibility reasons.
 
 - `gem uninstall pg && bundle` (reinstall `pg` gem)
+
+NOTE: installing `postgresql` formula still installs the latest version
+      (9.6 as of now) - all directories are named just `postgresql` accordingly.
+      but its binaries are not symlinked into _usr/bin/local_ directory
+      by default (that is now they all point to 9.5 installation).

@@ -8,7 +8,7 @@ categories: [postgresql]
 
 <!-- more -->
 
-### use new homebrew versioning
+### use new homebrew versioning scheme
 
 - <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 

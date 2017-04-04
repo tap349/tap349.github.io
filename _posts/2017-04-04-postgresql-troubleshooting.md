@@ -13,7 +13,8 @@ categories: [postgresql]
 - <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
 running `brew upgrade` has created quite a mess for me because of a new
-versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`.
+versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`
+(this is because homebrew/core now supports multiple versions).
 but this migration was not smooth and resulted in many errors to name a few:
 
 - `invalid value for parameter "TimeZone": "UTC"`
@@ -49,7 +50,7 @@ so this is what I did to fix problems mentioned above:
   (rename directory with databases to new format)
 
   it might be necessary to remove existing _postgresql@9.5_ directory
-  that was created when upgrading postgresql to new versioning scheme
-  but still double check it doesn't contain your databases.
+  that was created when upgrading postgresql to use new version format
+  (but still double check it doesn't contain any databases).
 
 - `rm /usr/local/Cellar/postgresql95` (symlink to `postgresql@9.5`)

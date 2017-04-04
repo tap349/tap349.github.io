@@ -12,6 +12,8 @@ categories: [postgresql]
 
 - <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
+#### problem
+
 running `brew upgrade` has created quite a mess for me because of a new
 versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`
 (this is because homebrew/core now supports multiple versions).
@@ -32,6 +34,8 @@ but this migration was not smooth and resulted in many errors, to name a few:
   this is because running `brew upgrade` has created new data directory for
   `postgresql@9.5` (_/usr/local/var/postgresql@9.5_) while all my databases
   are stored in _/usr/local/var/postgres_.
+
+#### solution
 
 so this is what I did to fix problems mentioned above:
 

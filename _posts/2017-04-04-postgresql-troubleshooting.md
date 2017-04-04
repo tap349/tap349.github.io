@@ -46,11 +46,10 @@ so this is what I did to fix problems mentioned above:
   it's not recommended though - it must be better to add _bin_ directory
   of specific postgresql installation to `PATH` explicitly in _~/.zshenv_.
 
-- `cd /usr/local/var && mv postgres postgresql@9.5`
-  (rename directory with databases to new format)
+- `cd /usr/local/var && mv postgres postgresql@9.5` (rename directory with databases)
 
   it might be necessary to remove existing _postgresql@9.5_ directory
-  that was created when upgrading postgresql to use new version format
+  that must have been created when upgrading postgresql
   (but still double check it doesn't contain any databases).
 
 - `rm /usr/local/Cellar/postgresql95` (remove symlink to `postgresql@9.5`)

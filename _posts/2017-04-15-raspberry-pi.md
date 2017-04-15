@@ -17,7 +17,7 @@ categories: [pi]
 
 ## configuration
 
-### dvorak
+### keyboard configuration
 
 <https://wiki.debian.org/Keyboard>
 
@@ -25,6 +25,11 @@ categories: [pi]
 $ sudo dpkg-reconfigure keyboard-configuration
 $ sudo service keyboard-setup restart
 ```
+
+- Keyboard model: `Happy Hacking Keyboard for Mac`
+- Keyboard layout: `English (US) - English (Dvorak)`
+- Key to function as AltGr: `The default for the keyboard layout`
+- Compose key: `No compose key`
 
 or else edit _/etc/default/keyboard_ manually:
 
@@ -35,6 +40,31 @@ XKBVARIANT="dvorak"
 XKBOPTIONS=""
 
 BACKSPACE="guess"
+```
+
+### console setup
+
+```sh
+$ sudo dpkg-reconfigure console-setup
+```
+
+- Encoding to use on the console: `UTF-8`
+- Character set to support: `# Cyrillic - Slavic languages`
+- Font for the console: `Terminus`
+- Font size: `10x20 (framebuffer only)`
+
+or else edit _/etc/default/console-setup_ manually:
+
+```config
+ACTIVE_CONSOLES="/dev/tty[1-6]"
+
+CHARMAP="UTF-8"
+
+CODESET="CyrSlav"
+FONTFACE="Terminus"
+FONTSIZE="10x20"
+
+VIDEOMODE=
 ```
 
 ### wi-fi

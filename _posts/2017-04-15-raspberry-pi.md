@@ -20,7 +20,7 @@ categories: [pi]
 
 ## configuration
 
-### keyboard configuration
+### keyboard
 
 <https://wiki.debian.org/Keyboard>
 
@@ -118,7 +118,7 @@ $ sudo apt-get update
 $ sudo apt-get install mc omxplayer
 ```
 
-### resolution
+### screen resolution
 
 - list all modes for `DMT` hdmi group
 
@@ -142,3 +142,13 @@ $ sudo apt-get install mc omxplayer
   ```
 
 - reboot
+
+### ruby
+
+```sh
+$ cd && mkdir tmp && cd tmp
+$ wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz
+$ cd ruby-2.4.1
+$ ./configure && make && sudo make install
+
+```

@@ -125,7 +125,7 @@ Sun 16 Apr 00:55:55 MSK 2017
 
 ```sh
 $ sudo apt-get update
-$ sudo apt-get install mc omxplayer
+$ sudo apt-get install mc htop omxplayer
 ```
 
 ### screen resolution

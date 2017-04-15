@@ -12,7 +12,8 @@ categories: [pi]
 
 - download `raspbian jessie lite` image
 - restore image to microsd with `applepi-baker`
-- create empty _ssh_ file in microsd root to enable ssh on boot
+- create empty _ssh_ file in microsd root to enable ssh
+  (do it before the very first boot!)
 
 ## configuration
 
@@ -23,6 +24,17 @@ categories: [pi]
 ```sh
 $ sudo dpkg-reconfigure keyboard-configuration
 $ sudo service keyboard-setup restart
+```
+
+or else edit _/etc/default/keyboard_ manually:
+
+```config
+XKBMODEL="macintosh_hhk"
+XKBLAYOUT="us"
+XKBVARIANT="dvorak"
+XKBOPTIONS=""
+
+BACKSPACE="guess"
 ```
 
 ### wi-fi
@@ -62,6 +74,7 @@ $ sudo service keyboard-setup restart
 ### packages
 
 ```sh
+$ sudo apt-get update
 $ sudo apt-get install mc
 ```
 

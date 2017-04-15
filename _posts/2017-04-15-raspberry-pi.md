@@ -150,5 +150,4 @@ $ cd && mkdir tmp && cd tmp
 $ wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz
 $ cd ruby-2.4.1
 $ ./configure && make && sudo make install
-
 ```

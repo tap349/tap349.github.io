@@ -68,7 +68,6 @@ BACKSPACE="guess"
   ```sh
   # ifdown wlan0
   # ifup wlan0
-  # ping ya.ru
   ```
 
 ### packages

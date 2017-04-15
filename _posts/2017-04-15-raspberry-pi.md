@@ -67,6 +67,14 @@ FONTSIZE="10x20"
 VIDEOMODE=
 ```
 
+### timezone
+
+```sh
+$ sudo timedatectl set-timezone Europe/Moscow
+$ date
+Sun 16 Apr 00:55:55 MSK 2017
+```
+
 ### wi-fi
 
 <https://wiki.debian.org/WiFi/HowToUse>
@@ -104,7 +112,7 @@ VIDEOMODE=
 
 ```sh
 $ sudo apt-get update
-$ sudo apt-get install mc
+$ sudo apt-get install mc omxplayer
 ```
 
 ### resolution

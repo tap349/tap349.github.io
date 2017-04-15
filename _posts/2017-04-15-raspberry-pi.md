@@ -8,6 +8,9 @@ categories: [pi]
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ## installation
 
 - download `raspbian jessie lite` image

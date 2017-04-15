@@ -13,6 +13,8 @@ categories: [pi]
 
 ## installation
 
+<https://www.raspberrypi.org/downloads/raspbian/>
+
 - download `raspbian jessie lite` image
 - restore image to microsd with `applepi-baker`
 - create empty _ssh_ file in microsd root to enable ssh
@@ -43,6 +45,14 @@ XKBVARIANT="dvorak"
 XKBOPTIONS=""
 
 BACKSPACE="guess"
+```
+
+### password
+
+default login/password: `pi`/`raspberry`
+
+```sh
+$ passwd
 ```
 
 ### console setup

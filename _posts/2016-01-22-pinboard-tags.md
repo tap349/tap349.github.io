@@ -27,7 +27,9 @@ differences between similar tags on pinboard
 - **lecture** (mostly videos):
   1. single lecture (e.g. on youtube or vimeo)
   2. series of such lectures not comprising a single course
-  3. not conference or meetup talk
+  3. not screencast
+  4. not conference or meetup talk
+- **screencast**
 - **talk**:
   1. conference or meetup talk
 - **blog**:

@@ -214,7 +214,7 @@ $ sudo apt-get install libssl-dev libreadline-dev
 
 run `make clean` if you have already tried to compile ruby
 before and got warnings about not installed extensions
-(because of not installed packages mentioned above).
+(because corresponding dev packages were not installed).
 
 ```sh
 $ cd ~/tmp
@@ -224,3 +224,9 @@ $ cd ruby-2.4.1
 $ ./configure && make && sudo make install
 $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
 ```
+
+### ssh
+
+- add raspberry pi host record to _~/.ssh/config_ on local machine
+- login to raspberry pi with login/password first
+- add your public RSA key to _~/.ssh/authorized_keys_ on raspberry pi

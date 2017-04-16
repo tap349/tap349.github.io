@@ -40,8 +40,12 @@ differences between similar tags on pinboard
   3. online series of tutorials comprising a single course
      but not structured as a book
   4. many courses but not mooc
-- **mooc** - many courses, mooc
-- **resources** - list of anything listed above about specific topic
+- **mooc**:
+  1. many courses, mooc
+- **resources**:
+  1. mixed list of resources (tutorials, books, talks, etc.) related
+     to specific topic. if list contains resources of one kind only
+     (say, books) then tag should be **book** - not **resources**.
 
 ### tags related to code style
 

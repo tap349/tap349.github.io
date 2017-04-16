@@ -295,4 +295,4 @@ $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
   NOTE: if user is not specified name of currently logged in user is used
         (this user might not exist on samba server).
 
-  also as a rule I add mount points to `Directory hotlist` in mc.
+  also usually I add new mount points to `Directory hotlist` in mc.

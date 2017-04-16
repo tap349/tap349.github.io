@@ -44,8 +44,8 @@ differences between similar tags on pinboard
   1. many courses, mooc
 - **resources**:
   1. mixed list of resources (tutorials, books, talks, etc.) related
-     to specific topic. if list contains resources of one kind only
-     (say, books) then tag should be **book** - not **resources**.
+     to specific topic - use when it's hard to enumerate all resource
+     types or it's hard to choose primary resource type for tag name.
 
 ### tags related to code style
 

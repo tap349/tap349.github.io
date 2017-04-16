@@ -36,7 +36,9 @@ $ sudo service keyboard-setup restart
 - Key to function as AltGr: `The default for the keyboard layout`
 - Compose key: `No compose key`
 
-or else edit _/etc/default/keyboard_ manually:
+#### manually
+
+_/etc/default/keyboard_:
 
 ```config
 XKBMODEL="macintosh_hhk"
@@ -45,6 +47,10 @@ XKBVARIANT="dvorak"
 XKBOPTIONS=""
 
 BACKSPACE="guess"
+```
+
+```sh
+$ sudo service keyboard-setup restart
 ```
 
 ### password
@@ -66,7 +72,9 @@ $ sudo dpkg-reconfigure console-setup
 - Font for the console: `Terminus`
 - Font size: `10x20 (framebuffer only)`
 
-or else edit _/etc/default/console-setup_ manually:
+#### manually
+
+_/etc/default/console-setup_:
 
 ```config
 ACTIVE_CONSOLES="/dev/tty[1-6]"
@@ -78,6 +86,49 @@ FONTFACE="Terminus"
 FONTSIZE="10x20"
 
 VIDEOMODE=
+```
+
+### locale
+
+```sh
+$ sudo dpkg-reconfigure locales
+$ logout
+```
+
+- Locales to be generated:
+  - [x] `en_US.UTF-8 UTF-8`
+- Default locale for the system environment: `en_US.UTF-8`
+
+when connecting via ssh remote host will try to set the same
+locale as on local computer - this operation will fail if
+corresponding locale is not generated on remote server:
+
+> -bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+
+that is why it's a good idea to have the same locale on both
+local computer and remote host.
+
+#### manually
+
+_/etc/default/locale_:
+
+```config
+LANG=en_US.UTF-8
+```
+
+_/etc/locale.gen_:
+
+```config
+...
+# en_US.ISO-8859-15 ISO-8859-15
+en_US.UTF-8 UTF-8
+# en_ZA.ISO-8859-1
+...
+```
+
+```sh
+$ sudo locale-gen
+$ logout
 ```
 
 ### timezone
@@ -171,5 +222,5 @@ $ wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz
 $ tar xvzf ruby-2.4.1.tar.gz
 $ cd ruby-2.4.1
 $ ./configure && make && sudo make install
-$ cd ~/tmp && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
+$ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
 ```

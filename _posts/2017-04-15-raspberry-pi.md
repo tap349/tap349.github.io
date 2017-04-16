@@ -151,6 +151,9 @@ Sun 16 Apr 00:55:55 MSK 2017
 
 <https://wiki.debian.org/WiFi/HowToUse>
 
+NOTE: network module in raspberry pi supports 2.4 GHz only
+      (at least `iwlist scan` doesn't show 5 GHz networks).
+
 - generate wpa psk for your wi-fi network
 
   ```sh

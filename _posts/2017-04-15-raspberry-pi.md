@@ -155,9 +155,21 @@ $ sudo apt-get install mc htop omxplayer
 
 ### ruby
 
+install packages for openssl and readline extensions:
+
 ```sh
-$ cd && mkdir tmp && cd tmp
+$ sudo apt-get install libssl-dev libreadline-dev
+```
+
+run `make clean` if you have already tried to compile ruby
+before and got warnings about not installed extensions
+(because of not installed packages mentioned above).
+
+```sh
+$ cd ~/tmp
 $ wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz
+$ tar xvzf ruby-2.4.1.tar.gz
 $ cd ruby-2.4.1
 $ ./configure && make && sudo make install
+$ cd ~/tmp && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
 ```

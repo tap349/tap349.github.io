@@ -107,13 +107,13 @@ $ logout
 - Default locale for the system environment: `en_US.UTF-8`
 
 when connecting via ssh remote host will try to set the same
-locale as on local computer - this operation will fail if
+locale as on local machine - this operation will fail if
 corresponding locale is not generated on remote server:
 
 > -bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 
 that is why it's a good idea to have the same locale on both
-local computer and remote host.
+local machine and remote host.
 
 #### manually
 
@@ -241,3 +241,58 @@ $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
 - add raspberry pi host record to _~/.ssh/config_ on local machine
 - login to raspberry pi with login/password first
 - add your public RSA key to _~/.ssh/authorized_keys_ on raspberry pi
+
+### samba
+
+<https://wiki.debian.org/SambaServerSimple>
+
+- install samba server and client
+
+  ```sh
+  $ sudo apt-get install samba samba-client
+  ```
+
+- configure shared directories
+
+  _/etc/samba/smb.conf_:
+
+  ```config
+  # export all home directories
+  [homes]
+    ...
+    # allow to write to them
+    read only = no
+    ...
+    # ensure that only 'username' can connect to //server/username
+    valid users = %S
+  ```
+
+- add samba user
+
+  samba doesn't use system users and has its own password system.
+
+  ```sh
+  $ sudo smbpasswd -a pi
+  / enter password
+  $ sudo pdbedit -wL
+  ```
+
+- restart samba daemon
+
+  ```sh
+  $ sudo service smbd restart
+  ```
+
+- mount shared directory from local machine
+
+  _~/scripts/mount_pi_:
+
+  ```sh
+  mkdir /Volumes/pi
+  mount_smbfs //pi@192.168.0.105/pi /Volumes/pi/
+  ```
+
+  NOTE: if user is not specified name of currently logged in user is used
+        (this user might not exist on samba server).
+
+  also I have added _/Volumes/pi_ to `Directory hotlist` in mc.

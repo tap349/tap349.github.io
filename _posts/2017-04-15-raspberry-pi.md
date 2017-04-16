@@ -24,9 +24,9 @@ categories: [pi]
 
 ### keyboard
 
-#### dpkg-reconfigure
-
 <https://wiki.debian.org/Keyboard>
+
+#### dpkg-reconfigure
 
 ```sh
 $ sudo dpkg-reconfigure keyboard-configuration

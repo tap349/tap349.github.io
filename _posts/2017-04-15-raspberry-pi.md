@@ -99,6 +99,7 @@ VIDEOMODE=
 ```sh
 $ sudo dpkg-reconfigure locales
 $ logout
+/ login
 ```
 
 - Locales to be generated:
@@ -135,6 +136,7 @@ en_US.UTF-8 UTF-8
 ```sh
 $ sudo locale-gen
 $ logout
+/ login
 ```
 
 ### timezone

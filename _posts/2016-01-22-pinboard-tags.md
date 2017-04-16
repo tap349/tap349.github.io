@@ -39,6 +39,7 @@ differences between similar tags on pinboard
      but not structured as a book
   4. many courses but not mooc
 - **mooc** - many courses, mooc
+- **resources** - list of anything listed above about specific topic
 
 ### tags related to code style
 

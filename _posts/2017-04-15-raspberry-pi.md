@@ -283,7 +283,7 @@ $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
   $ sudo service smbd restart
   ```
 
-- mount shared directory from local machine
+- mount shared directory on local machine
 
   _~/scripts/mount_pi_:
 
@@ -295,4 +295,4 @@ $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
   NOTE: if user is not specified name of currently logged in user is used
         (this user might not exist on samba server).
 
-  also I have added _/Volumes/pi_ to `Directory hotlist` in mc.
+  also as a rule I add mount points to `Directory hotlist` in mc.

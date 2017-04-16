@@ -24,6 +24,8 @@ categories: [pi]
 
 ### keyboard
 
+#### dpkg-reconfigure
+
 <https://wiki.debian.org/Keyboard>
 
 ```sh
@@ -63,6 +65,8 @@ $ passwd
 
 ### console setup
 
+#### dpkg-reconfigure
+
 ```sh
 $ sudo dpkg-reconfigure console-setup
 ```
@@ -89,6 +93,8 @@ VIDEOMODE=
 ```
 
 ### locale
+
+#### dpkg-reconfigure
 
 ```sh
 $ sudo dpkg-reconfigure locales

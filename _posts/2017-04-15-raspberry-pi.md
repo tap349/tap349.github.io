@@ -13,7 +13,10 @@ categories: [pi]
 
 ## installation
 
-<https://www.raspberrypi.org/downloads/raspbian/>
+- <https://www.raspberrypi.org/downloads/raspbian/>
+- <https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md>
+- <https://www.raspberrypi.org/documentation/installation/installing-images/mac.md>
+- <http://www.macworld.co.uk/how-to/mac/how-to-set-up-raspberry-pi-3-with-mac-3637490/>
 
 - download `raspbian jessie lite` image
 - restore image to microsd with `applepi-baker`
@@ -304,3 +307,9 @@ $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
 
 by default `sudo shutdown` schedules shutdown in 1 minute -
 run `sudo shutdown now` to shutdown immediately.
+
+<https://www.raspberrypi.org/documentation/installation/sd-cards.md>:
+
+```sh
+$ sudo halt
+```

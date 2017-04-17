@@ -192,6 +192,9 @@ $ sudo apt-get install mc htop omxplayer
 
 ### screen resolution
 
+NOTE: hdmi cable must be plugged in before booting raspberry pi -
+      otherwise hdmi signal is not detected.
+
 - list all modes for `DMT` hdmi group
 
   ```sh

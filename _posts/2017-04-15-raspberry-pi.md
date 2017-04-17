@@ -19,7 +19,8 @@ categories: [pi]
 - <http://www.macworld.co.uk/how-to/mac/how-to-set-up-raspberry-pi-3-with-mac-3637490/>
 
 - download `raspbian jessie lite` image
-- restore image to microsd with `applepi-baker`
+- use `applepi-baker` to write it to microsd
+  (or else use command line - see link above for details)
 - create empty _ssh_ file in microsd root to enable ssh
   (do it before the very first boot!)
 

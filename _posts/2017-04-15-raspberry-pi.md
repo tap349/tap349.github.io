@@ -299,3 +299,8 @@ $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
         (this user might not exist on samba server).
 
   also usually I add new mount points to `Directory hotlist` in mc.
+
+### shutdown
+
+by default `sudo shutdown` schedules shutdown in 1 minute -
+run `sudo shutdown now` to shutdown immediately.

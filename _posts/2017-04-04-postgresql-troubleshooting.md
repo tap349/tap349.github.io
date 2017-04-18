@@ -8,11 +8,11 @@ categories: [postgresql]
 
 <!-- more -->
 
-### use new homebrew versioning scheme
+### problems with new homebrew versioning scheme
 
 - <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
-#### problem
+#### description
 
 running `brew upgrade` has created quite a mess for me because of a new
 versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`

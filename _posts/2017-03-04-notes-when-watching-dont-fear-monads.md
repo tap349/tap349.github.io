@@ -6,6 +6,8 @@ access: private
 categories: [monad]
 ---
 
+<!-- more -->
+
 type is almost the same as set
 
 f: int -> int
@@ -19,4 +21,4 @@ if chaining functions together (in F#, Haskell) it associates to the left:
 
 f h g = (f h) g
 
-<!-- more -->
+TODO: watch next

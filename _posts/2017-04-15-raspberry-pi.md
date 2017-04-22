@@ -194,6 +194,15 @@ $ sudo apt-get update
 $ sudo apt-get install locate mc htop omxplayer
 ```
 
+### bash
+
+_~/.bash_aliases_:
+
+```sh
+alias ll='ls -al'
+alias mc='mc -ub'
+```
+
 ### screen resolution
 
 NOTE: hdmi cable must be plugged in before booting raspberry pi -

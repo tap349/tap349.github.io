@@ -330,15 +330,34 @@ $ sudo halt
   $ sudo dpkg-query -L <packagename>
   ```
 
-- remove package
+- search for packages containing specified file
 
   ```sh
-  / only binaries
+  $ sudo dpkg-query -S <filename>
+  ```
+
+- remove package
+
+  remove only binaries:
+
+  ```sh
   $ sudo apt-get remove <packagename>
-  / everything regarding package but without dependencies
+  ```
+
+  remove everything regarding package but without dependencies:
+
+  ```sh
   $ sudo apt-get [purge|remove --purge] <packagename>
-  / all orphaned packages
+  ```
+
+  remove all orphaned packages:
+
+  ```sh
   $ sudo apt-get autoremove
-  / everything regarding package with dependencies
+  ```
+
+  remove everything regarding package with dependencies:
+
+  ```sh
   $ sudo aptitude [remove|purge] <packagename>
   ```

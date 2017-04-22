@@ -191,7 +191,7 @@ NOTE: network module in raspberry pi supports 2.4 GHz only
 
 ```sh
 $ sudo apt-get update
-$ sudo apt-get install mc htop omxplayer
+$ sudo apt-get install locate mc htop omxplayer
 ```
 
 ### screen resolution
@@ -314,3 +314,31 @@ run `sudo shutdown now` to shutdown immediately.
 ```sh
 $ sudo halt
 ```
+
+### useful commands
+
+- locate any file:
+
+  ```sh
+  $ sudo updatedb
+  $ sudo locate <filename>
+  ```
+
+- list all files of specified package
+
+  ```sh
+  $ sudo dpkg-query -L <packagename>
+  ```
+
+- remove package
+
+  ```sh
+  / only binaries
+  $ sudo apt-get remove <packagename>
+  / everything regarding package but without dependencies
+  $ sudo apt-get [purge|remove --purge] <packagename>
+  / all orphaned packages
+  $ sudo apt-get autoremove
+  / everything regarding package with dependencies
+  $ sudo aptitude [remove|purge] <packagename>
+  ```

@@ -216,6 +216,8 @@ alias mc='mc -ub'
 
 ### screen resolution
 
+#### resolution
+
 NOTE: hdmi cable must be plugged in before booting raspberry pi -
       otherwise hdmi signal is not detected.
 
@@ -239,6 +241,16 @@ NOTE: hdmi cable must be plugged in before booting raspberry pi -
   hdmi_group=2 # CEA - 1, DMT - 2
   hdmi_mode=82
   ```
+
+- reboot
+
+#### blanking
+
+<https://raspberrypi.stackexchange.com/a/61080>
+
+- disable screen blanking in console
+
+  add `consoleblank=0` to the line in _/boot/cmdline.txt_.
 
 - reboot
 

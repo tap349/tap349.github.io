@@ -250,7 +250,7 @@ NOTE: hdmi cable must be plugged in before booting raspberry pi -
 
 - disable screen blanking in console
 
-  add `consoleblank=0` to the line in _/boot/cmdline.txt_.
+  add `consoleblank=0` to the end of the line in _/boot/cmdline.txt_.
 
 - reboot
 

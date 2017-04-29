@@ -214,6 +214,13 @@ alias ll='ls -al'
 alias mc='mc -ub'
 ```
 
+_~/.bashrc_:
+
+```sh
+...
+export EDITOR=vim
+```
+
 ### screen resolution
 
 #### resolution
@@ -273,6 +280,12 @@ $ tar xvzf ruby-2.4.1.tar.gz
 $ cd ruby-2.4.1
 $ ./configure && make && sudo make install
 $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
+```
+
+install global gems:
+
+```sh
+$ sudo gem install bundler git-up
 ```
 
 ### ssh

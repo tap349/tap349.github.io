@@ -210,6 +210,11 @@ set incsearch
 _~/.bash_aliases_:
 
 ```sh
+alias g='git'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gs='git status'
+
 alias ll='ls -al'
 alias mc='mc -ub'
 ```

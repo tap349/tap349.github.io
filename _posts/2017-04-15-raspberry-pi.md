@@ -191,7 +191,7 @@ NOTE: network module in raspberry pi supports 2.4 GHz only
 
 ```sh
 $ sudo apt-get update
-$ sudo apt-get install locate mc htop omxplayer vim
+$ sudo apt-get install locate mc htop omxplayer vim git
 ```
 
 #### vim

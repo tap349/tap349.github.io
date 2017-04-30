@@ -217,7 +217,7 @@ alias gdc='git diff --cached'
 alias gs='git status'
 
 alias ll='ls -al'
-alias mc='mc -ub'
+alias mcu='mc -ub'
 ```
 
 _~/.bashrc_:

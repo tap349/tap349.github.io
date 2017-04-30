@@ -295,7 +295,7 @@ class Site::Create
 
   include MyApp::Inject['svcs.fetch_main_mirror', 'ops.create_site_setting']
 
-  alias :m :method
+  alias m method
 
   MAIN_MIRROR_NOT_FETCHED = 'error fetching main mirror'
 

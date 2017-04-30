@@ -211,6 +211,7 @@ _~/.bash_aliases_:
 
 ```sh
 alias g='git'
+alias ga='git add -A .'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gs='git status'

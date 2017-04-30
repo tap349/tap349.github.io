@@ -269,6 +269,9 @@ NOTE: hdmi cable must be plugged in before booting raspberry pi -
 
 ### ruby
 
+package manager will install an outdated version of ruby -
+build it from source instead.
+
 install packages for openssl and readline extensions:
 
 ```sh

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: raspberry pi
+title: Raspberry Pi
 date: 2017-04-15 22:46:59 +0300
 access: public
-categories: [pi]
+categories: [rpi]
 ---
 
 <!-- more -->
@@ -155,7 +155,7 @@ Sun 16 Apr 00:55:55 MSK 2017
 
 <https://wiki.debian.org/WiFi/HowToUse>
 
-NOTE: network module in raspberry pi supports 2.4 GHz only
+NOTE: network module in RPI supports 2.4 GHz only
       (at least `iwlist scan` doesn't show 5 GHz networks).
 
 - generate wpa psk for your wi-fi network
@@ -231,10 +231,10 @@ export EDITOR=vim
 
 #### resolution
 
-NOTE: hdmi cable must be plugged in before booting raspberry pi -
-      otherwise hdmi signal is not detected.
+NOTE: HDMI cable must be plugged in before booting RPI -
+      otherwise HDMI signal is not detected.
 
-- list all modes for `DMT` hdmi group
+- list all modes for `DMT` HDMI group
 
   ```sh
   $ tvservice -m DMT
@@ -243,7 +243,7 @@ NOTE: hdmi cable must be plugged in before booting raspberry pi -
   current mode is marked as `(prefer)` (`mode 58: 1680x1050` by default).
   I need `mode 82: 1920x1050`.
 
-- set framebuffer width/height and hdmi mode
+- set framebuffer width/height and HDMI mode
 
   _/boot/config.txt_:
 
@@ -267,9 +267,9 @@ NOTE: hdmi cable must be plugged in before booting raspberry pi -
 
 - reboot
 
-### ruby
+### Ruby
 
-package manager will install an outdated version of ruby -
+package manager will install an outdated version of Ruby -
 build it from source instead.
 
 install packages for openssl and readline extensions:
@@ -278,7 +278,7 @@ install packages for openssl and readline extensions:
 $ sudo apt-get install libssl-dev libreadline-dev
 ```
 
-run `make clean` if you have already tried to compile ruby
+run `make clean` if you have already tried to compile Ruby
 before and got warnings about not installed extensions
 (because corresponding dev packages were not installed).
 
@@ -299,15 +299,15 @@ $ sudo gem install bundler git-up
 
 ### ssh
 
-- add raspberry pi host record to _~/.ssh/config_ on local machine
-- login to raspberry pi with login/password first
-- add your public RSA key to _~/.ssh/authorized_keys_ on raspberry pi
+- add RPI host record to _~/.ssh/config_ on local machine
+- login to RPI with login/password first
+- add your public RSA key to _~/.ssh/authorized_keys_ on RPI
 
-### samba
+### Samba
 
 <https://wiki.debian.org/SambaServerSimple>
 
-- install samba server and client
+- install Samba server and client
 
   ```sh
   $ sudo apt-get install samba samba-client
@@ -328,9 +328,9 @@ $ sudo gem install bundler git-up
     valid users = %S
   ```
 
-- add samba user
+- add Samba user
 
-  samba doesn't use system users and has its own password system.
+  Samba doesn't use system users and has its own password system.
 
   ```sh
   $ sudo smbpasswd -a pi
@@ -338,7 +338,7 @@ $ sudo gem install bundler git-up
   $ sudo pdbedit -wL
   ```
 
-- restart samba daemon
+- restart Samba daemon
 
   ```sh
   $ sudo service smbd restart
@@ -354,7 +354,7 @@ $ sudo gem install bundler git-up
   ```
 
   NOTE: if user is not specified name of currently logged in user is used
-        (this user might not exist on samba server).
+        (this user might not exist on Samba server).
 
   also usually I add new mount points to `Directory hotlist` in mc.
 

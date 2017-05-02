@@ -21,7 +21,7 @@ categories: [rpi]
 - download `raspbian jessie lite` image
 - use `applepi-baker` to write it to microsd
   (or else use command line - see link above for details)
-- create empty _ssh_ file in microsd root to enable ssh
+- create empty _ssh_ file in microsd root to enable SSH
   (do it before the very first boot!)
 
 ## configuration
@@ -110,7 +110,7 @@ $ logout
   - [x] `en_US.UTF-8 UTF-8`
 - Default locale for the system environment: `en_US.UTF-8`
 
-when connecting via ssh remote host will try to set the same
+when connecting via SSH remote host will try to set the same
 locale as on local machine - this operation will fail if
 corresponding locale is not generated on remote server:
 
@@ -299,7 +299,7 @@ install global gems:
 $ sudo gem install bundler git-up
 ```
 
-### ssh
+### SSH
 
 - add RPI host record to _~/.ssh/config_ on local machine
 - login to RPI with login/password first

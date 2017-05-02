@@ -218,6 +218,8 @@ alias gs='git status'
 
 alias ll='ls -al'
 alias mcu='mc -ub'
+
+alias j='sudo journalctl -ef -u ntv-*'
 ```
 
 _~/.bashrc_:

@@ -151,14 +151,133 @@ $ date
 Sun 16 Apr 00:55:55 MSK 2017
 ```
 
-### wi-fi
+### network
+
+[man interfaces 5](https://manpages.debian.org/jessie/ifupdown/interfaces.5.en.html)
+
+- list network interfaces with their statuses and MAC addresses
+
+  ```sh
+  $ ip link
+  1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1
+      link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+  2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT group default qlen 1000
+      link/ether b8:XX:XX:XX:XX:6d brd ff:ff:ff:ff:ff:ff
+  3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DORMANT group default qlen 1000
+      link/ether b8:XX:XX:XX:XX:38 brd ff:ff:ff:ff:ff:ff
+  ```
+
+- list network interfaces (like `ip link` but with IP addresses)
+
+  ```sh
+  $ ip address
+  1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+      link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+      inet 127.0.0.1/8 scope host lo
+        valid_lft forever preferred_lft forever
+      inet6 ::1/128 scope host
+        valid_lft forever preferred_lft forever
+  2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+      link/ether b8:XX:XX:XX:XX:6d brd ff:ff:ff:ff:ff:ff
+      inet 192.168.0.131/24 brd 192.168.0.255 scope global eth0
+        valid_lft forever preferred_lft forever
+      inet6 fe80::3c44:72e7:62ef:445/64 scope link
+        valid_lft forever preferred_lft forever
+  3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+      link/ether b8:XX:XX:XX:XX:38 brd ff:ff:ff:ff:ff:ff
+      inet 192.168.0.130/24 brd 192.168.0.255 scope global wlan0
+        valid_lft forever preferred_lft forever
+      inet6 fe80::ba27:ebff:fef5:1138/64 scope link
+        valid_lft forever preferred_lft forever
+  ```
+
+- bring interface up/down (using `ifupdown` package)
+
+  ```sh
+  $ sudo ifup eth0
+  $ sudo ifdown eth0
+  ```
+
+- restart `networking` service
+
+  ```sh
+  $ sudo systemctl daemon-reload
+  $ sudo systemctl restart networking
+  ```
+
+- disable interface (say, `wlan0`)
+
+  _/etc/network/interfaces_:
+
+  ```sh
+  # or else wlan0 will be up after reboot
+  #allow-hotplug wlan0
+  # or else wlan0 will be up after reboot
+  # or restarting networking service
+  #auto wlan0
+  # set method to manual instead of dhcp or static
+  iface wlan0 inet manual
+  ```
+
+- apply new network settings
+
+  restart interface (say, `eth0`):
+
+  ```sh
+  $ sudo ifdown eth0
+  $ sudo ifup eth0
+  ```
+
+  or restart `networking` service:
+
+  ```sh
+  $ sudo systemctl daemon-reload
+  $ sudo systemctl restart networking
+  ```
+
+  or restart RPI:
+
+  ```sh
+  $ sudo systemctl reboot
+  ```
+
+#### Ethernet
+
+<https://www.mathworks.com/help/supportpkg/raspberrypi/ug/getting-the-raspberry_pi-ip-address.html>
+
+make sure RPI Ethernet lights are on during boot - I used a cable with 4P4C
+(instead of 8P8C) connectors by mistake and my router refused to talk to RPI.
+
+- reserve IP address for Ethernet adapter in your router
+  (it has different MAC address than Wi-Fi adapter)
+- connect Ethernet cable and boot RPI
+- configure either `eth0` interface to use either static or dhcp method
+
+  _/etc/network/interfaces_ (static method):
+
+  ```sh
+  iface eth0 inet static
+      address 192.168.0.131
+      netmask 255.255.255.0
+      gateway 192.168.0.1
+  ```
+
+  _/etc/network/interfaces_ (dhcp method):
+
+  ```sh
+  iface eth0 inet dhcp
+  ```
+
+- apply new network settings (see instructions in parent section)
+
+#### Wi-Fi
 
 <https://wiki.debian.org/WiFi/HowToUse>
 
 NOTE: network module in RPI supports 2.4 GHz only
       (at least `iwlist scan` doesn't show 5 GHz networks).
 
-- generate wpa psk for your wi-fi network
+- generate wpa psk for your Wi-Fi network
 
   ```sh
   $ sudo su
@@ -180,12 +299,7 @@ NOTE: network module in RPI supports 2.4 GHz only
   # don't forget to remove output from wpa_passphrase
   ```
 
-- restart `wlan0` interface
-
-  ```sh
-  # ifdown wlan0
-  # ifup wlan0
-  ```
+- apply new network settings (see instructions in parent section)
 
 ### packages
 

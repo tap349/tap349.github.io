@@ -219,6 +219,11 @@ Sun 16 Apr 00:55:55 MSK 2017
   iface wlan0 inet manual
   ```
 
+  NOTE: if you set method to manual for `eth0` interface it's still up
+        after rebooting RPI even though appears to be not configured
+        (trying to bring it down with `ifdown` command returns error
+        unless you bring it up explicitly with `ifup` command).
+
 - apply new network settings
 
   restart interface (say, `eth0`):
@@ -235,7 +240,7 @@ Sun 16 Apr 00:55:55 MSK 2017
   $ sudo systemctl restart networking
   ```
 
-  or restart RPI:
+  or just reboot RPI:
 
   ```sh
   $ sudo systemctl reboot
@@ -277,6 +282,10 @@ make sure RPI Ethernet lights are on during boot - I used a cable with 4P4C
 NOTE: network module in RPI supports 2.4 GHz only
       (at least `iwlist scan` doesn't show 5 GHz networks).
 
+NOTE: pay attention to using double quotes around PSK (pre-shared key) in
+      configuration files - only plain passphrase must be quoted, PSK is
+      typed directly without quotes.
+
 - generate wpa psk for your Wi-Fi network
 
   ```sh
@@ -300,6 +309,57 @@ NOTE: network module in RPI supports 2.4 GHz only
   ```
 
 - apply new network settings (see instructions in parent section)
+
+##### using WPA supplicant
+
+<https://wiki.archlinux.org/index.php/WPA_supplicant>
+
+- create configuration file
+
+  default configuration file is _/etc/wpa_supplicant/wpa_supplicant.conf_.
+
+  ```sh
+  $ sudo cp wpa_supplicant.conf wlan0.conf
+  ```
+
+  _/etc/wpa_supplicant/wlan0.conf_:
+
+  ```sh
+  country=RU
+  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+  update_config=1
+  network={
+          ssid="<myssid>"
+          psk=<mypsk>
+  }
+  ```
+
+  the difference from default configuration file:
+
+  - country is modified
+  - network section with credentials is added
+
+  network section above can be generated using `wpa_passphrase` command:
+
+  ```sh
+  $ wpa_passphrase myssid passphrase
+  network={
+          ssid="myssid"
+          #psk="passphrase"
+          psk=af3492c3f8040dd43589d2700bbeacc7d6aa60e91f2225fe29898769fa139965
+  }
+  ```
+
+- use new configuration file for `wlan0` interface
+
+  _/etc/network/interfaces_:
+
+  ```sh
+  allow-hotplug wlan0
+  auto wlan0
+  iface wlan0 inet dhcp
+      wpa-conf /etc/wpa_supplicant/wlan0.conf
+  ```
 
 ### packages
 

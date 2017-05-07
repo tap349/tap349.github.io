@@ -273,7 +273,7 @@ make sure RPI Ethernet lights are on during boot - I used a cable with 4P4C
   iface eth0 inet dhcp
   ```
 
-- apply new network settings (see instructions in parent section)
+- apply new network settings (see instructions in `network` section)
 
 #### Wi-Fi
 
@@ -308,7 +308,7 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   # don't forget to remove output from wpa_passphrase
   ```
 
-- apply new network settings (see instructions in parent section)
+- apply new network settings (see instructions in `network` section)
 
 ##### using WPA supplicant
 
@@ -360,6 +360,8 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   iface wlan0 inet dhcp
       wpa-conf /etc/wpa_supplicant/wlan0.conf
   ```
+
+- apply new network settings (see instructions in `network` section)
 
 ### packages
 

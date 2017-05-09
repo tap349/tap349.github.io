@@ -102,7 +102,7 @@ monads have the following methods:
   use `fmap` when you need to pass function result down the chain
   and nothing can go wrong in that function:
 
-  - function normalizes url or adds utm tags to url
+  - function normalizes url or adds UTM tags to url
 
 - `tee` (`Maybe` and `Either` monads only)
 

@@ -342,12 +342,40 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   network section above can be generated using `wpa_passphrase` command:
 
   ```sh
-  $ wpa_passphrase myssid passphrase
+  $ wpa_passphrase myssid mypassphrase
   network={
           ssid="myssid"
-          #psk="passphrase"
+          #psk="mypassphrase"
           psk=af3492c3f8040dd43589d2700bbeacc7d6aa60e91f2225fe29898769fa139965
   }
+  ```
+
+  multiple network sections are allowed:
+
+  ```sh
+  country=RU
+  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+  update_config=1
+
+  network={
+          ssid="<myssid_1>"
+          psk=<mypsk_1>
+  }
+  network={
+          ssid="<myssid_2>"
+          psk="<mypassphrase_2>"
+  }
+  ```
+
+  NOTE: if using passphrase its length must be at least 8 characters -
+        otherwise trying to bring `wlan0` interface up will fail with
+        not very informative message:
+
+  ```sh
+  $ sudo ifup wlan0
+  wpa_supplicant: /sbin/wpa_supplicant daemon failed to start
+  run-parts: /etc/network/if-pre-up.d/wpasupplicant exited with return code 1
+  Failed to bring up wlan0.
   ```
 
 - use new configuration file for `wlan0` interface

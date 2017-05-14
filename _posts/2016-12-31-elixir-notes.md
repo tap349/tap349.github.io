@@ -908,7 +908,7 @@ iex> <<257>>
 <<1>>
 ```
 
-if you change the size of term with modifier it's no longer a binary:
+if you set term size that is not divisible by 8 the term is no longer a binary:
 
 ```elixir
 <<256>> # binary (size is 8 bits) => <<0>>

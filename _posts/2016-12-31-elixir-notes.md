@@ -402,9 +402,12 @@ in Erlang it's equivalent to:
 
 ### module directives
 
+- <http://elixir-lang.org/getting-started/alias-require-and-import.html>
+
+
 Elixir has 3 directives for modules, all of them are lexically scoped -
 they are effective from the point they are encountered till the end of
-enclosing scope.
+enclosing scope (say, function).
 
 - `import`
 
@@ -423,6 +426,8 @@ enclosing scope.
 
   - use in the smallest possible scope
   - use `only:` to import only the functions you need
+
+  > Note that importing a module automatically requires it.
 
 - `alias`
 
@@ -451,6 +456,32 @@ enclosing scope.
 
   make macros from specified module available in containing module
   (= ensure `required` module is compiled and available).
+
+  > In general a module does not need to be required before usage,
+  > except if we want to use the macros available in that module.
+
+
+also Elixir has macro `use` (it's not directive) which:
+
+- requires given module
+- calls `__using/1__` callback on it (to inject some code into current context)
+
+that is
+
+```elixir
+defmodule Example do
+  use Feature, option: :value
+end
+```
+
+is compiled to:
+
+```elixir
+defmodule Example do
+  require Feature
+  Feature.__using__(option: :value)
+end
+```
 
 ### module attributes
 

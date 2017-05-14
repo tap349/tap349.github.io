@@ -931,8 +931,8 @@ both strings and character lists:
 
 ### heredocs
 
-heredoc is string contents delimited with triple single (''') or
-double (""") quotes on separate lines:
+heredoc is string contents delimited with triple single (`'''`) or
+double (`"""`) quotes on separate lines:
 
 ```elixir
 IO.puts """

@@ -449,7 +449,8 @@ enclosing scope.
 
 - `require`
 
-  make macro definitions available when code is compiled.
+  make macros from specified module available in containing module
+  (= ensure `required` module is compiled and available).
 
 ### module attributes
 

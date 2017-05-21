@@ -112,3 +112,14 @@ iex> r Foo.Bar
 
 - start new IEx session or recompile module with breakpoint
 - finish pry session by calling `respawn`
+
+#### suppress long output (same as `;` in irb)
+
+<http://stackoverflow.com/a/39208906/3632318>
+
+add another expression at the end of the line after semicolon:
+
+```sh
+iex> Foo.bar(); 0
+0
+```

@@ -87,3 +87,26 @@ the line from current cursor position backwards to the start of the line.
 ```sh
 iex> recompile()
 ```
+
+also it's possible to recompile specific module:
+
+```sh
+iex> r Foo.Bar
+```
+
+#### debugging (same as `binding.pry`)
+
+<http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
+
+```elixir
+require IEx
+
+defmodule Test do
+  def foo do
+    IEx.pry
+  end
+end
+```
+
+then start new IEx session or recompile current application inside
+existing one (see tip above).

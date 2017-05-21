@@ -76,9 +76,9 @@ iex> v()
 
 `<D-u><D-u>`
 
-the first `<D-u>` will cancel reverse search but will leave found command if
-any (cursor will be located at the end of the line), the second `<D-u>` will
-delete the line from current cursor position backwards to the start of the line.
+the first `<D-u>` cancels reverse search but leaves found command if
+any (cursor is located at the end of the line), the second `<D-u>` deletes
+the line from current cursor position backwards to the start of the line.
 
 #### recompile current Mix application (same as `reload!` in rails console)
 

@@ -98,15 +98,17 @@ iex> r Foo.Bar
 
 <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
 
-```elixir
-require IEx
+- add `IEx.pry` breakpoint
 
-defmodule Test do
-  def foo do
-    IEx.pry
+  ```elixir
+  require IEx
+
+  defmodule Test do
+    def foo do
+      IEx.pry
+    end
   end
-end
-```
+  ```
 
-then start new IEx session or recompile current application inside
-existing one (see tip above).
+- start new IEx session or recompile module with breakpoint
+- finish pry session by calling `respawn`

@@ -45,7 +45,19 @@ categories: [elixir]
   end
   ```
 
-### iex
+### IEx
+
+#### quit IEx
+
+<http://blog.plataformatec.com.br/2016/03/how-to-quit-the-elixir-shell-iex/>
+
+- `<C-c>a<CR>` (graceful)
+- `<C-g>q<CR>` (graceful)
+- `<C-c><C-c>` (not graceful)
+- `<C-\>` (not graceful)
+
+only graceful ways to quit IEx allow to save shell history
+(when using `erlang-history`).
 
 #### result of last evaluated expression (same as `_` in irb)
 

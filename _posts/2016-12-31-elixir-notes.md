@@ -35,6 +35,9 @@ shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
 UPDATE: shell history is now stored in _~/.erlang-history/_ - you might
         need to remove _~/.erlang-hist.nonode@nohost_ for it to work.
 
+NOTE: for shell history to be saved quit IEx gracefully -
+      using either `<C-c>a<CR>` or `<C-g>q<CR>` commands.
+
 NOTE: you need to compile it for each new version of Erlang/OTP kernel!
 
 - get current version of Kernel library:

@@ -44,3 +44,16 @@ categories: [elixir]
     ]
   end
   ```
+
+### iex
+
+#### result of last evaluated expression (same as `_` in irb)
+
+- <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
+
+```sh
+iex> 123
+123
+iex> v()
+123
+```

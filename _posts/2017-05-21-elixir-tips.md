@@ -94,7 +94,7 @@ also it's possible to recompile specific module:
 iex> r Foo.Bar
 ```
 
-#### debugging (same as `binding.pry`)
+#### debugging (same as `binding.pry` in Ruby)
 
 <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
 

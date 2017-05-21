@@ -24,7 +24,7 @@ categories: [elixir]
 
 - application inference
 
-  - <http://elixir-lang.org/blog/2017/01/05/elixir-v1-4-0-released/#application-inference>
+  <http://elixir-lang.org/blog/2017/01/05/elixir-v1-4-0-released/#application-inference>
 
   deps should be no longer listed in applications list explicitly:
 
@@ -49,7 +49,7 @@ categories: [elixir]
 
 #### result of last evaluated expression (same as `_` in irb)
 
-- <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
+<https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
 ```sh
 iex> 123
@@ -60,10 +60,18 @@ iex> v()
 
 #### cancel reverse search
 
-- <http://readline.kablamo.org/emacs.html>
+<http://readline.kablamo.org/emacs.html>
 
 `<D-u><D-u>`
 
 the first `<D-u>` will cancel reverse search but will leave found command if
 any (cursor will be located at the end of the line), the second `<D-u>` will
 delete the line from current cursor position backwards to the start of the line.
+
+#### recompile current Mix application (same as `reload!` in rails console)
+
+<http://stackoverflow.com/a/36494891/3632318>
+
+```sh
+iex> recompile()
+```

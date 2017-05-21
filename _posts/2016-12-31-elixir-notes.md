@@ -233,7 +233,21 @@ function consists of head and body:
   (either standard or your own one) as another function argument:
 
   ```elixir
-  Enum.each [1, 2, 3, 4], &IO.inspect/1
+  Enum.each([1, 2, 3, 4], &IO.inspect/1)
+  ```
+
+  if using named function from the same it's possible to omit module name:
+
+  ```elixir
+  defmodule Test do
+    def foo do
+      Enum.each([1, 2, 3, 4], &bar/1)
+    end
+
+    def bar(value) do
+      IO.inspect(value)
+    end
+  end
   ```
 
 - get partially applied named function (currying)

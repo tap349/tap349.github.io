@@ -476,7 +476,15 @@ NOTE: HDMI cable must be plugged in before booting RPI -
 ### Ruby
 
 package manager will install an outdated version of Ruby -
-build it from source instead.
+build it from source instead or install 'stretch' package.
+
+install global gems after installing Ruby:
+
+```sh
+$ sudo gem install bundler git-up
+```
+
+#### build from source
 
 install packages for openssl and readline extensions:
 
@@ -497,10 +505,19 @@ $ ./configure && make && sudo make install
 $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
 ```
 
-install global gems:
+#### install 'stretch' package
+
+<https://raspberrypi.stackexchange.com/questions/49567#49567>
+
+_/etc/apt/sources.list_:
+
+```
+deb http://archive.raspbian.org/raspbian/ stretch main
+```
 
 ```sh
-$ sudo gem install bundler git-up
+$ sudo apt update
+$ sudo apt install ruby2.3
 ```
 
 ### SSH

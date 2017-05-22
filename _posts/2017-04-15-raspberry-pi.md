@@ -394,8 +394,8 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
 ### packages
 
 ```sh
-$ sudo apt-get update
-$ sudo apt-get install locate mc htop omxplayer vim git iotop
+$ sudo apt update
+$ sudo apt install locate mc htop omxplayer vim git iotop checkinstall
 ```
 
 #### vim
@@ -489,7 +489,7 @@ $ sudo gem install bundler git-up
 install packages for openssl and readline extensions:
 
 ```sh
-$ sudo apt-get install libssl-dev libreadline-dev
+$ sudo apt install libssl-dev libreadline-dev
 ```
 
 run `make clean` if you have already tried to compile Ruby
@@ -533,7 +533,7 @@ $ sudo apt install ruby2.3
 - install Samba server and client
 
   ```sh
-  $ sudo apt-get install samba samba-client
+  $ sudo apt install samba samba-client
   ```
 
 - configure shared directories
@@ -618,19 +618,19 @@ $ sudo halt
   remove only binaries:
 
   ```sh
-  $ sudo apt-get remove <packagename>
+  $ sudo apt remove <packagename>
   ```
 
   remove everything regarding package but without dependencies:
 
   ```sh
-  $ sudo apt-get [purge|remove --purge] <packagename>
+  $ sudo apt [purge|remove --purge] <packagename>
   ```
 
   remove all orphaned packages:
 
   ```sh
-  $ sudo apt-get autoremove
+  $ sudo apt autoremove
   ```
 
   remove everything regarding package with dependencies:

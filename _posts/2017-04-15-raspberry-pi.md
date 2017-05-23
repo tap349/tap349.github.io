@@ -535,7 +535,7 @@ also after downgrading Ruby version it might be necessary to update RubyGems
 (package manager for Ruby which provides `gem` command):
 
 ```sh
-$ gem update --system
+$ sudo gem update --system
 ```
 
 or else you might encounter this error when trying to install global gems:

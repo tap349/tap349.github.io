@@ -531,7 +531,7 @@ $ sudo make uninstall
 `uninstall` target is available only if you installed Ruby previously from the
 same directory - otherwise run `./configure && make && sudo make install` again.
 
-also when downgrading Ruby version it's necessary to update RubyGems
+also after downgrading Ruby version it might be necessary to update RubyGems
 (package manager for Ruby which provides `gem` command):
 
 ```sh

@@ -59,7 +59,7 @@ categories: [elixir]
 only graceful ways to quit IEx allow to save shell history
 (when using `erlang-history`).
 
-#### result of last evaluated expression (same as `_` in irb)
+#### get result of last evaluated expression (same as `_` in irb)
 
 <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
@@ -68,6 +68,16 @@ iex> 123
 123
 iex> v()
 123
+```
+
+#### cancel multiline command
+
+- <https://stackoverflow.com/questions/27591417>
+- <https://hexdocs.pm/iex/1.0.5/IEx.html>
+
+```sh
+iex> foo =
+...> #iex:break
 ```
 
 #### cancel reverse search

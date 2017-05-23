@@ -8,6 +8,8 @@ categories: [elixir]
 
 <!-- more -->
 
+<https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
+
 ### mix tasks
 
 - `mix deps.get` = `bundle install`

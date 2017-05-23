@@ -517,8 +517,10 @@ deb http://archive.raspbian.org/raspbian/ stretch main
 
 ```sh
 $ sudo apt update
-$ sudo apt install ruby2.3
+$ sudo apt install ruby2.3 ruby2.3-dev
 ```
+
+NOTE: install dev package as well to be able to build gem native extensions.
 
 it's necessary to remove Ruby built from source in order to use Ruby installed
 from repository (unless you use Ruby version managers such as RVM or rbenv):

@@ -507,7 +507,8 @@ $ cd .. && rm -rf ruby-2.4.1.tar.gz ruby-2.4.1/
 
 #### install package from stretch release
 
-<https://raspberrypi.stackexchange.com/questions/49567#49567>
+- <https://raspberrypi.stackexchange.com/questions/49567#49567>
+- <https://stackoverflow.com/questions/4304438>
 
 _/etc/apt/sources.list_:
 

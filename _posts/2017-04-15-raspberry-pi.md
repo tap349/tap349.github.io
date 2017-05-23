@@ -395,7 +395,7 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
 
 ```sh
 $ sudo apt update
-$ sudo apt install locate mc htop omxplayer vim git iotop checkinstall
+$ sudo apt install locate mc htop omxplayer vim git iotop
 ```
 
 #### vim
@@ -476,7 +476,7 @@ NOTE: HDMI cable must be plugged in before booting RPI -
 ### Ruby
 
 package manager will install an outdated version of Ruby -
-build it from source instead or install package from stretch release.
+build it from source or install package from stretch release instead.
 
 install global gems after installing Ruby:
 
@@ -518,6 +518,32 @@ deb http://archive.raspbian.org/raspbian/ stretch main
 ```sh
 $ sudo apt update
 $ sudo apt install ruby2.3
+```
+
+it's necessary to remove Ruby built from source in order to use Ruby installed
+from repository (unless you use Ruby version managers such as RVM or rbenv):
+
+```sh
+$ cd ~/tmp/ruby-2.4.1
+$ sudo make uninstall
+```
+
+`uninstall` target is available only if you installed Ruby previously from the
+same directory - otherwise run `./configure && make && sudo make install` again.
+
+also when downgrading Ruby version it's necessary to update RubyGems
+(package manager for Ruby which provides `gem` command):
+
+```sh
+$ gem update --system
+```
+
+or else you might encounter this error when trying to install global gems:
+
+```sh
+$ sudo gem install bundler git-up
+ERROR:  While executing gem ... (TypeError)
+    no implicit conversion of nil into String
 ```
 
 ### SSH

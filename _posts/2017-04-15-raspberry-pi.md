@@ -494,7 +494,7 @@ $ sudo apt install libssl-dev libreadline-dev
 
 run `make clean` if you have already tried to compile Ruby
 before and got warnings about not installed extensions
-(because corresponding dev packages were not installed).
+(because corresponding dev packages were not installed at that time).
 
 ```sh
 $ cd ~/tmp

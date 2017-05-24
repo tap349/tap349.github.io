@@ -31,6 +31,28 @@ $ brew cask install java
 $ brew cask install android-sdk
 ```
 
+#### configure paths
+
+_~/.zshenv_:
+
+```conf
+export ANDROID_HOME=/usr/local/share/android-sdk
+path=($path $ANDROID_HOME/tools)
+path=($path $ANDROID_HOME/tools/bin)
+path=($path $ANDROID_HOME/platform-tools)
+```
+
+#### create symlink for React Native
+
+React Native expects Android SDK to be installed in _~/Library/Android/sdk/_
+(this is where Android Studio would install it). thus create such a symlink
+that points to actual Android SDK root:
+
+```sh
+$ mkdir ~/Library/Android
+$ ln -s $ANDROID_HOME ~/Library/Android/sdk
+````
+
 #### install Android SDK Platform packages
 
 <https://developer.android.com/studio/command-line/sdkmanager.html>
@@ -57,15 +79,6 @@ $ sdkmanager 'system-images;android-23;google_apis;x86_64'
 
 ```sh
 $ sdkmanager 'build-tools;23.0.1'
-```
-
-configure paths in _~/.zshenv_:
-
-```conf
-export ANDROID_HOME=/usr/local/share/android-sdk
-path=($path $ANDROID_HOME/tools)
-path=($path $ANDROID_HOME/tools/bin)
-path=($path $ANDROID_HOME/platform-tools)
 ```
 
 #### create new AVD (Android Virtual Device)
@@ -102,24 +115,49 @@ emulator searches for AVDs in the following directories:
 
 ```sh
 $ emulator -help
-$ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin WXGA
+$ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
 ```
 
 make sure to specify both `-gpu` and `-skin` options:
 
 - `-gpu host` - enables graphics hardware emulation
-- `-skin 768x1280` - changes screen resolution to WXGA
+- `-skin 1080x1920` - changes screen resolution to WXGA
+  (by default a very low screen resolution is used)
 
-  by default a very low screen resolution is used.
-  some skin resolutions have corresponding skin names (see link above).
+some skin resolutions have corresponding skin names (see link above).
 
-according to log there is no need to install HAXM separately:
+according to emulator's log there is no need to install HAXM separately:
 
 ```sh
 Hax is enabled
 Hax ram_size 0x40000000
 HAX is working and emulator runs in fast virt mode.
 ```
+
+## running
+
+### android
+
+#### start server
+
+```sh
+$ rails server
+```
+
+#### start AVD
+
+```sh
+$ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
+```
+
+#### run application
+
+```sh
+$ react-native run-android
+```
+
+the first run might take a long time since React Native will try to
+download and install all required Android libraries.
 
 ## troubleshooting
 
@@ -217,3 +255,33 @@ _~/.zshenv_:
 ```conf
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 ```
+
+### application build fails
+
+```sh
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file '/Users/tap/dev/complead/iceperkapp/android/app/build.gradle' line: 108
+
+* What went wrong:
+A problem occurred evaluating project ':app'.
+> Could not get unknown property 'MYAPP_RELEASE_STORE_FILE' for SigningConfig_Decorated...
+```
+
+solution:
+
+<https://facebook.github.io/react-native/docs/signed-apk-android.html>
+
+create dummy _~/.gradle/gradle.properties_ file:
+
+```conf
+MYAPP_RELEASE_STORE_FILE=test
+MYAPP_RELEASE_KEY_ALIAS=test
+MYAPP_RELEASE_STORE_PASSWORD=test
+MYAPP_RELEASE_KEY_PASSWORD=test
+```
+
+since these variables (`MYAPP_RELEASE_STORE_FILE`, etc.) are mentioned in
+_android/app/build.gradle_ file inside application and build fails if they
+were not set.

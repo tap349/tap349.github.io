@@ -256,7 +256,7 @@ _~/.zshenv_:
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 ```
 
-### application build fails
+### application build fails (unknown property 'MYAPP_RELEASE_STORE_FILE')
 
 ```sh
 FAILURE: Build failed with an exception.
@@ -285,3 +285,17 @@ MYAPP_RELEASE_KEY_PASSWORD=test
 since these variables (`MYAPP_RELEASE_STORE_FILE`, etc.) are mentioned in
 _android/app/build.gradle_ file inside application and build fails if they
 were not set.
+
+### application build fails (no connected devices)
+
+```sh
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:installDebug'.
+> com.android.builder.testing.api.DeviceException: No connected devices!
+```
+
+solution:
+
+start AVD before running application.

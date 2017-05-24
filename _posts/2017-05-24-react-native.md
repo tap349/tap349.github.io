@@ -8,20 +8,106 @@ categories: [react-native]
 
 <!-- more -->
 
-## installation and running
+## installation
 
 - <https://facebook.github.io/react-native/docs/getting-started.html>
 - <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
 
-### android
-
-- <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
-- <https://stackoverflow.com/questions/42718973/run-avd-emulator-without-android-studio>
+install prerequisites and react-native-cli:
 
 ```sh
 $ brew install node watchman
 $ npm install -g react-native-cli
+```
+
+### android
+
+<https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
+
+#### install Android SDK
+
+```sh
 $ brew cask install java
+$ brew cask install android-sdk
+```
+
+#### install Android SDK Platform packages
+
+<https://developer.android.com/studio/command-line/sdkmanager.html>
+
+list all available packages:
+
+```sh
+$ sdkmanager --list
+```
+
+> Google APIs
+> Android SDK Platform 23 (Android 6.0 (Marshmallow))
+> Intel x86 Atom_64 System Image
+> Google APIs Intel x86 Atom_64 System Image
+
+```sh
+$ sdkmanager 'add-ons;addon-google_apis-google-23'
+$ sdkmanager 'platforms;android-23'
+$ sdkmanager 'system-images;android-23;default;x86_64'
+$ sdkmanager 'system-images;android-23;google_apis;x86_64'
+```
+
+> Android SDK Build-Tools 23.0.1
+
+```sh
+$ sdkmanager 'build-tools;23.0.1'
+```
+
+configure paths in _~/.zshenv_:
+
+```conf
+export ANDROID_HOME=/usr/local/share/android-sdk
+path=($path $ANDROID_HOME/tools)
+path=($path $ANDROID_HOME/tools/bin)
+path=($path $ANDROID_HOME/platform-tools)
+```
+
+#### create new AVD (Android Virtual Device)
+
+<https://developer.android.com/studio/command-line/avdmanager.html>
+
+```sh
+$ avdmanager create --help
+$ avdmanager list device
+$ avdmanager create avd \
+  --package 'system-images;android-23;google_apis;x86_64' \
+  --name Nexus_S_API_23_x86_64 \
+  --abi 'google_apis/x86_64' \
+  --device 16
+$ avdmanager create avd \
+  --package 'system-images;android-23;google_apis;x86_64' \
+  --name Pixel_XL_API_23_x86_64 \
+  --abi 'google_apis/x86_64' \
+  --device 19
+$ avdmanager list avd
+```
+
+#### start AVD
+
+<https://stackoverflow.com/questions/42718973/run-avd-emulator-without-android-studio>
+
+NOTE: emulator searches for AVDs in the following directories:
+
+- `$ANDROID_AVD_HOME`
+- `$ANDROID_SDK_HOME/avd`
+- `$HOME/.android/avd`
+
+```sh
+$ emulator -avd Pixel_XL_API_23_x86_64
+```
+
+according to log there is no need to install HAXM separately:
+
+```sh
+Hax is enabled
+Hax ram_size 0x40000000
+HAX is working and emulator runs in fast virt mode.
 ```
 
 ## troubleshooting
@@ -75,4 +161,31 @@ solution:
 
 ```sh
 $ sdkmanager --list --verbose
+```
+
+### cannot start AVD
+
+<https://stackoverflow.com/questions/40931254/could-not-launch-emulator-in-android-studio>
+
+```sh
+$ emulator -avd Pixel_XL_API_23_x86_64
+[140735129182208]:ERROR:./android/qt/qt_setup.cpp:28:Qt library not found at ../emulator/lib64/qt/lib
+Could not launch '../emulator/qemu/darwin-x86_64/qemu-system-x86_64': No such file or directory
+```
+
+solution:
+
+```sh
+$ cd /usr/local/share/android-sdk/emulator
+$ ./emulator -avd Pixel_XL_API_23_x86_64
+```
+
+or else create alias in _~/.zshenv_:
+
+```conf
+alias emulator='cd /usr/local/share/android-sdk/emulator && ./emulator'
+```
+
+```sh
+$ emulator -avd Pixel_XL_API_23_x86_64
 ```

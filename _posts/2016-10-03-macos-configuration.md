@@ -121,6 +121,10 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
 ### Displays
 
+  - Turn display off after: 10 min
+
+### Energy Saver
+
   - [ ] Show mirroring options in the menu bar when available
 
 ### Keyboard

@@ -76,31 +76,42 @@ path=($path $ANDROID_HOME/platform-tools)
 $ avdmanager create --help
 $ avdmanager list device
 $ avdmanager create avd \
+  --force \
   --package 'system-images;android-23;google_apis;x86_64' \
-  --name Nexus_S_API_23_x86_64 \
+  --name Nexus_5X_API_23_x86_64 \
   --abi 'google_apis/x86_64' \
-  --device 16
-$ avdmanager create avd \
-  --package 'system-images;android-23;google_apis;x86_64' \
-  --name Pixel_XL_API_23_x86_64 \
-  --abi 'google_apis/x86_64' \
-  --device 19
+  --device 9
 $ avdmanager list avd
 ```
 
 #### start AVD
 
-<https://stackoverflow.com/questions/42718973/run-avd-emulator-without-android-studio>
+- <https://stackoverflow.com/questions/42718973>
+- <https://developer.android.com/studio/run/emulator-acceleration.html#command-gpu>
+  (`-gpu` option)
+- <https://stackoverflow.com/questions/42792947>
+  (`-skin` option)
+- <https://developer.android.com/guide/practices/screens_support.html#testing>
+  (available skins)
 
-NOTE: emulator searches for AVDs in the following directories:
+emulator searches for AVDs in the following directories:
 
 - `$ANDROID_AVD_HOME`
 - `$ANDROID_SDK_HOME/avd`
 - `$HOME/.android/avd`
 
 ```sh
-$ emulator -avd Pixel_XL_API_23_x86_64
+$ emulator -help
+$ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin WXGA
 ```
+
+make sure to specify both `-gpu` and `-skin` options:
+
+- `-gpu host` - enables graphics hardware emulation
+- `-skin 768x1280` - changes screen resolution to WXGA
+
+  by default a very low screen resolution is used.
+  some skin resolutions have corresponding skin names (see link above).
 
 according to log there is no need to install HAXM separately:
 
@@ -112,7 +123,7 @@ HAX is working and emulator runs in fast virt mode.
 
 ## troubleshooting
 
-### cannot uninstall android-sdk
+### brew cannot uninstall android-sdk
 
 <https://github.com/caskroom/homebrew-cask/issues/32139>
 
@@ -133,7 +144,7 @@ $ brew cask uninstall android-sdk
 <https://askubuntu.com/questions/885658>
 
 ```sh
-$ sdkmanager --list                                                                                                                tap@MacBook-Pro-Personal
+$ sdkmanager --list
 Warning: File /Users/tap/.android/repositories.cfg could not be loaded.
 ```
 
@@ -163,12 +174,12 @@ solution:
 $ sdkmanager --list --verbose
 ```
 
-### cannot start AVD
+### emulator cannot start AVD
 
 <https://stackoverflow.com/questions/40931254/could-not-launch-emulator-in-android-studio>
 
 ```sh
-$ emulator -avd Pixel_XL_API_23_x86_64
+$ emulator -avd Nexus_5X_API_23_x86_64
 [140735129182208]:ERROR:./android/qt/qt_setup.cpp:28:Qt library not found at ../emulator/lib64/qt/lib
 Could not launch '../emulator/qemu/darwin-x86_64/qemu-system-x86_64': No such file or directory
 ```
@@ -177,7 +188,7 @@ solution:
 
 ```sh
 $ cd /usr/local/share/android-sdk/emulator
-$ ./emulator -avd Pixel_XL_API_23_x86_64
+$ ./emulator -avd Nexus_5X_API_23_x86_64
 ```
 
 or else create alias in _~/.zshenv_:
@@ -187,5 +198,22 @@ alias emulator='cd /usr/local/share/android-sdk/emulator && ./emulator'
 ```
 
 ```sh
-$ emulator -avd Pixel_XL_API_23_x86_64
+$ emulator -avd Nexus_5X_API_23_x86_64
+```
+
+### emulator cannot find AVD
+
+NOTE: the error occurs sporadically and might disappear on its own.
+
+```sh
+$ emulator -avd Nexus_5X_API_23_x86_64
+PANIC: Cannot find AVD system path. Please define ANDROID_SDK_ROOT
+```
+
+solution:
+
+_~/.zshenv_:
+
+```conf
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 ```

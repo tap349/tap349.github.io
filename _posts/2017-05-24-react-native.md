@@ -13,6 +13,17 @@ categories: [react-native]
 - <https://facebook.github.io/react-native/docs/getting-started.html>
 - <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
 
+### android
+
+- <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
+- <https://stackoverflow.com/questions/42718973/run-avd-emulator-without-android-studio>
+
+```sh
+$ brew install node watchman
+$ npm install -g react-native-cli
+$ brew cask install java
+```
+
 ## troubleshooting
 
 ### cannot uninstall android-sdk
@@ -44,4 +55,24 @@ solution:
 
 ```sh
 $ touch ~/.android/repositories.cfg
+```
+
+### truncated package paths in output from sdkmanager
+
+<https://stackoverflow.com/questions/42460205>
+
+```sh
+$ sdkmanager --list
+...
+Available Packages:
+  Path                              | Version      | Description
+  -------                           | -------      | -------
+  add-ons;addon-g..._apis-google-15 | 3            | Google APIs
+  add-ons;addon-g..._apis-google-16 | 4            | Google APIs
+```
+
+solution:
+
+```sh
+$ sdkmanager --list --verbose
 ```

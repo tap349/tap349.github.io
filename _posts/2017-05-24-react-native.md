@@ -64,8 +64,11 @@ $ sdkmanager --list
 ```
 
 > Google APIs
+
 > Android SDK Platform 23 (Android 6.0 (Marshmallow))
+
 > Intel x86 Atom_64 System Image
+
 > Google APIs Intel x86 Atom_64 System Image
 
 ```sh

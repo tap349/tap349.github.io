@@ -7,3 +7,8 @@ categories: [react-native]
 ---
 
 <!-- more -->
+
+## installation and running
+
+- <https://facebook.github.io/react-native/docs/getting-started.html>
+- <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>

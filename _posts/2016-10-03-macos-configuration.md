@@ -75,6 +75,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Paragon Driver for Mac OS (see above)
   - Adobe Lightroom 5 (latest version as of now - 5.7.1)
   - TopTracker
+  - Android Studio
 
     <https://forums.adobe.com/thread/1639590>
 

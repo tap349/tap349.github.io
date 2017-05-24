@@ -49,8 +49,8 @@ path=($path $ANDROID_HOME/platform-tools)
 #### create symlink for React Native
 
 React Native expects Android SDK to be installed in _~/Library/Android/sdk/_
-(this is where Android Studio would install it). thus create such a symlink
-that points to actual Android SDK root:
+(this is where Android Studio would install it) - create such a symlink that
+points to actual Android SDK root:
 
 ```sh
 $ mkdir ~/Library/Android

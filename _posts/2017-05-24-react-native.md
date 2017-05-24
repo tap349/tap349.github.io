@@ -36,9 +36,13 @@ $ brew cask install android-sdk
 _~/.zshenv_:
 
 ```conf
+# required by `react-native-cli` to be set
 export ANDROID_HOME=/usr/local/share/android-sdk
+# `android`
 path=($path $ANDROID_HOME/tools)
+# `sdkmanager` and `avdmanager`
 path=($path $ANDROID_HOME/tools/bin)
+# `adb`
 path=($path $ANDROID_HOME/platform-tools)
 ```
 

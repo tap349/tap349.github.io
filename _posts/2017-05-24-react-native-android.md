@@ -263,7 +263,7 @@ A problem occurred configuring project ':app'.
 solution:
 
 if you previously used Android Studio to run application it might have
-created _android/local.properties_ project file with the following content:
+created _android/local.properties_ file in project with the following content:
 
 ```conf
 sdk.dir=/Users/tap/Library/Android/sdk
@@ -291,7 +291,7 @@ there are 2 ways to solve the problem:
 FAILURE: Build failed with an exception.
 
 * Where:
-Build file '/Users/tap/dev/complead/iceperkapp/android/app/build.gradle' line: 108
+Build file '/Users/tap/dev/my_app/android/app/build.gradle' line: 108
 
 * What went wrong:
 A problem occurred evaluating project ':app'.
@@ -327,3 +327,29 @@ Execution failed for task ':app:installDebug'.
 solution:
 
 start AVD before running application.
+
+### application fails to stard (couldn't find preset "es2015")
+
+```sh
+SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:
+Couldn't find preset "es2015" relative to directory "/Users/tap/dev/my_app/node_modules/shallowequal"
+```
+
+solution:
+
+it has turned out that `shallowequal` is the only module in _node_modules/_ that
+configures babel preset to use in its _package.json_:
+
+```json
+  ...
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  ...
+```
+
+still IDK why it causes error but the error disappears if hot reloading is
+enabled in Android emulator (`<D-m>` -> `Enable Hot Reloading`). enabling
+live reload (`<D-m>` -> `Enable Live Reload`) doesn't have any effect.

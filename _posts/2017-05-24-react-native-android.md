@@ -355,7 +355,7 @@ Couldn't find preset "es2015" relative to directory "/Users/tap/dev/my_app/node_
 solution:
 
 it has turned out that `shallowequal` is the only module in _node_modules/_ that
-configures babel preset to use in its _package.json_:
+configures babel presets to use in its _package.json_:
 
 ```json
   "babel": {

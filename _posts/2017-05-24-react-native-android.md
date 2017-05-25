@@ -328,7 +328,7 @@ solution:
 
 start AVD before running application.
 
-### application fails to stard (couldn't find preset "es2015")
+### application fails to start (couldn't find preset "es2015")
 
 ```sh
 SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:

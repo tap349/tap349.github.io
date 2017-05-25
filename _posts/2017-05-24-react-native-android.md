@@ -132,7 +132,7 @@ HAX is working and emulator runs in fast virt mode.
 
 ## running
 
-### start server
+### start backend server
 
 ```sh
 $ rails server
@@ -142,9 +142,9 @@ $ rails server
 
 if you don't start it manually it will be started automatically by
 `react-native run-android` in a new Terminal window. IMO it's better to do
-it manually in a separate iTerm2 tab instead of opening extra windows.
+it manually in a separate iTerm2 tab instead of opening an extra window.
 
-NOTE: you may treat it as a Rails server but for RN application.
+NOTE: you may think of it as a Rails server but for RN application.
 
 ```sh
 $ npm start

@@ -25,7 +25,7 @@ $ npm install -g react-native-cli
 
 ## running
 
-### start server
+### start backend server
 
 ```sh
 $ rails server

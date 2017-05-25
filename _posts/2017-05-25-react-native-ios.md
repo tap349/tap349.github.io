@@ -23,6 +23,9 @@ $ brew install node watchman
 $ npm install -g react-native-cli
 ```
 
+install Xcode and Command Line Tools
+(both have been already installed on my MacBook).
+
 ## running
 
 ### start backend server

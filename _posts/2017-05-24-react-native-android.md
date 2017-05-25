@@ -250,7 +250,7 @@ _~/.zshenv_:
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 ```
 
-### application build fails (Android SDK directory doesn't exist)
+### application build fails (SDK directory doesn't exist)
 
 ```sh
 FAILURE: Build failed with an exception.

@@ -153,6 +153,23 @@ $ react-native run-android
 the first run might take a long time since RN will try to
 download and install all required Android libraries.
 
+## tips
+
+NOTE: development menu (`<D-m>`) is available only if application is launched
+      via `react-native` (that is it's not available if you just start AVD and
+      open application by yourself).
+
+### reloading application in emulator manually
+
+`<D-m>` -> `Reload`
+
+this is the only working option I have found so far.
+
+### enable live/hot reloading
+
+- `<D-m>` -> `Enable Live Reload`
+- `<D-m>` -> `Enable Hot Reloading`
+
 ## troubleshooting
 
 ### brew cannot uninstall android-sdk

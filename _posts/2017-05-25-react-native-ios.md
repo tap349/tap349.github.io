@@ -56,17 +56,17 @@ NOTE: all hotkeys use keys in QWERTY layout!
       that is you have to press `<D-e>` to access Developer Menu
       in case you are using Dvorak.
 
+### Developer Menu
+
+`<D-d>`
+
 ### console logs
 
 ```sh
 $ react-native log-ios
 ```
 
-### Developer Menu
-
-`<D-d>`
-
-### reloading application in emulator manually
+### reload application in emulator manually
 
 - `<D-d>` -> `Reload`
 - `<D-r>`
@@ -79,6 +79,15 @@ NOTE: hot reloading is recommended over live reload.
 
 - `<D-d>` -> `Enable Live Reload`
 - `<D-d>` -> `Enable Hot Reloading`
+
+### change screen resolution (scale) in emulator
+
+emulator menu: Window -> Scale
+
+- `<D-1>` - 100% (default)
+- `<D-2>` - 75%
+- `<D-3>` - 50%
+- et cetera
 
 ## troubleshooting
 

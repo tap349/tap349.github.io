@@ -173,17 +173,17 @@ NOTE: Developer Menu is available only if application is launched
       via `react-native` (that is it's not available if you just start
       AVD and open application by yourself).
 
+### Developer Menu
+
+`<D-m>`
+
 ### console logs
 
 ```sh
 $ react-native log-android
 ```
 
-### Developer Menu
-
-`<D-m>`
-
-### reloading application in emulator manually
+### reload application in emulator manually
 
 `<D-m>` -> `Reload`
 

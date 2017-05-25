@@ -164,18 +164,22 @@ still I managed to get rid of this error by making these steps:
 
 - quit emulator
 - remove offending section from _package.json_ of `shallowequal` package
-- run application in emulator
+- run application in emulator (no error, application is launched)
 - quit emulator
-- get the section back and run application again
-- the error is mysteriously gone
+- get the section back
+- run application again - still no error
 
-all in all IDK why this error happens and how to fix it in general.
+even if `shallowequal` package is removed from filesystem and installed again
+the error no longer occurs (maybe 'right' version of `shallowequal` package is
+cached somewhere?).
+
+all in all IDK why this error occurs and how to fix it in general.
 
 ### application fails to start (no bundle URL present)
 
 <https://github.com/facebook/react-native/issues/12754>
 
-in emulator window only:
+error message is displayed in emulator window only:
 
 ```sh
 No bundle URL present.
@@ -194,4 +198,4 @@ run application again without closing emulator:
 $ react-native run-ios
 ```
 
-NOTE: this error usually occurs if I run application in Android emulator before.
+NOTE: this error usually occurs after running application in Android emulator.

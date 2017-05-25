@@ -188,7 +188,7 @@ $ ln -s /usr/local/Caskroom/android-sdk/25.2.3 /usr/local/share/android-sdk
 $ brew cask uninstall android-sdk
 ```
 
-### warning when running tools from android-sdk
+### warning when running tools from Android SDK
 
 <https://askubuntu.com/questions/885658>
 

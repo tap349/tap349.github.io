@@ -1,17 +1,21 @@
 ---
 layout: post
-title: React Native
+title: React Native - Android
 date: 2017-05-24 16:27:38 +0300
 access: public
-categories: [react-native]
+categories: [react-native, android]
 ---
 
 <!-- more -->
+
+* TOC
+{:toc}
 
 ## installation
 
 - <https://facebook.github.io/react-native/docs/getting-started.html>
 - <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
+- <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
 
 install prerequisites and react-native-cli:
 
@@ -20,18 +24,14 @@ $ brew install node watchman
 $ npm install -g react-native-cli
 ```
 
-### android
-
-<https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
-
-#### install Android SDK
+### install Android SDK
 
 ```sh
 $ brew cask install java
 $ brew cask install android-sdk
 ```
 
-#### configure paths
+### configure paths
 
 _~/.zshenv_:
 
@@ -46,18 +46,7 @@ path=($path $ANDROID_HOME/tools/bin)
 path=($path $ANDROID_HOME/platform-tools)
 ```
 
-#### create symlink for React Native
-
-React Native expects Android SDK to be installed in _~/Library/Android/sdk/_
-(this is where Android Studio would install it) - create such a symlink that
-points to actual Android SDK root:
-
-```sh
-$ mkdir ~/Library/Android
-$ ln -s $ANDROID_HOME ~/Library/Android/sdk
-````
-
-#### install Android SDK Platform packages
+### install Android SDK Platform packages
 
 <https://developer.android.com/studio/command-line/sdkmanager.html>
 
@@ -88,7 +77,7 @@ $ sdkmanager 'system-images;android-23;google_apis;x86_64'
 $ sdkmanager 'build-tools;23.0.1'
 ```
 
-#### create new AVD (Android Virtual Device)
+### create new AVD (Android Virtual Device)
 
 <https://developer.android.com/studio/command-line/avdmanager.html>
 
@@ -104,7 +93,7 @@ $ avdmanager create avd \
 $ avdmanager list avd
 ```
 
-#### start AVD
+### start AVD
 
 - <https://stackoverflow.com/questions/42718973>
 - <https://developer.android.com/studio/run/emulator-acceleration.html#command-gpu>
@@ -143,27 +132,25 @@ HAX is working and emulator runs in fast virt mode.
 
 ## running
 
-### android
-
-#### start server
+### start server
 
 ```sh
 $ rails server
 ```
 
-#### start AVD
+### start AVD
 
 ```sh
 $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
 ```
 
-#### run application
+### run application
 
 ```sh
 $ react-native run-android
 ```
 
-the first run might take a long time since React Native will try to
+the first run might take a long time since RN will try to
 download and install all required Android libraries.
 
 ## troubleshooting
@@ -263,6 +250,41 @@ _~/.zshenv_:
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 ```
 
+### application build fails (Android SDK directory doesn't exist)
+
+```sh
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring project ':app'.
+> The SDK directory '/Users/tap/Library/Android/sdk' does not exist.
+```
+
+solution:
+
+if you previously used Android Studio to run application it might have
+created _android/local.properties_ project file with the following content:
+
+```conf
+sdk.dir=/Users/tap/Library/Android/sdk
+```
+
+that is RN now expects Android SDK to be installed in
+_~/Library/Android/sdk/_ (this is where Android Studio would install it).
+
+there are 2 ways to solve the problem:
+
+- create symlink that points to actual Android SDK root:
+
+  ```sh
+  $ mkdir ~/Library/Android
+  $ ln -s $ANDROID_HOME ~/Library/Android/sdk
+  ````
+
+- just comment out or remove that line
+
+  RN will search for Androd SDK in `ANDROID_HOME` then.
+
 ### application build fails (unknown property 'MYAPP_RELEASE_STORE_FILE')
 
 ```sh
@@ -290,8 +312,7 @@ MYAPP_RELEASE_KEY_PASSWORD=test
 ```
 
 since these variables (`MYAPP_RELEASE_STORE_FILE`, etc.) are mentioned in
-_android/app/build.gradle_ file inside application and build fails if they
-were not set.
+_android/app/build.gradle_ project file and build fails if they were not set.
 
 ### application build fails (no connected devices)
 

@@ -31,6 +31,14 @@ $ npm install -g react-native-cli
 $ rails server
 ```
 
+### start packager server (optional)
+
+same considerations as for Android.
+
+```sh
+$ npm start
+```
+
 ### run application in emulator
 
 ```sh
@@ -63,9 +71,14 @@ $ react-native log-ios
 - `<D-d>` -> `Reload`
 - `<D-r>`
 
-### enable hot reloading
+### enable live/hot reloading
 
-`<D-d>` -> `Enable Hot Reloading`
+<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
+
+NOTE: hot reloading is recommended over live reload.
+
+- `<D-d>` -> `Enable Live Reload`
+- `<D-d>` -> `Enable Hot Reloading`
 
 ## troubleshooting
 

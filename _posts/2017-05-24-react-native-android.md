@@ -138,6 +138,18 @@ HAX is working and emulator runs in fast virt mode.
 $ rails server
 ```
 
+### start packager server (optional)
+
+if you don't start it manually it will be started automatically by
+`react-native run-android` in a new Terminal window. IMO it's better to do
+it manually in a separate iTerm2 tab instead of opening extra windows.
+
+NOTE: you may treat it as a Rails server but for RN application.
+
+```sh
+$ npm start
+```
+
 ### start AVD
 
 ```sh
@@ -179,7 +191,9 @@ this is the only working option I have found so far.
 
 ### enable live/hot reloading
 
-IDK what the difference is between the two.
+<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
+
+NOTE: hot reloading is recommended over live reload.
 
 - `<D-m>` -> `Enable Live Reload`
 - `<D-m>` -> `Enable Hot Reloading`

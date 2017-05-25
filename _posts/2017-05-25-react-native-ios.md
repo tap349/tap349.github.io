@@ -29,6 +29,8 @@ $ npm install -g react-native-cli
 
 ### application build fails in Xcode (duplicate interface definition for class 'RCTView')
 
+<https://github.com/shoutem/ui/issues/134>
+
 xCode -> issue navigator -> Buildtime:
 
 ```sh
@@ -40,8 +42,6 @@ xCode -> issue navigator -> Buildtime:
 ```
 
 solution:
-
-<https://github.com/shoutem/ui/issues/134>
 
 too old version of `react-native-linear-gradient` package was used
 (it provides `LinearGradient` component).

@@ -25,6 +25,42 @@ $ npm install -g react-native-cli
 
 ## running
 
+### start server
+
+```sh
+$ rails server
+```
+
+### run application
+
+```sh
+$ react-native run-ios
+```
+
+the first run might take a long time since RN will try to
+download and install all required iOS libraries.
+
+## tips
+
+<https://facebook.github.io/react-native/docs/debugging.html>
+
+NOTE: all hotkeys use keys in QWERTY layout!
+      that is you have to press `<D-e>` to access Developer Menu
+      in case you are using Dvorak.
+
+### Developer Menu
+
+`<D-d>`
+
+### reloading application in emulator manually
+
+- `<D-d>` -> `Reload`
+- `<D-r>`
+
+### enable hot reloading
+
+`<D-d>` -> `Enable Hot Reloading`
+
 ## troubleshooting
 
 ### application build fails in Xcode (duplicate interface definition for class 'RCTView')
@@ -94,6 +130,8 @@ there are 2 ways to solve the problem:
   ```
 
 ### application build fails in command line (bundler identifier entry doesn't exist)
+
+<https://github.com/facebook/react-native/issues/7308>
 
 ```sh
 Print: Entry, ":CFBundleIdentifier", Does Not Exist

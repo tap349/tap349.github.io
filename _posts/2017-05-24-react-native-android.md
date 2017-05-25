@@ -155,9 +155,15 @@ download and install all required Android libraries.
 
 ## tips
 
-NOTE: development menu (`<D-m>`) is available only if application is launched
-      via `react-native` (that is it's not available if you just start AVD and
-      open application by yourself).
+<https://facebook.github.io/react-native/docs/debugging.html>
+
+NOTE: Developer Menu is available only if application is launched
+      via `react-native` (that is it's not available if you just start
+      AVD and open application by yourself).
+
+### Developer Menu
+
+`<D-m>`
 
 ### reloading application in emulator manually
 
@@ -166,6 +172,8 @@ NOTE: development menu (`<D-m>`) is available only if application is launched
 this is the only working option I have found so far.
 
 ### enable live/hot reloading
+
+IDK what the difference is between the two.
 
 - `<D-m>` -> `Enable Live Reload`
 - `<D-m>` -> `Enable Hot Reloading`

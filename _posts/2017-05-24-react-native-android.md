@@ -144,7 +144,7 @@ $ rails server
 $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
 ```
 
-### run application
+### run application in emulator
 
 ```sh
 $ react-native run-android

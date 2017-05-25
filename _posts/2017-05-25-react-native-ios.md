@@ -31,7 +31,7 @@ $ npm install -g react-native-cli
 $ rails server
 ```
 
-### run application
+### run application in emulator
 
 ```sh
 $ react-native run-ios
@@ -151,3 +151,47 @@ solution:
 
 error was gone after solving problme with `react-native-linear-gradient`
 package (see above) and reinstalling all node modules.
+
+### application fails to start (couldn't find preset "es2015")
+
+this is the same error as on Android.
+
+solution:
+
+unlike on Android enabling hot reloading doesn't help here.
+
+still I managed to get rid of this error by making these steps:
+
+- quit emulator
+- remove offending section from _package.json_ of `shallowequal` package
+- run application in emulator
+- quit emulator
+- get the section back and run application again
+- the error is mysteriously gone
+
+all in all IDK why this error happens and how to fix it in general.
+
+### application fails to start (no bundle URL present)
+
+<https://github.com/facebook/react-native/issues/12754>
+
+in emulator window only:
+
+```sh
+No bundle URL present.
+
+Make sure you're running a packager server or have included a .jsbundle file
+in your application bundle.
+```
+
+solution:
+
+it looks like application is run in emulator before packager server is started.
+
+run application again without closing emulator:
+
+```sh
+$ react-native run-ios
+```
+
+NOTE: this error usually occurs if I run application in Android emulator before.

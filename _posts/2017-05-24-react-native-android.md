@@ -341,13 +341,11 @@ it has turned out that `shallowequal` is the only module in _node_modules/_ that
 configures babel preset to use in its _package.json_:
 
 ```json
-  ...
   "babel": {
     "presets": [
       "es2015"
     ]
   },
-  ...
 ```
 
 still IDK why it causes error but the error disappears if hot reloading is

@@ -82,6 +82,8 @@ NOTE: hot reloading is recommended over live reload.
 
 ### change screen resolution (scale) in emulator
 
+<https://stackoverflow.com/questions/10481412>
+
 emulator menu: Window -> Scale
 
 - `<D-1>` - 100% (default)
@@ -89,6 +91,10 @@ emulator menu: Window -> Scale
 - `<D-3>` - 50%
 - `<D-4>` - 33%
 - `<D-5>` - 25%
+
+also there might be a way to change default scale by setting appropriate
+preference as described in the link above - but it didn't work for me
+(probably because Apple changes these preferences all the time).
 
 ## troubleshooting
 

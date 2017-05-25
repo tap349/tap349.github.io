@@ -253,7 +253,7 @@ $ sdkmanager --list --verbose
 
 ### emulator cannot start AVD
 
-<https://stackoverflow.com/questions/40931254/could-not-launch-emulator-in-android-studio>
+<https://stackoverflow.com/questions/40931254>
 
 ```sh
 $ emulator -avd Nexus_5X_API_23_x86_64

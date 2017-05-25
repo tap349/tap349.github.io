@@ -48,6 +48,12 @@ NOTE: all hotkeys use keys in QWERTY layout!
       that is you have to press `<D-e>` to access Developer Menu
       in case you are using Dvorak.
 
+### console logs
+
+```sh
+$ react-native log-ios
+```
+
 ### Developer Menu
 
 `<D-d>`

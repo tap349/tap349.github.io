@@ -87,7 +87,8 @@ emulator menu: Window -> Scale
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
 - `<D-3>` - 50%
-- et cetera
+- `<D-4>` - 33%
+- `<D-5>` - 25%
 
 ## troubleshooting
 

@@ -92,3 +92,14 @@ there are 2 ways to solve the problem:
   ```sh
   $ npm update react-native-linear-gradient
   ```
+
+### application build fails in command line (bundler identifier entry doesn't exist)
+
+```sh
+Print: Entry, ":CFBundleIdentifier", Does Not Exist
+```
+
+solution:
+
+error was gone after solving problme with `react-native-linear-gradient`
+package (see above) and reinstalling all node modules.

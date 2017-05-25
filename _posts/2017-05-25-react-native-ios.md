@@ -122,7 +122,11 @@ there are 2 ways to solve the problem:
   _package.json_:
 
   ```json
-  "react-native-linear-gradient": "^2.0.0"
+  "dependencies": {
+    ...
+    "react-native-linear-gradient": "^2.0.0",
+    ...
+  },
   ```
 
   ```sh

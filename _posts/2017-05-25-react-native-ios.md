@@ -92,9 +92,10 @@ emulator menu: Window -> Scale
 - `<D-4>` - 33%
 - `<D-5>` - 25%
 
-also there might be a way to change default scale by setting appropriate
-preference as described in the link above - but it didn't work for me
-(probably because Apple changes these preferences all the time).
+also there must be a way to change default scale by setting a value for
+appropriate preference key via `defaults write` as described in the link
+above - but it didn't work for me (probably because Apple changes these keys
+all the time).
 
 ## troubleshooting
 

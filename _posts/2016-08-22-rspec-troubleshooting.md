@@ -6,17 +6,15 @@ access: public
 categories: [rails, rspec, troubleshooting]
 ---
 
-RSpec related issues.
-
 <!-- more -->
 
-### `NameError: uninitialized constant TestService`
+### RSpec cannot find any project classes
 
-#### description
+```sh
+NameError: uninitialized constant TestService
+```
 
-RSpec cannot find any project classes.
-
-#### background
+#### solution
 
 by default `rails generate rspec:install` creates this _.rspec_:
 
@@ -33,8 +31,6 @@ require File.expand_path('../../config/environment', __FILE__)
 
 also _spec/rails_helper.rb_ requires _spec/spec_helper.rb_.
 
-#### solution
-
 just require `rails_helper` instead of `spec_helper` in _.rspec_:
 
 ```ruby
@@ -44,16 +40,33 @@ just require `rails_helper` instead of `spec_helper` in _.rspec_:
 
 ### empty response when rendering views in specs
 
-#### description
-
 rendering views mysteriously returns empty string even though proper template
 must have been found (if renamed it's not found).
 
-### solution
+#### solution
 
 by default RSpec doesn't render views - enable rendering by including
 this line in your spec:
 
 ```ruby
 render_views
+```
+
+### Guard cannot find `rspec`
+
+```sh
+bundler: failed to load command: rspec (/Users/tap/.rbenv/versions/2.3.1/bin/rspec)
+LoadError: cannot load such file -- rspec
+```
+
+solution:
+
+make sure `rspec` gem is added in _Gemfile_:
+
+```ruby
+group :development, :test do
+  ...
+  gem `rspec`
+  ...
+end
 ```

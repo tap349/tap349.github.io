@@ -126,7 +126,7 @@ xCode -> `Issue navigator` -> `Buildtime`:
 
 solution:
 
-too old version of `react-native-linear-gradient` package was used
+outdated version of `react-native-linear-gradient` package was used
 (it provides `LinearGradient` component).
 
 <https://github.com/react-native-community/react-native-linear-gradient>:

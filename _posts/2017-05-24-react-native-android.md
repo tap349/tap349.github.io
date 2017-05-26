@@ -114,6 +114,12 @@ $ emulator -help
 $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
 ```
 
+it's a good idea to create an alias for this command in _~/.zshenv_:
+
+```conf
+alias avd='emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920'
+```
+
 make sure to specify both `-gpu` and `-skin` options:
 
 - `-gpu host` - enables graphics hardware emulation
@@ -268,7 +274,7 @@ $ cd /usr/local/share/android-sdk/emulator
 $ ./emulator -avd Nexus_5X_API_23_x86_64
 ```
 
-or else create alias in _~/.zshenv_:
+or else create an alias in _~/.zshenv_:
 
 ```conf
 alias emulator='cd /usr/local/share/android-sdk/emulator && ./emulator'

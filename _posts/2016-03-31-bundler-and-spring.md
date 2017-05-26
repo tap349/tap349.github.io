@@ -46,7 +46,9 @@ it's necessary to use bundle gem versions - this can be done in 2 ways:
 using `bundle exec` is okay except that it's necessary to type it whenever
 you run gem commands:
 
-- alias common commands to be run with `bundle exec` in _.zshrc_:
+- alias common commands to be run with `bundle exec`
+
+  _.zshrc_:
 
   ```sh
   alias rails='bundle exec rails'
@@ -62,7 +64,9 @@ you run gem commands:
   alias sidekiq='bundle exec sidekiq --config ./config/sidekiq.yml'
   ```
 
-- run `rspec` with `bundle exec` in _Guardfile_:
+- run `rspec` with `bundle exec` in _Guardfile_
+
+  _Guardfile_:
 
   ```ruby
   guard :rspec, cmd: 'bundle exec rspec -f doc', failed_mode: :none do
@@ -78,7 +82,7 @@ alternatively generate bundler binstubs:
 $ bundle install --binstubs
 ```
 
-to make rbenv aware of bundler binstubs use
+to make rbenv is aware of bundler binstubs use
 [rbenv-binstubs](https://github.com/ianheggie/rbenv-binstubs) rbenv plugin.
 
 ```sh
@@ -90,12 +94,10 @@ $ rbenv which rspec
 
 <https://github.com/rails/spring>
 
-when either using `bundle exec` or bundler binstubs
-commands are NOT RUN via spring preloader!
-(well, except for `bundle exec rails console`
-but this is just a weird exception)
+when using `bundle exec` or bundler binstubs commands are not run with spring!
+(well, except for `bundle exec rails console` but this is just a weird exception)
 
-**NOTE**: don't use spring in production!
+NOTE: don't use spring in production!
 
 to use spring preloader:
 
@@ -118,17 +120,20 @@ to use spring preloader:
   also it generates _bin/spring_ which is loaded in each of these binstubs.
   in fact `bin/rails` is equivalent to `bin/spring rails`.
 
-  **NOTE**: it's not possible to run other commands with spring.
+  NOTE: it's not possible to run other commands with spring.
 
-  spring binstubs are run in context of bundle -
-  no need to use `bundle exec` or bundler binstubs.
+  spring binstubs are run in context of a bundle -
+  there is no need to use `bundle exec` or bundler binstubs.
+
   don't use bundler and spring binstubs at the same time since they are
   both stored in _bin/_ directory by default and might overwrite each other.
 
 ## okay, wtf to do with all this stuff about bundler and spring?
 
 - generate spring binstubs for `rails`, `rake` and `rspec`
-- use `rspec` spring binstub in _Guardfile_:
+- use `rspec` spring binstub in _Guardfile_
+
+  _Guardfile_:
 
   ```ruby
   guard :rspec, cmd: 'bin/rspec -f doc', failed_mode: :none do
@@ -152,7 +157,7 @@ to use spring preloader:
   alias sidekiq='bundle exec sidekiq --config ./config/sidekiq.yml'
   ```
 
-  sidekiq and guard are run with `bundle exec` because there are no
+  sidekiq and Guard are run with `bundle exec` because there are no
   spring binstubs for them (and it doesn't make sense to make one
-  for guard since it's using `rspec` spring binstub inside) - still
+  for Guard since it's using `rspec` spring binstub inside) - still
   we need to run their bundle versions.

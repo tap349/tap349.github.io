@@ -117,7 +117,7 @@ $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
 make sure to specify both `-gpu` and `-skin` options:
 
 - `-gpu host` - enables graphics hardware emulation
-- `-skin 1080x1920` - changes screen resolution to WXGA
+- `-skin 1080x1920` - changes screen resolution to 1080x1920
   (by default a very low screen resolution is used)
 
 some skin resolutions have corresponding skin names (see link above).

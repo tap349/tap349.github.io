@@ -55,6 +55,7 @@ you run gem commands:
 
   # alias definitions are recursive:
   # other aliases will expand `rspec` to `bundle exec rspec`
+  # (previously I thought that they are not)
 
   alias cap='bundle exec cap'
   alias guard='bundle exec guard'

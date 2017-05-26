@@ -53,9 +53,8 @@ you run gem commands:
   alias rake='bundle exec rake'
   alias rspec='bundle exec rspec'
 
-  # other aliases with rails, rake and rspec inside
-  # must use them with `bundle exec` as well -
-  # alias definitions are non-recursive
+  # alias definitions are recursive:
+  # other aliases will expand `rspec` to `bundle exec rspec`
 
   alias cap='bundle exec cap'
   alias guard='bundle exec guard'

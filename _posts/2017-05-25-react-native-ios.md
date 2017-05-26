@@ -28,6 +28,9 @@ install Xcode and Command Line Tools
 
 ## running
 
+NOTE: emulator for iOS is called Simulator
+      (will be referred to as just emulator for the sake of consistency)
+
 ### start backend server
 
 ```sh
@@ -55,9 +58,14 @@ download and install all required iOS libraries.
 
 <https://facebook.github.io/react-native/docs/debugging.html>
 
-NOTE: all hotkeys use keys in QWERTY layout!
-      that is you have to press `<D-e>` to access Developer Menu
-      in case you are using Dvorak.
+### Dvorak keyboard layout
+
+by default iOS simulator uses QWERTY as hardware keyboard layout - it
+also means that all hotkeys (say, for Developer Menu) use it as well.
+
+it's possible to change it to Dvorak inside simulator:
+
+Sett
 
 ### Developer Menu
 

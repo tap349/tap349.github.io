@@ -138,6 +138,9 @@ HAX is working and emulator runs in fast virt mode.
 
 ## running
 
+NOTE: emulator for Android is called Android Emulator
+      (will be referred to as just emulator for the sake of consistency)
+
 ### start backend server
 
 ```sh

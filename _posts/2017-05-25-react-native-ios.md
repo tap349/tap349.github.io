@@ -60,12 +60,12 @@ download and install all required iOS libraries.
 
 ### Dvorak keyboard layout
 
-by default iOS simulator uses QWERTY as hardware keyboard layout - it
+by default emulator uses QWERTY as hardware keyboard layout - it
 also means that all hotkeys (say, for Developer Menu) use it as well.
 
-it's possible to change it to Dvorak inside simulator:
+it's possible to change it to Dvorak inside emulator:
 
-Sett
+`Settings` -> `General` -> `Keyboards` -> `Hardware Keyboard` -> `English` -> `Dvorak`
 
 ### Developer Menu
 
@@ -95,7 +95,7 @@ NOTE: hot reloading is recommended over live reload.
 
 <https://stackoverflow.com/questions/10481412>
 
-emulator menu: Window -> Scale
+emulator menu: `Window` -> `Scale`
 
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
@@ -114,7 +114,7 @@ all the time).
 
 <https://github.com/shoutem/ui/issues/134>
 
-xCode -> issue navigator -> Buildtime:
+xCode -> `Issue navigator` -> `Buildtime`:
 
 ```sh
 > BVLinearGradient:
@@ -152,7 +152,7 @@ there are 2 ways to solve the problem:
 
 - manually edit files in `react-native-linear-gradient` package
 
-  Xcode -> Project navigator
+  Xcode -> `Project navigator`
 
   replace old imports with new ones in all files inside
   _my_app/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:

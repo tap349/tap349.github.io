@@ -145,7 +145,7 @@ to use spring preloader:
 
   # other aliases with rails, rake and rspec inside
   # must use their spring binstub counterparts as well -
-  # alias definitions are non-recursive
+  # alias definitions are recursive
 
   alias cap='bundle exec cap'
   alias guard='bundle exec guard'

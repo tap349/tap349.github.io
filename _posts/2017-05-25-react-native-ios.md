@@ -114,7 +114,7 @@ all the time).
 
 <https://github.com/shoutem/ui/issues/134>
 
-xCode -> `Issue navigator` -> `Buildtime`:
+Xcode -> `Issue navigator` -> `Buildtime`:
 
 ```sh
 > BVLinearGradient:

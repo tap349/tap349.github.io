@@ -1040,3 +1040,5 @@ modifiers for ~R and ~r sigils:
 | U         | make * and + modifiers ungreedy (same as *? and +?)
 | u         | enable unicode-specific patterns like \p
 | x         | extended mode (ignore whitespaces and comments)
+
+TODO: I stopped at page 138 (Binaries and Pattern Matching)

@@ -128,7 +128,8 @@ make sure to specify both `-gpu` and `-skin` options:
 
 some skin resolutions have corresponding skin names (see link above).
 
-according to emulator's log there is no need to install HAXM separately:
+according to emulator's log there is no need to install HAXM separately
+(it appears to have been already enabled):
 
 ```sh
 Hax is enabled
@@ -139,7 +140,7 @@ HAX is working and emulator runs in fast virt mode.
 ## running
 
 NOTE: emulator for Android is called Android Emulator
-      (will be referred to as just emulator for the sake of consistency)
+      (will be referred to as just emulator for the sake of consistency).
 
 ### start backend server
 

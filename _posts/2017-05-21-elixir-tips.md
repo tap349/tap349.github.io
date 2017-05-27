@@ -10,7 +10,7 @@ categories: [elixir]
 
 <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
 
-### mix tasks
+## mix tasks
 
 - `mix deps.get` = `bundle install`
 
@@ -22,7 +22,9 @@ categories: [elixir]
   removes dependencies which are no longer mentioned in _mix.exs_
   (`--unused`) and updates _mix.lock_ (`--unlock`)
 
-### mix.exs
+## mix.exs
+
+<http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
 
 - application inference
 
@@ -47,9 +49,13 @@ categories: [elixir]
   end
   ```
 
-### IEx
+## IEx
 
-#### quit IEx
+- Erlang shell - Eshell (`erl`)
+- Elixir shell - IEx (`iex`)
+- UNIX shell - Bash, etc.
+
+### quit IEx
 
 <http://blog.plataformatec.com.br/2016/03/how-to-quit-the-elixir-shell-iex/>
 
@@ -58,10 +64,115 @@ categories: [elixir]
 - `<C-c><C-c>` (not graceful)
 - `<C-\>` (not graceful)
 
-only graceful ways to quit IEx allow to save shell history
-(when using `erlang-history`).
+only graceful ways to quit IEx save shell history (when using `erlang-history`).
 
-#### get result of last evaluated expression (same as `_` in irb)
+### shell history
+
+<http://nithinbekal.com/posts/elixir-shell-history/>:
+
+```sh
+$ git clone https://github.com/ferd/erlang-history.git
+$ cd erlang-history
+$ sudo make install
+```
+
+shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
+(it's a binary file - not plain text).
+
+UPDATE: shell history is now stored in _~/.erlang-history/_ - you might
+        need to remove _~/.erlang-hist.nonode@nohost_ for it to work.
+
+NOTE: for shell history to be saved quit IEx gracefully -
+      using either `<C-c>a<CR>` or `<C-g>q<CR>` commands.
+
+`erlang-history` must be compiled for each new version of Erlang/OTP kernel!
+
+- get current version of Kernel library:
+
+  ```sh
+  $ erl
+  1> application:which_applications().
+  [{stdlib,"ERTS  CXC 138 10","3.2"},
+  {kernel,"ERTS  CXC 138 10","5.1.1"}]
+  ```
+  current version is 5.1.1.
+
+- update `erlang-history` repo:
+
+  ```sh
+  $ cd erlang-history
+  $ git up
+  ```
+
+- make and install:
+
+  ```sh
+  $ cd erlang-history
+  $ sudo make install
+  Password:
+  erl -make
+  Recompile: src/5.1.1/group_history
+  Recompile: src/5.1.1/group
+  ...
+  ebin/5.1.1/group.beam
+  ebin/5.1.1/group_history.beam
+  2 file(s) copied
+  ```
+
+  make sure `2 file(s) are copied` - if no files are copied it means
+  current version of Kernel library is not supported and you should
+  probably update `erlang-history` repo.
+
+### evaluate vs. compile in memory vs. compile
+
+<https://github.com/elixir-lang/elixir/issues/5073>
+
+> `ex` files are meant to be compiled<br>
+> `exs` files are used for scripting
+
+each module is compiled into its own bytecode (`beam`) file:
+
+- if file doesn't contain modules no bytecode files are generated
+- it doesn't matter if module is defined in `exs` or `ex` file<br>
+  (file extension doesn't matter at all - module can be defined in `rb` file)
+- module `Example` is compiled into `Elixir.Example.beam` file
+
+#### evaluate
+
+- code typed in IEx is always evaluated - not compiled
+- code is evaluated iff when typed in IEx directly
+- never benchmark by typing code in IEx directly
+
+#### compile in memory
+
+in these cases bytecode modules are not written to disk - only loaded in memory:
+
+- `$ iex test.exs`
+
+  compiles file in memory and loads it into IEx.
+
+- `$ elixir file.exs`
+
+  compiles file in memory and executes it
+  (it's like running any other script in UNIX shell).
+
+- `iex> import_file "test.exs"`
+
+  > evaluates the contents of the file as if it were directly typed into IEx
+
+  in spite of what is said above imported file is compiled in memory.
+
+#### compile
+
+- `$ elixirc file.exs`
+
+  compiles file and executes it.
+
+- `iex> c "test.exs"`
+
+  compiles file and loads it into IEx.
+
+### get result of last evaluated expression (same as `_` in irb)
 
 <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
@@ -72,7 +183,7 @@ iex> v()
 123
 ```
 
-#### cancel multiline command
+### cancel multiline command
 
 - <https://stackoverflow.com/questions/27591417>
 - <https://hexdocs.pm/iex/1.0.5/IEx.html>
@@ -82,7 +193,7 @@ iex> foo =
 ...> #iex:break
 ```
 
-#### cancel reverse search
+### cancel reverse search
 
 <http://readline.kablamo.org/emacs.html>
 
@@ -92,7 +203,7 @@ the first `<D-u>` cancels reverse search but leaves found command if
 any (cursor is located at the end of the line), the second `<D-u>` deletes
 the line from current cursor position backwards to the start of the line.
 
-#### recompile current Mix application (same as `reload!` in rails console)
+### recompile current Mix application (same as `reload!` in rails console)
 
 <http://stackoverflow.com/a/36494891/3632318>
 
@@ -106,7 +217,7 @@ also it's possible to recompile specific module:
 iex> r Foo.Bar
 ```
 
-#### debugging (same as `binding.pry` in Ruby)
+### debugging (same as `binding.pry` in Ruby)
 
 - <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
 - <https://stackoverflow.com/questions/29671156/pry-while-testing>
@@ -134,7 +245,7 @@ $ iex -S mix test
 
 NOTE: in my case `iex` is aliased to `iex -S mix` so type just `iex test`.
 
-#### suppress long output (same as `;` in irb)
+### suppress long output (same as `;` in irb)
 
 <http://stackoverflow.com/a/39208906/3632318>
 

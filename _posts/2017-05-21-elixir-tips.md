@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir tips
+title: Elixir - Mix and IEx
 date: 2017-05-21 12:08:46 +0300
 access: public
 categories: [elixir]
@@ -8,9 +8,12 @@ categories: [elixir]
 
 <!-- more -->
 
-<https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
+* TOC
+{:toc}
 
-## mix tasks
+## Mix
+
+### tasks
 
 - `mix deps.get` = `bundle install`
 
@@ -22,7 +25,7 @@ categories: [elixir]
   removes dependencies which are no longer mentioned in _mix.exs_
   (`--unused`) and updates _mix.lock_ (`--unlock`)
 
-## mix.exs
+### mix.exs
 
 <http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
 
@@ -50,6 +53,8 @@ categories: [elixir]
   ```
 
 ## IEx
+
+<https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
 
 - Erlang shell - Eshell (`erl`)
 - Elixir shell - IEx (`iex`)

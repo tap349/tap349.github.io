@@ -46,7 +46,7 @@ path=($path $ANDROID_HOME/tools/bin)
 path=($path $ANDROID_HOME/platform-tools)
 ```
 
-### install Android SDK Platform packages
+### install Android SDK Platform packages (version 23)
 
 <https://developer.android.com/studio/command-line/sdkmanager.html>
 
@@ -207,6 +207,11 @@ NOTE: hot reloading is recommended over live reload.
 
 - `<D-m>` -> `Enable Live Reload`
 - `<D-m>` -> `Enable Hot Reloading`
+
+### use another Android version in emulator
+
+- install required version of Android SDK Platform packages (version 23 = Android 6)
+- create new AVD using system image of required version
 
 ## troubleshooting
 

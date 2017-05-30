@@ -11,3 +11,17 @@ categories: [js]
 ## Promise
 
 <https://learn.javascript.ru/promise>
+
+## ES6
+
+### shorthand property names
+
+- <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer>
+- <http://www.benmvp.com/learning-es6-enhanced-object-literals/>
+
+```javascript
+> var a = 'foo', b = 42, c = {};
+> var o = {a, b, c};
+> o.a
+"foo"
+```

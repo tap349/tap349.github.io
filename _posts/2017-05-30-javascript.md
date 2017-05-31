@@ -8,11 +8,22 @@ categories: [js]
 
 <!-- more -->
 
+## falsy values
+
+<https://stackoverflow.com/a/5515349/3632318>
+
+- `null`
+- `undefined`
+- `NaN`
+- empty string ("")
+- 0
+- `false`
+
+## ES6
+
 ## Promise
 
 <https://learn.javascript.ru/promise>
-
-## ES6
 
 ### shorthand property names
 

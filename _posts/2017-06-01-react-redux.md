@@ -106,7 +106,7 @@ with reducer composition (but without using `combineReducers`):
 ```javascript
 function notiCount(state = 0, action) {
   switch(action.type) {
-    case BADGES_SET_COUNT:
+    case BADGES_SET_NOTI_COUNT:
       return action.count
     default:
       return state
@@ -125,9 +125,9 @@ with reducer composition (using `combineReducers`):
 ```javascript
 import { combineReducers } from 'redux'
 
-function count(state = 0, action) {
+function notiCount(state = 0, action) {
   switch(action.type) {
-    case BADGES_SET_COUNT:
+    case BADGES_SET_NOTI_COUNT:
       return action.count
     default:
       return state

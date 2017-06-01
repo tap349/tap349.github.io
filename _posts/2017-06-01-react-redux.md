@@ -184,7 +184,7 @@ export default badges
 
 ## tips
 
-### share state between reducers
+### don't share state between child reducers
 
 <https://stackoverflow.com/questions/35375810>
 

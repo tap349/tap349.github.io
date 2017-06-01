@@ -21,9 +21,19 @@ categories: [js]
 
 ## switch statement
 
-<https://stackoverflow.com/a/6612676/3632318>
+- <https://stackoverflow.com/a/6612676/3632318>
+- <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/switch>
 
 switch statement doesn't return value - it's used for side effects only.
+
+it's possible to use either `break` or `return` to terminate each case clause.
+
+using `break` is optional but if it's omitted program continues exepction:
+jumps to the next case clause and check whether it's matched against `switch`
+expression and so on.
+
+`return` statement returns result from function - it's okay to use it if there
+is nothing else after `switch` statement.
 
 ## ES6
 

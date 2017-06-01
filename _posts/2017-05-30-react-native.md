@@ -25,7 +25,7 @@ function getUsers() {
 
 `Fetch` methods (as seen above) return promises.
 
-example can be written using `async`/`await` syntax from ES2017:
+example can be rewritten using `async`/`await` syntax from ES2017:
 
 ```javascript
 async function getUsers() {

@@ -62,9 +62,8 @@ function addTodo(text) {
 reducer composition (fundamental pattern of Redux) -
 delegating a slice of state to manage to child reducers.
 
-NOTE: it's possible to nest child reducers!
-      say, child reducer to change `user` state field might call
-      another child reducer to change user's name.
+NOTE: it's possible to nest child reducers! say, child reducer to set `user`
+      state field might call another child reducer to set user's name.
 
 every reducer on any level receives part of state it manages on this level
 and current action and should return the same part of state with merged changes.

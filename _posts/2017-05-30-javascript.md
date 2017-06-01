@@ -19,9 +19,15 @@ categories: [js]
 - 0
 - `false`
 
+## switch statement
+
+<https://stackoverflow.com/a/6612676/3632318>
+
+switch statement doesn't return value - it's used for side effects only.
+
 ## ES6
 
-## Promise
+### Promise
 
 <https://learn.javascript.ru/promise>
 

@@ -199,22 +199,8 @@ this is the same error as on Android.
 
 solution:
 
-unlike on Android enabling hot reloading doesn't help here.
-
-still I managed to get rid of this error by making these steps:
-
-- quit emulator
-- remove offending section from _package.json_ of `shallowequal` package
-- run application in emulator (no error, application is launched)
-- quit emulator
-- get the section back
-- run application again - still no error
-
-even if `shallowequal` package is removed from filesystem and installed again
-the error no longer occurs (maybe 'right' version of `shallowequal` package is
-cached somewhere?).
-
-all in all IDK why this error occurs and how to fix it in general.
+unlike on Android enabling hot reloading never helped - use the 2nd method to
+fix this problem by temporarily removing `babel` section (see Android article).
 
 ### application fails to start (no bundle URL present)
 

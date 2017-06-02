@@ -411,3 +411,19 @@ configures babel presets to use in its _package.json_:
 still IDK why it causes error but the error disappears if hot reloading is
 enabled in Android emulator (`<D-m>` -> `Enable Hot Reloading`). enabling
 live reload (`<D-m>` -> `Enable Live Reload`) doesn't have any effect.
+
+**UPDATE**
+
+unfortunately I got this error even with hot reloading enabled and
+managed to get rid of it by following these steps:
+
+- remove offending section from _package.json_ of `shallowequal` package
+- restart packager service (`npm start`) - no error
+- get that section back
+- restart packager service (`npm start`) - still no error
+
+even if `shallowequal` package is removed from filesystem and installed again
+the error no longer occurs - maybe 'right' version of `shallowequal` package is
+cached somewhere?
+
+all in all IDK why this error occurs and how to fix it in general.

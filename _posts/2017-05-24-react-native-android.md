@@ -489,13 +489,19 @@ CANNOT TRANSLATE guest DNS ip
 
 solution:
 
-the issue is not resoved yet.
+the issue is not resolved yet.
 
-### no application icon on home screen in emulator
+### no launcher icon on home screen in emulator
 
-application installed via `react-native run-android` doesn't have icon
-on home screen in emulator.
+<https://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html>
+
+application doesn't have launcher icon on home screen in emulator.
 
 solution:
 
-TODO
+`react-native run-android` installs application but doesn't place
+application launcher icon on home screen - you can do it manually:
+
+- go to applications
+- click and hold application icon
+- drag application icon to home screen

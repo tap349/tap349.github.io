@@ -8,6 +8,47 @@ categories: [js]
 
 <!-- more -->
 
+## semicolon
+
+<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#semicolons>
+
+use semicolons:
+
+- after all single statements (variable/constant declarations, imports, etc.)
+
+don't use semicolons:
+
+- after class and function declarations
+- after [block statements (blocks)](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/block)
+  (commonly used with control flow statements - `if...else`, `for`, etc.)
+
+```javascript
+import React from 'react';
+
+class Board extends React.Component {
+  render() {
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    if (winner) {
+      status = 'Winner: ' + winner;
+    } else {
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
+
+    return (
+      <div>
+        <div className="status">{status}</div>
+        <div className="board-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
+        </div>
+      </div>
+    );
+  }
+}
+```
+
 ## falsy values
 
 <https://stackoverflow.com/a/5515349/3632318>

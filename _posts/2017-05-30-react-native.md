@@ -8,7 +8,7 @@ categories: [react-native]
 
 <!-- more -->
 
-## Networking
+## networking
 
 <https://facebook.github.io/react-native/docs/network.html>
 
@@ -38,3 +38,26 @@ async function getUsers() {
   }
 }
 ```
+
+## linking native libraries
+
+<http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
+
+libraries can be linked:
+
+- automatically
+
+  ```sh
+  $ npm install --save <library-with-native-dependencies>
+  $ react-native link
+  ```
+
+  this method is for npm packages that ship with native libraries.
+
+- manually
+
+  by adding corresponding library (its Xcode project file) to
+  your application (see the guide above)
+
+  this method is for independent static libraries that ship with RN -
+  they are not included by default so as not to impact binary size.

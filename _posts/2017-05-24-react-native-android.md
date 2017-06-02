@@ -400,6 +400,8 @@ start AVD before running application.
 
 ### application fails to start (couldn't find preset "es2015")
 
+emulator window, packager server log:
+
 ```sh
 SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:
 Couldn't find preset "es2015" relative to directory "/Users/tap/dev/my_app/node_modules/shallowequal"

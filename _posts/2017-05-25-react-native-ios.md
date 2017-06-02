@@ -241,7 +241,7 @@ NOTE: this error usually occurs after running application in Android emulator.
 - <http://facebook.github.io/react-native/docs/pushnotificationios.html>
 - <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
 
-emulator window:
+emulator window, packager server log:
 
 ```sh
 Native module cannot be null.

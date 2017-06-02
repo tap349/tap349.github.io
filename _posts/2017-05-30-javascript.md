@@ -14,7 +14,7 @@ categories: [js]
 
 use semicolons:
 
-- after all single statements (variable/constant declarations, imports, etc.)
+- after all single statements (variable/constant declarations, imports/exports, etc.)
 
 don't use semicolons:
 

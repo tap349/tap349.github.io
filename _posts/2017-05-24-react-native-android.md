@@ -499,7 +499,7 @@ application doesn't have launcher icon on home screen in emulator.
 
 solution:
 
-`react-native run-android` installs application but doesn't place
+`react-native run-android` installs application but doesn't add
 application launcher icon on home screen - you can do it manually:
 
 - go to applications

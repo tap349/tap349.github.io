@@ -35,6 +35,18 @@ expression and so on.
 `return` statement returns result from function - it's okay to use it if there
 is nothing else after `switch` statement.
 
+## comparison operators
+
+- equality (`==`)
+
+  type conversion (if operands have different types) => strict comparison,
+  objects are equal if they have the same references.
+
+- identity/strict equality (`===`)
+
+  returns true if operands are strictly equal without type conversion,
+  objects are equal if they have the same references.
+
 ## ES6
 
 ### Promise

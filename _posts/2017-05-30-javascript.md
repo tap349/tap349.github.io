@@ -37,6 +37,8 @@ is nothing else after `switch` statement.
 
 ## comparison operators
 
+<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators>
+
 - equality (`==`)
 
   type conversion (if operands have different types) => strict comparison,

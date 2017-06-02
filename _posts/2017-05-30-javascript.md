@@ -84,8 +84,8 @@ is nothing else after `switch` statement.
 
 - equality (`==`)
 
-  type conversion (if operands have different types) => strict comparison,
-  objects are equal if they have the same references.
+  perform type conversion (if operands have different types) before applying
+  strict comparison, objects are equal if they have the same references.
 
 - identity/strict equality (`===`)
 

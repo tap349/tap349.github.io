@@ -51,8 +51,13 @@ $ npm start
 $ react-native run-ios
 ```
 
-the first run might take a long time since RN will try to
-download and install all required iOS libraries.
+this command:
+
+- builds application
+- starts emulator
+- installs application
+
+the first run might take a while since RN will build the whole Xcode project.
 
 ## tips
 

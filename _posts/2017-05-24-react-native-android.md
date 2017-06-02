@@ -93,7 +93,7 @@ $ avdmanager create avd \
 $ avdmanager list avd
 ```
 
-### start AVD
+### configure emulator to use that AVD
 
 - <https://stackoverflow.com/questions/42718973>
 - <https://developer.android.com/studio/run/emulator-acceleration.html#command-gpu>
@@ -160,7 +160,7 @@ NOTE: you may think of it as a Rails server but for RN application.
 $ npm start
 ```
 
-### start AVD
+### start emulator using specific AVD
 
 ```sh
 $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
@@ -172,8 +172,13 @@ $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
 $ react-native run-android
 ```
 
-the first run might take a long time since RN will try to
-download and install all required Android libraries.
+this command:
+
+- builds application
+- doesn't start emulator (it has already been started)
+- installs application
+
+the first run might take a while since RN will build the whole Android project.
 
 ## tips
 
@@ -469,3 +474,24 @@ allprojects {
   }
 }
 ```
+
+### warning in emulator log (cannot translate guest dns ip)
+
+<https://github.com/facebook/react-native/issues/13340>
+
+```sh
+CANNOT TRANSLATE guest DNS ip
+```
+
+solution:
+
+the issue is not resoved yet.
+
+### no application icon on home screen in emulator
+
+application installed via `react-native run-android` doesn't have icon
+on home screen in emulator.
+
+solution:
+
+TODO

@@ -71,7 +71,7 @@ it's possible to change it to Dvorak inside emulator:
 
 `<D-d>`
 
-### console logs
+### iOS device syslog
 
 ```sh
 $ react-native log-ios
@@ -206,7 +206,7 @@ fix this problem by temporarily removing `babel` section (see Android article).
 
 <https://github.com/facebook/react-native/issues/12754>
 
-error message is displayed in emulator window only:
+emulator window:
 
 ```sh
 No bundle URL present.
@@ -226,3 +226,44 @@ $ react-native run-ios
 ```
 
 NOTE: this error usually occurs after running application in Android emulator.
+
+### application fails to start (native module cannot be null)
+
+- <https://github.com/zo0r/react-native-push-notification/issues/160>
+- <https://github.com/zo0r/react-native-push-notification/issues/279>
+- <http://facebook.github.io/react-native/docs/pushnotificationios.html>
+- <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
+
+emulator window:
+
+```sh
+Native module cannot be null.
+```
+
+solution:
+
+this error occured after installing `react-native-push-notification` package
+and trying to launch application:
+
+```sh
+$ npm install --save react-native-push-notification
+$ react-native link
+$ react-native run-ios
+```
+
+it has turned out that `PushNotificationIOS` library (has native dependencies)
+from `react-native` package has not been linked automatically to my iOS project
+when linking dependencies for `react-native-push-notification` package
+(this is probably a bug in the latter):
+
+```sh
+$ react-native link
+...
+rnpm-install info iOS module react-native-picker is already linked
+rnpm-install info Android module react-native-push-notification is already linked
+rnpm-install info Android module react-native-vector-icons is already linked
+...
+```
+
+solution is to link `PushNotificationIOS` library manually as instructed in
+[PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html).

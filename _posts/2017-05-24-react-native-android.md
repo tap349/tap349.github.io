@@ -187,7 +187,9 @@ NOTE: Developer Menu is available only if application is launched
 
 `<D-m>`
 
-### console logs
+### log of system messages
+
+<https://developer.android.com/studio/command-line/logcat.html>
 
 ```sh
 $ react-native log-android
@@ -427,3 +429,40 @@ the error no longer occurs - maybe 'right' version of `shallowequal` package is
 cached somewhere?
 
 all in all IDK why this error occurs and how to fix it in general.
+
+### application build fails (could not find com.facebook.react:react-native:0.42.0)
+
+- <https://github.com/oblador/react-native-vector-icons/issues/480>
+- <https://github.com/facebook/react-native/issues/14223#issuecomment-304447493>
+
+```sh
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring project ':app'.
+> Could not resolve all dependencies for configuration ':app:_debugApk'.
+   > A problem occurred configuring project ':react-native-push-notification'.
+      > Could not resolve all dependencies for configuration ':react-native-push-notification:_debugPublishCopy'.
+         > Could not find com.facebook.react:react-native:0.42.0.
+           Required by:
+               myapp:react-native-push-notification:unspecified
+```
+
+solution:
+
+add this snippet to _android/build.gradle_ and specify actual RN version in it
+(make sure to update this value every time RN version changes):
+
+```gradle
+allprojects {
+  configurations.all {
+    resolutionStrategy {
+      eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'com.facebook.react' && details.requested.name == 'react-native') {
+            details.useVersion '0.42.3' # specify actual RN version here
+        }
+      }
+    }
+  }
+}
+```

@@ -22,6 +22,8 @@ don't use semicolons:
 - after [block statements (blocks)](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/block)
   (commonly used with control flow statements - `if...else`, `for`, etc.)
 
+adapted example from <https://facebook.github.io/react/tutorial/tutorial.html>:
+
 ```javascript
 import React from 'react';
 

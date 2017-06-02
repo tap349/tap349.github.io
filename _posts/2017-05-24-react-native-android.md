@@ -208,7 +208,7 @@ NOTE: Developer Menu is available only if application is launched
 $ react-native log-android
 ```
 
-`console.log` prints to this log.
+`console.log()` prints to this log.
 
 ### reload application in emulator manually
 

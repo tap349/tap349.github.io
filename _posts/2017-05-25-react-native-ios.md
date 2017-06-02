@@ -101,7 +101,7 @@ all the time).
 $ react-native log-ios
 ```
 
-`console.log` prints to this log.
+`console.log()` prints to this log.
 
 ### reload application in emulator manually
 

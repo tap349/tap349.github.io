@@ -440,6 +440,8 @@ even if `shallowequal` package is removed from filesystem and installed again
 the error no longer occurs - maybe 'right' version of `shallowequal` package is
 cached somewhere?
 
+NOTE: anyway try to enable hot reloading first - sometimes it helps!
+
 all in all IDK why this error occurs and how to fix it in general.
 
 ### application build fails (could not find com.facebook.react:react-native:0.42.0)

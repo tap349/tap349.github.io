@@ -51,6 +51,12 @@ class Board extends React.Component {
 }
 ```
 
+## single vs. double quotes
+
+<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
+
+prefer single quotes.
+
 ## falsy values
 
 <https://stackoverflow.com/a/5515349/3632318>
@@ -71,9 +77,9 @@ switch statement doesn't return value - it's used for side effects only.
 
 it's possible to use either `break` or `return` to terminate each case clause.
 
-using `break` is optional but if it's omitted program continues exepction:
-jumps to the next case clause and check whether it's matched against `switch`
-expression and so on.
+using `break` is optional but if it's omitted program continues execution:
+it jumps to the next case clause and checks whether it's matched against
+`switch` expression and so on.
 
 `return` statement returns result from function - it's okay to use it if there
 is nothing else after `switch` statement.
@@ -91,21 +97,3 @@ is nothing else after `switch` statement.
 
   returns true if operands are strictly equal without type conversion,
   objects are equal if they have the same references.
-
-## ES6
-
-### Promise
-
-<https://learn.javascript.ru/promise>
-
-### shorthand property names
-
-- <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer>
-- <http://www.benmvp.com/learning-es6-enhanced-object-literals/>
-
-```javascript
-> var a = 'foo', b = 42, c = {};
-> var o = {a, b, c};
-> o.a
-"foo"
-```

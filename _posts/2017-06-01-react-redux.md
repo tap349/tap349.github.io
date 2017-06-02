@@ -202,3 +202,10 @@ say, you want to calculate total count and save it as a state field in store.
 > Reducer should be without side effects simply digesting the action payload
 > and returning a new state object. Adding listeners and dispatching actions
 >>  within the reducer can lead to chained actions and other side effects.
+
+### don't pass store to presentational components
+
+<https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0>
+
+only container components are aware of store and provide data from store to
+presentational and other container components.

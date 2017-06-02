@@ -177,17 +177,25 @@ download and install all required Android libraries.
 
 ## tips
 
+### use another Android version in emulator
+
+- install required version of Android SDK Platform packages (version 23 = Android 6)
+- create new AVD using system image of required version
+- start emulator using new AVD
+
+## debugging
+
 <https://facebook.github.io/react-native/docs/debugging.html>
 
 NOTE: Developer Menu is available only if application is launched
       via `react-native` (that is it's not available if you just start
-      AVD and open application by yourself).
+      AVD and open already installed application by yourself).
 
 ### Developer Menu
 
 `<D-m>`
 
-### log of system messages
+### device system log (log of system messages)
 
 <https://developer.android.com/studio/command-line/logcat.html>
 
@@ -209,11 +217,6 @@ NOTE: hot reloading is recommended over live reload.
 
 - `<D-m>` -> `Enable Live Reload`
 - `<D-m>` -> `Enable Hot Reloading`
-
-### use another Android version in emulator
-
-- install required version of Android SDK Platform packages (version 23 = Android 6)
-- create new AVD using system image of required version
 
 ## troubleshooting
 

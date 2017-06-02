@@ -56,8 +56,6 @@ download and install all required iOS libraries.
 
 ## tips
 
-<https://facebook.github.io/react-native/docs/debugging.html>
-
 ### Dvorak keyboard layout
 
 by default emulator uses QWERTY as hardware keyboard layout - it
@@ -67,11 +65,32 @@ it's possible to change it to Dvorak inside emulator:
 
 `Settings` -> `General` -> `Keyboards` -> `Hardware Keyboard` -> `English` -> `Dvorak`
 
+### change screen resolution (scale) in emulator
+
+<https://stackoverflow.com/questions/10481412>
+
+emulator menu: `Window` -> `Scale`
+
+- `<D-1>` - 100% (default)
+- `<D-2>` - 75%
+- `<D-3>` - 50%
+- `<D-4>` - 33%
+- `<D-5>` - 25%
+
+also there must be a way to change default scale by setting a value for
+appropriate preference key via `defaults write` as described in the link
+above - but it didn't work for me (probably because Apple changes these keys
+all the time).
+
+## debugging
+
+<https://facebook.github.io/react-native/docs/debugging.html>
+
 ### Developer Menu
 
 `<D-d>`
 
-### iOS device syslog
+### device system log (iOS device syslog)
 
 ```sh
 $ react-native log-ios
@@ -90,23 +109,6 @@ NOTE: hot reloading is recommended over live reload.
 
 - `<D-d>` -> `Enable Live Reload`
 - `<D-d>` -> `Enable Hot Reloading`
-
-### change screen resolution (scale) in emulator
-
-<https://stackoverflow.com/questions/10481412>
-
-emulator menu: `Window` -> `Scale`
-
-- `<D-1>` - 100% (default)
-- `<D-2>` - 75%
-- `<D-3>` - 50%
-- `<D-4>` - 33%
-- `<D-5>` - 25%
-
-also there must be a way to change default scale by setting a value for
-appropriate preference key via `defaults write` as described in the link
-above - but it didn't work for me (probably because Apple changes these keys
-all the time).
 
 ## troubleshooting
 

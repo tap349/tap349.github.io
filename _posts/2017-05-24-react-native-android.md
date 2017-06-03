@@ -481,7 +481,7 @@ allprojects {
 }
 ```
 
-### warning in emulator log (cannot translate guest dns ip)
+### warning in emulator log (cannot translate guest DNS IP)
 
 <https://github.com/facebook/react-native/issues/13340>
 

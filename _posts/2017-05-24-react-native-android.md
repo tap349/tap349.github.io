@@ -499,6 +499,8 @@ solution:
 
 the issue is not resolved yet.
 
+TODO: check if this issue is resolved when `android-sdk` is upgraded via brew.
+
 ### no application launcher icon on home screen in emulator
 
 <https://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html>

@@ -95,7 +95,7 @@ all the time).
 
 `<D-d>`
 
-### device system log (iOS device syslog)
+### device system log (`iOS device syslog`)
 
 ```sh
 $ react-native log-ios

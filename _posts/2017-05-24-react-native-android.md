@@ -200,7 +200,13 @@ NOTE: Developer Menu is available only if application is launched
 
 `<D-m>`
 
-### device system log (log of system messages)
+### verbose emulator log
+
+```sh
+$ avd -verbose
+```
+
+### device system log (`log of system messages`)
 
 <https://developer.android.com/studio/command-line/logcat.html>
 

@@ -278,7 +278,7 @@ solution:
 $ sdkmanager --list --verbose
 ```
 
-### emulator cannot start AVD
+### emulator fails to start (Qt library not found)
 
 <https://stackoverflow.com/questions/40931254>
 
@@ -398,7 +398,7 @@ Execution failed for task ':app:installDebug'.
 
 solution:
 
-start AVD before running application.
+start emulator before running application.
 
 ### application fails to start (couldn't find preset "es2015")
 

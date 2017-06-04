@@ -41,12 +41,7 @@ categories: [elixir]
   ```
 
   - stored in _neko.app_ (created when project is compiled)
-  - used to start/stop application manually in IEx:
-
-    ```sh
-    iex> Application.start(:neko)
-    iex> Application.stop(:neko)
-    ```
+  - used to start/stop application manually in IEx
 
 - application inference
 
@@ -80,6 +75,15 @@ categories: [elixir]
 - Erlang shell - Eshell (`erl`)
 - Elixir shell - IEx (`iex`)
 - UNIX shell - Bash, etc.
+
+### start/stop application manually
+
+```sh
+iex> Application.start(:neko)
+iex> Application.stop(:neko)
+iex> Application.stop(:logger)
+iex> Application.ensure_all_started(:neko)
+```
 
 ### quit IEx
 

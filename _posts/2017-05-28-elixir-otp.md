@@ -81,3 +81,10 @@ Task is not a GenServer but you can use GenServer as a Task.
     end
   end
   ```
+
+## Process.exit(pid, :normal) vs Agent.stop(pid)
+
+- <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
+- <http://crypt.codemancers.com/posts/2016-01-24-understanding-exit-signals-in-erlang-slash-elixir/>
+
+TODO: read the 2nd article and extract main ideas here.

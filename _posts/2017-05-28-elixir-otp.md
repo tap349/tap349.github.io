@@ -8,11 +8,16 @@ categories: [elixir, otp]
 
 <!-- more -->
 
-## GenServer vs. Agent
+## GenServer
 
-<https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>
+- <https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>
+- <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
 
-> Agent is just a GenServer that only saves state.
+GenServers:
+
+- GenServer itself (used for business logic)
+- Agent (GenServer that only saves state)
+- Supervisor (GenServer not meant to be used for business logic)
 
 > The benefit of an Agent over a GenServer is in the nomenclature.
 
@@ -21,6 +26,10 @@ Task is not a GenServer but you can use GenServer as a Task.
 ## Supervisor
 
 - <https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#the-application-callback>
+- <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
+
+> Supervisors should be extremely lightweight with low risk of having
+> their own bugs because their job is to restart other processes.
 
 2 ways to add application supervisor:
 
@@ -82,9 +91,31 @@ Task is not a GenServer but you can use GenServer as a Task.
   end
   ```
 
-## Process.exit(pid, :normal) vs Agent.stop(pid)
+## Exit signals
 
-- <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
 - <http://crypt.codemancers.com/posts/2016-01-24-understanding-exit-signals-in-erlang-slash-elixir/>
+- <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
 
-TODO: read the 2nd article and extract main ideas here.
+Exit signal is a special type of message.
+
+```elixir
+Process.exit(pid, <exit reason>)
+```
+
+classification of exit signals by their exit reasons:
+
+- `:normal`
+
+  `:normal` exit signal is ignored by receiving process unless it
+  traps exits in which case the signal will be received as a message.
+
+- `:kill`
+
+  `:kill` exit signal always terminates receiving process even if it traps exits.
+
+- other exit reasons (including `:shutdown`)
+
+  such signals terminate receiving process unless it trap exits
+  in which case these signals will be received as messages.
+
+![exit signal cheatsheet](http://crypt.codemancers.com/assets/images/elixir_processes/elixir_exit_signal_cheatsheet-6f1371dea9066489fe5a287abc81d460c2c85785c32efbbb65a5837bb98d635f.png)

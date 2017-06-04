@@ -29,6 +29,25 @@ categories: [elixir]
 
 <http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
 
+- application name
+
+  ```elixir
+  def project do
+    [
+      app: :neko,
+      ...
+    ]
+  end
+  ```
+
+  - stored in _neko.app_ (created when project is compiled)
+  - used to start/stop application manually in IEx:
+
+    ```sh
+    iex> Application.start(:neko)
+    iex> Application.stop(:neko)
+    ```
+
 - application inference
 
   <http://elixir-lang.org/blog/2017/01/05/elixir-v1-4-0-released/#application-inference>
@@ -38,8 +57,10 @@ categories: [elixir]
   ```elixir
   def application do
     [
-      # this line is longer necessary
+      # this line is longer necessary - all dependencies
+      # are added to `applications` by default in Elixir 1.4
       #applications: [:httpoison],
+      # specify only extra applications from Erlang/Elixir
       extra_applications: [:logger],
       mod: {Neko.Application, []}
     ]

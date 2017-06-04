@@ -25,22 +25,22 @@ Task is not a GenServer but you can use GenServer as a Task.
 
 ## Supervisor
 
-- <https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#the-application-callback>
-- <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
+<https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>:
 
 > Supervisors should be extremely lightweight with low risk of having
 > their own bugs because their job is to restart other processes.
 
-2 ways to add application supervisor:
+[2 ways](https://hexdocs.pm/elixir/Supervisor.html) to define supervisor:
 
-- in application callback module itself
+- dynamic supervisor (defined in [application callback module](https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#the-application-callback))
 
   _lib/neko/application.ex_:
 
   ```elixir
   defmodule Neko.Application do
     use Application
-    alias Neko.Achievement.StoreRegistry
+
+    alias Neko.Achievement.Store.Registry, as: StoreRegistry
 
     def start(_type, _args) do
       import Supervisor.Spec, warn: false
@@ -55,17 +55,21 @@ Task is not a GenServer but you can use GenServer as a Task.
   end
   ```
 
-- in separate module
+- module-based supervisor (defined in a separate module)
 
   _lib/neko/supervisor.ex_:
 
   ```elixir
   defmodule Neko.Supervisor do
+    # automatically imports Supervisor.Spec
     use Supervisor
-    alias Neko.Achievement.StoreRegistry
+
+    alias Neko.Achievement.Store.Registry, as: StoreRegistry
+
+    @name Neko.Supervisor
 
     def start_link do
-      Supervisor.start_link(__MODULE__, :ok)
+      Supervisor.start_link(__MODULE__, :ok, name: @name)
     end
 
     def init(:ok) do
@@ -73,6 +77,8 @@ Task is not a GenServer but you can use GenServer as a Task.
         worker(StoreRegistry, [StoreRegistry])
       ]
 
+      # NOTE: strategy is passed to Supervisor.Spec.supervise/2 -
+      #       not to Supervisor.start_link/2 like for dynamic supervisor
       supervise(children, strategy: :one_for_one)
     end
   end
@@ -83,7 +89,6 @@ Task is not a GenServer but you can use GenServer as a Task.
   ```elixir
   defmodule Neko.Application do
     use Application
-    alias Neko.Achievement.StoreRegistry
 
     def start(_type, _args) do
       Neko.Supervisor.start_link

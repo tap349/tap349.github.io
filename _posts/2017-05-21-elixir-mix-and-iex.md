@@ -248,7 +248,7 @@ to make pry work in tests run `mix test` in IEx session:
 $ iex -S mix test
 ```
 
-NOTE: in my case `iex` is aliased to `iex -S mix` so just type `iex test`.
+NOTE: in my case `iex` is aliased to `iex -S mix` so type just `iex test`.
 
 ### suppress long output (same as `;` in irb)
 

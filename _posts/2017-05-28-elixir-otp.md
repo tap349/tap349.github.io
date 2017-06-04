@@ -91,12 +91,12 @@ Task is not a GenServer but you can use GenServer as a Task.
   end
   ```
 
-## Exit signals
+## exit signals
 
 - <http://crypt.codemancers.com/posts/2016-01-24-understanding-exit-signals-in-erlang-slash-elixir/>
 - <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
 
-Exit signal is a special type of message.
+exit signal is a special type of message.
 
 ```elixir
 Process.exit(pid, <exit reason>)
@@ -106,8 +106,8 @@ classification of exit signals by their exit reasons:
 
 - `:normal`
 
-  `:normal` exit signal is ignored by receiving process unless it
-  traps exits in which case the signal will be received as a message.
+  `:normal` exit signal is ignored by receiving process unless the latter
+  traps exits - this signal will be received as a message then.
 
 - `:kill`
 
@@ -115,7 +115,7 @@ classification of exit signals by their exit reasons:
 
 - other exit reasons (including `:shutdown`)
 
-  such signals terminate receiving process unless it trap exits
-  in which case these signals will be received as messages.
+  other exit signals terminate receiving process unless the latter
+  trap exits - these signals will be received as messages then.
 
 ![exit signal cheatsheet](http://crypt.codemancers.com/assets/images/elixir_processes/elixir_exit_signal_cheatsheet-6f1371dea9066489fe5a287abc81d460c2c85785c32efbbb65a5837bb98d635f.png)

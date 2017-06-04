@@ -13,7 +13,7 @@ categories: [elixir]
 
 ## Mix
 
-### tasks
+### common tasks
 
 - `mix deps.get` = `bundle install`
 
@@ -177,16 +177,16 @@ each module is compiled into its own bytecode (`beam`) file:
 
 in these cases bytecode modules are not written to disk - only loaded in memory:
 
-- `$ iex test.exs`
+- `$ iex foo.exs`
 
   compiles file in memory and loads it into IEx.
 
-- `$ elixir file.exs`
+- `$ elixir foo.exs`
 
   compiles file in memory and executes it
   (it's like running any other script in UNIX shell).
 
-- `iex> import_file "test.exs"`
+- `iex> import_file "foo.exs"`
 
   > evaluates the contents of the file as if it were directly typed into IEx
 
@@ -194,11 +194,11 @@ in these cases bytecode modules are not written to disk - only loaded in memory:
 
 #### compile
 
-- `$ elixirc file.exs`
+- `$ elixirc foo.exs`
 
   compiles file and executes it.
 
-- `iex> c "test.exs"`
+- `iex> c "foo.exs"`
 
   compiles file and loads it into IEx.
 
@@ -266,14 +266,6 @@ iex> r Foo.Bar
 
 - start new IEx session or recompile module with breakpoint
 - finish pry session by calling `respawn`
-
-to make pry work in tests run `mix test` in IEx session:
-
-```sh
-$ iex -S mix test
-```
-
-NOTE: in my case `iex` is aliased to `iex -S mix` so type just `iex test`.
 
 ### suppress long output (same as `;` in irb)
 

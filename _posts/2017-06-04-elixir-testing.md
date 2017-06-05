@@ -12,7 +12,7 @@ categories: [elixir, testing]
 $ mix test
 ```
 
-## running specific tests (same as `focus` in RSpec)
+## run specific tests (same as `focus` in RSpec)
 
 - provide test path and line number to `mix test`
 
@@ -35,7 +35,21 @@ $ mix test
   $ mix test --only wip
   ```
 
-## using IEx.pry in tests
+## show detailed information (same as `--format documentation` in RSpec)
+
+```sh
+$ mix test --trace
+```
+
+## run tests synchronously
+
+`async: true` has no effect - useful in case of race conditions.
+
+```sh
+$ mix test --trace
+```
+
+## use IEx.pry in tests
 
 to make pry work in tests run `mix test` in IEx session:
 

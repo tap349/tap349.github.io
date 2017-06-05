@@ -97,3 +97,17 @@ is nothing else after `switch` statement.
 
   returns true if operands are strictly equal without type conversion,
   objects are equal if they have the same references.
+
+## template literals
+
+<https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals>
+
+template literals (formerly known as 'template strings') are
+string literals which allow multi-line strings and string interpolation:
+
+```javascript
+`text line 1
+ text line 2`
+
+`text ${expression} text`
+```

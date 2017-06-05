@@ -8,6 +8,40 @@ categories: [js]
 
 <!-- more -->
 
+## functions
+
+- <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions>
+- <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions>
+- <https://stackoverflow.com/a/155655/3632318>
+
+> Every function in JavaScript is a Function object.
+
+methods are functions associated with an object via its properties which are
+implicitly passed that object when called (class instance is an object too):
+
+```javascript
+var obj = {
+  foo: function() {}
+};
+```
+
+is equivalent to this using ES6 shorthand syntax:
+
+```javascript
+var obj = {
+  foo() {}
+};
+```
+
+it's possible to use only shorthand syntax inside classes.
+
+that is why always use `this` to get current object property that might happen
+to be function object and then use parentheses to call that function object.
+
+### constructor function
+
+<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#Description>
+
 ## semicolon
 
 <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#semicolons>

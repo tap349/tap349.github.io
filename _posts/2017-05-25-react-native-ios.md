@@ -87,6 +87,13 @@ appropriate preference key via `defaults write` as described in the link
 above - but it didn't work for me (probably because Apple changes these keys
 all the time).
 
+### upload file to emulator
+
+just drag any file from Finder onto emulator window - if it's an image it will
+be automatically copied to Photos on iOS (I didn't experiment with other types
+of files). moreover it will be copied to Photos regardless of what application
+is currently opened.
+
 ## debugging
 
 <https://facebook.github.io/react-native/docs/debugging.html>

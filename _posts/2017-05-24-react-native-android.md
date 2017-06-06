@@ -196,6 +196,34 @@ it makes UI more responsive.
 - create new AVD using system image of required version
 - start emulator using new AVD
 
+### upload file to emulator
+
+- <https://stackoverflow.com/questions/5151744/upload-picture-to-emulator-gallery>
+- <https://stackoverflow.com/questions/17928576/refresh-android-mediastore-using-adb>
+
+you can't just drag file onto emulator window just like for iOS (even though the
+hint when you try to do it says the file will be copied to _/sdcard/Download_).
+
+perform these steps to upload a file:
+
+- upload file
+
+  ```sh
+  $ adb push ~/tmp/image.jpg /sdcard/DCIM/100ANDRO/image.jpg
+  ```
+
+- force SD card rescan
+
+  otherwise Gallery (since I uploaded an image) doesn't see new file.
+
+  ```sh
+  $ adb shell am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard
+  ```
+
+  also it must be possible to rescan SD card by clicking `SCAN SD CARD` button
+  in Applications -> `Dev Tools` -> `Media Provider`. but it doesn't work -
+  something crashes with the message `Unfortunately, Dev Tools has stopped`.
+
 ## debugging
 
 <https://facebook.github.io/react-native/docs/debugging.html>
@@ -249,6 +277,20 @@ NOTE: hot reloading is recommended over live reload.
 
 - `<D-m>` -> `Enable Live Reload`
 - `<D-m>` -> `Enable Hot Reloading`
+
+### run remote interactive shell
+
+run remote interactive shell:
+
+```sh
+$ adb shell
+```
+
+run single remote shell command:
+
+```sh
+$ adb shell ls
+```
 
 ## troubleshooting
 

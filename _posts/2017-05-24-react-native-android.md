@@ -180,6 +180,14 @@ this command:
 
 the first run might take a while since RN will build the whole Android project.
 
+## configuration
+
+### force GPU rendering
+
+Applications -> `Dev Tools` -> `Developer options` -> `Force GPU rendering`
+
+it makes UI more responsive.
+
 ## tips
 
 ### use another Android version in emulator

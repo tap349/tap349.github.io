@@ -218,11 +218,22 @@ $ avd -verbose
 
 <https://developer.android.com/studio/command-line/logcat.html>
 
-```sh
-$ react-native log-android
-```
+`console.log()` prints to system log.
 
-`console.log()` prints to this log.
+- show messages from `ReactNativeJS` only:
+
+  ```sh
+  $ react-native log-android
+  ```
+
+- show all system messages (including those from `ReactNativeJS`):
+
+  ```sh
+  $ adb logcat
+  ```
+
+  this log is very helpful when debugging some system error
+  as it shows everything that's happening inside OS.
 
 ### reload application in emulator manually
 

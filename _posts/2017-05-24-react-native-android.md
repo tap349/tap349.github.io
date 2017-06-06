@@ -42,7 +42,7 @@ export ANDROID_HOME=/usr/local/share/android-sdk
 path=($path $ANDROID_HOME/tools)
 # `sdkmanager` and `avdmanager`
 path=($path $ANDROID_HOME/tools/bin)
-# `adb`
+# `adb` (Android Debug Bridge)
 path=($path $ANDROID_HOME/platform-tools)
 ```
 

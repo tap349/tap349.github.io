@@ -184,7 +184,7 @@ the first run might take a while since RN will build the whole Android project.
 
 ### force GPU rendering
 
-Applications -> `Dev Tools` -> `Developer options` -> `Force GPU rendering`
+Applications -> `Developer options` -> `Force GPU rendering`
 
 it makes UI more responsive.
 

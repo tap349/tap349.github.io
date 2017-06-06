@@ -37,7 +37,7 @@ NOTE: emulator for iOS is called Simulator
 $ rails server
 ```
 
-### start packager server (optional)
+### start packager (JS) server (optional)
 
 same considerations as for Android.
 

@@ -75,6 +75,7 @@ RN package which:
   the package is supposed to do it automatically but it fails to do so -
   see [iOS troubleshooting]({% post_url 2017-05-25-react-native-ios %})
   (`application fails to start (native module cannot be null)`).
+
   in a nutshell - link `PushNotificationIOS` native library manually.
 
 ## linking native libraries

@@ -81,7 +81,7 @@ RN package which:
 
 <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
 
-libraries can be linked:
+native libraries can be linked:
 
 - automatically
 

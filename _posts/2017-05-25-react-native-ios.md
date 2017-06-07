@@ -258,8 +258,8 @@ Native module cannot be null.
 
 solution:
 
-this error occured after installing `react-native-push-notification` package
-and trying to launch application:
+this error occured after installing `react-native-push-notification` package,
+linking native libraries and trying to launch application:
 
 ```sh
 $ npm install --save react-native-push-notification
@@ -267,7 +267,7 @@ $ react-native link react-native-push-notification
 $ react-native run-ios
 ```
 
-it has turned out that `PushNotificationIOS` library (has native dependencies)
+it has turned out `PushNotificationIOS` native library (has native dependencies)
 from `react-native` package has not been linked automatically to my iOS project
 when linking dependencies for `react-native-push-notification` package
 (this is probably a bug in the latter):
@@ -278,5 +278,5 @@ Scanning 587 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_mod
 rnpm-install info Android module react-native-push-notification is already linked
 ```
 
-solution is to link `PushNotificationIOS` library manually as instructed in
+solution is to link `PushNotificationIOS` native library manually as instructed in
 [PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html).

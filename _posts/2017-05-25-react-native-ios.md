@@ -263,7 +263,7 @@ and trying to launch application:
 
 ```sh
 $ npm install --save react-native-push-notification
-$ react-native link
+$ react-native link react-native-push-notification
 $ react-native run-ios
 ```
 
@@ -273,12 +273,9 @@ when linking dependencies for `react-native-push-notification` package
 (this is probably a bug in the latter):
 
 ```sh
-$ react-native link
-...
-rnpm-install info iOS module react-native-picker is already linked
+$ react-native link react-native-push-notification
+Scanning 587 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (6ms)
 rnpm-install info Android module react-native-push-notification is already linked
-rnpm-install info Android module react-native-vector-icons is already linked
-...
 ```
 
 solution is to link `PushNotificationIOS` library manually as instructed in

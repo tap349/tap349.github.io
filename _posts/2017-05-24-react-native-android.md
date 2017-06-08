@@ -232,6 +232,10 @@ NOTE: Developer Menu is available only if application is launched
       via `react-native` (that is it's not available if you just start
       AVD and open already installed application by yourself).
 
+### print to device system log
+
+add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
+
 ### Developer Menu
 
 `<D-m>`
@@ -245,8 +249,6 @@ $ avd -verbose
 ### device system log (`log of system messages`)
 
 <https://developer.android.com/studio/command-line/logcat.html>
-
-`console.log()` prints to system log.
 
 - show messages from `ReactNativeJS` only:
 

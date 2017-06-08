@@ -98,6 +98,10 @@ is currently opened.
 
 <https://facebook.github.io/react-native/docs/debugging.html>
 
+### print to device system log
+
+same as for Android.
+
 ### Developer Menu
 
 `<D-d>`
@@ -107,8 +111,6 @@ is currently opened.
 ```sh
 $ react-native log-ios
 ```
-
-`console.log()` prints to this log.
 
 ### reload application in emulator manually
 

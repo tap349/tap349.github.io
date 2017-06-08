@@ -112,7 +112,8 @@ imho it's a very controversial rule but I'll try to stick it for the time being.
 
 ### semicolon
 
-<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#semicolons>
+- <https://github.com/Flet/semistandard>
+- <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#semicolons>
 
 use semicolons:
 
@@ -155,6 +156,7 @@ class Board extends React.Component {
 
 ### single vs. double quotes
 
-<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
+- <https://standardjs.com/>
+- <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
 
 prefer single quotes.

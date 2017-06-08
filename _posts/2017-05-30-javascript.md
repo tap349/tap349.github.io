@@ -42,55 +42,6 @@ to be function object and then use parentheses to call that function object.
 
 <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#Description>
 
-## semicolon
-
-<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#semicolons>
-
-use semicolons:
-
-- after all single statements (variable/constant declarations, imports/exports, etc.)
-
-don't use semicolons:
-
-- after class and function declarations
-- after [block statements (blocks)](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/block)
-  (commonly used with control flow statements - `if...else`, `for`, etc.)
-
-adapted example from <https://facebook.github.io/react/tutorial/tutorial.html>:
-
-```javascript
-import React from 'react';
-
-class Board extends React.Component {
-  render() {
-    const winner = calculateWinner(this.state.squares);
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-    }
-
-    return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-      </div>
-    );
-  }
-}
-```
-
-## single vs. double quotes
-
-<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
-
-prefer single quotes.
-
 ## falsy values
 
 <https://stackoverflow.com/a/5515349/3632318>
@@ -145,3 +96,65 @@ string literals which allow multi-line strings and string interpolation:
 
 `text ${expression} text`
 ```
+
+## style and code conventions
+
+- <https://standardjs.com/>
+- <http://javascript.crockford.com/code.html>
+- <https://github.com/feross/standard>
+- <https://github.com/Flet/semistandard>
+
+### space after function name in function declaration
+
+- <https://github.com/feross/standard/issues/217>
+
+imho it's a very controversial rule but I'll try to stick it for the time being.
+
+### semicolon
+
+<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#semicolons>
+
+use semicolons:
+
+- after all single statements (variable/constant declarations, imports/exports, etc.)
+
+don't use semicolons:
+
+- after class and function declarations
+- after [block statements (blocks)](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/block)
+  (commonly used with control flow statements - `if...else`, `for`, etc.)
+
+adapted example from <https://facebook.github.io/react/tutorial/tutorial.html>:
+
+```javascript
+import React from 'react';
+
+class Board extends React.Component {
+  render() {
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    if (winner) {
+      status = 'Winner: ' + winner;
+    } else {
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
+
+    return (
+      <div>
+        <div className="status">{status}</div>
+        <div className="board-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
+        </div>
+      </div>
+    );
+  }
+}
+```
+
+### single vs. double quotes
+
+<https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
+
+prefer single quotes.

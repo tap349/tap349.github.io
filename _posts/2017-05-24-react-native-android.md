@@ -292,6 +292,15 @@ run single remote shell command:
 $ adb shell ls
 ```
 
+### connect to local web server
+
+<https://stackoverflow.com/questions/9808560>
+
+use `10.0.2.2:3000` instead of `127.0.0.1:3000` to send requests to local web
+server (say, puma) because emulator runs behind virtual router and `10.0.2.2`
+is a special alias to you host loopback interface (that is, `127.0.0.1` on
+development machine).
+
 ## troubleshooting
 
 ### brew cannot uninstall android-sdk

@@ -8,7 +8,7 @@ categories: [js, es6, es7, es8]
 
 <!-- more -->
 
-### Promise
+### promise
 
 <https://learn.javascript.ru/promise>
 
@@ -23,3 +23,10 @@ categories: [js, es6, es7, es8]
 > o.a
 "foo"
 ```
+
+### arrow function
+
+<https://stackoverflow.com/questions/33308121/can-you-bind-arrow-functions>
+
+it's impossible to rebind arrow function - just use normal function if
+you need to bind to another context later.

@@ -51,3 +51,48 @@ class Counter extends HTMLElement {
   }
 }
 ```
+
+### pass class instance method as argument
+
+<https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
+
+if it's necessary to keep current context (say, instance method uses instance
+properties of current class) there are 2 options:
+
+- pass instance method and bind it to current context in-place:
+
+  ```javascript
+  class Foo {
+    constructor (bar) {
+      this.bar = 123;
+    }
+
+    foo (userId) {
+      Api.get(userId, this.handleResponse.bind(this));
+    }
+
+    handleResponse (response) {
+      return response.baz + this.bar;
+    }
+  }
+  ```
+
+- use field declaration to define instance method as arrow function:
+
+  ```javascript
+  class Foo {
+    constructor (bar) {
+      this.bar = 123;
+    }
+
+    foo (userId) {
+      Api.get(userId, this.handleResponse);
+    }
+
+    handleResponse = (response) => {
+      return response.baz + this.bar;
+    }
+  }
+  ```
+
+  now `handleResponse` is bound to `Foo` instance forever.

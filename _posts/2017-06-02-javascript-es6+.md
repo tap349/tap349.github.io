@@ -30,3 +30,24 @@ categories: [js, es6, es7, es8]
 
 it's impossible to rebind arrow function - just use normal function if
 you need to bind to another context later.
+
+### field declarations
+
+<https://github.com/tc39/proposal-class-fields#field-declarations>
+
+```javascript
+class Counter extends HTMLElement {
+  x = 0;
+}
+```
+
+is equivalent to:
+
+```javascript
+class Counter extends HTMLElement {
+  constructor() {
+    super();
+    this.x = 0;
+  }
+}
+```

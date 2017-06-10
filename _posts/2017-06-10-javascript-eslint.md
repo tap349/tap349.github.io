@@ -44,6 +44,8 @@ on your answers) locally as development dependencies in _package.json_:
 
 ## use babel-eslint parser as default ESLint parser
 
+<https://github.com/babel/babel-eslint/>
+
 ```sh
 $ npm install babel-eslint --save-dep
 ```
@@ -54,7 +56,7 @@ _.eslintrc.yml_:
 parser: 'babel-eslint'
 ```
 
-standard ESLint parser marks some ES7 syntax as invalid, say
+standard ESLint parser marks some ES7/ES8/ES.Next syntax as invalid, say
 [field declarations](https://github.com/tc39/proposal-class-fields):
 
 ```javascript

@@ -8,9 +8,11 @@ categories: [js, eslint]
 
 <!-- more -->
 
-<https://github.com/eslint/eslint>
+- <https://github.com/eslint/eslint>
+- <https://medium.com/@hpux/vim-and-eslint-16fa08cc580f>
+- <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
 
-- install ESLint globally
+## install ESLint globally
 
   ```sh
   $ npm install eslint --global
@@ -37,9 +39,31 @@ categories: [js, eslint]
   }
   ```
 
-  by default 4 spaces are used for indentation - change to 2 spaces.
+## tweak ESLint config
 
-- configure syntastic
+  - 4 spaces are used for indentation by default - change to 2 spaces:
+
+    ```yaml
+    rules:
+      indent:
+        - error
+        - 2
+    ```
+
+  - disable `no-unused-vars` for imported and used JSX components
+
+    - <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md>
+    - <https://github.com/eslint/eslint/issues/2283#issuecomment-260928189>
+
+    ```yaml
+    rules:
+      react/jsx-uses-vars:
+        - error
+    ```
+
+    set the rule to `error` (2) is to enable it.
+
+## configure syntastic
 
   <https://github.com/vim-syntastic/syntastic/issues/1692>
 

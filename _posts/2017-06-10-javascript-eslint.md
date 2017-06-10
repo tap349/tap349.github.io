@@ -87,7 +87,7 @@ restart Vim for these changes to take effect.
       - error
   ```
 
-  set the rule to `error` (2) is to enable it.
+  set the rule to `error` (2) to enable it.
 
 ## configure syntastic
 

@@ -65,9 +65,20 @@ class Counter extends HTMLElement {
 }
 ```
 
-## tweak ESLint config (_.eslintrc.yml_)
+## tweak ESLint rules (_.eslintrc.yml_)
 
 restart Vim for these changes to take effect.
+
+- allow trailing commas on separate lines only
+
+  <http://eslint.org/docs/rules/comma-dangle>
+
+  ```yaml
+  rules:
+    comma-dangle:
+      - warn
+      - only-multiline
+  ```
 
 - 4 spaces are used for indentation by default - change to 2 spaces:
 

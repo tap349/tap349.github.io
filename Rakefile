@@ -8,7 +8,7 @@ namespace :post do
     filename = "_posts/#{date}-#{title}.md"
 
     File.open filename, 'w' do |file|
-      file.write "
+      file.write <<~TEMPLATE
         ---
         layout: post
         title: #{args.title}
@@ -18,7 +18,7 @@ namespace :post do
         ---
 
         <!-- more -->
-      ".gsub(/^\s+/, '')
+      TEMPLATE
     end
   end
 end

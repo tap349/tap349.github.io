@@ -65,42 +65,69 @@ class Counter extends HTMLElement {
 }
 ```
 
-## tweak ESLint rules (_.eslintrc.yml_)
+## configure ESLint rules
 
-restart Vim for these changes to take effect.
+<http://eslint.org/docs/user-guide/configuring>
+
+extending `eslint:recommended` configuration enables subset of core rules
+having a check mark on the [rules page](http://eslint.org/docs/rules/):
+
+```yaml
+extends: 'eslint:recommended'
+```
+
+rule modifications are picked immediately on next syntastic run.
+all the rules are added in `rules` section of _.eslintrc.yml_
 
 - allow trailing commas on separate lines only
 
   <http://eslint.org/docs/rules/comma-dangle>
 
   ```yaml
-  rules:
-    comma-dangle:
-      - warn
-      - only-multiline
+  comma-dangle:
+    - warn
+    - only-multiline
   ```
 
-- 4 spaces are used for indentation by default - change to 2 spaces:
+- use 2 spaces instead of 4 ones (in generated config)
 
   ```yaml
-  rules:
-    indent:
-      - error
-      - 2
+  indent:
+    - error
+    - 2
   ```
 
-- disable `no-unused-vars` for imported and used JSX components
+- mark variables used in JSX as used
 
   - <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md>
   - <https://github.com/eslint/eslint/issues/2283#issuecomment-260928189>
 
+  > Since 0.17.0 the ESLint no-unused-vars rule does not detect variables used in JSX
+
   ```yaml
-  rules:
-    react/jsx-uses-vars:
-      - error
+  react/jsx-uses-vars:
+    - error
   ```
 
-  set the rule to `error` (2) to enable it.
+  set rule ID to `error` (2) to turn it on.
+
+  this rule has an effect only if `no-unused-rule` is enabled
+  (enabled by default if extending `eslint:recommended`).
+
+  still error is detected if JSX component is imported but not used.
+
+- require space after function name in function declaration
+
+  <http://eslint.org/docs/rules/space-before-function-paren>
+
+  ```yaml
+  space-before-function-paren:
+    - error
+    - always
+  ```
+
+  see [JavaScript - StyleGuide]({% post_url 2017-06-10-javascript-styleguide %})
+  for description (section `space after function name in function declaration`).
 
 ## configure syntastic
 

@@ -65,7 +65,7 @@ class Counter extends HTMLElement {
 
 ## tweak ESLint config (_.eslintrc.yml_)
 
-restart vim for these changes to take effect.
+restart Vim for these changes to take effect.
 
 - 4 spaces are used for indentation by default - change to 2 spaces:
 

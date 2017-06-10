@@ -101,3 +101,5 @@ so the only combination that worked for me (both conditions are mandatory):
 - install ESLint globally (for checker to be enabled by syntastic)
 - install ESLint locally (`eslint --init` does it) and specify path
   to local `eslint` executable in `g:syntastic_javascript_eslint_exe`
+
+don't forget to restart vim for changes to take effect.

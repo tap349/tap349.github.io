@@ -89,7 +89,7 @@ all the rules are added in `rules` section of _.eslintrc.yml_
     - only-multiline
   ```
 
-- use 2 spaces instead of 4 ones (in generated config)
+- use 2 spaces for indentation
 
   ```yaml
   indent:
@@ -128,6 +128,16 @@ all the rules are added in `rules` section of _.eslintrc.yml_
 
   see [JavaScript - StyleGuide]({% post_url 2017-06-10-javascript-styleguide %})
   for description (section `space after function name in function declaration`).
+
+- disallow spaces inside of braces in object literals
+
+  <http://eslint.org/docs/rules/object-curly-spacing>
+
+  ```yaml
+  object-curly-spacing:
+    - error
+    - never
+  ```
 
 ## configure syntastic
 

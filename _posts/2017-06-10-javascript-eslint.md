@@ -114,7 +114,7 @@ all the rules are added to `rules` section of _.eslintrc.yml_
   this rule has an effect only if `no-unused-rule` is enabled
   (enabled by default if extending `eslint:recommended`).
 
-  still error is detected if JSX component is imported but not used.
+  still error is detected properly if JSX component is imported but not used.
 
 - require space after function name in function declaration
 

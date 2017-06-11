@@ -77,7 +77,7 @@ extends: 'eslint:recommended'
 ```
 
 rule modifications are picked immediately on next syntastic run.
-all the rules are added in `rules` section of _.eslintrc.yml_
+all the rules are added to `rules` section of _.eslintrc.yml_
 
 - allow trailing commas on separate lines only
 

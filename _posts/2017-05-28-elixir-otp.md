@@ -96,7 +96,9 @@ Task is not a GenServer but you can use GenServer as a Task.
   end
   ```
 
-## exit signals
+## linking and monitoring
+
+### exit signals
 
 - <http://crypt.codemancers.com/posts/2016-01-24-understanding-exit-signals-in-erlang-slash-elixir/>
 - <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
@@ -127,3 +129,22 @@ classification of exit signals by their exit reasons:
   traps exits - these signals will be received as messages then.
 
 ![exit signal cheatsheet](http://crypt.codemancers.com/assets/images/elixir_processes/elixir_exit_signal_cheatsheet-6f1371dea9066489fe5a287abc81d460c2c85785c32efbbb65a5837bb98d635f.png)
+
+### getting notification about terminated process
+
+<http://disq.us/p/1g92p7f>
+
+- create a monitor
+
+  <https://elixir-lang.org/getting-started/mix-otp/genserver.html#monitors-or-links>
+
+  monitoring process will be notified of crashes, exits, etc. of monitored
+  process via `handle_info/2` callbacks.
+
+  it's a preferable way if you just want to be informed when another process
+  terminates.
+
+- create a link and trap exits
+
+  this method is usually used in supervisors - it's an overkill if you just
+  want to be informed when another process terminates.

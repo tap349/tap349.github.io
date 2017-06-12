@@ -103,8 +103,8 @@ Task is not a GenServer but you can use GenServer as a Task.
 
 exit signal is a special type of message.
 
-exit signal is received by linked processes or when it's sent to
-target process explicitly (usually used to send `:kill` exit signal):
+exit signal is received by linked processes when a process terminates or when
+exit signal (usually `:kill` exit signal) is sent to target process explicitly:
 
 ```elixir
 Process.exit(pid, exit_reason)

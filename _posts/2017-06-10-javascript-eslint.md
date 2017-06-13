@@ -137,7 +137,7 @@ all the rules are added to `rules` section of _.eslintrc.yml_
 
   ```yaml
   space-before-function-paren:
-    - error
+    - warn
     - always
   ```
 

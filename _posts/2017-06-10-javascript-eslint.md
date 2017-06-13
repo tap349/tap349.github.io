@@ -77,25 +77,9 @@ extends: 'eslint:recommended'
 ```
 
 rule modifications are picked immediately on next syntastic run.
-all the rules are added to `rules` section of _.eslintrc.yml_
+all the rules are added to `rules` section of _.eslintrc.yml_.
 
-- allow trailing commas on separate lines only
-
-  <http://eslint.org/docs/rules/comma-dangle>
-
-  ```yaml
-  comma-dangle:
-    - warn
-    - only-multiline
-  ```
-
-- use 2 spaces for indentation
-
-  ```yaml
-  indent:
-    - error
-    - 2
-  ```
+some rules worth mentioning are listed below:
 
 - enforce event handler naming conventions in JSX
 
@@ -120,8 +104,7 @@ all the rules are added to `rules` section of _.eslintrc.yml_
   > Since 0.17.0 the ESLint no-unused-vars rule does not detect variables used in JSX
 
   ```yaml
-  react/jsx-uses-vars:
-    - error
+  react/jsx-uses-vars: error
   ```
 
   set rule ID to `error` (2) to turn it on.
@@ -143,16 +126,6 @@ all the rules are added to `rules` section of _.eslintrc.yml_
 
   see [JavaScript - StyleGuide]({% post_url 2017-06-10-javascript-styleguide %})
   for description (section `space after function name in function declaration`).
-
-- disallow spaces inside of braces in object literals
-
-  <http://eslint.org/docs/rules/object-curly-spacing>
-
-  ```yaml
-  object-curly-spacing:
-    - error
-    - never
-  ```
 
 ## configure syntastic
 

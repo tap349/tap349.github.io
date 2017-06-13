@@ -15,11 +15,11 @@ categories: [react-native]
 RN provides `Fetch API` that allows to fetch content from arbitrary URL:
 
 ```javascript
-function getUsers() {
+function getUsers () {
   return fetch('https://test.com/users.json')
     .then(response => response.json())
     .then(responseJson => responseJson.users)
-    .catch(error => console.error(error))
+    .catch(error => console.error(error));
 }
 ```
 
@@ -28,13 +28,13 @@ function getUsers() {
 example can be rewritten using `async`/`await` syntax from ES2017:
 
 ```javascript
-async function getUsers() {
+async function getUsers () {
   try {
     let response = await fetch('https://test.com/users.json');
     let responseJson = await response.json();
     return responseJson.users;
   } catch(error) {
-    console.error(error)
+    console.error(error);
   }
 }
 ```

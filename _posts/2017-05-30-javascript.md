@@ -21,7 +21,7 @@ implicitly passed that object when called (class instance is an object too):
 
 ```javascript
 var obj = {
-  foo: function() {}
+  foo: function () {}
 };
 ```
 
@@ -29,7 +29,7 @@ is equivalent to this using ES6 shorthand syntax:
 
 ```javascript
 var obj = {
-  foo() {}
+  foo () {}
 };
 ```
 

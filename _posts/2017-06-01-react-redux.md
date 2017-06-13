@@ -32,11 +32,11 @@ categories: [react, react-native, redux]
 > Action creators are functions that create actions.
 
 ```javascript
-function addTodo(text) {
+function addTodo (text) {
   return {
     type: TOGGLE_TODO,
     text
-  }
+  };
 }
 ```
 
@@ -89,14 +89,14 @@ const initialState = {
 }
 
 export default function badges(state = initialState, action = {}) {
-  switch(action.type) {
-    case BADGES_SET_NOTI_COUNT:
-      return {
-        ...state,
-        notiCount: action.count
-      }
-    default:
-      return state
+  switch (action.type) {
+  case BADGES_SET_NOTI_COUNT:
+    return {
+      ...state,
+      notiCount: action.count
+    };
+  default:
+    return state;
   }
 }
 ```
@@ -104,33 +104,33 @@ export default function badges(state = initialState, action = {}) {
 with reducer composition (but without using `combineReducers`):
 
 ```javascript
-function notiCount(state = 0, action) {
-  switch(action.type) {
-    case BADGES_SET_NOTI_COUNT:
-      return action.count
-    default:
-      return state
+function notiCount (state = 0, action) {
+  switch (action.type) {
+  case BADGES_SET_NOTI_COUNT:
+    return action.count;
+  default:
+    return state;
   }
 }
 
 export default function badges(state, action) {
   return {
     notiCount: notiCount(state.notiCount, action)
-  }
+  };
 }
 ```
 
 with reducer composition (using `combineReducers`):
 
 ```javascript
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux';
 
-function notiCount(state = 0, action) {
-  switch(action.type) {
+function notiCount (state = 0, action) {
+  switch (action.type) {
     case BADGES_SET_NOTI_COUNT:
-      return action.count
+      return action.count;
     default:
-      return state
+      return state;
   }
 }
 
@@ -138,9 +138,9 @@ const badges = combineReducers(
   {
     notiCount
   }
-)
+);
 
-export default badges
+export default badges;
 ```
 
 ## store
@@ -148,35 +148,35 @@ export default badges
 - create (say, in _Store.js_):
 
   ```javascript
-  import { createStore } from 'redux'
-  import badges from './reducers'
+  import {createStore} from 'redux';
+  import badges from './reducers';
 
-  export default createStore(badges)
+  export default createStore(badges);
   ```
 
 - get current state:
 
   ```javascript
-  import store from './Store'
+  import store from './Store';
 
-  let state = store.getState()
+  const state = store.getState();
   ```
 
 - change state by dispatching actions:
 
   ```javascript
-  import store from './Store'
-  import * as badgeActions from './actions/badgeActions'
+  import store from './Store';
+  import * as badgeActions from './actions/badgeActions';
 
-  store.dispatch(badgeActions.setNotiCount(3))
+  store.dispatch(badgeActions.setNotiCount(3));
   ```
 
 - listen to state updates:
 
   ```javascript
-  import store from './Store'
+  import store from './Store';
 
-  store.subscribe(() => this.forceUpdate())
+  store.subscribe(() => this.forceUpdate());
   ```
 
   every time state changes listener is called
@@ -209,3 +209,44 @@ say, you want to calculate total count and save it as a state field in store.
 
 only container components are aware of store and provide data from store to
 presentational and other container components.
+
+## debugging
+
+- <https://github.com/zalmoxisus/redux-devtools-extension>
+- <https://github.com/zalmoxisus/remote-redux-devtools>
+
+### install `Redux DevTools` extension for Chrome
+
+<https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd>
+
+### install DevTools npm packages
+
+```sh
+$ cd <project-directory>
+$ npm install --save-dev remote-redux-devtools remote-redux-devtools
+```
+
+`remote-redux-devtools` is required for RN.
+
+### add DevTools store enhancers
+
+<http://redux.js.org/docs/api/compose.html>
+
+add DevTools enhancers from both `redux-devtools-extension` and
+`remote-redux-devtools` packages (it's necessary to compose them
+before adding to store):
+
+```javascript
+import api from './api/redux';
+import reducer from './reducers';
+
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import devToolsEnhancer from 'remote-redux-devtools';
+
+export default createStore(reducer, composeWithDevTools(
+  applyMiddleware(thunk.withExtraArgument(api)),
+  devToolsEnhancer()
+));
+```

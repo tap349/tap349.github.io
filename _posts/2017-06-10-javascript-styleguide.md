@@ -41,7 +41,7 @@ adapted example from <https://facebook.github.io/react/tutorial/tutorial.html>:
 import React from 'react';
 
 class Board extends React.Component {
-  render() {
+  render () {
     const winner = calculateWinner(this.state.squares);
     let status;
     if (winner) {

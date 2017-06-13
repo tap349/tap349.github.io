@@ -29,7 +29,7 @@ passed to corresponding callback functions attached to `then()`.
 ```javascript
 > var a = 'foo', b = 42, c = {};
 > var o = {a, b, c};
-> o.a
+> o.a;
 "foo"
 ```
 
@@ -54,7 +54,7 @@ is equivalent to:
 
 ```javascript
 class Counter extends HTMLElement {
-  constructor() {
+  constructor () {
     super();
     this.x = 0;
   }

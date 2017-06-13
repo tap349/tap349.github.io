@@ -71,7 +71,8 @@ is nothing else after `switch` statement.
 
 ## comparison operators
 
-<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators>
+- <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators>
+- <https://stackoverflow.com/a/15992131/3632318>
 
 - equality (`==`)
 
@@ -82,6 +83,16 @@ is nothing else after `switch` statement.
 
   returns true if operands are strictly equal without type conversion,
   objects are equal if they have the same references.
+
+as a rule always prefer strict equality operators except for the case when
+it's necessary to test for `null` or `undefined`:
+
+```javascript
+// tests both for null and undefined
+if (variable == null) {
+  ...
+}
+```
 
 ## template literals
 

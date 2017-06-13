@@ -12,6 +12,7 @@ categories: [js, es6, es7, es8]
 
 - <https://learn.javascript.ru/promise>
 - <https://stackoverflow.com/a/35282921/3632318>
+- <https://stackoverflow.com/a/30741722/3632318>
 
 ### shorthand property names
 

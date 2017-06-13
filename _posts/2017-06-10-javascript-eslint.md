@@ -97,6 +97,21 @@ all the rules are added to `rules` section of _.eslintrc.yml_
     - 2
   ```
 
+- enforce event handler naming conventions in JSX
+
+  <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md>
+
+  ```yaml
+  react/jsx-handler-names: warn
+  ```
+
+  this is considered okay:
+
+  ```javascript
+  <MyComponent onChange={this.handleChange} />
+  <MyComponent onChange={this.props.onFoo} />
+  ```
+
 - mark variables used in JSX as used
 
   - <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md>

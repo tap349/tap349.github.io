@@ -10,9 +10,16 @@ categories: [js, es6, es7, es8]
 
 ### promise
 
+- <https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261>
 - <https://learn.javascript.ru/promise>
 - <https://stackoverflow.com/a/35282921/3632318>
 - <https://stackoverflow.com/a/30741722/3632318>
+
+the result of a promise chain is always a promise - either resolved or
+rejected one. this is what allows to chain promises endlessly.
+
+resolved or rejected values (i.e. resolved or rejected promise values) will be
+passed to corresponding callback functions attached to `then()`.
 
 ### shorthand property names
 

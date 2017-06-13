@@ -226,7 +226,7 @@ $ cd <project-directory>
 $ npm install --save-dev remote-redux-devtools remote-redux-devtools
 ```
 
-`remote-redux-devtools` is required for RN.
+`remote-redux-devtools` is required for RN only (not required for pure React).
 
 ### add DevTools store enhancers
 
@@ -244,9 +244,16 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import devToolsEnhancer from 'remote-redux-devtools';
+// it doesn't work vice versa:
+//import {composeWithDevTools} from 'remote-redux-devtools';
+//import devToolsEnhancer from 'redux-devtools-extension';
 
 export default createStore(reducer, composeWithDevTools(
   applyMiddleware(thunk.withExtraArgument(api)),
   devToolsEnhancer()
 ));
 ```
+
+### start application and use Chrome extension for remote monitoring
+
+`Redux DevTools` extension icon menu -> `Open Remote DevTools`

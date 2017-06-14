@@ -38,7 +38,7 @@ passed to corresponding callback functions attached to `then()`.
 <https://stackoverflow.com/questions/33308121/can-you-bind-arrow-functions>
 
 it's impossible to rebind arrow function - just use normal function if
-you need to bind to another context later.
+you need to bind it to another context later.
 
 ### field declarations
 
@@ -61,14 +61,15 @@ class Counter extends HTMLElement {
 }
 ```
 
-### pass class instance method as argument
+### pass class prototype methods as arguments
 
-<https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
+- <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
+- <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
 
-if it's necessary to keep current context (say, instance method uses instance
-properties of current class) there are 2 options:
+if it's necessary to keep current context (say, prototype method uses
+class instance properties of current class) there are 2 options:
 
-- pass instance method and bind it to current context in-place:
+- pass prototype method and bind it to current context in-place:
 
   ```javascript
   class Foo {
@@ -86,7 +87,27 @@ properties of current class) there are 2 options:
   }
   ```
 
-- use field declaration to define instance method as arrow function:
+  also it's possible to do it in constructor once and for all
+  (I haven't tested this solution):
+
+  ```javascript
+  class Foo {
+    constructor (bar) {
+      this.bar = 123;
+      this.handleResponse = this.handleResponse.bind(this);
+    }
+
+    foo (userId) {
+      Api.get(userId, this.handleResponse);
+    }
+
+    handleResponse (response) {
+      return response.baz + this.bar;
+    }
+  }
+  ```
+
+- use field declaration to define prototype method as arrow function:
 
   ```javascript
   class Foo {
@@ -104,4 +125,4 @@ properties of current class) there are 2 options:
   }
   ```
 
-  now `handleResponse` is bound to `Foo` instance forever.
+  now `handleResponse` is bound to `Foo` class instance forever.

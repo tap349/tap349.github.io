@@ -12,7 +12,8 @@ categories: [react, react-native, redux]
 
 > The whole state of your app is stored in an object tree inside a single store.
 
-> The only way to change the state tree is to emit an action, an object describing what happened.
+> The only way to change the state tree is to emit an action,
+> an object describing what happened.
 
 > To specify how the actions transform the state tree, you write pure reducers.
 
@@ -24,18 +25,18 @@ categories: [react, react-native, redux]
 
 ```javascript
 {
-  type: TOGGLE_TODO,
-  index: 5
+  type: SET_COUNT,
+  count: 5
 }
 ```
 
 > Action creators are functions that create actions.
 
 ```javascript
-function addTodo (text) {
+function setCount (count) {
   return {
-    type: TOGGLE_TODO,
-    text
+    type: SET_COUNT,
+    count
   };
 }
 ```
@@ -86,14 +87,14 @@ classic style (without reducer composition):
 ```javascript
 const initialState = {
   count: 0
-}
+};
 
-export default function badges(state = initialState, action = {}) {
+export default function badges (state = initialState, action = {}) {
   switch (action.type) {
-  case BADGES_SET_NOTI_COUNT:
+  case SET_COUNT:
     return {
       ...state,
-      notiCount: action.count
+      count: action.count
     };
   default:
     return state;
@@ -104,19 +105,17 @@ export default function badges(state = initialState, action = {}) {
 with reducer composition (but without using `combineReducers`):
 
 ```javascript
-function notiCount (state = 0, action) {
+function count (state = 0, action) {
   switch (action.type) {
-  case BADGES_SET_NOTI_COUNT:
+  case SET_COUNT:
     return action.count;
   default:
     return state;
   }
 }
 
-export default function badges(state, action) {
-  return {
-    notiCount: notiCount(state.notiCount, action)
-  };
+export default function badges (state, action) {
+  return {count: count(state.count, action)};
 }
 ```
 
@@ -125,20 +124,16 @@ with reducer composition (using `combineReducers`):
 ```javascript
 import {combineReducers} from 'redux';
 
-function notiCount (state = 0, action) {
+function count (state = 0, action) {
   switch (action.type) {
-    case BADGES_SET_NOTI_COUNT:
-      return action.count;
-    default:
-      return state;
+  case SET_COUNT:
+    return action.count;
+  default:
+    return state;
   }
 }
 
-const badges = combineReducers(
-  {
-    notiCount
-  }
-);
+const badges = combineReducers({count});
 
 export default badges;
 ```
@@ -157,29 +152,22 @@ export default badges;
 - get current state:
 
   ```javascript
-  import store from './Store';
-
   const state = store.getState();
   ```
 
 - change state by dispatching actions:
 
   ```javascript
-  import store from './Store';
-  import * as badgeActions from './actions/badgeActions';
-
-  store.dispatch(badgeActions.setNotiCount(3));
+  store.dispatch(badgeActions.setCount(3));
   ```
 
 - listen to state updates:
 
   ```javascript
-  import store from './Store';
-
   store.subscribe(() => this.forceUpdate());
   ```
 
-  every time state changes listener is called
+  every time state changes listener function is called
   (which re-renders root component in this example).
 
 ## tips
@@ -209,6 +197,47 @@ say, you want to calculate total count and save it as a state field in store.
 
 only container components are aware of store and provide data from store to
 presentational and other container components.
+
+### initialize state in reducers with ES6 default arguments
+
+<http://redux.js.org/docs/recipes/reducers/InitializingState.html#single-simple-reducer>:
+
+> When Redux initializes it dispatches a "dummy" action to fill the state.
+> This is exactly the case that "activates" the default argument.
+
+```javascript
+function isModalVisible (state = false, action) {
+  switch (action.type) {
+  case SHOW_MODAL:
+    return true;
+  case HIDE_MODAL:
+    return false;
+  default:
+    return state;
+  }
+}
+
+export default combineReducers({isModalVisible});
+```
+
+or when not using reducer composition:
+
+```javascript
+const initialState = {
+  isModalVisible: false
+}
+
+export default function memberships (state = initialState, action = {}) {
+  switch (action) {
+  case SHOW_MODAL:
+    return {...state, isModalVisible: true};
+  case HIDE_MODAL:
+    return {...state, isModalVisible: false};
+  default:
+    return state;
+  }
+}
+```
 
 ## debugging
 

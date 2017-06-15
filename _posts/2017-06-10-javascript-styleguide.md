@@ -13,12 +13,18 @@ categories: [js]
 - <https://github.com/feross/standard>
 - <https://github.com/Flet/semistandard>
 - <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html>
+- <https://github.com/ericelliott/class-free-javascript-style>
 
 ## space after function name in function declaration
 
 <https://github.com/feross/standard/issues/217>
 
 imho it's a very controversial rule but I'll try to stick it for the time being.
+
+## underscore for private properties
+
+- <https://github.com/airbnb/javascript/issues/1024#issuecomment-242588541>
+- <https://github.com/ericelliott/class-free-javascript-style#22.4>
 
 ## semicolon
 
@@ -64,9 +70,9 @@ class Board extends React.Component {
 }
 ```
 
-## single vs. double quotes
+## single quotes
 
 - <https://standardjs.com/>
 - <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
 
-prefer single quotes.
+prefer single quotes over double ones.

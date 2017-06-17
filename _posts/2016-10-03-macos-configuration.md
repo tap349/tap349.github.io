@@ -10,6 +10,8 @@ steps to configure new macOS installation.
 
 <!-- more -->
 
+## basic setup
+
 NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
       (<http://www.seagate.com/support/downloads/item/ntfs-driver-for-mac-os-master-dl/>).
 
@@ -180,7 +182,22 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
   - Computer Name: MacBook Pro Personal
 
-## Troubleshooting
+## font configuration
+
+these fonts should be copied to _~/Library/Fonts/_ directory:
+
+- unpatched `Andale Mono MT Std` and `Andale Mono MT Std Bold` fonts for MacVim
+- patched or unpatched `Inconsolate LGC for Powerline` font for iTerm2
+- patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font for MacVim
+
+  this patched font solves 2 problems in MacVim:
+
+  - fixes cyrillic characters (they are no longer bold and ugly)
+  - provides Powerline symbols for statusline plugin
+
+fonts are patched with `fontpatcher` script, patched fonts have suffix `-Powerline`.
+
+## troubleshooting
 
 ### battery percentage is not properly updating
 

@@ -303,6 +303,13 @@ server (say, puma) because emulator runs behind virtual router and `10.0.2.2`
 is a special alias to you host loopback interface (that is, `127.0.0.1` on
 development machine).
 
+### show touchable areas
+
+- `<D-m>` -> `Toggle Inspector`
+- click `Touchables` in bottom menu
+- `<D-m>` -> `Toggle Inspector`
+- touchable areas are still marked with dotted line
+
 ## troubleshooting
 
 ### brew cannot uninstall android-sdk

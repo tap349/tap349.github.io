@@ -8,6 +8,28 @@ categories: [react-native]
 
 <!-- more -->
 
+## flexbox
+
+- <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>
+- <https://facebook.github.io/react-native/docs/layout-props.html#flex>
+
+all RN components implicitly have `display: flex`.
+
+flex items (children) are placed inside flex container (parent).
+
+flex items have `box-sizing: content-box` (not `border-box` - that is
+padding and border are not included in component's width and height).
+
+### flex item properties
+
+- `flex`
+
+  - `0` - component is inflexible, sized according to its `width` and `height`
+  - `-1` - component is inflexible, sized according to its `width` and `height`,
+    can be shrinked to its `minWidth` and `minHeight`
+  - `1` - component is flexible, sized proportional to specified flex value
+    (can be > 1)
+
 ## networking
 
 <https://facebook.github.io/react-native/docs/network.html>

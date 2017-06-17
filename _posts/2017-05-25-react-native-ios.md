@@ -114,7 +114,7 @@ $ react-native log-ios
 
 ### reload application in emulator manually
 
-- `<D-d>` -> `Reload`
+- `<D-d>` -> `Reload` or
 - `<D-r>`
 
 ### enable live/hot reloading
@@ -125,6 +125,13 @@ NOTE: hot reloading is recommended over live reload.
 
 - `<D-d>` -> `Enable Live Reload`
 - `<D-d>` -> `Enable Hot Reloading`
+
+### show touchable areas
+
+- `<D-d>` -> `Show Inspector`
+- click `Touchables` in bottom menu
+- `<D-d>` -> `Hide Inspector`
+- touchable areas are still marked with dotted line
 
 ## troubleshooting
 

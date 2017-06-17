@@ -273,7 +273,7 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import devToolsEnhancer from 'remote-redux-devtools';
-// it doesn't work vice versa:
+// it doesn't work the other way round:
 //import {composeWithDevTools} from 'remote-redux-devtools';
 //import devToolsEnhancer from 'redux-devtools-extension';
 

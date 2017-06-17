@@ -184,18 +184,25 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
 ## font configuration
 
-these fonts should be copied to _~/Library/Fonts/_ directory:
+these fonts should be installed to _~/Library/Fonts/_ directory:
 
-- unpatched `Andale Mono MT Std` and `Andale Mono MT Std Bold` fonts for MacVim
-- patched or unpatched `Inconsolate LGC for Powerline` font for iTerm2
-- patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font for MacVim
+- unpatched `Andale Mono MT Std` and `Andale Mono MT Std Bold` fonts
+  (copy manually from dotfiles)
 
-  this patched font solves 2 problems in MacVim:
+  the font is used as a main font in MacVim.
+
+- patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font
+  (copy one of them manually from dotfiles and patch with `fontpatcher` script
+  unless it's already patched)
+
+  this patched is not used directly but solves 2 problems in MacVim:
 
   - fixes cyrillic characters (they are no longer bold and ugly)
   - provides Powerline symbols for statusline plugin
 
-fonts are patched with `fontpatcher` script, patched fonts have suffix `-Powerline`.
+  NOTE: fonts patched with `fontpatcher` have `-Powerline` suffix.
+
+- patched or unpatched `Inconsolate LGC` font for iTerm2 (install via brew)
 
 ## troubleshooting
 

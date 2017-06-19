@@ -59,7 +59,7 @@ this command:
 
 the first run might take a while since RN will build the whole Xcode project.
 
-## tips
+## configuration
 
 ### Dvorak keyboard layout
 
@@ -69,6 +69,8 @@ also means that all hotkeys (say, for Developer Menu) use it as well.
 it's possible to change it to Dvorak inside emulator:
 
 `Settings` -> `General` -> `Keyboards` -> `Hardware Keyboard` -> `English` -> `Dvorak`
+
+## tips
 
 ### change screen resolution (scale) in emulator
 

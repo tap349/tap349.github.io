@@ -182,19 +182,37 @@ the first run might take a while since RN will build the whole Android project.
 
 ## configuration
 
-### Android
+### performance tweaks
 
-Applications -> `Dev Settings` -> `Force GPU rendering`
+- Android:
 
-### emulator
+  Applications -> `Dev Settings` -> `Force GPU rendering`
 
-Settings -> OpenGL ES renderer (requires restart) -> `SwiftShader`
+- emulator:
+
+  Settings -> OpenGL ES renderer (requires restart) -> `SwiftShader`
+
+### enable hardware keyboard
+
+<https://stuff.mit.edu/afs/sipb/project/android/docs/tools/devices/managing-avds.html>
+
+edit configuration file _config.ini_ of each AVD where you want to enable
+hardware keyboard (by default AVDs are stored in _$HOME/.android/avd/_).
+
+_$HOME/.android/avd/\<AVD name\>/config.ini_:
+
+```ini
+...
+hw.keyboard=yes
+...
+```
 
 ## tips
 
 ### use another Android version in emulator
 
-- install required version of Android SDK Platform packages (version 23 = Android 6)
+- install required version of Android SDK Platform packages
+  (version 23 = Android 6)
 - create new AVD using system image of required version
 - start emulator using new AVD
 

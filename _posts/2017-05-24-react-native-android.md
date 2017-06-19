@@ -186,7 +186,7 @@ the first run might take a while since RN will build the whole Android project.
 
 - Android:
 
-  Applications -> `Dev Settings` -> `Force GPU rendering`
+  `<D-m>` -> `Dev Settings` -> `Force GPU rendering`
 
 - emulator:
 
@@ -263,6 +263,13 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 ### Developer Menu
 
 `<D-m>`
+
+### Dev Settings
+
+in Android:
+
+- Applications -> `Dev Settings`
+- `<D-m>` -> `Dev Settings`
 
 ### verbose emulator log
 

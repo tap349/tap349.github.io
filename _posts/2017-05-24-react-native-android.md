@@ -209,6 +209,10 @@ by default `hw.keyboard=no`.
 
 ## tips
 
+### change screen resolution (scale) in emulator
+
+just drag the corner of emulator window.
+
 ### use another Android version in emulator
 
 - install required version of Android SDK Platform packages

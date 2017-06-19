@@ -182,11 +182,13 @@ the first run might take a while since RN will build the whole Android project.
 
 ## configuration
 
-### force GPU rendering
+### Android
 
-Applications -> `Developer options` -> `Force GPU rendering`
+Applications -> `Dev Settings` -> `Force GPU rendering`
 
-it makes UI more responsive.
+### emulator
+
+Settings -> OpenGL ES renderer (requires restart) -> `SwiftShader`
 
 ## tips
 

@@ -545,7 +545,7 @@ live reload (`<D-m>` -> `Enable Live Reload`) doesn't have any effect.
 **UPDATE**
 
 unfortunately I got this error even with hot reloading enabled and
-managed to get rid of it by following these steps:
+temporarily managed to get rid of it by following these steps:
 
 - remove offending section from _package.json_ of `shallowequal` package
 - restart packager service (`npm start`) - no error
@@ -553,8 +553,10 @@ managed to get rid of it by following these steps:
 - restart packager service (`npm start`) - still no error
 
 even if `shallowequal` package is removed from filesystem and installed again
-the error no longer occurs - maybe 'right' version of `shallowequal` package is
-cached somewhere?
+the error no longer occurs - maybe the 'right' version of `shallowequal` package
+is cached somewhere?
+
+NOTE: still this error might occur the next time emulator is run.
 
 NOTE: anyway try to enable hot reloading first - sometimes it helps!
 

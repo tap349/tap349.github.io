@@ -190,22 +190,22 @@ the first run might take a while since RN will build the whole Android project.
 
 - emulator:
 
-  Settings -> OpenGL ES renderer (requires restart) -> `SwiftShader`
+  Settings -> `OpenGL ES renderer (requires restart)` -> `SwiftShader`
 
 ### enable hardware keyboard
 
 <https://stuff.mit.edu/afs/sipb/project/android/docs/tools/devices/managing-avds.html>
 
-edit configuration file _config.ini_ of each AVD where you want to enable
+edit configuration file _config.ini_ of each AVD in which you want to enable
 hardware keyboard (by default AVDs are stored in _$HOME/.android/avd/_).
 
-_$HOME/.android/avd/\<AVD name\>/config.ini_:
+_$HOME/.android/avd/\<name\>.avd/config.ini_:
 
 ```ini
-...
 hw.keyboard=yes
-...
 ```
+
+by default `hw.keyboard=no`.
 
 ## tips
 

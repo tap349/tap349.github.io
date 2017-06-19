@@ -105,9 +105,9 @@ $ avdmanager list avd
 
 emulator searches for AVDs in the following directories:
 
-- `$ANDROID_AVD_HOME`
-- `$ANDROID_SDK_HOME/avd`
-- `$HOME/.android/avd`
+- _$ANDROID_AVD_HOME_
+- _$ANDROID_SDK_HOME/avd/_
+- _$HOME/.android/avd/_
 
 ```sh
 $ emulator -help

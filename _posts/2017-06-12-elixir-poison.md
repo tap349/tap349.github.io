@@ -20,7 +20,7 @@ categories: [elixir, poison]
 
 <https://elixir-lang.org/getting-started/protocols.html#implementing-any>
 
-derive only `Protocol.Encoder` protocol implementation for encoding struct:
+derive only `Protocol.Encoder` protocol implementation for encoding the struct:
 
 ```elixir
 defmodule Neko.Achievement do

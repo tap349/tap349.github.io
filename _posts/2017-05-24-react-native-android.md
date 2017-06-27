@@ -627,3 +627,16 @@ application launcher icon on home screen - you can do it manually:
 - go to applications
 - click and hold application icon
 - drag application icon to home screen
+
+### application build fails (INSTALL_FAILED_VERSION_DOWNGRADE)
+
+```sh
+com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
+```
+
+solution:
+
+<https://stackoverflow.com/questions/13808599>
+
+RN fails to install application with lower versionCode than currently installed
+in emulator - uninstall application with higher versionCode and build again.

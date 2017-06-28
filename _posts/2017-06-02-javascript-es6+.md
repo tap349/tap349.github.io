@@ -66,8 +66,8 @@ class Counter extends HTMLElement {
 - <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
 - <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
 
-if it's necessary to keep current context (say, prototype method uses
-class instance properties of current class) there are 2 options:
+if it's necessary to keep current context (say, class method uses
+instance properties of current class) there are 2 options:
 
 - pass prototype method and bind it to current context in-place:
 

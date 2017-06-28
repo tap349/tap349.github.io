@@ -42,6 +42,70 @@ to be function object and then use parentheses to call that function object.
 
 <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#Description>
 
+## properties
+
+- <http://diegobarahona.com/javascript/es6/2015/01/05/understanding-es6-classes/>
+- <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Boxing_with_prototype_and_static_methods>
+
+- static properties
+
+  ```javascript
+  function Perro () {}
+  Perro.definition = "The dog is the man's best friend";
+  ```
+
+  in ES6+ these are static methods:
+
+  ```javascript
+  class Perro {
+    static bark () {}
+  }
+  ```
+
+  if using ES6 classes `bark` is bound to class instance:
+
+  ```javascript
+  let perro = new Perro();
+  let bark = perro.bark;
+  bark(); // undefined
+  ```
+
+  in ES5 `bark` would be called with global object as `this`
+  (so called autoboxing):
+
+  ```javascript
+  let perro = new Perro();
+  let bark = perro.bark;
+  bark(); // global object
+  ```
+
+- instance properties
+
+  ```javascript
+  function Perro (props) {
+    this.color = props.color;
+  }
+  ```
+
+- prototype properties
+
+  ```javascript
+  function Perro () {}
+  Perro.prototype.bark = function () {};
+  Perro.prototype.walk = function () {};
+  ```
+
+  in ES6+ these are class methods:
+
+  ```javascript
+  class Perro {
+    bark () {}
+  }
+  ```
+
+  same considerations regarding autoboxing as for static properties
+  apply here as well.
+
 ## falsy values
 
 <https://stackoverflow.com/a/5515349/3632318>

@@ -10,8 +10,8 @@ categories: []
 
 ## convert array to object for Redux
 
-- <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
 - <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
+- <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
 
 ```javascript
 // [{id: 2, name: 'foo'}, {id: 2, name: 'bar'}] ->

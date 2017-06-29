@@ -109,24 +109,24 @@ emulator searches for AVDs in the following directories:
 - _$ANDROID_SDK_HOME/avd/_
 - _$HOME/.android/avd/_
 
+specify `-gpu` and `-skin` options when starting emulator:
+
 ```sh
 $ emulator -help
 $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
 ```
-
-it's a good idea to create an alias for this command in _~/.zshenv_:
-
-```conf
-alias avd='emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920'
-```
-
-make sure to specify both `-gpu` and `-skin` options:
 
 - `-gpu host` - enables graphics hardware emulation
 - `-skin 1080x1920` - changes screen resolution to 1080x1920
   (by default a very low screen resolution is used)
 
 some skin resolutions have corresponding skin names (see link above).
+
+it's a good idea to create an alias for this command in _~/.zshenv_:
+
+```conf
+alias avd='emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920'
+```
 
 according to emulator's log there is no need to install HAXM separately
 (it appears to have been already enabled):

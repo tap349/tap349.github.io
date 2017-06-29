@@ -3,7 +3,7 @@ layout: post
 title: JavaScript - ES6+
 date: 2017-06-02 23:55:07 +0300
 access: public
-categories: [js, es6, es7, es8]
+categories: [js, es6, es7, es8, esnext]
 ---
 
 <!-- more -->

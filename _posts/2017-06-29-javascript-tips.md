@@ -22,3 +22,23 @@ const arrayToObject = (array) =>
     return obj;
   }, {})
 ```
+
+## merge objects
+
+- using `Object.assign`
+
+  <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Merging_objects>
+
+  ```javascript
+  Object.assign({a: 1, b: 2}, {b: 3}) // {a: 1, b: 3}
+  ```
+
+- using spread operator (`...`)
+
+  <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator#Spread_in_object_literals>
+
+  ```javascript
+  {...{a: 1, b: 2}, ...{b: 3}} // {a: 1, b: 3}
+  ```
+
+  while `Object.assign` modifies target object using spread syntax creates new object.

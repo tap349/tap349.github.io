@@ -8,7 +8,7 @@ categories: [js, es6, es7, es8]
 
 <!-- more -->
 
-### promise
+## promise
 
 - <https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261>
 - <https://learn.javascript.ru/promise>
@@ -21,7 +21,7 @@ rejected one. this is what allows to chain promises endlessly.
 resolved or rejected values (i.e. resolved or rejected promise values) will be
 passed to corresponding callback functions attached to `then()`.
 
-### shorthand property names
+## shorthand property names
 
 - <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer>
 - <http://www.benmvp.com/learning-es6-enhanced-object-literals/>
@@ -33,14 +33,14 @@ passed to corresponding callback functions attached to `then()`.
 "foo"
 ```
 
-### arrow function
+## arrow function
 
 <https://stackoverflow.com/questions/33308121/can-you-bind-arrow-functions>
 
 it's impossible to rebind arrow function - just use normal function if
 you need to bind it to another context later.
 
-### field declarations
+## field declarations
 
 <https://github.com/tc39/proposal-class-fields#field-declarations>
 
@@ -61,7 +61,7 @@ class Counter extends HTMLElement {
 }
 ```
 
-### pass class prototype methods as arguments
+## pass class prototype methods as arguments
 
 - <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
 - <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>

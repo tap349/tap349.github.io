@@ -122,7 +122,7 @@ $ brew services start postgresql@9.5
 ```
 
 or else try to restart the service (stopping the service might
-remove obsolete PID file as well - I didn't try this method though):
+remove obsolete PID file - I didn't try this method though):
 
 ```sh
 $ brew services restart postgresql@9.5

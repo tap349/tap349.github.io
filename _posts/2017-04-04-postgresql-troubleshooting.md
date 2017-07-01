@@ -8,11 +8,25 @@ categories: [postgresql]
 
 <!-- more -->
 
-### problems with new homebrew versioning scheme
+common ways to diagnose and fix the problem:
+
+- list running services
+
+  ```sh
+  $ brew services list
+  ```
+
+- restart the service
+
+  ```sh
+  $ brew services restart postgresql@9.5
+  ```
+
+## problems with new homebrew versioning scheme
 
 - <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
-#### description
+### description
 
 running `brew upgrade` has created quite a mess for me because of a new
 versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`
@@ -35,7 +49,7 @@ but this migration was not smooth and resulted in many errors, to name a few:
   `postgresql@9.5` (_/usr/local/var/postgresql@9.5_) while all my databases
   are stored in _/usr/local/var/postgres_.
 
-#### solution
+### solution
 
 so this is what I did to fix problems mentioned above:
 
@@ -67,3 +81,49 @@ NOTE: installing `postgresql` formula still installs the latest version
       but its binaries are not symlinked into _usr/bin/local_ directory
       by default (now they all point to 9.5 installation) -
       if you need it run `brew link postgresql --force` manually.
+
+## could not connect to server: Connection refused
+
+### description
+
+`psql -d <my_database>`:
+
+```sh
+psql: could not connect to server: Connection refused
+  Is the server running locally and accepting
+  connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+```
+
+rails console:
+
+```sh
+PG::ConnectionBad: could not connect to server: Connection refused
+  Is the server running on host "localhost" (127.0.0.1) and accepting
+  TCP/IP connections on port 5432?
+could not connect to server: Connection refused
+  Is the server running on host "localhost" (::1) and accepting
+  TCP/IP connections on port 5432?
+```
+
+### solution
+
+<https://stackoverflow.com/a/13573207/3632318>
+
+the problem usually appears after hard reboot. the latter doesn't allow
+PostgreSQL to exit gracefully and delete its PID files - _postmaster.pid_
+in particular. so upon reboot PostgreSQL thinks it's still running and
+corresponding service fails to start.
+
+so just delete that PID file and start the service:
+
+```sh
+$ rm /usr/local/var/postgresql@9.5/postmaster.pid
+$ brew services start postgresql@9.5
+```
+
+or else try to restart the service (stopping the service might
+remove obsolete PID file as well - I didn't try this method though):
+
+```sh
+$ brew services restart postgresql@9.5
+```

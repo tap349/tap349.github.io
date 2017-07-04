@@ -8,6 +8,9 @@ categories: [react-native]
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ## errors after upgrading RN
 
 ### Cannot find module X

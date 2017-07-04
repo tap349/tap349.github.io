@@ -28,7 +28,7 @@ Error: Cannot find module 'xmldoc'
 
 and similar errors when some module cannot be found.
 
-solution:
+**solution**
 
 use yarn instead of npm:
 
@@ -47,7 +47,7 @@ in emulator window:
 DeviceInfo native module is not installed correctly
 ```
 
-solution:
+**solution**
 
 <https://github.com/rebeccahughes/react-native-device-info/issues/176>
 
@@ -65,7 +65,7 @@ in emulator window:
 Unhandled JS Exception: undefined is not an object (evaluating 'PropTypes.shape')
 ```
 
-solution:
+**solution**
 
 <https://github.com/jsierles/react-native-audio/issues/83>
 

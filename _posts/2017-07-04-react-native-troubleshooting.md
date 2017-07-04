@@ -56,3 +56,38 @@ rebuild application:
 ```sh
 $ react-native run-ios
 ```
+
+### Unhandled JS Exception: undefined is not an object
+
+in emulator window:
+
+```sh
+Unhandled JS Exception: undefined is not an object (evaluating 'PropTypes.shape')
+```
+
+solution:
+
+<https://github.com/jsierles/react-native-audio/issues/83>
+
+first I tried to upgrade RN again:
+
+```sh
+$ react-native upgrade
+...
+You should consider using the new upgrade tool based on Git. It makes upgrades easier by resolving most conflicts automatically.
+To use it:
+- Go back to the old version of React Native
+- Run "npm install -g react-native-git-upgrade"
+- Run "react-native-git-upgrade"
+See https://facebook.github.io/react-native/docs/upgrading.html
+```
+
+as advised I ran:
+
+```sh
+$ npm install -g react-native-git-upgrade
+$ react-native-git-upgrade
+```
+
+`react-native-git-upgrade` command downgraded `react` package to
+another alpha version and this is what most likely fixed the issue.

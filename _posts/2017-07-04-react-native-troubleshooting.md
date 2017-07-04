@@ -49,6 +49,8 @@ DeviceInfo native module is not installed correctly
 
 solution:
 
+<https://github.com/rebeccahughes/react-native-device-info/issues/176>
+
 rebuild application:
 
 ```sh

@@ -11,6 +11,21 @@ categories: [react-native]
 * TOC
 {:toc}
 
+## React.Children.only expected to receive a single React element child
+
+in device system log:
+
+```sh
+React.Children.only expected to receive a single React element child.
+```
+
+**solution**
+
+<https://facebook.github.io/react-native/docs/touchablehighlight.html>
+
+> TouchableHighlight must have one child (not zero or more than one).
+> If you wish to have several child components, wrap them in a View.
+
 ## errors after upgrading RN
 
 ### Cannot find module X

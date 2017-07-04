@@ -10,6 +10,8 @@ categories: [react-native]
 
 ## errors after upgrading RN
 
+### Cannot find module X
+
 ```sh
 $ npm start
 
@@ -35,4 +37,20 @@ $ rm package-lock.json
 $ rm -rf node-modules/
 $ yarn
 $ npm start
+```
+
+### DeviceInfo native module is not installed correctly
+
+in emulator window:
+
+```sh
+DeviceInfo native module is not installed correctly
+```
+
+solution:
+
+rebuild application:
+
+```sh
+$ react-native run-ios
 ```

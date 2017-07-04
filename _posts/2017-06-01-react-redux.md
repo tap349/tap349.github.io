@@ -26,7 +26,7 @@ categories: [react, react-native, redux]
 ```javascript
 {
   type: SET_COUNT,
-  count: 5
+  count: 5,
 }
 ```
 
@@ -36,7 +36,7 @@ categories: [react, react-native, redux]
 function setCount (count) {
   return {
     type: SET_COUNT,
-    count
+    count,
   };
 }
 ```
@@ -86,7 +86,7 @@ classic style (without reducer composition):
 
 ```javascript
 const initialState = {
-  count: 0
+  count: 0,
 };
 
 export default function badges (state = initialState, action = {}) {
@@ -94,7 +94,7 @@ export default function badges (state = initialState, action = {}) {
   case SET_COUNT:
     return {
       ...state,
-      count: action.count
+      count: action.count,
     };
   default:
     return state;
@@ -224,7 +224,7 @@ or when not using reducer composition:
 
 ```javascript
 const initialState = {
-  isModalVisible: false
+  isModalVisible: false,
 }
 
 export default function memberships (state = initialState, action = {}) {
@@ -238,6 +238,19 @@ export default function memberships (state = initialState, action = {}) {
   }
 }
 ```
+
+## middleware
+
+### [Redux Thunk](https://github.com/gaearon/redux-thunk)
+
+<https://github.com/reactjs/redux/issues/1676#issuecomment-215413478>
+
+> The return value of dispatch() when you dispatch a thunk *is*
+> the return value of the inner function. This is why it's useful
+> to return a Promise (even though it is not strictly necessary)
+
+that is dispatching thunk action returns anything thunk action itself
+returns - not necessarily Promise (even though it's highly recommended).
 
 ## debugging
 

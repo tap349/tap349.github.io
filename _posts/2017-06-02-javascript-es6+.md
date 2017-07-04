@@ -61,7 +61,7 @@ class Counter extends HTMLElement {
 }
 ```
 
-## pass class prototype methods as arguments
+## passing class prototype methods as arguments
 
 - <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
 - <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
@@ -126,3 +126,5 @@ instance properties of current class) there are 2 options:
   ```
 
   now `handleResponse` is bound to `Foo` class instance forever.
+
+  this method is recommended.

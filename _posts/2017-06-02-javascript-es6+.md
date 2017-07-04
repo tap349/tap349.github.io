@@ -107,7 +107,7 @@ instance properties of current class) there are 2 options:
   }
   ```
 
-- use field declaration to define prototype method as arrow function:
+- [RECOMMENDED] use field declaration to define prototype method as arrow function:
 
   ```javascript
   class Foo {
@@ -126,5 +126,3 @@ instance properties of current class) there are 2 options:
   ```
 
   now `handleResponse` is bound to `Foo` class instance forever.
-
-  this method is recommended.

@@ -8,6 +8,9 @@ categories: [js, es6, es7, es8, esnext]
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ## functions
 
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions>

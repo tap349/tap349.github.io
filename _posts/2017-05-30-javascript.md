@@ -11,7 +11,7 @@ categories: [js, es6, es7, es8, esnext]
 * TOC
 {:toc}
 
-## functions
+## [ES5, ES6] functions
 
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions>
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions>
@@ -57,7 +57,7 @@ to be function object and then use parentheses to call that function object.
   Perro.definition = "The dog is the man's best friend";
   ```
 
-  in ES6+ these are static methods:
+  in ES6 these are static methods:
 
   ```javascript
   class Perro {
@@ -65,21 +65,19 @@ to be function object and then use parentheses to call that function object.
   }
   ```
 
-  if using ES6 classes `bark` is bound to class instance:
-
-  ```javascript
-  let perro = new Perro();
-  let bark = perro.bark;
-  bark(); // undefined
-  ```
-
   in ES5 `bark` would be called with global object as `this`
-  (so called autoboxing):
+  (autoboxing) while in ES6 `bark` is bound to class instance:
 
   ```javascript
+  // ES5
   let perro = new Perro();
   let bark = perro.bark;
   bark(); // global object
+
+  // ES6
+  let perro = new Perro();
+  let bark = perro.bark;
+  bark(); // undefined
   ```
 
 - instance properties
@@ -98,7 +96,7 @@ to be function object and then use parentheses to call that function object.
   Perro.prototype.walk = function () {};
   ```
 
-  in ES6+ these are class methods:
+  in ES6 these are class methods:
 
   ```javascript
   class Perro {
@@ -227,69 +225,3 @@ class Counter extends HTMLElement {
   }
 }
 ```
-
-## passing class prototype methods as arguments
-
-- <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
-- <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
-
-if it's necessary to keep current context (say, class method uses
-instance properties of current class) there are 2 options:
-
-- pass prototype method and bind it to current context in-place:
-
-  ```javascript
-  class Foo {
-    constructor (bar) {
-      this.bar = 123;
-    }
-
-    foo (userId) {
-      Api.get(userId, this.handleResponse.bind(this));
-    }
-
-    handleResponse (response) {
-      return response.baz + this.bar;
-    }
-  }
-  ```
-
-  also it's possible to do it in constructor once and for all
-  (I haven't tested this solution):
-
-  ```javascript
-  class Foo {
-    constructor (bar) {
-      this.bar = 123;
-      this.handleResponse = this.handleResponse.bind(this);
-    }
-
-    foo (userId) {
-      Api.get(userId, this.handleResponse);
-    }
-
-    handleResponse (response) {
-      return response.baz + this.bar;
-    }
-  }
-  ```
-
-- [RECOMMENDED][ES6] use field declaration to define prototype method as arrow function:
-
-  ```javascript
-  class Foo {
-    constructor (bar) {
-      this.bar = 123;
-    }
-
-    foo (userId) {
-      Api.get(userId, this.handleResponse);
-    }
-
-    handleResponse = (response) => {
-      return response.baz + this.bar;
-    }
-  }
-  ```
-
-  now `handleResponse` is bound to `Foo` class instance forever.

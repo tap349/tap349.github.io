@@ -48,7 +48,7 @@ and similar errors when some module cannot be found.
 
 **solution**
 
-use yarn instead of npm:
+use yarn instead of npm (somehow it managed to install all required dependencies):
 
 ```sh
 $ rm package-lock.json

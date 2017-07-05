@@ -8,6 +8,9 @@ categories: []
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ## convert array to object keyed by ID for Redux
 
 - <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>

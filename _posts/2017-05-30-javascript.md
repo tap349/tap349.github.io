@@ -11,7 +11,7 @@ categories: [js, es6, es7, es8, esnext]
 * TOC
 {:toc}
 
-## [ES5, ES6] functions
+## functions
 
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions>
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions>
@@ -118,7 +118,7 @@ to be function object and then use parentheses to call that function object.
 - 0
 - `false`
 
-## switch statement
+## switch statements
 
 - <https://stackoverflow.com/a/6612676/3632318>
 - <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/switch>
@@ -173,7 +173,7 @@ string literals which allow multi-line strings and string interpolation:
 `text ${expression} text`
 ```
 
-## [ES6] promise
+## [ES6] promises
 
 - <https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261>
 - <https://learn.javascript.ru/promise>
@@ -198,7 +198,7 @@ passed to corresponding callback functions attached to `then()`.
 "foo"
 ```
 
-## [ES6] arrow function
+## [ES6] arrow functions
 
 <https://stackoverflow.com/questions/33308121/can-you-bind-arrow-functions>
 
@@ -224,4 +224,18 @@ class Counter extends HTMLElement {
     this.x = 0;
   }
 }
+```
+
+## [ES6] export
+
+<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export>:
+
+> it is not possible to use var, let or const with export default
+
+if it's still necessary to use default export with, say,
+a constant declare and export it in separate statements:
+
+```javascript
+const foo = 123;
+export default foo;
 ```

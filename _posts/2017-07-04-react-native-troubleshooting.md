@@ -151,3 +151,39 @@ $ react-native-git-upgrade
 
 `react-native-git-upgrade` command downgraded `react` package to
 another alpha version and this is what most likely fixed the issue.
+
+## Maximum call stack size exceeded
+
+emulator window:
+
+```
+Maximum call stack size exceeded.
+```
+
+device system log:
+
+```
+<Warning>: Warning: Cannot update during an existing state transition
+(such as within `render` or another component's constructor).
+Render methods should be a pure function of props and state;
+constructor side-effects are an anti-pattern, but can be moved to
+`componentWillMount`.
+<Error>: Maximum call stack size exceeded.
+<Critical>: Unhandled JS Exception: Maximum call stack size exceeded.
+```
+
+**solution**
+
+<https://stackoverflow.com/questions/37387351>
+
+don't dispatch Redux actions in `render()` method or any other methods that
+are called when component is being rendered - this will cause an infinite loop:
+
+- action is dispatched when child component is being rendered
+- reducers update the store (application state) according to that action
+- parent component is re-rendered using `forceUpdate()` since it's
+  subscribed to store updates
+- child component is rendered again causing action to be dispatched
+
+to avoid infinite loop dispatch actions only in constructor or callbacks
+that are not immediately invoked when component is being rendered.

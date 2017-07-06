@@ -13,7 +13,7 @@ categories: [react-native]
 
 ## Couldn't find preset "es2015"
 
-emulator window, packager server log:
+emulator window:
 
 ```sh
 SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:

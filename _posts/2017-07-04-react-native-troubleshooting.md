@@ -176,14 +176,23 @@ constructor side-effects are an anti-pattern, but can be moved to
 
 <https://stackoverflow.com/questions/37387351>
 
-don't dispatch Redux actions in `render()` method or any other methods that
-are called when component is being rendered - this will cause an infinite loop:
+DON'T:
 
-- action is dispatched when child component is being rendered
-- reducers update the store (application state) according to that action
-- parent component is re-rendered using `forceUpdate()` since it's
-  subscribed to store updates
-- child component is rendered again causing action to be dispatched
+- dispatch Redux actions (`this.props.store.dispatch(...)`) or
+- set component state (`this.setState(...)`)
 
-to avoid infinite loop dispatch actions only in constructor or callbacks
-that are not immediately invoked when component is being rendered.
+in `render()` method or any other method that is called from `render()` method
+(that is when component is being rendered) - this will cause an infinite loop.
+
+for example, if you dispatch action when component is being rendered:
+
+1. reducers update the store according to that action
+2. parent component is re-rendered using `forceUpdate()`
+  (in my case it's subscribed to store updates)
+3. component is re-rendered too
+4. action is immediately dispatched again (infinite loop)
+
+to avoid infinite loop dispatch actions and set component state only in
+
+- constructor or
+- callbacks that are not immediately invoked when component is being rendered

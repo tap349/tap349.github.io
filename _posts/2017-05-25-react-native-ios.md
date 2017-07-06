@@ -217,17 +217,8 @@ Print: Entry, ":CFBundleIdentifier", Does Not Exist
 
 solution:
 
-error was gone after solving problme with `react-native-linear-gradient`
+error was gone after solving problem with `react-native-linear-gradient`
 package (see above) and reinstalling all node modules.
-
-### application fails to start (couldn't find preset "es2015")
-
-this is the same error as on Android.
-
-solution:
-
-unlike on Android enabling hot reloading never helped - use the 2nd method to
-fix this problem by temporarily removing `babel` section (see Android article).
 
 ### application fails to start (no bundle URL present)
 
@@ -286,7 +277,7 @@ when linking dependencies for `react-native-push-notification` package
 ```sh
 $ react-native link react-native-push-notification
 Scanning 587 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (6ms)
-rnpm-install info Android module react-native-push-notification is already linked
+npm-install info Android module react-native-push-notification is already linked
 ```
 
 solution is to link `PushNotificationIOS` native library manually as instructed in

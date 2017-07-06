@@ -11,6 +11,48 @@ categories: [react-native]
 * TOC
 {:toc}
 
+## Couldn't find preset "es2015"
+
+emulator window, packager server log:
+
+```sh
+SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:
+Couldn't find preset "es2015" relative to directory "/Users/tap/dev/my_app/node_modules/shallowequal"
+```
+
+**solution**
+
+it has turned out that `shallowequal` is the only module in _node_modules/_ that
+configures babel presets to use in its _package.json_:
+
+```json
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+```
+
+quick-and-dirty fix for both Android and iOS:
+
+- remove offending section from _package.json_ of `shallowequal` package
+- restart packager service (`npm start`) - no error
+- get that section back
+- restart packager service (`npm start`) - still no error
+
+even if `shallowequal` package is removed from filesystem and installed again
+the error no longer occurs - maybe the 'right' version of `shallowequal` package
+is cached somewhere?
+
+NOTE: still this error might occur the next time emulator is run.
+
+[Android] the error might disappear after enabling hot reloading in emulator
+(`<D-m>` -> `Enable Hot Reloading`) - enabling live reload has no effect.
+
+[iOS] enabling hot reloading never helped - use the fix above.
+
+all in all IDK why this error occurs and how to fix it in general.
+
 ## React.Children.only expected to receive a single React element child
 
 in device system log:
@@ -59,7 +101,7 @@ $ npm start
 
 ### DeviceInfo native module is not installed correctly
 
-in emulator window:
+emulator window:
 
 ```sh
 DeviceInfo native module is not installed correctly
@@ -77,7 +119,7 @@ $ react-native run-ios
 
 ### Unhandled JS Exception: undefined is not an object
 
-in emulator window:
+emulator window:
 
 ```sh
 Unhandled JS Exception: undefined is not an object (evaluating 'PropTypes.shape')

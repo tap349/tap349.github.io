@@ -516,52 +516,6 @@ solution:
 
 start emulator before running application.
 
-### application fails to start (couldn't find preset "es2015")
-
-emulator window, packager server log:
-
-```sh
-SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:
-Couldn't find preset "es2015" relative to directory "/Users/tap/dev/my_app/node_modules/shallowequal"
-```
-
-solution:
-
-it has turned out that `shallowequal` is the only module in _node_modules/_ that
-configures babel presets to use in its _package.json_:
-
-```json
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
-  },
-```
-
-still IDK why it causes error but the error disappears if hot reloading is
-enabled in Android emulator (`<D-m>` -> `Enable Hot Reloading`). enabling
-live reload (`<D-m>` -> `Enable Live Reload`) doesn't have any effect.
-
-**UPDATE**
-
-unfortunately I got this error even with hot reloading enabled and
-temporarily managed to get rid of it by following these steps:
-
-- remove offending section from _package.json_ of `shallowequal` package
-- restart packager service (`npm start`) - no error
-- get that section back
-- restart packager service (`npm start`) - still no error
-
-even if `shallowequal` package is removed from filesystem and installed again
-the error no longer occurs - maybe the 'right' version of `shallowequal` package
-is cached somewhere?
-
-NOTE: still this error might occur the next time emulator is run.
-
-NOTE: anyway try to enable hot reloading first - sometimes it helps!
-
-all in all IDK why this error occurs and how to fix it in general.
-
 ### application build fails (could not find com.facebook.react:react-native:0.42.0)
 
 - <https://github.com/oblador/react-native-vector-icons/issues/480>

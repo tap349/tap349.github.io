@@ -234,8 +234,9 @@ just drag the corner of emulator window.
 - <https://stackoverflow.com/questions/5151744/upload-picture-to-emulator-gallery>
 - <https://stackoverflow.com/questions/17928576/refresh-android-mediastore-using-adb>
 
-you can't just drag file onto emulator window just like for iOS (even though the
-hint when you try to do it says the file will be copied to _/sdcard/Download_).
+you can't just drag and drop file onto emulator window just like for iOS
+(even though the hint when trying to do so says that the file will be copied
+to _/sdcard/Download/_).
 
 perform these steps to upload a file:
 
@@ -247,7 +248,7 @@ perform these steps to upload a file:
 
 - force SD card rescan
 
-  otherwise Gallery (since I uploaded an image) doesn't see new file.
+  otherwise Gallery doesn't see uploaded file.
 
   ```sh
   $ adb shell am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard

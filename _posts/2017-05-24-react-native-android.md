@@ -182,6 +182,15 @@ the first run might take a while since RN will build the whole Android project.
 
 ## configuration
 
+### enable live/hot reloading
+
+<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
+
+NOTE: hot reloading is recommended over live reload.
+
+- `<D-m>` -> `Enable Live Reload`
+- `<D-m>` -> `Enable Hot Reloading`
+
 ### performance tweaks
 
 - Android:
@@ -301,15 +310,6 @@ $ avd -verbose
 `<D-m>` -> `Reload`
 
 this is the only working option I have found so far.
-
-### enable live/hot reloading
-
-<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
-
-NOTE: hot reloading is recommended over live reload.
-
-- `<D-m>` -> `Enable Live Reload`
-- `<D-m>` -> `Enable Hot Reloading`
 
 ### run remote interactive shell
 

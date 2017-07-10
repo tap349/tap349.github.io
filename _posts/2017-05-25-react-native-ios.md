@@ -70,6 +70,15 @@ it's possible to change it to Dvorak inside emulator:
 
 `Settings` -> `General` -> `Keyboards` -> `Hardware Keyboard` -> `English` -> `Dvorak`
 
+### enable live/hot reloading
+
+<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
+
+NOTE: hot reloading is recommended over live reload.
+
+- `<D-d>` -> `Enable Live Reload`
+- `<D-d>` -> `Enable Hot Reloading`
+
 ## tips
 
 ### change screen resolution (scale) in emulator
@@ -88,6 +97,20 @@ also there must be a way to change default scale by setting a value for
 appropriate preference key via `defaults write` as described in the link
 above - but it didn't work for me (probably because Apple changes these keys
 all the time).
+
+### use another simulator
+
+using another simulator means using another iPhone model -
+not another iOS version.
+
+by default iPhone 6 simulator is used.
+
+```sh
+$ react-native run-ios --simulator 'iPhone 5'
+```
+
+NOTE: it's necessary to configure new simulator separately
+      (see [configuration](#configuration)).
 
 ### upload file to emulator
 
@@ -118,15 +141,6 @@ $ react-native log-ios
 
 - `<D-d>` -> `Reload` or
 - `<D-r>`
-
-### enable live/hot reloading
-
-<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
-
-NOTE: hot reloading is recommended over live reload.
-
-- `<D-d>` -> `Enable Live Reload`
-- `<D-d>` -> `Enable Hot Reloading`
 
 ### show touchable areas
 

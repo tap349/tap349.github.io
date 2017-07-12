@@ -115,14 +115,6 @@ monads have the following methods:
 
 ### tips
 
-- always convert `Try` value to `Either` one using `Try#to_either` because:
-
-  - `Try` monad doesn't implement `tee` method
-    (if you need to chain on result using `tee` method)
-  - `Failure#value` returns nil while `Left#value` returns exception
-    itself from `Failure#exception` - we need it to generate error message
-    (in case of failure this result is eventually returned from the chain)
-
 - function should always return `Either` value for uniform processing
 
   for all monad methods:
@@ -190,12 +182,29 @@ monads have the following methods:
   - `Try` value converted to `Either` one if the former is used
     (`Try` monad block can return anything - it won't be used anyway)
 
-- when updating model in place it's better to use methods that throw exceptions
-  (`create!`/`update!`/etc.) and wrap them in `Try` monad
+- as a consequence of a previous tip always convert `Try` value to `Either` one
+  using `Try#to_either` and in particular because:
+
+  - `Try` monad doesn't implement `tee` method
+    (if you need to chain on result using `tee` method)
+  - `Failure#value` returns `nil` while `Left#value` returns exception
+    itself from `Failure#exception` - we need it to generate error message
+    (in case of failure this result is eventually returned from the chain)
+
+- when creating/updating model in place it's better to use methods that throw
+  exceptions (`create!`/`update!`/etc.) and wrap them in `Try` monad
   (don't forget to convert the latter to `Either` value - see previous tips)
   than to use their counterparts without `!` and check for errors manually
   (returning either `Right(model)` or `Left(model.errors.full_messages)`).
   rationale: exception contains all the necessary validation error messages.
+
+- when creating/updating model association or another related model vice versa
+  it's better to use methods that don't throw exceptions (`create`/`update`/etc.)
+  and check for errors manually (returning either `Right(model)` or
+  `Left(model_error_message(another_model))`) than to use their counterparts
+  with `!` and wrap them in `Try` monad (converting to `Either` value in the end).
+  rationale: exception doesn't contain information about another model - it's
+  necessary to provide our own custom model error message to avoid ambiguity.
 
 - it's recommended to specify expected exceptions when using `Try` monad
 

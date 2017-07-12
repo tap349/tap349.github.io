@@ -11,33 +11,6 @@ categories: []
 * TOC
 {:toc}
 
-## convert array to object keyed by ID for Redux
-
-- <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
-- <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
-
-```javascript
-// [{id: 2, name: 'foo'}, {id: 2, name: 'bar'}] ->
-//  {2: {id: 1, name: 'foo'}, 2: {id: 2, name: 'bar'}}
-const arrayToObject = (array) =>
-  array.reduce((obj, item) => {
-    obj[item.id] = item;
-    return obj;
-  }, {})
-```
-
-NOTE: original array sorting is lost in resulting object!
-
-if you need to keep sorting opt for `Map` instead:
-
-```javascript
-const arrayToMap = (array) =>
-  array.reduce((map, item) => {
-    map.set(item.id, item);
-    return map;
-  }, new Map());
-```
-
 ## merge objects
 
 - using `Object.assign`

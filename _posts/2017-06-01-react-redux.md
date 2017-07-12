@@ -8,6 +8,9 @@ categories: [react, react-native, redux]
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 <http://redux.js.org/docs/basics/>
 
 > The whole state of your app is stored in an object tree inside a single store.
@@ -239,6 +242,33 @@ export default function memberships (state = initialState, action = {}) {
 }
 ```
 
+### store object keyed by ID instead of array
+
+- <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
+- <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
+
+```javascript
+// [{id: 2, name: 'foo'}, {id: 2, name: 'bar'}] ->
+//  {2: {id: 1, name: 'foo'}, 2: {id: 2, name: 'bar'}}
+const arrayToObject = (array) =>
+  array.reduce((obj, item) => {
+    obj[item.id] = item;
+    return obj;
+  }, {})
+```
+
+NOTE: original array sorting is lost in resulting object!
+
+if you need to keep sorting opt for `Map` instead:
+
+```javascript
+const arrayToMap = (array) =>
+  array.reduce((map, item) => {
+    map.set(item.id, item);
+    return map;
+  }, new Map());
+```
+
 ## middleware
 
 ### [Redux Thunk](https://github.com/gaearon/redux-thunk)
@@ -249,8 +279,8 @@ export default function memberships (state = initialState, action = {}) {
 > the return value of the inner function. This is why it's useful
 > to return a Promise (even though it is not strictly necessary)
 
-that is dispatching thunk action returns anything thunk action itself
-returns - not necessarily Promise (even though it's highly recommended).
+that is dispatching thunk action returns whatever thunk action itself
+returns - not necessarily `Promise` (even though it's highly recommended).
 
 ## debugging
 

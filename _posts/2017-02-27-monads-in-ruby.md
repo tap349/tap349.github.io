@@ -226,7 +226,8 @@ monads have the following methods:
   `Method` objects can be passed as well (obtained with `Object.method`):
 
   ```ruby
-  # block is given and will be called with `yield` inside `bind`
+  # block is given that will be called with `yield` passing
+  # current wrapped plain value as argument inside of `bind`
   # (&foo in method call == foo.to_proc and use it as method block)
   Right(model).bind { |model| set_main_mirror(model) } # block
   Right(model).bind(&method(:set_main_mirror)) # method object used as block

@@ -189,7 +189,20 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 - unpatched `Andale Mono MT Std` and `Andale Mono MT Std Bold` fonts
   (copy manually from dotfiles)
 
-  the font is used as a main font in MacVim.
+  this font is one of main ones for MacVim.
+
+- custom `Input` font (download from <http://input.fontbureau.com/>)
+
+  this font is one of main ones for MacVim.
+
+  current custom configuration on <http://input.fontbureau.com/download/>:
+
+  ![custom input font configuration](http://take.ms/BL0y8)
+
+  - Regular: Input Mono Condensed Light
+  - Bold: Input Mono Condensed Medium
+  - 2nd variant of all configurable characters except for curly brackets
+  - Line Spacing: 1.6x
 
 - patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font
   (copy one of them manually from dotfiles and patch with `fontpatcher` script
@@ -202,7 +215,7 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 
   NOTE: fonts patched with `fontpatcher` have `-Powerline` suffix.
 
-- patched or unpatched `Inconsolate LGC` font for iTerm2 (install via brew)
+- patched or unpatched `Inconsolate LGC` font for iTerm2 (installed via brew)
 
 ## troubleshooting
 

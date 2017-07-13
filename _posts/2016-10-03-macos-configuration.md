@@ -215,7 +215,7 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 
   NOTE: fonts patched with `fontpatcher` have `-Powerline` suffix.
 
-- patched or unpatched `Inconsolate LGC` font for iTerm2 (installed via brew)
+- patched or unpatched `Inconsolate LGC` font for iTerm2 (install via brew)
 
 ## troubleshooting
 

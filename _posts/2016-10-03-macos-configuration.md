@@ -199,8 +199,8 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 
   ![custom input font configuration](https://monosnap.com/file/TOCVcpoclRS9UQwQiAm98W3pgZMg6T.png)
 
-  - Regular: Input Mono Condensed Light
-  - Bold: Input Mono Condensed Medium
+  - Regular: `Input Mono Condensed Light`
+  - Bold: `Input Mono Condensed Medium`
   - 2nd variant of all configurable characters except for curly brackets
   - Line Spacing: 1.6x
 

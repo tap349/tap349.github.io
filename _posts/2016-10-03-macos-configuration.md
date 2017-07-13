@@ -191,11 +191,11 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 
   this font is one of main ones for MacVim.
 
-- custom `Input` font (download from <http://input.fontbureau.com/>)
+- custom `Input` font (download from <http://input.fontbureau.com>)
 
   this font is one of main ones for MacVim.
 
-  current custom configuration on <http://input.fontbureau.com/download/>:
+  current custom configuration on <http://input.fontbureau.com/download>:
 
   ![custom input font configuration](https://monosnap.com/file/TOCVcpoclRS9UQwQiAm98W3pgZMg6T.png)
 

@@ -279,8 +279,52 @@ const arrayToMap = (array) =>
 > the return value of the inner function. This is why it's useful
 > to return a Promise (even though it is not strictly necessary)
 
-that is dispatching thunk action returns whatever thunk action itself
-returns - not necessarily `Promise` (even though it's highly recommended).
+that is dispatching thunk action returns whatever thunk action itself returns -
+not necessarily `Promise` object (even though it's highly recommended).
+
+#### handling of rejected promises in thunk actions
+
+in thunk action:
+
+```javascript
+export const requestPlayers = (teamId) => (
+  (dispatch, getState, api) => {
+    dispatch(startLoading());
+
+    const {token} = getState().user.credentials;
+
+    return api.getPlayers(token, teamId)
+      .then(data => {
+        dispatch(set(data.players));
+        return data.players;
+      })
+      .catch(e => {
+        dispatch(finishLoading());
+        Log.info(e.message);
+        throw e;
+      });
+  }
+);
+```
+
+don't forget to re-throw error in `catch` method body to return rejected promise.
+
+in component:
+
+```javascript
+// notify user about error
+this.props.store
+  .dispatch(teamsActions.requestPlayers(this.props.team.id))
+  .catch(_e => AlertHelpers.serverError());
+
+// or else silence error
+this.props.store
+  .dispatch(teamsActions.requestPlayers(this.props.team.id))
+  .catch(_e => {});
+```
+
+in any case it's required to add `catch` method call in component
+in order to avoid warning about unhandled promise rejection.
 
 ## debugging
 

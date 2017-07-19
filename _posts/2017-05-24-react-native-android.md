@@ -308,7 +308,8 @@ $ avd -verbose
 
 ### reload application in emulator manually
 
-`<D-m>` -> `Reload`
+- `rr`
+- `<D-m>` -> `Reload`
 
 this is the only working option I have found so far.
 

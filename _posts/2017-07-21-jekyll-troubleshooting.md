@@ -20,9 +20,11 @@ GET http://tap349.github.io/postgresql/rails/2017/07/20/postgresql-tips/public/c
 
 _\_includes/head.html_:
 
+{% raw %}
 ```html
-<link rel="stylesheet" href="\{\{ site.baseurl \}\}public/css/hyde.css">
+<link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
 ```
+{% endraw %}
 
 it looks like `site.baseurl` is always set to current url - that is why
 assets are searched for in wrong location.

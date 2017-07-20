@@ -3,7 +3,7 @@ layout: post
 title: PostgreSQL tips
 date: 2017-07-20 16:09:32 +0300
 access: public
-categories: [postgresql]
+categories: [postgresql, rails]
 ---
 
 <!-- more -->

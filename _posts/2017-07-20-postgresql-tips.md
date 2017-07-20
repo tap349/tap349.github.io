@@ -16,7 +16,7 @@ categories: [postgresql, rails]
 
 - describe table
 
-  ```sql
+  ```
   \d users
   ```
 
@@ -27,8 +27,13 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 
 - list installed extensions
 
-  ```sql
+  ```
   \dx
+  ```
+
+  or
+
+  ```sql
   SELECT * FROM pg_extension;
   ```
 

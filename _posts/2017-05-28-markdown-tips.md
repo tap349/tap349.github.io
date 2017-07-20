@@ -21,7 +21,7 @@ surround inline code block with double backticks and extra spaces:
 - <https://stackoverflow.com/questions/24102498>
 - <http://sarathlal.com/escape-liquid-tag-in-jekyll-posts>
 
-wrap code block with `` {% raw %} `` and `{% endraw %}` tags:
+wrap code block with {% raw %} and {% endraw %} tags:
 
     {% raw %}
     ```html

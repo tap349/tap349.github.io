@@ -69,7 +69,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 - create trigram index
 
   - <https://www.postgresql.org/docs/9.6/static/pgtrgm.html>
-  - <http://blog.scoutapp.com/articles/2016/07/12/how-to-make-text-searches-in-postgresql-faster-with-trigram-similarity>
+  - (!) <http://blog.scoutapp.com/articles/2016/07/12/how-to-make-text-searches-in-postgresql-faster-with-trigram-similarity>
 
   all kinds of patterns (not only left-anchored ones) are supported by
   trigram indexes => they are good for general searches.

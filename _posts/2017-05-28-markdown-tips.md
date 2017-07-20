@@ -18,18 +18,15 @@ surround inline code block with double backticks and extra spaces:
 `` `IO.puts("Hello world")` ``
 </pre>
 
-## double curly braces inside code block (Jekyll only)
+## escape Liquid template tags in Jekyll
 
-<https://stackoverflow.com/questions/24102498>
-
-> Any liquid tags inside this block don't get executed and are displayed as is.
+- <https://stackoverflow.com/questions/24102498>
+- <http://sarathlal.com/escape-liquid-tag-in-jekyll-posts>
 
 wrap code block with `{% raw %}` and `{% endraw %}` tags:
 
-<pre>
-{% raw %}
-```html
-\<link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css"\>
-```
-{% endraw %}
-</pre>
+    {% raw %}
+    ```html
+    <link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
+    ```
+    {% endraw %}

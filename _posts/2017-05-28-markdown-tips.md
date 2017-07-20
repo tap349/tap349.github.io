@@ -29,7 +29,7 @@ wrap code block with `{% raw %}` and `{% endraw %}` tags:
 <pre>
 {% raw %}
 ```html
-<link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
+\<link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css"\>
 ```
 {% endraw %}
 </pre>

@@ -204,7 +204,7 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 
   alternatively use `Andale Mono style`.
 
-  NOTE: to apply new downloaded font close all Vim windows.
+  NOTE: to get new downloaded font applied close all Vim windows.
 
 - patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font
   (copy one of them manually from dotfiles and patch with `fontpatcher` script

@@ -202,6 +202,8 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
   - 2nd variant of all configurable characters
   - Line Spacing: 1.6x
 
+  alternatively use `Andale Mono style`.
+
 - patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font
   (copy one of them manually from dotfiles and patch with `fontpatcher` script
   unless it's already patched)

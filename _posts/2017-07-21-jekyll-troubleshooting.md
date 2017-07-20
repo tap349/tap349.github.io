@@ -36,6 +36,8 @@ prefix all occurrences of `site.baseurl` with `site.url`
 
 _\_includes/head.html_:
 
+{% raw %}
 ```html
 <link rel="stylesheet" href="{{ site.url }}/{{ site.baseurl }}public/css/hyde.css">
 ```
+{% endraw %}

@@ -12,4 +12,12 @@ categories: [markdown]
 
 <https://meta.stackexchange.com/questions/82718>
 
-surround code with double backticks with extra spaces.
+surround code with double backticks with extra spaces:
+
+```
+`` `IO.puts("Hello world")` ``
+```
+
+## double curly braces inside code block
+
+<https://stackoverflow.com/questions/24102498>

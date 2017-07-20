@@ -12,12 +12,24 @@ categories: [markdown]
 
 <https://meta.stackexchange.com/questions/82718>
 
-surround code with double backticks with extra spaces:
+surround inline code block with double backticks and extra spaces:
 
-```
+<pre>
 `` `IO.puts("Hello world")` ``
-```
+</pre>
 
-## double curly braces inside code block
+## double curly braces inside code block (Jekyll only)
 
 <https://stackoverflow.com/questions/24102498>
+
+> Any liquid tags inside this block don't get executed and are displayed as is.
+
+wrap code block with `{% raw %}` and `{% endraw %}` tags:
+
+<pre>
+{% raw %}
+```html
+<link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
+```
+{% endraw %}
+</pre>

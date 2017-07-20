@@ -51,7 +51,7 @@ $ psql -d myapp_development
   in Rails:
 
   ```ruby
-  add_index(:teams, :name, using: 'btree')
+  add_index(:teams, :name, using: :btree)
   ```
 
 - create trigram index

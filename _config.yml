@@ -6,7 +6,7 @@ title:                tap349
 tagline:              my blog
 description:          my blog
 url:                  http://tap349.github.io
-baseurl:              //
+baseurl:              '/'
 
 paginate:             5
 excerpt_separator:    <!-- more -->

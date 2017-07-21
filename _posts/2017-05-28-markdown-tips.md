@@ -22,13 +22,10 @@ surround inline code block with double backticks and extra spaces:
 - <http://sarathlal.com/escape-liquid-tag-in-jekyll-posts>
 - <https://stackoverflow.com/questions/3426182>
 
-{% assign raw = "{% raw %}" %}
-{% assign endraw = "{% endraw %}" %}
+wrap code block with {{ "{% raw " }}%} and {{ "{% endraw " }}%} tags:
 
-wrap code block with {{ raw }} and {{ endraw }} tags:
-
-    {{ raw }}
+    {% raw %}
     ```html
     <link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
     ```
-    {{ endraw }}
+    {% endraw %}

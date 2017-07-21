@@ -26,7 +26,7 @@ _\_includes/head.html_:
 ```
 {% endraw %}
 
-it looks like `site.baseurl` is always set to current url - that is why
+it looks like `site.baseurl` is always set to current url - that's why
 assets are searched for in wrong location.
 
 **solution**

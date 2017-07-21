@@ -52,11 +52,11 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 
 ## query optimization
 
-- <https://robots.thoughtbot.com/why-postgres-wont-always-use-an-index>
+<https://robots.thoughtbot.com/why-postgres-wont-always-use-an-index>
 
 ### LIKE operator
 
-- <https://stackoverflow.com/questions/1566717>
+<https://stackoverflow.com/questions/1566717>
 
 - create B-tree index
 

@@ -269,6 +269,11 @@ const arrayToMap = (array) =>
   }, new Map());
 ```
 
+## don't store refreshing flag in Redux store
+
+this causes `RefreshControl` to flicker during animation - store it in
+component state instead.
+
 ## middleware
 
 ### [Redux Thunk](https://github.com/gaearon/redux-thunk)

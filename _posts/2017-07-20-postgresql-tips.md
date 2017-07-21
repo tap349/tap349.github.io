@@ -54,6 +54,26 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 
 <https://robots.thoughtbot.com/why-postgres-wont-always-use-an-index>
 
+### Rails notes
+
+- custom index operator classes
+
+  Rails doesn't allow to specify custom operator classes when creating index
+  in migrations - fallback to raw SQL in migrations in such cases:
+
+  ```ruby
+  execute <<~SQL
+    CREATE INDEX users_on_name_idx ON users USING GIN (name gin_trgm_ops);
+  SQL
+  ```
+
+- using extensions
+
+  there is no need to enable extension in migration itself using
+  `enable_extension :pg_trgm` statement if it has already been created
+  manually in psql - `enable_extension "btree_gin"` line will be added
+  to _schema.rb_ anyway after running migration.
+
 ### LIKE operator
 
 <https://stackoverflow.com/questions/1566717>
@@ -67,13 +87,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   SELECT * FROM tbl WHERE col LIKE 'foo%';
   ```
 
-  in Rails migration:
-
-  ```ruby
-  add_index(:users, :name, using: :btree)
-  ```
-
-- create trigram index
+- create trigram index (GIN index using operator class provided by pg_trgm module)
 
   - <https://www.postgresql.org/docs/9.6/static/pgtrgm.html>
   - (!) <http://blog.scoutapp.com/articles/2016/07/12/how-to-make-text-searches-in-postgresql-faster-with-trigram-similarity>
@@ -94,11 +108,35 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   CREATE INDEX users_on_name_idx ON users USING GIN (name gin_trgm_ops);
   ```
 
-  in Rails migration (fallback to raw SQL - Rails doesn't accept custom operator classes):
+- create combined multicolumn GIN index
 
-  ```ruby
-  enable_extension :pg_trgm
-  execute <<~SQL
-    CREATE INDEX users_on_name_idx ON users USING GIN (name gin_trgm_ops);
-  SQL
+  - <https://stackoverflow.com/a/29414489>
+  - <https://stackoverflow.com/questions/40409997>
+  - <https://www.postgresql.org/docs/current/static/btree-gin.html>
+
+  this is useful when you want to search on some column using B-tree index
+  and another column using trigram index (that is using `LIKE` operator).
+
+  > for queries that test both a GIN-indexable column and a B-tree-indexable
+  > column, it might be more efficient to create a multicolumn GIN index that
+  > uses one of these operator classes (operator classes provided by btree_gin
+  > module - my note) than to create two separate indexes that would have to be
+  > combined via bitmap ANDing.
+
+
+  ```sql
+  CREATE EXTENSION pg_trgm;
+  CREATE EXTENSION btree_gin;
+  CREATE INDEX teams_on_name_idx ON teams USING GIN (name gin_trgm_ops, city);
+  ```
+
+  > if you install btree_gin, you can create a GIN index over “basic” data types
+  > like integer, varchar or text.
+
+  if B-tree-indexable column has another data type (say, boolean) you'll have
+  to create 2 separate indexes:
+
+  ```sql
+  CREATE INDEX teams_on_name_idx ON teams USING GIN (name gin_trgm_ops);
+  CREATE INDEX teams_on_is_public_idx ON teams (is_public);
   ```

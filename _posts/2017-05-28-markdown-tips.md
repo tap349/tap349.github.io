@@ -25,9 +25,9 @@ surround inline code block with double backticks and extra spaces:
 wrap code block with `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}` tags:
 
     {% raw %}
-    {{ "{% raw " }}%}
+    {% raw %}
     ```html
     <link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
     ```
-    {{ "{% endraw " }}%}
+    {% endraw %}
     {% endraw %}

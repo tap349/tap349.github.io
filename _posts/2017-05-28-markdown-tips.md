@@ -23,9 +23,10 @@ surround inline code block with double backticks and extra spaces:
 - <https://stackoverflow.com/questions/3426182>
 
 wrap code block with `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}` tags:
-
+    {% raw %}
     {{ "{% raw " }}%}
     ```html
     <link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
     ```
     {{ "{% endraw " }}%}
+    {% endraw %}

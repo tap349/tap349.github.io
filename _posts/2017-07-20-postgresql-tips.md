@@ -79,7 +79,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   - (!) <http://blog.scoutapp.com/articles/2016/07/12/how-to-make-text-searches-in-postgresql-faster-with-trigram-similarity>
 
   all kinds of patterns (not only left-anchored ones) are supported by
-  trigram indexes => they are good for general searches.
+  trigram indexes => it makes them good for general searches.
 
   > PostgreSQL splits a string into words and determines trigrams for each
   > word separately. It also normalizes the word by downcasing it, prefixing

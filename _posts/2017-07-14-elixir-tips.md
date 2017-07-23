@@ -42,11 +42,8 @@ Map.from_struct(%User{id: 1, name: "Alice"})
 ```elixir
 # creates new struct
 struct(User, %{id: 1, name: "Alice"})
-# updates existing struct
-struct(%User{id: 1, name: "Kate"}, %{name: "Alice"})
 # raises if key doesn't belong to struct
 struct!(User, %{id: 1, name: "Alice", foo: 123})
-struct!(%User{id: 1, name: "Kate"}, %{foo: 123})
 ```
 
 ## updating struct
@@ -55,15 +52,15 @@ struct!(%User{id: 1, name: "Kate"}, %{foo: 123})
 user = %User{id: 1, name: "Alice"}
 
 # raises if key doesn't belong to struct
-user = %{user | name: "Kate"}
+user = %{user | foo: "Kate"}
 # raises if key doesn't belong to struct
-user = struct!(user, %{name: "Kate"})
+user = struct!(user, %{foo: "Kate"})
 # ignores keys that don't belong to struct
-user = struct(user, %{name: "Kate"})
+user = struct(user, %{foo: "Kate"})
 # adds keys that don't belong to struct
-user = Map.put(user, :name, "Kate")
+user = Map.put(user, :foo, "Kate")
 # adds keys that don't belong to struct
-user = Map.merge(user, %{name: "Kate"})
+user = Map.merge(user, %{foo: "Kate"})
 ```
 
 after adding unknown keys to struct using `Map` module functions struct is no

@@ -10,7 +10,7 @@ categories: [jekyll]
 
 - <http://downtothewire.io/2015/08/15/configuring-jekyll-for-user-and-project-github-pages/>
 
-## all styles are lost
+## all styles are gone
 
 in Chrome Console:
 

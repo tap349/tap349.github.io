@@ -90,7 +90,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   SELECT * FROM tbl WHERE col LIKE 'foo%';
   ```
 
-- create trigram index (GIN index using operator class provided by pg_trgm module)
+- create trigram index (GIN index using operator class provided by `pg_trgm` module)
 
   - <https://www.postgresql.org/docs/9.6/static/pgtrgm.html>
   - (!) <http://blog.scoutapp.com/articles/2016/07/12/how-to-make-text-searches-in-postgresql-faster-with-trigram-similarity>

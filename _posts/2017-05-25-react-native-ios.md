@@ -149,6 +149,12 @@ $ react-native log-ios
 - `<D-d>` -> `Hide Inspector`
 - touchable areas are still marked with dotted line
 
+### toggle software keyboard
+
+emulator menu: `Hardware` -> `Keyboard` -> `Toggle Software Keyboard`
+
+- `<D-k>`
+
 ## troubleshooting
 
 ### application build fails in Xcode (duplicate interface definition for class 'RCTView')

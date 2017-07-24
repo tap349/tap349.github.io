@@ -196,3 +196,29 @@ to avoid infinite loop dispatch actions and set component state only in
 
 - constructor or
 - callbacks that are not immediately invoked when component is being rendered
+
+## In next release empty section headers will be rendered
+
+emulator window:
+
+```sh
+Warning: In next release empty section headers will be rendered. In this
+release you can use 'enableEmptySections' flag to render empty section
+headers.
+```
+
+**solution**
+
+<https://github.com/FaridSafi/react-native-gifted-listview/issues/39#issuecomment-217073492>
+
+> If you use cloneWithRows then you don't have sections and so there's no issue
+> with section headers showing up. The confusing part is that even if you don't
+> use sections, it will still throw the warning mentioning sections. In this
+> case, you can just set enableEmptySections={true} and forget about it.
+
+```javascript
+<ListView
+  enableEmptySections={true}
+  ...
+/>
+```

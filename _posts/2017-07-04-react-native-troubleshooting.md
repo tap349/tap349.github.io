@@ -222,3 +222,22 @@ headers.
   ...
 />
 ```
+
+## onEndReached event of ListView keeps on firing
+
+**solution**
+
+- <https://stackoverflow.com/questions/38531369>
+- <https://github.com/facebook/react-native/issues/6002>
+- <https://facebook.github.io/react-native/docs/refreshcontrol.html>
+
+don't nest `ListView` component in `ScrollView` component -
+this is what causes `onEndReached` event to be triggered again and again.
+
+in most cases it means not to use `ScrollView` component at all if
+you have to use `ListView` component:
+
+- if you used `refreshControl` property of `ScrollView` component
+  note that `ListView` component has the same property
+- if you used some header in `ScrollView` component it's possible to render
+  the very same header in `renderHeader` callback of `ListView` component

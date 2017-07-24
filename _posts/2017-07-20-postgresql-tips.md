@@ -8,6 +8,9 @@ categories: [postgresql, rails]
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 ## psql tips
 
 - <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>

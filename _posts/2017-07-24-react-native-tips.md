@@ -68,4 +68,4 @@ component - wrap the latter in `ScrollView` component for this to happen:
 ```
 
 if there is `ListView` component somewhere below you'll have to wrap
-`ScrollView` component in `View` component - otherwise it's not rendered.
+`ScrollView` component in `View` component - otherwise it's not visible.

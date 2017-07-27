@@ -11,14 +11,12 @@ categories: [react, react-native, redux]
 * TOC
 {:toc}
 
-<http://redux.js.org/docs/basics/>
+<https://github.com/reactjs/redux>:
 
-> The whole state of your app is stored in an object tree inside a single store.
-
-> The only way to change the state tree is to emit an action,
-> an object describing what happened.
-
-> To specify how the actions transform the state tree, you write pure reducers.
+> - The whole state of your app is stored in an object tree inside a single store.
+> - The only way to change the state tree is to emit an action,
+>   an object describing what happened.
+> - To specify how the actions transform the state tree, you write pure reducers.
 
 ## actions
 
@@ -192,7 +190,7 @@ say, you want to calculate total count and save it as a state field in store.
 > Dispatching an action within a reducer is an anti-pattern.
 > Reducer should be without side effects simply digesting the action payload
 > and returning a new state object. Adding listeners and dispatching actions
->>  within the reducer can lead to chained actions and other side effects.
+> within the reducer can lead to chained actions and other side effects.
 
 ### don't pass store to presentational components
 

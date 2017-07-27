@@ -118,7 +118,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   > word separately. It also normalizes the word by downcasing it, prefixing
   > two spaces and suffixing one. Non-alphanumeric characters are considered
   > to be word boundaries. Note that downcasing makes trigrams case-insensitive.
-
+  >
   > We don't need any special changes to the query to use the trigram index.
   > Any query using LIKE will improve.
 

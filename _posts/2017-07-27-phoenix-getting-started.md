@@ -70,7 +70,7 @@ or inside IEx:
 $ iex -S mix phx.server
 ```
 
-add support for Slim template engine:
+add support for Slime template engine:
 
 - <https://github.com/slime-lang/phoenix_slime>
 - <https://github.com/slime-lang/slime>

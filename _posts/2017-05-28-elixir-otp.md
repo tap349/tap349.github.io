@@ -23,6 +23,11 @@ GenServers:
 
 Task is not a GenServer but you can use GenServer as a Task.
 
+<https://www.dailydrip.com/topics/elixir/drips/supervising-tasks-and-agents>:
+
+> Tasks and Agents are both built on GenServer. Tasks are purely computation, and
+> Agents are purely state management. For everything in between, there's GenServer.
+
 ## Supervisor
 
 <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>:

@@ -44,6 +44,8 @@ Map.from_struct(%User{id: 1, name: "Alice"})
 struct(User, %{id: 1, name: "Alice"})
 # raises if key doesn't belong to struct
 struct!(User, %{id: 1, name: "Alice", foo: 123})
+# using ExConstructor package
+User.new(%{id: 1, name: "Alice", foo: 123})
 ```
 
 ## updating struct

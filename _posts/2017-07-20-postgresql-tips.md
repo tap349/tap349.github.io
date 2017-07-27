@@ -15,6 +15,22 @@ categories: [postgresql, rails]
 
 - <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>
 
+### users
+
+- list roles (= users) and their attributes
+
+  ```
+  \u
+  ```
+
+### databases
+
+- list databases and their owners
+
+  ```
+  \l
+  ```
+
 ### tables
 
 - describe table

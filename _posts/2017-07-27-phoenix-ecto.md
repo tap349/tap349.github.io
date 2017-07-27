@@ -1,25 +1,12 @@
 ---
 layout: post
-title: Phoenix notes
-date: 2016-11-12 16:21:40 +0300
+title: Phoenix - Ecto
+date: 2017-07-27 15:37:03 +0300
 access: public
-categories: [phoenix]
+categories: [phoenix, ecto]
 ---
 
-Phoenix notes (mostly based on "Programming Phoenix" by Chris McCord).
-
 <!-- more -->
-
-* TOC
-{:toc}
-
-### using IEx with Phoenix app
-
-- `iex` - doesn't load your app (equivalent of `irb`)
-- `iex -S mix` - loads your app by executing _mix.exs_ script
-  (equivalent of `rails console`)
-- `iex -S mix phoenix.server` - loads your app and launches web server
-  (`rails console` inside `rails server` - or vice versa)
 
 ### associations
 

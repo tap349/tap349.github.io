@@ -189,6 +189,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 using `erlang-history` is no longer required
 (though I haven't found an easy way to uninstall it).
 
+also IDK where it's stored now.
+
 ### evaluate vs. compile in memory vs. compile
 
 <https://github.com/elixir-lang/elixir/issues/5073>

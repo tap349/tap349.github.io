@@ -74,3 +74,10 @@ add support for Slime template engine:
 
 - <https://github.com/slime-lang/phoenix_slime>
 - <https://github.com/slime-lang/slime>
+
+generate schemas:
+
+```sh
+$ mix phx.gen.schema User users uuid:string
+$ mix ecto.migrate
+```

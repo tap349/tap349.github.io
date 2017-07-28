@@ -33,7 +33,19 @@ categories: [postgresql, rails]
 
 ### tables
 
-- describe table
+- show all tables
+
+  ```
+  \d
+  ```
+
+  this commands also lists sequences. to show tables only:
+
+  ```
+  \dt
+  ```
+
+- show table
 
   ```
   \d users

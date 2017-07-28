@@ -13,6 +13,9 @@ categories: [elixir]
 
 ## Mix
 
+> Mix assumes that we are in the development environment unless we tell it
+> otherwise with MIX_ENV=another_environment mix some_task.
+
 ### common tasks
 
 - `mix deps.get` = `bundle install`
@@ -24,6 +27,8 @@ categories: [elixir]
 
   removes dependencies which are no longer mentioned in _mix.exs_
   (`--unused`) and updates _mix.lock_ (`--unlock`)
+
+see [Phoenix]({% post_url 2016-11-12-phoenix %}) for Phoenix-specific Mix tasks.
 
 ### mix.exs
 

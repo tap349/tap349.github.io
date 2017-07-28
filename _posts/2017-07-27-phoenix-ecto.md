@@ -8,6 +8,10 @@ categories: [phoenix, ecto]
 
 <!-- more -->
 
+- <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+
+## 
+
 ## associations
 
 associations are always loaded explicitly!

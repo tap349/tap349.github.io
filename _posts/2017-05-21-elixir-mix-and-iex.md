@@ -121,11 +121,11 @@ $ sudo make install
 shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
 (it's a binary file - not plain text).
 
-UPDATE: shell history is now stored in _~/.erlang-history/_ - you might
-        need to remove _~/.erlang-hist.nonode@nohost_ for it to work.
+**UPDATE**: shell history is now stored in _~/.erlang-history/_ - you might
+            need to remove _~/.erlang-hist.nonode@nohost_ for it to work.
 
-NOTE: for shell history to be saved quit IEx gracefully -
-      using either `<C-c>a<CR>` or `<C-g>q<CR>` commands.
+**NOTE**: for shell history to be saved quit IEx gracefully -
+          using either `<C-c>a<CR>` or `<C-g>q<CR>` commands.
 
 `erlang-history` must be compiled for each new version of Erlang/OTP kernel!
 
@@ -164,6 +164,30 @@ NOTE: for shell history to be saved quit IEx gracefully -
   make sure `2 file(s) are copied` - if no files are copied it means
   current version of Kernel library is not supported and you should
   probably update `erlang-history` repo.
+
+**UPDATE (2017-07-28)**
+
+<https://hexdocs.pm/iex/IEx.html#module-shell-history>:
+
+> From Erlang/OTP 20, it is possible to get shell history by passing some flags
+> that enable it in the VM.
+
+<https://github.com/ferd/erlang-history>:
+
+> Since Erlang/OTP-20rc2, Shell history is supported out of the box
+> (although initially disabled by default) through a port of this library to
+> the Erlang/OTP code base. Enable the shell in these versions by setting the
+> shell_history kernel environment variable to enabled with export
+> ERL_AFLAGS="-kernel shell_history enabled" added to your environment variables.
+
+_~/.zshenv_:
+
+```zsh
+export ERL_AFLAGS="-kernel shell_history enabled"
+```
+
+using `erlang-history` is no longer required
+(though I haven't found an easy way to uninstall it).
 
 ### evaluate vs. compile in memory vs. compile
 

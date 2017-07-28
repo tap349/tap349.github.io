@@ -79,5 +79,7 @@ generate schemas:
 
 ```sh
 $ mix phx.gen.schema User users uuid:string
+$ mix phx.gen.schema Card cards number:string cvv:string exp_date:string user_id:references:users
+$ mix phx.gen.schema Transfer transfers from_card_id:references:cards to_card_id:references:cards amount:decimal client_ip:string
 $ mix ecto.migrate
 ```

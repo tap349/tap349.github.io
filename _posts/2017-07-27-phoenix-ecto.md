@@ -11,13 +11,14 @@ categories: [phoenix, ecto]
 * TOC
 {:toc}
 
-NOTE: there is no anything similar to _schema.rb_ file in Phoenix project!
-
-- <https://hexdocs.pm/phoenix/ecto.html>
-- <https://hexdocs.pm/ecto/getting-started.html>
-- <https://hexdocs.pm/ecto/Ecto.html>
+1. <https://hexdocs.pm/phoenix/ecto.html>
+2. <https://hexdocs.pm/ecto/getting-started.html>
+3. <https://hexdocs.pm/ecto/Ecto.html>
 
 ## migrations
+
+NOTE: there is nothing like _schema.rb_ file in Phoenix project -
+      database schema is not dumped to file after running migrations.
 
 - `mix ecto.migrate` - runs all pending migrations
 - `mix ecto.rollback` - rollbacks last applied migration

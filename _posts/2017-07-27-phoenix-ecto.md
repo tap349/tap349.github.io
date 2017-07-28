@@ -114,26 +114,7 @@ associations can be loaded in:
   comments = Repo.all(query)
   ```
 
-### `build_assoc`, `put_assoc` and `cast_assoc`
-
-- `build_assoc`
-
-  <https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
-
-  ```elixir
-  # build association using parent struct and association name
-  Ecto.build_assoc(post, :comments, body: "Excellent!")
-  ```
-
-  =
-
-  ```elixir
-  # build association explicitly by setting FK column value
-  %Comment{post_id: post.id, body: "Excellent!"}
-  ```
-
-  > The goal of build_assoc is to allow you to work on the association names
-  > instead of the key names.
+### `put_assoc`, `cast_assoc` and `build_assoc`
 
 - `put_assoc` vs. `cast_assoc`
 
@@ -142,11 +123,38 @@ associations can be loaded in:
 
   when using `put_assoc` you usually supply existing association (either
   association struct or changeset - say, `user` when creating a `comment`)
-  while when using `cast_assoc` you specify association to retrieve from
-  supplied params and expect it to be created alongside the parent struct
+  while when using `cast_assoc` you specify association name to retrieve
+  from supplied params and expect it to be created alongside the parent struct
   (like when using `accepts_nested_attributes_for` in Rails).
 
-  though in both cases corresponding associations should be preloaded.
+  though in both cases corresponding association should be preloaded
+  (of course it only makes sense when parent struct has id field but
+  it doesn't raise error otherwise).
+
+- `build_assoc` vs. building association explicitly
+
+  <https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
+
+  ```elixir
+  # build association using parent struct and association name
+  user = Repo.get_by(User, name: "John")
+  comment = Ecto.build_assoc(user, :comments, body: "foo")
+  ```
+
+  =
+
+  ```elixir
+  # build association explicitly by setting FK column value
+  user = Repo.get_by(User, name: "John")
+  comment = %Comment{user_id: user.id, body: "foo"}
+  ```
+
+  > The goal of build_assoc is to allow you to work on
+  > the association names instead of the key names.
+
+- usage examples
+
+  `put_assoc` (build new comment using its `user` association and existing user):
 
   ```elixir
   def changeset(%Comment{} = comment, params) do
@@ -160,6 +168,21 @@ associations can be loaded in:
   end
   ```
 
+  `build_assoc` (build new comment using existing user and his `comments` association):
+
+  ```elixir
+  def changeset(%Comment{} = comment, params) do
+    user = Repo.get_by(User, name: "John")
+
+    user
+    |> build_assoc(:comments)
+    |> cast(params, [:body])
+    |> validate_required([:body])
+  end
+  ```
+
+  `cast_assoc` (build new user with new comments to save them all later in one go):
+
   ```elixir
   # &Comment.changeset/2 is used by default
   # to create changesets for comments
@@ -172,7 +195,7 @@ associations can be loaded in:
   end
   ```
 
-  it's better to extract working with `Repo` from `changeset` function:
+  NOTE: it's better to extract working with repo out of `changeset` function:
 
   ```elixir
   # in comment controller or context:
@@ -183,6 +206,7 @@ associations can be loaded in:
   |> Repo.preload(:user)
   |> Comment.changeset(params)
   |> Ecto.Changeset.put_assoc(:user, user)
+  |> Repo.insert!
 
   # in comment schema:
 

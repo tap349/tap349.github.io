@@ -2,7 +2,7 @@
 layout: post
 title: Phoenix - getting started
 date: 2017-07-27 13:44:01 +0300
-access: private
+access: public
 categories: [phoenix]
 ---
 

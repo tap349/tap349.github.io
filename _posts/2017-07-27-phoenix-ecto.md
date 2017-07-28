@@ -14,6 +14,7 @@ categories: [phoenix, ecto]
 NOTE: there is no _schema.rb_ file!
 
 - <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+- <https://hexdocs.pm/ecto/getting-started.html>
 - <https://hexdocs.pm/ecto/Ecto.html>
 
 ## migrations

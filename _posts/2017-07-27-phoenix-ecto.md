@@ -198,7 +198,7 @@ associations can be loaded in:
   NOTE: it's better to extract working with repo out of `changeset` function:
 
   ```elixir
-  # in comment controller or context:
+  # somewhere in comment controller or context:
 
   user = Repo.get_by!(User, uuid: user_uuid)
 

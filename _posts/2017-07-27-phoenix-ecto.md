@@ -8,6 +8,9 @@ categories: [phoenix, ecto]
 
 <!-- more -->
 
+* TOC
+{:toc}
+
 NOTE: there is no _schema.rb_ file!
 
 - <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
@@ -17,6 +20,13 @@ NOTE: there is no _schema.rb_ file!
 
 - `mix ecto.migrate` - runs all pending migrations
 - `mix ecto.rollback` - rollbacks last applied migration
+
+primitive column types that can be used in migrations:
+[Types and casting](https://hexdocs.pm/ecto/Ecto.Schema.html#module-types-and-casting).
+
+## schemas
+
+<https://hexdocs.pm/ecto/Ecto.Schema.html>
 
 ## repository
 
@@ -30,7 +40,8 @@ NOTE: there is no _schema.rb_ file!
 
 ## changesets
 
-<https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+- <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+- <http://cultofmetatron.io/2017/04/22/thinking-in-ecto---schemas-and-changesets/>
 
 ```elixir
 def changeset(%User{} = user, attrs) do
@@ -47,6 +58,40 @@ of changeset all validations defined in changeset are bypassed of course -
 error will be raised only if underlying data store returns error.
 
 ## associations
+
+<http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
+
+prefer defining associations to specifying foreign key columns in
+schema definitions (or else you won't be able to use them in queries):
+
+```elixir
+schema "cards" do
+  # define association:
+  belongs_to :user, MyApp.User
+  # instead of specifying FK column:
+  #field :user_id, :id
+  timestamps()
+end
+```
+
+<https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
+
+associations can be preloaded in:
+
+- in schema definition itself (can' find the source - probably not true)
+- in query:
+
+  ```elixir
+  Repo.all from p in Post, preload: [:comments]
+  ```
+
+- a posteriori (after fetching record or collection):
+
+  ```elixir
+  posts = Repo.all(Post) |> Repo.preload(:comments)
+  ```
+
+[Programming Phoenix]:
 
 associations are always loaded explicitly!
 
@@ -87,7 +132,7 @@ load association without storing it in model struct:
 > videos = Repo.all(query)
 ```
 
-## prefixes
+## [Programming Phoenix] prefixes
 
 NOTE: it's not possible to perform joins across prefixes -
 data in different prefixes must be completely isolated.
@@ -162,7 +207,7 @@ if it's nil it means global prefix is used
 %Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "new_prefix", "videos">, ...}
 ```
 
-## get query SQL
+## [Programming Phoenix] get query SQL
 
 <https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
 

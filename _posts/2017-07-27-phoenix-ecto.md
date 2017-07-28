@@ -226,7 +226,7 @@ associations can be loaded in:
 
 **UPDATE**:
 
-models have been deprecated in Phoenix 1.3 - they called just schemas now.
+models have been deprecated in Phoenix 1.3 - they are called just schemas now.
 
 ## Ecto.Multi
 

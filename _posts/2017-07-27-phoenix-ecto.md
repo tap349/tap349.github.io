@@ -28,7 +28,7 @@ primitive column types that can be used in migrations:
 
 <https://hexdocs.pm/ecto/Ecto.Schema.html>
 
-## repository
+## repositories
 
 <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
 
@@ -59,7 +59,8 @@ error will be raised only if underlying data store returns error.
 
 ## associations
 
-<http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
+- <http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
+- <https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
 
 prefer defining associations to specifying foreign key columns in
 schema definitions (or else you won't be able to use them in queries):
@@ -73,8 +74,6 @@ schema "cards" do
   timestamps()
 end
 ```
-
-<https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
 
 associations can be preloaded in:
 

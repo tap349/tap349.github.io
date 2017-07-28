@@ -75,11 +75,13 @@ add support for Slime template engine:
 - <https://github.com/slime-lang/phoenix_slime>
 - <https://github.com/slime-lang/slime>
 
-generate schemas:
+generate schemas (add all required columns in generated migrations -
+IDK how to pass `precision` and `scale` options for decimal column to
+generator so don't specify any columns altogether to be consistent):
 
 ```sh
-$ mix phx.gen.schema User users uuid:string
-$ mix phx.gen.schema Card cards number:string cvv:string exp_date:string user_id:references:users
-$ mix phx.gen.schema Transfer transfers from_card_id:references:cards to_card_id:references:cards amount:decimal client_ip:string
+$ mix phx.gen.schema User users
+$ mix phx.gen.schema Card cards
+$ mix phx.gen.schema Transfer transfers
 $ mix ecto.migrate
 ```

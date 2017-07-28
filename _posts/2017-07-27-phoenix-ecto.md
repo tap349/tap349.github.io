@@ -11,7 +11,7 @@ categories: [phoenix, ecto]
 * TOC
 {:toc}
 
-NOTE: there is no _schema.rb_ file!
+NOTE: there is no anything similar to _schema.rb_ file in Phoenix project!
 
 - <https://hexdocs.pm/phoenix/ecto.html>
 - <https://hexdocs.pm/ecto/getting-started.html>
@@ -25,10 +25,6 @@ NOTE: there is no _schema.rb_ file!
 primitive column types that can be used in migrations:
 [Types and casting](https://hexdocs.pm/ecto/Ecto.Schema.html#module-types-and-casting).
 
-## schemas
-
-<https://hexdocs.pm/ecto/Ecto.Schema.html>
-
 ## repositories
 
 <https://hexdocs.pm/phoenix/ecto.html>
@@ -38,6 +34,10 @@ primitive column types that can be used in migrations:
 > - to bring in all the common query functions from Ecto.Repo
 > - to set the otp_app name equal to our application name
 > - to initialize the options passed to the database adapter in init/2
+
+## schemas
+
+<https://hexdocs.pm/ecto/Ecto.Schema.html>
 
 ## changesets
 
@@ -60,12 +60,12 @@ error will be raised only if underlying data store returns error.
 
 ## associations
 
-### associations vs. foreign key columns
+### associations vs. FK columns
 
 <http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
 
-prefer defining associations to specifying foreign key columns in
-schema definitions (or else you won't be able to use them in queries):
+prefer defining associations to specifying FK columns in schema
+definitions (or else you won't be able to use them in queries):
 
 ```elixir
 schema "cards" do
@@ -81,19 +81,35 @@ end
 
 <https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
 
+assocations are never preloaded by default - load them explicitly!
+
 associations can be preloaded in:
 
-- in schema definition itself (can' find the source - probably not true)
-- in query:
+- in query when loading parent struct:
 
   ```elixir
   Repo.all from p in Post, preload: [:comments]
   ```
 
-- a posteriori (after fetching record or collection):
+- a posteriori after loading parent struct:
 
   ```elixir
   posts = Repo.all(Post) |> Repo.preload(:comments)
+  ```
+
+associations can be loaded in:
+
+- into parent struct:
+
+  ```elixir
+  post = Repo.preload(post, :comments)
+  ```
+
+- into its own struct:
+
+  ```elixir
+  query = Ecto.assoc(post, :comments)
+  comments = Repo.all(query)
   ```
 
 ### `build_assoc`, `put_assoc` and `cast_assoc`
@@ -103,12 +119,14 @@ associations can be preloaded in:
   <https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
 
   ```elixir
+  # build association using parent struct and association name
   Ecto.build_assoc(post, :comments, body: "Excellent!")
   ```
 
   =
 
   ```elixir
+  # build association explicitly by setting FK column value
   %Comment{post_id: post.id, body: "Excellent!"}
   ```
 
@@ -173,12 +191,16 @@ associations can be preloaded in:
   end
   ```
 
-## models vs changesets
+## models vs. changesets
 
 <http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:
 
 > Typically, you'd work with a changeset for making modifications to a model
 > via the repo, and you'd work with the model when fetching the data for display.
+
+**UPDATE**:
+
+models have been deprecated in Phoenix 1.3 - they called just schemas now.
 
 ## Ecto.Multi
 
@@ -221,50 +243,19 @@ you deal with persistence and need something to replace callbacks
 (that is Ecto.Multi is alternative to our custom operations in Rails projects
 which both persist data and run `after_*` callbacks manually).
 
-## Programming Phoenix notes
+## get query SQL
 
-### associations
-
-associations are always loaded explicitly!
-
-preparation:
+<https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
 
 ```elixir
-> alias Rumbl.Repo
-> alias Rumbl.User
 > import Ecto.Query
+> query = from p in User
+#Ecto.Query<from u in User>
+> Ecto.Adapters.SQL.to_sql(:all, Repo, query)
+{"SELECT u0.\"id\", u0.\"name\" FROM \"users\" AS u0", []}
 ```
 
-build and insert association:
-
-```elixir
-> attrs = %{title: 'title', description: 'desc'}
-> video = Ecto.build_assoc(user, :videos, attrs)
-> video = Repo.insert!(video)
-```
-
-alternatively build association explicitly:
-
-```elixir
-> video = %Video{user_id: user.id, title: 'title', description: 'desc'}
-> video = Repo.insert!(video)
-```
-
-load association and store it in model struct:
-
-```elixir
-> user = Repo.preload(user, :videos)
-> videos = user.videos
-```
-
-load association without storing it in model struct:
-
-```elixir
-> query = Ecto.assoc(user, :videos)
-> videos = Repo.all(query)
-```
-
-## prefixes
+## [Programming Phoenix] prefixes
 
 NOTE: it's not possible to perform joins across prefixes -
 data in different prefixes must be completely isolated.
@@ -337,17 +328,4 @@ if it's nil it means global prefix is used
 [%Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "videos">, ...}
 > new_prefix_video = Ecto.put_meta(video, prefix: "new_prefix")
 %Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "new_prefix", "videos">, ...}
-```
-
-## get query SQL
-
-<https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
-
-```elixir
-> import Ecto.Query
-Ecto.Query
-> query = from p in Rumbl.User
-#Ecto.Query<from u in Rumbl.User>
-> Ecto.Adapters.SQL.to_sql :all, Rumbl.Repo, query
-{"SELECT u0.\"id\", u0.\"name\", u0.\"username\", u0.\"password_hash\", u0.\"inserted_at\", u0.\"updated_at\" FROM \"users\" AS u0", []}
 ```

@@ -91,7 +91,57 @@ associations can be preloaded in:
   posts = Repo.all(Post) |> Repo.preload(:comments)
   ```
 
-[Programming Phoenix]:
+## models vs changesets
+
+<http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:
+
+> Typically, you'd work with a changeset for making modifications to a model
+> via the repo, and you'd work with the model when fetching the data for display.
+
+## Ecto.Multi
+
+- <https://hexdocs.pm/ecto/Ecto.Multi.html>
+- <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>
+
+- replace `before` callbacks with functions in changesets
+- replace `after` callbacks with operations in Ecto.Multi
+
+use it when you would need callbacks in AR: Ecto.Multi allows to pack functions
+that should be called after main action (like `create` or `update`) - all these
+functions are named operations in Ecto.Multi parlance.
+
+moreover using Ecto.Multi allows to stop execution if some operation fails and
+returns `{:error, reason}` - this error can be returned either automatically
+from `Repo` function or manually from functions passed to `Ecto.Multi.run`.
+
+in the end Ecto.Multi struct is usually passed to `Repo.transaction/1` which
+rollbacks transaction if any operation fails however calling `Repo.transaction/1`
+in the end is not obligatory (if you don't want all operations to be run in
+transaction - for example, they write to filesystem which cannot be rolled back).
+
+it all resembles using monads to handle errors in general and using
+`dry-monads` and `dry-matcher` gems in Ruby in particular
+([monads in Ruby]({% post_url 2017-02-27-monads-in-ruby %})).
+
+but unlike `dry-matcher` Ecto.Multi stores additional information in case of
+failure - not only do we have error itself but also operation name and changes
+accumulated in previous succeeded operations.
+
+in this regard Ecto.Multi acts more like `dry-transaction` gem which allows to
+handle errors arising from particular steps (= operations) with the difference
+that `dry-transaction` holds operations (service objects that respond to `call`)
+from DI container while multi packs operations (`Repo` or arbitrary functions).
+
+also don't forget that there exist several monad libraries for Elixir
+(e.g. [MonadEx](https://github.com/rob-brown/MonadEx)) which allow to use
+this error handling mechanism in any module while Ecto.Multi is used when
+you deal with persistence and need something to replace callbacks
+(that is Ecto.Multi is alternative to our custom operations in Rails projects
+which both persist data and run `after_*` callbacks manually).
+
+## Programming Phoenix notes
+
+### associations
 
 associations are always loaded explicitly!
 
@@ -132,7 +182,7 @@ load association without storing it in model struct:
 > videos = Repo.all(query)
 ```
 
-## [Programming Phoenix] prefixes
+## prefixes
 
 NOTE: it's not possible to perform joins across prefixes -
 data in different prefixes must be completely isolated.
@@ -207,7 +257,7 @@ if it's nil it means global prefix is used
 %Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "new_prefix", "videos">, ...}
 ```
 
-## [Programming Phoenix] get query SQL
+## get query SQL
 
 <https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
 
@@ -219,51 +269,3 @@ Ecto.Query
 > Ecto.Adapters.SQL.to_sql :all, Rumbl.Repo, query
 {"SELECT u0.\"id\", u0.\"name\", u0.\"username\", u0.\"password_hash\", u0.\"inserted_at\", u0.\"updated_at\" FROM \"users\" AS u0", []}
 ```
-
-## models vs changesets
-
-<http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:
-
-> Typically, you'd work with a changeset for making modifications to a model
-> via the repo, and you'd work with the model when fetching the data for display.
-
-## Ecto.Multi
-
-- <https://hexdocs.pm/ecto/Ecto.Multi.html>
-- <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>
-
-- replace `before` callbacks with functions in changesets
-- replace `after` callbacks with operations in Ecto.Multi
-
-use it when you would need callbacks in AR: Ecto.Multi allows to pack functions
-that should be called after main action (like `create` or `update`) - all these
-functions are named operations in Ecto.Multi parlance.
-
-moreover using Ecto.Multi allows to stop execution if some operation fails and
-returns `{:error, reason}` - this error can be returned either automatically
-from `Repo` function or manually from functions passed to `Ecto.Multi.run`.
-
-in the end Ecto.Multi struct is usually passed to `Repo.transaction/1` which
-rollbacks transaction if any operation fails however calling `Repo.transaction/1`
-in the end is not obligatory (if you don't want all operations to be run in
-transaction - for example, they write to filesystem which cannot be rolled back).
-
-it all resembles using monads to handle errors in general and using
-`dry-monads` and `dry-matcher` gems in Ruby in particular
-([monads in Ruby]({% post_url 2017-02-27-monads-in-ruby %})).
-
-but unlike `dry-matcher` Ecto.Multi stores additional information in case of
-failure - not only do we have error itself but also operation name and changes
-accumulated in previous succeeded operations.
-
-in this regard Ecto.Multi acts more like `dry-transaction` gem which allows to
-handle errors arising from particular steps (= operations) with the difference
-that `dry-transaction` holds operations (service objects that respond to `call`)
-from DI container while multi packs operations (`Repo` or arbitrary functions).
-
-also don't forget that there exist several monad libraries for Elixir
-(e.g. [MonadEx](https://github.com/rob-brown/MonadEx)) which allow to use
-this error handling mechanism in any module while Ecto.Multi is used when
-you deal with persistence and need something to replace callbacks
-(that is Ecto.Multi is alternative to our custom operations in Rails projects
-which both persist data and run `after_*` callbacks manually).

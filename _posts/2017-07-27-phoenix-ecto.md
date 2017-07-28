@@ -11,9 +11,11 @@ categories: [phoenix, ecto]
 * TOC
 {:toc}
 
-1. <https://hexdocs.pm/phoenix/ecto.html>
-2. <https://hexdocs.pm/ecto/getting-started.html>
-3. <https://hexdocs.pm/ecto/Ecto.html>
+<hr>
+
+- <https://hexdocs.pm/phoenix/ecto.html>
+- <https://hexdocs.pm/ecto/getting-started.html>
+- <https://hexdocs.pm/ecto/Ecto.html>
 
 ## migrations
 

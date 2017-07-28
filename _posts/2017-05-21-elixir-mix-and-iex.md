@@ -108,6 +108,12 @@ iex> Application.ensure_all_started(:neko)
 
 only graceful ways to quit IEx save shell history (when using `erlang-history`).
 
+**UPDATE (2017-07-28)**
+
+since Erlang/OTP 20 shell history is supported out of the box - if using it
+instead of `erlang-history` patch all ways to quit IEx allow to save shell
+history except for the last one (`<C-\>`).
+
 ### shell history
 
 <http://nithinbekal.com/posts/elixir-shell-history/>:
@@ -188,8 +194,6 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 using `erlang-history` is no longer required
 (though I haven't found an easy way to uninstall it).
-
-also IDK where it's stored now.
 
 ### evaluate vs. compile in memory vs. compile
 

@@ -355,7 +355,7 @@ $ brew cask uninstall android-sdk
 Error: No such file or directory - /usr/local/share/android-sdk
 ```
 
-solution:
+**solution**
 
 ```sh
 $ ln -s /usr/local/Caskroom/android-sdk/25.2.3 /usr/local/share/android-sdk
@@ -371,7 +371,7 @@ $ sdkmanager --list
 Warning: File /Users/tap/.android/repositories.cfg could not be loaded.
 ```
 
-solution:
+**solution**
 
 ```sh
 $ touch ~/.android/repositories.cfg
@@ -391,7 +391,7 @@ Available Packages:
   add-ons;addon-g..._apis-google-16 | 4            | Google APIs
 ```
 
-solution:
+**solution**
 
 ```sh
 $ sdkmanager --list --verbose
@@ -407,7 +407,7 @@ $ emulator -avd Nexus_5X_API_23_x86_64
 Could not launch '../emulator/qemu/darwin-x86_64/qemu-system-x86_64': No such file or directory
 ```
 
-solution:
+**solution**
 
 ```sh
 $ cd /usr/local/share/android-sdk/emulator
@@ -433,7 +433,7 @@ $ emulator -avd Nexus_5X_API_23_x86_64
 PANIC: Cannot find AVD system path. Please define ANDROID_SDK_ROOT
 ```
 
-solution:
+**solution**
 
 _~/.zshenv_:
 
@@ -451,7 +451,7 @@ A problem occurred configuring project ':app'.
 > The SDK directory '/Users/tap/Library/Android/sdk' does not exist.
 ```
 
-solution:
+**solution**
 
 if you previously used Android Studio to run application it might have
 created _android/local.properties_ file in project with the following content:
@@ -489,7 +489,7 @@ A problem occurred evaluating project ':app'.
 > Could not get unknown property 'MYAPP_RELEASE_STORE_FILE' for SigningConfig_Decorated...
 ```
 
-solution:
+**solution**
 
 <https://facebook.github.io/react-native/docs/signed-apk-android.html>
 
@@ -515,7 +515,7 @@ Execution failed for task ':app:installDebug'.
 > com.android.builder.testing.api.DeviceException: No connected devices!
 ```
 
-solution:
+**solution**
 
 start emulator before running application.
 
@@ -537,7 +537,7 @@ A problem occurred configuring project ':app'.
                myapp:react-native-push-notification:unspecified
 ```
 
-solution:
+**solution**
 
 add this snippet to _android/build.gradle_ and specify actual RN version in it
 (make sure to update this value every time RN version changes):
@@ -564,7 +564,7 @@ allprojects {
 CANNOT TRANSLATE guest DNS ip
 ```
 
-solution:
+**solution**
 
 the issue is not resolved yet.
 
@@ -576,7 +576,7 @@ TODO: check if this issue is resolved when `android-sdk` is upgraded via brew.
 
 application doesn't have launcher icon on home screen in emulator.
 
-solution:
+**solution**
 
 `react-native run-android` installs application but doesn't add
 application launcher icon on home screen - you can do it manually:
@@ -591,7 +591,7 @@ application launcher icon on home screen - you can do it manually:
 com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
 ```
 
-solution:
+**solution**
 
 <https://stackoverflow.com/questions/13808599>
 

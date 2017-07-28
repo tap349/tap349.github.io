@@ -172,7 +172,7 @@ Xcode -> `Issue navigator` -> `Buildtime`:
     ...
 ```
 
-solution:
+**solution**
 
 outdated version of `react-native-linear-gradient` package was used
 (it provides `LinearGradient` component).
@@ -236,7 +236,7 @@ there are 2 ways to solve the problem:
 Print: Entry, ":CFBundleIdentifier", Does Not Exist
 ```
 
-solution:
+**solution**
 
 error was gone after solving problem with `react-native-linear-gradient`
 package (see above) and reinstalling all node modules.
@@ -254,7 +254,7 @@ Make sure you're running a packager server or have included a .jsbundle file
 in your application bundle.
 ```
 
-solution:
+**solution**
 
 it looks like application is run in emulator before packager server is started.
 
@@ -279,7 +279,7 @@ emulator window, packager server log:
 Native module cannot be null.
 ```
 
-solution:
+**solution**
 
 this error occured after installing `react-native-push-notification` package,
 linking native libraries and trying to launch application:

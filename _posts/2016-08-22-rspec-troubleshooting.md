@@ -14,7 +14,7 @@ categories: [rails, rspec, troubleshooting]
 NameError: uninitialized constant TestService
 ```
 
-#### solution
+**solution**
 
 by default `rails generate rspec:install` creates this _.rspec_:
 
@@ -43,7 +43,7 @@ just require `rails_helper` instead of `spec_helper` in _.rspec_:
 rendering views mysteriously returns empty string even though proper template
 must have been found (if renamed it's not found).
 
-#### solution
+**solution**
 
 by default RSpec doesn't render views - enable rendering by including
 this line in your spec:
@@ -59,7 +59,7 @@ bundler: failed to load command: rspec (/Users/tap/.rbenv/versions/2.3.1/bin/rsp
 LoadError: cannot load such file -- rspec
 ```
 
-solution:
+**solution**
 
 make sure `rspec` gem is added in _Gemfile_:
 

@@ -37,7 +37,7 @@ supported natively - see
 [PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html)
 for instructions how to link `PushNotificationIOS` native library manually.
 
-### universal solution
+**universal solution**
 
 use [react-native-push-notification](https://github.com/zo0r/react-native-push-notification)
 RN package which:

@@ -26,7 +26,7 @@ common ways to diagnose and fix the problem:
 
 - <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
-### description
+**description**
 
 running `brew upgrade` has created quite a mess for me because of a new
 versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`
@@ -49,7 +49,7 @@ but this migration was not smooth and resulted in many errors, to name a few:
   `postgresql@9.5` (_/usr/local/var/postgresql@9.5_) while all my databases
   are stored in _/usr/local/var/postgres_.
 
-### solution
+**solution**
 
 so this is what I did to fix problems mentioned above:
 
@@ -84,7 +84,7 @@ NOTE: installing `postgresql` formula still installs the latest version
 
 ## could not connect to server: Connection refused
 
-### description
+**description**
 
 `psql -d <my_database>`:
 
@@ -105,7 +105,7 @@ could not connect to server: Connection refused
   TCP/IP connections on port 5432?
 ```
 
-### solution
+**solution**
 
 <https://stackoverflow.com/a/13573207/3632318>
 

@@ -12,7 +12,6 @@ CSS recipes.
 
 * TOC
 {:toc}
-
 <hr>
 
 ## using icons

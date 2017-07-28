@@ -10,7 +10,6 @@ categories: [rpi]
 
 * TOC
 {:toc}
-
 <hr>
 
 ## installation

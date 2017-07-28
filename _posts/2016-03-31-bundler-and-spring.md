@@ -13,7 +13,6 @@ intricacies of using `bundle exec`, bundler and spring binstubs.
 
 * TOC
 {:toc}
-
 <hr>
 
 ## bundler

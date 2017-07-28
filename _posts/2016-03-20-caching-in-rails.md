@@ -12,7 +12,6 @@ notes about caching in Rails.
 
 * TOC
 {:toc}
-
 <hr>
 
 - <https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>

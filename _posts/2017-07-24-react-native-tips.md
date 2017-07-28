@@ -10,7 +10,6 @@ categories: [react-native]
 
 * TOC
 {:toc}
-
 <hr>
 
 ## set application icon badge number

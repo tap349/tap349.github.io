@@ -10,7 +10,6 @@ categories: [react, react-native, redux]
 
 * TOC
 {:toc}
-
 <hr>
 
 <https://github.com/reactjs/redux>:

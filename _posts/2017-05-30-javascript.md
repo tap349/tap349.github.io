@@ -10,7 +10,6 @@ categories: [js, es6, es7, es8, esnext]
 
 * TOC
 {:toc}
-
 <hr>
 
 ## functions

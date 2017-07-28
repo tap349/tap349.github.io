@@ -10,7 +10,6 @@ categories: [react-native, ios]
 
 * TOC
 {:toc}
-
 <hr>
 
 ## installation

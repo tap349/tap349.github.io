@@ -10,7 +10,6 @@ categories: []
 
 * TOC
 {:toc}
-
 <hr>
 
 ## merge objects

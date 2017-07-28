@@ -10,7 +10,6 @@ categories: [elixir]
 
 * TOC
 {:toc}
-
 <hr>
 
 ## Mix

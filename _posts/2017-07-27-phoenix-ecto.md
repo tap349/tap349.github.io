@@ -8,6 +8,8 @@ categories: [phoenix, ecto]
 
 <!-- more -->
 
+NOTE: there is no _schema.rb_ file!
+
 ## repository
 
 <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>

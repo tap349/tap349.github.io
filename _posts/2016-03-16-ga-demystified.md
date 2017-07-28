@@ -121,7 +121,7 @@ all services available in APIs Explorer are listed
 [here](https://developers.google.com/apis-explorer) -
 select `Google Analytics API v3` service.
 
-### API methods vs HTTP requests
+### API methods vs. HTTP requests
 
 all methods for `Google Analytics API v3` service are listed
 [here](https://developers.google.com/apis-explorer/#p/analytics/v3/).

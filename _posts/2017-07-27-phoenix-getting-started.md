@@ -54,9 +54,7 @@ config :billing, Billing.Repo,
 create database:
 
 ```sh
-$ mix ecto.create
-$ MIX_ENV=test mix ecto.create
-The database for Billing.Repo has been created
+$ mix ecto.create && MIX_ENV=test mix ecto.create
 ```
 
 start Phoenix app:
@@ -84,6 +82,5 @@ generator so don't specify any columns altogether to be consistent):
 $ mix phx.gen.schema User users
 $ mix phx.gen.schema Card cards
 $ mix phx.gen.schema Transfer transfers
-$ mix ecto.migrate
-$ MIX_ENV=test mix ecto.migrate
+$ mix ecto.migrate && MIX_ENV=test mix ecto.migrate
 ```

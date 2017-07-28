@@ -8,7 +8,7 @@ categories: [phoenix, ecto]
 
 <!-- more -->
 
-### associations
+## associations
 
 associations are always loaded explicitly!
 
@@ -49,7 +49,7 @@ load association without storing it in model struct:
 > videos = Repo.all(query)
 ```
 
-### prefixes
+## prefixes
 
 NOTE: it's not possible to perform joins across prefixes -
 data in different prefixes must be completely isolated.
@@ -60,7 +60,7 @@ global prefix ->
   schema prefix ->
     query/repository operation/struct prefix
 
-#### global prefix
+### global prefix
 
 _config/dev.exs_:
 
@@ -75,7 +75,7 @@ config :rumbl, Rumbl.Repo,
   after_connect: {Postgrex, :query!, ["SET search_path TO new_prefix", []]}
 ```
 
-#### schema prefix
+### schema prefix
 
 NOTE: since Ecto 2.1
 
@@ -97,7 +97,7 @@ defmodule Rumbl.User do
   end
 ```
 
-#### query prefix
+### query prefix
 
 ```elixir
 > query = Ecto.Queryable.to_query Rumbl.User
@@ -106,13 +106,13 @@ defmodule Rumbl.User do
 []
 ```
 
-#### repository operation prefix
+### repository operation prefix
 
 ```elixir
 > Rumbl.Repo.all Rumbl.User, prefix: "new_prefix"
 ```
 
-#### struct prefix
+### struct prefix
 
 if it's nil it means global prefix is used
 ("public" or as configured in environment config).
@@ -124,7 +124,7 @@ if it's nil it means global prefix is used
 %Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "new_prefix", "videos">, ...}
 ```
 
-### get query SQL
+## get query SQL
 
 <https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
 
@@ -137,14 +137,14 @@ Ecto.Query
 {"SELECT u0.\"id\", u0.\"name\", u0.\"username\", u0.\"password_hash\", u0.\"inserted_at\", u0.\"updated_at\" FROM \"users\" AS u0", []}
 ```
 
-### models vs changesets
+## models vs changesets
 
 <http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:
 
 > Typically, you'd work with a changeset for making modifications to a model
 > via the repo, and you'd work with the model when fetching the data for display.
 
-### Ecto.Multi
+## Ecto.Multi
 
 - <https://hexdocs.pm/ecto/Ecto.Multi.html>
 - <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>

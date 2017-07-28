@@ -18,6 +18,11 @@ namespace :post do
         ---
 
         <!-- more -->
+
+        * TOC
+        {:toc}
+        <hr>
+
       TEMPLATE
     end
   end

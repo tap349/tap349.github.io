@@ -98,6 +98,81 @@ associations can be preloaded in:
 
 ### `build_assoc` vs. `put_assoc` vs. `cast_assoc`
 
+- `build_assoc`
+
+  <https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
+
+  ```elixir
+  Ecto.build_assoc(post, :comments, body: "Excellent!")
+  ```
+
+  =
+
+  ```elixir
+  %Comment{post_id: post.id, body: "Excellent!"}
+  ```
+
+  > The goal of build_assoc is to allow you to work on the association names
+  > instead of the key names.
+
+- `put_assoc` and `cast_assoc`
+
+  - <https://medium.com/coryodaniel/til-elixir-ecto-put-assoc-vs-cast-assoc-7c80f35f6e6>
+  - <https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_assoc/3>
+
+  when using `put_assoc` you usually supply existing association (either
+  association struct or changeset - say, `user` when creating a `comment`)
+  while when using `cast_assoc` you specify association to retrieve from
+  supplied params and expect it to be created alongside the parent struct
+  (like when using `accepts_nested_attributes_for` in Rails).
+
+  though in both cases corresponding associations should be preloaded.
+
+  ```elixir
+  def changeset(%Comment{} = comment, params) do
+    user = Repo.get_by(User, name: "John")
+
+    comment
+    |> Repo.preload(:user)
+    |> cast(params, [:body])
+    |> validate_required([:body])
+    |> put_assoc(:user, user)
+  end
+  ```
+
+  ```elixir
+  # &Comment.changeset/2 is used by default
+  # to create changesets for comments
+  def changeset(%User{} = user, params) do
+    user
+    |> Repo.preload(:comments)
+    |> cast(params, [:name])
+    |> validate_required([:name])
+    |> cast_assoc(:comments, with: &Comment.insert_changeset/2)
+  end
+  ```
+
+  it's better to extract working with `Repo` from `changeset` function:
+
+  ```elixir
+  # in comment controller or context:
+
+  user = Repo.get_by!(User, uuid: user_uuid)
+
+  %Comment{}
+  |> Repo.preload(:user)
+  |> Comment.changeset(params)
+  |> Ecto.Changeset.put_assoc(:user, user)
+
+  # in comment schema:
+
+  def changeset(%Comment{} = comment, params) do
+    comment
+    |> cast(params, [:body])
+    |> validate_required([:body])
+  end
+  ```
+
 ## models vs changesets
 
 <http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:

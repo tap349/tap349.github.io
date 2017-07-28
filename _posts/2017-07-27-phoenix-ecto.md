@@ -79,7 +79,7 @@ schema "cards" do
 end
 ```
 
-### preloading
+### preloading associations
 
 <https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
 
@@ -114,7 +114,7 @@ associations can be loaded in:
   comments = Repo.all(query)
   ```
 
-### `put_assoc`, `cast_assoc` and `build_assoc`
+### building associations
 
 - `put_assoc` vs. `cast_assoc`
 
@@ -152,7 +152,7 @@ associations can be loaded in:
   > The goal of build_assoc is to allow you to work on
   > the association names instead of the key names.
 
-- usage examples
+- usage examples of `put_assoc`, `build_assoc` and `cast_assoc`
 
   `put_assoc` (build new comment using its `user` association and existing user):
 

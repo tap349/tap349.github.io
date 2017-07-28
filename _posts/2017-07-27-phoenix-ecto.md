@@ -96,7 +96,7 @@ associations can be preloaded in:
   posts = Repo.all(Post) |> Repo.preload(:comments)
   ```
 
-### `build_assoc` vs. `put_assoc` vs. `cast_assoc`
+### `build_assoc`, `put_assoc` and `cast_assoc`
 
 - `build_assoc`
 
@@ -115,7 +115,7 @@ associations can be preloaded in:
   > The goal of build_assoc is to allow you to work on the association names
   > instead of the key names.
 
-- `put_assoc` and `cast_assoc`
+- `put_assoc` vs. `cast_assoc`
 
   - <https://medium.com/coryodaniel/til-elixir-ecto-put-assoc-vs-cast-assoc-7c80f35f6e6>
   - <https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_assoc/3>

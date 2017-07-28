@@ -13,7 +13,7 @@ categories: [phoenix, ecto]
 
 NOTE: there is no _schema.rb_ file!
 
-- <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+- <https://hexdocs.pm/phoenix/ecto.html>
 - <https://hexdocs.pm/ecto/getting-started.html>
 - <https://hexdocs.pm/ecto/Ecto.html>
 
@@ -31,7 +31,7 @@ primitive column types that can be used in migrations:
 
 ## repositories
 
-<https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+<https://hexdocs.pm/phoenix/ecto.html>
 
 > Our repo (MyApp.Repo) has three main tasks:
 >
@@ -41,7 +41,7 @@ primitive column types that can be used in migrations:
 
 ## changesets
 
-- <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+- <https://hexdocs.pm/phoenix/ecto.html>
 - <http://cultofmetatron.io/2017/04/22/thinking-in-ecto---schemas-and-changesets/>
 
 ```elixir
@@ -60,8 +60,9 @@ error will be raised only if underlying data store returns error.
 
 ## associations
 
-- <http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
-- <https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
+### associations vs. foreign key columns
+
+<http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
 
 prefer defining associations to specifying foreign key columns in
 schema definitions (or else you won't be able to use them in queries):
@@ -75,6 +76,10 @@ schema "cards" do
   timestamps()
 end
 ```
+
+### preloading
+
+<https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
 
 associations can be preloaded in:
 
@@ -90,6 +95,8 @@ associations can be preloaded in:
   ```elixir
   posts = Repo.all(Post) |> Repo.preload(:comments)
   ```
+
+### `build_assoc` vs. `put_assoc` vs. `cast_assoc`
 
 ## models vs changesets
 

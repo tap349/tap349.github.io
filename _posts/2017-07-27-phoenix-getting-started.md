@@ -8,7 +8,7 @@ categories: [phoenix]
 
 <!-- more -->
 
-<https://hexdocs.pm/phoenix/1.3.0-rc.3/overview.html>
+<https://hexdocs.pm/phoenix/overview.html>
 
 install or update Hex package manager:
 

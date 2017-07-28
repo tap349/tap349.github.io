@@ -8,9 +8,15 @@ categories: [phoenix, ecto]
 
 <!-- more -->
 
-- <https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+## repository
 
-## 
+<https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+
+> Our repo (MyApp.Repo) has three main tasks:
+>
+> - to bring in all the common query functions from Ecto.Repo
+> - to set the otp_app name equal to our application name
+> - to initialize the options passed to the database adapter in init/2
 
 ## associations
 

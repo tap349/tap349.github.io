@@ -18,6 +18,7 @@ categories: [elixir]
 
 ### common tasks
 
+- `mix compile`
 - `mix deps.get` = `bundle install`
 
   installs new dependencies and updates existing ones up to the version
@@ -29,6 +30,12 @@ categories: [elixir]
   (`--unused`) and updates _mix.lock_ (`--unlock`)
 
 see [Phoenix]({% post_url 2016-11-12-phoenix %}) for Phoenix-specific Mix tasks.
+
+tasks can be grouped:
+
+```sh
+$ mix do deps.get, compile
+```
 
 ### mix.exs
 

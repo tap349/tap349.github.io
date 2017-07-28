@@ -18,6 +18,24 @@ categories: [phoenix, ecto]
 > - to set the otp_app name equal to our application name
 > - to initialize the options passed to the database adapter in init/2
 
+## changesets
+
+<https://hexdocs.pm/phoenix/1.3.0-rc.3/ecto.html>
+
+```elixir
+def changeset(%User{} = user, attrs) do
+  user
+  |> cast(attrs, [:uuid])        # params.require(:user).permit(:uuid) (strong parameters)
+  |> validate_required([:uuid])  # validates :uuid, presence: true (AM validations)
+end
+```
+
+`cast/3` also casts parameters to types defined in schema.
+
+if you communicate with `Repo` directly by passing `User` struct instead
+of changeset all validations defined in changeset are bypassed of course -
+error will be raised only if underlying data store returns error.
+
 ## associations
 
 associations are always loaded explicitly!

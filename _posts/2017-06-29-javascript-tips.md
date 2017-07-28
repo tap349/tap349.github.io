@@ -11,6 +11,8 @@ categories: []
 * TOC
 {:toc}
 
+<hr>
+
 ## merge objects
 
 - using `Object.assign`

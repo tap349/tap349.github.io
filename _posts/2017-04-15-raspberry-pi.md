@@ -11,6 +11,8 @@ categories: [rpi]
 * TOC
 {:toc}
 
+<hr>
+
 ## installation
 
 - <https://www.raspberrypi.org/downloads/raspbian/>

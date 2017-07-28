@@ -10,7 +10,6 @@ categories: [phoenix, ecto]
 
 * TOC
 {:toc}
-
 <hr>
 
 - <https://hexdocs.pm/phoenix/ecto.html>

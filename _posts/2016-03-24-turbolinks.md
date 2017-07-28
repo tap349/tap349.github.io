@@ -13,6 +13,8 @@ notes about turbolinks.
 * TOC
 {:toc}
 
+<hr>
+
 - <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
 - <http://railscasts.com/episodes/390-turbolinks?view=asciicast>
 - <https://habrahabr.ru/post/167161/>

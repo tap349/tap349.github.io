@@ -11,6 +11,8 @@ categories: [elixir]
 * TOC
 {:toc}
 
+<hr>
+
 ## Mix
 
 > Mix assumes that we are in the development environment unless we tell it

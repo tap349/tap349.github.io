@@ -11,6 +11,8 @@ categories: [react, react-native, redux]
 * TOC
 {:toc}
 
+<hr>
+
 <https://github.com/reactjs/redux>:
 
 > - The whole state of your app is stored in an object tree inside a single store.

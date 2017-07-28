@@ -11,6 +11,8 @@ categories: [react-native, ios]
 * TOC
 {:toc}
 
+<hr>
+
 ## installation
 
 - <https://facebook.github.io/react-native/docs/getting-started.html>

@@ -13,6 +13,8 @@ information about [Google Analytics](https://analytics.google.com) and its API.
 * TOC
 {:toc}
 
+<hr>
+
 ## Google Analytics (account, tracking and view IDs)
 
 <https://analytics.google.com/analytics/web/#management/Settings>

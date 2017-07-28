@@ -11,6 +11,8 @@ categories: [postgresql, rails]
 * TOC
 {:toc}
 
+<hr>
+
 ## psql tips
 
 - <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>

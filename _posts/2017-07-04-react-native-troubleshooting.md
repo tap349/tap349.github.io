@@ -11,6 +11,8 @@ categories: [react-native]
 * TOC
 {:toc}
 
+<hr>
+
 ## Couldn't find preset "es2015"
 
 emulator window:

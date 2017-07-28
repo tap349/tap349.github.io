@@ -116,104 +116,122 @@ associations can be loaded in:
 
 ### building associations
 
-- `put_assoc` vs. `cast_assoc`
+#### `put_assoc` vs. `cast_assoc`
 
-  - <https://medium.com/coryodaniel/til-elixir-ecto-put-assoc-vs-cast-assoc-7c80f35f6e6>
-  - <https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_assoc/3>
+- <https://medium.com/coryodaniel/til-elixir-ecto-put-assoc-vs-cast-assoc-7c80f35f6e6>
+- <https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_assoc/3>
 
-  when using `put_assoc` you usually supply existing association (either
-  association struct or changeset - say, `user` when creating a `comment`)
-  while when using `cast_assoc` you specify association name to retrieve
-  from supplied params and expect it to be created alongside the parent struct
-  (like when using `accepts_nested_attributes_for` in Rails).
+when using `put_assoc` you usually supply existing association (either
+association struct or changeset - say, `user` when creating a `comment`)
+while when using `cast_assoc` you specify association name to retrieve
+from supplied params and expect it to be created alongside the parent struct
+(like when using `accepts_nested_attributes_for` in Rails).
 
-  though in both cases corresponding association should be preloaded
-  (of course it only makes sense when parent struct has id field but
-  it doesn't raise error otherwise).
+though in both cases corresponding association should be preloaded
+(of course it only makes sense when parent struct has id field but
+it doesn't raise error otherwise).
 
-- `build_assoc` vs. building association explicitly
+#### `build_assoc` vs. building association explicitly
 
-  <https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
+<https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
+
+```elixir
+# build association using parent struct and association name
+user = Repo.get_by(User, name: "John")
+comment = Ecto.build_assoc(user, :comments, body: "foo")
+```
+
+=
+
+```elixir
+# build association explicitly by setting FK column value
+user = Repo.get_by(User, name: "John")
+comment = %Comment{user_id: user.id, body: "foo"}
+```
+
+> The goal of build_assoc is to allow you to work on
+> the association names instead of the key names.
+
+#### usage examples of `put_assoc`, `build_assoc` and `cast_assoc`
+
+NOTE: it's not recommended to place calls to these functions or repo inside
+      `changeset` functions.
+
+- `put_assoc`
+
+  <https://elixirforum.com/t/using-put-assoc-in-changeset-for-many-to-many/3848/2>:
+
+  > However, that put_assoc is about a belongs_to relationship and that expects
+  > either nil or a struct.
+
+  build new comment using its `user` association and existing user:
 
   ```elixir
-  # build association using parent struct and association name
+  # in controller or context
+
   user = Repo.get_by(User, name: "John")
-  comment = Ecto.build_assoc(user, :comments, body: "foo")
-  ```
 
-  =
+  comment
+  |> Repo.preload(:user)
+  |> Comment.changeset(params)
+  |> put_assoc(:user, user)
+  |> Repo.insert!
 
-  ```elixir
-  # build association explicitly by setting FK column value
-  user = Repo.get_by(User, name: "John")
-  comment = %Comment{user_id: user.id, body: "foo"}
-  ```
+  # in schema
 
-  > The goal of build_assoc is to allow you to work on
-  > the association names instead of the key names.
-
-- usage examples of `put_assoc`, `build_assoc` and `cast_assoc`
-
-  `put_assoc` (build new comment using its `user` association and existing user):
-
-  ```elixir
   def changeset(%Comment{} = comment, params) do
-    user = Repo.get_by(User, name: "John")
-
     comment
-    |> Repo.preload(:user)
     |> cast(params, [:body])
     |> validate_required([:body])
-    |> put_assoc(:user, user)
   end
   ```
 
-  `build_assoc` (build new comment using existing user and his `comments` association):
+- `build_assoc`
+
+  build new comment using existing user and his `comments` association:
 
   ```elixir
+  # in controller or context
+
+  user = Repo.get_by(User, name: "John")
+
+  user
+  |> build_assoc(:comments)
+  |> Comment.changeset(params)
+  |> Repo.insert!
+
+  # in schema
+
   def changeset(%Comment{} = comment, params) do
-    user = Repo.get_by(User, name: "John")
-
-    user
-    |> build_assoc(:comments)
+    comment
     |> cast(params, [:body])
     |> validate_required([:body])
   end
   ```
 
-  `cast_assoc` (build new user with new comments to save them all later in one go):
+- `cast_assoc`
+
+  build new user with new comments to save them all later in one go:
 
   ```elixir
+  # in controller or context
+
+  user = %User{}
+
+  user
+  |> Repo.preload(:comments)
+  |> User.changeset(params)
+  |> cast_assoc(:comments, with: &Comment.insert_changeset/2)
+  |> Repo.insert!
+
+  # in schema
+
   # &Comment.changeset/2 is used by default
   # to create changesets for comments
   def changeset(%User{} = user, params) do
     user
-    |> Repo.preload(:comments)
     |> cast(params, [:name])
     |> validate_required([:name])
-    |> cast_assoc(:comments, with: &Comment.insert_changeset/2)
-  end
-  ```
-
-  NOTE: it's better to extract working with repo out of `changeset` function:
-
-  ```elixir
-  # somewhere in comment controller or context:
-
-  user = Repo.get_by!(User, uuid: user_uuid)
-
-  %Comment{}
-  |> Repo.preload(:user)
-  |> Comment.changeset(params)
-  |> Ecto.Changeset.put_assoc(:user, user)
-  |> Repo.insert!
-
-  # in comment schema:
-
-  def changeset(%Comment{} = comment, params) do
-    comment
-    |> cast(params, [:body])
-    |> validate_required([:body])
   end
   ```
 

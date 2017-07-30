@@ -30,8 +30,8 @@ categories: [elixir]
 
 - `mix deps.get` = `bundle install`
 
-  installs new dependencies and updates existing ones up to the version
-  specified in _mix.lock_
+  gets all missing and out of date dependencies
+  (updates existing ones up to the version specified in _mix.lock_)
 
 - `mix deps.clean --unused --unlock` = `bundle install`
 

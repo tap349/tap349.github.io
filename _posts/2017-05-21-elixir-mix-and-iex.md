@@ -20,6 +20,14 @@ categories: [elixir]
 ### common tasks
 
 - `mix compile`
+
+  compiles the whole project including dependencies
+
+- `mix deps.compile [<package>]`
+
+  compiles project dependencies only (say, when you need to
+  recompile dependencies after editing their source code manually)
+
 - `mix deps.get` = `bundle install`
 
   installs new dependencies and updates existing ones up to the version
@@ -27,12 +35,15 @@ categories: [elixir]
 
 - `mix deps.clean --unused --unlock` = `bundle install`
 
-  removes dependencies which are no longer mentioned in _mix.exs_
+  removes dependencies which are no longer listed in _mix.exs_
   (`--unused`) and updates _mix.lock_ (`--unlock`)
+
+- `mix deps.update --all` = `bundle update`
+- `mix deps.update <package>` = `bundle update <gem>`
 
 see [Phoenix]({% post_url 2016-11-12-phoenix %}) for Phoenix-specific Mix tasks.
 
-tasks can be grouped:
+tasks can be batched:
 
 ```sh
 $ mix do deps.get, compile
@@ -289,26 +300,6 @@ also it's possible to recompile specific module:
 ```sh
 iex> r Foo.Bar
 ```
-
-### debugging (same as `binding.pry` in Ruby)
-
-- <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
-- <https://stackoverflow.com/questions/29671156/pry-while-testing>
-
-- add `IEx.pry` breakpoint
-
-  ```elixir
-  require IEx
-
-  defmodule Test do
-    def foo do
-      IEx.pry
-    end
-  end
-  ```
-
-- start new IEx session or recompile module with breakpoint
-- finish pry session by calling `respawn`
 
 ### suppress long output (same as `;` in irb)
 

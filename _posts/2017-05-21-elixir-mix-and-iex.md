@@ -298,7 +298,7 @@ iex> recompile()
 also it's possible to recompile specific module:
 
 ```sh
-iex> r Foo.Bar
+iex> r(Foo.Bar)
 ```
 
 ### suppress long output (same as `;` in irb)

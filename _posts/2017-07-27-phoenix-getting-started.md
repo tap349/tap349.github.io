@@ -84,3 +84,11 @@ $ mix phx.gen.schema Card cards
 $ mix phx.gen.schema Transfer transfers
 $ mix ecto.migrate && MIX_ENV=test mix ecto.migrate
 ```
+
+use [mix phx.gen.json](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Json.html) task
+instead - otherwise some useful modules (like `ChangesetView`) are not generated.
+
+see the list of modules that should be generated when using this task
+[here](https://github.com/phoenixframework/phoenix/tree/master/priv/templates/phx.gen.json).
+
+

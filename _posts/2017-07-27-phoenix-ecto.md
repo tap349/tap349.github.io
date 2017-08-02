@@ -293,6 +293,18 @@ you deal with persistence and need something to replace callbacks
 (that is `Ecto.Multi` is alternative to our custom operations in Rails projects
 which both persist data and run `after_*` callbacks manually).
 
+<https://github.com/elixir-ecto/ecto/issues/1114#issuecomment-162985202>:
+
+if it's necessary to get access to result of previous operation it's necessary
+to use `run` functions - say, if you first insert a record and then need to
+updated it you cannot use `Ecto.Multi.update` in the 2nd case since you won't
+be able to get previously inserted record.
+
+<https://elixirforum.com/t/ecto-multi-without-transaction/7453>:
+
+it's not possible to execute `Ecto.Multi` operations outside of transaction -
+use `with` statement instead.
+
 ## get query SQL
 
 <https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>

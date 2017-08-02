@@ -13,27 +13,35 @@ refined and focused quickref for chef-zero and knife-zero.
 - install chefdk and knife-zero on workstation:
 
   ```sh
-  (ws)$ brew cask update
+  (ws)$ brew update
   (ws)$ brew cask install chefdk
   (ws)$ chef gem install knife-zero
   ```
 
-- configure devops user on remote node:
+- configure devops and application (say, `builder`) users on remote node:
 
   ```sh
   (ws)$ ssh root@<remote-ip>
   (remote)# useradd devops -m -s /bin/bash -G sudo
   (remote)# passwd devops
+  (remote)# useradd builder -m -s /bin/bash -G sudo
+  (remote)# passwd builder
   (remote)# exit
   ```
 
-  add new ssh host to _~./ssh/config_: host itself and user must be
-  equal to the name of application you're going to deploy on that host
-  (say, builder). if it's necessary to deploy another application on
-  the same host create a separate ssh host named as that new application.
+- add new ssh host to _~./ssh/config_
+
+  host itself and user must be equal to the name of application you're going
+  to deploy on that host (`builder` in this case). if it's necessary to deploy
+  another application on the same host create a separate ssh host named as that
+  new application.
+
   to login as devops specify ssh user explicitly: `ssh devops@builder`.
-  when bootstrapping and converging ssh user is also specified explicitly
-  in _.chef/knife.rb_ with `knife[:ssh_user]` option.
+
+  also when bootstrapping and converging ssh user (devops) is specified
+  explicitly in _.chef/knife.rb_ with `knife[:ssh_user]` option.
+
+- add public keys of devops and application users to authorized keys on remote node
 
   ```sh
   (ws)$ ssh devops@builder
@@ -43,6 +51,8 @@ refined and focused quickref for chef-zero and knife-zero.
   / paste your public key (say, ~/.ssh/id_rsa.pub)
   (remote)$ exit
   ```
+
+  the same steps for application user.
 
   now you can login to remote node without password.
 

@@ -1,13 +1,12 @@
 ---
 layout: post
-title: how knife connects to node
+title: Chef - How knife connects to node
 date: 2016-02-27 01:16:00 +0300
 access: public
 categories: [chef]
 ---
 
-how knife-solo and knife-zero connect to the node
-when bootstrapping and cooking.
+how knife-solo and knife-zero connect to the node when bootstrapping and cooking.
 
 <!-- more -->
 

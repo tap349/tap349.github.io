@@ -1,6 +1,6 @@
 ---
 layout: post
-title: chef attributes
+title: Chef - Attributes
 date: 2016-01-27 14:06:00 +0300
 access: public
 categories: [chef]

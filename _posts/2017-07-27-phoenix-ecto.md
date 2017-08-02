@@ -255,6 +255,7 @@ models have been deprecated in Phoenix 1.3 - they are called just schemas now.
 
 - <https://hexdocs.pm/ecto/Ecto.Multi.html>
 - <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>
+- <https://medium.com/@feymartynov/an-example-of-using-ecto-multi-5f7fc8cf3cc1>
 
 - replace `before` callbacks with functions in changesets
 - replace `after` callbacks with operations in `Ecto.Multi`

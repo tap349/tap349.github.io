@@ -23,6 +23,7 @@ categories: [phoenix]
 
 - <https://hexdocs.pm/phoenix/Phoenix.Token.html>
 - <https://elixirforum.com/t/how-is-phoenix-token-different-from-jwt/2349/4>
+- <https://dennisreimann.de/articles/phoenix-passwordless-authentication-magic-link.html>
 
 ## using Guardian and JWT
 

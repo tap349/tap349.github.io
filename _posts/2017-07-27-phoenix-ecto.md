@@ -303,7 +303,8 @@ be able to get previously inserted record.
 <https://elixirforum.com/t/ecto-multi-without-transaction/7453>:
 
 it's not possible to execute `Ecto.Multi` operations outside of transaction -
-use `with` statement instead.
+use [with](https://hexdocs.pm/elixir/master/Kernel.SpecialForms.html#with/1)
+statement instead.
 
 ## get query SQL
 

@@ -18,7 +18,7 @@ refined and focused quickref for chef-zero and knife-zero.
   (ws)$ chef gem install knife-zero
   ```
 
-- configure devops and application (say, `builder`) users on remote node:
+- configure `devops` and application (say, `builder`) users on remote node:
 
   ```sh
   (ws)$ ssh root@<remote-ip>
@@ -36,12 +36,12 @@ refined and focused quickref for chef-zero and knife-zero.
   another application on the same host create a separate ssh host named as that
   new application.
 
-  to login as devops specify ssh user explicitly: `ssh devops@builder`.
+  to login as `devops` specify ssh user explicitly: `ssh devops@builder`.
 
   also when bootstrapping and converging ssh user (devops) is specified
   explicitly in _.chef/knife.rb_ with `knife[:ssh_user]` option.
 
-- add public keys of devops and application users to authorized keys on remote node
+- add public keys of `devops` and application users to authorized keys on remote node
 
   ```sh
   (ws)$ ssh devops@builder

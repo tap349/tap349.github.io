@@ -90,5 +90,3 @@ instead - otherwise some useful modules (like `ChangesetView`) are not generated
 
 see the list of modules that should be generated when using this task
 [here](https://github.com/phoenixframework/phoenix/tree/master/priv/templates/phx.gen.json).
-
-

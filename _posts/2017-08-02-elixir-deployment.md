@@ -41,12 +41,21 @@ end
 
 ## building release for production environment
 
-in all examples both `MIX_ENV=prod` environmen variable and `--env=prod` option
+in all examples both `MIX_ENV=prod` environment variable and `--env=prod` option
 are specified:
 
 ```sh
 $ MIX_ENV=prod mix release --env=prod
 ```
 
-without `MIX_ENV=prod` release is built in _\_/dev/rel/_ directory (`dev` is 
-default environment for Distillery).
+without `MIX_ENV=prod` release is built in _\_build/dev/rel/_ directory.
+still settings from `prod` environment in _rel/config.exs_ are applied
+(ERTS is included) and generated release is almost identical to production
+one except for extra _\_build/dev/rel/neko/var/_ directory.
+
+without `--env=prod` release is built in _\_build/prod/rel/_ directory and
+is completely identical to the one generated with both `MIX_ENV=prod` and
+`--env=prod`. so it seems to be safe to omit `--env=prod` option when setting
+`MIX_ENV` environment variable to required environment.
+
+TL;DR: use `MIX_ENV=prod` only without `--env=prod` option.

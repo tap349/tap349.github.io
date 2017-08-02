@@ -62,3 +62,11 @@ is completely identical to the one generated with both `MIX_ENV=prod` and
 `MIX_ENV` environment variable to required environment.
 
 TL;DR: use `MIX_ENV=prod` only without `--env=prod` option.
+
+## hot upgrades
+
+<https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
+
+> You do not have to use hot upgrades, you can simply do rolling restarts by
+> running stop, extracting the new release tarball over the top of the old,
+> and running start to boot the release.

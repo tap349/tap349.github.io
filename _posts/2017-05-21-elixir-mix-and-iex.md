@@ -41,6 +41,8 @@ categories: [elixir]
 - `mix deps.update --all` = `bundle update`
 - `mix deps.update <package>` = `bundle update <gem>`
 
+  updates dependency and writes updated version to _mix.lock_
+
 see [Phoenix]({% post_url 2016-11-12-phoenix %}) for Phoenix-specific Mix tasks.
 
 tasks can be batched:

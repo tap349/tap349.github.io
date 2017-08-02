@@ -15,6 +15,9 @@ categories: [elixir]
 - <https://hexdocs.pm/distillery/terminology.html>
 - <https://hexdocs.pm/distillery/walkthrough.html>
 
+> The artifact you will want to deploy is the release tarball, which is
+> located at `_build/prod/rel/<name>/releases/<version>/<name>.tar.gz`.
+
 ## including data files in release
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:

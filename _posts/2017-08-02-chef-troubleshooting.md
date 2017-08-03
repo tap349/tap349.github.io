@@ -56,3 +56,18 @@ it seems like `knife` is using old Ruby version provided by ChefDK.
 $ brew cask reinstall chefdk
 $ chef gem install knife-zero
 ```
+
+## There is a dependency conflict, but the solver could not determine the precise cause in the time allotted
+
+```sh
+$ berks vendor
+Resolving cookbook dependencies...
+...
+Fetching cookbook index from https://supermarket.chef.io...
+There is a dependency conflict, but the solver could not determine the precise cause in the time allotted.
+```
+
+**solution**
+
+error occurs when you add non-existing custom cookbook as dependency in your
+application cookbook's _metadata.rb_ file - so just remove that dependency.

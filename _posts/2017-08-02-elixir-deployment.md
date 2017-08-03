@@ -23,8 +23,9 @@ categories: [elixir]
 - replace all values in _config/prod.exs_ with environment variables and set
   those variables in production machine
 - hard-code secrets in _config/prod.exs_ and place it in production machine
-  manually or via Chef, say, at _/var/prod.secrets.exs_. also don't forget
-  to import it in _config/prod.exs_ (remove existing import):
+  manually or via Chef, say, at _/var/prod.secrets.exs_
+
+  also don't forget to import it in _config/prod.exs_ (remove existing import):
 
   ```elixir
   import_config "/var/prod.secrets.exs"

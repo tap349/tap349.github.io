@@ -1,16 +1,16 @@
 ---
 layout: post
-title: chef-zero quickref
+title: Chef - Quickref (using chef-zero and knife-zero)
 date: 2016-08-31 14:32:47 +0300
 access: public
-categories: [chef, chef-zero, knife-zero]
+categories: [chef, knife-zero]
 ---
 
-refined and focused quickref for chef-zero and knife-zero.
+refined and focused quickref for `chef-zero` and `knife-zero`.
 
 <!-- more -->
 
-- install chefdk and knife-zero on workstation:
+- install ChefDK and `knife-zero` on workstation:
 
   ```sh
   (ws)$ brew update
@@ -32,19 +32,19 @@ refined and focused quickref for chef-zero and knife-zero.
   (remote)# exit
   ```
 
-- add new ssh host to _~./ssh/config_
+- add new SSH host to _~./ssh/config_
 
   host itself and user must be equal to the name of application you're going
   to deploy on that host (`builder` in this case). if it's necessary to deploy
-  another application on the same host create a separate ssh host named as that
+  another application on the same host create a separate SSH host named as that
   new application.
 
-  to login as `devops` specify ssh user explicitly: `ssh devops@builder`.
+  to login as `devops` specify SSH user explicitly: `ssh devops@builder`.
 
-  also when bootstrapping and converging ssh user (devops) is specified
+  also when bootstrapping and converging SSH user (devops) is specified
   explicitly in _.chef/knife.rb_ with `knife[:ssh_user]` option.
 
-- add public keys of `devops` and application users to authorized keys on remote node
+- add public keys of `devops` and `builder` users to authorized keys on remote node
 
   ```sh
   (ws)$ ssh devops@builder
@@ -55,7 +55,7 @@ refined and focused quickref for chef-zero and knife-zero.
   (remote)$ exit
   ```
 
-  the same steps for application user.
+  the same steps for `builder` user.
 
   now you can login to remote node without password.
 
@@ -66,10 +66,10 @@ refined and focused quickref for chef-zero and knife-zero.
   / enter devops password for sudo command
   ```
 
-  here first `builder` is a host name from ssh config.
+  here first `builder` is a host name from SSH config.
 
   if you don't specify node name FQDN will be used by default -
-  this is the name by which node is registered in a chef-zero server.
+  this is the name by which node is registered in a `chef-zero` server.
 
   NOTE: you cannot change node name by renaming node file and changing the name
   inside this file - node name is also stored in _/etc/chef/client.rb_ on remote
@@ -102,7 +102,7 @@ refined and focused quickref for chef-zero and knife-zero.
   - update changes to _/etc/chef/client.rb_ on remote node:
 
     ```sh
-    (ws)$ knife zero bootstrap builder --node-name builder --no-converge 
+    (ws)$ knife zero bootstrap builder --node-name builder --no-converge
     ```
 
     without `--no-converge` option command would overwrite node file.

@@ -12,13 +12,32 @@ categories: [elixir]
 {:toc}
 <hr>
 
+- <https://hexdocs.pm/phoenix/deployment.html>
 - <https://hexdocs.pm/distillery/terminology.html>
 - <https://hexdocs.pm/distillery/walkthrough.html>
 
-> The artifact you will want to deploy is the release tarball, which is
-> located at `_build/prod/rel/<name>/releases/<version>/<name>.tar.gz`.
+## secrets
 
-## including data files in release
+<https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
+
+- replace all values in _config/prod.exs_ with environment variables and set
+  those variables in production machine
+- hard-code secrets in _config/prod.exs_ and place it in production machine
+  manually or via Chef, say, at _/var/prod.secrets.exs_. also don't forget
+  to import it in _config/prod.exs_ (remove existing import):
+
+  ```elixir
+  import_config "/var/prod.secrets.exs"
+  ```
+
+## assets
+
+<https://hexdocs.pm/phoenix/deployment.html#compiling-your-application-assets>:
+
+> If you are not serving or don’t care about assets at all, you can just remove
+> the cache_static_manifest configuration from config/prod.exs.
+
+## artifacts (say, YAML files)
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:
 
@@ -44,6 +63,11 @@ end
 
 ## building release for production environment
 
+<https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
+
+> The artifact you will want to deploy is the release tarball, which is
+> located at `_build/prod/rel/<name>/releases/<version>/<name>.tar.gz`.
+
 in all examples both `MIX_ENV=prod` environment variable and `--env=prod` option
 are specified:
 
@@ -61,7 +85,7 @@ is completely identical to the one generated with both `MIX_ENV=prod` and
 `--env=prod`. so it seems to be safe to omit `--env=prod` option when setting
 `MIX_ENV` environment variable to required environment.
 
-TL;DR: use `MIX_ENV=prod` only without `--env=prod` option.
+TL;DR: use `MIX_ENV=prod` only - without `--env=prod` option.
 
 ## hot upgrades
 

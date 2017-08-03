@@ -21,16 +21,17 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   NOTE: if you haven't used ChefDK for a while it's better to reinstall it -
         it looks like it's not updated properly using just `brew upgrade`.
 
-- configure `devops` and application (say, `builder`) users on remote node:
+- configure `devops` user on remote node:
 
   ```sh
   (ws)$ ssh root@<remote-ip>
   (remote)# useradd devops -m -s /bin/bash -G sudo
   (remote)# passwd devops
-  (remote)# useradd builder -m -s /bin/bash -G sudo
-  (remote)# passwd builder
   (remote)# exit
   ```
+
+  NOTE: it's not necessary to create application user (say, `builder`) -
+        he will be created by `appbox` cookbook when converging.
 
 - add new SSH host to _~./ssh/config_
 
@@ -44,7 +45,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   also when bootstrapping and converging SSH user (devops) is specified
   explicitly in _.chef/knife.rb_ with `knife[:ssh_user]` option.
 
-- add public keys of `devops` and `builder` users to authorized keys on remote node
+- add your public keys to authorized keys for `devops` user on remote node
 
   ```sh
   (ws)$ ssh devops@builder
@@ -55,9 +56,10 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   (remote)$ exit
   ```
 
-  the same steps for `builder` user.
-
   now you can login to remote node without password.
+
+  NOTE: your public keys for application user (say, `builder`)
+        will be added to authorized keys by `appbox` cookbook too.
 
 - bootstrap remote node:
 
@@ -72,9 +74,9 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   this is the name by which node is registered in a `chef-zero` server.
 
   NOTE: you cannot change node name by renaming node file and changing the name
-  inside this file - node name is also stored in _/etc/chef/client.rb_ on remote
-  node: if you change it locally new node file with the name from
-  _/etc/chef/client.rb_ will be created after converging (with empty run_list).
+        inside this file - node name is also stored in _/etc/chef/client.rb_ on
+        remote node: if you change it locally new node file with the name from
+        _/etc/chef/client.rb_ will be created after converging (with empty run_list).
 
 - converge remote node:
 

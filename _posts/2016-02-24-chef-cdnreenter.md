@@ -1,9 +1,9 @@
 ---
 layout: post
-title: cdnreenter
+title: Chef - cdnreenter
 date: 2016-02-24 20:41:00 +0300
 access: private
-categories: [chef, capistrano]
+categories: [chef]
 ---
 
 actions log to provision cdnreenter.

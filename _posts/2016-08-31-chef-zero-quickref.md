@@ -14,9 +14,12 @@ refined and focused quickref for chef-zero and knife-zero.
 
   ```sh
   (ws)$ brew update
-  (ws)$ brew cask install chefdk
+  (ws)$ brew cask reinstall chefdk
   (ws)$ chef gem install knife-zero
   ```
+
+  NOTE: if you haven't used ChefDK for a while it's better to reinstall it -
+        it looks like it's not updated properly using just `brew upgrade`.
 
 - configure `devops` and application (say, `builder`) users on remote node:
 

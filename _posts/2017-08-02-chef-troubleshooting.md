@@ -71,3 +71,58 @@ There is a dependency conflict, but the solver could not determine the precise c
 
 error occurs when you add non-existing custom cookbook as dependency in your
 application cookbook's _metadata.rb_ file - so just remove that dependency.
+
+## undefined method `set' for Chef::Platform:Class
+
+```sh
+$ knife zero converge 'name:billing'
+Compiling Cookbooks...
+
+================================================================================
+Recipe Compile Error in /var/chef/cache/cookbooks/git/libraries/z_provider_mapping.rb
+================================================================================
+
+NoMethodError
+-------------
+undefined method `set' for Chef::Platform:Class
+
+Cookbook Trace:
+---------------
+  /var/chef/cache/cookbooks/git/libraries/z_provider_mapping.rb:6:in `<top (required)>'
+
+Relevant File Content:
+----------------------
+/var/chef/cache/cookbooks/git/libraries/z_provider_mapping.rb:
+
+  1:  # provider mappings for Chef 11
+  2:
+  3:  #########
+  4:  # client
+  5:  #########
+  6>> Chef::Platform.set platform: :amazon, resource: :git_client, provider: Chef::Provider::GitClient::Package
+  7:  Chef::Platform.set platform: :centos, resource: :git_client, provider: Chef::Provider::GitClient::Package
+```
+
+**solution**
+
+- <https://github.com/chef-cookbooks/git/issues/121>
+- <https://github.com/chef-cookbooks/git/issues/119>
+
+```sh
+$ berks update git
+```
+
+also I had to update all cookbooks that depend on `git` cookbook
+which are used in my application cookbook:
+
+```sh
+$ berks update appbox
+```
+
+also it's necessary to remove directory with vendored cookbooks and vendor
+them again:
+
+```sh
+$ rm -rf berks-cookbooks/
+$ berks vendor
+```

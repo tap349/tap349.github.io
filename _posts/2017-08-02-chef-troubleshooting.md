@@ -159,7 +159,7 @@ Recipe: postgresql::setup_users
 <https://github.com/realchrisolin/chef-postgresql/commit/7683f11aedf967bca4c40eb8a72dc14d0f0ebf03>
 
 it looks like new version of Chef doesn't provide `Chef::Resource::PostgresqlUser`
-resource (same for `PostgresqlDatabase` and `PostgresqlExtension`).
+resource (same for `PostgresqlDatabase` and `PostgresqlExtension` resources).
 
 _providers/user.rb_ (`chef-postgresql` cookbook):
 

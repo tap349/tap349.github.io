@@ -38,6 +38,15 @@ categories: [elixir]
 > If you are not serving or don’t care about assets at all, you can just remove
 > the cache_static_manifest configuration from config/prod.exs.
 
+so if your application doesn't have to deal with assets:
+
+```diff
+config :billing, BillingWeb.Endpoint,
+  load_from_system_env: true,
+  url: [host: "example.com", port: 80],
+- cache_static_manifest: "priv/static/cache_manifest.json"
+```
+
 ## artifacts (say, YAML files)
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:

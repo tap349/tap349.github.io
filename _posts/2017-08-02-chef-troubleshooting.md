@@ -163,7 +163,7 @@ resource (same for `PostgresqlDatabase` and `PostgresqlExtension`).
 
 _providers/user.rb_ (`chef-postgresql` cookbook):
 
-```ruby
+```diff
 - @current_resource = Chef::Resource::PostgresqlUser.new(new_resource.name)
 + @current_resource = Chef::Resource.resource_for_node(:postgresql_user, node).new(new_resource.name)
 ```

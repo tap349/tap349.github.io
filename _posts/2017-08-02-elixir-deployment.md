@@ -38,12 +38,14 @@ categories: [elixir]
 > If you are not serving or don’t care about assets at all, you can just remove
 > the cache_static_manifest configuration from config/prod.exs.
 
-so if your application doesn't have to deal with assets:
+so if your application doesn't have to deal with assets remove specified line
+in _config/prod.exs_:
 
 ```diff
 config :billing, BillingWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "example.com", port: 80],
++ url: [host: "example.com", port: 80]
+- url: [host: "example.com", port: 80],
 - cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 

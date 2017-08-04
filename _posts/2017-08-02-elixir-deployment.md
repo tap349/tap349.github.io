@@ -46,8 +46,7 @@ categories: [elixir]
 > If you are not serving or don’t care about assets at all, you can just remove
 > the cache_static_manifest configuration from config/prod.exs.
 
-so if your application doesn't have to deal with assets remove specified line
-in _config/prod.exs_:
+so if application doesn't deal with assets remove this line in _config/prod.exs_:
 
 ```diff
 config :billing, BillingWeb.Endpoint,
@@ -81,31 +80,41 @@ defmodule Neko.Reader do
 end
 ```
 
-## building release for production environment
+## prepare for building release
+
+<https://hexdocs.pm/phoenix/deployment.html#putting-it-all-together>:
+
+```sh
+# not sure how it's different from `mix deps.get`
+$ mix deps.get --only prod
+# compiles project into _build/prod/ directory
+$ MIX_ENV=prod mix compile
+```
+
+## build release
 
 <https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
 
 > The artifact you will want to deploy is the release tarball, which is
 > located at `_build/prod/rel/<name>/releases/<version>/<name>.tar.gz`.
 
-in all examples both `MIX_ENV=prod` environment variable and `--env=prod` option
-are specified:
+in all examples `MIX_ENV=prod` and `--env=prod` are used at the same time:
 
 ```sh
 $ MIX_ENV=prod mix release --env=prod
 ```
 
-without `MIX_ENV=prod` release is built in _\_build/dev/rel/_ directory.
-still settings from `prod` environment in _rel/config.exs_ are applied
-(ERTS is included) and generated release is almost identical to production
-one except for extra _\_build/dev/rel/neko/var/_ directory.
+without `MIX_ENV=prod` release is built into _\_build/dev/rel/_ directory.
+still settings for `prod` environment from _rel/config.exs_ are applied
+(say, ERTS is included) and generated release is almost identical to
+production one except for extra _\_build/dev/rel/neko/var/_ directory.
 
-without `--env=prod` release is built in _\_build/prod/rel/_ directory and
+without `--env=prod` release is built into _\_build/prod/rel/_ directory and
 is completely identical to the one generated with both `MIX_ENV=prod` and
-`--env=prod`. so it seems to be safe to omit `--env=prod` option when setting
+`--env=prod` => it seems to be safe to omit `--env=prod` option when setting
 `MIX_ENV` environment variable to required environment.
 
-TL;DR: use `MIX_ENV=prod` only - without `--env=prod` option.
+TL;DR: use `MIX_ENV=prod` only - without `--env=prod`.
 
 ## hot upgrades
 

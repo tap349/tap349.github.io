@@ -173,3 +173,11 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   CREATE INDEX teams_on_name_idx ON teams USING GIN (name gin_trgm_ops);
   CREATE INDEX teams_on_is_public_idx ON teams (is_public);
   ```
+
+## remove all versions of PostgreSQL on ubuntu
+
+<https://askubuntu.com/a/32735>:
+
+```sh
+$ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
+```

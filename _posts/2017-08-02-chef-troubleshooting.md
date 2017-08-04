@@ -126,3 +126,46 @@ them again:
 $ rm -rf berks-cookbooks/
 $ berks vendor
 ```
+
+## uninitialized constant Chef::Resource::PostgresqlUser
+
+```sh
+$ knife zero converge 'name:billing'
+...
+Recipe: postgresql::setup_users
+  * postgresql_user[devops] action create
+
+    ================================================================================
+    Error executing action `create` on resource 'postgresql_user[devops]'
+    ================================================================================
+
+    NameError
+    ---------
+    uninitialized constant Chef::Resource::PostgresqlUser
+
+    Cookbook Trace:
+    ---------------
+    /var/chef/cache/cookbooks/postgresql/providers/user.rb:54:in `load_current_resource'
+
+    Resource Declaration:
+    ---------------------
+    # In /var/chef/cache/cookbooks/postgresql/recipes/setup_users.rb
+
+      8:   postgresql_user user["username"] do
+```
+
+**solution**
+
+<https://github.com/realchrisolin/chef-postgresql/commit/7683f11aedf967bca4c40eb8a72dc14d0f0ebf03>
+
+it looks like new version of Chef doesn't provide `Chef::Resource::PostgresqlUser`
+resource (same for `PostgresqlDatabase` and `PostgresqlExtension`).
+
+_providers/user.rb_ (`chef-postgresql` cookbook):
+
+```ruby
+- @current_resource = Chef::Resource::PostgresqlUser.new(new_resource.name)
++ @current_resource = Chef::Resource.resource_for_node(:postgresql_user, node).new(new_resource.name)
+```
+
+make the same changes in _providers/database.rb_ and _providers/extension.rb_.

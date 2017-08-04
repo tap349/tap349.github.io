@@ -12,11 +12,14 @@ categories: [elixir]
 {:toc}
 <hr>
 
+## preparation
+
 - <https://hexdocs.pm/phoenix/deployment.html>
 - <https://hexdocs.pm/distillery/terminology.html>
 - <https://hexdocs.pm/distillery/walkthrough.html>
+- <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
 
-## secrets
+### secrets
 
 <https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
 
@@ -39,7 +42,7 @@ categories: [elixir]
   $ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
   ```
 
-## assets
+### assets
 
 <https://hexdocs.pm/phoenix/deployment.html#compiling-your-application-assets>:
 
@@ -56,7 +59,7 @@ config :billing, BillingWeb.Endpoint,
 - cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
-## artifacts (say, YAML files)
+### artifacts (say, YAML files)
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:
 
@@ -80,18 +83,45 @@ defmodule Neko.Reader do
 end
 ```
 
-## prepare for building release
+### web server
+
+- <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/10>
+
+<https://hexdocs.pm/phoenix/Phoenix.Endpoint.html>:
+
+> Runtime configuration
+>
+> :server - when true, starts the web server when the endpoint supervision tree
+> starts. Defaults to false. The mix phx.server task automatically sets this to true.
+
+_config/prod.exs_:
+
+```elixir
+config :billing, BillingWeb.Endpoint,
+  load_from_system_env: true,
+- url: [host: "example.com", port: 80]
++ url: [host: "example.com", port: 80],
++ server: true
+```
+
+also see auto-generated comment `Using releases` in _config/prod.exs_.
+
+if web server is not started you'll get `Connection refused` error.
+
+## manual deployment
+
+### prepare for building release
 
 <https://hexdocs.pm/phoenix/deployment.html#putting-it-all-together>:
 
 ```sh
-# not sure how it's different from `mix deps.get`
+# no idea how it's different from `mix deps.get`
 $ mix deps.get --only prod
 # compiles project into _build/prod/ directory
 $ MIX_ENV=prod mix compile
 ```
 
-## build release
+### build release
 
 <https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
 
@@ -116,10 +146,53 @@ is completely identical to the one generated with both `MIX_ENV=prod` and
 
 TL;DR: use `MIX_ENV=prod` only - without `--env=prod`.
 
-## hot upgrades
+### hot upgrades
 
 <https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
 
 > You do not have to use hot upgrades, you can simply do rolling restarts by
 > running stop, extracting the new release tarball over the top of the old,
 > and running start to boot the release.
+
+## edeliver
+
+### install Erlang and Elixir on build server
+
+TODO: automate these steps with Chef?
+
+<https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
+
+NOTE: OS on my build server is Ubuntu 16.04.3 LTS (Xenial Xerus).
+
+currently my build server is production one.
+
+- connect to build server as application user (`billing`):
+
+  ```sh
+  $ ssh billing
+  ```
+
+- install latest Erlang and Elixir
+
+  ```sh
+  $ mkdir tmp/
+  $ cd tmp/
+  $ wget http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+  $ sudo apt-key add erlang_solutions.asc
+  $ echo "deb http://packages.erlang-solutions.com/ubuntu xenial contrib" >> /etc/apt/sources.list
+  $ sudo apt-get update
+  $ sudo apt-get -y install esl-erlang
+  $ sudo apt-get -y install elixir
+  ```
+
+- install `build-essential` to compile `certifi` dependency
+
+  ```sh
+  $ sudo apt-get install build-essential
+  ```
+
+### build and deploy release
+
+<http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
+
+

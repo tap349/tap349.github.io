@@ -12,14 +12,14 @@ categories: [chef]
 {:toc}
 <hr>
 
-## installation of both knife-solo and knife-zero
+## knife-solo and knife-zero are installed at the same time
 
-`knife` executables from both gems might conflict since `knife-solo` is
-installed as ordinary gem (`gem install knife-solo` - _~/.rbenv/shims/knife_)
-while `knife-zero` is installed using ChefDK (`chef install gem knife-zero` -
-_/opt/chefdk/bin/knife_) 
+`knife` executables from these gems might conflict with each other since
+`knife-solo` is installed as ordinary gem (`gem install knife-solo` ->
+_~/.rbenv/shims/knife_) while `knife-zero` is installed using ChefDK
+(`chef install gem knife-zero` -> _/opt/chefdk/bin/knife_).
 
-so only one of them might be available at any given time -
+so only one of them can be available at any given time -
 see [rbenv]({% post_url 2016-03-30-rbenv %}) for details.
 
 ## Doing old-style registration with the validation key at

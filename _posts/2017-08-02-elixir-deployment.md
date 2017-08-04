@@ -23,12 +23,20 @@ categories: [elixir]
 - replace all values in _config/prod.exs_ with environment variables and set
   those variables in production machine
 - hard-code secrets in _config/prod.exs_ and place it in production machine
-  manually or via Chef, say, at _/var/prod.secrets.exs_
+  manually or via Chef, say, at _/var/prod.secret.exs_
 
-  also don't forget to import it in _config/prod.exs_ (remove existing import):
+  _config/prod.exs_:
 
   ```elixir
-  import_config "/var/prod.secrets.exs"
+  - import_config "config/prod.secret.exs"
+  + import_config "/var/prod.secret.exs"
+  ```
+
+  on development machine (or else you'll get errors about missing config
+  when compiling project with `MIX_ENV=prod`):
+
+  ```sh
+  $ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
   ```
 
 ## assets

@@ -12,17 +12,17 @@ categories: [elixir]
 {:toc}
 <hr>
 
-## prepare for deployment
+# prepare for deployment
 
 1. <https://hexdocs.pm/phoenix/deployment.html>
 
-### secrets
+## secrets
 
 1. <https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
 
 - replace all values in _config/prod.exs_ with environment variables and set
-  those variables in production machine OR
-- hard-code secrets in _config/prod.exs_ and place it in production machine
+  those variables on production machine OR
+- hard-code secrets in _config/prod.exs_ and place it on production machine
   manually or via Chef, say, at _/var/prod.secret.exs_
 
   _config/prod.exs_:
@@ -32,7 +32,7 @@ categories: [elixir]
   + import_config "/var/prod.secret.exs"
   ```
 
-### assets
+## assets
 
 <https://hexdocs.pm/phoenix/deployment.html#compiling-your-application-assets>:
 
@@ -49,7 +49,7 @@ config :billing, BillingWeb.Endpoint,
 - cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
-### artifacts (say, YAML files)
+## artifacts (say, YAML files)
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:
 
@@ -64,7 +64,7 @@ config :billing, BillingWeb.Endpoint,
 > it has grown beyond that. All it matters now is that we put in the "priv"
 > directory any artifact that you need in production alongside your code.
 
-in Elixir module:
+in some Elixir module:
 
 ```elixir
 defmodule Neko.Reader do
@@ -73,16 +73,16 @@ defmodule Neko.Reader do
 end
 ```
 
-### web server
+## endpoint
 
-get information about `BillingWeb.Endpoint` process in production machine:
+get information about `BillingWeb.Endpoint` process on production machine:
 
-```
+```sh
 $ bin/billing remote_console
 iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 ```
 
-- `:server` endpoint option
+- `:server` option
 
   1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html>
   2. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/10>
@@ -103,9 +103,9 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
   ```
 
   if web server is not started you'll get `Connection refused` error
-  when trying to send request.
+  when trying to send any request to application.
 
-- `:load_from_system_env` and `:http` endpoint options
+- `:load_from_system_env` and `:http` options
 
   _config/prod.exs_:
 
@@ -133,19 +133,19 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
   end
   ```
 
-### migrations
+## migrations
 
 1. <https://github.com/bitwalker/distillery/issues/2>
 2. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
 3. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
 4. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
 
-## test production release locally
+# test production release locally
 
 1. <https://hexdocs.pm/distillery/terminology.html>
 2. <https://hexdocs.pm/distillery/walkthrough.html>
 
-### create production database
+## create production database
 
 ```sh
 $ psql -d postgres
@@ -154,13 +154,13 @@ $ psql -d postgres
 $ mix ecto.setup
 ```
 
-### link _prod.secret.exs_
+## link _prod.secret.exs_
 
 ```sh
 $ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
 ```
 
-### build production release
+## build production release
 
 <https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
 
@@ -178,30 +178,30 @@ $ MIX_ENV=prod mix compile
 $ MIX_ENV=prod mix release
 ```
 
-NOTE: it's necessary to specify `MIX_ENV=prod` for both `compile` and `release`
-      tasks to set working directory to _\_build/prod/_.
+`MIX_ENV=prod`, inter alia, sets working directory to _\_build/prod/_
+for both `compile` and `release` tasks.
 
-#### about `MIX_ENV=prod` and `--env=prod`
-
-in all examples `MIX_ENV=prod` and `--env=prod` are used at the same time:
+in all examples I've seen `MIX_ENV=prod` and `--env=prod` are used
+together like this:
 
 ```sh
 $ MIX_ENV=prod mix release --env=prod
 ```
 
-without `MIX_ENV=prod` release is built into _\_build/dev/rel/_ directory.
-still settings for `prod` environment from _rel/config.exs_ are applied
-(say, ERTS is included) and generated release is almost identical to
-production one except for extra _\_build/dev/rel/neko/var/_ directory.
+using `MIX_ENV=prod` only:
 
-without `--env=prod` release is built into _\_build/prod/rel/_ directory and
-is completely identical to the one generated with both `MIX_ENV=prod` and
-`--env=prod` => it seems to be safe to omit `--env=prod` option when setting
-`MIX_ENV` environment variable to required environment.
+- sets working directory to _\_build/prod/_
+- applies production configuration from _rel/config.exs_
 
-TL;DR: use `MIX_ENV=prod` only - without `--env=prod`.
+using `--env=prod` only:
 
-### run production release
+- doesn't change working directory (_\_build/dev/_ directory is used)
+- applies production configuration from _rel/config.exs_
+- includes extra _\_build/dev/rel/billing/var/_ directory
+
+TL;DR: for `release` task it's safe to use `MIX_ENV=prod` only.
+
+## run production release
 
 ```sh
 $ PORT=4000 _build/prod/rel/billing/bin/billing console
@@ -213,19 +213,19 @@ in another terminal:
 $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
 ```
 
-## deployment
+# deployment
 
 1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
 
-### [edeliver](https://github.com/edeliver/edeliver/)
+## [edeliver](https://github.com/edeliver/edeliver/)
 
-#### install Erlang and Elixir on build server
+### install Erlang and Elixir on build server
 
 TODO: automate these steps with Chef?
 
 1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 
-NOTE: OS on my build server is Ubuntu 16.04.3 LTS (Xenial Xerus).
+NOTE: my build server OS is Ubuntu 16.04.3 LTS (Xenial Xerus).
 
 currently my build server is production one.
 
@@ -254,14 +254,14 @@ currently my build server is production one.
   $ sudo apt-get install build-essential
   ```
 
-#### build and deploy release
+### build and deploy release
 
-NOTE: push all changes to github - when building new release on build server
-      edeliver fetches repo from github!!! (just like Capistrano)
+NOTE: push all changes to github!!! when building new release on build
+      server edeliver fetches repo from github (just like Capistrano)
 
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 
-## manage application in production
+# manage application in production
 
 ```sh
 $ bin/billing console
@@ -270,7 +270,7 @@ $ bin/billing stop
 $ bin/billing remote_console
 ```
 
-## about hot upgrades
+# about hot upgrades
 
 <https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
 

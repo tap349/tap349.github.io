@@ -15,16 +15,13 @@ categories: [elixir]
 ## prepare for deployment
 
 - <https://hexdocs.pm/phoenix/deployment.html>
-- <https://hexdocs.pm/distillery/terminology.html>
-- <https://hexdocs.pm/distillery/walkthrough.html>
-- <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
 
 ### secrets
 
-<https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
+1. <https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
 
 - replace all values in _config/prod.exs_ with environment variables and set
-  those variables in production machine
+  those variables in production machine OR
 - hard-code secrets in _config/prod.exs_ and place it in production machine
   manually or via Chef, say, at _/var/prod.secret.exs_
 
@@ -33,13 +30,6 @@ categories: [elixir]
   ```diff
   - import_config "config/prod.secret.exs"
   + import_config "/var/prod.secret.exs"
-  ```
-
-  on development machine (or else you'll get errors about missing config
-  when compiling project with `MIX_ENV=prod`):
-
-  ```sh
-  $ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
   ```
 
 ### assets
@@ -150,7 +140,10 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 - <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
 - <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
 
-## test production release
+## test production release locally
+
+- <https://hexdocs.pm/distillery/terminology.html>
+- <https://hexdocs.pm/distillery/walkthrough.html>
 
 ### create production database
 
@@ -159,6 +152,12 @@ $ psql -d postgres
 =# CREATE USER billing_prod WITH PASSWORD 'billing_prod';
 =# ALTER USER billing_prod CREATEDB;
 $ mix ecto.setup
+```
+
+### link _prod.secret.exs_
+
+```sh
+$ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
 ```
 
 ### build production release
@@ -202,12 +201,6 @@ is completely identical to the one generated with both `MIX_ENV=prod` and
 
 TL;DR: use `MIX_ENV=prod` only - without `--env=prod`.
 
-### link _prod.secret.exs_
-
-```sh
-$ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
-```
-
 ### run production release
 
 ```sh
@@ -221,6 +214,8 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 ```
 
 ## deployment
+
+- <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
 
 ### [edeliver](https://github.com/edeliver/edeliver/)
 
@@ -253,7 +248,7 @@ currently my build server is production one.
   $ sudo apt-get -y install elixir
   ```
 
-- install `build-essential` to compile `certifi` dependency
+- install `build-essential` package to compile `certifi` dependency
 
   ```sh
   $ sudo apt-get install build-essential

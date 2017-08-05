@@ -222,7 +222,7 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 
 ## deployment
 
-### edeliver
+### [edeliver](https://github.com/edeliver/edeliver/)
 
 #### install Erlang and Elixir on build server
 

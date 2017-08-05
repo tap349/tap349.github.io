@@ -84,8 +84,8 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 
 - `:server` endpoint option
 
-  - <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html>
-  - <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/10>
+  1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html>
+  2. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/10>
 
   > Runtime configuration
   >
@@ -135,10 +135,10 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 
 ### migrations
 
-- <https://github.com/bitwalker/distillery/issues/2>
-- <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
-- <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
-- <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
+1. <https://github.com/bitwalker/distillery/issues/2>
+2. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
+3. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
+4. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
 
 ## test production release locally
 

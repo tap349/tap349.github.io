@@ -12,7 +12,7 @@ categories: [elixir]
 {:toc}
 <hr>
 
-## preparation
+## prepare for deployment
 
 - <https://hexdocs.pm/phoenix/deployment.html>
 - <https://hexdocs.pm/distillery/terminology.html>
@@ -85,48 +85,104 @@ end
 
 ### web server
 
-- <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/10>
+get information about `BillingWeb.Endpoint` process in production machine:
 
-<https://hexdocs.pm/phoenix/Phoenix.Endpoint.html>:
-
-> Runtime configuration
->
-> :server - when true, starts the web server when the endpoint supervision tree
-> starts. Defaults to false. The mix phx.server task automatically sets this to true.
-
-_config/prod.exs_:
-
-```elixir
-config :billing, BillingWeb.Endpoint,
-  load_from_system_env: true,
-- url: [host: "example.com", port: 80]
-+ url: [host: "example.com", port: 80],
-+ server: true
+```
+$ bin/billing remote_console
+iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 ```
 
-also see auto-generated comment `Using releases` in _config/prod.exs_.
+- `:server` endpoint option
 
-if web server is not started you'll get `Connection refused` error.
+  - <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html>
+  - <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/10>
 
-## manual deployment
+  > Runtime configuration
+  >
+  > :server - when true, starts the web server when the endpoint supervision tree
+  > starts. Defaults to false. The mix phx.server task automatically sets this to true.
 
-### prepare for building release
+  _config/prod.exs_ (see also auto-generated comment titled `Using releases`):
+
+  ```elixir
+  config :billing, BillingWeb.Endpoint,
+    load_from_system_env: true,
+  - url: [host: "example.com", port: 80]
+  + url: [host: "example.com", port: 80],
+  + server: true
+  ```
+
+  if web server is not started you'll get `Connection refused` error
+  when trying to send request.
+
+- `:load_from_system_env` and `:http` endpoint options
+
+  _config/prod.exs_:
+
+  ```elixir
+  # you won't find the :http configuration below, but set inside
+  # BillingWeb.Endpoint.init/2 when load_from_system_env is true.
+  # Any dynamic configuration should be done there.
+  # ...
+  config :billing, BillingWeb.Endpoint,
+    load_from_system_env: true,
+    url: [host: "example.com", port: 80],
+    server: true
+  ```
+
+  _lib/billing_web/endpoint.ex_:
+
+  ```elixir
+  def init(_key, config) do
+    if config[:load_from_system_env] do
+      port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
+      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+    else
+      {:ok, config}
+    end
+  end
+  ```
+
+### migrations
+
+- <https://github.com/bitwalker/distillery/issues/2>
+- <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
+- <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
+- <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
+
+## test production release
+
+### create production database
+
+```sh
+$ psql -d postgres
+=# CREATE USER billing_prod WITH PASSWORD 'billing_prod';
+=# ALTER USER billing_prod CREATEDB;
+$ mix ecto.setup
+```
+
+### build production release
+
+<https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
+
+> The artifact you will want to deploy is the release tarball, which is
+> located at `_build/prod/rel/<name>/releases/<version>/<name>.tar.gz`.
 
 <https://hexdocs.pm/phoenix/deployment.html#putting-it-all-together>:
 
 ```sh
 # no idea how it's different from `mix deps.get`
 $ mix deps.get --only prod
-# compiles project into _build/prod/ directory
+# compiles project into _build/prod/lib/ directory
 $ MIX_ENV=prod mix compile
+# builds release in _build/prod/rel/ directory
+$ MIX_ENV=prod mix release
 ```
 
-### build release
+NOTE: it's necessary to specify `MIX_ENV=prod` for both `compile` and `release`
+      tasks to set working directory to _\_build/prod/_.
 
-<https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
-
-> The artifact you will want to deploy is the release tarball, which is
-> located at `_build/prod/rel/<name>/releases/<version>/<name>.tar.gz`.
+#### about `MIX_ENV=prod` and `--env=prod`
 
 in all examples `MIX_ENV=prod` and `--env=prod` are used at the same time:
 
@@ -146,17 +202,29 @@ is completely identical to the one generated with both `MIX_ENV=prod` and
 
 TL;DR: use `MIX_ENV=prod` only - without `--env=prod`.
 
-### hot upgrades
+### link _prod.secret.exs_
 
-<https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
+```sh
+$ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
+```
 
-> You do not have to use hot upgrades, you can simply do rolling restarts by
-> running stop, extracting the new release tarball over the top of the old,
-> and running start to boot the release.
+### run production release
 
-## edeliver
+```sh
+$ PORT=4000 _build/prod/rel/billing/bin/billing console
+```
 
-### install Erlang and Elixir on build server
+in another terminal:
+
+```sh
+$ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
+```
+
+## deployment
+
+### edeliver
+
+#### install Erlang and Elixir on build server
 
 TODO: automate these steps with Chef?
 
@@ -191,8 +259,26 @@ currently my build server is production one.
   $ sudo apt-get install build-essential
   ```
 
-### build and deploy release
+#### build and deploy release
+
+NOTE: push all changes to github - when building new release on build server
+      edeliver fetches repo from github!!! (just like Capistrano)
 
 <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 
+## manage application in production
 
+```sh
+$ bin/billing console
+$ bin/billing start
+$ bin/billing stop
+$ bin/billing remote_console
+```
+
+## about hot upgrades
+
+<https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
+
+> You do not have to use hot upgrades, you can simply do rolling restarts by
+> running stop, extracting the new release tarball over the top of the old,
+> and running start to boot the release.

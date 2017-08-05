@@ -213,11 +213,11 @@ in another terminal:
 $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
 ```
 
-## deployment
+## deploy
 
 1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
 
-### [edeliver](https://github.com/edeliver/edeliver/)
+### edeliver
 
 #### install Erlang and Elixir on build server
 
@@ -260,6 +260,8 @@ NOTE: push all changes to github!!! when building new release on build
       server edeliver fetches repo from github (just like Capistrano)
 
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
+
+HERE
 
 ## manage application in production
 

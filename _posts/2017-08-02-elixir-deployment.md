@@ -14,7 +14,7 @@ categories: [elixir]
 
 ## prepare for deployment
 
-- <https://hexdocs.pm/phoenix/deployment.html>
+1. <https://hexdocs.pm/phoenix/deployment.html>
 
 ### secrets
 
@@ -142,8 +142,8 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 
 ## test production release locally
 
-- <https://hexdocs.pm/distillery/terminology.html>
-- <https://hexdocs.pm/distillery/walkthrough.html>
+1. <https://hexdocs.pm/distillery/terminology.html>
+2. <https://hexdocs.pm/distillery/walkthrough.html>
 
 ### create production database
 
@@ -215,7 +215,7 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 
 ## deployment
 
-- <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
+1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
 
 ### [edeliver](https://github.com/edeliver/edeliver/)
 
@@ -223,7 +223,7 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 
 TODO: automate these steps with Chef?
 
-<https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
+1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 
 NOTE: OS on my build server is Ubuntu 16.04.3 LTS (Xenial Xerus).
 
@@ -259,7 +259,7 @@ currently my build server is production one.
 NOTE: push all changes to github - when building new release on build server
       edeliver fetches repo from github!!! (just like Capistrano)
 
-<http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
+1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 
 ## manage application in production
 

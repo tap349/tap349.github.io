@@ -12,11 +12,11 @@ categories: [elixir]
 {:toc}
 <hr>
 
-# prepare for deployment
+## prepare for deployment
 
 1. <https://hexdocs.pm/phoenix/deployment.html>
 
-## secrets
+### secrets
 
 1. <https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
 
@@ -32,7 +32,7 @@ categories: [elixir]
   + import_config "/var/prod.secret.exs"
   ```
 
-## assets
+### assets
 
 <https://hexdocs.pm/phoenix/deployment.html#compiling-your-application-assets>:
 
@@ -49,7 +49,7 @@ config :billing, BillingWeb.Endpoint,
 - cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
-## artifacts (say, YAML files)
+### artifacts (say, YAML files)
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:
 
@@ -73,7 +73,7 @@ defmodule Neko.Reader do
 end
 ```
 
-## endpoint
+### endpoint
 
 get information about `BillingWeb.Endpoint` process on production machine:
 
@@ -133,19 +133,19 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
   end
   ```
 
-## migrations
+### migrations
 
 1. <https://github.com/bitwalker/distillery/issues/2>
 2. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
 3. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
 4. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
 
-# test production release locally
+## test production release locally
 
 1. <https://hexdocs.pm/distillery/terminology.html>
 2. <https://hexdocs.pm/distillery/walkthrough.html>
 
-## create production database
+### create production database
 
 ```sh
 $ psql -d postgres
@@ -154,13 +154,13 @@ $ psql -d postgres
 $ mix ecto.setup
 ```
 
-## link _prod.secret.exs_
+### link _prod.secret.exs_
 
 ```sh
 $ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
 ```
 
-## build production release
+### build production release
 
 <https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
 
@@ -201,7 +201,7 @@ using `--env=prod` only:
 
 TL;DR: for `release` task it's safe to use `MIX_ENV=prod` only.
 
-## run production release
+### run production release
 
 ```sh
 $ PORT=4000 _build/prod/rel/billing/bin/billing console
@@ -213,13 +213,13 @@ in another terminal:
 $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
 ```
 
-# deployment
+## deployment
 
 1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
 
-## [edeliver](https://github.com/edeliver/edeliver/)
+### [edeliver](https://github.com/edeliver/edeliver/)
 
-### install Erlang and Elixir on build server
+#### install Erlang and Elixir on build server
 
 TODO: automate these steps with Chef?
 
@@ -254,14 +254,14 @@ currently my build server is production one.
   $ sudo apt-get install build-essential
   ```
 
-### build and deploy release
+#### build and deploy release
 
 NOTE: push all changes to github!!! when building new release on build
       server edeliver fetches repo from github (just like Capistrano)
 
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 
-# manage application in production
+## manage application in production
 
 ```sh
 $ bin/billing console
@@ -270,7 +270,7 @@ $ bin/billing stop
 $ bin/billing remote_console
 ```
 
-# about hot upgrades
+## about hot upgrades
 
 <https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
 

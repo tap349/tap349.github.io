@@ -30,7 +30,7 @@ categories: [elixir]
 
   _config/prod.exs_:
 
-  ```elixir
+  ```diff
   - import_config "config/prod.secret.exs"
   + import_config "/var/prod.secret.exs"
   ```
@@ -104,7 +104,7 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 
   _config/prod.exs_ (see also auto-generated comment titled `Using releases`):
 
-  ```elixir
+  ```diff
   config :billing, BillingWeb.Endpoint,
     load_from_system_env: true,
   - url: [host: "example.com", port: 80]

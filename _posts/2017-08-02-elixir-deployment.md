@@ -261,7 +261,12 @@ NOTE: push all changes to github!!! when building new release on build
 
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 
-HERE
+```sh
+$ mix edeliver build release --verbose
+$ mix edeliver deploy release to production --verbose
+```
+
+TODO: try `mix edeliver migrate production up` task - maybe it works!
 
 ## manage application in production
 

@@ -21,7 +21,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   NOTE: if you haven't used ChefDK for a while it's better to reinstall it -
         it looks like it's not updated properly using just `brew upgrade`.
 
-- configure `devops` user on remote node:
+- create `devops` user on remote node:
 
   ```sh
   (ws)$ ssh root@<remote-ip>
@@ -31,7 +31,9 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   ```
 
   NOTE: it's not necessary to create application user (say, `builder`) -
-        it will be created by either application or `appbox` cookbook.
+        it will be created by `appbox` cookbook.
+
+  UPDATE: application user will be created by application cookbook manually.
 
 - add new SSH host to _~./ssh/config_
 
@@ -42,7 +44,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 
   to login as `devops` specify SSH user explicitly: `ssh devops@builder`.
 
-  also when bootstrapping and converging SSH user (devops) is specified
+  also when bootstrapping and converging SSH user (`devops`) is specified
   explicitly in _.chef/knife.rb_ with `knife[:ssh_user]` option.
 
 - add your public keys to authorized keys for `devops` user on remote node
@@ -60,6 +62,9 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 
   NOTE: your public keys for application user (say, `builder`)
         will be added to authorized keys by `appbox` cookbook too.
+
+  UPDATE: public keys should be added to _~/.ssh/authorized_keys_ for both
+          application and `devops` users by `ssh_authorized_keys` cookbook.
 
 - bootstrap remote node:
 

@@ -10,6 +10,10 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 - install ChefDK and `knife-zero` on workstation
 
   ```sh

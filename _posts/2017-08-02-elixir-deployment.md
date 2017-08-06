@@ -12,6 +12,14 @@ categories: [elixir]
 {:toc}
 <hr>
 
+opinionated guides:
+
+1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827>
+2. <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>
+3. <https://dustinfarris.gitbooks.io/phoenix-continuous-deployment/content/>
+4. <https://jimmy-beaudoin.com/posts/elixir/phoenix-deployment/>
+5. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
+
 ## prepare for deployment
 
 1. <https://hexdocs.pm/phoenix/deployment.html>
@@ -137,8 +145,7 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 
 1. <https://github.com/bitwalker/distillery/issues/2>
 2. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
-3. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
-4. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
+3. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
 
 ## test production release locally
 
@@ -215,11 +222,11 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 
 ## deploy
 
-1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827?source_topic_id=2345>
-
 ### edeliver
 
 #### install Erlang and Elixir on build server
+
+NOTE: this step has been automated with Chef now.
 
 1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 

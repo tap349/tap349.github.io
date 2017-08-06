@@ -30,7 +30,11 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   (remote)# exit
   ```
 
-  NOTE: it's not necessary to create application user (say, `builder`) -
+  <https://github.com/edeliver/edeliver/blob/master/libexec/app_config>:
+
+  > Each app should run under its own system user.
+
+  NOTE: it's not necessary to create application user (say, `builder`) now -
         it will be created by `appbox` cookbook.
 
   UPDATE: application user will be created by application cookbook manually.
@@ -45,7 +49,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   to login as `devops` specify SSH user explicitly: `ssh devops@builder`.
 
   also when bootstrapping and converging SSH user (`devops`) is specified
-  explicitly in _.chef/knife.rb_ with `knife[:ssh_user]` option.
+  explicitly in _.chef/knife.rb_ config with `knife[:ssh_user]` option.
 
 - add your public keys to authorized keys for `devops` user on remote node
 

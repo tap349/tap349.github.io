@@ -233,6 +233,12 @@ currently my build server is production one.
   $ ssh billing
   ```
 
+- install `build-essential` package to compile `certifi` dependency
+
+  ```sh
+  $ sudo apt-get install build-essential
+  ```
+
 - install latest Erlang and Elixir
 
   ```sh
@@ -244,12 +250,6 @@ currently my build server is production one.
   $ sudo apt-get update
   $ sudo apt-get -y install esl-erlang
   $ sudo apt-get -y install elixir
-  ```
-
-- install `build-essential` package to compile `certifi` dependency
-
-  ```sh
-  $ sudo apt-get install build-essential
   ```
 
 #### build and deploy release

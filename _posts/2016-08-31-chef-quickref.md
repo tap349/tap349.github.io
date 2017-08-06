@@ -10,7 +10,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 
 <!-- more -->
 
-- install ChefDK and `knife-zero` on workstation:
+- install ChefDK and `knife-zero` on workstation
 
   ```sh
   (ws)$ brew update
@@ -19,9 +19,9 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   ```
 
   NOTE: if you haven't used ChefDK for a while it's better to reinstall it -
-        it looks like it's not updated properly using just `brew upgrade`.
+        it looks like it's not updated properly by `brew upgrade`.
 
-- create `devops` user on remote node:
+- create `devops` user on remote node
 
   ```sh
   (ws)$ ssh root@<remote-ip>
@@ -30,54 +30,39 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   (remote)# exit
   ```
 
+- don't create application user (say, `billing`) now
+
+  application user should be created by application cookbook.
+
   <https://github.com/edeliver/edeliver/blob/master/libexec/app_config>:
 
   > Each app should run under its own system user.
 
-  NOTE: it's not necessary to create application user (say, `builder`) now -
-        it will be created by `appbox` cookbook.
-
-  UPDATE: application user will be created by application cookbook manually.
-
 - add new SSH host to _~./ssh/config_
 
   host itself and user must be equal to the name of application you're going
-  to deploy on that host (`builder` in this case). if it's necessary to deploy
+  to deploy on that host (`billing` in this case). if it's necessary to deploy
   another application on the same host create a separate SSH host named as that
   new application.
 
-  to login as `devops` specify SSH user explicitly: `ssh devops@builder`.
+  to login as `devops` specify SSH user explicitly: `ssh devops@billing`.
 
   also when bootstrapping and converging SSH user (`devops`) is specified
   explicitly in _.chef/knife.rb_ config with `knife[:ssh_user]` option.
 
-- add your public keys to authorized keys for `devops` user on remote node
+- don't add public keys to authorized keys files now
+
+  public keys should be added to _~/.ssh/authorized_keys_ files of both
+  application and `devops` users by `ssh_authorized_keys` cookbook.
+
+- bootstrap remote node
 
   ```sh
-  (ws)$ ssh devops@builder
-  / enter devops password
-  (remote)$ mkdir ~/.ssh
-  (remote)$ vi ~/.ssh/authorized_keys
-  / paste your public key (say, ~/.ssh/id_rsa.pub)
-  (remote)$ exit
+  (ws)$ knife zero bootstrap billing --node-name billing
+  / enter devops password for sudo command twice
   ```
 
-  now you can login to remote node without password.
-
-  NOTE: your public keys for application user (say, `builder`)
-        will be added to authorized keys by `appbox` cookbook too.
-
-  UPDATE: public keys should be added to _~/.ssh/authorized_keys_ for both
-          application and `devops` users by `ssh_authorized_keys` cookbook.
-
-- bootstrap remote node:
-
-  ```sh
-  (ws)$ knife zero bootstrap builder --node-name builder
-  / enter devops password for sudo command
-  ```
-
-  here first `builder` is a host name from SSH config.
+  here first `billing` is a host name from SSH config.
 
   if you don't specify node name FQDN will be used by default -
   this is the name by which node is registered in a `chef-zero` server.
@@ -87,14 +72,14 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
         remote node: if you change it locally new node file with the name from
         _/etc/chef/client.rb_ will be created after converging (with empty run_list).
 
-- converge remote node:
+- converge remote node
 
   ```sh
-  (ws)$ knife node run_list add builder 'recipe[builder_app]'
-  (ws)$ knife node environment_set builder staging
+  (ws)$ knife node run_list add billing 'recipe[billing_app]'
+  (ws)$ knife node environment_set billing staging
   (ws)$ berks vendor
-  (ws)$ knife zero converge 'name:builder'
-  / enter devops password for sudo command (on first converge only)
+  (ws)$ knife zero converge 'name:billing'
+  / enter devops password for sudo command twice (on first converge only)
   ```
 
   berks vendors cookbooks to _berks-cookbooks/_ by default (both community
@@ -105,7 +90,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   cookbook_path ['berks-cookbooks']
   ```
 
-- update attribute whitelist:
+- update attribute whitelist (if necessary)
 
   <https://github.com/higanworks/knife-zero/issues/99>
 
@@ -113,7 +98,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   - update changes to _/etc/chef/client.rb_ on remote node:
 
     ```sh
-    (ws)$ knife zero bootstrap builder --node-name builder --no-converge
+    (ws)$ knife zero bootstrap billing --node-name billing --no-converge
     ```
 
     without `--no-converge` option command would overwrite node file.

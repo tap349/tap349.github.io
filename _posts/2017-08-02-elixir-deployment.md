@@ -221,8 +221,6 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 
 #### install Erlang and Elixir on build server
 
-TODO: automate these steps with Chef?
-
 1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 
 NOTE: my build server OS is Ubuntu 16.04.3 LTS (Xenial Xerus).

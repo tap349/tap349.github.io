@@ -31,7 +31,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
   ```
 
   NOTE: it's not necessary to create application user (say, `builder`) -
-        he will be created by `appbox` cookbook when converging.
+        it will be created by either application or `appbox` cookbook.
 
 - add new SSH host to _~./ssh/config_
 

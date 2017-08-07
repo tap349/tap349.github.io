@@ -169,3 +169,31 @@ _providers/user.rb_ (`chef-postgresql` cookbook):
 ```
 
 make the same changes in _providers/database.rb_ and _providers/extension.rb_.
+
+## undefined method `[]' for nil:NilClass (nginx/recipes/ohai_plugin.rb:27)
+
+```sh
+$ knife zero converge 'name:billing'
+...
+Compiling Cookbooks...
+
+================================================================================
+Recipe Compile Error in /var/chef/cache/cookbooks/billing_app/recipes/default.rb
+================================================================================
+
+NoMethodError
+-------------
+undefined method `[]' for nil:NilClass
+
+Cookbook Trace:
+---------------
+  /var/chef/cache/cookbooks/nginx/recipes/ohai_plugin.rb:27:in `from_file'
+  /var/chef/cache/cookbooks/nginx/recipes/source.rb:40:in `from_file'
+  /var/chef/cache/cookbooks/phoenix_nginx/recipes/default.rb:11:in `from_file'
+```
+
+**solution**
+
+<https://github.com/miketheman/nginx/issues/419>
+
+use [chef_nginx](https://github.com/chef-cookbooks/chef_nginx) cookbook instead.

@@ -19,7 +19,11 @@ complete guides:
 3. <https://dustinfarris.gitbooks.io/phoenix-continuous-deployment/content/>
 4. <https://jimmy-beaudoin.com/posts/elixir/phoenix-deployment/>
 5. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
-6. <https://habrahabr.ru/post/320096/>
+6. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
+7. <https://habrahabr.ru/post/320096/>
+
+NOTE: all paths on production machine are specified relative to
+      application directory located at _$DELIVER_TO/\<app\_name\>/_.
 
 ## prepare for deployment
 
@@ -289,6 +293,8 @@ currently my build server is production one (Ubuntu 16.04.3 LTS (Xenial Xerus)).
 
 #### create systemd service
 
+1. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
+
 NOTE: this step has been automated with Chef.
 
 deployed and started application must be listening on specified port:
@@ -316,10 +322,10 @@ $ mix edeliver ping production
 
 locations on production machine:
 
-- _$DELIVER_TO/\<app\_name\>/bin/\<app\_name\>_ - main application script
-- _$DELIVER_TO/\<app\_name\>/releases/start_erl.data_ - file with current release
-  version (used by main application script to determine what version to run)
-- _$DELIVER_TO/\<app\_name\>/releases/\<release\_version\>/_ - specific release
+- _bin/\<app\_name\>_ - main application script
+- _releases/start_erl.data_ - file with current release version
+  (used by main application script to determine what version to run)
+- _releases/\<release\_version\>/_ - specific release
 
 ## manage application in production
 
@@ -335,10 +341,16 @@ locations on production machine:
 
 ## debug
 
-- systemd journal:
+- systemd journal
 
   ```sh
   $ sudo journalctl -ef -u phoenix_billing
+  ```
+
+- Erlang VM log
+
+  ```sh
+  $ tail -f var/log/erlang.log.1
   ```
 
 ## about hot upgrades

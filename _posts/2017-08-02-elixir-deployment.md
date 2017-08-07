@@ -275,12 +275,16 @@ TODO: try `mix edeliver migrate production up` task - maybe it works!
 
 ## manage application in production
 
-```sh
-$ bin/billing console
-$ bin/billing start
-$ bin/billing stop
-$ bin/billing remote_console
-```
+- `bin/billing pid` - get pid of running application
+- `bin/billing ping` - check if application is running
+- `bin/billing start` - start as daemon
+- `bin/billing foreground` - start in the foreground
+- `bin/billing console` - start with console attached
+- `bin/billing stop`
+- `bin/billing restart` - restart application daemon without shutting down VM
+- `bin/billing reboot` - restart application daemon with shutting down VM
+- `bin/billing remote_console` - remote shell to application console
+  (application must be running)
 
 ## about hot upgrades
 

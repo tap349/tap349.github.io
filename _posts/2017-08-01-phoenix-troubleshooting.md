@@ -25,3 +25,15 @@ conn
 |> put_resp_header("x-expires", "#{exp}")
 # ...
 ```
+
+### Slogan: Kernel pid terminated (application_controller)
+
+_/home/billing/production/billing/erl_crash.dump_ on production machine:
+
+```
+Slogan: Kernel pid terminated (application_controller) ({application_start_failure,billing,{{shutdown,{failed_to_start_child,'Elixir.BillingWeb.Endpoint',{#{'__exception__' => true,'__struct__' => 'Elixir.Run
+```
+
+**solution**
+
+in most cases it means that `PORT` environment variable is not set.

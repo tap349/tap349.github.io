@@ -291,8 +291,7 @@ currently my build server is production one (Ubuntu 16.04.3 LTS (Xenial Xerus)).
 
 NOTE: this step has been automated with Chef.
 
-after deploying new release you can make sure that applicatino has been
-started and is listening on specified port by examining systemd journal:
+deployed and started application must be listening on specified port:
 
 ```sh
 $ sudo journalctl -ef -u phoenix_billing
@@ -333,6 +332,15 @@ locations on production machine:
 - `bin/billing restart` - restart application daemon without shutting down VM
 - `bin/billing reboot` - restart application daemon with shutting down VM
 - `bin/billing remote_console` - remote shell to running application console
+
+
+## debug
+
+- systemd journal:
+
+  ```sh
+  $ sudo journalctl -ef -u phoenix_billing
+  ```
 
 ## about hot upgrades
 

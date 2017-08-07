@@ -12,13 +12,14 @@ categories: [elixir]
 {:toc}
 <hr>
 
-opinionated guides:
+complete guides:
 
 1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827>
 2. <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>
 3. <https://dustinfarris.gitbooks.io/phoenix-continuous-deployment/content/>
 4. <https://jimmy-beaudoin.com/posts/elixir/phoenix-deployment/>
 5. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
+6. <https://habrahabr.ru/post/320096/>
 
 ## prepare for deployment
 
@@ -144,8 +145,36 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 ### migrations
 
 1. <https://github.com/bitwalker/distillery/issues/2>
-2. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
-3. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
+2. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
+3. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
+4. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
+
+NOTE: if using edeliver run `mix edeliver migrate production up` task instead.
+      though this module still might be useful if you're planning to add more
+      release tasks here later.
+
+_lib/release/tasks.ex_:
+
+```elixir
+defmodule Release.Tasks do
+  @app :billing
+  @repo Billing.Repo
+
+  def migrate do
+    {:ok, _} = Application.ensure_all_started(@app)
+    path = Application.app_dir(@app, "priv/repo/migrations")
+    Ecto.Migrator.run(@repo, path, :up, all: true)
+    :init.stop()
+  end
+end
+```
+
+on production machine:
+
+```sh
+$ bin/billing stop
+$ bin/billing command Elixir.Release.Tasks migrate
+```
 
 ## test production release locally
 

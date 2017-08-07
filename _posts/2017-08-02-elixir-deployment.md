@@ -356,10 +356,38 @@ locations on production machine:
   iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
   ```
 
-## about hot upgrades
+## don't use hot upgrades
+
+<https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>:
+
+> The downside is that you need to migrate data structures in your application.
+> Deployment is no longer a no-brainer (as it should be in the continuous
+> deployment world).
+>
+> Simply restart.
 
 <https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
 
 > You do not have to use hot upgrades, you can simply do rolling restarts by
 > running stop, extracting the new release tarball over the top of the old,
 > and running start to boot the release.
+
+## configure to work with Nginx
+
+<https://medium.com/@a4word/setting-up-phoenix-elixir-with-nginx-and-letsencrypt-ada9398a9b2c>:
+
+> There are many ways to configure your Phoenix app for production use,
+> but here just make sure that you bind yourself to 127.0.0.1.
+>
+> Now your site is being served up only through SSL (using Nginx),
+> and Phoenix is no longer directly available on port 4000.
+
+_config/prod.exs_:
+
+```diff
+config :billing, BillingWeb.Endpoint,
+  load_from_system_env: true,
++ http: [ip: {127.0.0.1}],
+  url: [host: "example.com", port: 80],
+  server: true
+```

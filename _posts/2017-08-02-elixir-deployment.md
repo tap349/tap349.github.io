@@ -334,6 +334,8 @@ locations on production machine:
 
 ## debug on production machine
 
+1. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/5>
+
 - systemd journal
 
   ```sh

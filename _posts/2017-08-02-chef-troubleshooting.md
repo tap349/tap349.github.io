@@ -74,7 +74,7 @@ application cookbook's _metadata.rb_ file - so just remove that dependency.
 
 ## undefined method `set' for Chef::Platform:Class
 
-```sh
+```
 $ knife zero converge 'name:billing'
 Compiling Cookbooks...
 
@@ -129,7 +129,7 @@ $ berks vendor
 
 ## uninitialized constant Chef::Resource::PostgresqlUser
 
-```sh
+```
 $ knife zero converge 'name:billing'
 ...
 Recipe: postgresql::setup_users
@@ -172,7 +172,7 @@ make the same changes in _providers/database.rb_ and _providers/extension.rb_.
 
 ## undefined method `[]' for nil:NilClass (nginx/recipes/ohai_plugin.rb:27)
 
-```sh
+```
 $ knife zero converge 'name:billing'
 ...
 Compiling Cookbooks...
@@ -197,3 +197,18 @@ Cookbook Trace:
 <https://github.com/miketheman/nginx/issues/419>
 
 use [chef_nginx](https://github.com/chef-cookbooks/chef_nginx) cookbook instead.
+
+## dependency is not installed
+
+_cookbooks/phoenix_nginx/metadata.rb_:
+
+```ruby
+depends 'chef_nginx'
+```
+
+but running `berks install` doesn't install this cookbook even though
+it's available in Chef supermarket.
+
+**solution**
+
+delete _Berksfile.lock_ and run `berks install` again.

@@ -77,6 +77,14 @@ config :billing, BillingWeb.Endpoint,
 > it has grown beyond that. All it matters now is that we put in the "priv"
 > directory any artifact that you need in production alongside your code.
 
+<https://stackoverflow.com/a/32097896>:
+
+> Elixir applications care about two directories: 1. ebin (which is where you
+> put compiled code) and 2. priv (auxiliary files that you need to run your
+> software in production, like static files). If you rely on a file that is not
+> in any of those directories, things can break when running in production or
+> building releases.
+
 in some Elixir module:
 
 ```elixir

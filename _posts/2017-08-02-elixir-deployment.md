@@ -295,10 +295,11 @@ NOTE: push all changes to github!!! when building new release on build
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 
 ```sh
-mix edeliver build release --verbose
-mix edeliver deploy release to production --verbose
-mix edeliver start production --verbose
-mix edeliver migrate production up --verbose
+$ mix edeliver build release --verbose
+$ mix edeliver deploy release to production --verbose
+$ mix edeliver start production --verbose
+$ mix edeliver migrate production up --verbose
+$ mix edeliver ping production
 ```
 
 locations on production machine:

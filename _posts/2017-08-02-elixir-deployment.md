@@ -284,7 +284,6 @@ TODO: try `mix edeliver migrate production up` task - maybe it works!
 - `bin/billing restart` - restart application daemon without shutting down VM
 - `bin/billing reboot` - restart application daemon with shutting down VM
 - `bin/billing remote_console` - remote shell to application console
-  (application must be running)
 
 ## about hot upgrades
 

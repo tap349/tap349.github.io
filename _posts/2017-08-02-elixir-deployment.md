@@ -149,9 +149,10 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 3. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
 4. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
 
-NOTE: if using edeliver run `mix edeliver migrate production up` task instead.
-      though this module still might be useful if you're planning to add more
-      release tasks here later.
+NOTE: if using edeliver just run `mix edeliver migrate production up` task
+      instead - it runs migrations remotely without all this hassle.
+      though this module still might be useful if you're planning to add
+      more release tasks to it later.
 
 _lib/release/tasks.ex_:
 

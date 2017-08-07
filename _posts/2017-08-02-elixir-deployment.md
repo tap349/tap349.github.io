@@ -260,9 +260,7 @@ NOTE: this step has been automated with Chef now.
 
 1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 
-NOTE: my build server OS is Ubuntu 16.04.3 LTS (Xenial Xerus).
-
-currently my build server is production one.
+currently my build server is production one (Ubuntu 16.04.3 LTS (Xenial Xerus)).
 
 - connect to build server as application user (`billing`):
 

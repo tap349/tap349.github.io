@@ -212,3 +212,36 @@ in Chef supermarket.
 **solution**
 
 delete _Berksfile.lock_ and run `berks install` again.
+
+## Failed to restart nginx.service: Unit nginx.service not found.
+
+```
+$ knife zero converge 'name:billing'
+...
+* service[nginx] action restart
+
+  ================================================================================
+  Error executing action `restart` on resource 'service[nginx]'
+  ================================================================================
+
+  Mixlib::ShellOut::ShellCommandFailed
+  ------------------------------------
+  Expected process to exit with [0], but received '5'
+  ---- Begin output of /bin/systemctl --system restart nginx ----
+  STDOUT:
+  STDERR: Failed to restart nginx.service: Unit nginx.service not found.
+  ---- End output of /bin/systemctl --system restart nginx ----
+  Ran /bin/systemctl --system restart nginx returned 5
+```
+
+**solution**
+
+obviously `chef_nginx` cookbook has created init script but
+for some reason is trying to restart systemd unit.
+
+_cookbooks/phoenix_nginx/attributes/default.rb_:
+
+```diff
+- override['nginx']['init_style'] = 'init'
++ override['nginx']['init_style'] = 'systemd'
+```

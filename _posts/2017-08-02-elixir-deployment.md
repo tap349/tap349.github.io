@@ -290,7 +290,7 @@ currently my build server is production one (Ubuntu 16.04.3 LTS (Xenial Xerus)).
 #### build and deploy release
 
 NOTE: push all changes to github!!! when building new release on build
-      server edeliver fetches repo from github (just like Capistrano)
+      server edeliver fetches repo from github (just like Capistrano).
 
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 

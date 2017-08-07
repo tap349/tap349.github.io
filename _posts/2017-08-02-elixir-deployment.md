@@ -256,7 +256,7 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 
 #### install Erlang and Elixir on build server
 
-NOTE: this step has been automated with Chef now.
+NOTE: this step has been automated with Chef.
 
 1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 
@@ -287,6 +287,19 @@ currently my build server is production one (Ubuntu 16.04.3 LTS (Xenial Xerus)).
   $ sudo apt-get -y install elixir
   ```
 
+#### create systemd service
+
+NOTE: this step has been automated with Chef.
+
+after deploying new release you can make sure that applicatino has been
+started and is listening on specified port by examining systemd journal:
+
+```sh
+$ sudo journalctl -ef -u phoenix_billing
+localhost systemd[1]: Started Phoenix server for billing app.
+localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
+```
+
 #### build and deploy release
 
 NOTE: push all changes to github!!! when building new release on build
@@ -305,8 +318,8 @@ $ mix edeliver ping production
 locations on production machine:
 
 - _$DELIVER_TO/\<app\_name\>/bin/\<app\_name\>_ - main application script
-- _$DELIVER_TO/\<app\_name\>/releases/start_erl.data_ - current release version
-  (this file is used by main application script to determine what version to run)
+- _$DELIVER_TO/\<app\_name\>/releases/start_erl.data_ - file with current release
+  version (used by main application script to determine what version to run)
 - _$DELIVER_TO/\<app\_name\>/releases/\<release\_version\>/_ - specific release
 
 ## manage application in production

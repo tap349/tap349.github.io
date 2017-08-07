@@ -88,13 +88,6 @@ end
 
 ### endpoint
 
-get information about `BillingWeb.Endpoint` process on production machine:
-
-```sh
-$ bin/billing remote_console
-iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
-```
-
 - `:server` option
 
   1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html>
@@ -339,7 +332,7 @@ locations on production machine:
 - `bin/billing reboot` - restart application daemon with shutting down VM
 - `bin/billing remote_console` - remote shell to running application console
 
-## debug
+## debug on production machine
 
 - systemd journal
 
@@ -351,6 +344,14 @@ locations on production machine:
 
   ```sh
   $ tail -f var/log/erlang.log.1
+  ```
+
+- get information about endpoint
+
+  ```sh
+  $ bin/billing remote_console
+  iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
+  iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
   ```
 
 ## about hot upgrades

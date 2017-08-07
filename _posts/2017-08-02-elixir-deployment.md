@@ -301,6 +301,13 @@ mix edeliver start production --verbose
 mix edeliver migrate production up --verbose
 ```
 
+files and directories on production machine:
+
+- _$DELIVER_TO/\<app\_name\>/releases/\<release\_version\>/_ - specific release
+
+current release version is stored in _$DELIVER_TO/<app_name>/releases/start_erl.data_ file
+(it's used by _$DELIVER_TO/<app_name>/bin/<app_name> script).
+
 ## manage application in production
 
 - `bin/billing pid` - get pid of running application

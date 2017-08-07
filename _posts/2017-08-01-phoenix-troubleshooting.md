@@ -37,4 +37,4 @@ Slogan: Kernel pid terminated (application_controller) ({application_start_failu
 **solution**
 
 in most cases it means that `PORT` environment variable is not set - examine
-`~/.profile` and `/etc/systemd/system/phoenix_\<app_name\>.service` files.
+`~/.profile` and `/etc/systemd/system/phoenix_billing.service` files.

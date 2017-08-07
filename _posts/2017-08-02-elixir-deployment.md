@@ -303,10 +303,10 @@ mix edeliver migrate production up --verbose
 
 files and directories on production machine:
 
+- _$DELIVER_TO/\<app\_name\>/bin/\<app\_name\>_ - main application script
+- _$DELIVER_TO/\<app\_name\>/releases/start_erl.data_ - current release version
+  (this file is used by main application script to determine what version to run)
 - _$DELIVER_TO/\<app\_name\>/releases/\<release\_version\>/_ - specific release
-
-current release version is stored in _$DELIVER_TO/<app_name>/releases/start_erl.data_ file
-(it's used by _$DELIVER_TO/<app_name>/bin/<app_name> script).
 
 ## manage application in production
 

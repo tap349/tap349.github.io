@@ -198,7 +198,7 @@ Cookbook Trace:
 
 use [chef_nginx](https://github.com/chef-cookbooks/chef_nginx) cookbook instead.
 
-## dependency is not installed
+## `berks install` doesn't install dependency
 
 _cookbooks/phoenix_nginx/metadata.rb_:
 
@@ -206,8 +206,8 @@ _cookbooks/phoenix_nginx/metadata.rb_:
 depends 'chef_nginx'
 ```
 
-but running `berks install` doesn't install this cookbook even though
-it's available in Chef supermarket.
+but `berks install` doesn't install this cookbook even though it's available
+in Chef supermarket.
 
 **solution**
 

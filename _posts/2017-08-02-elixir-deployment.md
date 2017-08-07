@@ -301,7 +301,7 @@ mix edeliver start production --verbose
 mix edeliver migrate production up --verbose
 ```
 
-files and directories on production machine:
+locations on production machine:
 
 - _$DELIVER_TO/\<app\_name\>/bin/\<app\_name\>_ - main application script
 - _$DELIVER_TO/\<app\_name\>/releases/start_erl.data_ - current release version

@@ -31,7 +31,7 @@ conn
 _/home/billing/production/billing/erl_crash.dump_ on production machine:
 
 ```
-Slogan: Kernel pid terminated (application_controller) ({application_start_failure,billing,{{shutdown,{failed_to_start_child,'Elixir.BillingWeb.Endpoint',{#{'__exception__' => true,'__struct__' => 'Elixir.Run
+Slogan: Kernel pid terminated (application_controller) ({application_start_failure,billing,\{\{shutdown,{failed_to_start_child,'Elixir.BillingWeb.Endpoint',{#{'__exception__' => true,'__struct__' => 'Elixir.Run
 ```
 
 **solution**

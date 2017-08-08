@@ -22,7 +22,7 @@ complete guides:
 6. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
 7. <https://habrahabr.ru/post/320096/>
 
-NOTE: all paths on production machine are specified relative to
+NOTE: all paths on production host are specified relative to
       application directory located at _$DELIVER_TO/\<app\_name\>/_.
 
 ## preparing for deployment
@@ -33,9 +33,9 @@ NOTE: all paths on production machine are specified relative to
 
 1. <https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
 
-- replace all values in _config/prod.exs_ with environment variables and set
-  those variables on production machine OR
-- hard-code secrets in _config/prod.exs_ and place it on production machine
+- replace all values in _config/prod.exs_ with environment variables and
+  set those variables on production host (dynamic configuration) OR
+- hard-code secrets in _config/prod.exs_ and place it on production host
   manually or via Chef, say, at _/var/prod.secret.exs_
 
   _config/prod.exs_:
@@ -44,6 +44,10 @@ NOTE: all paths on production machine are specified relative to
   - import_config "config/prod.secret.exs"
   + import_config "/var/prod.secret.exs"
   ```
+
+  NOTE: so it's not necessary to change `import_config` line when using
+        edeliver - it automatically links _/var/prod.secret.exs_ into
+        project directory as _config/prod.secret.exs_ when building release.
 
 ### assets
 
@@ -175,7 +179,7 @@ defmodule Release.Tasks do
 end
 ```
 
-on production machine:
+on production host:
 
 ```sh
 $ bin/billing stop
@@ -306,6 +310,23 @@ localhost systemd[1]: Started Phoenix server for billing app.
 localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
 ```
 
+#### embedding secrets into release
+
+1. <https://github.com/edeliver/edeliver/wiki/Embed-Secrets---Credentials-into-the-Release>
+
+when building release on remote host edeliver links _/var/prod.secret.exs_
+into its build directory as _config/prod.secret.exs_
+(see `pre_erlang_get_and_update_deps` hook in _.deliver/config_)
+and uses it to create consolidated release config (_sys.config_) =>
+if secrets or configuration change build and deploy release again!
+
+or else it's possible import _/var/prod.secret.exs_ in _config/prod.exs_
+directly and remove the hook so that distillery could generate _sys.config_
+using _/var/prod.secret.exs_ file itself instead of its symlink.
+
+IMO the whole idea of using a symlink in edeliver is to remove the knowledge
+of exact _prod.secret.exs_ file location on build host from project configs.
+
 #### build and deploy release
 
 NOTE: push all changes to github!!! when building new release on build
@@ -314,19 +335,29 @@ NOTE: push all changes to github!!! when building new release on build
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
 
 ```sh
-$ mix edeliver build release --verbose
-$ mix edeliver deploy release to production --verbose
-$ mix edeliver start production --verbose
-$ mix edeliver migrate production up --verbose
+$ mix edeliver build release
+$ mix edeliver deploy release to production --start-deploy
+$ mix edeliver start production
+$ mix edeliver migrate production up
 $ mix edeliver ping production
 ```
 
-locations on production machine:
+make sure to pass `--start-deploy` option for `deploy` task or to
+restart application using `restart` task after deploying release -
+otherwise previous release will still be running.
+
+locations on production host:
 
 - _bin/\<app\_name\>_ - main application script
 - _releases/start_erl.data_ - file with current release version
-  (used by main application script to determine what version to run)
+
+  used by main application script to determine what version to run
+
 - _releases/\<release\_version\>/_ - specific release
+- _releases/\<release\_version\>/sys.config_ - release config
+
+  release config is compiled from all related configs in _config/_ directory
+  (_config/config.exs_, _config/prod.exs_ and linked _config/prod.secret.exs_).
 
 ## managing application in production
 
@@ -340,7 +371,7 @@ locations on production machine:
 - `bin/billing reboot` - restart application daemon with shutting down VM
 - `bin/billing remote_console` - remote shell to running application console
 
-## debugging on production machine
+## debugging on production host
 
 1. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/5>
 

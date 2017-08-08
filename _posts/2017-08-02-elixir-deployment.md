@@ -25,7 +25,7 @@ complete guides:
 NOTE: all paths on production machine are specified relative to
       application directory located at _$DELIVER_TO/\<app\_name\>/_.
 
-## prepare for deployment
+## preparing for deployment
 
 1. <https://hexdocs.pm/phoenix/deployment.html>
 
@@ -182,7 +182,7 @@ $ bin/billing stop
 $ bin/billing command Elixir.Release.Tasks migrate
 ```
 
-## test production release locally
+## testing production release locally
 
 1. <https://hexdocs.pm/distillery/terminology.html>
 2. <https://hexdocs.pm/distillery/walkthrough.html>
@@ -255,7 +255,7 @@ in another terminal:
 $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
 ```
 
-## deploy
+## deployment
 
 ### edeliver
 
@@ -328,7 +328,7 @@ locations on production machine:
   (used by main application script to determine what version to run)
 - _releases/\<release\_version\>/_ - specific release
 
-## manage application in production
+## managing application in production
 
 - `bin/billing pid` - get pid of running application
 - `bin/billing ping` - check if application is running
@@ -340,7 +340,7 @@ locations on production machine:
 - `bin/billing reboot` - restart application daemon with shutting down VM
 - `bin/billing remote_console` - remote shell to running application console
 
-## debug on production machine
+## debugging on production machine
 
 1. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/5>
 
@@ -364,7 +364,7 @@ locations on production machine:
   iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
   ```
 
-## don't use hot upgrades
+## hot upgrades
 
 <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>:
 
@@ -380,9 +380,10 @@ locations on production machine:
 > running stop, extracting the new release tarball over the top of the old,
 > and running start to boot the release.
 
-## configure to work with Nginx
+## Nginx as proxy server
 
-<https://medium.com/@a4word/setting-up-phoenix-elixir-with-nginx-and-letsencrypt-ada9398a9b2c>:
+1. <https://hexdocs.pm/phoenix/phoenix_behind_proxy.html>
+2. <https://medium.com/@a4word/setting-up-phoenix-elixir-with-nginx-and-letsencrypt-ada9398a9b2c>
 
 > There are many ways to configure your Phoenix app for production use,
 > but here just make sure that you bind yourself to 127.0.0.1.
@@ -390,12 +391,22 @@ locations on production machine:
 > Now your site is being served up only through SSL (using Nginx),
 > and Phoenix is no longer directly available on port 4000.
 
+- disable dynamic endpoint configuration (`load_from_system_env: false`) -
+  or else you cannot specify any `http` options in _config/prod.exs_
+  (they get overriden by dynamic configuration in _lib/billing_web/endpoint.ex_)
+- bind application to `127.0.0.1` so that it's available to Nginx only
+  (and not available from outside accordingly)
+- specify port manually because it's no longer loaded from `PORT` environment
+  variable
+- set host and port to be used in generated urls using `url` option
+
 _config/prod.exs_:
 
 ```diff
 config :billing, BillingWeb.Endpoint,
-  load_from_system_env: true,
-+ http: [ip: {127.0.0.1}],
-  url: [host: "example.com", port: 80],
+- load_from_system_env: true,
++ load_from_system_env: false,
++ http: [ip: {127, 0, 0, 1}, port: 4000],
++ url: [host: "billing.***.com", port: 80],
   server: true
 ```

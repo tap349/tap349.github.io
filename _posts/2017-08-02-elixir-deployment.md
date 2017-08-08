@@ -17,10 +17,11 @@ complete guides:
 1. <https://elixirforum.com/t/elixir-deployment-tools-general-discussion-blog-posts-wiki/827>
 2. <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>
 3. <https://dustinfarris.gitbooks.io/phoenix-continuous-deployment/content/>
-4. <https://jimmy-beaudoin.com/posts/elixir/phoenix-deployment/>
+4. <https://jimmy-beaudoin.com/posts/elixir/phoenix-deployment/> (simple, distillery)
 5. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 6. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
 7. <https://habrahabr.ru/post/320096/>
+8. <http://fletchermoore.me/blog/notes-on-deploying-phoenix/> (simple, edeliver)
 
 NOTE: all paths on production host are specified relative to
       application directory located at _$DELIVER_TO/\<app\_name\>/_.

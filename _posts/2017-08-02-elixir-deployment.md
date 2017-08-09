@@ -338,14 +338,17 @@ NOTE: push all changes to github!!! when building new release on build
 ```sh
 $ mix edeliver build release
 $ mix edeliver deploy release to production --start-deploy
-$ mix edeliver start production
 $ mix edeliver migrate production up
 $ mix edeliver ping production
 ```
 
 make sure to pass `--start-deploy` option for `deploy` task or to
-restart application using `restart` task after deploying release -
-otherwise previous release will still be running.
+restart application using `restart` task after deploying release
+(otherwise previous release will still be running):
+
+```sh
+$ mix edeliver restart production
+```
 
 locations on production host:
 

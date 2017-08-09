@@ -363,17 +363,25 @@ locations on production host:
   release config is compiled from all related configs in _config/_ directory
   (_config/config.exs_, _config/prod.exs_ and linked _config/prod.secret.exs_).
 
-## managing application in production
+## managing application
 
-- `bin/billing pid` - get pid of running application
-- `bin/billing ping` - check if application is running
-- `bin/billing start` - start as daemon
-- `bin/billing foreground` - start in the foreground
-- `bin/billing console` - start with console attached
-- `bin/billing stop`
-- `bin/billing restart` - restart application daemon without shutting down VM
-- `bin/billing reboot` - restart application daemon with shutting down VM
-- `bin/billing remote_console` - remote shell to running application console
+- application commands
+
+  - `bin/billing pid` - get pid of running application
+  - `bin/billing ping` - check if application is running
+  - `bin/billing start` - start as daemon
+  - `bin/billing foreground` - start in the foreground
+  - `bin/billing console` - start with console attached
+  - `bin/billing stop`
+  - `bin/billing restart` - restart application daemon without shutting down VM
+  - `bin/billing reboot` - restart application daemon with shutting down VM
+  - `bin/billing remote_console` - remote shell to running application console
+
+- systemd commands
+
+  - `sudo systemctl start billing_production`
+  - `sudo systemctl stop billing_production`
+  - `sudo systemctl restart billing_production`
 
 ## debugging on production host
 
@@ -389,33 +397,65 @@ locations on production host:
 
 ## logging
 
-### change default log level
+generally Elixir application log is written to Erlang VM log file:
 
-change default log level from `info` to `debug` in _config/prod.exs_:
-
-```elixir
-config :logger, level: :debug
+```sh
+$ tail -f var/log/erlang.log.1
 ```
 
-some errors have log level `debug`, say:
-
-```
-[debug] ** (Ecto.Query.CastError) deps/ecto/lib/ecto/repo/queryable.ex:331
-```
-
-### systemd journal
-
-application service is managed by systemd and all logs are sent to
-systemd journal (as configured in application service unit).
+but since application service is managed by systemd all logs are
+sent to systemd journal (as configured in systemd service unit):
 
 ```sh
 $ journalctl -ef -u billing_production
 ```
 
-### Erlang VM log
+when application is started via systemd service unit:
 
-```sh
-$ tail -f var/log/erlang.log.1
+- application IS logging to systemd journal
+- application IS NOT logging to Erlang VM log file
+
+when application is started manually (service is stopped):
+
+- application IS logging to Erlang VM log file
+- application IS NOT logging to systemd journal
+
+### application log level
+
+NOTE: default application log level is `info`.
+
+change application log level from `info` to `debug` in _config/prod.exs_:
+
+```diff
+- config :logger, level: :info
++ config :logger, level: :debug
+```
+
+### Ecto log level
+
+1. <https://hexdocs.pm/ecto/Ecto.Repo.html>
+2. <https://stackoverflow.com/a/30319577/3632318>
+
+NOTE: default Ecto log level is `info`.
+
+set Ecto log level to `debug` in _config/prod.secret.exs_
+(and in corresponding template of `phoenix_secrets` Chef cookbook):
+
+```diff
+config :billing, Billing.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "username",
+  password: "password",
+  database: "database",
+- pool_size: 15
++ pool_size: 15,
++ loggers: [{Ecto.LogEntry, :log, [:debug]}]
+```
+
+it's required because some Ecto errors have log level `debug`, say:
+
+```
+[debug] ** (Ecto.Query.CastError) deps/ecto/lib/ecto/repo/queryable.ex:331
 ```
 
 ## hot upgrades

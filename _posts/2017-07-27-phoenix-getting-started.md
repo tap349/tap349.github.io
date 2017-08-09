@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Phoenix - getting started
+title: Phoenix - Getting started
 date: 2017-07-27 13:44:01 +0300
 access: public
 categories: [phoenix]

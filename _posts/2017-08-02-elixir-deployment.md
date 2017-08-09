@@ -42,7 +42,7 @@ NOTE: all paths on production host are specified relative to
   _config/prod.exs_:
 
   ```diff
-  - import_config "config/prod.secret.exs"
+  - import_config "prod.secret.exs"
   + import_config "/var/prod.secret.exs"
   ```
 

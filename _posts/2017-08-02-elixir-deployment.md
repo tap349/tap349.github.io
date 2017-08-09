@@ -474,7 +474,7 @@ it's required because some Ecto errors have log level `debug`, say:
 > running stop, extracting the new release tarball over the top of the old,
 > and running start to boot the release.
 
-## Nginx as proxy server
+## using proxy server (Nginx)
 
 1. <https://hexdocs.pm/phoenix/phoenix_behind_proxy.html>
 2. <https://medium.com/@a4word/setting-up-phoenix-elixir-with-nginx-and-letsencrypt-ada9398a9b2c>

@@ -306,7 +306,7 @@ NOTE: this step has been automated with Chef.
 deployed and started application must be listening on specified port:
 
 ```sh
-$ sudo journalctl -ef -u phoenix_billing
+$ sudo journalctl -ef -u billing_production
 localhost systemd[1]: Started Phoenix server for billing app.
 localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
 ```
@@ -379,18 +379,6 @@ locations on production host:
 
 1. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/5>
 
-- systemd journal
-
-  ```sh
-  $ sudo journalctl -ef -u phoenix_billing
-  ```
-
-- Erlang VM log
-
-  ```sh
-  $ tail -f var/log/erlang.log.1
-  ```
-
 - get information about endpoint
 
   ```sh
@@ -398,6 +386,37 @@ locations on production host:
   iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
   iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
   ```
+
+## logging
+
+### change default log level
+
+change default log level from `info` to `debug` in _config/prod.exs_:
+
+```elixir
+config :logger, level: :debug
+```
+
+some errors have log level `debug`, say:
+
+```
+[debug] ** (Ecto.Query.CastError) deps/ecto/lib/ecto/repo/queryable.ex:331
+```
+
+### systemd journal
+
+application service is managed by systemd and all logs are sent to
+systemd journal (as configured in application service unit).
+
+```sh
+$ journalctl -ef -u billing_production
+```
+
+### Erlang VM log
+
+```sh
+$ tail -f var/log/erlang.log.1
+```
 
 ## hot upgrades
 

@@ -363,7 +363,7 @@ locations on production host:
   release config is compiled from all related configs in _config/_ directory
   (_config/config.exs_, _config/prod.exs_ and linked _config/prod.secret.exs_).
 
-## managing application
+## managing
 
 - application commands
 

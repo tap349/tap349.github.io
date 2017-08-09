@@ -383,7 +383,7 @@ locations on production host:
   - `sudo systemctl stop billing_production`
   - `sudo systemctl restart billing_production`
 
-## debugging on production host
+## debugging
 
 1. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/5>
 

@@ -80,7 +80,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 
   ```sh
   (ws)$ knife node run_list add billing 'recipe[billing_app]'
-  (ws)$ knife node environment_set billing staging
+  (ws)$ knife node environment_set billing prod
   (ws)$ berks vendor
   (ws)$ knife zero converge 'name:billing'
   / enter devops password for sudo command twice (on first converge only)

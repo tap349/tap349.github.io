@@ -28,7 +28,7 @@ conn
 
 ### Slogan: Kernel pid terminated (application_controller)
 
-_/home/billing/production/billing/erl_crash.dump_ on production machine:
+_/home/billing/prod/billing/erl_crash.dump_ on production host:
 
 {% raw %}
 ```

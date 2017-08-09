@@ -306,7 +306,7 @@ NOTE: this step has been automated with Chef.
 deployed and started application must be listening on specified port:
 
 ```sh
-$ sudo journalctl -ef -u billing_production
+$ sudo journalctl -ef -u billing_prod
 localhost systemd[1]: Started Phoenix server for billing app.
 localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
 ```
@@ -379,9 +379,9 @@ locations on production host:
 
 - systemd commands
 
-  - `sudo systemctl start billing_production`
-  - `sudo systemctl stop billing_production`
-  - `sudo systemctl restart billing_production`
+  - `sudo systemctl start billing_prod`
+  - `sudo systemctl stop billing_prod`
+  - `sudo systemctl restart billing_prod`
 
 ## debugging
 
@@ -407,7 +407,7 @@ but since application service is managed by systemd all logs are
 sent to systemd journal (as configured in systemd service unit):
 
 ```sh
-$ journalctl -ef -u billing_production
+$ journalctl -ef -u billing_prod
 ```
 
 when application is started via systemd service unit:

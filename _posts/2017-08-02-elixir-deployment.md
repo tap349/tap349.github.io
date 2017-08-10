@@ -46,7 +46,7 @@ NOTE: all paths on production host are specified relative to
   + import_config "/var/prod.secret.exs"
   ```
 
-  NOTE: so it's not necessary to change `import_config` line when using
+  NOTE: it's not necessary to change `import_config` line when using
         edeliver - it automatically links _/var/prod.secret.exs_ into
         project directory as _config/prod.secret.exs_ when building release.
 
@@ -319,7 +319,7 @@ when building release on remote host edeliver links _/var/prod.secret.exs_
 into its build directory as _config/prod.secret.exs_
 (see `pre_erlang_get_and_update_deps` hook in _.deliver/config_)
 and uses it to create consolidated release config (_sys.config_) =>
-if secrets or configuration change build and deploy release again!
+if secrets or configuration change, build and deploy release again!
 
 or else it's possible import _/var/prod.secret.exs_ in _config/prod.exs_
 directly and remove the hook so that distillery could generate _sys.config_
@@ -424,7 +424,7 @@ when application is started manually (service is stopped):
 
 NOTE: default application log level is `info`.
 
-change application log level from `info` to `debug` in _config/prod.exs_:
+change application log level to `debug` in _config/prod.exs_:
 
 ```diff
 - config :logger, level: :info
@@ -438,8 +438,8 @@ change application log level from `info` to `debug` in _config/prod.exs_:
 
 NOTE: default Ecto log level is `info`.
 
-set Ecto log level to `debug` in _config/prod.secret.exs_
-(and in corresponding template of `phoenix_secrets` Chef cookbook):
+change Ecto log level to `debug` in _config/prod.secret.exs_
+(don't forget to synchronize Chef application cookbook):
 
 ```diff
 config :billing, Billing.Repo,
@@ -452,7 +452,7 @@ config :billing, Billing.Repo,
 + loggers: [{Ecto.LogEntry, :log, [:debug]}]
 ```
 
-it's required because some Ecto errors have log level `debug`, say:
+it's required because some Ecto errors have `debug` log level, say:
 
 ```
 [debug] ** (Ecto.Query.CastError) deps/ecto/lib/ecto/repo/queryable.ex:331
@@ -501,6 +501,7 @@ config :billing, BillingWeb.Endpoint,
 - load_from_system_env: true,
 + load_from_system_env: false,
 + http: [ip: {127, 0, 0, 1}, port: 4000],
+- url: [host: "example.com", port: 80],
 + url: [host: "billing.***.com", port: 80],
   server: true
 ```

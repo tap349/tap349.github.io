@@ -299,9 +299,9 @@ currently my build server is production one (Ubuntu 16.04.3 LTS (Xenial Xerus)).
 
 #### create systemd service
 
-1. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
-
 NOTE: this step has been automated with Chef.
+
+1. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
 
 deployed and started application must be listening on specified port:
 
@@ -346,7 +346,7 @@ $ mix edeliver ping production
 make sure to restart application after deploying
 (otherwise previous release will still be running):
 
-- run `restart` task after deploying
+- run `restart` task right after deploying
 
   ```sh
   $ mix edeliver restart production
@@ -358,15 +358,15 @@ make sure to restart application after deploying
   $ mix edeliver deploy release to production --start-deploy
   ```
 
-- set `START_DEPLOY` in edeliver config
+- add `START_DEPLOY=true` to edeliver config
 
   _.deliver/config_:
 
-  ```bash
-  START_DEPLOY=true
+  ```diff
+  + START_DEPLOY=true
   ```
 
-locations on production host:
+#### locations on production host
 
 - _bin/\<app\_name\>_ - main application script
 - _releases/start_erl.data_ - file with current release version
@@ -528,7 +528,7 @@ NOTE: everywhere except for edeliver environments have short names
       (`prod`/`stage`) including Phoenix application itself, Chef,
       names of secret files, Nginx sites and systemd service units.
 
-### Chef
+### configure Chef
 
 create based on current environment:
 
@@ -541,7 +541,7 @@ add for `stage` environment:
 - bash aliases
 - PostgreSQL user and database
 
-### application
+### configure application
 
 - create configs for _stage_ environment
 
@@ -622,7 +622,19 @@ add for `stage` environment:
   -smp auto
   ```
 
-#### alternative solutions
+### build and deploy release
+
+```sh
+$ mix edeliver build release --mix-env=stage
+$ mix edeliver deploy release to staging
+$ mix edeliver migrate staging up
+$ mix edeliver ping staging
+```
+
+make sure that application is restarted -
+just like after deploying production release.
+
+### alternative solutions
 
 <https://stackoverflow.com/questions/38818446>:
 

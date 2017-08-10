@@ -523,3 +523,61 @@ config :billing, BillingWeb.Endpoint,
 ```
 
 ## adding staging environment
+
+### Chef
+
+create based on current environment:
+
+- Nginx site (_billing_stage_ or _billing_prod_)
+- secret file (_/var/stage.secret.exs_ or _/var/prod.secret.exs_)
+- systemd service unit (_billing_stage.service_ or _billing_prod.service_)
+
+add for `stage` environment:
+
+- bash aliases
+- PostgreSQL user and database
+
+### application
+
+_.deliver/config_:
+
+```diff
+  ...
+  STAGING_USER="billing"
+- DELIVER_TO="/home/billing/staging"
++ TEST_AT="/home/billing/stage"
+  ...
+  PRODUCTION_USER="billing"
+- DELIVER_TO="/home/billing/production"
++ DELIVER_TO="/home/billing/prod"
+  ...
++ START_DEPLOY=true
+```
+
+### problem with 2 releases having the same node name
+
+<https://stackoverflow.com/questions/33406725>:
+
+> The rel/vm.args supports OS environment variables parametrization:
+>
+> ## Name of the node
+> -name ${MY_NODE_NAME}
+>
+> ## Cookie for distributed erlang
+> -setcookie ${MY_COOKIE}
+
+#### alternative solutions
+
+<https://stackoverflow.com/questions/38818446>:
+
+> :prod is in fact a build mode and should be used for any cases where one intends
+> to deploy. So in other words, my staging deployment should be set to MIX_ENV=prod
+> and then either use environment variables for dynamic configuration settings in
+> the prod.exs file or, as I have done in this case, dynamically load a deployment
+> specific configuration in prod.exs like so:
+
+> deployment_config=System.get_env("DEPLOYMENT_CONFIG")
+> import_config "./deployment_config/#{deployment_config}.exs"
+
+idea looks brilliant but this solution works only if you have separate
+staging and production hosts (and it's not my case).

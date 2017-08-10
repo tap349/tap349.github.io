@@ -60,11 +60,11 @@ NOTE: all paths on production host are specified relative to
 so if application doesn't deal with assets remove this line in _config/prod.exs_:
 
 ```diff
-config :billing, BillingWeb.Endpoint,
-  load_from_system_env: true,
-+ url: [host: "example.com", port: 80]
-- url: [host: "example.com", port: 80],
-- cache_static_manifest: "priv/static/cache_manifest.json"
+  config :billing, BillingWeb.Endpoint,
+    load_from_system_env: true,
++   url: [host: "example.com", port: 80]
+-   url: [host: "example.com", port: 80],
+-   cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
 ### artifacts (say, YAML files)
@@ -114,11 +114,11 @@ end
   _config/prod.exs_ (see also auto-generated comment titled `Using releases`):
 
   ```diff
-  config :billing, BillingWeb.Endpoint,
-    load_from_system_env: true,
-  - url: [host: "example.com", port: 80]
-  + url: [host: "example.com", port: 80],
-  + server: true
+    config :billing, BillingWeb.Endpoint,
+      load_from_system_env: true,
+  -   url: [host: "example.com", port: 80]
+  +   url: [host: "example.com", port: 80],
+  +   server: true
   ```
 
   if web server is not started you'll get `Connection refused` error
@@ -458,14 +458,14 @@ change Ecto log level to `debug` in _config/prod.secret.exs_
 (don't forget to synchronize Chef application cookbook):
 
 ```diff
-config :billing, Billing.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "username",
-  password: "password",
-  database: "database",
-- pool_size: 15
-+ pool_size: 15,
-+ loggers: [{Ecto.LogEntry, :log, [:debug]}]
+  config :billing, Billing.Repo,
+    adapter: Ecto.Adapters.Postgres,
+    username: "username",
+    password: "password",
+    database: "database",
+-   pool_size: 15
++   pool_size: 15,
++   loggers: [{Ecto.LogEntry, :log, [:debug]}]
 ```
 
 it's required because some Ecto errors have `debug` log level, say:
@@ -513,16 +513,20 @@ it's required because some Ecto errors have `debug` log level, say:
 _config/prod.exs_:
 
 ```diff
-config :billing, BillingWeb.Endpoint,
-- load_from_system_env: true,
-- url: [host: "example.com", port: 80],
-+ load_from_system_env: false,
-+ http: [ip: {127, 0, 0, 1}, port: 4000],
-+ url: [host: "billing.***.com", port: 80],
-  server: true
+  config :billing, BillingWeb.Endpoint,
+-   load_from_system_env: true,
+-   url: [host: "example.com", port: 80],
++   load_from_system_env: false,
++   http: [ip: {127, 0, 0, 1}, port: 4000],
++   url: [host: "billing.***.com", port: 80],
+    server: true
 ```
 
-## adding staging environment
+## stage environment
+
+NOTE: everywhere except for edeliver environments have short names
+      (`prod`/`stage`) including Phoenix application itself, Chef,
+      names of secret files, Nginx sites and systemd service units.
 
 ### Chef
 
@@ -539,32 +543,84 @@ add for `stage` environment:
 
 ### application
 
-_.deliver/config_:
+- create configs for _stage_ environment
 
-```diff
-  ...
-  STAGING_USER="billing"
-- DELIVER_TO="/home/billing/staging"
-+ TEST_AT="/home/billing/stage"
-  ...
-  PRODUCTION_USER="billing"
-- DELIVER_TO="/home/billing/production"
-+ DELIVER_TO="/home/billing/prod"
-  ...
-+ START_DEPLOY=true
-```
+  _config/stage.secret.exs_:
 
-### problem with 2 releases having the same node name
+  - specify stage database credentials
 
-<https://stackoverflow.com/questions/33406725>:
+  _config/stage.exs_:
 
-> The rel/vm.args supports OS environment variables parametrization:
->
-> ## Name of the node
-> -name ${MY_NODE_NAME}
->
-> ## Cookie for distributed erlang
-> -setcookie ${MY_COOKIE}
+  - specify different port (say, 4001)
+  - `import_config "stage.secret.exs"`
+
+- configure edeliver
+
+  _.deliver/config_:
+
+  ```diff
+  - DELIVER_TO="/home/billing/stage"
+  + TEST_AT="/home/billing/stage"
+
+    pre_erlang_get_and_update_deps() {
+  +   local _secret_file="$TARGET_MIX_ENV.secret.exs"
+  +   __sync_remote "
+  +     ln -sfn "/var/$_secret_file" "$BUILD_AT/config/$_secret_file"
+  +   "
+    }
+  ```
+
+- configure distillery
+
+  1. <https://hexdocs.pm/distillery/runtime-configuration.html#content>
+  2. <https://github.com/bitwalker/distillery/issues/159> (!)
+  3. <https://github.com/bitwalker/distillery/issues/121>
+  4. <https://stackoverflow.com/questions/33406725>
+
+  _rel/config.exs_:
+
+  ```diff
+  + environment :stage do
+  +   set vm_args: "rel/vm.args.stage"
+  +   set include_erts: true
+  +   set include_src: true
+  + end
+
+    environment :prod do
+  +   set vm_args: "rel/vm.args.prod"
+      set include_erts: true
+      set include_src: false
+  -   set cookie: :"123"
+    end
+  ```
+
+  _rel/vm.args.stage_:
+
+  ```elixir
+  ## Name of the node
+  -name billing_stage.0.0.1
+
+  ## Cookie for distributed erlang
+  ## (generate with `mix phoenix.gen.secret`)
+  -setcookie 123
+
+  # Enable SMP automatically based on availability
+  -smp auto
+  ```
+
+  _rel/vm.args.prod_:
+
+  ```elixir
+  ## Name of the node
+  -name billing_prod@127.0.0.1
+
+  ## Cookie for distributed erlang
+  ## (generate with `mix phoenix.gen.secret`)
+  -setcookie 123
+
+  # Enable SMP automatically based on availability
+  -smp auto
+  ```
 
 #### alternative solutions
 
@@ -580,4 +636,4 @@ _.deliver/config_:
 > import_config "./deployment_config/#{deployment_config}.exs"
 
 idea looks brilliant but this solution works only if you have separate
-staging and production hosts (and it's not my case).
+staging and production hosts (which is not my case).

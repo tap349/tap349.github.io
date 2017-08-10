@@ -334,21 +334,37 @@ NOTE: push all changes to github!!! when building new release on build
       server edeliver fetches repo from github (just like Capistrano).
 
 1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
+2. <https://github.com/edeliver/edeliver/wiki/Configuration-(.deliver-config)>
 
 ```sh
 $ mix edeliver build release
-$ mix edeliver deploy release to production --start-deploy
+$ mix edeliver deploy release to production
 $ mix edeliver migrate production up
 $ mix edeliver ping production
 ```
 
-make sure to pass `--start-deploy` option for `deploy` task or to
-restart application using `restart` task after deploying release
+make sure to restart application after deploying
 (otherwise previous release will still be running):
 
-```sh
-$ mix edeliver restart production
-```
+- run `restart` task after deploying
+
+  ```sh
+  $ mix edeliver restart production
+  ```
+
+- pass `--start-deploy` option to `deploy` task
+
+  ```sh
+  $ mix edeliver deploy release to production --start-deploy
+  ```
+
+- set `START_DEPLOY` in edeliver config
+
+  _.deliver/config_:
+
+  ```bash
+  START_DEPLOY=true
+  ```
 
 locations on production host:
 

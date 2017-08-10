@@ -264,52 +264,23 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 
 ### edeliver
 
-#### install Erlang and Elixir on build server
+#### configure and run Chef
 
-NOTE: this step has been automated with Chef.
+- install Erlang and Elixir on production host
 
-1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
+  1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 
-currently my build server is production one (Ubuntu 16.04.3 LTS (Xenial Xerus)).
+- create systemd service
 
-- connect to build server as application user (`billing`):
+  1. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
 
-  ```sh
-  $ ssh billing
-  ```
-
-- install `build-essential` package to compile `certifi` dependency
+  deployed and started application must be listening on specified port:
 
   ```sh
-  $ sudo apt-get install build-essential
+  $ sudo journalctl -ef -u billing_prod
+  localhost systemd[1]: Started Phoenix server for billing app.
+  localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
   ```
-
-- install latest Erlang and Elixir
-
-  ```sh
-  $ mkdir tmp/
-  $ cd tmp/
-  $ wget http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
-  $ sudo apt-key add erlang_solutions.asc
-  $ echo "deb http://packages.erlang-solutions.com/ubuntu xenial contrib" >> /etc/apt/sources.list
-  $ sudo apt-get update
-  $ sudo apt-get -y install esl-erlang
-  $ sudo apt-get -y install elixir
-  ```
-
-#### create systemd service
-
-NOTE: this step has been automated with Chef.
-
-1. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
-
-deployed and started application must be listening on specified port:
-
-```sh
-$ sudo journalctl -ef -u billing_prod
-localhost systemd[1]: Started Phoenix server for billing app.
-localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
-```
 
 #### embedding secrets into release
 
@@ -528,7 +499,7 @@ NOTE: everywhere except for edeliver environments have short names
       (`prod`/`stage`) including Phoenix application itself, Chef,
       names of secret files, Nginx sites and systemd service units.
 
-### configure Chef
+### configure and run Chef
 
 create based on current environment:
 
@@ -541,86 +512,86 @@ add for `stage` environment:
 - bash aliases
 - PostgreSQL user and database
 
-### configure application
+### create configs for _stage_ environment
 
-- create configs for _stage_ environment
+NOTE: these settings must be synchronized with Chef.
 
-  _config/stage.secret.exs_:
+_config/stage.secret.exs_:
 
-  - specify stage database credentials
+- specify stage database credentials
 
-  _config/stage.exs_:
+_config/stage.exs_:
 
-  - specify different port (say, 4001)
-  - `import_config "stage.secret.exs"`
+- specify different port (say, 4001)
+- `import_config "stage.secret.exs"`
 
-- configure edeliver
+### configure edeliver
 
-  _.deliver/config_:
+_.deliver/config_:
 
-  ```diff
-  - DELIVER_TO="/home/billing/stage"
-  + TEST_AT="/home/billing/stage"
+```diff
+- DELIVER_TO="/home/billing/stage"
++ TEST_AT="/home/billing/stage"
 
-    pre_erlang_get_and_update_deps() {
-  +   local _secret_file="$TARGET_MIX_ENV.secret.exs"
-  +   __sync_remote "
-  +     ln -sfn "/var/$_secret_file" "$BUILD_AT/config/$_secret_file"
-  +   "
-    }
-  ```
+  pre_erlang_get_and_update_deps() {
++   local _secret_file="$TARGET_MIX_ENV.secret.exs"
++   __sync_remote "
++     ln -sfn "/var/$_secret_file" "$BUILD_AT/config/$_secret_file"
++   "
+  }
+```
 
-- configure distillery
+### configure distillery
 
-  1. <https://hexdocs.pm/distillery/runtime-configuration.html#content>
-  2. <https://github.com/bitwalker/distillery/issues/159> (!)
-  3. <https://github.com/bitwalker/distillery/issues/121>
-  4. <https://stackoverflow.com/questions/33406725>
+1. <https://hexdocs.pm/distillery/runtime-configuration.html#content>
+2. <https://github.com/bitwalker/distillery/issues/159> (!)
+3. <https://github.com/bitwalker/distillery/issues/121>
+4. <https://stackoverflow.com/questions/33406725>
 
-  _rel/config.exs_:
+_rel/config.exs_:
 
-  ```diff
-  + environment :stage do
-  +   set vm_args: "rel/vm.args.stage"
-  +   set include_erts: true
-  +   set include_src: true
-  + end
+```diff
++ environment :stage do
++   set vm_args: "rel/vm.args.stage"
++   set include_erts: true
++   set include_src: true
++ end
 
-    environment :prod do
-  +   set vm_args: "rel/vm.args.prod"
-      set include_erts: true
-      set include_src: false
-  -   set cookie: :"123"
-    end
-  ```
+  environment :prod do
++   set vm_args: "rel/vm.args.prod"
+    set include_erts: true
+    set include_src: false
+-   set cookie: :"123"
+  end
+```
 
-  _rel/vm.args.stage_:
+_rel/vm.args.stage_:
 
-  ```elixir
-  ## Name of the node
-  -name billing_stage.0.0.1
+```elixir
+## Name of the node
+-name billing_stage.0.0.1
 
-  ## Cookie for distributed erlang
-  ## (generate with `mix phoenix.gen.secret`)
-  -setcookie 123
+## Cookie for distributed erlang
+## (generate with `mix phoenix.gen.secret`)
+-setcookie 123
 
-  # Enable SMP automatically based on availability
-  -smp auto
-  ```
+# Enable SMP automatically based on availability
+-smp auto
+```
 
-  _rel/vm.args.prod_:
+_rel/vm.args.prod_:
 
-  ```elixir
-  ## Name of the node
-  -name billing_prod@127.0.0.1
+```elixir
+## Name of the node
+-name billing_prod@127.0.0.1
 
-  ## Cookie for distributed erlang
-  ## (generate with `mix phoenix.gen.secret`)
-  -setcookie 123
+## Cookie for distributed erlang
+## (generate with `mix phoenix.gen.secret`)
+-setcookie 123
 
-  # Enable SMP automatically based on availability
-  -smp auto
-  ```
+# Enable SMP automatically based on availability
+-smp auto
+```
 
 ### build and deploy release
 

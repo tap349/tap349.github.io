@@ -515,9 +515,11 @@ _config/prod.exs_:
 ```diff
 config :billing, BillingWeb.Endpoint,
 - load_from_system_env: true,
+- url: [host: "example.com", port: 80],
 + load_from_system_env: false,
 + http: [ip: {127, 0, 0, 1}, port: 4000],
-- url: [host: "example.com", port: 80],
 + url: [host: "billing.***.com", port: 80],
   server: true
 ```
+
+## adding staging environment

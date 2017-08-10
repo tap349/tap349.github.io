@@ -260,7 +260,7 @@ in another terminal:
 $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
 ```
 
-## deployment
+## deploying
 
 ### edeliver
 
@@ -461,7 +461,7 @@ it's required because some Ecto errors have `debug` log level, say:
 > running stop, extracting the new release tarball over the top of the old,
 > and running start to boot the release.
 
-## using proxy server (Nginx)
+## proxy server (Nginx)
 
 1. <https://hexdocs.pm/phoenix/phoenix_behind_proxy.html>
 2. <https://medium.com/@a4word/setting-up-phoenix-elixir-with-nginx-and-letsencrypt-ada9398a9b2c>

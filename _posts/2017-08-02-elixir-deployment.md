@@ -638,7 +638,7 @@ $ journalctl -ef -u billing_prod | ccze
 
 1. <https://hexdocs.pm/logger/Logger.html>
 
-`:console` is `:logger` application backend by default
+`:console` is `:logger` application default backend
 (used to log both Phoenix and user messages).
 
 _config/config.exs_:

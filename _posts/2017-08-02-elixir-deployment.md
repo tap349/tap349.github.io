@@ -620,3 +620,39 @@ just like after deploying production release.
 
 idea looks brilliant but this solution works only if you have separate
 staging and production hosts (which is not my case).
+
+## colorize logs
+
+### systemd journal
+
+1. <https://github.com/cornet/ccze>
+
+use `ccze` package to colorize `journalctl` output
+(can be installed via Chef):
+
+```sh
+$ journalctl -ef -u billing_prod | ccze
+```
+
+### Elixir logs
+
+1. <https://hexdocs.pm/logger/Logger.html>
+
+`:console` is `:logger` application backend by default
+(used to log both Phoenix and user messages).
+
+_config/config.exs_:
+
+```diff
+  config :logger, :console,
+    format: "$time $metadata[$level] $message\n",
+-   metadata: [:request_id],
++   metadata: [:request_id],
++   colors: [
++     enabled: true,
++     debug: :cyan,
++     info: :green,
++     warn: :yellow,
++     error: :red
++   ]
+```

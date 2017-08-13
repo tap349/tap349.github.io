@@ -525,7 +525,9 @@ NOTE: everywhere except for edeliver, environments have short names
       (`prod`/`stage`) including Phoenix application itself, Chef,
       names of secret files, Nginx sites and systemd service units.
 
-### Chef
+### configuration
+
+#### Chef
 
 create based on current environment:
 
@@ -538,7 +540,7 @@ add for `stage` environment:
 - bash aliases
 - PostgreSQL user and database
 
-### configs for `stage` environment
+#### configs for `stage` environment
 
 NOTE: these settings must be synchronized with Chef.
 
@@ -551,7 +553,7 @@ _config/stage.exs_:
 - specify different port (say, 4001)
 - `import_config "stage.secret.exs"`
 
-### edeliver
+#### edeliver
 
 _.deliver/config_:
 
@@ -567,7 +569,7 @@ _.deliver/config_:
   }
 ```
 
-### distillery
+#### distillery
 
 1. <https://hexdocs.pm/distillery/runtime-configuration.html#content>
 2. <https://github.com/bitwalker/distillery/issues/159> (!)
@@ -629,7 +631,7 @@ $ mix edeliver ping staging
 ```
 
 make sure that application is restarted -
-just like after deploying production release.
+see instructions for restarting production release.
 
 ### alternative solutions
 

@@ -31,7 +31,7 @@ add for `stage` environment:
 - bash aliases
 - PostgreSQL user and database
 
-### configs for `stage` environment
+### configs
 
 NOTE: these settings must be synchronized with Chef.
 

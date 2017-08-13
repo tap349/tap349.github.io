@@ -589,7 +589,7 @@ _rel/config.exs_:
 +   set vm_args: "rel/vm.args.prod"
     set include_erts: true
     set include_src: false
--   set cookie: :"123"
+-   set cookie: :"foo123"
   end
 ```
 
@@ -601,7 +601,7 @@ _rel/vm.args.stage_:
 
 ## Cookie for distributed erlang
 ## (generate with `mix phoenix.gen.secret`)
--setcookie 123
+-setcookie foo123
 
 # Enable SMP automatically based on availability
 -smp auto
@@ -615,7 +615,7 @@ _rel/vm.args.prod_:
 
 ## Cookie for distributed erlang
 ## (generate with `mix phoenix.gen.secret`)
--setcookie 123
+-setcookie foo123
 
 # Enable SMP automatically based on availability
 -smp auto

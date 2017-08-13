@@ -41,3 +41,21 @@ _\_includes/head.html_:
 <link rel="stylesheet" href="{{ site.url }}/{{ site.baseurl }}public/css/hyde.css">
 ```
 {% endraw %}
+
+## Page build failed
+
+in email from Github:
+
+```
+The page build failed for the `master` branch with the following error:
+Page build failed. For more information, see ...
+```
+
+**solution**
+
+build Jekyll site manually to find out the reason:
+
+```sh
+$ blog
+$ jekyll build
+```

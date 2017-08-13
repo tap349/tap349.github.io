@@ -53,11 +53,30 @@ $ mix do deps.get, compile
 
 ### gotchas
 
+- Mix doesn't allow a task to be run twice (just like Rake)
 
+  1. <https://stackoverflow.com/questions/36846041>
+
+  that is why it's impossible to create Mix alias in _mix.exs_
+  that runs the same task multiple times with different arguments:
+
+  ```elixir
+  defp aliases do
+    [
+      # works
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      # doesn't work
+      "ed.all": [
+        "edeliver build release",
+        "edeliver deploy release to production"
+      ]
+    ]
+  end
+  ```
 
 ### mix.exs
 
-<http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
+1. <http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
 
 - application name
 
@@ -75,7 +94,7 @@ $ mix do deps.get, compile
 
 - application inference
 
-  <http://elixir-lang.org/blog/2017/01/05/elixir-v1-4-0-released/#application-inference>
+  1. <http://elixir-lang.org/blog/2017/01/05/elixir-v1-4-0-released/#application-inference>
 
   deps should be no longer listed in applications list explicitly:
 
@@ -100,7 +119,7 @@ $ mix do deps.get, compile
 
 ## IEx
 
-<https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
+1. <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
 
 - Erlang shell - Eshell (`erl`)
 - Elixir shell - IEx (`iex`)
@@ -117,7 +136,7 @@ iex> Application.ensure_all_started(:neko)
 
 ### quit IEx
 
-<http://blog.plataformatec.com.br/2016/03/how-to-quit-the-elixir-shell-iex/>
+1. <http://blog.plataformatec.com.br/2016/03/how-to-quit-the-elixir-shell-iex/>
 
 - `<C-c>a<CR>` (graceful)
 - `<C-g>q<CR>` (graceful)
@@ -134,7 +153,7 @@ history except for the last one (`<C-\>`).
 
 ### shell history
 
-<http://nithinbekal.com/posts/elixir-shell-history/>:
+1. <http://nithinbekal.com/posts/elixir-shell-history/>:
 
 ```sh
 $ git clone https://github.com/ferd/erlang-history.git
@@ -191,12 +210,12 @@ shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
 
 **UPDATE (2017-07-28)**
 
-<https://hexdocs.pm/iex/IEx.html#module-shell-history>:
+1. <https://hexdocs.pm/iex/IEx.html#module-shell-history>:
 
 > From Erlang/OTP 20, it is possible to get shell history by passing some flags
 > that enable it in the VM.
 
-<https://github.com/ferd/erlang-history>:
+1. <https://github.com/ferd/erlang-history>:
 
 > Since Erlang/OTP-20rc2, Shell history is supported out of the box
 > (although initially disabled by default) through a port of this library to
@@ -215,7 +234,7 @@ using `erlang-history` is no longer required
 
 ### evaluate vs. compile in memory vs. compile
 
-<https://github.com/elixir-lang/elixir/issues/5073>
+1. <https://github.com/elixir-lang/elixir/issues/5073>
 
 > `ex` files are meant to be compiled<br>
 > `exs` files are used for scripting
@@ -264,7 +283,7 @@ in these cases bytecode modules are not written to disk - only loaded in memory:
 
 ### get result of last evaluated expression (same as `_` in irb)
 
-<https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
+1. <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
 ```sh
 iex> 123
@@ -275,8 +294,8 @@ iex> v()
 
 ### cancel multiline command
 
-- <https://stackoverflow.com/questions/27591417>
-- <https://hexdocs.pm/iex/1.0.5/IEx.html>
+1. <https://stackoverflow.com/questions/27591417>
+2. <https://hexdocs.pm/iex/1.0.5/IEx.html>
 
 ```sh
 iex> foo =
@@ -285,7 +304,7 @@ iex> foo =
 
 ### cancel reverse search
 
-<http://readline.kablamo.org/emacs.html>
+1. <http://readline.kablamo.org/emacs.html>
 
 `<D-u><D-u>`
 
@@ -295,7 +314,7 @@ the line from current cursor position backwards to the start of the line.
 
 ### recompile current Mix application (same as `reload!` in rails console)
 
-<http://stackoverflow.com/a/36494891/3632318>
+1. <http://stackoverflow.com/a/36494891/3632318>
 
 ```sh
 iex> recompile()
@@ -309,7 +328,7 @@ iex> r(Foo.Bar)
 
 ### suppress long output (same as `;` in irb)
 
-<http://stackoverflow.com/a/39208906/3632318>
+1. <http://stackoverflow.com/a/39208906/3632318>
 
 add another expression at the end of the line after semicolon:
 

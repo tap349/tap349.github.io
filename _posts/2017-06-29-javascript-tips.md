@@ -26,9 +26,11 @@ categories: []
 
   <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator#Spread_in_object_literals>
 
+  {% raw %}
   ```javascript
   {...{a: 1, b: 2}, ...{b: 3}} // {a: 1, b: 3}
   ```
+  {% endraw %}
 
   while `Object.assign` modifies target object using spread syntax creates new object.
 

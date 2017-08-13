@@ -44,22 +44,6 @@ _config/stage.exs_:
 - specify different port (say, 4001)
 - `import_config "stage.secret.exs"`
 
-### edeliver
-
-_.deliver/config_:
-
-```diff
-- DELIVER_TO="/home/billing/stage"
-+ TEST_AT="/home/billing/stage"
-
-  pre_erlang_get_and_update_deps() {
-+   local _secret_file="$TARGET_MIX_ENV.secret.exs"
-+   __sync_remote "
-+     ln -sfn "/var/$_secret_file" "$BUILD_AT/config/$_secret_file"
-+   "
-  }
-```
-
 ### distillery
 
 1. <https://hexdocs.pm/distillery/runtime-configuration.html#content>
@@ -110,6 +94,22 @@ _rel/vm.args.prod_:
 
 # Enable SMP automatically based on availability
 -smp auto
+```
+
+### edeliver
+
+_.deliver/config_:
+
+```diff
+- DELIVER_TO="/home/billing/stage"
++ TEST_AT="/home/billing/stage"
+
+  pre_erlang_get_and_update_deps() {
++   local _secret_file="$TARGET_MIX_ENV.secret.exs"
++   __sync_remote "
++     ln -sfn "/var/$_secret_file" "$BUILD_AT/config/$_secret_file"
++   "
+  }
 ```
 
 ## deployment

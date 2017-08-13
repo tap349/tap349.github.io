@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Markdown tips
+title: Markdown - Tips
 date: 2017-05-28 01:15:46 +0300
 access: public
 categories: [markdown]

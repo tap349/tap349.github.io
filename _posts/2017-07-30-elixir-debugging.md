@@ -42,3 +42,13 @@ $ mvim deps/detergentex/lib/detergentex.ex
 $ mix deps.compile detergentex
 $ mix -S iex
 ```
+
+### information about endpoint
+
+1. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/5>
+
+```sh
+$ bin/billing remote_console
+iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
+iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
+```

@@ -15,7 +15,7 @@ categories: [elixir]
 ## Mix
 
 > Mix assumes that we are in the development environment unless we tell it
-> otherwise with MIX_ENV=another_environment mix some_task.
+> otherwise with MIX_ENV=<another_environment> mix some_task.
 
 ### common tasks
 
@@ -50,6 +50,10 @@ tasks can be batched:
 ```sh
 $ mix do deps.get, compile
 ```
+
+### gotchas
+
+
 
 ### mix.exs
 

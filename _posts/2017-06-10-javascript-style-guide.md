@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JavaScript - Style guide
+title: JavaScript - Style Guide
 date: 2017-06-10 18:36:47 +0300
 access: public
 categories: [js]

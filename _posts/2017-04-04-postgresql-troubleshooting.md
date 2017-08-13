@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PostgreSQL troubleshooting
+title: PostgreSQL - Troubleshooting
 date: 2017-04-04 15:06:42 +0300
 access: public
 categories: [postgresql]

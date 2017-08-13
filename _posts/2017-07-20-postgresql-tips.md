@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PostgreSQL tips
+title: PostgreSQL - Tips
 date: 2017-07-20 16:09:32 +0300
 access: public
 categories: [postgresql, rails]

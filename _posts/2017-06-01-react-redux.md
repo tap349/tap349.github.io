@@ -246,6 +246,7 @@ export default function memberships (state = initialState, action = {}) {
 - <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
 - <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
 
+{% raw %}
 ```javascript
 // [{id: 2, name: 'foo'}, {id: 2, name: 'bar'}] ->
 //  {2: {id: 1, name: 'foo'}, 2: {id: 2, name: 'bar'}}
@@ -255,6 +256,7 @@ const arrayToObject = (array) =>
     return obj;
   }, {})
 ```
+{% endraw %}
 
 NOTE: original array sorting is lost in resulting object!
 

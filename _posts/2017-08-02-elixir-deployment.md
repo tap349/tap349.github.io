@@ -268,6 +268,24 @@ it's necessary to restart application after deploying
   $ mix edeliver stop production
   ```
 
+  make sure application is really stopped (application might be running
+  but not responding to commands to ping/start/stop it - IDK why yet):
+
+  ```diff
+    EDELIVER BILLING WITH STOP COMMAND
+
+    -----> stoping production servers
+
+    production node:
+
+    user    : billing
+    host    : billing
+    path    : /home/billing/prod
+  + response: ok
+
+  + STOP DONE!
+  ```
+
 - when systemd IS NOT used to manage application
 
   ```sh

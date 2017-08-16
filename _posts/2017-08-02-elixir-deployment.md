@@ -282,7 +282,7 @@ it's necessary to restart application after deploying
     host    : billing
     path    : /home/billing/prod
   + response: ok
-
+  +
   + STOP DONE!
   ```
 
@@ -508,6 +508,29 @@ when application is started manually (service is stopped):
   +     error: :red
   +   ]
   ```
+
+### persistent systemd journal
+
+1. <https://www.freedesktop.org/software/systemd/man/journald.conf.html>
+2. <https://habrahabr.ru/company/selectel/blog/264731/>
+
+_/etc/systemd/journald.conf_ (no changes):
+
+```conf
+[Journal]
+#Storage=auto
+```
+
+with `Storage=auto` (default value) logs will be persisted on disk
+if _/var/log/journal/_ directory exists - so create one with Chef.
+
+view specific boot:
+
+```sh
+$ journalctl --list-boots
+0 e833ad1ae9f34f89b851d08b9ad55ee0 Mon 2017-08-14 01:57:44 UTC—Wed 2017-08-16 21:37:24 UTC
+$ journalctl -b 0
+```
 
 ## hot upgrades
 

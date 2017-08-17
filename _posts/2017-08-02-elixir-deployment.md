@@ -234,7 +234,7 @@ trying to send any request to application.
   deployed and started application must be listening on specified port:
 
   ```sh
-  $ journalctl -ef -u billing_prod
+  $ journalctl -fu billing_prod
   localhost systemd[1]: Started Phoenix server for billing app.
   localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
   ```
@@ -420,8 +420,11 @@ but since application service is managed by systemd all logs are
 sent to systemd journal (as configured in systemd service unit):
 
 ```sh
-$ journalctl -ef -u billing_prod
+$ journalctl --no-tail -fu billing_prod
 ```
+
+NOTE: don't use `-e` and `-n` options (`-e` implies `-n1000`) -
+      they cause some lines not to be printed (IDK why).
 
 when application is started via systemd service unit:
 
@@ -483,7 +486,7 @@ when application is started manually (service is stopped):
   (can be installed via Chef):
 
   ```sh
-  $ journalctl -ef -u billing_prod | ccze
+  $ journalctl --no-tail -fu billing_prod | ccze
   ```
 
 - Elixir logs
@@ -528,7 +531,8 @@ view specific boot:
 
 ```sh
 $ journalctl --list-boots
-0 e833ad1ae9f34f89b851d08b9ad55ee0 Mon 2017-08-14 01:57:44 UTC—Wed 2017-08-16 21:37:24 UTC
+-1 e833ad1ae9f34f89b851d08b9ad55ee0 Wed 2017-08-16 19:03:28 UTC—Wed 2017-08-16 21:54:57 UTC
+ 0 c4ef341537734dc18235c9e8d2d7a76a Wed 2017-08-16 21:55:35 UTC—Thu 2017-08-17 18:49:56 UTC
 $ journalctl -b 0
 ```
 

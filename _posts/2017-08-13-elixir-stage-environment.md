@@ -118,15 +118,30 @@ _.deliver/config_:
 
 ## deployment
 
+### build and deploy release
+
 ```sh
 $ mix edeliver build release --mix-env=stage
-$ mix edeliver deploy release to staging
-$ mix edeliver migrate staging up
+$ mix edeliver deploy release staging
 $ mix edeliver ping staging
 ```
 
-make sure that application is restarted -
-see instructions for restarting production release.
+or the same in one go:
+
+```sh
+$ mix edeliver update staging --mix-env=stage
+```
+
+### restart application
+
+make sure application is restarted - see instructions for restarting production
+release in [Elixir - Deployment]({% post_url 2017-08-02-elixir-deployment %}).
+
+### run migrations
+
+```sh
+$ mix edeliver migrate staging up
+```
 
 ## alternative solutions
 

@@ -40,3 +40,19 @@ Slogan: Kernel pid terminated (application_controller) ({application_start_failu
 
 in most cases it means that `PORT` environment variable is not set - examine
 `~/.profile` and `/etc/systemd/system/phoenix_billing.service` files.
+
+### running application is not responding
+
+running application is not responding to ping/start/stop commands
+(issued with edeliver task locally or application command on remote host).
+
+**solution**
+
+after deploying application don't stop it using edeliver task
+but restart corresponding systemd service on remote host:
+
+```sh
+$ ssh devops@billing sudo systemctl restart billing_prod
+```
+
+also it helps in case application is already not responding.

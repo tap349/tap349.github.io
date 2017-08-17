@@ -66,9 +66,24 @@ $ mix do deps.get, compile
       # works
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       # doesn't work
-      "ed.all": [
+      "deploy.prod": [
         "edeliver build release",
-        "edeliver deploy release to production"
+        "edeliver deploy release production"
+      ]
+    ]
+  end
+  ```
+
+  though it's allowed to alternate between 2 tasks, say:
+
+  ```elixir
+  defp aliases do
+    [
+      # works
+      "edeliver.all": [
+        "edeliver build release",
+        "deps.get",
+        "edeliver deploy release production"
       ]
     ]
   end

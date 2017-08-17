@@ -250,8 +250,14 @@ NOTE: push all changes to github!!! when building new release on build
 
 ```sh
 $ mix edeliver build release
-$ mix edeliver deploy release to production
+$ mix edeliver deploy release production
 $ mix edeliver ping production
+```
+
+or the same in one go:
+
+```sh
+$ mix edeliver update production
 ```
 
 ### restart application
@@ -286,17 +292,25 @@ it's necessary to restart application after deploying
   + STOP DONE!
   ```
 
+  **UPDATE**:
+
+  [Phoenix - Troubleshooting]({% post_url 2017-08-01-phoenix-troubleshooting %}):
+
+  ```sh
+  $ ssh devops@billing sudo systemctl restart billing_stage
+  ```
+
 - when systemd IS NOT used to manage application
 
   ```sh
-  $ mix edeliver deploy to production
+  $ mix edeliver deploy production
   $ mix edeliver restart production
   ```
 
   OR
 
   ```sh
-  $ mix edeliver deploy release to production --start-deploy
+  $ mix edeliver deploy release production --start-deploy
   ```
 
   OR

@@ -96,6 +96,11 @@ _rel/vm.args.prod_:
 -smp auto
 ```
 
+The Little Elixir and OTP Guidebook:
+
+> you can think of nodes as separate Erlang runtimes
+> that can talk to each other.
+
 ### edeliver
 
 _.deliver/config_:

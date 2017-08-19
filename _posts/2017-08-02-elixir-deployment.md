@@ -500,8 +500,12 @@ when application is started manually (service is stopped):
   (can be installed via Chef):
 
   ```sh
-  $ journalctl --no-tail -fu billing_prod | ccze
+  $ journalctl --no-tail -fu billing_prod | ccze -A
   ```
+
+  make sure to add `-A` (`--raw-ansi`) option - otherwise long lines are
+  split into several newline-separated lines (instead of being just wrapped)
+  which is very inconvenient when you need to copy'n'paste such a long line.
 
 - Elixir logs
 

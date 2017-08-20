@@ -121,15 +121,21 @@ associations can be loaded in:
 - <https://medium.com/coryodaniel/til-elixir-ecto-put-assoc-vs-cast-assoc-7c80f35f6e6>
 - <https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_assoc/3>
 
-when using `put_assoc` you usually supply existing association (either
-association struct or changeset - say, `user` when creating a `comment`)
-while when using `cast_assoc` you specify association name to retrieve
-from supplied params and expect it to be created alongside the parent struct
-(like when using `accepts_nested_attributes_for` in Rails).
+- when using `put_assoc`:
 
-though in both cases corresponding association should be preloaded
-(of course it only makes sense when parent struct has id field but
-it doesn't raise error otherwise).
+  association that you `put` usually already exists (that is it's not meant to
+  be persisted as a result of current operation) and is supplied as a struct or
+  changeset (say, `user` when creating a `comment`).
+
+- when using `cast_assoc`:
+
+  you specify the name of association that is expected to be created alongside
+  its parent (this name is also used to retrieve association params from supplied
+  `params`) - like when using `accepts_nested_attributes_for` in Rails.
+
+though in both cases corresponding association must be preloaded so that
+Ecto knows what to do in case it already exists (of course it only makes
+sense when parent has `id` field but it doesn't raise error otherwise).
 
 #### `build_assoc` vs. building association explicitly
 

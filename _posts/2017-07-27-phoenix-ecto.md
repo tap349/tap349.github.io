@@ -157,7 +157,7 @@ comment = %Comment{user_id: user.id, body: "foo"}
 it's not recommended to use these functions inside schemas since they might
 require you to make calls to `Repo` (`build_assoc` or `put_assoc`) or use
 changesets of other schemas (`cast_assoc`) while it's preferable to isolate
-both calls to `Repo` and usage of different changesets on the level of contexts.
+both calls to `Repo` and usage of different changesets in contexts.
 
 though in `What's new in Ecto 2.1` ebook (chapter `Many to many and upserts`)
 there is an example of schema in which both `put_assoc` and `Repo` are used.

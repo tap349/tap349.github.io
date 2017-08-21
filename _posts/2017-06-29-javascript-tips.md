@@ -100,3 +100,28 @@ instance properties of current class) there are 2 options:
 
   now `handleResponse` is bound to `Foo` class instance forever
   (it's even impossible to rebind it explicitly using `bind`).
+
+## post form data
+
+1. <https://github.com/facebook/react-native/issues/3349>
+2. <https://stackoverflow.com/a/32445457/3632318>
+
+```javascript
+const jsonToFormData = (json) => {
+  return Object.entries(json)
+    .map(entry => {
+      const [key, value] = entry;
+      const encodedKey = encodeURIComponent(key);
+      const encodedValue = encodeURIComponent(value);
+
+      return `${encodedKey}=${encodedValue}`;
+    }, [])
+    .join('&');
+}
+
+const response = fetch(url, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+  body: jsonToFormData(json)
+})
+```

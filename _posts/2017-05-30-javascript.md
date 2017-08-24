@@ -196,11 +196,8 @@ passed to corresponding callback functions attached to `then()`.
 > if the handler function:
 >
 > - returns a value, the promise returned by then gets resolved with the returned value as its value;
->
 > - throws an error, the promise returned by then gets rejected with the thrown error as its value;
->
 > - returns an already resolved promise, the promise returned by then gets resolved with that promise's value as its value;
->
 > - returns an already rejected promise, the promise returned by then gets rejected with that promise's value as its value.
 
 ## [ES6] shorthand property names

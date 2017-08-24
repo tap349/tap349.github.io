@@ -187,6 +187,22 @@ rejected one. this is what allows to chain promises endlessly.
 resolved or rejected values (i.e. resolved or rejected promise values) will be
 passed to corresponding callback functions attached to `then()`.
 
+### returning promise from handler functions
+
+<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then>:
+
+> The handler function (onFulfilled or onRejected) gets then called asynchronously
+> (as soon as the stack is empty). After the invocation of the handler function,
+> if the handler function:
+>
+> - returns a value, the promise returned by then gets resolved with the returned value as its value;
+>
+> - throws an error, the promise returned by then gets rejected with the thrown error as its value;
+>
+> - returns an already resolved promise, the promise returned by then gets resolved with that promise's value as its value;
+>
+> - returns an already rejected promise, the promise returned by then gets rejected with that promise's value as its value.
+
 ## [ES6] shorthand property names
 
 - <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer>

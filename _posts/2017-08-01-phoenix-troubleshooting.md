@@ -74,3 +74,14 @@ $ mix archive.install https://github.com/phoenixframework/archives/raw/master/ph
 Are you sure you want to install "https://github.com/phoenixframework/archives/raw/master/phx_new.ez"? [Yn]
 * creating /Users/tap/.asdf/installs/elixir/1.5.1/.mix/archives/phx_new
 ```
+
+## all styles are gone
+
+**solution**
+
+I removed _priv/static/_ directory some time ago - restore it from Git repo
+or copy from newly generated project:
+
+```sh
+$ mix phx.new hello --no-brunch
+```

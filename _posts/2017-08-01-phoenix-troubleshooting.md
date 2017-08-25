@@ -26,7 +26,7 @@ conn
 # ...
 ```
 
-### Slogan: Kernel pid terminated (application_controller)
+## Slogan: Kernel pid terminated (application_controller)
 
 _/home/billing/prod/billing/erl_crash.dump_ on production host:
 
@@ -41,7 +41,7 @@ Slogan: Kernel pid terminated (application_controller) ({application_start_failu
 in most cases it means that `PORT` environment variable is not set - examine
 `~/.profile` and `/etc/systemd/system/phoenix_billing.service` files.
 
-### running application is not responding
+## running application is not responding
 
 running application is not responding to ping/start/stop commands
 (issued with edeliver task locally or application command on remote host).
@@ -56,3 +56,21 @@ $ ssh devops@billing sudo systemctl restart billing_prod
 ```
 
 also it helps in case application is already not responding.
+
+## The task "phx.new" could not be found
+
+```sh
+$ mix phx.new billing --no-brunch
+** (Mix) The task "phx.new" could not be found
+```
+
+**solution**
+
+I guess this problem is related to using `asdf` to manage Elixir versions -
+Phoenix has not been installed yet into new Elixir directory:
+
+```sh
+$ mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez
+Are you sure you want to install "https://github.com/phoenixframework/archives/raw/master/phx_new.ez"? [Yn]
+* creating /Users/tap/.asdf/installs/elixir/1.5.1/.mix/archives/phx_new
+```

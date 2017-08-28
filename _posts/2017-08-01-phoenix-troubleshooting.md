@@ -57,6 +57,25 @@ $ ssh devops@billing sudo systemctl restart billing_prod
 
 also it helps in case application is already not responding.
 
+## Node is not running!
+
+```sh
+$ ssh billing
+$ prod && bin/billing remote_console
+Node is not running!
+```
+
+maybe this problem is the same as the previous one though
+I don't stop application using edeliver task any more.
+
+**solution**
+
+still the same:
+
+```sh
+$ ssh devops@billing sudo systemctl restart billing_prod
+```
+
 ## The task "phx.new" could not be found
 
 ```sh

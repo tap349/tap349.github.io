@@ -71,7 +71,14 @@ there are 2 alternative approaches to deal with secrets:
 
 ### assets
 
-1. <https://hexdocs.pm/phoenix/deployment.html#compiling-your-application-assets>:
+1. <https://hexdocs.pm/phoenix/deployment.html#compiling-your-application-assets>
+
+compilation of static assets consists of 2 steps:
+
+- building assets (say, using Brunch)
+- generating digests and cache manifest for production (using `phx.digest` Mix task)
+
+#### assets are not used
 
 > If you are not serving or don’t care about assets at all, you can just remove
 > the cache_static_manifest configuration from config/prod.exs.
@@ -85,6 +92,37 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
 -   url: [host: "example.com", port: 80],
 -   cache_static_manifest: "priv/static/cache_manifest.json"
 ```
+
+#### assets are used
+
+1. <http://blog.plataformatec.com.br/2016/06/deploying-elixir-applications-with-edeliver/>
+2. <https://github.com/edeliver/edeliver/wiki/Run-additional-build-tasks>
+
+- add Brunch support if project was generated with `--no-brunch` option
+  (see [Phoenix]({% post_url 2016-11-12-phoenix %}))
+- compile static assets in edeliver `pre_erlang_clean_compile` hook
+
+  _.deliver/config_:
+
+  ```diff
+  + pre_erlang_clean_compile() {
+  +   status "Compiling static assets"
+  +   __sync_remote "
+  +     set -e
+  +     cd '$BUILD_AT'
+  +
+  +     # install npm packages and build assets
+  +     cd assets
+  +     yarn install
+  +     node node_modules/brunch/bin/brunch build --production
+  +
+  +     # generate digest and cache manifest
+  +     cd ..
+  +     mkdir -p priv/static
+  +     APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
+  +   "
+  + }
+  ```
 
 ### artifacts (say, YAML files)
 
@@ -327,8 +365,8 @@ it's necessary to restart application after deploying
 $ mix edeliver migrate production up
 ```
 
-ALWAYS use `--version` option when running `migrate production down` task
-or else it will rollback all migrations (effectively deleting all data):
+ALWAYS use `--version` option when running `migrate production down` edeliver
+task or else it will rollback all migrations (effectively deleting all data):
 
 ```sh
 $ mix edeliver migrate production down --version=20170728105044
@@ -629,7 +667,7 @@ using `--env=prod` only:
 - applies production configuration from _rel/config.exs_
 - includes extra _\_build/dev/rel/billing/var/_ directory
 
-TL;DR: for `release` task it's safe to use `MIX_ENV=prod` only.
+TL;DR: for `release` Mix task it's safe to use `MIX_ENV=prod` only.
 
 ### run production release
 

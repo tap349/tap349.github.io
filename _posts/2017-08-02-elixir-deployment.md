@@ -33,6 +33,9 @@ NOTE: all paths on production host are specified relative to
 
 ## configuration
 
+all edeliver hooks:
+<https://github.com/edeliver/edeliver/wiki/Run-additional-build-tasks>.
+
 ### secrets
 
 1. <https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>

@@ -365,7 +365,7 @@ it's necessary to restart application after deploying
 ### run migrations
 
 ```sh
-$ mix edeliver migrate production up
+$ mix edeliver migrate production
 ```
 
 ALWAYS use `--version` option when running `migrate production down` edeliver

@@ -142,7 +142,7 @@ release in [Elixir - Deployment]({% post_url 2017-08-02-elixir-deployment %}).
 ### run migrations
 
 ```sh
-$ mix edeliver migrate staging up
+$ mix edeliver migrate staging
 ```
 
 ## alternative solutions

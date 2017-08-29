@@ -104,3 +104,46 @@ or copy from newly generated project:
 ```sh
 $ mix phx.new hello --no-brunch
 ```
+
+## Host key verification failed
+
+```sh
+$ mix deploy.stage
+EDELIVER BILLING WITH UPDATE COMMAND
+-----> Updating to revision dec86cd from branch master
+-----> Building the release for the update
+-----> Authorizing hosts
+-----> Ensuring hosts are ready to accept git pushes
+-----> Pushing new commits with git to: billing@billing
+-----> Resetting remote hosts to dec86cdd704a1e88fd5fd0600bad4a425c81762e
+-----> Cleaning generated files from last build
+-----> Symlinking stage.secret.exs
+-----> Fetching / Updating dependencies
+using mix to fetch and update deps
+rebar and rebar3 for mix was built already
+* creating /home/billing/.mix/archives/hex-0.17.0
+* Getting slime (git@github.com:slime-lang/slime.git)
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+** (Mix) Command "git --git-dir=.git fetch --force --quiet --progress" failed
+```
+
+**solution**
+
+1. <https://github.com/docker-library/golang/issues/148#issuecomment-279459932>
+
+use HTTPS instead of SSH to clone public repos in _mix.exs_:
+
+```elixir
+defp deps do
+  [
+    # ...
+-   {:slime, git: "git@github.com:slime-lang/slime.git", override: true},
++   {:slime, git: "https://github.com/slime-lang/slime.git", override: true},
+    # ...
+  ]
+end
+```

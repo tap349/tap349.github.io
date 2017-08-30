@@ -598,6 +598,7 @@ $ journalctl -b 0
 ### parameter filtering
 
 1. <https://hexdocs.pm/phoenix/Phoenix.Logger.html>
+2. <https://docs.appsignal.com/elixir/configuration/parameter-filtering.html>
 
 _config/prod.exs_:
 

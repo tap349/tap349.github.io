@@ -595,6 +595,17 @@ $ journalctl --list-boots
 $ journalctl -b 0
 ```
 
+### parameter filtering
+
+1. <https://hexdocs.pm/phoenix/Phoenix.Logger.html>
+
+_config/prod.exs_:
+
+```elixir
+config :phoenix,
+  :filter_parameters, ["password", "number", "exp_date"]
+```
+
 ## hot upgrades
 
 <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>:

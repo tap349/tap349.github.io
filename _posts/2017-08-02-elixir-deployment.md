@@ -475,7 +475,7 @@ but since application service is managed by systemd all logs are
 sent to systemd journal (as configured in systemd service unit):
 
 ```sh
-$ journalctl --no-tail -fu billing_prod
+$ journalctl --no-tail --since yesterday -fu billing_prod
 ```
 
 NOTE: don't use `-e` and `-n` options (`-e` implies `-n1000`) -
@@ -536,12 +536,13 @@ when application is started manually (service is stopped):
 - systemd journal
 
   1. <https://github.com/cornet/ccze>
+  2. <https://unix.stackexchange.com/questions/278161/scrolling-output-with-ccze>
+  3. <https://forums.meteor.com/t/better-logging-for-react-native-and-server/27961/4>
 
-  use `ccze` package to colorize `journalctl` output
-  (can be installed via Chef):
+  use `ccze` package to colorize `journalctl` output (can be installed via Chef):
 
   ```sh
-  $ journalctl --no-tail -fu billing_prod | ccze -A
+  $ journalctl --no-tail --since yesterday -fu billing_prod | ccze -A -o nolookups
   ```
 
   make sure to add `-A` (`--raw-ansi`) option - otherwise long lines are

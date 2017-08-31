@@ -271,6 +271,7 @@ trying to send any request to application.
 - create systemd service
 
   1. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>
+  2. <https://mfeckie.github.io/Phoenix-In-Production-With-Systemd/>
 
   deployed and started application must be listening on specified port:
 

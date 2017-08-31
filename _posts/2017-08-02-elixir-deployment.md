@@ -608,6 +608,17 @@ config :phoenix,
   :filter_parameters, ["password", "number", "exp_date"]
 ```
 
+### formatting
+
+1. <https://hexdocs.pm/logger/Logger.html>
+
+_config/prod.exs_:
+
+```elixir
+# Do not include time - it's provided by systemd journal
+config :logger, :console, format: "$metadata[$level] $message\n"
+```
+
 ## hot upgrades
 
 <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>:

@@ -57,7 +57,12 @@ _config/stage.exs_:
   ```
 
   AppSignal will create _appsignal/_ subdirectory in specified working
-  directory (the latter must exist - AppSignal won't try to create one).
+  directory. the latter must exist - AppSignal won't try to create one
+  and its agent will fail to start if it's missing:
+
+  ```
+  WARNING: Error when reading appsignal config, appsignal not starting: IO error: No viable path found
+  ```
 
 ### distillery
 

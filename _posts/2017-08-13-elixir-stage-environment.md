@@ -43,8 +43,7 @@ _config/stage.exs_:
 
 - specify different port (say, 4001)
 - `import_config "stage.secret.exs"`
-- configure AppSignal agent to use separate working directory for
-  each environment
+- use separate working directory for AppSignal agent
 
   1. <https://docs.appsignal.com/elixir/configuration/options.html#appsignal_working_dir_path-working_dir_path>
 
@@ -53,9 +52,12 @@ _config/stage.exs_:
   ```diff
     config :appsignal, :config,
       # ...
-  +   working_dir_path: "/tmp/billing_#{Mix.env()}/",
+  +   working_dir_path: "/home/billing/#{Mix.env()}",
       # ...
   ```
+
+  AppSignal will create _appsignal/_ subdirectory in specified working
+  directory (the latter must exist - AppSignal won't try to create one).
 
 ### distillery
 

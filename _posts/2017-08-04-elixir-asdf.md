@@ -1,6 +1,6 @@
 ---
 layout: post
-title: asdf
+title: Elixir - asdf
 date: 2017-08-04 12:35:57 +0300
 access: public
 categories: [asdf]

@@ -50,6 +50,13 @@ _config/appsignal.exs_:
 
   1. <https://docs.appsignal.com/elixir/configuration/options.html#appsignal_working_dir_path-working_dir_path>
 
+  ```diff
+    config :appsignal, :config,
+      # ...
+  +   working_dir_path: "/home/billing/#{Mix.env()}",
+      # ...
+  ```
+
   AppSignal will create _appsignal/_ subdirectory in specified working
   directory. the latter must exist - AppSignal won't try to create one
   and its agent will fail to start if it's missing:

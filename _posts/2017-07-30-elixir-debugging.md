@@ -12,6 +12,8 @@ categories: [elixir]
 {:toc}
 <hr>
 
+## locally
+
 ### using `IEx.pry` (same as `binding.pry` in Ruby)
 
 - <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
@@ -52,3 +54,9 @@ $ bin/billing remote_console
 iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
 ```
+
+## remotely
+
+1. <http://blog.plataformatec.com.br/2016/05/tracing-and-observing-your-remote-node/>
+2. <https://mfeckie.github.io/Remote-Profiling-Elixir-Over-SSH/>
+3. <https://chazsconi.github.io/2017/04/22/observing-remote-elixir-docker-nodes.html>

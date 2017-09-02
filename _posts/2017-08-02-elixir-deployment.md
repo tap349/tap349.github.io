@@ -285,6 +285,8 @@ options set there are passed as is to EVM process:
   ...
 ```
 
+NOTE: application must be restarted after changing EVM flags.
+
 - `-name` vs. `-sname`
 
   1. <https://github.com/elixir-lang/elixir/issues/3955#issuecomment-156035367>
@@ -508,7 +510,7 @@ $ bin/billing command Elixir.Release.Tasks migrate
 ## locations on production host
 
 - _bin/\<app\_name\>_ - main application script
-- _releases/start_erl.data_ - file with current release version
+- _releases/start\_erl.data_ - file with current release version
 
   used by main application script to determine what version to run
 

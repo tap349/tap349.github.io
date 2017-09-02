@@ -583,7 +583,7 @@ when application is started manually (service is stopped):
   [debug] ** (Ecto.Query.CastError) deps/ecto/lib/ecto/repo/queryable.ex:331
   ```
 
-### colorize
+### colorizing
 
 - systemd journal
 

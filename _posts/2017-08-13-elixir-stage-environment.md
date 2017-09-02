@@ -130,12 +130,12 @@ _.deliver/config_:
 + TEST_AT="/home/billing/stage"
 
   pre_erlang_get_and_update_deps() {
-+   local _secret_file="$TARGET_MIX_ENV.secret.exs"
-+
-+   status "Symlinking $_secret_file"
-+   __sync_remote "
-+     ln -sfn "/var/$_secret_file" "$BUILD_AT/config/$_secret_file"
-+   "
+    local _secret_file="$TARGET_MIX_ENV.secret.exs"
+
+    status "Symlinking $_secret_file"
+    __sync_remote "
+      ln -sfn "/var/$_secret_file" "$BUILD_AT/config/$_secret_file"
+    "
   }
 ```
 

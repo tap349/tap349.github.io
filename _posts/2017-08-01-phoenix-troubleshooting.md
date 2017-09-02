@@ -105,7 +105,7 @@ or copy from newly generated project:
 $ mix phx.new hello --no-brunch
 ```
 
-## Host key verification failed
+## [edeliver] Host key verification failed
 
 ```sh
 $ mix deploy.stage
@@ -147,3 +147,19 @@ defp deps do
   ]
 end
 ```
+
+## [distillery] "$@" -- "${1+$ARGS}"
+
+systemd journal:
+
+```
+localhost systemd[1]: Started Phoenix server for billing.
+localhost billing[1234]: "$@" -- "${1+$ARGS}"
+```
+
+**solution**
+
+<https://github.com/bitwalker/distillery/issues/319#issuecomment-326661509>:
+
+> It's put there when reattaching stdout to the tty after running post-start
+> hooks, so it's normal. I'll see if I can silence it, but it's expected.

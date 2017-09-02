@@ -39,18 +39,21 @@ all edeliver hooks:
 ### secrets
 
 1. <https://hexdocs.pm/phoenix/deployment.html#handling-of-your-application-secrets>
-2. <https://github.com/edeliver/edeliver/wiki/Embed-Secrets---Credentials-into-the-Release>
 
 there are 2 alternative approaches to deal with secrets:
 
-- replace all values in _config/prod.exs_ with environment variables and
-  set those variables on production host (dynamic configuration)
+- dynamic configuration: replace all values in _config/prod.exs_ with
+  environment variables and set those variables on production host
+
+  1. <https://mfeckie.github.io/Phoenix-In-Production-With-Systemd/>
 
   when using this approach remove `pre_erlang_get_and_update_deps` hook in
   _.deliver/config_.
 
-- hard-code secrets in _config/prod.exs_ and place it on build host
-  manually or via Chef, say, at _/var/prod.secret.exs_:
+- embeding secrets into release: hard-code secrets in _config/prod.exs_ and
+  place it on build host manually or via Chef, say, at _/var/prod.secret.exs_
+
+  1. <https://github.com/edeliver/edeliver/wiki/Embed-Secrets---Credentials-into-the-Release>
 
   when building release edeliver links _/var/prod.secret.exs_
   into project directory as _config/prod.secret.exs_

@@ -260,6 +260,47 @@ trying to send any request to application.
       server: true
   ```
 
+### Erlang VM (EVM) flags
+
+1. <http://erlang.org/doc/man/erl.html>
+
+when using distillery EVM flags are set in _rel/vm.args_
+(or any other file set with `vm_args` setting for specific
+environment in _rel/config.exs_).
+
+options set there are passed as is to EVM process:
+
+```
+/home/billing/prod/billing/erts-9.0/bin/beam.smp -Bd\
+  -- -root /home/billing/prod/billing\
+  -progname home/billing/prod/billing/releases/0.0.1/billing.sh\
+  -- -home /home/billing\
+  ...
+  -name billing_prod@127.0.0.1\
+  -setcookie <cookie>\
+  -smp auto\
+  ...
+```
+
+- `-name` vs. `-sname`
+
+  1. <https://github.com/elixir-lang/elixir/issues/3955#issuecomment-156035367>
+  2. <https://github.com/bitwalker/distillery/issues/159>
+
+  it's possible to omit hostname when using short name (`-sname`) -
+  in general both variants are acceptable (still at least one of them
+  must be specified or else you'll get error when starting application):
+
+  ```sh
+  -name billing_prod@127.0.0.1
+  ```
+
+  OR
+
+  ```sh
+  -sname billing_prod
+  ```
+
 ### Chef
 
 - create _/var/prod.secret.exs_ on build host
@@ -476,7 +517,7 @@ $ bin/billing command Elixir.Release.Tasks migrate
 
 ## logging
 
-generally Elixir application log is written to Erlang VM (EVM) log file:
+generally Elixir application log is written to EVM log file:
 
 ```sh
 $ tail -f var/log/erlang.log.1

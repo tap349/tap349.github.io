@@ -91,7 +91,7 @@ _rel/config.exs_:
 
 _rel/vm.args.stage_:
 
-```elixir
+```sh
 ## Name of the node
 -name billing_stage.0.0.1
 
@@ -105,7 +105,7 @@ _rel/vm.args.stage_:
 
 _rel/vm.args.prod_:
 
-```elixir
+```sh
 ## Name of the node
 -name billing_prod@127.0.0.1
 

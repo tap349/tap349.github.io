@@ -41,40 +41,26 @@ Slogan: Kernel pid terminated (application_controller) ({application_start_failu
 in most cases it means that `PORT` environment variable is not set - examine
 `~/.profile` and `/etc/systemd/system/phoenix_billing.service` files.
 
-## running application is not responding
+## Node is not running! (Node not responding to pings.)
 
 running application is not responding to ping/start/stop commands
 (issued with edeliver task locally or application command on remote host).
 
-**solution**
-
-after deploying application don't stop it using edeliver task
-but restart corresponding systemd service on remote host:
-
-```sh
-$ ssh devops@billing sudo systemctl restart billing_prod
-```
-
-also it helps in case application is already not responding.
-
-## Node is not running!
-
 ```sh
 $ ssh billing
+$ prod && bin/billing ping
+Node 'billing_prod@127.0.0.1' not responding to pings.
 $ prod && bin/billing remote_console
-Node is not running!
+Node billing_prod@127.0.0.1 is not running!
 ```
 
-maybe this problem is the same as the previous one though
-I don't stop application using edeliver task any more.
+steps to reproduce:
+
+- restart `prod` application - try to ping `stage` application
 
 **solution**
 
-still the same:
-
-```sh
-$ ssh devops@billing sudo systemctl restart billing_prod
-```
+see [Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %}).
 
 ## The task "phx.new" could not be found
 

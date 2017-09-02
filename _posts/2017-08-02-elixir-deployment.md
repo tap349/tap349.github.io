@@ -279,8 +279,31 @@ trying to send any request to application.
   ```sh
   $ journalctl -fu billing_prod
   localhost systemd[1]: Started Phoenix server for billing app.
-  localhost billing[3448]: 08:52:35.970 [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
+  localhost billing[3448]: [info] Running BillingWeb.Endpoint with Cowboy using http://:::4000
   ```
+
+  important service unit options:
+
+  - `WorkingDirectory=<app_dir>`
+
+    set working directory instead of `HOME` environment variable:
+    application creates _.erlang.cookie_ in its home directory if
+    it's missing - so each application would create their own magic
+    cookie file instead of using a single one in _~/.erlang.cookie_
+    (to be precise - when building release with distillery cookie is set
+    in _vm.args_ file so _.erlang.cookie_ file is not used all the same).
+
+  - `ExecStart=/<bin_dir>/<app_name> foreground`
+
+    start application in the foreground rather than as a daemon
+    (using `start` application command and `RemainAfterExit=yes` option) -
+    in the latter case logs are written to EVM log file instead of
+    systemd journal.
+
+  - `Restart=no` (default)
+
+    don't restart application automatically by systemd when it crashes
+    (application is meant to be restarted by supervisor - not systemd).
 
 ## deployment
 
@@ -308,41 +331,6 @@ $ mix edeliver update production
 it's necessary to restart application after deploying
 (otherwise previous release will still be running).
 
-- when systemd IS used to manage application
-
-  systemd restarts failed processes automatically so it's necessary
-  just to stop application:
-
-  ```sh
-  $ mix edeliver stop production
-  ```
-
-  make sure application is really stopped (application might be running
-  but not responding to commands to ping/start/stop it - IDK why yet):
-
-  ```diff
-    EDELIVER BILLING WITH STOP COMMAND
-
-    -----> stoping production servers
-
-    production node:
-
-    user    : billing
-    host    : billing
-    path    : /home/billing/prod
-  + response: ok
-  +
-  + STOP DONE!
-  ```
-
-  **UPDATE**:
-
-  [Phoenix - Troubleshooting]({% post_url 2017-08-01-phoenix-troubleshooting %}):
-
-  ```sh
-  $ ssh devops@billing sudo systemctl restart billing_stage
-  ```
-
 - when systemd IS NOT used to manage application
 
   ```sh
@@ -363,6 +351,26 @@ it's necessary to restart application after deploying
   ```diff
   + START_DEPLOY=true
   ```
+
+- when systemd IS used to manage application
+
+  ```sh
+  $ ssh devops@billing sudo systemctl restart billing_prod
+  ```
+
+  don't restart application directly (as described above) -
+  using edeliver tasks or application commands.
+
+  when stopping application service unit enters failed state
+  (because process exits) but doesn't become active again
+  when application is started - as a result all logs are
+  written to EVM log file instead of systemd journal.
+
+  if you still stopped application manually stop it again
+  using systemd command to make systemd aware of state change.
+
+  TL;DR: if application is managed by systemd always use
+  corresponding systemd service to start/stop application.
 
 ### run migrations
 
@@ -451,6 +459,7 @@ $ bin/billing command Elixir.Release.Tasks migrate
   - `$ sudo systemctl start billing_prod`
   - `$ sudo systemctl stop billing_prod`
   - `$ sudo systemctl restart billing_prod`
+  - `$ sudo systemctl status billing_prod`
 
 ## locations on production host
 
@@ -467,7 +476,7 @@ $ bin/billing command Elixir.Release.Tasks migrate
 
 ## logging
 
-generally Elixir application log is written to Erlang VM log file:
+generally Elixir application log is written to Erlang VM (EVM) log file:
 
 ```sh
 $ tail -f var/log/erlang.log.1
@@ -486,11 +495,11 @@ NOTE: don't use `-e` and `-n` options (`-e` implies `-n1000`) -
 when application is started via systemd service unit:
 
 - application IS logging to systemd journal
-- application IS NOT logging to Erlang VM log file
+- application IS NOT logging to EVM log file
 
 when application is started manually (service is stopped):
 
-- application IS logging to Erlang VM log file
+- application IS logging to EVM log file
 - application IS NOT logging to systemd journal
 
 ### log level

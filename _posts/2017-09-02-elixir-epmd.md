@@ -47,6 +47,15 @@ EPMD can be started:
   when distributed Erlang node is started and no running
   instance of EPMD is present (otherwise it's used).
 
+  <http://erlang.org/doc/man/erl.html#start_epmd>:
+
+  it's possible to instruct distributed Erlang node not to start
+  EPMD on startup by passing `-start_epmd false` EVM flag - in
+  that case node will fail to start if EPMD is not running.
+
+  but in my experience it had no effect - application still started
+  EPMD unless it was already running.
+
 - in the foreground
 
   EPMD is usually started in the foreground either in systemd

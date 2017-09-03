@@ -41,9 +41,13 @@ Slogan: Kernel pid terminated (application_controller) ({application_start_failu
 in most cases it means that `PORT` environment variable is not set - examine
 `~/.profile` and `/etc/systemd/system/phoenix_billing.service` files.
 
-## Node is not running! (Node not responding to pings.)
+## Node is not running! / Node not responding to pings.
 
-running application is not responding to ping/start/stop commands
+restarting either `prod` or `stage` application leads to another
+one being unreachable (sometimes restarting `prod` application
+causes `stage` one to be unreachable - sometimes vice versa).
+
+running application stops responding to ping/start/stop commands
 (issued with edeliver task locally or application command on remote host).
 
 ```sh
@@ -54,13 +58,25 @@ $ prod && bin/billing remote_console
 Node billing_prod@127.0.0.1 is not running!
 ```
 
-steps to reproduce:
-
-- restart `prod` application - try to ping `stage` application
-
 **solution**
 
-see [Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %}).
+Erlang node of this application is no longer registered in EPMD -
+see `troubleshooting` section of
+[Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %})
+for explanation of how this could happen.
+
+TL;DR: create and enable a dedicated systemd service for `epmd` and
+configure it as a requirement dependency for all application services:
+
+```
+Requires=epmd.service
+```
+
+as a temporary fix restart systemd service of not responding application:
+
+```sh
+$ sudo systemctl restart billing_prod
+```
 
 ## The task "phx.new" could not be found
 

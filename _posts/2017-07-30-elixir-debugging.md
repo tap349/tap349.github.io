@@ -14,7 +14,7 @@ categories: [elixir]
 
 ## locally
 
-### using `IEx.pry` (same as `binding.pry` in Ruby)
+### using `IEx.pry` (= `binding.pry` in Ruby)
 
 - <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
 - <https://stackoverflow.com/questions/29671156/pry-while-testing>

@@ -10,6 +10,8 @@ guide on how to migrate data when switching from 9.4 to 9.5.
 
 <!-- more -->
 
+1. <https://www.postgresql.org/docs/9.5/static/pgupgrade.html>
+
 backup 9.4 data:
 
 ```sh

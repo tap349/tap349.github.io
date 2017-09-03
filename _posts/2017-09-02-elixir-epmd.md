@@ -61,7 +61,14 @@ EPMD can be started:
   EPMD is usually started in the foreground either in systemd
   service unit or manually in the shell for debugging purposes.
 
-## debugging with EPMD
+## debugging using EPMD
+
+- kill running EPMD process and start in the foreground for debugging
+
+  ```sh
+  $ sudo killall epmd
+  $ epmd -d
+  ```
 
 - list names registered with currently running EPMD
 
@@ -70,13 +77,6 @@ EPMD can be started:
   epmd: up and running on port 4369 with data:
   name billing_stage at port 30701
   name billing_prod at port 30183
-  ```
-
-- kill running EPMD process and start in the foreground for debugging
-
-  ```sh
-  $ sudo killall epmd
-  $ epmd -d
   ```
 
 ## troubleshooting

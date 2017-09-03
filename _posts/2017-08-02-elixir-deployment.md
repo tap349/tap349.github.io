@@ -289,12 +289,13 @@ NOTE: application must be restarted after changing EVM flags.
 
 - `-name` vs. `-sname`
 
+  makes ERTS (Erlang node) into a distributed node.
+
   1. <https://github.com/elixir-lang/elixir/issues/3955#issuecomment-156035367>
   2. <https://github.com/bitwalker/distillery/issues/159>
 
-  it's possible to omit hostname when using short name (`-sname`) -
-  in general both variants are acceptable (still at least one of them
-  must be specified or else you'll get error when starting application):
+  it's allowed to omit hostname when using short name (`-sname`) -
+  in general both variants are acceptable:
 
   ```sh
   -name billing_prod@127.0.0.1
@@ -305,6 +306,53 @@ NOTE: application must be restarted after changing EVM flags.
   ```sh
   -sname billing_prod
   ```
+
+  still at least one of these flags must be specified when using a
+  separate _vm.args_ file - otherwise application will refuse to start:
+
+  ```sh
+  $ bin/billing foreground
+  vm.args needs to have either -name or -sname parameter.
+  ```
+
+- `-setcookie`
+
+  sets the magic cookie of the node.
+
+  1. <https://github.com/bitwalker/distillery/issues/59#issuecomment-258928892>
+  2. <https://stackoverflow.com/questions/35812774>
+
+  <https://happi.github.io/theBeamBook/>:
+
+  > In order to connect two nodes they need to share or know a secret
+  > passphrase called a cookie (aka magic cookie).
+  >
+  > As long as you are running both nodes on the same machine and
+  > the same user starts them they will automatically share the cookie
+  > (in the file $HOME/.erlang.cookie).
+  >
+  > In the distributed case we need to make sure that all nodes know or
+  > share the cookie. This can be done in three ways:
+  >
+  > - you can set the cookie used when talking to a specific node
+  > - you can set the same cookie for all systems at start up with
+  >   the -setcookie parameter or
+  > - you can copy the file .erlang.cookie to the home directory of
+  >   the user running the system on each machine
+
+  by default cookie from automatically generated _~/.erlang.cookie_
+  file is used - it can be overriden with `-setcookie` EVM flag
+  (this is what is done in generated _rel/vm.args_ file).
+
+  application creates _.erlang.cookie_ file at startup in its home
+  directory if it's missing => each application would create their
+  own cookie file instead of using a single _~/.erlang.cookie_ file
+  when `HOME` environment variable is set to application directory
+  in application service units - don't set it at all.
+
+  when building release with distillery cookie is set in _vm.args_
+  file so _.erlang.cookie_ file is effectively ignored (even though
+  it's still created if missing).
 
 ### Chef
 
@@ -332,12 +380,9 @@ NOTE: application must be restarted after changing EVM flags.
 
   - `WorkingDirectory=<app_dir>`
 
-    set working directory instead of `HOME` environment variable:
-    application creates _.erlang.cookie_ in its home directory if
-    it's missing - so each application would create their own magic
-    cookie file instead of using a single one in _~/.erlang.cookie_
-    (to be precise - when building release with distillery cookie is set
-    in _vm.args_ file so _.erlang.cookie_ file is not used all the same).
+    set working directory instead of `HOME` environment variable
+    to avoid creating many _.erlang.cookie_ files (which are not
+    used all the same) - see description of `-setcookie` EVM flag.
 
   - `ExecStart=/<bin_dir>/<app_name> foreground`
 

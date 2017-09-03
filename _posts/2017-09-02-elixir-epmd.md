@@ -34,8 +34,8 @@ EPMD is like a DNS server for Erlang nodes.
 1. <http://erlang.org/doc/man/epmd.html>
 2. <http://erlang.org/doc/reference_manual/distributed.html>
 
-Elixir application (Erlang node) can respond to application commands
-(ping/start/stop) only if its name is registered in EPMD.
+NOTE: Elixir application (Erlang node) can respond to application
+      commands (ping/start/stop) iff its name is registered in EPMD.
 
 ## starting
 
@@ -77,20 +77,46 @@ EPMD can be started:
 this might happen when application crashes - examine its _erl_crash.dump_
 file or try to start application in the foreground to find out the error.
 
-### running node is not registered
+### successfully running node is not registered
 
-1. <https://bugzilla.redhat.com/show_bug.cgi?id=1104843>
+situation when application is successfully running but not
+registered in EPMD can be caused by this sequence of events:
 
-if application is successfully running but is not registered in EPMD
-this can be caused by this sequence of events:
-
-- application that starts first via systemd service
-  (say, `billing_prod`) spawns `epmd` process as well
+- application that is started via systemd service first
+  (say, `billing_prod`) spawns `epmd` process
 - restarting `billing_stage` service doesn't affect `epmd` process
 - stopping `billing_prod` service kills `epmd` process
-- starting `billing_prod` service again starts new `epmd process`
+- starting `billing_prod` service again starts new `epmd` process
   (because there are no running instances of `epmd` any longer)
 
-new `epmd` process knows nothing about `billing_stage` application
-even though it's still running. as a result the latter stops responding
-to all application commands.
+as a result new `epmd` process knows nothing about `billing_stage`
+application (even though it's still running) and the latter stops
+responding to all application commands.
+
+IDK why but stopping `billing_prod` service again doesn't kill
+`epmd` process any longer.
+
+**solution**
+
+1. <https://bugzilla.redhat.com/show_bug.cgi?id=1104843>
+2. <https://stackoverflow.com/questions/17324786>
+
+in theory `epmd` process shouldn't actually exit when application
+that started it automatically is stopped. but for some reason this
+is the case when application is started via systemd service.
+
+so it seems safer to make running EPMD independent of running applications -
+this can be done by creating a dedicated systemd service for EPMD and
+configuring it as a requirement dependency for all application services:
+
+```
+Requires=epmd.service
+```
+
+quick and dirty fix to register not responding application in EPMD:
+
+the only way to make EPMD aware of running but not responding
+application is to restart its service - I guess systemd sends SIGTERM
+signal to running process when it fails to stop it using `ExecStop=`
+command. when application is started it will discover already running
+EPMD instance and register itself as usual.

@@ -60,23 +60,10 @@ Node billing_prod@127.0.0.1 is not running!
 
 **solution**
 
-Erlang node of this application is no longer registered in EPMD -
-see `troubleshooting` section of
+application is not responding because its Erlang node is no
+longer registered in EPMD - see `troubleshooting` section of
 [Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %})
-for explanation of how this could happen.
-
-TL;DR: create and enable a dedicated systemd service for `epmd` and
-configure it as a requirement dependency for all application services:
-
-```
-Requires=epmd.service
-```
-
-as a temporary fix restart systemd service of not responding application:
-
-```sh
-$ sudo systemctl restart billing_prod
-```
+for explanation of how this could happen and how to fix it.
 
 ## The task "phx.new" could not be found
 

@@ -152,3 +152,40 @@ localhost billing[1234]: "$@" -- "${1+$ARGS}"
 
 > It's put there when reattaching stdout to the tty after running post-start
 > hooks, so it's normal. I'll see if I can silence it, but it's expected.
+
+## erl_child_setup closed
+
+sometimes Erlang crash dump is generated when stopping application.
+
+_erl_crash.dump_:
+
+```
+=erl_crash_dump:0.3
+Sun Sep  3 22:49:34 2017
+Slogan: erl_child_setup closed
+```
+
+**solution**
+
+1. <https://elixirforum.com/t/phoenix-server-crashing-randomly/3687>
+
+<https://elixirforum.com/t/phoenix-server-crashing-randomly/3687/2>:
+
+> Perhaps it has something to do with NIFs? You are using
+> elixir_make/comeonin/guardian which I believe all use NIFs.
+
+<https://elixirforum.com/t/phoenix-server-crashing-randomly/3687/14>:
+
+> By default Erlang will launch one scheduler thread per core and 10
+> "async threads" to do blocking things like IO.
+>
+> Additionally, more modern versions, will fork a process called
+> "erl_child_setup" that is used for spawning ports to avoid forking
+> the main VM process, which may be costly.
+
+all in all it looks like forked process `erl_child_setup` is not correctly
+terminated when application is stopped - maybe it has something to do with
+NIFs used by Guardian package.
+
+however this crash doesn't affect application in any way so I guess it can
+be safely ignored.

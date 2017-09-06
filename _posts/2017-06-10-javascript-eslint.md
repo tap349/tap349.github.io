@@ -47,7 +47,7 @@ on your answers) locally as development dependencies in _package.json_:
 <https://github.com/babel/babel-eslint/>
 
 ```sh
-$ npm install babel-eslint --save-dep
+$ npm install babel-eslint --save-dev
 ```
 
 _.eslintrc.yml_:

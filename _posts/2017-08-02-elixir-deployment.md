@@ -265,6 +265,12 @@ trying to send any request to application.
 
 ### Erlang VM (EVM) flags
 
+<http://ds.cs.ut.ee/courses/course-files/To303nis%20Pool%20.pdf>:
+
+> The whole runtime system together with the language, interpreter, memory
+> handling is called the Erlang Runtime System (ERTS), but the virtual machine
+> is often referred to also as the BEAM.
+
 1. <http://erlang.org/doc/man/erl.html>
 
 when using distillery EVM flags are set in _rel/vm.args_

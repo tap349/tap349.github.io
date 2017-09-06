@@ -8,6 +8,10 @@ categories: [elixir, otp]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 ## GenServer
 
 - <https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>

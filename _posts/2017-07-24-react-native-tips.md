@@ -14,7 +14,7 @@ categories: [react-native]
 
 ## set application icon badge number
 
-<https://stackoverflow.com/questions/40313361>
+1. <https://stackoverflow.com/questions/40313361>
 
 ### Android
 
@@ -53,7 +53,7 @@ RN package which:
 
 ## dismiss keyboard when tapping outside of TextInput
 
-<https://stackoverflow.com/questions/41426862>
+1. <https://stackoverflow.com/questions/41426862>
 
 by default keyboard is not dismissed when tapping outside of `TextInput`
 component - wrap the latter in `ScrollView` component for this to happen:
@@ -70,3 +70,35 @@ component - wrap the latter in `ScrollView` component for this to happen:
 
 if there is `ListView` component somewhere below you'll have to wrap
 `ScrollView` component in `View` component - otherwise it's not visible.
+
+## open application in store
+
+1. <https://stackoverflow.com/questions/35612383>
+
+first find out application IDs in App Store and Play Store:
+
+- iOS: <https://linkmaker.itunes.apple.com>
+- Android: <https://play.google.com/store/apps>
+
+examples of application IDs:
+
+- iOS: `id1111111111`
+- Android: `com.myapp`
+
+examples of final URLs:
+
+- iOS: `itms://itunes.apple.com/ru/app/id1111111111?mt=8`
+- Android: `market://details?id=com.myapp`
+
+<http://facebook.github.io/react-native/docs/linking.html#canopenurl>:
+
+since iOS 9 it's necessary to allow to query schemas explicitly in
+_Info.plist_ or else `canOpenUrl` will always return `false`.
+
+install `react-native-app-link` package to handle it for you:
+
+```sh
+$ yarn add react-native-app-link --save
+```
+
+NOTE: still opening application in App Store doesn't work in emulator.

@@ -29,8 +29,8 @@ install Xcode and Command Line Tools
 
 ## running
 
-NOTE: emulator for iOS is called Simulator
-      (will be referred to as just emulator for the sake of consistency).
+NOTE: emulator for iOS is called Simulator (will be referred
+      to as just emulator for the sake of consistency).
 
 ### start backend server
 

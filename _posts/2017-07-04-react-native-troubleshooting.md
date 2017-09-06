@@ -96,7 +96,7 @@ use yarn instead of npm (somehow it managed to install all required dependencies
 ```sh
 $ rm package-lock.json
 $ rm -rf node-modules/
-$ yarn
+$ yarn install
 $ npm start
 ```
 

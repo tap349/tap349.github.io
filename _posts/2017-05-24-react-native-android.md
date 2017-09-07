@@ -149,7 +149,7 @@ NOTE: emulator for Android is called Android Emulator
 $ rails server
 ```
 
-### start packager (JS) server (optional)
+### start packager server (JS server) (optional)
 
 if you don't start it manually it will be started automatically by
 `react-native run-android` in a new Terminal window. IMO it's better to do

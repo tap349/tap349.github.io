@@ -38,7 +38,7 @@ NOTE: emulator for iOS is called Simulator (will be referred
 $ rails server
 ```
 
-### start packager server (JS server) (optional)
+### start packager (JS server) (optional)
 
 same considerations as for Android.
 
@@ -247,16 +247,16 @@ package (see above) and reinstalling all node modules.
 
 emulator window:
 
-```sh
+```
 No bundle URL present.
 
-Make sure you're running a packager server or have included a .jsbundle file
+Make sure you're running a packager or have included a .jsbundle file
 in your application bundle.
 ```
 
 **solution**
 
-it looks like application is run in emulator before packager server is started.
+it looks like application is run in emulator before packager is started.
 
 run application again without closing emulator:
 
@@ -273,7 +273,7 @@ NOTE: this error usually occurs after running application in Android emulator.
 - <http://facebook.github.io/react-native/docs/pushnotificationios.html>
 - <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
 
-emulator window, packager server log:
+emulator window, packager log:
 
 ```sh
 Native module cannot be null.

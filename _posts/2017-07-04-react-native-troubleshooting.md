@@ -37,9 +37,9 @@ configures babel presets to use in its _package.json_:
 quick-and-dirty fix for both Android and iOS:
 
 - remove offending section from _package.json_ of `shallowequal` package
-- restart packager service (`npm start`) - no error
+- restart packager - no error
 - get that section back
-- restart packager service (`npm start`) - still no error
+- restart packager - still no error
 
 even if `shallowequal` package is removed from filesystem and installed again
 the error no longer occurs - maybe the 'right' version of `shallowequal` package

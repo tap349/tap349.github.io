@@ -263,7 +263,9 @@ trying to send any request to application.
       server: true
   ```
 
-### Erlang VM (EVM) flags
+### Erlang VM (EVM/BEAM) flags
+
+NOTE: distillery must have been installed to make this configuration.
 
 <http://ds.cs.ut.ee/courses/course-files/To303nis%20Pool%20.pdf>:
 
@@ -403,6 +405,24 @@ NOTE: application must be restarted after changing EVM flags.
     (application is meant to be restarted by supervisor - not systemd).
 
 ## deployment
+
+### install and configure distillery
+
+1. <https://hexdocs.pm/distillery/getting-started.html>
+
+inter alia, generate config (_rel/config.exs_):
+
+```sh
+$ mix release.init
+```
+
+default generated config will do in most cases
+(unless you need to setup stage environment, for example).
+
+### install and configure edeliver
+
+inter alia, create config (_.deliver/config_) manually as instructed
+in [README](https://github.com/edeliver/edeliver/blob/master/README.md).
 
 ### build and deploy release
 

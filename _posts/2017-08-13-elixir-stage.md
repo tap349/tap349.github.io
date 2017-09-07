@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir - Staging
+title: Elixir - Stage
 date: 2017-08-13 18:34:14 +0300
 access: public
 categories: [elixir, phoenix, deployment]

@@ -478,10 +478,10 @@ it's necessary to restart application after deploying
   don't restart application directly (as described above) -
   using edeliver tasks or application commands.
 
-  when stopping application service unit enters failed state
-  (because process exits) but doesn't become active again
-  when application is started - as a result all logs are
-  written to EVM log file instead of systemd journal.
+  when stopping application directly service unit enters
+  failed state (because process exits) but doesn't become
+  active again when application is started - as a result all
+  logs are written to EVM log file instead of systemd journal.
 
   if you still stopped application manually stop it again
   using systemd command to make systemd aware of state change.

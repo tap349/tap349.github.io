@@ -49,13 +49,11 @@ Task is not a GenServer but you can use GenServer as a Task.
   defmodule Neko.Application do
     use Application
 
-    alias Neko.Achievement.Store.Registry, as: StoreRegistry
-
     def start(_type, _args) do
       import Supervisor.Spec, warn: false
 
       children = [
-        worker(StoreRegistry, [StoreRegistry])
+        worker(Neko.Achievement.Store.Registry, [])
       ]
 
       opts = [strategy: :one_for_one, name: Neko.Supervisor]
@@ -73,8 +71,6 @@ Task is not a GenServer but you can use GenServer as a Task.
     # automatically imports Supervisor.Spec
     use Supervisor
 
-    alias Neko.Achievement.Store.Registry, as: StoreRegistry
-
     @name Neko.Supervisor
 
     def start_link do
@@ -83,7 +79,7 @@ Task is not a GenServer but you can use GenServer as a Task.
 
     def init(:ok) do
       children = [
-        worker(StoreRegistry, [StoreRegistry])
+        worker(Neko.Achievement.Store.Registry, [])
       ]
 
       # NOTE: strategy is passed to Supervisor.Spec.supervise/2 -

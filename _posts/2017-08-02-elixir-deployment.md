@@ -370,6 +370,15 @@ NOTE: application must be restarted after changing EVM flags.
 
   1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
 
+  to update already installed packages specify new package version:
+
+  ```ruby
+  package 'elixir' do
+    version '1.5.1-1'
+    options '--yes'
+  end
+  ```
+
 - create systemd service
 
   1. <https://medium.com/@zek/deploy-early-and-often-deploying-phoenix-with-edeliver-and-distillery-part-two-f361ef36aa10>

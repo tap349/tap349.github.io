@@ -369,6 +369,7 @@ NOTE: application must be restarted after changing EVM flags.
 - install Erlang and Elixir on build host
 
   1. <https://groups.google.com/forum/#!topic/elixir-lang-talk/zobme8NvlZ4>
+  2. <https://docs.chef.io/resource_package.html>
 
   to update already installed packages specify new package version:
 

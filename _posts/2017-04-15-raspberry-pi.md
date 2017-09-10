@@ -624,47 +624,4 @@ $ sudo halt
 
 ### useful commands
 
-- locate any file:
-
-  ```sh
-  $ sudo updatedb
-  $ sudo locate <filename>
-  ```
-
-- list all files of specified package
-
-  ```sh
-  $ sudo dpkg-query -L <packagename>
-  ```
-
-- search for packages containing specified file
-
-  ```sh
-  $ sudo dpkg-query -S <filename>
-  ```
-
-- remove package
-
-  remove only binaries:
-
-  ```sh
-  $ sudo apt remove <packagename>
-  ```
-
-  remove everything regarding package but without dependencies:
-
-  ```sh
-  $ sudo apt [purge|remove --purge] <packagename>
-  ```
-
-  remove all orphaned packages:
-
-  ```sh
-  $ sudo apt autoremove
-  ```
-
-  remove everything regarding package with dependencies:
-
-  ```sh
-  $ sudo aptitude [remove|purge] <packagename>
-  ```
+see [Debian - Commands]({% post_url 2017-09-10-debian-commands %}).

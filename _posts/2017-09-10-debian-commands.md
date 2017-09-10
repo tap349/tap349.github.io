@@ -61,7 +61,7 @@ of course these commands should work on Ubuntu as well.
 
 - list package versions
 
-  <https://www.cyberciti.biz/faq/debian-ubuntu-linux-apt-get-aptitude-show-package-version-command/>:
+  1. <https://www.cyberciti.biz/faq/debian-ubuntu-linux-apt-get-aptitude-show-package-version-command/>
 
   ```sh
   $ sudo apt-cache policy elixir

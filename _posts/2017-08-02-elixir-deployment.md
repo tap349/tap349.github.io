@@ -453,6 +453,15 @@ or the same in one go:
 $ mix edeliver update production
 ```
 
+NOTE: edeliver build command doesn't allow to specify target envinroment -
+      it's set using `--mix-env` option which has `prod` value by default:
+
+```sh
+$ mix edeliver --help
+...
+--mix-env=<env>   Build with custom mix env $MIX_ENV. Default is 'prod'
+```
+
 ### restart application
 
 it's necessary to restart application after deploying

@@ -220,7 +220,7 @@ by default `hw.keyboard=no`.
 ### scroll with 3 fingers
 
 see `Accessibility` section of
-[macOS configuration]({% post_url 2016-10-03-macos-configuration.md %}).
+[macOS configuration]({% post_url 2016-10-03-macos-configuration %}).
 
 ## tips
 

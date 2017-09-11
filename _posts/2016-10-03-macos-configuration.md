@@ -10,6 +10,10 @@ steps to configure new macOS installation.
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 ## basic setup
 
 NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS

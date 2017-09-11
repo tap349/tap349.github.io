@@ -80,6 +80,10 @@ NOTE: hot reloading is recommended over live reload.
 - `<D-d>` -> `Enable Live Reload`
 - `<D-d>` -> `Enable Hot Reloading`
 
+### scroll with 3 fingers
+
+same as for Android.
+
 ## tips
 
 ### change screen resolution (scale) in emulator

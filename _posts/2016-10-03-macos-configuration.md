@@ -112,75 +112,82 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
 ### Dock
 
-  - Position on screen: Right
-  - [x] Minimize windows into application icon
-  - [x] Automatically hide and show the Dock
+- Position on screen: Right
+- [x] Minimize windows into application icon
+- [x] Automatically hide and show the Dock
 
 ### Security & Privacy
 
-  - General:
-    - [x] Require password 5 seconds after sleep or screen saver begins
+- General (tab):
+  - [x] Require password 5 seconds after sleep or screen saver begins
 
 ### Displays
 
-  - Turn display off after: 10 min
+- Turn display off after: 10 min
 
 ### Energy Saver
 
-  - [ ] Show mirroring options in the menu bar when available
+- [ ] Show mirroring options in the menu bar when available
 
 ### Keyboard
 
-  - Keyboard:
-    - Key Repeat: Fast (max)
-    - Delay Until Repeat: Short (max)
-    - [x] Use all F1, F2, etc. keys as standard function keys
-    - Modifier Keys:
-      - Caps Lock Key: Control
-  - Text:
-    - [ ] Correct spelling automatically
-  - Shortcuts:
-    - Input Sources (available after adding 2nd input source):
-      - [x] Select the previous input source: Command-Space
-    - Spotlight:
-      - [x] Show Spotlight search: Control-Space
-  - Input Sources:
-    - Dvorak
-    - Russian - PC
+- Keyboard (tab):
+  - Key Repeat: Fast (max)
+  - Delay Until Repeat: Short (max)
+  - [x] Use all F1, F2, etc. keys as standard function keys
+  - Modifier Keys:
+    - Caps Lock Key: Control
+- Text (tab):
+  - [ ] Correct spelling automatically
+- Shortcuts (tab):
+  - Input Sources (available after adding 2nd input source):
+    - [x] Select the previous input source: Command-Space
+  - Spotlight:
+    - [x] Show Spotlight search: Control-Space
+- Input Sources (tab):
+  - Dvorak
+  - Russian - PC
 
 ### Mouse
 
-  - Point & Click:
-    - [x] Secondary click: Click on right side
-  - More Gestures:
-    - [x] Swipe between pages: Scroll left or right with one finger
+- Point & Click (tab):
+  - [x] Secondary click: Click on right side
+- More Gestures (tab):
+  - [x] Swipe between pages: Scroll left or right with one finger
 
 ### Trackpad
 
-  - Point & click:
-    - [x] Look up & data detectors
-    - [x] Secondary click: Click or tap with two fingers
-      (default value after checking `Tap to click` option)
-    - [x] Tap to click
-  - More gestures:
-    - [x] App Expose: Swipe down with three fingers
+- Point & click (tab):
+  - [x] Look up & data detectors
+  - [x] Secondary click: Click or tap with two fingers
+    (default value after checking `Tap to click` option)
+  - [x] Tap to click
+- More gestures (tab):
+  - [x] Mission Control: Swipe up with four fingers
+  - [x] App Expose: Swipe down with four fingers
 
 ### Sound
 
-  - Sound Effects:
-    - [ ] Play user interface sound effects
-  - Input:
-    - Input volume: min (disable microphone)
+- Sound Effects (tab):
+  - [ ] Play user interface sound effects
+- Input (tab):
+  - Input volume: min (disable microphone)
 
 ### Network
 
-  - PureVPN:
-    - [x] Show VPN status in menu bar
-      (optionally select `Show Time Connected` in menu bar)
+- PureVPN:
+  - [x] Show VPN status in menu bar
+    (optionally select `Show Time Connected` in menu bar)
 
 ### Sharing
 
-  - Computer Name: MacBook Pro Personal
+- Computer Name: MacBook Pro Personal
+
+### Accessibility
+
+- Mouse & Trackpad (left menu):
+  - Trackpad Options... (button):
+    - [x] Enable dragging: three fingers drag
 
 ## font configuration
 

@@ -79,4 +79,4 @@ sass:
 
 plugins:              [jekyll-paginate, jekyll-gist]
 
-theme: jekyll-theme-cayman
+theme:                jekyll-theme-cayman

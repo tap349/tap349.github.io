@@ -82,7 +82,7 @@ NOTE: hot reloading is recommended over live reload.
 
 ### scroll with 3 fingers
 
-same as for Android.
+same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ## tips
 
@@ -130,7 +130,7 @@ is currently opened.
 
 ### print to device system log
 
-same as for Android.
+same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### Developer Menu
 

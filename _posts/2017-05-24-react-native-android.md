@@ -51,32 +51,47 @@ path=($path $ANDROID_HOME/platform-tools)
 
 <https://developer.android.com/studio/command-line/sdkmanager.html>
 
-list all available packages:
+- list packages
 
-```sh
-$ sdkmanager --list
-```
+  list all packages along with outdated packages
+  (installed packages that have new version available).
 
-> Google APIs
+  ```sh
+  $ sdkmanager --list
+  ```
 
-> Android SDK Platform 23 (Android 6.0 (Marshmallow))
+- install packages
 
-> Intel x86 Atom_64 System Image
+  install or update separate packages if they are already installed:
 
-> Google APIs Intel x86 Atom_64 System Image
+  > Google APIs
 
-```sh
-$ sdkmanager 'add-ons;addon-google_apis-google-23'
-$ sdkmanager 'platforms;android-23'
-$ sdkmanager 'system-images;android-23;default;x86_64'
-$ sdkmanager 'system-images;android-23;google_apis;x86_64'
-```
+  > Android SDK Platform 23 (Android 6.0 (Marshmallow))
 
-> Android SDK Build-Tools 23.0.1
+  > Intel x86 Atom_64 System Image
 
-```sh
-$ sdkmanager 'build-tools;23.0.1'
-```
+  > Google APIs Intel x86 Atom_64 System Image
+
+  ```sh
+  $ sdkmanager 'add-ons;addon-google_apis-google-23'
+  $ sdkmanager 'platforms;android-23'
+  $ sdkmanager 'system-images;android-23;default;x86_64'
+  $ sdkmanager 'system-images;android-23;google_apis;x86_64'
+  ```
+
+  > Android SDK Build-Tools 23.0.1
+
+  ```sh
+  $ sdkmanager 'build-tools;23.0.1'
+  ```
+
+- update packages
+
+  update all installed packages to their latest versions:
+
+  ```sh
+  $ sdkmanager --update
+  ```
 
 ### create new AVD (Android Virtual Device)
 

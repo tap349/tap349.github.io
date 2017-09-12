@@ -51,7 +51,7 @@ path=($path $ANDROID_HOME/platform-tools)
 
 <https://developer.android.com/studio/command-line/sdkmanager.html>
 
-- list packages
+- list all packages
 
   list all packages along with outdated packages
   (installed packages that have new version available).
@@ -60,9 +60,9 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager --list
   ```
 
-- install packages
+- install required packages
 
-  install or update separate packages if they are already installed:
+  install or update required packages if they are already installed:
 
   > Google APIs
 
@@ -85,13 +85,16 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager 'build-tools;23.0.1'
   ```
 
-- update packages
+- update installed packages
 
   update all installed packages to their latest versions:
 
   ```sh
   $ sdkmanager --update
   ```
+
+  this is preferred way to update Android SDK packages since
+  `android-sdk` brew formula is not updated frequently.
 
 ### create new AVD (Android Virtual Device)
 
@@ -586,9 +589,8 @@ CANNOT TRANSLATE guest DNS ip
 
 **solution**
 
-the issue is not resolved yet.
-
-TODO: check if this issue is resolved when `android-sdk` is upgraded via brew.
+issue is resolved after updating emulator to version 26.1.4.0
+via `sdkmanager --update`.
 
 ### no application launcher icon on home screen in emulator
 

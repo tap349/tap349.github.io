@@ -369,7 +369,9 @@ development machine).
 
 ## troubleshooting
 
-### brew cannot uninstall android-sdk
+NOTE: all emulator options are omitted for brevity in examples below.
+
+### No such file or directory - /usr/local/share/android-sdk
 
 <https://github.com/caskroom/homebrew-cask/issues/32139>
 
@@ -385,7 +387,7 @@ $ ln -s /usr/local/Caskroom/android-sdk/25.2.3 /usr/local/share/android-sdk
 $ brew cask uninstall android-sdk
 ```
 
-### warning when running tools from Android SDK
+### repositories.cfg could not be loaded
 
 <https://askubuntu.com/questions/885658>
 
@@ -420,7 +422,7 @@ Available Packages:
 $ sdkmanager --list --verbose
 ```
 
-### emulator fails to start (Qt library not found)
+### Qt library not found
 
 <https://stackoverflow.com/questions/40931254>
 
@@ -440,14 +442,27 @@ $ ./emulator -avd Nexus_5X_API_23_x86_64
 or else create an alias in _~/.zshenv_:
 
 ```conf
-alias emulator='cd /usr/local/share/android-sdk/emulator && ./emulator'
+export ANDROID_HOME=/usr/local/share/android-sdk
+
+alias avd='emulator -avd Nexus_5X_API_23_x86_64'
+alias emulator='cd $ANDROID_HOME/emulator && ./emulator'
 ```
 
-```sh
-$ emulator -avd Nexus_5X_API_23_x86_64
+**UPDATE**
+
+after updating emulator to version 26.1.4.0 it's no longer necessary to
+cd to emulator directory.
+
+_~/.zshenv_:
+
+```conf
+alias avd='$ANDROID_HOME/emulator/emulator -avd Nexus_5X_API_23_x86_64'
 ```
 
-### emulator cannot find AVD
+we cannot use just `emulator` since it points to `/usr/local/bin/emulator`
+instead of `$ANDROID_HOME/emulator/emulator`.
+
+### Cannot find AVD system path
 
 NOTE: the error occurs sporadically and might disappear on its own.
 
@@ -464,9 +479,11 @@ _~/.zshenv_:
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 ```
 
-### application build fails (SDK directory doesn't exist)
+### The SDK directory does not exist
 
 ```sh
+$ react-native run-android
+...
 FAILURE: Build failed with an exception.
 
 * What went wrong:
@@ -497,11 +514,13 @@ there are 2 ways to solve the problem:
 
 - just comment out or remove that line
 
-  RN will search for Androd SDK in `ANDROID_HOME` then.
+  RN will search for Androd SDK in `$ANDROID_HOME` then.
 
-### application build fails (unknown property 'MYAPP_RELEASE_STORE_FILE')
+### Could not get unknown property 'MYAPP_RELEASE_STORE_FILE'
 
 ```sh
+$ react-native run-android
+...
 FAILURE: Build failed with an exception.
 
 * Where:
@@ -528,9 +547,11 @@ MYAPP_RELEASE_KEY_PASSWORD=test
 since these variables (`MYAPP_RELEASE_STORE_FILE`, etc.) are mentioned in
 _android/app/build.gradle_ project file and build fails if they were not set.
 
-### application build fails (no connected devices)
+### DeviceException: No connected devices!
 
 ```sh
+$ react-native run-android
+...
 FAILURE: Build failed with an exception.
 
 * What went wrong:
@@ -542,12 +563,14 @@ Execution failed for task ':app:installDebug'.
 
 start emulator before running application.
 
-### application build fails (could not find com.facebook.react:react-native:0.42.0)
+### Could not find com.facebook.react:react-native
 
-- <https://github.com/oblador/react-native-vector-icons/issues/480>
-- <https://github.com/facebook/react-native/issues/14223#issuecomment-304447493>
+1. <https://github.com/oblador/react-native-vector-icons/issues/480>
+2. <https://github.com/facebook/react-native/issues/14223#issuecomment-304447493>
 
 ```sh
+$ react-native run-android
+...
 FAILURE: Build failed with an exception.
 
 * What went wrong:
@@ -579,11 +602,13 @@ allprojects {
 }
 ```
 
-### warning in emulator log (cannot translate guest DNS IP)
+### CANNOT TRANSLATE guest DNS ip
 
-<https://github.com/facebook/react-native/issues/13340>
+1. <https://github.com/facebook/react-native/issues/13340>
 
 ```sh
+$ emulator -avd Nexus_5X_API_23_x86_64
+...
 CANNOT TRANSLATE guest DNS ip
 ```
 
@@ -607,15 +632,17 @@ application launcher icon on home screen - you can do it manually:
 - click and hold application icon
 - drag application icon to home screen
 
-### application build fails (INSTALL_FAILED_VERSION_DOWNGRADE)
+### Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
 
 ```sh
+$ react-native run-android
+...
 com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
 ```
 
 **solution**
 
-<https://stackoverflow.com/questions/13808599>
+1. <https://stackoverflow.com/questions/13808599>
 
 RN fails to install application with lower versionCode than currently installed
 in emulator - uninstall application with higher versionCode and build again.

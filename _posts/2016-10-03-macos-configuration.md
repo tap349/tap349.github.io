@@ -189,6 +189,9 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
 ### Accessibility
 
+NOTE: currently disabled because of a significant delay
+      when scrolling with inertia in iOS emulator.
+
 - Mouse & Trackpad (left menu):
   - Trackpad Options... (button):
     - [x] Enable dragging: three fingers drag

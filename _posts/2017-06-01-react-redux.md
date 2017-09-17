@@ -172,6 +172,79 @@ export default badges;
   every time state changes listener function is called
   (which re-renders root component in this example).
 
+## react-redux
+
+1. <https://github.com/reactjs/react-redux/blob/master/docs/api.md>
+2. <http://rants.broonix.ca/getting-started-with-react-native-and-redux/>
+3. <http://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/>
+4. <https://goshakkk.name/redux-antipattern-mapstatetoprops/>
+
+using react-redux boils down to using just 2 things:
+
+- `Provider` component
+
+  wraps some parent component (not necessarily root component) and
+  provides Redux store to all its child components.
+
+- `connect` function
+
+  1. <https://stackoverflow.com/questions/32646920/whats-the-at-symbol-in-the-redux-connect-decorator>
+
+  connects specified child component to Redux store by passing additional
+  properties to component - its purpose is not just to pass a state subtree
+  to component but to translate state structure into what component needs
+  so that Redux details are not leaked into component.
+
+  `connects` function takes these arguments (see docs for all uses):
+
+  - `mapStateToProps` function
+
+    function is given Redux store as an argument - return
+    a plain object that will be merged into component's props.
+
+    also component will subscribe to Redux store updates: any time store
+    is updated, `mapStateToProps` will be called.
+
+  - `mapDispatchToProps` function
+
+    function is given `dispatch` function as an argument - return
+    a plain object that binds action creators using `dispatch`
+    (to bind action creator is to create anonymous function that
+    calls `dispatch` which is passed some action - usually created
+    by some action creator accordingly) - this can be done with
+    `bindActionCreators` helper from `redux` package.
+
+  `connect` function can be thought of as a store facade for component.
+
+  state <=> `connect` <=> component
+
+  ```javascript
+  import {connect} from 'react-redux';
+
+  const mapStateToProps = (state, ownProps) => {
+    const {team_id} = ownProps.bill;
+    return {team: StoreHelper.findTeam(state, team_id)};
+  };
+
+  class MyComponent extends Component {...}
+
+  export default connect(mapStateToProps)(MyComponent);
+  ```
+
+  or else using decorator:
+
+  ```javascript
+  import {connect} from 'react-redux';
+
+  const mapStateToProps = (state, ownProps) => {
+    const {team_id} = ownProps.bill;
+    return {team: StoreHelper.findTeam(state, team_id)};
+  };
+
+  @connect(mapStateToProps)
+  class MyComponent extends Component {...}
+  ```
+
 ## tips
 
 ### don't share state between child reducers

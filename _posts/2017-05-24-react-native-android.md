@@ -282,6 +282,19 @@ perform these steps to upload a file:
   in Applications -> `Dev Tools` -> `Media Provider`. but it doesn't work -
   something crashes with the message `Unfortunately, Dev Tools has stopped`.
 
+### delete all application data
+
+this can be useful if, say, it's impossible to log out normally.
+
+```sh
+$ adb shell pm list packages
+...
+package:com.iceperkapp
+...
+$ adb shell pm clear com.iceperkapp
+Success
+```
+
 ## debugging
 
 <https://facebook.github.io/react-native/docs/debugging.html>

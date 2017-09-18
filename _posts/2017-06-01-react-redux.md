@@ -193,9 +193,10 @@ using react-redux boils down to using just 2 things:
   connects specified child component to Redux store by passing additional
   properties to component - its purpose is not just to pass a state subtree
   to component but to translate state structure into what component needs
-  so that Redux details are not leaked into component.
+  so that Redux details are not leaked into component (component shouldn't
+  use Redux store directly!).
 
-  `connects` function takes these arguments (see docs for all uses):
+  `connects` function takes 2 arguments (well, more actually - see docs):
 
   - `mapStateToProps` function
 
@@ -214,7 +215,7 @@ using react-redux boils down to using just 2 things:
     by some action creator accordingly) - this can be done with
     `bindActionCreators` helper from `redux` package.
 
-  `connect` function can be thought of as a store facade for component.
+  think of `connect` function as a Redux store facade for component.
 
   state <=> `connect` <=> component
 

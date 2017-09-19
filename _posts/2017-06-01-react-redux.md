@@ -212,8 +212,8 @@ using react-redux boils down to using just 2 things:
     a plain object that binds action creators using `dispatch`
     (to bind action creator is to create anonymous function that
     calls `dispatch` which is passed some action - usually created
-    by some action creator accordingly) - this can be done with
-    `bindActionCreators` helper from `redux` package.
+    with some action creator accordingly) - this can also be done
+    using `bindActionCreators` helper from `redux` package.
 
   think of `connect` function as a Redux store facade for component.
 

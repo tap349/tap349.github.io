@@ -178,6 +178,7 @@ export default badges;
 2. <http://rants.broonix.ca/getting-started-with-react-native-and-redux/>
 3. <http://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/>
 4. <https://goshakkk.name/redux-antipattern-mapstatetoprops/>
+5. <https://stackoverflow.com/a/40068198/3632318>
 
 using react-redux boils down to using just 2 things:
 

@@ -12,8 +12,10 @@ categories: [elixir, iex]
 {:toc}
 <hr>
 
-1. <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
-2. <http://echobind.com/blog/2017-08-31-tips-and-tricks-for-iex/>
+1. <https://hexdocs.pm/iex/IEx.html>
+2. <https://hexdocs.pm/iex/IEx.Helpers.html>
+3. <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
+4. <http://echobind.com/blog/2017-08-31-tips-and-tricks-for-iex/>
 
 - Erlang shell - Eshell (`erl`)
 - Elixir shell - IEx (`iex`)
@@ -21,7 +23,20 @@ categories: [elixir, iex]
 
 ## _.iex.exs_
 
+contents of _.iex.exs_ is evaluated in shell's context so
+it can be used to alias popular modules to cut down on typing:
 
+```elixir
+alias Neko.{Achievement, UserRate}
+```
+
+IEx loads the 1st file it finds:
+
+- _$PWD/.iex.exs_
+- _$HOME/.iex.exs_
+
+=> each project can have its own _.iex.exs_ with project-specific
+   aliases that don't pollute global namespace.
 
 ## quit IEx
 
@@ -42,7 +57,7 @@ history except for the last one (`<C-\>`).
 
 ## shell history
 
-1. <http://nithinbekal.com/posts/elixir-shell-history/>:
+<http://nithinbekal.com/posts/elixir-shell-history/>:
 
 ```sh
 $ git clone https://github.com/ferd/erlang-history.git
@@ -99,12 +114,12 @@ shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
 
 **UPDATE (2017-07-28)**
 
-1. <https://hexdocs.pm/iex/IEx.html#module-shell-history>:
+<https://hexdocs.pm/iex/IEx.html#module-shell-history>:
 
 > From Erlang/OTP 20, it is possible to get shell history by passing some flags
 > that enable it in the VM.
 
-1. <https://github.com/ferd/erlang-history>:
+<https://github.com/ferd/erlang-history>:
 
 > Since Erlang/OTP-20rc2, Shell history is supported out of the box
 > (although initially disabled by default) through a port of this library to

@@ -81,9 +81,7 @@ NOTE: `run` is default Mix task - specify it explicitly
 $ mix run --no-halt
 ```
 
-## start/stop
-
-### in IEx
+## start/stop in IEx
 
 ```sh
 iex> Application.start(:neko)

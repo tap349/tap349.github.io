@@ -140,7 +140,26 @@ $ mix do deps.get, compile
 - Elixir shell - IEx (`iex`)
 - UNIX shell - Bash, etc.
 
-### start/stop application manually
+### run application
+
+1. <https://stackoverflow.com/a/30688873/3632318>
+
+- inside IEx
+
+  ```sh
+  $ iex -S mix
+  ```
+
+  NOTE: `run` is default Mix task - specify it explicitly
+        if it's necessary to pass task options.
+
+- without IEx
+
+  ```sh
+  $ mix run --no-halt
+  ```
+
+### start/stop application
 
 ```sh
 iex> Application.start(:neko)

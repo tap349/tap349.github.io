@@ -49,45 +49,7 @@ tasks can be batched:
 $ mix do deps.get, compile
 ```
 
-## gotchas
-
-- Mix doesn't allow a task to be run twice (just like Rake)
-
-  1. <https://stackoverflow.com/questions/36846041>
-
-  that is why it's impossible to create Mix alias in _mix.exs_
-  that runs the same task multiple times with different arguments:
-
-  ```elixir
-  defp aliases do
-    [
-      # works
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      # doesn't work
-      "deploy.prod": [
-        "edeliver build release",
-        "edeliver deploy release production"
-      ]
-    ]
-  end
-  ```
-
-  though it's allowed to alternate between 2 tasks, say:
-
-  ```elixir
-  defp aliases do
-    [
-      # works
-      "edeliver.all": [
-        "edeliver build release",
-        "deps.get",
-        "edeliver deploy release production"
-      ]
-    ]
-  end
-  ```
-
-## mix.exs
+## _mix.exs_
 
 1. <http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
 
@@ -126,6 +88,44 @@ $ mix do deps.get, compile
   defp deps do
     [
       {:httpoison, "~> 0.11.1"}
+    ]
+  end
+  ```
+
+## gotchas
+
+- Mix doesn't allow a task to be run twice (just like Rake)
+
+  1. <https://stackoverflow.com/questions/36846041>
+
+  that is why it's impossible to create Mix alias in _mix.exs_
+  that runs the same task multiple times with different arguments:
+
+  ```elixir
+  defp aliases do
+    [
+      # works
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      # doesn't work
+      "deploy.prod": [
+        "edeliver build release",
+        "edeliver deploy release production"
+      ]
+    ]
+  end
+  ```
+
+  though it's allowed to alternate between 2 tasks, say:
+
+  ```elixir
+  defp aliases do
+    [
+      # works
+      "edeliver.all": [
+        "edeliver build release",
+        "deps.get",
+        "edeliver deploy release production"
+      ]
     ]
   end
   ```

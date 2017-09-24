@@ -13,10 +13,15 @@ categories: [elixir, iex]
 <hr>
 
 1. <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
+2. <http://echobind.com/blog/2017-08-31-tips-and-tricks-for-iex/>
 
 - Erlang shell - Eshell (`erl`)
 - Elixir shell - IEx (`iex`)
 - UNIX shell - Bash, etc.
+
+## _.iex.exs_
+
+
 
 ## quit IEx
 
@@ -126,6 +131,10 @@ iex> 123
 iex> v()
 123
 ```
+
+optional argument can be passed to return `n`th expression in current
+IEx session: positive number indicates absolute position and negative
+number indicates relative one (say, `v()` == `v(-1)`).
 
 ## cancel multiline command
 

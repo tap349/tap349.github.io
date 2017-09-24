@@ -49,7 +49,7 @@ tasks can be batched:
 $ mix do deps.get, compile
 ```
 
-## _mix.exs_
+## mix.exs
 
 1. <http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
 

@@ -21,7 +21,7 @@ categories: [elixir, iex]
 - Elixir shell - IEx (`iex`)
 - UNIX shell - Bash, etc.
 
-## _.iex.exs_
+## .iex.exs
 
 contents of _.iex.exs_ is evaluated in shell's context so
 it can be used to alias popular modules to cut down on typing:

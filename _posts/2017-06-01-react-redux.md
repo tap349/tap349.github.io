@@ -320,7 +320,7 @@ export default function memberships (state = initialState, action = {}) {
 }
 ```
 
-### store object keyed by ID instead of array
+### store object keyed by ID instead of array (or both)
 
 - <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
 - <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>

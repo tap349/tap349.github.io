@@ -320,7 +320,7 @@ export default function memberships (state = initialState, action = {}) {
 }
 ```
 
-### store object keyed by ID instead of array (or both)
+### store object keyed by ID instead of array
 
 - <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
 - <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
@@ -348,6 +348,9 @@ const arrayToMap = (array) =>
     return map;
   }, new Map());
 ```
+
+also it might be more convenient to store both object keyed by ID
+(`byId` store key) and array of all items (`all` store key).
 
 ### don't store refreshing flag in Redux store
 

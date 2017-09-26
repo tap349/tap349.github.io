@@ -259,9 +259,8 @@ using react-redux boils down to using just 2 things:
 by default all components are updated whenever store changes
 because root component is subscribed to store updates.
 
-but it's not the case when component is connected - component
-will be re-rendered only [when properties are changed]
-(https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux):
+but it's not the case when component is connected - it will be re-rendered only
+[when properties are changed](https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux):
 
 > connect() implements shouldComponentUpdate by default,
 > assuming that your component will produce the same results

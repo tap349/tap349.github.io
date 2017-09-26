@@ -299,7 +299,7 @@ merged props are compared in `connect()` using shallow comparison by default
 > than returning new state immutably, which causes react-redux to think
 > nothing changed, when in fact, something did change.
 
-see <https://github.com/reactjs/react-redux/blob/d5bf492ee35ad1be8ffd5fa6be689cd74df3b41e/src/components/createConnect.js#L91>
+see <https://github.com/reactjs/react-redux/blob/3.x/src/components/createConnect.js#L91>
 (implementation has changed now but behaviour is still the same).
 
 I want to state it once again: only prop references are compared!
@@ -543,6 +543,10 @@ there are 2 ways to solve this problem:
   > and cause it to update whenever its parent component renders.
   > Note that this will make your application less performant,
   > so only do this if you have no other option.
+
+  ```javascript
+  @connect(mapStateToProps, null, null, {pure: false})
+  ```
 
 - pass calculated `isChecked` property instead of callback to calculate it
 

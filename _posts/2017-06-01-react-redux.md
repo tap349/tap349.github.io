@@ -19,6 +19,38 @@ categories: [react, react-native, redux]
 >   an object describing what happened.
 > - To specify how the actions transform the state tree, you write pure reducers.
 
+## store
+
+- create (say, in _Store.js_):
+
+  ```javascript
+  import {createStore} from 'redux';
+  import badges from './reducers';
+
+  export default createStore(badges);
+  ```
+
+- get current state:
+
+  ```javascript
+  const state = store.getState();
+  ```
+
+- change state by dispatching actions:
+
+  ```javascript
+  store.dispatch(badgeActions.setCount(3));
+  ```
+
+- listen to state updates:
+
+  ```javascript
+  store.subscribe(() => this.forceUpdate());
+  ```
+
+  every time state changes listener function is called
+  (which re-renders root component with all its child components here).
+
 ## actions
 
 > Actions are payloads of information that send data from your application
@@ -140,38 +172,6 @@ const badges = combineReducers({count});
 export default badges;
 ```
 
-## store
-
-- create (say, in _Store.js_):
-
-  ```javascript
-  import {createStore} from 'redux';
-  import badges from './reducers';
-
-  export default createStore(badges);
-  ```
-
-- get current state:
-
-  ```javascript
-  const state = store.getState();
-  ```
-
-- change state by dispatching actions:
-
-  ```javascript
-  store.dispatch(badgeActions.setCount(3));
-  ```
-
-- listen to state updates:
-
-  ```javascript
-  store.subscribe(() => this.forceUpdate());
-  ```
-
-  every time state changes listener function is called
-  (which re-renders root component in this example).
-
 ## react-redux
 
 1. <https://github.com/reactjs/react-redux/blob/master/docs/api.md>
@@ -191,6 +191,9 @@ using react-redux boils down to using just 2 things:
 
   1. <https://stackoverflow.com/questions/32646920/whats-the-at-symbol-in-the-redux-connect-decorator>
   2. <https://stackoverflow.com/a/41438191/3632318>
+
+  to connect component (to Redux store) ==
+  to wrap component in HOC (container) using `connect` function.
 
   simplified implementation of `connect` function:
   [connect.js](https://gist.github.com/gaearon/1d19088790e70ac32ea636c025ba424e).
@@ -250,6 +253,19 @@ using react-redux boils down to using just 2 things:
   @connect(mapStateToProps)
   class MyComponent extends Component {...}
   ```
+
+### updating component
+
+by default all components are updated whenever store changes
+because root component is subscribed to store updates.
+
+but it's not the case when component is connected - component
+will be re-rendered only [when properties are changed]
+(https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux):
+
+> connect() implements shouldComponentUpdate by default,
+> assuming that your component will produce the same results
+> given the same props and state.
 
 ## tips
 

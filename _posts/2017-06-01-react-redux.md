@@ -42,7 +42,7 @@ categories: [react, react-native, redux]
   store.dispatch(badgeActions.setCount(3));
   ```
 
-- listen to state updates:
+- subscribe to state updates:
 
   ```javascript
   store.subscribe(() => this.forceUpdate());
@@ -175,10 +175,11 @@ export default badges;
 ## react-redux
 
 1. <https://github.com/reactjs/react-redux/blob/master/docs/api.md>
-2. <http://rants.broonix.ca/getting-started-with-react-native-and-redux/>
-3. <http://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/>
-4. <https://goshakkk.name/redux-antipattern-mapstatetoprops/>
-5. <https://stackoverflow.com/a/40068198/3632318>
+2. <http://redux.js.org/docs/faq/ReactRedux.html>
+3. <http://rants.broonix.ca/getting-started-with-react-native-and-redux/>
+4. <http://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/>
+5. <https://goshakkk.name/redux-antipattern-mapstatetoprops/>
+6. <https://stackoverflow.com/a/40068198/3632318>
 
 using react-redux boils down to using just 2 things:
 
@@ -187,15 +188,15 @@ using react-redux boils down to using just 2 things:
   wraps some parent component (not necessarily root component) and
   provides Redux store to all its child components.
 
-- `connect` function
+- `connect()` function
 
   1. <https://stackoverflow.com/questions/32646920/whats-the-at-symbol-in-the-redux-connect-decorator>
   2. <https://stackoverflow.com/a/41438191/3632318>
 
   to connect component (to Redux store) ==
-  to wrap component in HOC (container) using `connect` function.
+  to wrap component in HOC (container) using `connect()`.
 
-  simplified implementation of `connect` function:
+  simplified implementation of `connect()`:
   [connect.js](https://gist.github.com/gaearon/1d19088790e70ac32ea636c025ba424e).
 
   connects specified child component to Redux store by passing additional
@@ -204,15 +205,19 @@ using react-redux boils down to using just 2 things:
   so that Redux details are not leaked into component (component shouldn't
   use Redux store directly!).
 
-  `connects` function takes 2 arguments (well, actually more - see docs):
+  `connect()` takes 2 arguments (well, actually more - see docs):
 
   - `mapStateToProps` function
 
     function is given Redux store as an argument - return
     a plain object that will be merged into component's props.
 
-    also component will subscribe to Redux store updates: any time store
-    is updated, `mapStateToProps` will be called.
+    also component will subscribe to Redux store updates:
+    any time store is updated, `mapStateToProps` will be called.
+
+    if `mapStateToProps` is passed the 2nd argument `ownProps` it
+    will be called when store is updated OR when `ownProps` differ
+    (since new props may affect return value of `mapStateToProps`).
 
   - `mapDispatchToProps` function
 
@@ -223,9 +228,9 @@ using react-redux boils down to using just 2 things:
     with some action creator accordingly) - this can also be done
     using `bindActionCreators` helper from `redux` package.
 
-  think of `connect` function as a Redux store facade for component.
+  think of `connect()` as a Redux store facade for component.
 
-  state <=> `connect` <=> component
+  state <=> `connect()` <=> component
 
   ```javascript
   import {connect} from 'react-redux';
@@ -256,15 +261,51 @@ using react-redux boils down to using just 2 things:
 
 ### updating component
 
-by default all components are updated whenever store changes
-because root component is subscribed to store updates.
+1. <https://github.com/reactjs/redux/issues/585>
+2. <https://stackoverflow.com/questions/38189783/re-rendering-of-connected-component-based-on-mapstatetoprops-output>
 
-but it's not the case when component is connected - it will be re-rendered only
-[when properties are changed](https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux):
+all components are updated whenever store changes because root
+component is subscribed to store updates in my case (see above).
 
-> connect() implements shouldComponentUpdate by default,
-> assuming that your component will produce the same results
-> given the same props and state.
+but it's not the case when component is connected -
+it will be re-rendered only when props have changed
+(<https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux>):
+
+> connect() implements shouldComponentUpdate by default, assuming that your
+> component will produce the same results given the same props and state.
+
+note these are merged props (output from `mapStateToProps` and
+`mapDispatchToProps` merged with `ownProps`) which are compared:
+component is updated when either own property or calculated one
+(in `mapStateToProps`) is changed.
+
+merged props are compared in `connect()` using shallow comparison by default
+(<http://redux.js.org/docs/faq/ReactRedux.html#react-not-rerendering>):
+
+> React Redux tries to improve performance by doing shallow equality reference
+> checks on incoming props in shouldComponentUpdate, and if all references are
+> the same, returns false to skip actually updating your original component.
+>
+> It's important to remember that whenever you update a nested value,
+> you must also return new copies of anything above it in your state tree.
+> If you have state.a.b.c.d, and you want to make an update to d,
+> you would also need to return new copies of c, b, a, and state.
+
+<https://github.com/reactjs/redux/issues/585#issuecomment-244184656>:
+
+> Typically problems arise when you write reducers in such a way that
+> the object identity of a piece of state doesn't change, while some
+> nested attribute within it does change. This is mutating state rather
+> than returning new state immutably, which causes react-redux to think
+> nothing changed, when in fact, something did change.
+
+see <https://github.com/reactjs/react-redux/blob/d5bf492ee35ad1be8ffd5fa6be689cd74df3b41e/src/components/createConnect.js#L91>
+(implementation has changed now but behaviour is still the same).
+
+I want to state it once again: only prop references are compared!
+if you pass mutated property (say, some nested value is updated),
+it will be considered unchanged => return new objects from reducers
+even if changing some deeply nested value.
 
 ## tips
 
@@ -476,3 +517,34 @@ export default createStore(reducer, composeWithDevTools(
 ### start application and use Chrome extension for remote monitoring
 
 `Redux DevTools` extension icon menu -> `Open Remote DevTools`
+
+## troubleshooting
+
+### component is not re-rendered when it's connected
+
+see the section above about updating component when using react-redux.
+
+in my case connected component `GamerCheckedRow` is passed gamer
+and callback to calculate if gamer is checked or not. when gamer
+is clicked, `selected_user_ids` state property is updated - not
+gamer himself. but `selected_user_ids` state property is not passed
+as component property of `GamerCheckedRow` so its container thinks
+nothing has changed and doesn't let React re-render the component.
+
+**solution**
+
+there are 2 ways to solve this problem:
+
+- pass `pure: false` option to `connect()`
+
+  <https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux>:
+
+  > This will remove the assumption that GamerCheckedRow is pure
+  > and cause it to update whenever its parent component renders.
+  > Note that this will make your application less performant,
+  > so only do this if you have no other option.
+
+- pass calculated `isChecked` property instead of callback to calculate it
+
+  because the former changes when new gamers are selected while the latter
+  doesn't - IMO this should be a prefered approach to solve the problem.

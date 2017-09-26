@@ -190,6 +190,10 @@ using react-redux boils down to using just 2 things:
 - `connect` function
 
   1. <https://stackoverflow.com/questions/32646920/whats-the-at-symbol-in-the-redux-connect-decorator>
+  2. <https://stackoverflow.com/a/41438191/3632318>
+
+  simplified implementation of `connect` function:
+  [connect.js](https://gist.github.com/gaearon/1d19088790e70ac32ea636c025ba424e).
 
   connects specified child component to Redux store by passing additional
   properties to component - its purpose is not just to pass a state subtree
@@ -197,7 +201,7 @@ using react-redux boils down to using just 2 things:
   so that Redux details are not leaked into component (component shouldn't
   use Redux store directly!).
 
-  `connects` function takes 2 arguments (well, more actually - see docs):
+  `connects` function takes 2 arguments (well, actually more - see docs):
 
   - `mapStateToProps` function
 

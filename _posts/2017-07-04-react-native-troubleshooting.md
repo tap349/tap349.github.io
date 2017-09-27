@@ -217,7 +217,7 @@ headers.
 > use sections, it will still throw the warning mentioning sections. In this
 > case, you can just set enableEmptySections={true} and forget about it.
 
-```javascript
+```jsx
 <ListView
   enableEmptySections={true}
   ...

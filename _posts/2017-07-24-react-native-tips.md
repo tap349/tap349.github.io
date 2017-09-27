@@ -59,7 +59,7 @@ RN package which:
 by default keyboard is not dismissed when tapping outside of `TextInput`
 component - wrap the latter in `ScrollView` component for this to happen:
 
-```javascript
+```jsx
 <ScrollView keyboardShouldPersistTaps='handled'>
   <InputSearch
     label='SEARCH'
@@ -71,6 +71,17 @@ component - wrap the latter in `ScrollView` component for this to happen:
 
 if there is a `ListView` component somewhere below you'll have to wrap
 `ScrollView` component in `View` component - otherwise it's not visible.
+
+## dismiss keyboard when pressing `<CR>` on keyboard
+
+1. <https://facebook.github.io/react-native/docs/textinput.html>
+
+```jsx
+<TextInput
+  blurOnSubmit={true}
+  ...
+/>
+```
 
 ## open application in store
 

@@ -54,6 +54,7 @@ RN package which:
 ## dismiss keyboard when tapping outside of TextInput
 
 1. <https://stackoverflow.com/questions/41426862>
+2. <https://blog.brainsandbeards.com/react-native-keyboard-handling-tips-a2472b74c114>
 
 by default keyboard is not dismissed when tapping outside of `TextInput`
 component - wrap the latter in `ScrollView` component for this to happen:
@@ -68,7 +69,7 @@ component - wrap the latter in `ScrollView` component for this to happen:
 </ScrollView>
 ```
 
-if there is `ListView` component somewhere below you'll have to wrap
+if there is a `ListView` component somewhere below you'll have to wrap
 `ScrollView` component in `View` component - otherwise it's not visible.
 
 ## open application in store

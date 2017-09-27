@@ -8,6 +8,10 @@ categories: [elixir]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 ## ramblings about module naming in Elixir
 
 as far as I can see folks prefer nouns to verbs when naming modules.
@@ -37,7 +41,7 @@ applicaiton). contexts can be further divided into subdomains (say, I have
 such subdomains named after schemas - they contain operations, queries, etc.
 that refer to (= bounded by) that specific schema).
 
-## converting struct to map and vice versa
+## convert struct <-> map
 
 [struct to map](https://hexdocs.pm/elixir/Map.html#from_struct/1):
 
@@ -45,18 +49,19 @@ that refer to (= bounded by) that specific schema).
 Map.from_struct(%User{id: 1, name: "Alice"})
 ```
 
-[map to struct](https://hexdocs.pm/elixir/master/Kernel.html#struct/2):
+[map to struct](https://hexdocs.pm/elixir/Kernel.html#struct/2):
 
 ```elixir
 # creates new struct
 struct(User, %{id: 1, name: "Alice"})
 # raises if key doesn't belong to struct
 struct!(User, %{id: 1, name: "Alice", foo: 123})
-# using ExConstructor package
+# ignores keys that don't belong to struct
+# (using ExConstructor package)
 User.new(%{id: 1, name: "Alice", foo: 123})
 ```
 
-## updating struct
+## update struct
 
 ```elixir
 user = %User{id: 1, name: "Alice"}

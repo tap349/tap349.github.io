@@ -40,11 +40,8 @@ it can be used to alias popular modules to cut down on typing:
 alias Neko.{Achievement, UserRate}
 ```
 
-or else use [QuickAlias](https://github.com/thoughtbot/quick_alias) package:
-
-```elixir
-use QuickAlias, Neko
-```
+or else try to use [QuickAlias](https://github.com/thoughtbot/quick_alias)
+package (though it wasn't working for me when I tried it).
 
 ## quit IEx
 

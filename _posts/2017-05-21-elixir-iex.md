@@ -23,13 +23,6 @@ categories: [elixir, iex]
 
 ## .iex.exs
 
-contents of _.iex.exs_ is evaluated in shell's context so
-it can be used to alias popular modules to cut down on typing:
-
-```elixir
-alias Neko.{Achievement, UserRate}
-```
-
 IEx loads the 1st file it finds:
 
 - _$PWD/.iex.exs_
@@ -37,6 +30,21 @@ IEx loads the 1st file it finds:
 
 => each project can have its own _.iex.exs_ with local
    aliases that don't pollute global namespace.
+
+### aliases
+
+contents of _.iex.exs_ is evaluated in shell's context so
+it can be used to alias popular modules to cut down on typing:
+
+```elixir
+alias Neko.{Achievement, UserRate}
+```
+
+or else use [QuickAlias](https://github.com/thoughtbot/quick_alias) package:
+
+```elixir
+use QuickAlias, Neko
+```
 
 ## quit IEx
 

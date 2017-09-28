@@ -68,12 +68,16 @@ in these cases bytecode modules are not written to disk - only loaded in memory:
 
 ### inside IEx
 
-```sh
-$ iex -S mix
-```
+- Elixir application
 
-NOTE: `run` is default Mix task - specify it explicitly
-      if it's necessary to pass task options.
+  ```sh
+  $ iex -S mix
+  ```
+
+  NOTE: `run` is default Mix task - specify it explicitly
+        if it's necessary to pass task options.
+
+- Phoenix application
 
 ### without IEx
 

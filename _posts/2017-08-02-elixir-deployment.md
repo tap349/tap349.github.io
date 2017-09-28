@@ -447,13 +447,13 @@ $ mix edeliver deploy release production
 $ mix edeliver ping production
 ```
 
-or the same in one go:
+or run build and deploy tasks in one go using `update` command:
 
 ```sh
 $ mix edeliver update production
 ```
 
-NOTE: edeliver build command doesn't allow to specify target envinroment -
+NOTE: edeliver `build` command doesn't allow to specify target envinroment -
       it's set using `--mix-env` option which has `prod` value by default:
 
 ```sh
@@ -521,6 +521,9 @@ task or else it will rollback all migrations (effectively deleting all data):
 $ mix edeliver migrate production down --version=20170728105044
 ```
 
+or else just don't use `change/0` functions in migrations -
+only `up/0` and `down/0` ones making migrations irreversible.
+
 ### add custom commands
 
 1. <https://github.com/bitwalker/distillery/issues/2>
@@ -575,6 +578,12 @@ $ bin/billing command Elixir.Release.Tasks migrate
 ### tasks and commands
 
 - [local] edeliver tasks
+
+  on tasks vs. commands: in wiki and `mix edeliver --help` tasks and
+  commands are used interchangeably but to be precise `edeliver` is
+  a Mix task itself so `edeliver build release` is a edeliver build
+  task as well while `build release` is a specific edeliver command
+  (edeliver `build release` command vs. `edeliver build release` task).
 
   1. <https://hexdocs.pm/edeliver/Mix.Tasks.Edeliver.html>
 

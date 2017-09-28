@@ -514,8 +514,8 @@ it's necessary to restart application after deploying
 $ mix edeliver migrate production
 ```
 
-ALWAYS use `--version` option when running `migrate production down` edeliver
-task or else it will rollback all migrations (effectively deleting all data):
+ALWAYS use `--version` option when running edeliver `migrate production down`
+command or else it will rollback all migrations (effectively deleting all data):
 
 ```sh
 $ mix edeliver migrate production down --version=20170728105044
@@ -584,6 +584,8 @@ $ bin/billing command Elixir.Release.Tasks migrate
   a Mix task itself so `edeliver build release` is a edeliver build
   task as well while `build release` is a specific edeliver command
   (edeliver `build release` command vs. `edeliver build release` task).
+
+  but for simplicity I might refer to edeliver commands as tasks as well.
 
   1. <https://hexdocs.pm/edeliver/Mix.Tasks.Edeliver.html>
 

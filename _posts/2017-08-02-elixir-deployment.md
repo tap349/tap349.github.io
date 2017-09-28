@@ -444,10 +444,9 @@ NOTE: push all changes to github!!! when building new release on build
 ```sh
 $ mix edeliver build release
 $ mix edeliver deploy release production
-$ mix edeliver ping production
 ```
 
-or run build and deploy tasks in one go using `update` command:
+or the same in one go:
 
 ```sh
 $ mix edeliver update production
@@ -524,7 +523,48 @@ $ mix edeliver migrate production down --version=20170728105044
 or else just don't use `change/0` functions in migrations -
 only `up/0` and `down/0` ones making migrations irreversible.
 
-### add custom commands
+### ping node
+
+```sh
+$ mix ping production
+```
+
+## management
+
+### tasks and commands
+
+- [local] edeliver tasks
+
+  on tasks vs. commands: in wiki and `mix edeliver --help` tasks and
+  commands are used interchangeably but to be precise `edeliver` is
+  a Mix task itself so `edeliver build release` is a edeliver build
+  task as well while `build release` is a specific edeliver command
+  (edeliver `build release` command vs. `edeliver build release` task).
+
+  but for simplicity I might refer to edeliver commands as tasks as well.
+
+  1. <https://hexdocs.pm/edeliver/Mix.Tasks.Edeliver.html>
+
+- [remote] application commands
+
+  - `$ bin/billing pid` - get pid of running application
+  - `$ bin/billing ping` - check if application is running
+  - `$ bin/billing start` - start as daemon
+  - `$ bin/billing foreground` - start in the foreground
+  - `$ bin/billing console` - start with console attached
+  - `$ bin/billing stop`
+  - `$ bin/billing restart` - restart application daemon without shutting down VM
+  - `$ bin/billing reboot` - restart application daemon with shutting down VM
+  - `$ bin/billing remote_console` - remote shell to running application console
+
+- [remote] systemd commands
+
+  - `$ sudo systemctl start billing_prod`
+  - `$ sudo systemctl stop billing_prod`
+  - `$ sudo systemctl restart billing_prod`
+  - `$ sudo systemctl status billing_prod`
+
+### custom commands
 
 1. <https://github.com/bitwalker/distillery/issues/2>
 2. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
@@ -572,41 +612,6 @@ on production host:
 $ bin/billing stop
 $ bin/billing command Elixir.Release.Tasks migrate
 ```
-
-## management
-
-### tasks and commands
-
-- [local] edeliver tasks
-
-  on tasks vs. commands: in wiki and `mix edeliver --help` tasks and
-  commands are used interchangeably but to be precise `edeliver` is
-  a Mix task itself so `edeliver build release` is a edeliver build
-  task as well while `build release` is a specific edeliver command
-  (edeliver `build release` command vs. `edeliver build release` task).
-
-  but for simplicity I might refer to edeliver commands as tasks as well.
-
-  1. <https://hexdocs.pm/edeliver/Mix.Tasks.Edeliver.html>
-
-- [remote] application commands
-
-  - `$ bin/billing pid` - get pid of running application
-  - `$ bin/billing ping` - check if application is running
-  - `$ bin/billing start` - start as daemon
-  - `$ bin/billing foreground` - start in the foreground
-  - `$ bin/billing console` - start with console attached
-  - `$ bin/billing stop`
-  - `$ bin/billing restart` - restart application daemon without shutting down VM
-  - `$ bin/billing reboot` - restart application daemon with shutting down VM
-  - `$ bin/billing remote_console` - remote shell to running application console
-
-- [remote] systemd commands
-
-  - `$ sudo systemctl start billing_prod`
-  - `$ sudo systemctl stop billing_prod`
-  - `$ sudo systemctl restart billing_prod`
-  - `$ sudo systemctl status billing_prod`
 
 ## locations on production host
 

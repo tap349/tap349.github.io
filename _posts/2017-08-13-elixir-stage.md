@@ -166,6 +166,12 @@ release in [Elixir - Deployment]({% post_url 2017-08-02-elixir-deployment %}).
 $ mix edeliver migrate staging
 ```
 
+### ping node
+
+```sh
+$ mix ping staging
+```
+
 ## alternative solutions
 
 <https://stackoverflow.com/questions/38818446>:

@@ -94,15 +94,13 @@ $ mix do deps.get, compile
 
 ## troubleshooting
 
-### Mix doesn't allow the same task to be run twice in task alias
-
-1. <https://stackoverflow.com/questions/36846041>
+### Mix doesn't allow to run the same task twice in alias
 
 Rake has the same behaviour - task must be reenabled explicitly
 before it can be run again.
 
-that is why it's impossible to create task alias in _mix.exs_
-that runs the same task multiple times with different arguments:
+that is why it's impossible to create alias in _mix.exs_ that
+runs the same task multiple times with different arguments:
 
 ```elixir
 defp aliases do
@@ -135,9 +133,10 @@ end
 
 **solution**
 
-1. <https://hexdocs.pm/mix/Mix.Task.html#rerun/2>
-2. <https://hexdocs.pm/mix/Mix.html#module-aliases>
-3. <https://github.com/elixir-lang/elixir/blob/master/lib/mix/test/mix/task_test.exs#L138>
+1. <https://stackoverflow.com/questions/36846041>
+2. <https://hexdocs.pm/mix/Mix.Task.html#rerun/2>
+3. <https://hexdocs.pm/mix/Mix.html#module-aliases>
+4. <https://github.com/elixir-lang/elixir/blob/master/lib/mix/test/mix/task_test.exs#L138>
 
 it's possible to pass function instead of a string with task name and
 task arguments - that function would need to use `Mix.Task.rerun/2` to

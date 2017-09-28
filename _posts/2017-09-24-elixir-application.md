@@ -66,24 +66,24 @@ in these cases bytecode modules are not written to disk - only loaded in memory:
 
 1. <https://stackoverflow.com/a/30688873/3632318>
 
-### inside IEx
+NOTE: `iex` starts IEx without running your app (same as `irb`).
 
-- Elixir application
+### Elixir application
 
-  ```sh
-  $ iex -S mix
-  ```
+- `mix run --no-halt` - run your Elixir app without IEx
+- `iex -S mix` - start IEx and run your Elixir app inside
+  (same as `rails console`)
 
-  NOTE: `run` is default Mix task - specify it explicitly
-        if it's necessary to pass task options.
+NOTE: `run` is a default Mix task - specify it explicitly
+      if it's necessary to pass any task options.
 
-- Phoenix application
+## Phoenix application
 
-### without IEx
+1. <https://hexdocs.pm/phoenix/up_and_running.html>
 
-```sh
-$ mix run --no-halt
-```
+- `mix phx.server` - run your Phoenix app without IEx
+- `iex -S mix phx.server` - start IEx and run your Phoenix app inside
+  (like `rails console` inside `rails server`)
 
 ## start/stop in IEx
 

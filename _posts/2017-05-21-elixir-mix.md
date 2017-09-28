@@ -41,13 +41,17 @@ categories: [elixir, mix]
 
   updates dependency and writes updated version to _mix.lock_.
 
-see [Phoenix]({% post_url 2016-11-12-phoenix %}) for Phoenix-specific Mix tasks.
-
-tasks can be batched:
+tasks can also be batched:
 
 ```sh
 $ mix do deps.get, compile
 ```
+
+## Phoenix tasks
+
+- `mix phx.server` = `rails server`
+- `mix phx.routes` = `rake routes`
+- `mix phx.gen.secret` = `rake secret`
 
 ## mix.exs
 

@@ -103,8 +103,8 @@ $ mix do deps.get, compile
 Rake has the same behaviour - task must be reenabled explicitly
 before it can be run again.
 
-that is why it's impossible to create alias in _mix.exs_ which is a list
-specifying the same task to be run multiple times with different arguments:
+thus it's impossible to create alias in _mix.exs_ for the list of tasks
+in which the same task is run multiple times with different arguments:
 
 ```elixir
 defp aliases do

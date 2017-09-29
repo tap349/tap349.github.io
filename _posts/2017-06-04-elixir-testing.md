@@ -41,6 +41,8 @@ $ mix test
 $ mix test --trace
 ```
 
+`--trace` option also sets timeout to infinity - useful when using `IEx.pry`.
+
 ## run tests synchronously
 
 `async: true` has no effect - useful in case of race conditions.
@@ -57,4 +59,18 @@ to make pry work in tests run `mix test` in IEx session:
 $ iex -S mix test
 ```
 
-NOTE: in my case `iex` is aliased to `iex -S mix` so type just `iex test`.
+in my case `iex` is aliased to `iex -S mix` so type just `iex test`.
+
+NOTE: test will time out after 60000ms by default:
+
+```
+** (ExUnit.TimeoutError) test timed out after 60000ms. You can change the timeout:
+
+  1. per test by setting "@tag timeout: x"
+  2. per case by setting "@moduletag timeout: x"
+  3. globally via "ExUnit.start(timeout: x)" configuration
+  4. or set it to infinity per run by calling "mix test --trace"
+     (useful when using IEx.pry)
+
+Timeouts are given as integers in milliseconds.
+```

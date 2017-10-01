@@ -30,6 +30,12 @@ $ mix test
 > and by definition it cannot be the SomeDependency module because
 > it already exists.
 
+<https://github.com/plataformatec/mox/>:
+
+when using `Mox.stub` it's almost the same as just defining mock module
+except that we don't do it in our codebase polluting it with mock modules
+(usually Mox mocks are stubbed inside tests or in _test_helper.exs_).
+
 ## run specific tests (same as `focus` in RSpec)
 
 - provide test path and line number to `mix test`

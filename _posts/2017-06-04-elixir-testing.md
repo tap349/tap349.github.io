@@ -12,6 +12,24 @@ categories: [elixir, testing]
 $ mix test
 ```
 
+## mocks
+
+1. <http://blog.plataformatec.com.br/2015/10/mocks-and-explicit-contracts/>
+
+> Passing the dependency as argument is much simpler and should be
+> preferred over relying on configuration files and Application.get_env/3.
+> When not possible, the configuration system is a good fallback.
+
+> Another way to think about mocks is to treat them as nouns.
+> You shouldn’t mock an API (verb), instead you create a mock
+> (noun) that implements a given API.
+>
+> When you use mock as a verb, you are changing something that
+> already exists, and often those changes are global.
+> When you use mock as a noun, you need to create something new,
+> and by definition it cannot be the SomeDependency module because
+> it already exists.
+
 ## run specific tests (same as `focus` in RSpec)
 
 - provide test path and line number to `mix test`

@@ -36,6 +36,26 @@ when using `Mox.stub` it's almost the same as just defining mock module
 except that we don't do it in our codebase polluting it with mock modules
 (usually Mox mocks are stubbed inside tests or in _test_helper.exs_).
 
+## add _test/support/_ to compilation paths
+
+1. <https://github.com/thoughtbot/ex_machina#install-in-just-the-test-environment-for-non-phoenix-projects>
+2. <https://elixirforum.com/t/load-module-during-test/7400/2>
+
+_mix.exs_:
+
+```elixir
+def project do
+  [
+    app: :my_app,
+    # ...
+    elixirc_paths: elixirc_paths(Mix.env)
+  ]
+end
+
+defp elixirc_paths(:test), do: ["lib", "test/support"]
+defp elixirc_paths(_), do: ["lib"]
+```
+
 ## run specific tests (same as `focus` in RSpec)
 
 - provide test path and line number to `mix test`

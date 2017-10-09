@@ -77,13 +77,13 @@ NOTE: `iex` starts IEx without running your app (same as `irb`).
 NOTE: `run` is a default Mix task - specify it explicitly
       if it's necessary to pass any task options.
 
-## Phoenix application
+### Phoenix application
 
 1. <https://hexdocs.pm/phoenix/up_and_running.html>
 
 - `mix phx.server` - run your Phoenix app without IEx
 - `iex -S mix phx.server` - start IEx and run your Phoenix app inside
-  (like `rails console` inside `rails server`)
+  (looks like `rails console` inside `rails server`)
 
 ## start/stop in IEx
 

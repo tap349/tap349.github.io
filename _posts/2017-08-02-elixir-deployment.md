@@ -547,6 +547,8 @@ $ mix ping production
 
 - [remote] application commands
 
+  `console`, `foreground`, `start` - application boot commands.
+
   - `$ bin/billing pid` - get pid of running application
   - `$ bin/billing ping` - check if application is running
   - `$ bin/billing start` - start as daemon

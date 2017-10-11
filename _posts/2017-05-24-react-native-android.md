@@ -201,6 +201,10 @@ the first run might take a while since RN will build the whole Android project.
 
 ## configuration
 
+### Russian keyboard layout
+
+TODO: still not resolved.
+
 ### enable live/hot reloading
 
 <https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>

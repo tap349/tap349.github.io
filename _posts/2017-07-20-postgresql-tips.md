@@ -174,6 +174,15 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   CREATE INDEX teams_on_is_public_idx ON teams (is_public);
   ```
 
+## create/restore backup
+
+### with data only
+
+```sh
+$ pg_dump -aOf ~/dump.sql database_name
+$ psql -U user_name -f ~/dump.sql database_name
+```
+
 ## [how to] remove all versions of PostgreSQL on ubuntu
 
 <https://askubuntu.com/a/32735>:

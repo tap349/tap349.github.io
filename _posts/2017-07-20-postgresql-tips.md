@@ -190,7 +190,7 @@ $ psql -U username -f ./dump.sql database
 ### using `backup` gem
 
 ```sh
-$ RAILS_ENV=development bundle exec backup perform -t model_name -c ./config.rb
+$ RAILS_ENV=production bundle exec backup perform -t model_name -c ./config.rb
 ```
 
 ```sh

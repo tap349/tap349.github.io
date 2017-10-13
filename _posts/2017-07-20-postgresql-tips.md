@@ -179,10 +179,11 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 ### with data only
 
 ```sh
-$ pg_dump -aOf dump.sql database
+$ pg_dump -aOf ~/tmp/dump.sql database
 ```
 
 ```sh
+$ scp ssh_host:~/tmp/dump.sql ./dump.sql
 $ psql -U username -f ./dump.sql database
 ```
 

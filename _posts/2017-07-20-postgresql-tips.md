@@ -179,11 +179,11 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 ### with data only
 
 ```sh
-$ pg_dump -aOf ~/dump.sql db_name
+$ pg_dump -aOf dump.sql database
 ```
 
 ```sh
-$ psql -U db_username -f ~/dump.sql db_name
+$ psql -U username -f ./dump.sql database
 ```
 
 ### using `backup` gem
@@ -197,7 +197,7 @@ $ RAILS_ENV=development bundle exec backup perform -t model_name -c ./config.rb
 $ tar xvf model_name.tar
 $ cd model_name/databases/
 $ gunzip PostgreSQL.sql.gz
-$ psql -U db_username -d db_name -f ./PostgreSQL.sql
+$ psql -U username -d database -f ./PostgreSQL.sql
 ```
 
 ## [how to] remove all versions of PostgreSQL on Ubuntu

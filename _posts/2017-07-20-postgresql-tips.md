@@ -174,9 +174,9 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   CREATE INDEX teams_on_is_public_idx ON teams (is_public);
   ```
 
-## create/restore backup
+## backup
 
-### with data only
+### using `pg_dump` (data only)
 
 create:
 
@@ -191,7 +191,16 @@ $ scp ssh_host:~/tmp/dump.sql ./dump.sql
 $ psql -U username -f ./dump.sql database
 ```
 
-### using `backup` gem
+this dump doesn't create tables so make sure schema is the same -
+if it's not the case it might be necessary to reset database with
+required schema. say, in Rails project:
+
+```sh
+$ git checkout master
+$ rake db:reset
+```
+
+### [Rails] using `backup` gem
 
 create:
 

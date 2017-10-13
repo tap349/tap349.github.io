@@ -174,7 +174,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   CREATE INDEX teams_on_is_public_idx ON teams (is_public);
   ```
 
-## remove all versions of PostgreSQL on ubuntu
+## [how to] remove all versions of PostgreSQL on ubuntu
 
 <https://askubuntu.com/a/32735>:
 

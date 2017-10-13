@@ -12,7 +12,7 @@ categories: []
 {:toc}
 <hr>
 
-## merge objects
+## [how to] merge objects
 
 - using `Object.assign`
 
@@ -34,7 +34,7 @@ categories: []
 
   while `Object.assign` modifies target object using spread syntax creates new object.
 
-## pass class prototype methods as arguments
+## [how to] pass class prototype methods as arguments
 
 - <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
 - <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
@@ -101,7 +101,7 @@ instance properties of current class) there are 2 options:
   now `handleResponse` is bound to `Foo` class instance forever
   (it's even impossible to rebind it explicitly using `bind`).
 
-## post form data
+## [how to] post form data
 
 1. <https://github.com/facebook/react-native/issues/3349>
 2. <https://stackoverflow.com/a/32445457/3632318>

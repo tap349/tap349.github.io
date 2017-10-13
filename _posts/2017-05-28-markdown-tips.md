@@ -16,7 +16,7 @@ surround inline code block with double backticks and extra spaces:
 
     `` `IO.puts("Hello world")` ``
 
-## escape Liquid template tags in Jekyll
+## [how to] escape Liquid template tags in Jekyll
 
 - <https://stackoverflow.com/questions/24102498>
 - <http://sarathlal.com/escape-liquid-tag-in-jekyll-posts>

@@ -10,7 +10,7 @@ Chrome web inspector tips.
 
 <!-- more -->
 
-## find elements in Console
+## [how to] find elements in Console
 
 - by css: `$('div.phone')`
 - by xpath: `$x("//div[contains(@class,'phone')")`

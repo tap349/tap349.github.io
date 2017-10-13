@@ -12,7 +12,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-## set application icon badge number
+## [how to] set application icon badge number
 
 1. <https://stackoverflow.com/questions/40313361>
 
@@ -51,7 +51,7 @@ RN package which:
 
   in a nutshell - link `PushNotificationIOS` native library manually.
 
-## dismiss keyboard when tapping outside of TextInput
+## [how to] dismiss keyboard when tapping outside of TextInput
 
 1. <https://stackoverflow.com/questions/41426862>
 2. <https://blog.brainsandbeards.com/react-native-keyboard-handling-tips-a2472b74c114>
@@ -72,7 +72,7 @@ component - wrap the latter in `ScrollView` component for this to happen:
 if there is a `ListView` component somewhere below you'll have to wrap
 `ScrollView` component in `View` component - otherwise it's not visible.
 
-## dismiss keyboard when pressing `<CR>` on keyboard
+## [how to] dismiss keyboard when pressing `<CR>` on keyboard
 
 1. <https://facebook.github.io/react-native/docs/textinput.html>
 
@@ -83,7 +83,7 @@ if there is a `ListView` component somewhere below you'll have to wrap
 />
 ```
 
-## open application in store
+## [how to] open application in store
 
 1. <https://stackoverflow.com/questions/35612383>
 

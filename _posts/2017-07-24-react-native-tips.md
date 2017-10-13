@@ -122,9 +122,7 @@ I had one component (`TeamInfoPage`) pushed on top of another one
 in this case.
 
 it has turned out that `TeamPage` component is still updated in
-the background (either when `forceUpdate` is triggered or when
-parent component is re-rendered as a result of its state change
-and current component properties change as well).
+the background.
 
 so make sure to allow for invalid properties in hidden component
 caused by some action in pushed component (in my case team was

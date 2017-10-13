@@ -87,3 +87,22 @@ native libraries can be linked:
 
   this method is for independent static libraries that ship with RN -
   they are not included by default so as not to impact binary size.
+
+## updating components
+
+component is updated when:
+
+- its internal state has changed (using `setState`)
+- `forceUpdate` is triggered (say, when Redux store is changed)
+- props have changed:
+
+  parent component state changes -\>
+  it's re-rendered -\>
+  current component receives new props
+
+- props in `mapStateToProps` have changed:
+
+  component is connected to Redux store -\>
+  Redux store state has changed -\>
+  props in `mapStateToProps` have changed
+  (they are compared using shallow comparison)

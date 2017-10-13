@@ -114,3 +114,40 @@ $ yarn add react-native-app-link --save
 ```
 
 NOTE: still opening application in App Store doesn't work in emulator.
+
+## process invalid props for all mounted components
+
+I had one component (`TeamInfoPage`) pushed on top of another one
+(`TeamPage`) using navigator - the 1st component is not unmounted
+in this case.
+
+it has turned out that `TeamPage` component is still updated in
+the background (either when `forceUpdate` is triggered or when
+parent component is re-rendered as a result of its state change
+and current component properties change as well).
+
+so make sure to allow for invalid properties in hidden component
+caused by some action in pushed component (in my case team was
+destroyed in `TeamInfoPage` and I had to process undefined team
+in `TeamPage` component).
+
+## don't return null from top level component's `render` method
+
+in my case returning null from top level component (i.e. component
+rendered right in _App.js_ for specified route) caused application
+to crash.
+
+**UPDATE**
+
+well, I cannot reproduce it now - returning null just hides component.
+according to docs returning null used to be not supported in the past
+but that is no longer the case.
+
+so just be cautious when returning null - if it breaks anything, return,
+say, `Text` component instead.
+
+## log error messages in `catch` clauses
+
+in case of unhandled promise rejection there might be no relevant
+messages in `react-native log-ios` output - make sure that errors
+are logged in corresponding `catch` clauses in that case.

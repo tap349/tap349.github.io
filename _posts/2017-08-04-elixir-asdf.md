@@ -25,6 +25,7 @@ $ brew uninstall --force elixir
 $ rm -rf ~/.mix/
 $ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.3.0
 $ asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir
+$ asdf list-all elixir
 $ asdf install elixir 1.5.1
 $ asdf global elixir 1.5.1
 $ asdf current elixir

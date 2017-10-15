@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Elixir/Phoenix - Troubleshooting
+title: Elixir - Troubleshooting
 date: 2017-08-01 17:48:52 +0300
 access: public
-categories: [phoenix]
+categories: [elixir, phoenix]
 ---
 
 <!-- more -->
@@ -64,7 +64,7 @@ longer registered in EPMD - see `troubleshooting` section of
 [Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %})
 for explanation of how this could happen and how to fix it.
 
-## The task "phx.new" could not be found
+## [phoenix] The task "phx.new" could not be found
 
 ```sh
 $ mix phx.new billing --no-brunch
@@ -82,7 +82,7 @@ Are you sure you want to install "https://github.com/phoenixframework/archives/r
 * creating /Users/tap/.asdf/installs/elixir/1.5.1/.mix/archives/phx_new
 ```
 
-## all styles are gone
+## [phoenix] all styles are gone
 
 **solution**
 

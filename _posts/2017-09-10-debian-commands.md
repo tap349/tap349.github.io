@@ -21,6 +21,18 @@ of course these commands should work on Ubuntu as well.
   $ sudo locate <filename>
   ```
 
+- search for packages
+
+  ```sh
+  $ apt-cache search <packagename>
+  ```
+
+- show package info
+
+  ```sh
+  $ apt-cache show <packagename>
+  ```
+
 - list all files of specified package
 
   ```sh
@@ -64,7 +76,7 @@ of course these commands should work on Ubuntu as well.
   1. <https://www.cyberciti.biz/faq/debian-ubuntu-linux-apt-get-aptitude-show-package-version-command/>
 
   ```sh
-  $ sudo apt-cache policy elixir
+  $ apt-cache policy elixir
   elixir:
     Installed: 1.5.1-1
     Candidate: 1.5.1-1

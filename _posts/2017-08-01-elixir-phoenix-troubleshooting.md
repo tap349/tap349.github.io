@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Phoenix - Troubleshooting
+title: Elixir/Phoenix - Troubleshooting
 date: 2017-08-01 17:48:52 +0300
 access: public
 categories: [phoenix]
@@ -12,10 +12,9 @@ categories: [phoenix]
 {:toc}
 <hr>
 
-
 ## (FunctionClauseError) no function clause matching in Plug.Conn.put_resp_header/3
 
-<https://github.com/ueberauth/guardian/issues/196>
+1. <https://github.com/ueberauth/guardian/issues/196>
 
 response header value must be a string - convert `exp` variable to string:
 

@@ -12,8 +12,9 @@ categories: [elixir, otp]
 {:toc}
 <hr>
 
-## GenServer
+## [GenServer](https://hexdocs.pm/elixir/GenServer.html)
 
+- <https://medium.com/@adammokan/elixir-genserver-call-vs-cast-ba89fafd8847>
 - <https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>
 - <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
 
@@ -29,19 +30,22 @@ Task is not a GenServer but you can use GenServer as a Task.
 
 <https://www.dailydrip.com/topics/elixir/drips/supervising-tasks-and-agents>:
 
-> Tasks and Agents are both built on GenServer. Tasks are purely computation, and
-> Agents are purely state management. For everything in between, there's GenServer.
+> Tasks and Agents are both built on GenServer. Tasks are purely computation,
+> and Agents are purely state management. For everything in between, there's
+> GenServer.
 
-## Supervisor
+## [Supervisor](https://hexdocs.pm/elixir/Supervisor.html)
 
 <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>:
 
 > Supervisors should be extremely lightweight with low risk of having
 > their own bugs because their job is to restart other processes.
 
-[2 ways](https://hexdocs.pm/elixir/Supervisor.html) to define supervisor:
+2 ways to define supervisor:
 
-- dynamic supervisor (defined in [application callback module](https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#the-application-callback))
+- dynamic supervisor (defined in application callback module)
+
+  1. <https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#the-application-callback>
 
   _lib/neko/application.ex_:
 
@@ -64,6 +68,8 @@ Task is not a GenServer but you can use GenServer as a Task.
 
 - module-based supervisor (defined in a separate module)
 
+  1. <https://hexdocs.pm/elixir/Supervisor.html#module-module-based-supervisors>
+
   _lib/neko/supervisor.ex_:
 
   ```elixir
@@ -71,10 +77,8 @@ Task is not a GenServer but you can use GenServer as a Task.
     # automatically imports Supervisor.Spec
     use Supervisor
 
-    @name Neko.Supervisor
-
     def start_link do
-      Supervisor.start_link(__MODULE__, :ok, name: @name)
+      Supervisor.start_link(__MODULE__, :ok, name: Neko.Supervisor)
     end
 
     def init(:ok) do
@@ -82,8 +86,8 @@ Task is not a GenServer but you can use GenServer as a Task.
         worker(Neko.Achievement.Store.Registry, [])
       ]
 
-      # NOTE: strategy is passed to Supervisor.Spec.supervise/2 -
-      #       not to Supervisor.start_link/2 like for dynamic supervisor
+      # strategy is passed to Supervisor.Spec.supervise/2 -
+      # not to Supervisor.start_link/2 like for dynamic supervisor
       supervise(children, strategy: :one_for_one)
     end
   end
@@ -96,10 +100,54 @@ Task is not a GenServer but you can use GenServer as a Task.
     use Application
 
     def start(_type, _args) do
-      Neko.Supervisor.start_link
+      Neko.Supervisor.start_link()
     end
   end
   ```
+
+### child specifications (child spec)
+
+1. <https://hexdocs.pm/elixir/Supervisor.html#module-child-specification>
+2. <https://hexdocs.pm/elixir/Supervisor.html#module-start_link-2-init-2-and-strategies>
+
+sample child spec:
+
+```elixir
+iex> Neko.Achievement.Store.Registry.child_spec([])
+%{id: Neko.Achievement.Store.Registry, restart: :permanent, shutdown: 5000,
+  start: {Neko.Achievement.Store.Registry, :start_link, [[]]}, type: :worker}
+```
+
+supervisor is passed a list of children when started (with `start_link/2`),
+each child can be specified in 3 ways:
+
+- module (`MyApp.Foo` = `{MyApp.Foo, []}`)
+- tuple with module and start argument (`{MyApp.Foo, [:ok]}`)
+- child spec (`MyApp.Foo.child_spec([])`)
+
+when module or tuple is provided supervisor retrieves child spec from
+the given module (passing specified start argument in case of tuple).
+
+**IMPORTANT**
+
+supervisor can supervise any module that has `start_link/2` function while
+not all modules having `start_link/2` function may implement `child_spec/1`
+function (say, modules wrapping Agent).
+
+that is why it's better to always use `Supervisor.Spec.worker/3` or
+`Supervisor.Spec.supervisor/3` helper functions that generate child
+spec for specified modules.
+
+but unlike child spec shown above this generated child spec is a tuple
+whose elements are the values from corresponding map (so it turns out
+this is the 4th way to specify supervisor child).
+
+```elixir
+iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [])
+{Neko.Achievement.Store.Registry,
+ {Neko.Achievement.Store.Registry, :start_link, []}, :permanent, 5000, :worker,
+ [Neko.Achievement.Store.Registry]}
+```
 
 ## linking and monitoring
 

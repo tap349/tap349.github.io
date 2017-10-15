@@ -434,6 +434,24 @@ default generated config will do in most cases
 inter alia, create config (_.deliver/config_) manually as instructed
 in [README](https://github.com/edeliver/edeliver/blob/master/README.md).
 
+#### auto-versioning
+
+1. <https://github.com/edeliver/edeliver/wiki/Auto-Versioning>
+
+auto-versioning allows to append version metadata to release version
+(it's equal to application version by default as configured in
+_rel/config.exs_ while application version is set in _mix.exs_):
+
+_.deliver/config_:
+
+```sh
+AUTO_VERSION=build-date+git-branch+git-revision
+```
+
+resulting release version (example): `0.1.0+20171015-master-be9ffde`.
+
+NOTE: application version must be incremented manually in _mix.exs_.
+
 ### build and deploy release
 
 NOTE: push all changes to github!!! when building new release on build
@@ -493,8 +511,8 @@ it's necessary to restart application after deploying
   $ ssh devops@billing sudo systemctl restart billing_prod
   ```
 
-  don't restart application directly (as described above) -
-  using edeliver tasks or application commands.
+  don't restart application directly - using edeliver tasks
+  (as described above) or application commands.
 
   when stopping application directly service unit enters
   failed state (because process exits) but doesn't become
@@ -523,10 +541,11 @@ $ mix edeliver migrate production down --version=20170728105044
 or else just don't use `change/0` functions in migrations -
 only `up/0` and `down/0` ones making migrations irreversible.
 
-### ping node
+### ping node and check release version
 
 ```sh
-$ mix ping production
+$ mix edeliver ping production
+$ mix edeliver version production
 ```
 
 ## management

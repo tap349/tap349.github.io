@@ -44,7 +44,7 @@ _\_includes/head.html_:
 
 ## Page build failed
 
-in email from Github:
+in email from GitHub:
 
 ```
 The page build failed for the `master` branch with the following error:

@@ -105,7 +105,7 @@ Task is not a GenServer but you can use GenServer as a Task.
   end
   ```
 
-### child specifications (child spec)
+### child specifications (child specs)
 
 1. <https://hexdocs.pm/elixir/Supervisor.html#module-child-specification>
 2. <https://hexdocs.pm/elixir/Supervisor.html#module-start_link-2-init-2-and-strategies>

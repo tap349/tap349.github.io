@@ -8,6 +8,10 @@ categories: [postgresql]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 common ways to diagnose and fix the problem:
 
 - list running services

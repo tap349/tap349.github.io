@@ -21,7 +21,7 @@ of course these commands should work on Ubuntu as well.
   $ sudo locate <filename>
   ```
 
-- search for packages
+- search for package
 
   ```sh
   $ apt-cache search <packagename>
@@ -39,7 +39,7 @@ of course these commands should work on Ubuntu as well.
   $ sudo dpkg-query -L <packagename>
   ```
 
-- search for packages containing specified file
+- find package containing specified file
 
   ```sh
   $ sudo dpkg-query -S <filename>

@@ -12,6 +12,8 @@ categories: [elixir]
 {:toc}
 <hr>
 
+1. <https://github.com/blackode/elixir-tips>
+
 ## ramblings about module naming in Elixir
 
 as far as I can see folks prefer nouns to verbs when naming modules.

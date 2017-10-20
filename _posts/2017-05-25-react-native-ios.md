@@ -145,6 +145,11 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 `<D-d>`
 
+### Inspector
+
+- `<D-d>` -> `Show Inspector`
+- `<D-i>` (toggle)
+
 ### device system log (`iOS device syslog`)
 
 ```sh

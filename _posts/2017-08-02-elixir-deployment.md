@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir - Deployment
+title: Elixir - TLTR; Deployment
 date: 2017-08-02 21:38:18 +0300
 access: public
 categories: [elixir, phoenix, deployment, edeliver]

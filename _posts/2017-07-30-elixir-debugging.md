@@ -51,7 +51,7 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
 ```
 
-### debugging remotely
+## debugging remotely
 
 1. <http://blog.plataformatec.com.br/2016/05/tracing-and-observing-your-remote-node/>
 2. <https://mfeckie.github.io/Remote-Profiling-Elixir-Over-SSH/>

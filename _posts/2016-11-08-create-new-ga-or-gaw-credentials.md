@@ -3,6 +3,7 @@ layout: post
 title: create new GAW or GA credentials
 date: 2016-11-08 14:03:10 +0300
 access: public
+comments: true
 categories: [gaw]
 ---
 

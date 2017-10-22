@@ -3,6 +3,7 @@ layout: post
 title: migrate from PostgreSQL 9.4 to 9.5
 date: 2016-09-22 11:37:26 +0300
 access: public
+comments: true
 categories: [postgresql]
 ---
 

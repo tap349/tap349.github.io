@@ -11,10 +11,10 @@ namespace :post do
       file.write <<~TEMPLATE
         ---
         layout: post
-        comments: true
         title: #{args.title}
         date: #{Time.new}
         access: #{args.access}
+        comments: true
         categories: []
         ---
 

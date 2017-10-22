@@ -3,6 +3,7 @@ layout: post
 title: Chef - Attributes
 date: 2016-01-27 14:06:00 +0300
 access: public
+comments: true
 categories: [chef]
 ---
 

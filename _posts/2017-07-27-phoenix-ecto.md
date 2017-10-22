@@ -3,6 +3,7 @@ layout: post
 title: Phoenix - Ecto
 date: 2017-07-27 15:37:03 +0300
 access: public
+comments: true
 categories: [phoenix, ecto]
 ---
 

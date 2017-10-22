@@ -3,6 +3,7 @@ layout: post
 title: assets in cells
 date: 2016-04-07 02:01:46 +0300
 access: public
+comments: true
 categories: [rails, assets, cells]
 ---
 

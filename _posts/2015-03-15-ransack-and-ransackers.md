@@ -3,6 +3,7 @@ layout: post
 title: ransack and ransackers
 date: 2015-03-15 18:55:28 +0300
 access: public
+comments: true
 categories: [ransack, arel, active admin]
 ---
 

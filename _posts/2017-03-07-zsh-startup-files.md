@@ -3,6 +3,7 @@ layout: post
 title: Zsh startup files
 date: 2017-03-07 12:58:19 +0300
 access: public
+comments: true
 categories: [zsh]
 ---
 

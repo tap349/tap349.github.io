@@ -3,6 +3,7 @@ layout: post
 title: ImageMagick - Tips
 date: 2017-10-18 12:11:39 +0300
 access: public
+comments: true
 categories: [imagemagick]
 ---
 

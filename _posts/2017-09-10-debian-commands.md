@@ -3,6 +3,7 @@ layout: post
 title: Debian - Commands
 date: 2017-09-10 17:49:12 +0300
 access: public
+comments: true
 categories: [debian, ubuntu]
 ---
 

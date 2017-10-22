@@ -3,6 +3,7 @@ layout: post
 title: HTML-escape/unescape strings
 date: 2017-01-17 14:23:20 +0300
 access: public
+comments: true
 categories: [rails, html]
 ---
 

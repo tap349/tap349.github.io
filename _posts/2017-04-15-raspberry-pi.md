@@ -3,6 +3,7 @@ layout: post
 title: Raspberry Pi
 date: 2017-04-15 22:46:59 +0300
 access: public
+comments: true
 categories: [rpi]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: tables and models within modules in Rails
 date: 2016-05-11 19:03:23 +0300
 access: public
+comments: true
 categories: [rails]
 ---
 

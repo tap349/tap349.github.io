@@ -3,6 +3,7 @@ layout: post
 title: cancancan
 date: 2016-04-03 15:42:14 +0300
 access: public
+comments: true
 categories: [rails, cancancan]
 ---
 

@@ -3,7 +3,8 @@ layout: post
 title: JavaScript - Tips
 date: 2017-06-29 17:44:10 +0300
 access: public
-categories: []
+comments: true
+categories: [js]
 ---
 
 <!-- more -->

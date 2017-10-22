@@ -3,7 +3,8 @@ layout: post
 title: Jekyll - Tips
 date: 2017-10-22 02:44:03 +0300
 access: public
-categories: []
+comments: true
+categories: [jekyll]
 ---
 
 <!-- more -->

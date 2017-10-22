@@ -3,6 +3,7 @@ layout: post
 title: dry-rb, rom-rb and roda resources
 date: 2016-08-17 00:18:42 +0300
 access: public
+comments: true
 categories: [dry-rb, rom-rb, roda]
 ---
 

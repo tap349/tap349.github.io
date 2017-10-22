@@ -3,6 +3,7 @@ layout: post
 title: React Native - Troubleshooting
 date: 2017-07-04 18:40:40 +0300
 access: public
+comments: true
 categories: [react-native]
 ---
 

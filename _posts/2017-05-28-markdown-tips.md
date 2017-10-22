@@ -3,6 +3,7 @@ layout: post
 title: Markdown - Tips
 date: 2017-05-28 01:15:46 +0300
 access: public
+comments: true
 categories: [markdown]
 ---
 

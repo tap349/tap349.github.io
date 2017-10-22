@@ -3,6 +3,7 @@ layout: post
 title: Elixir - Testing
 date: 2017-06-04 14:25:16 +0300
 access: public
+comments: true
 categories: [elixir, testing]
 ---
 

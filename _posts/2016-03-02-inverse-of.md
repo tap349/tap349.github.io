@@ -3,6 +3,7 @@ layout: post
 title: inverse_of
 date: 2016-03-02 11:08:00 +0300
 access: public
+comments: true
 categories: [rails]
 ---
 

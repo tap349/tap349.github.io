@@ -3,6 +3,7 @@ layout: post
 title: Elixir - Troubleshooting
 date: 2017-08-01 17:48:52 +0300
 access: public
+comments: true
 categories: [elixir, phoenix]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: JavaScript
 date: 2017-05-30 16:20:16 +0300
 access: public
+comments: true
 categories: [js, es6, es7, es8, esnext]
 ---
 

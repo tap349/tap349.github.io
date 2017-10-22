@@ -3,6 +3,7 @@ layout: post
 title: Elixir - Application
 date: 2017-09-24 19:21:41 +0300
 access: public
+comments: true
 categories: [elixir]
 ---
 

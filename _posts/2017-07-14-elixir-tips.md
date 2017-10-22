@@ -3,6 +3,7 @@ layout: post
 title: Elixir - Tips
 date: 2017-07-14 03:27:06 +0300
 access: public
+comments: true
 categories: [elixir]
 ---
 

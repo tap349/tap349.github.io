@@ -3,6 +3,7 @@ layout: post
 title: React - Redux
 date: 2017-06-01 16:52:49 +0300
 access: public
+comments: true
 categories: [react, react-native, redux]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: Elixir - EPMD
 date: 2017-09-02 13:00:52 +0300
 access: public
+comments: true
 categories: [elixir]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: Chef - Troubleshooting
 date: 2017-08-02 18:25:32 +0300
 access: public
+comments: true
 categories: [chef]
 ---
 

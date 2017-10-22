@@ -3,6 +3,7 @@ layout: post
 title: Elixir - Stage
 date: 2017-08-13 18:34:14 +0300
 access: public
+comments: true
 categories: [elixir, phoenix, deployment]
 ---
 

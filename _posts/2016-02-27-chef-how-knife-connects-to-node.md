@@ -3,6 +3,7 @@ layout: post
 title: Chef - How knife connects to node
 date: 2016-02-27 01:16:00 +0300
 access: public
+comments: true
 categories: [chef]
 ---
 

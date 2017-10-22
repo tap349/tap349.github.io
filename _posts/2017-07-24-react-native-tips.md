@@ -3,6 +3,7 @@ layout: post
 title: React Native - Tips
 date: 2017-07-24 15:33:55 +0300
 access: public
+comments: true
 categories: [react-native]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: React Native
 date: 2017-05-30 15:54:03 +0300
 access: public
+comments: true
 categories: [react-native]
 ---
 

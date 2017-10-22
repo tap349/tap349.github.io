@@ -3,6 +3,7 @@ layout: post
 title: GA demystified
 date: 2016-03-16 13:08:10 +0300
 access: public
+comments: true
 categories: [ga]
 ---
 

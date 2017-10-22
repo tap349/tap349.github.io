@@ -3,6 +3,7 @@ layout: post
 title: download file from public in Rails
 date: 2016-04-07 18:43:49 +0300
 access: public
+comments: true
 categories: [rails]
 ---
 

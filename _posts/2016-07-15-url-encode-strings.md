@@ -3,6 +3,7 @@ layout: post
 title: URL-encode/decode strings
 date: 2016-07-15 19:15:52 +0300
 access: public
+comments: true
 categories: [rails, html]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: Phoenix - Authentication
 date: 2017-08-01 10:50:39 +0300
 access: public
+comments: true
 categories: [phoenix]
 ---
 

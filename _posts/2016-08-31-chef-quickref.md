@@ -3,6 +3,7 @@ layout: post
 title: Chef - Quickref (using chef-zero and knife-zero)
 date: 2016-08-31 14:32:47 +0300
 access: public
+comments: true
 categories: [chef, knife-zero]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: Rails - Timezones
 date: 2017-09-13 14:03:31 +0300
 access: public
+comments: true
 categories: [rails]
 ---
 

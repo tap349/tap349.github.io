@@ -3,6 +3,7 @@ layout: post
 title: React Native - Android
 date: 2017-05-24 16:27:38 +0300
 access: public
+comments: true
 categories: [react-native, android]
 ---
 

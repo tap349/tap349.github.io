@@ -3,6 +3,7 @@ layout: post
 title: capistrano
 date: 2016-01-31 23:39:00 +0300
 access: public
+comments: true
 categories: [capistrano]
 ---
 

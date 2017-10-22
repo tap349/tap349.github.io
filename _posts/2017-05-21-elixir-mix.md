@@ -3,6 +3,7 @@ layout: post
 title: Elixir - Mix
 date: 2017-05-21 12:08:46 +0300
 access: public
+comments: true
 categories: [elixir, mix]
 ---
 

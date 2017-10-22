@@ -3,6 +3,7 @@ layout: post
 title: bundler and spring
 date: 2016-03-31 23:17:24 +0300
 access: public
+comments: true
 categories: [bundler, spring, rbenv]
 ---
 

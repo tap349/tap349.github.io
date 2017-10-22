@@ -3,6 +3,7 @@ layout: post
 title: RSpec troubleshooting
 date: 2016-08-22 14:17:21 +0300
 access: public
+comments: true
 categories: [rails, rspec, troubleshooting]
 ---
 

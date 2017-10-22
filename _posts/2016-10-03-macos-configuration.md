@@ -3,6 +3,7 @@ layout: post
 title: macOS configuration
 date: 2016-10-03 01:42:54 +0300
 access: public
+comments: true
 categories: [macos]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: RSpec before hooks
 date: 2016-04-16 15:49:59 +0300
 access: public
+comments: true
 categories: [rspec]
 ---
 

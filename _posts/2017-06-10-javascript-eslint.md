@@ -3,6 +3,7 @@ layout: post
 title: JavaScript - ESLint
 date: 2017-06-10 11:18:17 +0300
 access: public
+comments: true
 categories: [js, eslint]
 ---
 

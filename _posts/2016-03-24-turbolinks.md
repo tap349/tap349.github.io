@@ -3,6 +3,7 @@ layout: post
 title: Turbolinks
 date: 2016-03-24 00:17:42 +0300
 access: public
+comments: true
 categories: [rails, turbolinks]
 ---
 

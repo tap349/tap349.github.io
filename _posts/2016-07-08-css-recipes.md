@@ -3,6 +3,7 @@ layout: post
 title: CSS recipes
 date: 2016-07-08 02:06:46 +0300
 access: public
+comments: true
 categories: [css]
 ---
 

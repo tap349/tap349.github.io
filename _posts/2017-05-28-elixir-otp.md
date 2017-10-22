@@ -3,6 +3,7 @@ layout: post
 title: Elixir - OTP
 date: 2017-05-28 01:01:59 +0300
 access: public
+comments: true
 categories: [elixir, otp]
 ---
 

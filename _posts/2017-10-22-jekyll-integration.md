@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Jekyll - Tips
+title: Jekyll - Integration
 date: 2017-10-22 02:44:03 +0300
 access: public
 comments: true
@@ -13,7 +13,7 @@ categories: [jekyll]
 {:toc}
 <hr>
 
-## comments with Disqus
+## Disqus
 
 1. <http://sgeos.github.io/jekyll/disqus/2016/02/14/adding-disqus-to-a-jekyll-blog.html>
 2. <https://tap349-blog.disqus.com/admin/settings/jekyll/>
@@ -21,7 +21,7 @@ categories: [jekyll]
 - [register](https://disqus.com/admin/create/) site in Disqus
 - [follow](https://disqus.com/admin/settings/jekyll/) instructions for Jekyll
 
-detailed instructions:
+my instructions:
 
 - add Universal Embed Code to post layout
 

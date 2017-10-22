@@ -7,5 +7,5 @@ title: About
   My personal blog.
   <br>
   <br>
-  mailto: <a href='mailto:temp_@mail.ru'>temp_@mail.ru</a>
+  <a href='mailto:temp_@mail.ru'>temp_@mail.ru</a>
 </p>

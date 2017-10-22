@@ -21,20 +21,13 @@ categories: [jekyll]
 - [register](https://disqus.com/admin/create/) site in Disqus
 - [follow](https://disqus.com/admin/settings/jekyll/) instructions for Jekyll
 
-adapted instructions:
+detailed instructions:
 
-- `comments: true` option
+- add Universal Embed Code to post layout
 
-  `page.comments` variable is used to toggle comments for post.
+  1. <https://disqus.com/admin/install/platforms/universalcode>
 
-  adding this option to YAML front matter of post layout
-  (_\_layouts/post.html_) had no effect so I added it to
-  post template in Rake task used to generate new posts and
-  to each already existing post manually.
-
-- [Universal Embed Code](https://disqus.com/admin/install/platforms/universalcode)
-
-  save it in _\_includes/disqus.html_ (e.g.):
+  save it, say, in _\_includes/disqus.html_ and edit as follows:
 
   {% raw %}
   ```html
@@ -71,12 +64,65 @@ adapted instructions:
   ```
   {% endraw %}
 
-  and include at the end of _\_layouts/post.html_:
+  include that file at the very end of post layout (_\_layouts/post.html_):
 
   {% raw %}
   ```html
   ...
 
   {% include disqus.html %}
+  ```
+  {% endraw %}
+
+- add `comments: true` option to each post
+
+  `page.comments` variable is used to toggle comments for post
+  (in _\_includes/disqus.html_).
+
+  adding this option to YAML front matter of post layout
+  (_\_layouts/post.html_) had no effect so I added it to
+  post template in Rake task (used to generate new posts)
+  and to each already existing post manually.
+
+## Google Analytics
+
+1. <https://desiredpersona.com/google-analytics-jekyll/>
+
+- create account and new property (= your website) in GA
+
+  `Property → Tracking Info → Tracking Code`
+
+  in the end you'll be provided with Tracking ID and tracking code
+  (Global Site Tag) that can be pasted into the `<HEAD>` of every
+  webpage you want to track with GA.
+
+- add tracking code to `<HEAD>` of post layout
+
+  save tracking code, say, in _\_includes/ga.html_:
+
+  {% raw %}
+  ```html
+  <!--
+  default Jekyll environment is development -
+  it's production when built on GitHub Pages
+  -->
+  {% if jekyll.environment == 'production' %}
+    <!-- beginning of pasted Global Site Tag -->
+    ...
+    <!-- end of pasted Global Site Tag -->
+  {% endif %}
+  ```
+  {% endraw %}
+
+  include that file at the very end of `<HEAD>` section in
+  _\_includes/head.html_ (which is included in default layout).
+
+  {% raw %}
+  ```html
+  <head>
+    ...
+
+    {% include ga.html %}
+  </head>
   ```
   {% endraw %}

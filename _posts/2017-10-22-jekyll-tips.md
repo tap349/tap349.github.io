@@ -96,7 +96,7 @@ detailed instructions:
   (Global Site Tag) that can be pasted into the `<HEAD>` of every
   webpage you want to track with GA.
 
-- add tracking code to `<HEAD>` of post layout
+- add tracking code to `<HEAD>` of default layout
 
   save tracking code, say, in _\_includes/ga.html_:
 

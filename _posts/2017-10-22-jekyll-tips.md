@@ -22,6 +22,17 @@ categories: []
 
 adapted instructions:
 
+- `comments: true` option
+
+  `page.comments` variable is used to toggle comments for post.
+
+  I generate new posts with Rake task, all of them having predefined
+  YAML front matter. that is why it makes no sense to add this option
+  to YAML front matter of post layout (it just won't be used).
+
+  instead it was added (1) to the template in Rake task
+  and (2) to each already existing post manually.
+
 - [Universal Embed Code](https://disqus.com/admin/install/platforms/universalcode)
 
   save it, say, in _\_includes/disqus.html_:
@@ -67,12 +78,3 @@ adapted instructions:
   ...
   {% include disqus.html %}
   ```
-
-- `comments: true` option to enable comments for post
-
-  I didn't add it to YAML front matter of post layout since
-  I generate posts using Rake task and they all have predefined
-  YAML front matter.
-
-  so I've added `comments: true` option (1) to the template
-  in Rake task and (2) to each already existing post manually.

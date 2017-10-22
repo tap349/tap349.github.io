@@ -26,12 +26,9 @@ adapted instructions:
 
   `page.comments` variable is used to toggle comments for post.
 
-  I generate new posts with Rake task, all of them having predefined
-  YAML front matter. that is why it makes no sense to add this option
-  to YAML front matter of post layout (it just won't be used).
-
-  instead it was added (1) to the template in Rake task
-  and (2) to each already existing post manually.
+  adding this option to YAML front matter of post layout had no effect so
+  I added it to post template in Rake task used to generate new posts and
+  to each already existing post manually.
 
 - [Universal Embed Code](https://disqus.com/admin/install/platforms/universalcode)
 
@@ -74,7 +71,9 @@ adapted instructions:
 
   and include at the end of _\_layouts/post.html_:
 
+  {% raw %}
   ```html
   ...
   {% include disqus.html %}
   ```
+  {% endraw %}

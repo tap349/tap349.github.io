@@ -528,6 +528,12 @@ it's necessary to restart application after deploying
 
 ### run migrations
 
+1. <https://github.com/edeliver/edeliver/issues/81>
+
+NOTE: migrations should be run after restarting application -
+      otherwise new release is not loaded yet and migrations
+      are not seen (they will be shown as pending afterwards).
+
 ```sh
 $ mix edeliver migrate production
 ```

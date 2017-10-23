@@ -57,9 +57,7 @@ Task is not a GenServer but you can use GenServer as a Task.
     def start(_type, _args) do
       import Supervisor.Spec, warn: false
 
-      children = [
-        worker(Neko.Achievement.Store.Registry, [])
-      ]
+      children = [worker(Neko.Achievement.Store.Registry, [])]
 
       opts = [strategy: :one_for_one, name: Neko.Supervisor]
       Supervisor.start_link(children, opts)
@@ -83,9 +81,7 @@ Task is not a GenServer but you can use GenServer as a Task.
     end
 
     def init(:ok) do
-      children = [
-        worker(Neko.Achievement.Store.Registry, [])
-      ]
+      children = [worker(Neko.Achievement.Store.Registry, [])]
 
       # strategy is passed to Supervisor.Spec.supervise/2 -
       # not to Supervisor.start_link/2 like for dynamic supervisor

@@ -65,7 +65,7 @@ React.Children.only expected to receive a single React element child.
 
 **solution**
 
-<https://facebook.github.io/react-native/docs/touchablehighlight.html>
+1. <https://facebook.github.io/react-native/docs/touchablehighlight.html>
 
 > TouchableHighlight must have one child (not zero or more than one).
 > If you wish to have several child components, wrap them in a View.
@@ -111,7 +111,7 @@ DeviceInfo native module is not installed correctly
 
 **solution**
 
-<https://github.com/rebeccahughes/react-native-device-info/issues/176>
+1. <https://github.com/rebeccahughes/react-native-device-info/issues/176>
 
 rebuild application:
 
@@ -129,7 +129,7 @@ Unhandled JS Exception: undefined is not an object (evaluating 'PropTypes.shape'
 
 **solution**
 
-<https://github.com/jsierles/react-native-audio/issues/83>
+1. <https://github.com/jsierles/react-native-audio/issues/83>
 
 first I tried to upgrade RN again:
 
@@ -176,7 +176,7 @@ constructor side-effects are an anti-pattern, but can be moved to
 
 **solution**
 
-<https://stackoverflow.com/questions/37387351>
+1. <https://stackoverflow.com/questions/37387351>
 
 DON'T:
 
@@ -211,7 +211,7 @@ headers.
 
 **solution**
 
-<https://github.com/FaridSafi/react-native-gifted-listview/issues/39#issuecomment-217073492>
+1. <https://github.com/FaridSafi/react-native-gifted-listview/issues/39#issuecomment-217073492>
 
 > If you use cloneWithRows then you don't have sections and so there's no issue
 > with section headers showing up. The confusing part is that even if you don't
@@ -229,9 +229,9 @@ headers.
 
 **solution**
 
-- <https://stackoverflow.com/questions/38531369>
-- <https://github.com/facebook/react-native/issues/6002>
-- <https://facebook.github.io/react-native/docs/refreshcontrol.html>
+1. <https://stackoverflow.com/questions/38531369>
+2. <https://github.com/facebook/react-native/issues/6002>
+3. <https://facebook.github.io/react-native/docs/refreshcontrol.html>
 
 don't nest `ListView` component in `ScrollView` component -
 this is what causes `onEndReached` event to be triggered again and again.
@@ -243,3 +243,23 @@ you have to use `ListView` component:
   note that `ListView` component has the same property
 - if you used some header in `ScrollView` component it's possible to render
   the very same header in `renderHeader` callback of `ListView` component
+
+## ListView becomes blank
+
+when pushing another page and then going back to page with `ListView`
+the latter becomes blank (nothing is rendered where `ListView` is
+supposed to be rendered). at the same time adjacent components are
+rendered properly (=> it's not that wrapped collection becomes empty).
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/8607>
+
+```jsx
+<ListView
+  removeClippedSubviews={false}
+  ...
+/>
+```
+
+though I guess it's more of a hack than real solution.

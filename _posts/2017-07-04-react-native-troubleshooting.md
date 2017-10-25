@@ -263,3 +263,11 @@ rendered properly (=> it's not that wrapped collection becomes empty).
 ```
 
 though I guess it's more of a hack than real solution.
+
+## SyntaxError wallet.png: Unexpected character (1:0)
+
+this error occurs sometimes after adding new icon or updating existing one.
+
+**solution**
+
+restart packager (`yarn start`) and reload application in emulator.

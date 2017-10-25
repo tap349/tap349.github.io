@@ -553,3 +553,26 @@ there are 2 ways to solve this problem:
 
   because the former changes when new gamers are selected while the latter
   doesn't - IMO this should be a prefered approach to solve the problem.
+
+### functions of connected component are not available from outside
+
+1. <https://github.com/reactjs/react-redux/issues/475>
+
+say, when connected component is obtained via its `ref` property.
+
+**solution**
+
+connected component:
+
+```javascript
+@connect(mapStateToProps, null, null, {withRef: true})
+export default class MyComponent extends Component {
+  // ...
+}
+```
+
+calling its function from outside:
+
+```javascript
+this.myComponent.getWrappedInstance().tryScrollToGame(games[0]);
+```

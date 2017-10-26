@@ -664,3 +664,27 @@ com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED
 
 RN fails to install application with lower versionCode than currently installed
 in emulator - uninstall application with higher versionCode and build again.
+
+### You have not accepted the license agreements of the following SDK components
+
+```sh
+$ react-native run-android
+...
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring project ':app'.
+> Could not resolve all dependencies for configuration ':app:_debugApk'.
+   > A problem occurred configuring project ':react-native-svg'.
+      > You have not accepted the license agreements of the following SDK components:
+        [Android SDK Build-Tools 25.0.1, Android SDK Platform 25].
+        Before building your project, you need to accept the license agreements and complete the installation of the missing components using the Android Studio SDK Manager.
+        Alternatively, to learn how to transfer the license agreements from one workstation to another, go to http://d.android.com/r/studio-ui/export-licenses.html
+```
+
+**solution**
+
+```sh
+$ sudo sdkmanager --licenses
+/ accept all licenses
+```

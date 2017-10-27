@@ -106,44 +106,56 @@ Task is not a GenServer but you can use GenServer as a Task.
 
 1. <https://hexdocs.pm/elixir/Supervisor.html#module-child-specification>
 2. <https://hexdocs.pm/elixir/Supervisor.html#module-start_link-2-init-2-and-strategies>
+3. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L573>
+4. <https://hexdocs.pm/elixir/GenServer.html#start_link/3>
 
 sample child spec:
 
 ```elixir
-iex> Neko.Achievement.Store.Registry.child_spec([])
+iex> Neko.Achievement.Store.Registry.child_spec(:hello)
 %{id: Neko.Achievement.Store.Registry, restart: :permanent, shutdown: 5000,
-  start: {Neko.Achievement.Store.Registry, :start_link, [[]]}, type: :worker}
+  start: {Neko.Achievement.Store.Registry, :start_link, [:hello]},
+  type: :worker}
 ```
 
-supervisor is passed a list of children when started (with `start_link/2`),
-each child can be specified in 3 ways:
+supervisor is passed a list of children when started
+(with `Supervisor.start_link/2`), each child can be specified in 3 ways:
 
 - module (`MyApp.Foo` = `{MyApp.Foo, []}`)
-- tuple with module and start argument (`{MyApp.Foo, [:ok]}`)
-- child spec (`MyApp.Foo.child_spec([])`)
+- tuple with module and start argument (`{MyApp.Foo, arg}`)
+- child spec (`MyApp.Foo.child_spec(arg)`)
 
-when module or tuple is provided supervisor retrieves child spec from
-the given module (passing specified start argument in case of tuple).
+when module (1) or tuple (2) are provided, supervisor retrieves child spec (3)
+from the given module (passing specified start argument in case of tuple) -
+so using child spec must be the only true way of specifying supervisor child.
+
+NOTE: you cannot pass more than 1 argument to underlying `start_link/2` when using `child_spec/1`
+      (and consequently when using tuple too) - it's possible to pass
+      list or tuple but still it'll be a single argument for `start_link/2`.
 
 **IMPORTANT**
 
-supervisor can supervise any module that has `start_link/2` function while
-not all modules having `start_link/2` function may implement `child_spec/1`
-function (say, modules wrapping Agent).
+supervisor can supervise any module that implements `start_link/2`
+while not all such modules might implement `child_spec/1` as well -
+say, modules wrapping Agent (though you can always do it by yourself).
 
 that is why it's better to always use `Supervisor.Spec.worker/3` or
 `Supervisor.Spec.supervisor/3` helper functions that generate child
-spec for specified modules.
+spec for specified module.
 
-but unlike child spec shown above this generated child spec is a tuple
-whose elements are the values from corresponding map (so it turns out
-this is the 4th way to specify supervisor child).
+but, unlike child spec shown above, this generated child spec is a
+tuple whose elements are the values from corresponding child spec map
+(so it turns out it's kinda the 4th way to specify supervisor child).
+
+NOTE: now when using these helper functions it's possible to pass as
+      many arguments to underlying `start_link/2` as you want (up to
+      maximum allowed function arity - 255).
 
 ```elixir
-iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [])
+iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello])
 {Neko.Achievement.Store.Registry,
- {Neko.Achievement.Store.Registry, :start_link, []}, :permanent, 5000, :worker,
- [Neko.Achievement.Store.Registry]}
+ {Neko.Achievement.Store.Registry, :start_link, [:hello]}, :permanent, 5000,
+ :worker, [Neko.Achievement.Store.Registry]}
 ```
 
 ## linking and monitoring

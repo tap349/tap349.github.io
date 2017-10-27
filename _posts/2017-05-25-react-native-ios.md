@@ -113,19 +113,26 @@ appropriate preference key via `defaults write` as described in the link
 above - but it didn't work for me (probably because Apple changes these keys
 all the time).
 
-### use another simulator
+### run another simulator
 
-using another simulator means using another iPhone model -
+running another simulator means using another iPhone model -
 not another iOS version.
 
 by default iPhone 6 simulator is used.
 
-```sh
-$ react-native run-ios --simulator 'iPhone 5'
-```
+#### switch from command line
+
+- close currently running simulator - or else it will be
+  used even if simulator of another iPhone model is started
+- `$ react-native run-ios --simulator 'iPhone 5'`
 
 NOTE: it's necessary to configure new simulator separately
       (see [configuration](#configuration)).
+
+#### switch from inside simulator
+
+- emulator menu: `Hardware` -> `Device` -> `iOS 10.2` -> `iPhone 5`
+- `$ react-native run-ios` (reinstall application)
 
 ### upload file to emulator
 

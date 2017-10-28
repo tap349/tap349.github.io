@@ -1,6 +1,6 @@
 ---
 layout: post
-title: macOS configuration
+title: macOS - Configuration
 date: 2016-10-03 01:42:54 +0300
 access: public
 comments: true
@@ -233,24 +233,3 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
   NOTE: fonts patched with `fontpatcher` have `-Powerline` suffix.
 
 - patched or unpatched `Inconsolate LGC` font for iTerm2 (install via brew)
-
-## troubleshooting
-
-### battery percentage is not properly updating
-
-reset the SMC:
-
-<https://support.apple.com/en-us/HT201295>
-
-### active developer directory is a CLT instance
-
-> xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer
-> directory '/Library/Developer/CommandLineTools' is a command line tools instance
-
-<http://stackoverflow.com/questions/17980759#17980786>
-
-just switch to Xcode directory:
-
-```sh
-$ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-```

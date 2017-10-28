@@ -15,9 +15,9 @@ categories: [react-native, android]
 
 ## installation
 
-- <https://facebook.github.io/react-native/docs/getting-started.html>
-- <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
-- <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
+1. <https://facebook.github.io/react-native/docs/getting-started.html>
+2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
+3. <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
 
 install prerequisites and react-native-cli:
 
@@ -205,7 +205,7 @@ TODO: still not resolved.
 
 ### enable live/hot reloading
 
-<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
+1. <https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
 
 NOTE: hot reloading is recommended over live reload.
 
@@ -224,7 +224,7 @@ NOTE: hot reloading is recommended over live reload.
 
 ### enable hardware keyboard
 
-<https://stuff.mit.edu/afs/sipb/project/android/docs/tools/devices/managing-avds.html>
+1. <https://stuff.mit.edu/afs/sipb/project/android/docs/tools/devices/managing-avds.html>
 
 edit configuration file _config.ini_ of each AVD in which you want to enable
 hardware keyboard (by default AVDs are stored in _$HOME/.android/avd/_).
@@ -257,8 +257,8 @@ just drag the corner of emulator window.
 
 ### upload file to emulator
 
-- <https://stackoverflow.com/questions/5151744/upload-picture-to-emulator-gallery>
-- <https://stackoverflow.com/questions/17928576/refresh-android-mediastore-using-adb>
+1. <https://stackoverflow.com/questions/5151744/upload-picture-to-emulator-gallery>
+2. <https://stackoverflow.com/questions/17928576/refresh-android-mediastore-using-adb>
 
 you can't just drag and drop file onto emulator window just like for iOS
 (even though the hint when trying to do so says that the file will be copied
@@ -299,7 +299,7 @@ Success
 
 ## debugging
 
-<https://facebook.github.io/react-native/docs/debugging.html>
+1. <https://facebook.github.io/react-native/docs/debugging.html>
 
 NOTE: Developer Menu is available only if application is launched
       via `react-native` (that is it's not available if you just start
@@ -328,7 +328,7 @@ $ avd -verbose
 
 ### device system log (`log of system messages`)
 
-<https://developer.android.com/studio/command-line/logcat.html>
+1. <https://developer.android.com/studio/command-line/logcat.html>
 
 - show messages from `ReactNativeJS` only:
 
@@ -368,7 +368,7 @@ $ adb shell ls
 
 ### connect to local web server
 
-<https://stackoverflow.com/questions/9808560>
+1. <https://stackoverflow.com/questions/9808560>
 
 use `10.0.2.2:3000` instead of `127.0.0.1:3000` to send requests to local web
 server (say, puma) because emulator runs behind virtual router and `10.0.2.2`
@@ -388,7 +388,7 @@ NOTE: all emulator options are omitted for brevity in examples below.
 
 ### No such file or directory - /usr/local/share/android-sdk
 
-<https://github.com/caskroom/homebrew-cask/issues/32139>
+1. <https://github.com/caskroom/homebrew-cask/issues/32139>
 
 ```sh
 $ brew cask uninstall android-sdk
@@ -404,7 +404,7 @@ $ brew cask uninstall android-sdk
 
 ### repositories.cfg could not be loaded
 
-<https://askubuntu.com/questions/885658>
+1. <https://askubuntu.com/questions/885658>
 
 ```sh
 $ sdkmanager --list
@@ -419,7 +419,7 @@ $ touch ~/.android/repositories.cfg
 
 ### truncated package paths in output from sdkmanager
 
-<https://stackoverflow.com/questions/42460205>
+1. <https://stackoverflow.com/questions/42460205>
 
 ```sh
 $ sdkmanager --list
@@ -439,7 +439,7 @@ $ sdkmanager --list --verbose
 
 ### Qt library not found
 
-<https://stackoverflow.com/questions/40931254>
+1. <https://stackoverflow.com/questions/40931254>
 
 ```sh
 $ emulator -avd Nexus_5X_API_23_x86_64
@@ -548,7 +548,7 @@ A problem occurred evaluating project ':app'.
 
 **solution**
 
-<https://facebook.github.io/react-native/docs/signed-apk-android.html>
+1. <https://facebook.github.io/react-native/docs/signed-apk-android.html>
 
 create dummy _~/.gradle/gradle.properties_ file:
 
@@ -634,7 +634,7 @@ via `sdkmanager --update`.
 
 ### no application launcher icon on home screen in emulator
 
-<https://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html>
+1. <https://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html>
 
 application doesn't have launcher icon on home screen in emulator.
 

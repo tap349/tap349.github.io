@@ -15,8 +15,8 @@ categories: [react-native, ios]
 
 ## installation
 
-- <https://facebook.github.io/react-native/docs/getting-started.html>
-- <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
+1. <https://facebook.github.io/react-native/docs/getting-started.html>
+2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
 
 install prerequisites and react-native-cli:
 
@@ -83,7 +83,7 @@ NOTE: it's not possible to input text in Russian without software keyboard.
 
 ### enable live/hot reloading
 
-<https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
+1. <https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
 
 NOTE: hot reloading is recommended over live reload.
 
@@ -98,7 +98,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### change screen resolution (scale) in emulator
 
-<https://stackoverflow.com/questions/10481412>
+1. <https://stackoverflow.com/questions/10481412>
 
 emulator menu: `Window` -> `Scale`
 
@@ -143,7 +143,7 @@ is currently opened.
 
 ## debugging
 
-<https://facebook.github.io/react-native/docs/debugging.html>
+1. <https://facebook.github.io/react-native/docs/debugging.html>
 
 ### print to device system log
 
@@ -186,7 +186,7 @@ emulator menu: `Hardware` -> `Keyboard` -> `Toggle Software Keyboard`
 
 ### application build fails in Xcode (duplicate interface definition for class 'RCTView')
 
-<https://github.com/shoutem/ui/issues/134>
+1. <https://github.com/shoutem/ui/issues/134>
 
 Xcode -> `Issue navigator` -> `Buildtime`:
 
@@ -256,7 +256,7 @@ there are 2 ways to solve the problem:
 
 ### application build fails in command line (bundler identifier entry doesn't exist)
 
-<https://github.com/facebook/react-native/issues/7308>
+1. <https://github.com/facebook/react-native/issues/7308>
 
 ```sh
 Print: Entry, ":CFBundleIdentifier", Does Not Exist
@@ -269,7 +269,7 @@ package (see above) and reinstalling all node modules.
 
 ### application fails to start (no bundle URL present)
 
-<https://github.com/facebook/react-native/issues/12754>
+1. <https://github.com/facebook/react-native/issues/12754>
 
 emulator window:
 
@@ -294,10 +294,10 @@ NOTE: this error usually occurs after running application in Android emulator.
 
 ### application fails to start (native module cannot be null)
 
-- <https://github.com/zo0r/react-native-push-notification/issues/160>
-- <https://github.com/zo0r/react-native-push-notification/issues/279>
-- <http://facebook.github.io/react-native/docs/pushnotificationios.html>
-- <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
+1. <https://github.com/zo0r/react-native-push-notification/issues/160>
+2. <https://github.com/zo0r/react-native-push-notification/issues/279>
+3. <http://facebook.github.io/react-native/docs/pushnotificationios.html>
+4. <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
 
 emulator window, packager log:
 

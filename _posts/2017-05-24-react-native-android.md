@@ -99,7 +99,7 @@ path=($path $ANDROID_HOME/platform-tools)
 
 ### create new AVD (Android Virtual Device)
 
-<https://developer.android.com/studio/command-line/avdmanager.html>
+1. <https://developer.android.com/studio/command-line/avdmanager.html>
 
 ```sh
 $ avdmanager create --help
@@ -115,13 +115,10 @@ $ avdmanager list avd
 
 ### configure emulator to use that AVD
 
-- <https://stackoverflow.com/questions/42718973>
-- <https://developer.android.com/studio/run/emulator-acceleration.html#command-gpu>
-  (`-gpu` option)
-- <https://stackoverflow.com/questions/42792947>
-  (`-skin` option)
-- <https://developer.android.com/guide/practices/screens_support.html#testing>
-  (available skins)
+1. <https://stackoverflow.com/questions/42718973>
+2. <https://developer.android.com/studio/run/emulator-acceleration.html#command-gpu> (`-gpu` option)
+3. <https://stackoverflow.com/questions/42792947> (`-skin` option)
+4. <https://developer.android.com/guide/practices/screens_support.html#testing> (available skins)
 
 emulator searches for AVDs in the following directories:
 

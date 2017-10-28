@@ -55,6 +55,29 @@ NOTE: still this error might occur the next time emulator is run.
 
 all in all IDK why this error occurs and how to fix it in general.
 
+**UPDATE**
+
+1. <https://github.com/dashed/shallowequal/issues/11>
+2. <https://github.com/dashed/shallowequal/commit/f515936c8a790fbc225add864265b6c82881c9b1>
+3. <https://yarnpkg.com/en/docs/cli/upgrade>
+
+bug was fixed in v1.0.2 by moving babel settings to _.babelrc_
+so that they are not consumed by RN packager by default.
+
+`react-side-effect` is the only package in my project that depends on
+`shallowequal` package (according to _yarn.lock_) =>
+upgrade `react-side-effect` package to update its dependencies
+(including `shallowequal` package) to their latest version:
+
+```sh
+$ yarn upgrade react-side-effect
+...
+success Saved 3 new dependencies.
+├─ exenv@1.2.2
+├─ react-side-effect@1.1.3
+└─ shallowequal@1.0.2
+```
+
 ## React.Children.only expected to receive a single React element child
 
 in device system log:

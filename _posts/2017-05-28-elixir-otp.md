@@ -158,7 +158,7 @@ also supervisor can supervise an arbitrary module that is not GenServer
   (with any arity - all arguments supplied to `Supervisor.Spec`
   helper will be passed down to `MyApp.Bar.start_link`).
 
-#### `Supervisor.Spec` helpers (`worker/3` and `supervisor/3`)
+#### Supervisor.Spec helpers (worker/3 and supervisor/3)
 
 1. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L608>
 

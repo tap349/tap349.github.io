@@ -164,12 +164,22 @@ also supervisor can supervise an arbitrary module that is not GenServer
 
 NOTE: `Supervisor.Spec` helpers are deprecated now.
 
+Jose Valim (<http://disq.us/p/1nbxadq>):
+
+> One of the reasons why Elixir v1.5 introduced the new child specs was
+> exactly to settle on `start_link/1` and `init/1`. The previous approach
+> where `start_link` received a variadic number of arguments and `init`
+> received only one was very confusing.
+>
+> The sore thumb is :simple_one_for_one supervisor but we are planning
+> to revisit it for Elixir v1.6. I hope the old ways will be eventually
+> forgotten and the experience will be streamlined. :)
+
 they generate child spec tuple which consists of values from
 corresponding child spec map.
 
-when using these helper functions it's possible to pass as many
-arguments to start function of underlying module as you want
-(up to maximum allowed function arity - 255).
+when using these helper functions it's possible to pass as many arguments to
+start function of underlying module as you want (see Jose Valim's comment above).
 
 ```elixir
 iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello])

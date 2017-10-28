@@ -175,17 +175,18 @@ Jose Valim (<http://disq.us/p/1nbxadq>):
 > to revisit it for Elixir v1.6. I hope the old ways will be eventually
 > forgotten and the experience will be streamlined. :)
 
-they generate child spec tuple which consists of values from
+these helpers generate child spec tuple which consists of values from
 corresponding child spec map.
 
-when using these helper functions it's possible to pass as many arguments to
-start function of underlying module as you want (see Jose Valim's comment above).
+also it's possible to pass as many arguments to start function of
+underlying module as you want - up to max allowed function arity 255
+(which can be confusing - see Jose Valim's comment above).
 
 ```elixir
-iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello])
+iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello, :world])
 {Neko.Achievement.Store.Registry,
- {Neko.Achievement.Store.Registry, :start_link, [:hello]}, :permanent, 5000,
- :worker, [Neko.Achievement.Store.Registry]}
+ {Neko.Achievement.Store.Registry, :start_link, [:hello, :world]}, :permanent,
+ 5000, :worker, [Neko.Achievement.Store.Registry]}
 ```
 
 ## linking and monitoring

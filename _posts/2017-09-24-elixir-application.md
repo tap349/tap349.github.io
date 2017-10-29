@@ -13,6 +13,8 @@ categories: [elixir]
 {:toc}
 <hr>
 
+1. <https://hexdocs.pm/elixir/Application.html>
+
 ## evaluate or compile
 
 1. <https://github.com/elixir-lang/elixir/issues/5073>

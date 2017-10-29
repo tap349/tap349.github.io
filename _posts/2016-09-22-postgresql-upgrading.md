@@ -1,17 +1,20 @@
 ---
 layout: post
-title: migrate from PostgreSQL 9.4 to 9.5
+title: PostgreSQL - Upgrading
 date: 2016-09-22 11:37:26 +0300
 access: public
 comments: true
 categories: [postgresql]
 ---
 
-guide on how to migrate data when switching from 9.4 to 9.5.
+the guide focuses on upgrading from 9.4 to 9.5 but the steps for
+upgrading from 9.5 to 10.0 are similar (maybe I'll add them later).
 
 <!-- more -->
 
 1. <https://www.postgresql.org/docs/9.5/static/pgupgrade.html>
+2. <https://www.postgresql.org/docs/10/static/pgupgrade.html>
+3. <https://www.postgresql.org/docs/10/static/upgrading.html>
 
 backup 9.4 data:
 
@@ -28,7 +31,7 @@ $ brew install postgresql
 $ brew link postgresql
 ```
 
-install command will also initialize new database but
+`install` command will also initialize new database but
 you can always do it manually if something goes wrong:
 
 ```sh
@@ -58,7 +61,7 @@ the same in one line (for copy-paste):
 $ pg_upgrade -d /usr/local/var/postgresql94.backup -D /usr/local/var/postgres -b /usr/local/Cellar/postgresql94/9.4.9/bin -B /usr/local/Cellar/postgresql/9.5.4/bin
 ```
 
-uninstall 9.4 (remove all versions and
+uninstall 9.4 (remove all installed versions and
 _/usr/local/Cellar/postgresql94/_ directory itself):
 
 ```sh

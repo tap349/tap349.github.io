@@ -15,7 +15,7 @@ categories: [elixir, iex]
 
 1. <https://hexdocs.pm/iex/IEx.html>
 2. <https://hexdocs.pm/iex/IEx.Helpers.html>
-3. <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks>
+3. <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks> (closed)
 4. <http://echobind.com/blog/2017-08-31-tips-and-tricks-for-iex/>
 
 - Erlang shell - Eshell (`erl`)

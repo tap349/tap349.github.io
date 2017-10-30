@@ -20,7 +20,7 @@ registry can be implemented in several ways based on
 [how](https://hexdocs.pm/elixir/GenServer.html#module-name-registration)
 new process is going to be registered in that registry:
 
-### using atom value
+### using atom
 
 - GenServer with manual registration and monitoring of tracked processes
 

@@ -34,8 +34,7 @@ new process is going to be registered in that registry:
 
 ### using `{:via, module, term}` tuple
 
-NOTE: from now on I'll refer to registries to be accessed
-      with via tuple as via registries.
+from now on I'll refer to registries accessed with via tuple as via registries.
 
 the benefit of via registries is that you don't have to interact with
 them directly when registering new processes - it's done automatically

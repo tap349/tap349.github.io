@@ -35,14 +35,21 @@ new process is going to be registered in that registry:
 ### using `{:via, module, term}` tuple
 
 NOTE: from now on I'll refer to registries to be accessed
-      with `:via` tuple as via registries.
+      with via tuple as via registries.
+
+the benefit of via registries is that you don't have to interact with
+them directly when registering new processes - it's done automatically
+when using via tuple in process client API (each process is GenServer
+itself as a rule).
+
+via registry is started as part of supervision tree by top-level supervisor.
 
 - GenServer exporting `register_name/2`, `unregister_name/1`, `whereis_name/1` and `send/2`
 
   1. <https://m.alphasights.com/process-registry-in-elixir-a-practical-example-4500ee7c0dcc>
 
   any via registry must implement these functions
-  (IDK why there is no corresponding behaviour).
+  (but there is no corresponding behaviour for some reason).
 
 - `Registry` module introduced in Elixir 1.4
 

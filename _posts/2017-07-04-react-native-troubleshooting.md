@@ -17,7 +17,7 @@ categories: [react-native]
 
 emulator window:
 
-```sh
+```
 SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:
 Couldn't find preset "es2015" relative to directory "/Users/tap/dev/my_app/node_modules/shallowequal"
 ```
@@ -82,7 +82,7 @@ success Saved 3 new dependencies.
 
 in device system log:
 
-```sh
+```
 React.Children.only expected to receive a single React element child.
 ```
 
@@ -128,7 +128,7 @@ $ npm start
 
 emulator window:
 
-```sh
+```
 DeviceInfo native module is not installed correctly
 ```
 
@@ -146,7 +146,7 @@ $ react-native run-ios
 
 emulator window:
 
-```sh
+```
 Unhandled JS Exception: undefined is not an object (evaluating 'PropTypes.shape')
 ```
 
@@ -226,7 +226,7 @@ to avoid infinite loop dispatch actions and set component state only in
 
 emulator window:
 
-```sh
+```
 Warning: In next release empty section headers will be rendered. In this
 release you can use 'enableEmptySections' flag to render empty section
 headers.
@@ -294,3 +294,23 @@ this error occurs sometimes after adding new icon or updating existing one.
 **solution**
 
 restart packager (`yarn start`) and reload application in emulator.
+
+## Module JSTimersExecution is not a registered callable module
+
+1. <https://stackoverflow.com/questions/45594935>
+
+emulator window:
+
+```
+Module JSTimersExecution is not a registered callable module (calling callTimers)
+```
+
+errors occurs after upgrading RN to 0.47.0.
+
+**solution**
+
+rebuild application:
+
+```sh
+$ react-native run-ios
+```

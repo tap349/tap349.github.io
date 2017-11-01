@@ -418,18 +418,22 @@ store it in component state instead.
 
 ### [Redux Thunk](https://github.com/gaearon/redux-thunk)
 
+<https://github.com/gaearon/redux-thunk#composition>:
+
+> A thunk is a function that returns a function.
+
 <https://github.com/reactjs/redux/issues/1676#issuecomment-215413478>
 
 > The return value of dispatch() when you dispatch a thunk *is*
 > the return value of the inner function. This is why it's useful
 > to return a Promise (even though it is not strictly necessary)
 
-that is dispatching thunk action returns whatever thunk action itself returns -
+that is dispatching a thunk returns whatever thunk itself returns -
 not necessarily `Promise` object (even though it's highly recommended).
 
-#### handling of rejected promises in thunk actions
+#### handling of rejected promises in thunks
 
-in thunk action:
+in thunk:
 
 ```javascript
 export const requestPlayers = (teamId) => (

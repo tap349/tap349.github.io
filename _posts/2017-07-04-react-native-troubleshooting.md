@@ -314,3 +314,27 @@ rebuild application:
 ```sh
 $ react-native run-ios
 ```
+
+## Actions must be plain objects
+
+emulator window:
+
+```
+Actions must be plain objects. Use custom middleware for async actions.
+```
+
+error occurs when trying to dispatch a thunk (Thunk middleware is applied).
+
+**solution**
+
+I used curly braces instead of parens when defining thunk action creator:
+
+```diff
+-export const requestCreateAuthentication = (phone_number) => {
++export const requestCreateAuthentication = (phone_number) => (
+  (dispatch, getState, api) => {
+    // ...
+  }
+-}
++)
+```

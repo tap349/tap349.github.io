@@ -2,7 +2,7 @@
 layout: post
 title: Elixir - Behaviour
 date: 2017-11-01 10:10:45 +0300
-access: public
+access: private
 comments: true
 categories: [elixir]
 ---

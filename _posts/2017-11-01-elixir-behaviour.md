@@ -49,7 +49,7 @@ at compile time (using `Application.get_env/3`):
   BM can be embedded inside CM directly or as a nested module
   (in the latter case the boundary between the two is more explicit).
 
-  this pattern is useful when there are only 2 CMs (real and mock CMs)
+  this pattern is useful when there are only 2 CMs (real and mock ones)
   and it's tiresome to create a separate CM for real implementation
   each time (or you cannot come up with a proper name for this module).
 

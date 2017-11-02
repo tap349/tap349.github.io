@@ -16,14 +16,14 @@ categories: [elixir]
 1. <https://hexdocs.pm/elixir/behaviours.html>
 2. <https://hexdocs.pm/elixir/Application.html>
 
-NOTE: all the classification below is purely mine.
+NOTE: the classification is purely mine.
 
 ## usage
 
-in all cases specific callback module is usually fetched from
-environment at compile time (using `Application.get_env/3`):
+in all cases specific CM is usually fetched from environment
+at compile time (using `Application.get_env/3`):
 
-- in a single place (see facade callback module)
+- in a single place (see `facade callback module`)
 - in an arbitrary application module on demand
 
   ```elixir
@@ -34,9 +34,9 @@ environment at compile time (using `Application.get_env/3`):
   end
   ```
 
-## behaviour module
+## behaviour module (BM)
 
-- pure behaviour module
+- pure BM
 
   ```elixir
   defmodule MyApp.API do
@@ -44,17 +44,16 @@ environment at compile time (using `Application.get_env/3`):
   end
   ```
 
-- behaviour module combined with callback module
+- BM combined with CM
 
-  behaviour module can be embedded directly or as a nested module
-  (in latter case the boundary between the two is more explicit).
+  BM can be embedded inside CM directly or as a nested module
+  (in the latter case the boundary between the two is more explicit).
 
-  this pattern is useful when there are only 2 callback modules
-  (real and mock callback modules) and it's tiresome to create
-  a separate callback module for real implementation each time
-  (or you cannot come up with a proper name for this module).
+  this pattern is useful when there are only 2 CMs (real and mock CMs)
+  and it's tiresome to create a separate CM for real implementation
+  each time (or you cannot come up with a proper name for this module).
 
-  embedding behaviour module directly:
+  embedding BM directly:
 
   ```elixir
   defmodule MyApp.API do
@@ -65,7 +64,7 @@ environment at compile time (using `Application.get_env/3`):
   end
   ```
 
-  nesting behaviour module inside callback module:
+  nesting BM inside CM:
 
   ```elixir
   defmodule MyApp.API do
@@ -78,9 +77,9 @@ environment at compile time (using `Application.get_env/3`):
   end
   ```
 
-## callback module
+## callback module (CM)
 
-- pure callback module
+- pure CM
 
   ```elixir
   defmodule MyApp.API.HTTPClient do
@@ -89,17 +88,16 @@ environment at compile time (using `Application.get_env/3`):
   end
   ````
 
-- callback module combined with behaviour module
+- CM combined with BM
 
   same as vice versa.
 
-- facade (or proxy) callback module (FCM)
+- facade (or proxy) CM (FCM)
 
-  unlike pure callback module, FCM is not a fully functional
-  callback module since it implements callbacks by delegating
-  to specific callback module fetched from environment.
+  unlike pure CM, FCM is not a fully functional CM since it implements
+  callbacks by delegating to specific CM fetched from environment.
 
-  FCM is often combined with behaviour module.
+  FCM is often combined with BM.
 
   => FCM acts as a facade or proxy forwarding calls to dynamically
   fetched adapter so that clients are not even aware that they are
@@ -108,7 +106,7 @@ environment at compile time (using `Application.get_env/3`):
   cases) - FCM looks just like an ordinary module from outside:
 
   ```elixir
-  # facade callback module
+  # FCM
   defmodule MyApp.API do
     defmodule Behaviour do
       @callback fetch() :: any()
@@ -126,5 +124,5 @@ environment at compile time (using `Application.get_env/3`):
   end
   ```
 
-  also FCM gives an opportunity to do some housekeeping (say, logging)
-  before or after delegating to actual callback module.
+  also FCM gives an opportunity to do some housekeeping
+  (say, logging) before or after delegating to actual CM.

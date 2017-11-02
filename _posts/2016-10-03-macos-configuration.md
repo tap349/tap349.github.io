@@ -24,13 +24,13 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - install brew:
 
   ```sh
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   ```
 
   NOTE: it will also download and install CLT for Xcode.
 
-- `brew install gpg git` (for decrypting ssh archive and cloning git repos)
-- copy ssh keys into _~/.ssh_:
+- `brew install gpg git` (for decrypting SSH archive and cloning git repos)
+- copy SSH keys into _~/.ssh_:
   - `gpg -d --output ssh.tar.gz ssh.tar.gz.gpg`
   - `tar xvzf ssh.tar.gz`
   - `rm ssh.tar.gz`
@@ -39,6 +39,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - `cd ~/.dotfiles && brew bundle -v`
 
   rerun command if download request for any app from App Store fails
+
 - postinstallation setup (see comments in _Brewfile_)
 - `~/.dotfiles/install.sh`
 
@@ -55,8 +56,9 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
   - creates symlinks for all config files and directories
   - copies fonts into _~/Library/Fonts/_
+
 - `mkdir ~/dev` and git clone all repos
-- Battery: Show percentage
+- menu bar: `Battery` -\> `Show percentage`
 - add PureVPN service:
 
   <https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>
@@ -102,8 +104,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
         - Play tick tock sound during:
           - [ ] Pomodoro
       - Hotkeys:
-        - Start Pomodoro: <C-D-p> (displayed in qwerty: <C-D-r>)
-        - Stop Pomodoro: <C-D-s> (displayed in qwerty: <C-D-;>)
+        - Start Pomodoro: `<C-D-p>` (displayed in qwerty: `<C-D-r>`)
+        - Stop Pomodoro: `<C-D-s>` (displayed in qwerty: `<C-D-;>`)
 - copy other files from backup (to name a few):
   - _~/Pictures/Lightroom/_
   - _~/backup/_

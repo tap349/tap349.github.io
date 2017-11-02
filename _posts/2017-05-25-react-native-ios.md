@@ -329,3 +329,29 @@ npm-install info Android module react-native-push-notification is already linked
 
 solution is to link `PushNotificationIOS` native library manually as instructed in
 [PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html).
+
+## excessive logging in device system log
+
+that is when running `react-native log-ios`.
+
+**solution**
+
+1. <https://stackoverflow.com/questions/37800790>
+2. <https://github.com/bradmartin/nativescript-videoplayer/issues/76>
+
+setting `OS_ACTIVITY_MODE` and `OS_ACTIVITY_DT_MODE` environment
+variables in Xcode project had no effect (link #1).
+
+the only thing that helped to reduce the amount of logging output
+was exporting `SIMCTL_CHILD_OS_ACTIVITY_MODE` environment variable
+before starting application (link #2):
+
+```sh
+$ SIMCTL_CHILD_OS_ACTIVITY_MODE="disable" react-native run-ios
+```
+
+of course this variable can be exported in _~/.zshenv_:
+
+```zsh
+export SIMCTL_CHILD_OS_ACTIVITY_MODE="disable"
+```

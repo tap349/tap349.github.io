@@ -16,6 +16,8 @@ categories: [elixir]
 1. <https://hexdocs.pm/elixir/behaviours.html>
 2. <https://hexdocs.pm/elixir/Application.html>
 
+NOTE: all the classification below is purely mine.
+
 ## usage
 
 in all cases specific callback module is usually fetched from

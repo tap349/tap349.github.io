@@ -344,13 +344,13 @@ variables in Xcode project had no effect (link #1).
 
 the only thing that helped to reduce the amount of logging output
 was exporting `SIMCTL_CHILD_OS_ACTIVITY_MODE` environment variable
-before starting application (link #2):
+in the shell before starting application (link #2):
 
 ```sh
 $ SIMCTL_CHILD_OS_ACTIVITY_MODE="disable" react-native run-ios
 ```
 
-of course this variable can be exported in _~/.zshenv_:
+or else this variable can be exported for all shells in _~/.zshenv_:
 
 ```zsh
 export SIMCTL_CHILD_OS_ACTIVITY_MODE="disable"

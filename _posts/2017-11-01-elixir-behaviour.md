@@ -16,7 +16,7 @@ categories: [elixir]
 1. <https://hexdocs.pm/elixir/behaviours.html>
 2. <https://hexdocs.pm/elixir/Application.html>
 
-NOTE: the classification is purely mine.
+NOTE: the classification below is purely mine.
 
 ## usage
 

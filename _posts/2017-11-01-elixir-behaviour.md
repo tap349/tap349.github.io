@@ -23,7 +23,7 @@ NOTE: the classification below is purely mine.
 in all cases specific CM is usually fetched from environment
 at compile time (using `Application.get_env/3`):
 
-- in a single place (see `FCM` for details)
+- in a single place (see FCM for details)
 - in an arbitrary application module on demand
 
   ```elixir
@@ -92,7 +92,7 @@ at compile time (using `Application.get_env/3`):
 
   same as vice versa.
 
-- facade (or proxy) CM (FCM)
+- facade CM (FCM)
 
   unlike pure CM, FCM is not a fully functional CM since it implements
   callbacks by delegating to specific CM fetched from environment.

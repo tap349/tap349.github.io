@@ -48,7 +48,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
   - _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
   - oh-my-zsh installation script will rename existing _.zshrc_ config file
-    into _.zshrc.pre-oh-my-zsh_ -> symlink _.zshrc_ into home directory after
+    into _.zshrc.pre-oh-my-zsh_ -\> symlink _.zshrc_ into home directory after
     oh-my-zsh is installed
 
   this script:

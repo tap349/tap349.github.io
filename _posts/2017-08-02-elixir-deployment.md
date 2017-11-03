@@ -555,6 +555,17 @@ $ mix edeliver ping production
 $ mix edeliver version production
 ```
 
+### rollback release
+
+NOTE: migrations should be rollbacked before restarting application -
+      they just might be not available when previous realese is loaded.
+
+```sh
+$ mix edeliver deploy release production --version=<previous_release_version>
+$ mix edeliver migrate production down --version=<previous_migration_version>
+$ ssh devops@billing sudo systemctl restart billing_prod
+```
+
 ## management
 
 ### tasks and commands

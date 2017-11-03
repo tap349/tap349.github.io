@@ -22,7 +22,10 @@ all RN components implicitly have `display: flex`.
 
 flex items (children) are placed inside flex container (parent).
 
-flex items have `box-sizing: content-box` (not `border-box` - that is
+### box-sizing
+
+flexbox in RN doesn't have `box-sizing` property but flex items behave
+as if they have `box-sizing: content-box` (not `border-box` - that is
 padding and border are not included in component's width and height).
 
 ### flex item properties
@@ -33,7 +36,7 @@ padding and border are not included in component's width and height).
   - `-1` - component is inflexible, sized according to its `width` and `height`,
     can be shrinked to its `minWidth` and `minHeight`
   - `1` - component is flexible, sized proportional to specified flex value
-    (can be > 1)
+    (can be \> 1)
 
 ## networking
 

@@ -685,3 +685,29 @@ A problem occurred configuring project ':app'.
 $ sudo sdkmanager --licenses
 / accept all licenses
 ```
+
+### method does not override or implement a method from a supertype
+
+error occurs after upgrading RN to 0.47.0.
+
+```sh
+$ react-native run-android
+...
+<app_dir>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerPackage.java:19: error: method does not override or implement a method from a supertype
+  @Override
+  ^
+Note: <app_dir>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerActivityEventListener.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
+:react-native-image-picker:compileReleaseJavaWithJavac FAILED
+
+FAILURE: Build failed with an exception.
+```
+
+**solution**
+
+for each package that fails to compile:
+
+- bump its version in _package.json_ (preferably to the latest one)
+- `yarn`
+- `yarn upgrade <package_name>`

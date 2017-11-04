@@ -93,7 +93,7 @@ React.Children.only expected to receive a single React element child.
 > TouchableHighlight must have one child (not zero or more than one).
 > If you wish to have several child components, wrap them in a View.
 
-## errors after upgrading RN
+## errors after upgrading RN to 0.45.1
 
 ### Cannot find module X
 

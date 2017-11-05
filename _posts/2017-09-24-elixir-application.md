@@ -21,8 +21,10 @@ categories: [elixir]
 2. <https://hexdocs.pm/elixir/Code.html#require_file/2>
 
 Elixir compiles all source files found in `elixirc_paths`
-(project configuration option specified in _mix.exs_ -
-it can be set to different values for each environment).
+(project configuration option specified in _mix.exs_)
+
+`elixirc_paths` option can be set on per environment basis -
+see [Elixir - Testing]({% post_url 2017-06-04-elixir-testing %}).
 
 sometimes it's necessary to load specific file that is located
 somewhere else (say, when running `exs` script file that depends

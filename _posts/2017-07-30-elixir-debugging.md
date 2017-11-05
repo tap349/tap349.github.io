@@ -28,7 +28,15 @@ categories: [elixir]
   end
   ```
 
-- start new IEx session or recompile module with breakpoint
+- run your application inside IEx
+
+  say, for Elixir app
+  (see [Elixir - Application]({% post_url 2017-09-24-elixir-application %})):
+
+  ```elixir
+  $ \iex -S mix run --no-halt
+  ```
+
 - finish pry session by calling `respawn`
 
 ## debugging dependencies

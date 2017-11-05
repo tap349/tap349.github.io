@@ -55,3 +55,9 @@ via registry is started as part of supervision tree by top-level supervisor.
   1. <https://hexdocs.pm/elixir/Registry.html>
 
   it's just a standard (official) implementation of via registry.
+
+  typically this registry is started by top-level supervisor through:
+
+  ```elixir
+  {Registry, keys: :unique, name: Registry.ViaTest}
+  ```

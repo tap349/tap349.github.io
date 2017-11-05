@@ -47,6 +47,11 @@ iex> Code.eval_quoted(quote do: "123" == unquote(Macro.escape(%{a: 1})))
 {false, []}
 ```
 
+<https://elixir-lang.org/getting-started/meta/macros.html>:
+
+> macro receives quoted expressions, inject them into the quote,
+> and finally returns another quoted expression.
+
 ## `quote` vs. `Macro.escape/2`
 
 1. <https://elixirforum.com/t/understand-macro-escape/405/2>

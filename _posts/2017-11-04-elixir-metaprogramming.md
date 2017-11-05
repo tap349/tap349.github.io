@@ -52,6 +52,17 @@ iex> Code.eval_quoted(quote do: "123" == unquote(Macro.escape(%{a: 1})))
 > macro receives quoted expressions, inject them into the quote,
 > and finally returns another quoted expression.
 
+## functions vs. macros
+
+<https://elixir-lang.org/getting-started/meta/macros.html>:
+
+> arguments to a function call are evaluated before calling the function.
+> macros do not evaluate their arguments - they receive the arguments as
+> quoted expressions which are then transformed into other quoted expressions.
+
+that is most likely macro arguments are quoted with `quote` before being
+passed to macro itself.
+
 ## `quote` vs. `Macro.escape/2`
 
 1. <https://elixirforum.com/t/understand-macro-escape/405/2>

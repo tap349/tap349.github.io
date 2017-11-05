@@ -15,6 +15,26 @@ categories: [elixir]
 
 1. <https://hexdocs.pm/elixir/Application.html>
 
+## load paths
+
+1. <https://hexdocs.pm/mix/Mix.Tasks.Compile.Elixir.html>
+2. <https://hexdocs.pm/elixir/Code.html#require_file/2>
+
+Elixir compiles all source files found in `elixirc_paths`
+(project configuration option specified in _mix.exs_ -
+it can be set to different values for each environment).
+
+sometimes it's necessary to load specific file that is located
+somewhere else (say, when running `exs` script file that depends
+on another `exs` file) - use `Code.require_file/2` in this case:
+
+```elixir
+Code.require_file("benchmarks/benchmark.exs")
+```
+
+NOTE: when `relative_to` argument is not passed, all paths
+      are considered to be relative to project root directory.
+
 ## evaluate or compile
 
 1. <https://github.com/elixir-lang/elixir/issues/5073>
@@ -55,7 +75,7 @@ in these cases bytecode modules are not written to disk - only loaded in memory:
 
   in spite of what is said above imported file is compiled in memory.
 
-### compile
+### compile to beam file
 
 - `$ elixirc foo.exs`
 

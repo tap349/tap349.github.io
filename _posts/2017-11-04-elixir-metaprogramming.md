@@ -13,6 +13,8 @@ categories: [elixir]
 {:toc}
 <hr>
 
+1. <https://medium.com/@andreichernykh/elixir-a-bit-about-macros-behaviours-84fd3de1595d>
+
 ## unquoting expressions
 
 1. <https://elixirforum.com/t/how-to-quote-regular-expression/6311>

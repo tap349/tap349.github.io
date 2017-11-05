@@ -120,8 +120,8 @@ which are used in my application cookbook:
 $ berks update appbox
 ```
 
-also it's necessary to remove directory with vendored cookbooks and vendor
-them again (this is what really helped):
+then remove directory with vendored cookbooks and vendor them again
+(this is what really helped):
 
 ```sh
 $ rm -rf berks-cookbooks/

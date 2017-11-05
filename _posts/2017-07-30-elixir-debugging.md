@@ -37,7 +37,7 @@ categories: [elixir]
   $ \iex -S mix run --no-halt
   ```
 
-- finish pry session by calling `respawn`
+- finish pry session by calling `respawn()`
 
 ## debugging dependencies
 

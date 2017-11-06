@@ -189,3 +189,26 @@ NIFs used by Guardian package.
 
 however this crash doesn't affect application in any way so I guess it can
 be safely ignored.
+
+## (ArgumentError) argument error
+
+errors occurs when trying to insert into ETS table:
+
+```sh
+** (exit) exited in: GenServer.call(#PID<0.465.0>, {:update, #Function<4.3141730/1 in Neko.UserRate.Store.reload/2>}, 5000)
+    ** (EXIT) an exception was raised:
+        ** (ArgumentError) argument error
+            (stdlib) :ets.insert(:user_anime_ids, {#PID<0.465.0>, #MapSet<[]>})
+```
+
+**solution**
+
+<https://stackoverflow.com/a/26216656/3632318>:
+
+> By default, ETS tables are created with protected access. That means
+> that any process can read values from the table, but only the process
+> that created the table can write values to it.
+
+I tried to write to ETS table inside agent process while it was created
+outside of it in agent wrapper - problem was solved by creating ETS table
+inside anonymous function passed to `Agent.start_link/2`.

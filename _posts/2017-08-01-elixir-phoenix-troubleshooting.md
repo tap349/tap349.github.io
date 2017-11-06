@@ -210,5 +210,9 @@ errors occurs when trying to insert into ETS table:
 > that created the table can write values to it.
 
 I tried to write to ETS table inside agent process while it was created
-outside of it in agent wrapper - problem was solved by creating ETS table
-inside anonymous function passed to `Agent.start_link/2`.
+outside of it in agent's wrapper - problem was solved by creating ETS
+table inside anonymous function passed to `Agent.start_link/2`.
+
+alternatively it's possible to create ETS table with `public` option so
+that any process can write to it - not only its owner (of course if it's
+safe to do in your application).

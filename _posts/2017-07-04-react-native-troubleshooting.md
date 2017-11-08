@@ -358,7 +358,7 @@ anyway I've found a workaround - create nested `View` component and set
 {% raw %}
 ```jsx
 <TouchableOpacity>
-  <View style={{opacity}}>
+  <View style={{opacity: 0.5}}>
     <Text>{title}</Text>
   </View>
 </TouchableOpacity>

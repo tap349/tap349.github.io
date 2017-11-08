@@ -338,3 +338,28 @@ I used curly braces instead of parens when defining thunk action creator:
 -}
 +)
 ```
+
+## TouchableOpacity ignores initial opacity
+
+`TouchableOpacity` component ignores `opacity` property -
+it's set only when application is hot reloaded in emulator.
+
+**solution**
+
+1. <https://github.com/facebook/react-native/pull/12628>
+2. <https://github.com/facebook/react-native/pull/8909>
+
+according to these links the issue has been closed (that is fixed) but
+it doesn't look like this (or maybe it's another but related issue).
+
+anyway I've found a workaround - create nested `View` component and set
+`opacity` property on it instead of `TouchableOpacity` component itself:
+
+```jsx
+<TouchableOpacity>
+  <View style={{opacity}}>
+    <Text>{title}</Text>
+  </View>
+</TouchableOpacity>
+```
+

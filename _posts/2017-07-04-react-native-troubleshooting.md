@@ -355,6 +355,7 @@ it doesn't look like this (or maybe it's another but related issue).
 anyway I've found a workaround - create nested `View` component and set
 `opacity` property on it instead of `TouchableOpacity` component itself:
 
+{% raw %}
 ```jsx
 <TouchableOpacity>
   <View style={{opacity}}>
@@ -362,3 +363,4 @@ anyway I've found a workaround - create nested `View` component and set
   </View>
 </TouchableOpacity>
 ```
+{% endraw %}

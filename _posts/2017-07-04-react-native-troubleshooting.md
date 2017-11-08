@@ -362,4 +362,3 @@ anyway I've found a workaround - create nested `View` component and set
   </View>
 </TouchableOpacity>
 ```
-

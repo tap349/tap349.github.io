@@ -301,7 +301,7 @@ NOTE: this error usually occurs after running application in Android emulator.
 3. <http://facebook.github.io/react-native/docs/pushnotificationios.html>
 4. <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
 
-emulator window, packager log:
+packager log:
 
 ```sh
 Native module cannot be null.
@@ -360,9 +360,9 @@ export SIMCTL_CHILD_OS_ACTIVITY_MODE="disable"
 
 ## Domain: NSURLErrorDomain, Error Code: -1200
 
-emulator window when trying to open HTTPS URL in `WebView`:
+`WebView` component's content when trying to open HTTPS URL:
 
-```sh
+```
 Error loading page
 
 Domain: NSURLErrorDomain

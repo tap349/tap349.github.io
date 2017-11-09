@@ -229,7 +229,7 @@ there are 2 ways to solve the problem:
   Xcode -> `Project navigator`
 
   replace old imports with new ones in all files inside
-  _<my_app>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
+  _\<my_app\>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
 
   ```objc
   // old import
@@ -391,7 +391,7 @@ device system log:
 2. <https://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/>
 3. <https://github.com/vinhnx/iOS-notes/issues/1>
 
-problem was fixed by disabling forward secrecy support
+problem was solved by disabling forward secrecy support
 for offending URL in _Info.plist_:
 
 ```diff
@@ -415,6 +415,6 @@ for offending URL in _Info.plist_:
   ...
 ```
 
-or else edit in _Info.plist_ in Xcode:
+or else edit _Info.plist_ in Xcode:
 
-Xcode -> `Project navigator` -> _<my_app>/<my_app>/Info.plist_.
+Xcode -> `Project navigator` -> _\<my_app\>/\<my_app\>/Info.plist_.

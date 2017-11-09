@@ -18,8 +18,8 @@ categories: [react-native]
 emulator window:
 
 ```
-SyntaxError: TransformError: /Users/tap/dev/my_app/node_modules/shallowequal/index.js:
-Couldn't find preset "es2015" relative to directory "/Users/tap/dev/my_app/node_modules/shallowequal"
+SyntaxError: TransformError: <app_dir>/node_modules/shallowequal/index.js:
+Couldn't find preset "es2015" relative to directory "<app_dir>/node_modules/shallowequal"
 ```
 
 **solution**
@@ -80,7 +80,7 @@ success Saved 3 new dependencies.
 
 ## React.Children.only expected to receive a single React element child
 
-device system log and emulator window:
+device system log:
 
 ```
 <Critical>: Unhandled JS Exception: React.Children.only expected to receive a single React element child.
@@ -178,12 +178,6 @@ $ react-native-git-upgrade
 another alpha version and this is what most likely fixed the issue.
 
 ## Maximum call stack size exceeded
-
-emulator window:
-
-```
-Maximum call stack size exceeded.
-```
 
 device system log:
 

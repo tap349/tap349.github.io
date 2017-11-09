@@ -229,7 +229,7 @@ there are 2 ways to solve the problem:
   Xcode -> `Project navigator`
 
   replace old imports with new ones in all files inside
-  _\<my_app\>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
+  _\<MyApp\>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
 
   ```objc
   // old import
@@ -417,4 +417,4 @@ for offending URL in _Info.plist_:
 
 or else edit _Info.plist_ in Xcode:
 
-Xcode -> `Project navigator` -> _\<my_app\>/\<my_app\>/Info.plist_.
+Xcode -> `Project navigator` -> _\<MyApp\>/\<MyApp\>/Info.plist_.

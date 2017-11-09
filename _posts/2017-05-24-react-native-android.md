@@ -539,7 +539,7 @@ $ react-native run-android
 FAILURE: Build failed with an exception.
 
 * Where:
-Build file '/Users/tap/dev/my_app/android/app/build.gradle' line: 108
+Build file '<app_dir>/android/app/build.gradle' line: 108
 
 * What went wrong:
 A problem occurred evaluating project ':app'.

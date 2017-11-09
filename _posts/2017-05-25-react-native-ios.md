@@ -184,7 +184,7 @@ emulator menu: `Hardware` -> `Keyboard` -> `Toggle Software Keyboard`
 
 ## troubleshooting
 
-### application build fails in Xcode (duplicate interface definition for class 'RCTView')
+### duplicate interface definition for class 'RCTView'
 
 1. <https://github.com/shoutem/ui/issues/134>
 
@@ -229,7 +229,7 @@ there are 2 ways to solve the problem:
   Xcode -> `Project navigator`
 
   replace old imports with new ones in all files inside
-  _my_app/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
+  _<my_app>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
 
   ```objc
   // old import
@@ -254,11 +254,13 @@ there are 2 ways to solve the problem:
   $ npm update react-native-linear-gradient
   ```
 
-### application build fails in command line (bundler identifier entry doesn't exist)
+### Entry, ":CFBundleIdentifier", Does Not Exist
 
 1. <https://github.com/facebook/react-native/issues/7308>
 
 ```sh
+$ react-native run-ios
+...
 Print: Entry, ":CFBundleIdentifier", Does Not Exist
 ```
 
@@ -267,7 +269,7 @@ Print: Entry, ":CFBundleIdentifier", Does Not Exist
 error was gone after solving problem with `react-native-linear-gradient`
 package (see above) and reinstalling all node modules.
 
-### application fails to start (no bundle URL present)
+### No bundle URL present
 
 1. <https://github.com/facebook/react-native/issues/12754>
 
@@ -292,7 +294,7 @@ $ react-native run-ios
 
 NOTE: this error usually occurs after running application in Android emulator.
 
-### application fails to start (native module cannot be null)
+### Native module cannot be null
 
 1. <https://github.com/zo0r/react-native-push-notification/issues/160>
 2. <https://github.com/zo0r/react-native-push-notification/issues/279>
@@ -355,3 +357,64 @@ or else this variable can be exported for all shells in _~/.zshenv_:
 ```zsh
 export SIMCTL_CHILD_OS_ACTIVITY_MODE="disable"
 ```
+
+## Domain: NSURLErrorDomain, Error Code: -1200
+
+emulator window when trying to open HTTPS URL in `WebView`:
+
+```sh
+Error loading page
+
+Domain: NSURLErrorDomain
+Error Code: -1200
+Description: An SSL error has occurred and a secure connection to the server cannot be made
+```
+
+device system log:
+
+```
+<Warning>: NSURLSession/NSURLConnection HTTP load failed (kCFStreamErrorDomainSSL, -9824)
+<Warning>: 'Encountered an error loading page', { domain: 'NSURLErrorDomain',
+  loading: false,
+  description: 'An SSL error has occurred and a secure connection to the server cannot be made.',
+  target: 398,
+  code: -1200,
+  canGoBack: false,
+  title: '',
+  url: '',
+  canGoForward: false }
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/30882037/3632318>
+2. <https://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/>
+3. <https://github.com/vinhnx/iOS-notes/issues/1>
+
+problem was fixed by disabling forward secrecy support
+for offending URL in _Info.plist_:
+
+```diff
+  ...
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+      <key>localhost</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+      </dict>
++     <key>acs.***.ru</key>
++     <dict>
++       <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
++       <false/>
++     </dict>
+    </dict>
+  </dict>
+  ...
+```
+
+or else edit in _Info.plist_ in Xcode:
+
+Xcode -> `Project navigator` -> _<my_app>/<my_app>/Info.plist_.

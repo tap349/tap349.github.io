@@ -80,10 +80,10 @@ success Saved 3 new dependencies.
 
 ## React.Children.only expected to receive a single React element child
 
-in device system log:
+device system log and emulator window:
 
 ```
-React.Children.only expected to receive a single React element child.
+<Critical>: Unhandled JS Exception: React.Children.only expected to receive a single React element child.
 ```
 
 **solution**

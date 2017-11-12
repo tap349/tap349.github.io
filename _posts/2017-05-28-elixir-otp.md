@@ -239,5 +239,17 @@ classification of exit signals by their exit reasons:
 
 - create a link and trap exits
 
-  this method is usually used in supervisors - it's an overkill if you just
-  want to be informed when another process terminates.
+  this method is usually used in supervisors - it's an overkill
+  if you just want to be informed when another process terminates.
+
+  moreover it's considered an antipattern in most cases
+  (<http://www.erlang.se/doc/programming_rules.shtml#HDR22>):
+
+  > As few processes as possible should trap exit signals.
+
+  <https://www.reddit.com/r/elixir/comments/3dlwhu>:
+
+  > A cornerstone of the Erlang philosophy is to separate error handling
+  > and application logic in separate processes, workers and supervisors.
+  > Trapping exits in your application code mixes these concerns in the
+  > same process.

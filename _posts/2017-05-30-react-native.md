@@ -96,22 +96,68 @@ native libraries can be linked:
 
 component is updated when:
 
-- its internal state has changed:
+- its internal state has changed
 
   new state is set using `setState`
 
-- `forceUpdate` is triggered:
+- `forceUpdate` is triggered
 
   say, when Redux store is changed
 
-- props have changed:
+- props have changed
 
   parent component state changes -\>
   it's re-rendered -\>
   current component receives new props
 
-- props in `mapStateToProps` have changed:
+- props in `mapStateToProps` have changed
 
   component is connected to Redux store (subscribed to Redux store updates) -\>
   Redux store state has changed -\>
   props in `mapStateToProps` have changed (as determined by shallow comparison)
+
+## component naming conventions and file structure
+
+1. <https://github.com/react-toolbox/react-toolbox/issues/98>
+
+```
+.
+├── app
+│   ├── components
+│   │   ├── login
+│   │   │   ├── Layout.js
+│   │   │   └── PhonePage.js
+```
+
+_app/components/login/PhonePage.js_:
+
+```javascript
+export default class PhonePage extends Component {
+  // ...
+}
+```
+
+_app/components/login/index.js_:
+
+```javascript
+import PhonePage from './PhonePage';
+
+export default {
+  PhonePage,
+};
+```
+
+_app/App.js_:
+
+```javascript
+import Login from './components/login';
+
+export default class App extends Component {
+  // ...
+
+  case 'login_phone_page':
+    return <Login.PhonePage navigator={navigator} />;
+
+  // ...
+}
+```

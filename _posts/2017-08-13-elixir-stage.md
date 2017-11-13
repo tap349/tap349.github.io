@@ -170,7 +170,7 @@ $ mix edeliver migrate staging
 ### ping node
 
 ```sh
-$ mix ping staging
+$ mix edeliver ping staging
 ```
 
 ## alternative solutions
@@ -188,3 +188,29 @@ $ mix ping staging
 
 idea looks brilliant but this solution works only if you have separate
 staging and production hosts (which is not my case).
+
+## troubleshooting
+
+### Your connection is not private
+
+this error is shown in Chrome when trying to access stage application even
+though it's configured not to use SSL (HTTPS) at all in corresponding Nginx
+site.
+
+**solution**
+
+1. <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>
+
+the reason why this happens is because our server implements HSTS policy by
+supplying HSTS header over HTTPS connection.
+
+usually HSTS policy is declared at top-level domain but HSTS header might
+also contain `includeSubDomains` directive which specifies that HSTS policy
+should be applied for all subdomains (this is the case for our server).
+
+so if you access top-level domain, HTTPS connection will be enforced for all
+subdomains as well - even though they might be configured not to use HTTPS.
+
+a workaround is to delete domain security policies for top-level domain
+in Chrome on <chrome://net-internals/#hsts> page - it's not required to
+delete entries for all affected subdomains.

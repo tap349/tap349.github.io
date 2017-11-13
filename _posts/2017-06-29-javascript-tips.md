@@ -17,7 +17,7 @@ categories: [js]
 
 - using `Object.assign`
 
-  <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Merging_objects>
+  1. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Merging_objects>
 
   ```javascript
   Object.assign({a: 1, b: 2}, {b: 3}) // {a: 1, b: 3}
@@ -25,7 +25,7 @@ categories: [js]
 
 - using spread operator (`...`)
 
-  <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator#Spread_in_object_literals>
+  1. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator#Spread_in_object_literals>
 
   {% raw %}
   ```javascript
@@ -37,8 +37,8 @@ categories: [js]
 
 ## [how to] pass class prototype methods as arguments
 
-- <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
-- <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
+1. <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
+2. <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
 
 if it's necessary to keep current context (say, class method uses
 instance properties of current class) there are 2 options:
@@ -125,4 +125,15 @@ const response = fetch(url, {
   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
   body: jsonToFormData(json)
 })
+```
+
+## [how to] get subset of object properties
+
+1. <https://stackoverflow.com/questions/17781472>
+
+```javascript
+const object = {a: 5, b: 6, c: 7};
+const picked = (({a, c}) => ({a, c}))(object);
+
+console.log(picked); // {a: 5, c: 7}
 ```

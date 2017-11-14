@@ -313,6 +313,10 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 
 `<D-m>`
 
+### Inspector
+
+- `<D-m>` -> `Toggle Inspector`
+
 ### Dev Settings
 
 in Android:

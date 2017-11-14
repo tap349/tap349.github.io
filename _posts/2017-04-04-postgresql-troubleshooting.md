@@ -40,11 +40,11 @@ but this migration was not smooth and resulted in many errors, to name a few:
 
 - `invalid value for parameter "TimeZone": "UTC"`
 
-  should by fixed by restarting service or the whole system according to SO.
+  should be fixed by restarting service or the whole system according to SO.
 
 - `command not found: psql`
 
-  `psql` must have symlink in _/usr/local/bin_ directory
+  `psql` must have a symlink in _/usr/local/bin/_
   (it has been added to `PATH` in _~/.zshenv_ in my case) -
   it's gone now for some mysterious reason.
 
@@ -91,9 +91,8 @@ NOTE: installing `postgresql` formula still installs the latest version
 
 **description**
 
-`psql -d <my_database>`:
-
 ```sh
+$ psql -d <my_database>
 psql: could not connect to server: Connection refused
   Is the server running locally and accepting
   connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
@@ -132,3 +131,27 @@ remove obsolete PID file - I didn't try this method though):
 ```sh
 $ brew services restart postgresql@9.5
 ```
+
+## command not found: psql
+
+```sh
+psql --version                                                                   tap@MacBook-Pro-Personal
+zsh: command not found: psql
+```
+
+**solution**
+
+in my case only versioned formula of PostgreSQL (`postgresql@9.5`) was
+installed but it didn't create a symlink to `psql` in _/usr/local/bin/_.
+
+to solve this problem either:
+
+- install the latest version of PostgreSQL (`postgresql`)
+
+  unversioned formula creates a symlink in _/usr/local/bin/_ automatically.
+
+- create a symlink for old version of PostgreSQL manually
+
+  ```sh
+  $ ln -s /usr/local/Cellar/postgresql@9.5/9.5.10/bin/psql /usr/local/bin/psql
+  ```

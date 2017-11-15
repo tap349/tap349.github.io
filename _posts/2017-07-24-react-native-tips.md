@@ -150,3 +150,36 @@ say, `Text` component instead.
 in case of unhandled promise rejection there might be no relevant
 messages in `react-native log-ios` output - make sure that errors
 are logged in corresponding `catch` clauses in that case.
+
+## [how to] to use absolute paths for imports
+
+1. <https://medium.com/@davidjwoody/6b06ae3f65d1>
+
+the problem is that it's necessary to include application
+directory name if you want to use absolute paths:
+
+```javascript
+import MyComponent from 'MyAppDir/app/components/MyComponent';
+```
+
+it's possible to use `babel-plugin-root-import` plugin but Vim's
+`gf` command (opens file under the cursor) doesn't understand it.
+
+the solution is to create _package.json_ in directory from which
+you want to import (it's _app/_ as a rule):
+
+```json
+{
+  "name": "app"
+}
+```
+
+this name can then be used when importing modules:
+
+```javascript
+import MyComponent from 'app/components/MyComponent';
+```
+
+the name can be anything (say, `app1`) but the whole point of using
+it is that it matches top-level directory name so that Vim can find
+the file being imported.

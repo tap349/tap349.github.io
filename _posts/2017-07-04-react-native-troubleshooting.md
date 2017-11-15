@@ -358,3 +358,27 @@ anyway I've found a workaround - create nested `View` component and set
 </TouchableOpacity>
 ```
 {% endraw %}
+
+## Unknown named module
+
+this error occurs when trying to load image using `Image` component.
+
+device system log:
+
+```
+<Notice>: { [Error: Unknown named module: '~/components/_new/graphics/images/ion-ios-person.png'] ... }
+```
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/2481>
+
+it turns out you cannot load images dynamically - provide static URI instead
+(that is don't construct it dynamically, say, using variable interpolation):
+
+```jsx
+<Image
+  style={{height: 30, width: 35}}
+  source={require('~/components/_new/graphics/images/ion-person-stalker.png')}
+/>
+```

@@ -63,5 +63,53 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
 ## debugging remotely
 
 1. <http://blog.plataformatec.com.br/2016/05/tracing-and-observing-your-remote-node/>
-2. <https://mfeckie.github.io/Remote-Profiling-Elixir-Over-SSH/>
-3. <https://chazsconi.github.io/2017/04/22/observing-remote-elixir-docker-nodes.html>
+2. <https://gist.github.com/pnc/9e957e17d4f9c6c81294>
+3. <http://erlang.org/doc/apps/observer/observer_ug.html>
+
+- `foo_host` is a name of remote host from _.ssh/config_
+- `foo` is a name of remote Erlang node running on `foo_host`
+  (most likely it matches application name)
+
+### find out EPMD and node ports on remote machine
+
+```sh
+$ ssh foo_host 'epmd -names'
+epmd: up and running on port 4369 with data:
+name foo at port 99999
+```
+
+here `4369` is EPMD port and `99999` is a node port.
+
+### forward ports
+
+configure forwarding of corresponding local ports:
+
+```sh
+$ ssh -N -L 4369:localhost:4369 99999:localhost:99999 foo_host
+```
+
+here all connections are forwarded, say, from localhost:4369 to foo_host:4369
+(whenever connection is made to locahost:4369, it's forwarded to foo_host:4369).
+
+### start a hidden node running observer
+
+```sh
+\iex --name 'debug@localhost' --cookie 'bar' --hidden -e ':observer.start'
+```
+
+**IMPORTANT**
+
+make sure magic cookie matches the one from _foo/var/vm.args_
+(not the one from automatically generated `~/.erlang.cookie`)!
+otherwise you won't be able to connect to `foo` next.
+
+### connect to remote node
+
+observer menu:
+
+`Nodes` -> `Connect Node` (type `foo@127.0.0.1`)
+
+**IMPORTANT**
+
+make sure node name matches the one from _foo/var/vm.args_ exactly
+(`foo@localhost` != `foo@127.0.0.1`).

@@ -396,6 +396,6 @@ the solution is to use `flexGrow: 1` instead of `flex: 1` for container:
 
 ```jsx
 <ScrollView contentContainerStyle={{flexGrow: 1}} scrollEnabled={true}>
-   ...
+   // ...
 </ScrollView>
 ```

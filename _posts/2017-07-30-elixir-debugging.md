@@ -60,7 +60,7 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
 ```
 
-## debugging remotely
+## remote debugging
 
 1. <http://blog.plataformatec.com.br/2016/05/tracing-and-observing-your-remote-node/>
 2. <https://gist.github.com/pnc/9e957e17d4f9c6c81294>

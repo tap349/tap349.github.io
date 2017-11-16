@@ -141,6 +141,16 @@ be automatically copied to Photos on iOS (I didn't experiment with other types
 of files). moreover it will be copied to Photos regardless of what application
 is currently opened.
 
+### add iPhone 4s model
+
+iPhone 4s model is not available by default - add it manually:
+
+- Xcode -> `Product` (top menu) -> `Destination` -> `Add Additional Simulators...`
+- press `+` icon (`Add Simulator`) in bottom left corner
+- `OS Version` (dropdown menu) -> `Download more simulator runtimes...`
+- download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
+- create simulator for iPhone 4s using downloaded runtime
+
 ## debugging
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>

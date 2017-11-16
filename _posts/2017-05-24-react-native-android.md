@@ -347,7 +347,7 @@ $ avd -verbose
   ```
 
   this log is very helpful when debugging some system error
-  as it shows everything that's happening inside OS.
+  as it shows everything what's happening inside OS.
 
 ### reload application in emulator manually
 

@@ -77,9 +77,6 @@ it's possible to change it to Dvorak inside emulator:
 emulator menu:
 
 - `Hardware` -> `Keyboard` -> `Uses the Same Layout as macOS`
-- `Hardware` -> `Keyboard` -> `Toggle Software Keyboard` (enable)
-
-NOTE: it's not possible to input text in Russian without software keyboard.
 
 ### enable live/hot reloading
 
@@ -188,8 +185,7 @@ $ react-native log-ios
 
 ### toggle software keyboard
 
-emulator menu: `Hardware` -> `Keyboard` -> `Toggle Software Keyboard`
-
+- emulator menu: `Hardware` -> `Keyboard` -> `Toggle Software Keyboard`
 - `<D-k>`
 
 ## troubleshooting

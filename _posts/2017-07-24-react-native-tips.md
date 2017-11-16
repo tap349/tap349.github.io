@@ -181,6 +181,7 @@ this name can then be used when importing modules:
 import MyComponent from 'app/components/MyComponent';
 ```
 
-the name can be anything (say, `app1`) but the whole point of using
-it is that it matches top-level directory name so that Vim can find
-the file being imported.
+in fact the name can be anything (say, `app1`) but for Vim to find
+the file being imported it must match application top-level directory
+name (`app`) - that's the whole point of using custom name instead of
+`~` prefix.

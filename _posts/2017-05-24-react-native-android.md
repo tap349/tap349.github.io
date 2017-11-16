@@ -354,8 +354,6 @@ $ avd -verbose
 - `rr`
 - `<D-m>` -> `Reload`
 
-this is the only working option I have found so far.
-
 ### run remote interactive shell
 
 run remote interactive shell:

@@ -376,12 +376,14 @@ device system log:
 it turns out you cannot load images dynamically - provide static URI instead
 (that is don't construct it dynamically, say, using variable interpolation):
 
+{% raw %}
 ```jsx
 <Image
   style={{height: 30, width: 35}}
   source={require('~/components/_new/graphics/images/ion-person-stalker.png')}
 />
 ```
+{% endraw %}
 
 ## ScrollView with unbounded height doesn't grow on scrolling
 
@@ -394,8 +396,10 @@ overflows the container.
 
 the solution is to use `flexGrow: 1` instead of `flex: 1` for container:
 
+{% raw %}
 ```jsx
 <ScrollView contentContainerStyle={{flexGrow: 1}} scrollEnabled={true}>
    // ...
 </ScrollView>
 ```
+{% endraw %}

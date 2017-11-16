@@ -159,11 +159,12 @@ the problem is that it's necessary to include application
 directory name if you want to use absolute paths:
 
 ```javascript
-import MyComponent from 'MyAppDir/app/components/MyComponent';
+import MyComponent from '<app_dir>/app/components/MyComponent';
 ```
 
 it's possible to use `babel-plugin-root-import` plugin but Vim's
-`gf` command (opens file under the cursor) doesn't understand it.
+`gf` command (opens file under the cursor) doesn't understand its
+notation (`~` stands for `<app_dir>/app` by default).
 
 the solution is to create _package.json_ in directory from which
 you want to import (it's _app/_ as a rule):

@@ -141,7 +141,7 @@ be automatically copied to Photos on iOS (I didn't experiment with other types
 of files). moreover it will be copied to Photos regardless of what application
 is currently opened.
 
-### add iPhone 4s model
+### add iPhone 4s simulator
 
 iPhone 4s model is not available by default - add it manually:
 

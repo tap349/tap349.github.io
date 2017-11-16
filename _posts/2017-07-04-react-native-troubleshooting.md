@@ -382,3 +382,20 @@ it turns out you cannot load images dynamically - provide static URI instead
   source={require('~/components/_new/graphics/images/ion-person-stalker.png')}
 />
 ```
+
+## ScrollView with unbounded height doesn't grow on scrolling
+
+1. <https://stackoverflow.com/a/43525913/3632318>
+
+I use `ScrollView` component as a top-level container - when all its content
+doesn't fit on the screen (say, on iPhone 4s), the `ScrollView` component
+doesn't grow when trying to scroll down: hidden content becomes visible but
+overflows the container.
+
+the solution is to use `flexGrow: 1` instead of `flex: 1` for container:
+
+```jsx
+<ScrollView contentContainerStyle={{flexGrow: 1}} scrollEnabled={true}>
+   ...
+</ScrollView>
+```

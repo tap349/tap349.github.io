@@ -250,16 +250,16 @@ headers.
 2. <https://github.com/facebook/react-native/issues/6002>
 3. <https://facebook.github.io/react-native/docs/refreshcontrol.html>
 
-don't nest `ListView` component in `ScrollView` component -
-this is what causes `onEndReached` event to be triggered again and again.
+don't nest `ListView` in `ScrollView` - this is what
+causes `onEndReached` event to be triggered again and again.
 
-in most cases it means not to use `ScrollView` component at all if
-you have to use `ListView` component:
+in most cases it means not to use `ScrollView` at all if you have
+to use `ListView`:
 
-- if you used `refreshControl` property of `ScrollView` component
-  note that `ListView` component has the same property
-- if you used some header in `ScrollView` component it's possible to render
-  the very same header in `renderHeader` callback of `ListView` component
+- if you used `refreshControl` property of `ScrollView` note
+  that `ListView` has the same property
+- if you used some header in `ScrollView` it's possible to render
+  the very same header in `renderHeader` callback of `ListView`
 
 ## ListView becomes blank
 
@@ -335,7 +335,7 @@ I used curly braces instead of parens when defining thunk action creator:
 
 ## TouchableOpacity ignores initial opacity
 
-`TouchableOpacity` component ignores `opacity` property -
+`TouchableOpacity` ignores `opacity` property -
 it's set only when application is hot reloaded in emulator.
 
 **solution**
@@ -346,8 +346,8 @@ it's set only when application is hot reloaded in emulator.
 according to these links the issue has been closed (that is fixed) but
 it doesn't look like this (or maybe it's another but related issue).
 
-anyway I've found a workaround - create nested `View` component and set
-`opacity` property on it instead of `TouchableOpacity` component itself:
+anyway I've found a workaround - create nested `View` and set
+`opacity` property on it instead of `TouchableOpacity` itself:
 
 {% raw %}
 ```jsx
@@ -361,7 +361,7 @@ anyway I've found a workaround - create nested `View` component and set
 
 ## Unknown named module
 
-this error occurs when trying to load image using `Image` component.
+this error occurs when trying to load image using `Image`.
 
 device system log:
 
@@ -389,10 +389,10 @@ it turns out you cannot load images dynamically - provide static URI instead
 
 1. <https://stackoverflow.com/a/43525913/3632318>
 
-I use `ScrollView` component as a top-level container - when all its content
-doesn't fit on the screen (say, on iPhone 4s), the `ScrollView` component
-doesn't grow when trying to scroll down: hidden content becomes visible but
-overflows the container.
+I use `ScrollView` as a top-level container - when all its content
+doesn't fit on the screen (say, on iPhone 4s), the `ScrollView`
+doesn't grow when trying to scroll down: hidden content becomes
+visible but overflows the container.
 
 the solution is to use `flexGrow: 1` instead of `flex: 1` for container:
 
@@ -402,3 +402,20 @@ the solution is to use `flexGrow: 1` instead of `flex: 1` for container:
 </ScrollView>
 ```
 {% endraw %}
+
+## TextInput inside TouchableOpacity intercepts touches
+
+when `TouchableOpacity` wraps `TextInput` and the latter is pressed,
+`onPress` callback of `TouchableOpacity` is not invoked.
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/14958#issuecomment-324237317>
+
+```jsx
+<TouchableOpacity onPress={this._handlePress}>
+  <View pointerEvents='none'>
+    <TextInput editable={false} />
+  </View>
+</TouchableOpacity>
+```

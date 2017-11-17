@@ -57,8 +57,8 @@ RN package which:
 1. <https://stackoverflow.com/questions/41426862>
 2. <https://blog.brainsandbeards.com/react-native-keyboard-handling-tips-a2472b74c114>
 
-by default keyboard is not dismissed when tapping outside of `TextInput`
-component - wrap the latter in `ScrollView` component for this to happen:
+by default keyboard is not dismissed when tapping outside of
+`TextInput` - wrap the latter in `ScrollView` for this to happen:
 
 ```jsx
 <ScrollView keyboardShouldPersistTaps='handled'>
@@ -70,8 +70,8 @@ component - wrap the latter in `ScrollView` component for this to happen:
 </ScrollView>
 ```
 
-if there is a `ListView` component somewhere below you'll have to wrap
-`ScrollView` component in `View` component - otherwise it's not visible.
+if there is a `ListView` somewhere below you'll have to wrap
+`ScrollView` in `View` - otherwise it's not visible.
 
 ## [how to] dismiss keyboard when pressing `<CR>` on keyboard
 
@@ -143,7 +143,7 @@ according to docs returning null used to be not supported in the past
 but that is no longer the case.
 
 so just be cautious when returning null - if it breaks anything, return,
-say, `Text` component instead.
+say, `Text` instead.
 
 ## log error messages in `catch` clauses
 

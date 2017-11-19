@@ -137,3 +137,12 @@ const picked = (({a, c}) => ({a, c}))(object);
 
 console.log(picked); // {a: 5, c: 7}
 ```
+
+or
+
+```javascript
+const object = {a: 5, b: 6, c: 7};
+const {b, ...picked} = object;
+
+console.log(picked); // {a: 5, c: 7}
+```

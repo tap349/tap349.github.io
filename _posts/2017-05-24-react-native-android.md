@@ -713,3 +713,10 @@ for each package that fails to compile:
 - bump its version in _package.json_ (preferably to the latest one)
 - `yarn`
 - `yarn upgrade <package_name>`
+
+if it doesn't help, try to unlink/link failing package manually:
+
+```sh
+$ react-native unlink <package_name>
+$ react-native link <package_name>
+```

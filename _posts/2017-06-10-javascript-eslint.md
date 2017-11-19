@@ -9,14 +9,14 @@ categories: [js, eslint]
 
 <!-- more -->
 
-- <https://github.com/eslint/eslint>
-- <https://medium.com/@hpux/vim-and-eslint-16fa08cc580f>
-- <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
+1. <https://github.com/eslint/eslint>
+2. <https://medium.com/@hpux/vim-and-eslint-16fa08cc580f>
+3. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
 
 ## install ESLint globally
 
 ```sh
-$ npm install eslint --global
+$ yarn global add eslint
 ```
 
 it's required to generate initial ESLint config for specific project
@@ -45,7 +45,7 @@ on your answers) locally as development dependencies in _package.json_:
 
 ## use babel-eslint parser as default ESLint parser
 
-<https://github.com/babel/babel-eslint/>
+1. <https://github.com/babel/babel-eslint/>
 
 ```sh
 $ npm install babel-eslint --save-dev
@@ -68,7 +68,7 @@ class Counter extends HTMLElement {
 
 ## configure ESLint rules
 
-<http://eslint.org/docs/user-guide/configuring>
+1. <http://eslint.org/docs/user-guide/configuring>
 
 extending `eslint:recommended` configuration enables subset of core rules
 having a check mark on the [rules page](http://eslint.org/docs/rules/):
@@ -84,7 +84,7 @@ some rules worth mentioning are listed below:
 
 - enforce event handler naming conventions in JSX
 
-  <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md>
+  1. <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md>
 
   ```yaml
   react/jsx-handler-names: warn
@@ -99,8 +99,8 @@ some rules worth mentioning are listed below:
 
 - mark variables used in JSX as used
 
-  - <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md>
-  - <https://github.com/eslint/eslint/issues/2283#issuecomment-260928189>
+  1. <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md>
+  2. <https://github.com/eslint/eslint/issues/2283#issuecomment-260928189>
 
   > Since 0.17.0 the ESLint no-unused-vars rule does not detect variables used in JSX
 
@@ -117,7 +117,7 @@ some rules worth mentioning are listed below:
 
 - require space after function name in function declaration
 
-  <http://eslint.org/docs/rules/space-before-function-paren>
+  1. <http://eslint.org/docs/rules/space-before-function-paren>
 
   ```yaml
   space-before-function-paren:
@@ -130,7 +130,7 @@ some rules worth mentioning are listed below:
 
 ## configure syntastic
 
-<https://github.com/vim-syntastic/syntastic/issues/1692>
+1. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
 ```vim
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'

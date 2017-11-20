@@ -419,3 +419,14 @@ when `TouchableOpacity` wraps `TextInput` and the latter is pressed,
   </View>
 </TouchableOpacity>
 ```
+
+## error: http error: Invalid token (401)
+
+this error is related to `react-native-sentry` package.
+
+**solution**
+
+TODO
+
+even though build fails, this is the last build step so application is
+still built and launched in emulator => ignore this error for now.

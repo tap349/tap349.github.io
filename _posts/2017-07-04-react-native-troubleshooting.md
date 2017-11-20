@@ -430,3 +430,12 @@ TODO
 
 even though build fails, this is the last build step so application is
 still built and launched in emulator => ignore this error for now.
+
+## `fontWeight={600}` is not applied for TextInput
+
+error occurs if Gill Sans font is used only - setting font weight
+works with `Text` and when default font is used instead.
+
+**solution**
+
+TODO

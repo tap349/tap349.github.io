@@ -146,3 +146,11 @@ const {b, ...picked} = object;
 
 console.log(picked); // {a: 5, c: 7}
 ```
+
+## [how to] create empty array of N elements
+
+1. <https://stackoverflow.com/a/41246860/3632318>
+
+```javascript
+[...Array(100)]
+```

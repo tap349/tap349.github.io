@@ -439,3 +439,20 @@ works with `Text` and when default font is used instead.
 **solution**
 
 TODO
+
+## undefined is not an object (evaluating 'Sentry.options.logLevel')
+
+device system log:
+
+```
+<Notice>: { [TypeError: undefined is not an object (evaluating 'Sentry.options.logLevel')] ... }
+```
+
+**solution**
+
+<https://github.com/getsentry/react-native-sentry/issues/237#issuecomment-330779566>:
+
+```javascript
+Sentry.config(<sentry_endpoint>);
+if (!__DEV__) { Sentry.install(); }
+```

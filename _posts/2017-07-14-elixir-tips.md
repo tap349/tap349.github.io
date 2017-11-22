@@ -55,7 +55,7 @@ Map.from_struct(%User{id: 1, name: "Alice"})
 [map to struct](https://hexdocs.pm/elixir/Kernel.html#struct/2):
 
 ```elixir
-# creates new struct
+# ignores keys that don't belong to struct
 struct(User, %{id: 1, name: "Alice"})
 # raises if key doesn't belong to struct
 struct!(User, %{id: 1, name: "Alice", foo: 123})

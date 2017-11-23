@@ -13,6 +13,8 @@ categories: [dry-rb]
 {:toc}
 <hr>
 
+1. <http://dry-rb.org/gems/dry-validation/>
+
 dry-rb documentation is great but still the docs on dry-validation
 has always made me crazy since I couldn't discern a pattern in how
 its DSL is organized and when to use of these variants:
@@ -62,15 +64,16 @@ NOTE: when using `value` method, you pass hash for unary predicate
 
 ## `int?` vs. `type?(Integer)`
 
-1. <http://dry-rb.org/gems/dry-validation/basics/built-in-predicates/>
+<http://dry-rb.org/gems/dry-validation/basics/built-in-predicates/>:
 
-`int?` is a shorthand for `type?(Integer)`
-(note that predicates have different arity).
+> `int?` is a shorthand for `type?(Integer)`
+
+NOTE: predicates have different arity.
 
 ## multiple predicates
 
-if you need custom predicate logic, using blocks is the only option
-but if you just need to AND multiple predicates together (the most
+when custom predicate logic is required, using blocks is the only option
+but if it's necessary just to AND multiple predicates together (the most
 common case I guess) this can be done using `value` method as well:
 
 ```ruby
@@ -84,11 +87,10 @@ required(:foo) { str? & min_size?(3) }
 
 1. <https://github.com/dry-rb/dry-validation/issues/161#issuecomment-232333065>
 2. <https://gist.github.com/AMHOL/0671986632fe734189c4c73e2a665f8b>
-3. <http://dry-rb.org/gems/dry-types/custom-types>
 
 it's possible to register custom class (say, AR model) as a dry type
 (in the same dry container where built-in types are registered) so that
-it can be used in validation rules:
+it can be used in validation rules afterwards:
 
 ```ruby
 schema = Dry::Validation.Schema do
@@ -109,5 +111,5 @@ end
 
 1. <http://dry-rb.org/gems/dry-validation/basics/macros/>
 
-all macros don't share a common pattern - so just memorize how they
-are expanded.
+macros don't share a common pattern - just memorize how they are expanded
+(e.g. that `filled(:int?)` == `{ filled? & int? }`).

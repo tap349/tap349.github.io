@@ -28,7 +28,7 @@ DSL madness looks like black magic much more than any Rails gem does.
 frankly speaking, these patterns are not that hard to recognize but still
 I wish they were stated in documentation more clearly.
 
-## `value` vs. block
+## `value` method vs. block
 
 a predicate can be specified as (both ways are equivalent):
 

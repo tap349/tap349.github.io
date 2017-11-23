@@ -110,4 +110,4 @@ end
 1. <http://dry-rb.org/gems/dry-validation/basics/macros/>
 
 macros don't share a common pattern - just memorize how they are expanded
-(e.g. that `filled(:int?)` == `{ filled? & int? }`).
+(e.g. `filled(:int?)` => `{ filled? & int? }`).

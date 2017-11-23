@@ -25,8 +25,8 @@ which is a predicate itself (`filled?`) like this: `filled(:int?)`.
 authors of dry-rb claim their libraries to be dry and simple but all this
 DSL madness looks like black magic much more than any Rails gem does.
 
-frankly speaking, these patterns are not that hard to recognize but still
-I wish they were stated in documentation more clearly.
+frankly speaking, these principles of organization are not that hard to
+recognize but still I wish they were stated in documentation more clearly.
 
 ## `value` method vs. block
 

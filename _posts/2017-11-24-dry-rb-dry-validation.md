@@ -13,8 +13,6 @@ categories: [dry-rb]
 {:toc}
 <hr>
 
-1. <http://dry-rb.org/gems/dry-validation/>
-
 dry-rb documentation is great but still the docs on dry-validation
 has always made me crazy since I couldn't discern a pattern in how
 its DSL is organized and when to use of these variants:

@@ -15,7 +15,7 @@ categories: [dry-rb]
 
 dry-rb documentation is great but still the docs on dry-validation
 has always made me crazy since I couldn't discern a pattern in how
-its DSL is organized and when to use of these variants:
+its DSL is organized and when to use each of these variants:
 
 `type?(Integer)` vs. `type?: Integer` vs. `:int?` vs. `{ int? }` vs. anything else?
 

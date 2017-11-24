@@ -57,8 +57,8 @@ required(:foo).value(type?: Integer)
 required(:foo) { type?(Integer) }
 ```
 
-NOTE: when using `value` method, you pass hash for unary predicate
-      instead of atom for predicate of zero arity.
+NOTE: when using `value` method, unary predicate is specified as a hash
+      (while predicate of zero arity is specified as an atom).
 
 ## `int?` vs. `type?(Integer)`
 

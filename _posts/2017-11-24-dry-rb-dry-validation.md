@@ -14,7 +14,7 @@ categories: [dry-rb]
 <hr>
 
 dry-rb documentation is great but still the docs on dry-validation
-has always made me crazy since I couldn't discern a pattern in how
+have always made me crazy since I couldn't discern a pattern in how
 its DSL is organized and when to use each of these variants:
 
 `type?(Integer)` vs. `type?: Integer` vs. `:int?` vs. `{ int? }` vs. anything else?
@@ -32,7 +32,7 @@ recognize but still I wish they were stated in documentation more clearly.
 
 a predicate can be specified in 2 ways (both are equivalent):
 
-- as an argument (atom or hash) of `value` method
+- as an argument (atom or hash) of `value` method (value syntax)
 
   ```ruby
   required(:foo).value(:int?)
@@ -66,7 +66,7 @@ NOTE: when using `value` method, unary predicate is specified as a hash
 
 > `int?` is a shorthand for `type?(Integer)`
 
-NOTE: predicates have different arity.
+NOTE: the predicates have different arity.
 
 ## multiple predicates
 

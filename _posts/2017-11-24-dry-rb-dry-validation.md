@@ -30,7 +30,7 @@ recognize but still I wish they were stated in documentation more clearly.
 
 ## `value` method vs. block
 
-a predicate can be specified in 2 ways (both ways are equivalent):
+a predicate can be specified in 2 ways (both are equivalent):
 
 - as an argument (atom or hash) of `value` method
 

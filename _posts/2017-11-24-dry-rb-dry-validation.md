@@ -30,15 +30,15 @@ recognize but still I wish they were stated in documentation more clearly.
 
 ## `value` method vs. block
 
-a predicate can be specified as (both ways are equivalent):
+a predicate can be specified in 2 ways (both ways are equivalent):
 
-- an argument (atom or hash) of `value` method
+- as an argument (atom or hash) of `value` method
 
   ```ruby
   required(:foo).value(:int?)
   ```
 
-- a method call inside block passed to `required` method
+- as a method call inside block passed to `required` method
 
   ```ruby
   required(:foo) { int? }

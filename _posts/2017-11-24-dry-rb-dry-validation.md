@@ -32,7 +32,7 @@ recognize but still I wish they were stated in documentation more clearly.
 
 a predicate can be specified in 2 ways (both are equivalent):
 
-- as an argument (atom or hash) of `value` method (value syntax)
+- as an argument (atom or hash) of `value` method
 
   ```ruby
   required(:foo).value(:int?)

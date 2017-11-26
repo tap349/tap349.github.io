@@ -17,8 +17,7 @@ style guide
 -----------
 
 - page should be divided into sections with the same `marginBottom`
-  (`<View style={styles.section}></View>`)
-- all standard (`Text`) or custom components (buttons, inputs, pickers,
+- all standard and custom components (buttons, inputs, pickers,
   etc.) must have ZERO margins and external paddings
 
   if it's necessary to set margins, wrap component into `View` or

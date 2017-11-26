@@ -231,7 +231,7 @@ using react-redux boils down to using just 2 things:
 
   think of `connect()` as a Redux store facade for component.
 
-  state <=> `connect()` <=> component
+  state \<=\> `connect()` \<=\> component
 
   ```javascript
   import {connect} from 'react-redux';
@@ -260,59 +260,11 @@ using react-redux boils down to using just 2 things:
   class MyComponent extends Component {...}
   ```
 
-### updating component
-
-1. <https://github.com/reactjs/redux/issues/585>
-2. <https://stackoverflow.com/questions/38189783/re-rendering-of-connected-component-based-on-mapstatetoprops-output>
-
-all components are updated whenever store changes because root
-component is subscribed to store updates in my case (see above).
-
-but it's not the case when component is connected -
-it will be re-rendered only when props have changed
-(<https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux>):
-
-> connect() implements shouldComponentUpdate by default, assuming that your
-> component will produce the same results given the same props and state.
-
-note these are merged props (output from `mapStateToProps` and
-`mapDispatchToProps` merged with `ownProps`) which are compared:
-component is updated when either own property or calculated one
-(in `mapStateToProps`) is changed.
-
-merged props are compared in `connect()` using shallow comparison by default
-(<http://redux.js.org/docs/faq/ReactRedux.html#react-not-rerendering>):
-
-> React Redux tries to improve performance by doing shallow equality reference
-> checks on incoming props in shouldComponentUpdate, and if all references are
-> the same, returns false to skip actually updating your original component.
->
-> It's important to remember that whenever you update a nested value,
-> you must also return new copies of anything above it in your state tree.
-> If you have state.a.b.c.d, and you want to make an update to d,
-> you would also need to return new copies of c, b, a, and state.
-
-<https://github.com/reactjs/redux/issues/585#issuecomment-244184656>:
-
-> Typically problems arise when you write reducers in such a way that
-> the object identity of a piece of state doesn't change, while some
-> nested attribute within it does change. This is mutating state rather
-> than returning new state immutably, which causes react-redux to think
-> nothing changed, when in fact, something did change.
-
-see <https://github.com/reactjs/react-redux/blob/3.x/src/components/createConnect.js#L91>
-(implementation has changed now but behaviour is still the same).
-
-I want to state it once again: only prop references are compared!
-if you pass mutated property (say, some nested value is updated),
-it will be considered unchanged => return new objects from reducers
-even if changing some deeply nested value.
-
 ## tips
 
 ### don't share state between child reducers
 
-<https://stackoverflow.com/questions/35375810>
+1. <https://stackoverflow.com/questions/35375810>
 
 say, you want to calculate total count and save it as a state field in store.
 
@@ -322,7 +274,7 @@ say, you want to calculate total count and save it as a state field in store.
 
 ### don't dispatch in reducer
 
-<https://stackoverflow.com/questions/36730793/dispatch-action-in-reducer>
+1. <https://stackoverflow.com/questions/36730793/dispatch-action-in-reducer>
 
 > Dispatching an action within a reducer is an anti-pattern.
 > Reducer should be without side effects simply digesting the action payload
@@ -331,7 +283,7 @@ say, you want to calculate total count and save it as a state field in store.
 
 ### don't pass store to presentational components
 
-<https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0>
+1. <https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0>
 
 only container components are aware of store and provide data from store to
 presentational and other container components.
@@ -431,7 +383,7 @@ store it in component state instead.
 that is dispatching a thunk returns whatever thunk itself returns -
 not necessarily `Promise` object (even though it's highly recommended).
 
-#### handling of rejected promises in thunks
+#### handling rejected promises in thunks
 
 in thunk:
 
@@ -525,16 +477,17 @@ export default createStore(reducer, composeWithDevTools(
 
 ## troubleshooting
 
-### component is not re-rendered when it's connected
+### component is not re-rendered when it's `connect`ed
 
 see the section above about updating component when using react-redux.
 
-in my case connected component `GamerCheckedRow` is passed gamer
-and callback to calculate if gamer is checked or not. when gamer
-is clicked, `selected_user_ids` state property is updated - not
-gamer himself. but `selected_user_ids` state property is not passed
-as component property of `GamerCheckedRow` so its container thinks
-nothing has changed and doesn't let React re-render the component.
+in my case `connect`ed component `GamerCheckedRow` is passed gamer and
+callback to calculate if gamer is checked or not. when gamer is clicked,
+`selected_user_ids` state property of parent component is updated inside
+passed callback - not the gamer himself. but `selected_user_ids` state
+property is not passed as a property of `GamerCheckedRow` component so
+React thinks that props of `GamerCheckedRow` have not changed and doesn't
+re-render it (it would re-render if, say, `forceUpdate()` would be called).
 
 **solution**
 
@@ -553,20 +506,20 @@ there are 2 ways to solve this problem:
   @connect(mapStateToProps, null, null, {pure: false})
   ```
 
-- pass calculated `isChecked` property instead of callback to calculate it
+- pass calculated `isChecked` property instead of a callback to calculate it
 
   because the former changes when new gamers are selected while the latter
   doesn't - IMO this should be a prefered approach to solve the problem.
 
-### functions of connected component are not available from outside
+### functions of `connect`ed component are not available from outside
 
 1. <https://github.com/reactjs/react-redux/issues/475>
 
-say, when connected component is obtained via its `ref` property.
+say, when `connect`ed component is obtained via its `ref` property.
 
 **solution**
 
-connected component:
+`connect`ed component:
 
 ```javascript
 @connect(mapStateToProps, null, null, {withRef: true})

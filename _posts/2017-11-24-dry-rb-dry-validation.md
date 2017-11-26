@@ -28,8 +28,8 @@ DSL madness looks like black magic much more than any Rails gem does.
 frankly speaking, these principles of organization are not that hard to
 recognize but still I wish they were stated in documentation more clearly.
 
-
-## macro and block syntax
+macro and block syntax
+----------------------
 
 usually some hash is validated: hash key is passed to `required`
 method while predicates to validate hash value are specified in
@@ -57,7 +57,8 @@ one of 2 equivalent ways:
 
   this way will be referred to as `block syntax`.
 
-## macros
+macros
+------
 
 1. <http://dry-rb.org/gems/dry-validation/basics/macros/>
 
@@ -68,7 +69,8 @@ I've mentioned `value` method that looks like a macro - it just applies
 all specified predicates (joined by conjunction) without introducing any
 additional logic (e.g. `value(:int?) => { int? }`).
 
-## predicates with argument
+predicates with argument
+------------------------
 
 predicates might have arity of 0 (`filled?`) or 1 (`gt?`).
 
@@ -84,7 +86,8 @@ required(:foo) { type?(Integer) }
 NOTE: when using macro syntax, unary predicate is specified as a
       hash (while predicate of zero arity is specified as an atom).
 
-## `int?` vs. `type?(Integer)`
+`int?` vs. `type?(Integer)`
+---------------------------
 
 <http://dry-rb.org/gems/dry-validation/basics/built-in-predicates/>:
 
@@ -92,7 +95,8 @@ NOTE: when using macro syntax, unary predicate is specified as a
 
 NOTE: the predicates have different arity.
 
-## multiple predicates
+multiple predicates
+-------------------
 
 when custom predicate logic is required, using block syntax is the only
 option but if it's necessary just to AND multiple predicates together
@@ -105,7 +109,8 @@ required(:foo).value(:str?, min_size?: 3)
 required(:foo) { str? & min_size?(3) }
 ```
 
-## custom type
+custom type
+-----------
 
 1. <https://github.com/dry-rb/dry-validation/issues/161#issuecomment-232333065>
 2. <https://gist.github.com/AMHOL/0671986632fe734189c4c73e2a665f8b>

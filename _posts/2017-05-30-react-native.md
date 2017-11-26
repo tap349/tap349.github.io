@@ -67,30 +67,6 @@ native libraries can be linked:
   this method is for independent static libraries that ship with RN -
   they are not included by default so as not to impact binary size.
 
-## updating components
-
-component is updated when:
-
-- its internal state has changed
-
-  new state is set using `setState`
-
-- `forceUpdate` is triggered
-
-  say, when Redux store is changed
-
-- props have changed
-
-  parent component state changes -\>
-  it's re-rendered -\>
-  current component receives new props
-
-- props in `mapStateToProps` have changed
-
-  component is connected to Redux store (subscribed to Redux store updates) -\>
-  Redux store state has changed -\>
-  props in `mapStateToProps` have changed (as determined by shallow comparison)
-
 ## component naming conventions and file structure
 
 1. <https://github.com/react-toolbox/react-toolbox/issues/98>

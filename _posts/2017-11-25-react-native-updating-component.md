@@ -25,7 +25,7 @@ component's update is triggered when:
   either own props (say, when parent component passes new props to
   its child component as a result of its own state change) or props
   from `mapStateToProps()` and `mapDispatchToProps()` which are
-  merged into the component's props (when component is `connect`ed).
+  merged into the component's props (when component is connected).
 
 - new state is received
 
@@ -35,7 +35,7 @@ component's update is triggered when:
 
   1. <https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments>
 
-  `connect`ed component is subscribed to Redux store updates:
+  connected component is subscribed to Redux store updates:
   any time store is updated, `mapStateToProps()` is called.
 
 - `forceUpdate()` is called
@@ -99,16 +99,16 @@ NOTE: in all cases where state or props are compared, shallow comparison is
       (say, some nested value is updated), it'll be considered unchanged =\>
       always return new objects from reducers!
 
-### `connect`ed component vs. `PureComponent`
+### connected component vs. `PureComponent`
 
-`connect`ed component behaves just like `PureComponent`:
+connected component behaves just like `PureComponent`:
 
 - they both implement shallow prop and state comparison inside
   `shouldComponentUpdate()`
 - they are both re-rendered when `forceUpdate()` is called
   (since `shouldComponentUpdate()` is bypassed then)
 
-the only difference is that `connect`ed component is subscribed
+the only difference is that connected component is subscribed
 to Redux store updates while `PureComponent` is not (so update
 of the latter is triggered only when its props or state change).
 

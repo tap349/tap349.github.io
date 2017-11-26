@@ -477,11 +477,11 @@ export default createStore(reducer, composeWithDevTools(
 
 ## troubleshooting
 
-### component is not re-rendered when it's `connect`ed
+### component is not re-rendered when it's connected
 
 see the section above about updating component when using react-redux.
 
-in my case `connect`ed component `GamerCheckedRow` is passed gamer and
+in my case connected component `GamerCheckedRow` is passed gamer and
 callback to calculate if gamer is checked or not. when gamer is clicked,
 `selected_user_ids` state property of parent component is updated inside
 passed callback - not the gamer himself. but `selected_user_ids` state
@@ -511,15 +511,15 @@ there are 2 ways to solve this problem:
   because the former changes when new gamers are selected while the latter
   doesn't - IMO this should be a prefered approach to solve the problem.
 
-### functions of `connect`ed component are not available from outside
+### functions of connected component are not available from outside
 
 1. <https://github.com/reactjs/react-redux/issues/475>
 
-say, when `connect`ed component is obtained via its `ref` property.
+say, when connected component is obtained via its `ref` property.
 
 **solution**
 
-`connect`ed component:
+connected component:
 
 ```javascript
 @connect(mapStateToProps, null, null, {withRef: true})

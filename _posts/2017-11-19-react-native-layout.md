@@ -16,7 +16,12 @@ categories: [react-native, flexbox]
 style guide
 -----------
 
-- page should be divided into sections with the same `marginBottom`
+- page should be divided into sections
+
+  sections are `View`s - preferably with the same `marginBottom`
+  and (possibly) other properties which can be extracted into local
+  `section` style.
+
 - all standard and custom components (buttons, inputs, pickers,
   etc.) must have ZERO margins and external paddings
 

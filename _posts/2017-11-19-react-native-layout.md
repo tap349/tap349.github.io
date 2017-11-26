@@ -13,7 +13,25 @@ categories: [react-native, flexbox]
 {:toc}
 <hr>
 
+style guide
+-----------
+
+- page should be divided into sections with the same `marginBottom`
+  (`<View style={styles.section}></View>`)
+- all standard (`Text`) or custom components (buttons, inputs, pickers,
+  etc.) must have ZERO margins and external paddings
+
+  if it's necessary to set margins, wrap component into `View` or
+  `ScrollView` and style this container with required margins (say,
+  using `section` style) - components themselves must be responsible
+  for how they look INSIDE only without any assumptions about their
+  context.
+
+  consequently, using `containerStyle` component property to set
+  margins or external paddings is an antipattern.
+
 flexbox
+-------
 
 1. <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>
 2. <https://facebook.github.io/react-native/docs/layout-props.html#flex>

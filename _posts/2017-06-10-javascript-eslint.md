@@ -125,7 +125,7 @@ some rules worth mentioning are listed below:
     - always
   ```
 
-  see [JavaScript - StyleGuide]({% post_url 2017-06-10-javascript-style-guide %})
+  see [JavaScript - Style Guide]({% post_url 2017-06-10-javascript-style-guide %})
   for description (section `space after function name in function declaration`).
 
 ## configure syntastic

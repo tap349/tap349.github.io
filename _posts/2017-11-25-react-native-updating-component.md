@@ -33,10 +33,10 @@ component's update is triggered when:
 
 - Redux store is updated
 
-  1. <https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments>
+  <https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments>:
 
-  connected component is subscribed to Redux store updates:
-  any time store is updated, `mapStateToProps()` is called.
+  > connected component is subscribed to Redux store updates:
+  > any time the store is updated, `mapStateToProps()` will be called.
 
 - `forceUpdate()` is called
 
@@ -99,7 +99,7 @@ NOTE: in all cases where state or props are compared, shallow comparison is
       (say, some nested value is updated), it'll be considered unchanged =\>
       always return new objects from reducers!
 
-### connected component vs. `PureComponent`
+### connected component vs. PureComponent
 
 connected component behaves just like `PureComponent`:
 

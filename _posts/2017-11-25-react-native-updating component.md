@@ -112,6 +112,11 @@ the only difference is that `connect`ed component is subscribed
 to Redux store updates while `PureComponent` is not (so update
 of the latter is triggered only when its props or state change).
 
+render
+------
+
+`render()` is called every time `shouldComponentUpdate()` returns true.
+
 update DOM
 ----------
 

@@ -39,6 +39,7 @@ flexbox
 
 1. <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>
 2. <https://facebook.github.io/react-native/docs/layout-props.html#flex>
+3. <https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af>
 
 all RN components implicitly have `display: flex`.
 
@@ -60,7 +61,10 @@ padding and border are not included in component's width and height).
   - `1` - component is flexible, sized proportional to specified flex value
     (can be \> 1)
 
-- `height`/`width`
+- `alignItems`
 
-  if container has fixed height or width, its children occupy all space
-  in that direction.
+  default value is `stretch` so *items fill all available space along the
+  cross-axis by default*!
+
+  if it's necessary to fill all available space along the main axis,
+  use `flexGrow: 1` (or more general `flex: 1`).

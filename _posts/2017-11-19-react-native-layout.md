@@ -59,3 +59,8 @@ padding and border are not included in component's width and height).
     can be shrinked to its `minWidth` and `minHeight`
   - `1` - component is flexible, sized proportional to specified flex value
     (can be \> 1)
+
+- `height`/`width`
+
+  if container has fixed height or width, its children occupy all space
+  in that direction.

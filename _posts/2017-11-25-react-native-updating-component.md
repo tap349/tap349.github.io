@@ -58,11 +58,12 @@ comparison is made inside `shouldComponentUpdate()` which is
   > compares the objects. If these contain complex data structures,
   > it may produce false-negatives for deeper differences.
 
-  NOTE: when using `React.PureComponent`, performance might even degrade
-        a little bit if some object that is passed as a property value is
-        created in place =\> `shouldComponentUpdate()` will always return
-        `true` but still it has to iterate over all keys of both props and
-        nextProps on each update.
+  <https://hackernoon.com/react-purecomponent-considered-harmful-8155b5c1d4bc>:
+
+  when using `React.PureComponent`, performance might even degrade a little
+  bit if some object that is passed as property value is created in place =\>
+  `shouldComponentUpdate()` will always return `true` but still it has to
+  iterate over all keys of both props and nextProps on each update.
 
 - implemented by `connect()` with shallow prop and state comparison
 

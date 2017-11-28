@@ -154,3 +154,12 @@ console.log(picked); // {a: 5, c: 7}
 ```javascript
 [...Array(100)]
 ```
+
+## [how to] create array with the same element repeated multiple times
+
+1. <https://stackoverflow.com/a/34104348/3632318>
+
+```javascript
+> Array(7).fill(false)
+< [false, false, false, false, false, false, false]
+```

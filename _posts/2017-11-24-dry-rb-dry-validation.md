@@ -83,8 +83,8 @@ required(:foo).value(type?: Integer)
 required(:foo) { type?(Integer) }
 ```
 
-NOTE: when using macro syntax, unary predicate is specified as a
-      hash (while predicate of zero arity is specified as an atom).
+NOTE: when using macro syntax, unary predicate is specified as
+      a hash (predicate of zero arity is specified as an atom).
 
 `int?` vs. `type?(Integer)`
 ---------------------------

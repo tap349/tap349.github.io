@@ -138,6 +138,7 @@ nested arrays
 -------------
 
 1. <http://dry-rb.org/gems/dry-validation/nested-data/>
+2. <https://github.com/dry-rb/dry-validation/issues/175>
 
 array can be empty but not `nil`:
 
@@ -148,6 +149,8 @@ required(:ids).each(:int?)
 array cannot be empty:
 
 ```ruby
+required(:ids).filled { each(:int?) }
+# NOTE: this doesn't apply `each` predicates:
 required(:ids).filled.each(:int?)
 ```
 

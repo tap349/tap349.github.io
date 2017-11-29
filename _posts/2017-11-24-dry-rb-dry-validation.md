@@ -133,3 +133,26 @@ schema = Dry::Validation.Schema do
   required(:user).filled(type?: User)
 end
 ```
+
+nested arrays
+-------------
+
+1. <http://dry-rb.org/gems/dry-validation/nested-data/>
+
+array can be empty but not `nil`:
+
+```ruby
+required(:ids).each(:int?)
+```
+
+array cannot be empty:
+
+```ruby
+required(:ids).filled.each(:int?)
+```
+
+multiple predicates for each array value:
+
+```ruby
+required(:ids).each(:int?, gteq?: 0)
+```

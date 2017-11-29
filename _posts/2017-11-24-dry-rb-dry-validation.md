@@ -48,8 +48,8 @@ one of 2 equivalent ways:
 
 - by calling them as methods
 
- predicate methods are called inside block passed to
- `required` method (at least they look like method calls):
+  predicate methods are called inside block passed to
+  `required` method (at least they look like method calls):
 
   ```ruby
   required(:foo) { int? }

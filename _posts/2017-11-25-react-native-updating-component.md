@@ -27,6 +27,12 @@ component's update is triggered when:
   from `mapStateToProps()` and `mapDispatchToProps()` which are
   merged into the component's props (when component is connected).
 
+  NOTE: when component is created inside navigator scene, it longer
+        receives new props which are usually passed as route params
+        unless that scene is rendered again explicitly (say, when
+        pushing its route into the navigator stack). in other words,
+        chain of updates doesn't survive navigator transitions.
+
 - new state is received
 
   `setState()` is called inside component.

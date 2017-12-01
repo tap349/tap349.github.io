@@ -420,17 +420,6 @@ when `TouchableOpacity` wraps `TextInput` and the latter is pressed,
 </TouchableOpacity>
 ```
 
-## error: http error: Invalid token (401)
-
-this error is related to `react-native-sentry` package.
-
-**solution**
-
-TODO
-
-even though build fails, this is the last build step so application is
-still built and launched in emulator => ignore this error for now.
-
 ## `fontWeight={600}` is not applied for TextInput
 
 error occurs if Gill Sans font is used only - setting font weight
@@ -456,3 +445,9 @@ device system log:
 Sentry.config(<sentry_endpoint>);
 if (!__DEV__) { Sentry.install(); }
 ```
+
+## ScrollView content is partially hidden below when scrolled to the bottom
+
+**solution**
+
+make sure that all `ScrollView` parents have `flex: 1`.

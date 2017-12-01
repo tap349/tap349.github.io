@@ -68,3 +68,8 @@ padding and border are not included in component's width and height).
 
   if it's necessary to fill all available space along the main axis,
   use `flexGrow: 1` (or more general `flex: 1`).
+
+- `lineHeight`
+
+  when setting `lineHeight`, set `height` to the same value as well:
+  say, after setting `lineHeight: 20` the height of `TextInput` is 17.5.

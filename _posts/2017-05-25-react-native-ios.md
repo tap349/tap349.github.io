@@ -148,6 +148,10 @@ iPhone 4s model is not available by default - add it manually:
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
 - create simulator for iPhone 4s using downloaded runtime
 
+### delete all application data
+
+remove application inside emulator and install it again.
+
 ## debugging
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>

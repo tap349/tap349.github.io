@@ -82,5 +82,6 @@ padding and border are not included in component's width and height).
 
   **UPDATE**
 
-  first of all, get it clear if the problem with invalid text component
-  height exists on real Android device before using hacks mentioned above.
+  get it clear if the problem with invalid text component height exists
+  on real Android device before using hacks mentioned above - maybe this
+  is an emulator-specific issue.

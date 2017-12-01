@@ -74,8 +74,13 @@ padding and border are not included in component's width and height).
   when setting `lineHeight`, set `height` to the same value as well:
   say, after setting `lineHeight: 20` the height of `TextInput` is 17.5.
 
-  it's not always possible though: say, when text component spans multiple
-  lines and it's impossible to set fixed height. in this case I fine-tune
-  `lineHeight` so that (primarily for Android):
+  it's not always possible though: it's impossible to set fixed
+  height when text component spans multiple lines. in this case I
+  fine-tune `lineHeight` so that (primarily for Android):
 
   `actual_height` = `number_of_lines` x `original_line_height`
+
+  **UPDATE**
+
+  first of all, get it clear if the problem with invalid text component
+  height exists on real Android device before using hacks mentioned above.

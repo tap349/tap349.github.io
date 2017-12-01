@@ -74,5 +74,8 @@ padding and border are not included in component's width and height).
   when setting `lineHeight`, set `height` to the same value as well:
   say, after setting `lineHeight: 20` the height of `TextInput` is 17.5.
 
-  it's not always possible though: say, when text component spans
-  multiple lines and it's impossible to set fixed height.
+  it's not always possible though: say, when text component spans multiple
+  lines and it's impossible to set fixed height. in this case I fine-tune
+  `lineHeight` so that (primarily for Android):
+
+  `actual_height` = `number_of_lines` x `original_line_height`

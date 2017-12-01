@@ -254,3 +254,19 @@ a constant declare and export it in separate statements:
 const foo = 123;
 export default foo;
 ```
+
+exports can be either named or default, named exports are imported
+as a single object (usually using destructuring):
+
+```javascript
+// export
+
+export const foo = () => { console.log('foo') };
+const bar = () => { console.log('bar'); }
+
+export {bar};
+
+// import
+
+import {foo, bar} from 'module.js';
+```

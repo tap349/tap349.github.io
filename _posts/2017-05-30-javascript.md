@@ -255,8 +255,8 @@ const foo = 123;
 export default foo;
 ```
 
-exports can be either named or default, named exports are imported
-as a single object (usually using destructuring):
+exports can be either named or default, named exports are
+imported as a single object (usually using destructuring):
 
 ```javascript
 // export

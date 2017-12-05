@@ -77,3 +77,14 @@ class Board extends React.Component {
 2. <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
 
 prefer single quotes over double ones.
+
+## parentheses around parameters of arrow functions
+
+1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions>
+
+don't wrap single parameter of arrow function in parentheses:
+
+```javascript
+v => v + 1
+(v, i) => v + 1
+```

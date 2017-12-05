@@ -14,7 +14,8 @@ categories: [postgresql, rails]
 
 <hr>
 
-## psql tips
+psql tips
+---------
 
 - <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>
 
@@ -84,7 +85,8 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   > CREATE EXTENSION pg_trgm;
   ```
 
-## query optimization
+query optimization
+------------------
 
 <https://robots.thoughtbot.com/why-postgres-wont-always-use-an-index>
 
@@ -175,7 +177,8 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   CREATE INDEX teams_on_is_public_idx ON teams (is_public);
   ```
 
-## backup
+backup
+------
 
 ### using `pg_dump` (data only)
 
@@ -219,7 +222,8 @@ $ gunzip PostgreSQL.sql.gz
 $ psql -U username -f ./PostgreSQL.sql database
 ```
 
-## [how to] remove all versions of PostgreSQL on Ubuntu
+[how to] remove all versions of PostgreSQL on Ubuntu
+----------------------------------------------------
 
 <https://askubuntu.com/a/32735>:
 

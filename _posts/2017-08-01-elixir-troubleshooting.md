@@ -13,7 +13,8 @@ categories: [elixir, phoenix]
 {:toc}
 <hr>
 
-## (FunctionClauseError) no function clause matching in Plug.Conn.put_resp_header/3
+(FunctionClauseError) no function clause matching in Plug.Conn.put_resp_header/3
+--------------------------------------------------------------------------------
 
 1. <https://github.com/ueberauth/guardian/issues/196>
 
@@ -26,7 +27,8 @@ conn
 # ...
 ```
 
-## Slogan: Kernel pid terminated (application_controller)
+Slogan: Kernel pid terminated (application_controller)
+------------------------------------------------------
 
 _/home/billing/prod/billing/erl_crash.dump_ on production host:
 
@@ -41,7 +43,8 @@ Slogan: Kernel pid terminated (application_controller) ({application_start_failu
 in most cases it means that `PORT` environment variable is not set - examine
 `~/.profile` and `/etc/systemd/system/phoenix_billing.service` files.
 
-## Node is not running! / Node not responding to pings.
+Node is not running! / Node not responding to pings.
+----------------------------------------------------
 
 restarting either `prod` or `stage` application leads to another
 one being unreachable (sometimes restarting `prod` application
@@ -65,7 +68,8 @@ longer registered in EPMD - see `troubleshooting` section of
 [Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %})
 for explanation of how this could happen and how to fix it.
 
-## [phoenix] The task "phx.new" could not be found
+[phoenix] The task "phx.new" could not be found
+-----------------------------------------------
 
 ```sh
 $ mix phx.new billing --no-brunch
@@ -83,7 +87,8 @@ Are you sure you want to install "https://github.com/phoenixframework/archives/r
 * creating /Users/tap/.asdf/installs/elixir/1.5.1/.mix/archives/phx_new
 ```
 
-## [phoenix] all styles are gone
+[phoenix] all styles are gone
+-----------------------------
 
 **solution**
 
@@ -94,7 +99,8 @@ or copy from newly generated project:
 $ mix phx.new hello --no-brunch
 ```
 
-## [edeliver] Host key verification failed
+[edeliver] Host key verification failed
+---------------------------------------
 
 ```sh
 $ mix deploy.stage
@@ -137,7 +143,8 @@ defp deps do
 end
 ```
 
-## [distillery] "$@" -- "${1+$ARGS}"
+[distillery] "$@" -- "${1+$ARGS}"
+---------------------------------
 
 systemd journal:
 
@@ -153,7 +160,8 @@ localhost billing[1234]: "$@" -- "${1+$ARGS}"
 > It's put there when reattaching stdout to the tty after running post-start
 > hooks, so it's normal. I'll see if I can silence it, but it's expected.
 
-## erl_child_setup closed
+erl_child_setup closed
+----------------------
 
 sometimes Erlang crash dump is generated when stopping application.
 
@@ -190,7 +198,8 @@ NIFs used by Guardian package.
 however this crash doesn't affect application in any way so I guess it can
 be safely ignored.
 
-## (ArgumentError) argument error
+(ArgumentError) argument error
+------------------------------
 
 errors occurs when trying to insert into ETS table:
 

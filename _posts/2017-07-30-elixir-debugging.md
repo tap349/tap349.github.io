@@ -13,7 +13,8 @@ categories: [elixir]
 {:toc}
 <hr>
 
-## using `IEx.pry` (= `binding.pry` in Ruby)
+using `IEx.pry` (= `binding.pry` in Ruby)
+-----------------------------------------
 
 1. <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
 2. <https://stackoverflow.com/questions/29671156/pry-while-testing>
@@ -39,7 +40,8 @@ categories: [elixir]
 
 - finish pry session by calling `respawn()`
 
-## debugging dependencies
+debugging dependencies
+----------------------
 
 sometimes it might be necessary to debug or temporarily change external
 dependencies stored in _deps/_ directory:
@@ -50,7 +52,8 @@ $ mix deps.compile detergentex
 $ mix -S iex
 ```
 
-## information about endpoint
+information about endpoint
+--------------------------
 
 1. <https://elixirforum.com/t/how-can-i-see-what-port-a-phoenix-app-in-production-is-actually-trying-to-use/5160/5>
 
@@ -60,7 +63,8 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
 ```
 
-## remote debugging
+remote debugging
+----------------
 
 1. <http://blog.plataformatec.com.br/2016/05/tracing-and-observing-your-remote-node/>
 2. <https://gist.github.com/pnc/9e957e17d4f9c6c81294>

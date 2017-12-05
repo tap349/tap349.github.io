@@ -15,7 +15,8 @@ categories: [elixir]
 
 1. <https://medium.com/@andreichernykh/elixir-a-bit-about-macros-behaviours-84fd3de1595d>
 
-## unquoting expressions
+unquoting expressions
+---------------------
 
 1. <https://elixirforum.com/t/how-to-quote-regular-expression/6311>
 
@@ -54,7 +55,8 @@ iex> Code.eval_quoted(quote do: "123" == unquote(Macro.escape(%{a: 1})))
 > macro receives quoted expressions, injects them into the quote,
 > and finally returns another quoted expression.
 
-## functions vs. macros
+functions vs. macros
+--------------------
 
 <https://elixir-lang.org/getting-started/meta/macros.html>:
 
@@ -65,7 +67,8 @@ iex> Code.eval_quoted(quote do: "123" == unquote(Macro.escape(%{a: 1})))
 that is most likely macro arguments are quoted with `quote` before being
 passed to macro itself.
 
-## `quote` vs. `Macro.escape/2`
+quote vs. Macro.escape/2
+----------------------------
 
 1. <https://elixirforum.com/t/understand-macro-escape/405/2>
 

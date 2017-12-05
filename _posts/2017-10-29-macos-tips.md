@@ -13,7 +13,8 @@ categories: [macos]
 {:toc}
 <hr>
 
-## open application in terminal
+open application in terminal
+----------------------------
 
 - in the background
 

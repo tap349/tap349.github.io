@@ -38,7 +38,8 @@ EPMD is like a DNS server for Erlang nodes.
 NOTE: Elixir application (Erlang node) can respond to application
       commands (ping/start/stop) iff its name is registered in EPMD.
 
-## starting
+starting
+--------
 
 EPMD can be started:
 
@@ -62,7 +63,8 @@ EPMD can be started:
   EPMD is usually started in the foreground either in systemd
   service unit or manually in the shell for debugging purposes.
 
-## debugging using EPMD
+debugging using EPMD
+--------------------
 
 - kill running EPMD process and start in the foreground for debugging
 
@@ -80,7 +82,8 @@ EPMD can be started:
   name billing_prod at port 30183
   ```
 
-## troubleshooting
+troubleshooting
+---------------
 
 ### node is unregistered right after it's registered
 

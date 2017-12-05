@@ -13,7 +13,8 @@ categories: [chef]
 {:toc}
 <hr>
 
-## knife-solo and knife-zero are installed at the same time
+knife-solo and knife-zero are installed at the same time
+--------------------------------------------------------
 
 `knife` executables from these gems might conflict with each other since
 `knife-solo` is installed as ordinary gem (`gem install knife-solo` ->
@@ -23,7 +24,8 @@ _~/.rbenv/shims/knife_) while `knife-zero` is installed using ChefDK
 so only one of them can be available at any given time -
 see [rbenv]({% post_url 2016-03-30-rbenv %}) for details.
 
-## Doing old-style registration with the validation key at
+Doing old-style registration with the validation key at
+-------------------------------------------------------
 
 ```sh
 $ knife zero bootstrap builder --node-name builder
@@ -39,7 +41,8 @@ Delete your validation key in order to use your user credentials instead
 > This warning message is not effect Knife-Zero's behavior.
 > Because authrization of Chef-Zero is dummy.
 
-## ArgumentErrorwrong number of arguments (given 1, expected 2)
+ArgumentErrorwrong number of arguments (given 1, expected 2)
+------------------------------------------------------------
 
 ```sh
 $ knife zero bootstrap billing --node-name billing
@@ -58,7 +61,8 @@ $ brew cask reinstall chefdk
 $ chef gem install knife-zero
 ```
 
-## There is a dependency conflict, but the solver could not determine the precise cause in the time allotted
+There is a dependency conflict, but the solver could not determine the precise cause in the time allotted
+---------------------------------------------------------------------------------------------------------
 
 ```sh
 $ berks vendor
@@ -73,7 +77,8 @@ There is a dependency conflict, but the solver could not determine the precise c
 error occurs when you add non-existing custom cookbook as dependency in your
 application cookbook's _metadata.rb_ file - so just remove that dependency.
 
-## undefined method `set' for Chef::Platform:Class
+undefined method `set' for Chef::Platform:Class
+-----------------------------------------------
 
 ```
 $ knife zero converge 'name:billing'
@@ -128,7 +133,8 @@ $ rm -rf berks-cookbooks/
 $ berks vendor
 ```
 
-## uninitialized constant Chef::Resource::PostgresqlUser
+uninitialized constant Chef::Resource::PostgresqlUser
+-----------------------------------------------------
 
 ```
 $ knife zero converge 'name:billing'
@@ -171,7 +177,8 @@ _providers/user.rb_ (`chef-postgresql` cookbook):
 
 make the same changes in _providers/database.rb_ and _providers/extension.rb_.
 
-## undefined method `[]' for nil:NilClass (nginx/recipes/ohai_plugin.rb:27)
+undefined method `[]' for nil:NilClass (nginx/recipes/ohai_plugin.rb:27)
+------------------------------------------------------------------------
 
 ```
 $ knife zero converge 'name:billing'
@@ -199,7 +206,8 @@ Cookbook Trace:
 
 use [chef_nginx](https://github.com/chef-cookbooks/chef_nginx) cookbook instead.
 
-## `berks install` doesn't install dependency
+`berks install` doesn't install dependency
+------------------------------------------
 
 _cookbooks/phoenix_nginx/metadata.rb_:
 
@@ -214,7 +222,8 @@ in Chef supermarket.
 
 delete _Berksfile.lock_ and run `berks install` again.
 
-## Failed to restart nginx.service: Unit nginx.service not found.
+Failed to restart nginx.service: Unit nginx.service not found.
+--------------------------------------------------------------
 
 ```
 $ knife zero converge 'name:billing'

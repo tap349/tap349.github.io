@@ -17,7 +17,8 @@ categories: [phoenix, ecto]
 - <https://hexdocs.pm/ecto/getting-started.html>
 - <https://hexdocs.pm/ecto/Ecto.html>
 
-## migrations
+migrations
+----------
 
 NOTE: there is nothing like _schema.rb_ file in Phoenix project -
       database schema is not dumped to file after running migrations.
@@ -28,9 +29,10 @@ NOTE: there is nothing like _schema.rb_ file in Phoenix project -
 primitive column types that can be used in migrations:
 [Types and casting](https://hexdocs.pm/ecto/Ecto.Schema.html#module-types-and-casting).
 
-## repositories
+repositories
+------------
 
-<https://hexdocs.pm/phoenix/ecto.html>
+<https://hexdocs.pm/phoenix/ecto.html>:
 
 > Our repo (MyApp.Repo) has three main tasks:
 >
@@ -38,14 +40,16 @@ primitive column types that can be used in migrations:
 > - to set the otp_app name equal to our application name
 > - to initialize the options passed to the database adapter in init/2
 
-## schemas
+schemas
+-------
 
 <https://hexdocs.pm/ecto/Ecto.Schema.html>
 
-## changesets
+changesets
+----------
 
-- <https://hexdocs.pm/phoenix/ecto.html>
-- <http://cultofmetatron.io/2017/04/22/thinking-in-ecto---schemas-and-changesets/>
+1. <https://hexdocs.pm/phoenix/ecto.html>
+2. <http://cultofmetatron.io/2017/04/22/thinking-in-ecto---schemas-and-changesets/>
 
 ```elixir
 def changeset(%User{} = user, attrs) do
@@ -61,7 +65,8 @@ if you communicate with `Repo` directly by passing `User` struct instead
 of changeset all validations defined in changeset are bypassed of course -
 error will be raised only if underlying data store returns error.
 
-## associations
+associations
+------------
 
 ### associations vs. FK columns
 
@@ -247,7 +252,8 @@ there is an example of schema in which both `put_assoc` and `Repo` are used.
   end
   ```
 
-## models vs. changesets
+models vs. changesets
+---------------------
 
 <http://blog.tokafish.com/rails-to-phoenix-getting-started-with-ecto/>:
 
@@ -258,7 +264,8 @@ there is an example of schema in which both `put_assoc` and `Repo` are used.
 
 models have been deprecated in Phoenix 1.3 - they are called just schemas now.
 
-## `Ecto.Multi`
+Ecto.Multi
+----------
 
 - <https://hexdocs.pm/ecto/Ecto.Multi.html>
 - <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>
@@ -313,7 +320,8 @@ it's not possible to execute `Ecto.Multi` operations outside of transaction -
 use [with](https://hexdocs.pm/elixir/master/Kernel.SpecialForms.html#with/1)
 statement instead.
 
-## get query SQL
+get query SQL
+-------------
 
 <https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
 
@@ -325,7 +333,8 @@ statement instead.
 {"SELECT u0.\"id\", u0.\"name\" FROM \"users\" AS u0", []}
 ```
 
-## [Programming Phoenix] prefixes
+[Programming Phoenix] prefixes
+------------------------------
 
 NOTE: it's not possible to perform joins across prefixes -
 data in different prefixes must be completely isolated.

@@ -32,7 +32,8 @@ official documentation:
 NOTE: all paths on production host are specified relative to
       application directory located at _$DELIVER_TO/\<app\_name\>/_.
 
-## configuration
+configuration
+-------------
 
 all edeliver hooks:
 <https://github.com/edeliver/edeliver/wiki/Run-additional-build-tasks>.
@@ -415,7 +416,8 @@ NOTE: application must be restarted after changing EVM flags.
     don't restart application automatically by systemd when it crashes
     (application is meant to be restarted by supervisor - not systemd).
 
-## deployment
+deployment
+----------
 
 ### install and configure distillery
 
@@ -566,7 +568,8 @@ $ mix edeliver migrate production down --version=<previous_migration_version>
 $ ssh devops@billing sudo systemctl restart billing_prod
 ```
 
-## management
+management
+----------
 
 ### tasks and commands
 
@@ -652,7 +655,8 @@ $ bin/billing stop
 $ bin/billing command Elixir.Release.Tasks migrate
 ```
 
-## locations on production host
+locations on production host
+----------------------------
 
 - _bin/\<app\_name\>_ - main application script
 - _releases/start\_erl.data_ - file with current release version
@@ -665,7 +669,8 @@ $ bin/billing command Elixir.Release.Tasks migrate
   release config is compiled from all related configs in _config/_ directory
   (_config/config.exs_, _config/prod.exs_ and linked _config/prod.secret.exs_).
 
-## logging
+logging
+-------
 
 generally Elixir application log is written to EVM log file:
 
@@ -821,7 +826,8 @@ _config/prod.exs_:
 config :logger, :console, format: "$metadata[$level] $message\n"
 ```
 
-## hot upgrades
+hot upgrades
+------------
 
 <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>:
 
@@ -837,7 +843,8 @@ config :logger, :console, format: "$metadata[$level] $message\n"
 > running stop, extracting the new release tarball over the top of the old,
 > and running start to boot the release.
 
-## testing production release locally
+testing production release locally
+----------------------------------
 
 1. <https://hexdocs.pm/distillery/terminology.html>
 2. <https://hexdocs.pm/distillery/walkthrough.html>

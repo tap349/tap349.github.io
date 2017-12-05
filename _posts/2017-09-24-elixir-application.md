@@ -15,7 +15,8 @@ categories: [elixir]
 
 1. <https://hexdocs.pm/elixir/Application.html>
 
-## load paths
+load paths
+----------
 
 1. <https://hexdocs.pm/mix/Mix.Tasks.Compile.Elixir.html>
 2. <https://hexdocs.pm/elixir/Code.html#require_file/2>
@@ -37,7 +38,8 @@ Code.require_file("benchmarks/benchmark.exs")
 NOTE: when `relative_to` argument is not passed, all paths
       are considered to be relative to project root directory.
 
-## evaluate or compile
+evaluate or compile
+-------------------
 
 1. <https://github.com/elixir-lang/elixir/issues/5073>
 
@@ -87,7 +89,8 @@ in these cases bytecode modules are not written to disk - only loaded in memory:
 
   compiles file and loads it into IEx.
 
-## run
+run
+---
 
 1. <https://stackoverflow.com/a/30688873/3632318>
 
@@ -110,7 +113,8 @@ NOTE: `run` is a default Mix task - specify it explicitly
 - `iex -S mix phx.server` - start IEx and run your Phoenix app inside
   (looks like `rails console` inside `rails server`)
 
-## start/stop in IEx
+start/stop in IEx
+-----------------
 
 ```sh
 iex> Application.start(:neko)

@@ -15,7 +15,8 @@ categories: [react-native]
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>
 
-## React Developer Tools
+React Developer Tools
+---------------------
 
 1. <https://facebook.github.io/react-native/docs/debugging.html#react-developer-tools>
 

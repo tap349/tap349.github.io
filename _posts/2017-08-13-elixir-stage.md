@@ -17,7 +17,8 @@ NOTE: everywhere except for edeliver, environments have short names
       (`prod`/`stage`) including Phoenix application itself, Chef,
       names of secret files, Nginx sites and systemd service units.
 
-## configuration
+configuration
+-------------
 
 ### Chef
 
@@ -140,7 +141,8 @@ _.deliver/config_:
 + }
 ```
 
-## deployment
+deployment
+----------
 
 ### build and deploy release
 
@@ -173,7 +175,8 @@ $ mix edeliver migrate staging
 $ mix edeliver ping staging
 ```
 
-## alternative solutions
+alternative solutions
+---------------------
 
 <https://stackoverflow.com/questions/38818446>:
 
@@ -189,7 +192,8 @@ $ mix edeliver ping staging
 idea looks brilliant but this solution works only if you have separate
 staging and production hosts (which is not my case).
 
-## troubleshooting
+troubleshooting
+---------------
 
 ### Your connection is not private
 

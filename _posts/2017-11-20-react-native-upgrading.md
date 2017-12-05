@@ -13,7 +13,8 @@ categories: [react-native]
 {:toc}
 <hr>
 
-## post-upgrade instructions
+post-upgrade instructions
+-------------------------
 
 ```sh
 $ rm -rf node_modules/

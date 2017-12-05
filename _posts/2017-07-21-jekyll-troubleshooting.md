@@ -11,7 +11,8 @@ categories: [jekyll]
 
 - <http://downtothewire.io/2015/08/15/configuring-jekyll-for-user-and-project-github-pages/>
 
-## all styles are gone
+all styles are gone
+-------------------
 
 in Chrome Console:
 
@@ -43,7 +44,8 @@ _\_includes/head.html_:
 ```
 {% endraw %}
 
-## Page build failed
+Page build failed
+-----------------
 
 in email from GitHub:
 

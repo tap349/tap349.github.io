@@ -18,7 +18,8 @@ categories: [elixir]
 
 NOTE: the classification below is purely mine.
 
-## usage
+usage
+-----
 
 in all cases specific CM is usually fetched from environment
 at compile time (using `Application.get_env/3`):
@@ -34,7 +35,8 @@ at compile time (using `Application.get_env/3`):
   end
   ```
 
-## behaviour module (BM)
+behaviour module (BM)
+---------------------
 
 - pure BM
 
@@ -77,7 +79,8 @@ at compile time (using `Application.get_env/3`):
   end
   ```
 
-## callback module (CM)
+callback module (CM)
+--------------------
 
 - pure CM
 

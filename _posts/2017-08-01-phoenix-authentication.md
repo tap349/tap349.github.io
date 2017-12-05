@@ -13,7 +13,8 @@ categories: [phoenix]
 {:toc}
 <hr>
 
-## API
+API
+---
 
 ### manual implementation
 
@@ -31,7 +32,8 @@ categories: [phoenix]
 1. <https://github.com/ueberauth/guardian>
 2. <http://blog.overstuffedgorilla.com/simple-guardian-api-authentication/>
 
-## basic authentication
+basic authentication
+--------------------
 
 1. <http://radekmolenda.github.io/2016/02/26/phoenix-basic-auth-exercise.html>
 2. <https://medium.com/@paulfedory/basic-authentication-in-your-phoenix-app-fa24e57baa8>

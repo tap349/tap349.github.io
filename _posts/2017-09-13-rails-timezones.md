@@ -13,11 +13,12 @@ categories: [rails]
 {:toc}
 <hr>
 
-- parse datetime string wo timezone in specified timezone
+[how to] parse datetime string wo timezone in specified timezone
+----------------------------------------------------------------
 
-  ```ruby
-  > ActiveSupport::TimeZone['Europe/Moscow'].parse('2017-09-13 13:50:00')
-  Wed, 13 Sep 2017 13:50:00 MSK +03:00
-  > _.to_s(:db)
-  "2017-09-13 10:50:00"
-  ```
+```ruby
+> ActiveSupport::TimeZone['Europe/Moscow'].parse('2017-09-13 13:50:00')
+Wed, 13 Sep 2017 13:50:00 MSK +03:00
+> _.to_s(:db)
+"2017-09-13 10:50:00"
+```

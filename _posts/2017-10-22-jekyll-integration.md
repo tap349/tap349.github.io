@@ -13,7 +13,8 @@ categories: [jekyll]
 {:toc}
 <hr>
 
-## Disqus
+Disqus
+------
 
 1. <http://sgeos.github.io/jekyll/disqus/2016/02/14/adding-disqus-to-a-jekyll-blog.html>
 2. <https://tap349-blog.disqus.com/admin/settings/jekyll/>
@@ -75,7 +76,8 @@ my instructions:
   post template in Rake task (used to generate new posts)
   and to each already existing post manually.
 
-## Google Analytics
+Google Analytics
+----------------
 
 1. <https://desiredpersona.com/google-analytics-jekyll/>
 

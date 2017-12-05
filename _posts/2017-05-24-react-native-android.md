@@ -529,9 +529,16 @@ there are 2 ways to solve the problem:
   $ ln -s $ANDROID_HOME ~/Library/Android/sdk
   ````
 
+  or edit _android/local.properties_ directly:
+
+  ```
+  # export ANDROID_HOME=/usr/local/share/android-sdk
+  sdk.dir=/usr/local/share/android-sdk
+  ```
+
 - just comment out or remove that line
 
-  RN will search for Androd SDK in `$ANDROID_HOME` then.
+  RN will search for Android SDK in `$ANDROID_HOME` then.
 
 ### Could not get unknown property 'MYAPP_RELEASE_STORE_FILE'
 

@@ -171,6 +171,15 @@ unlike `Dry::Validation.Schema`, `Dry::Validation.Form`:
 - coerces values
 - coerces empty strings to `nil`
 
+nested data is validated in the same way -
+even though nested hash is specified with `schema` macro:
+
+```ruby
+required(:quiz).schema do
+  required(:question1).filled(:str?)
+end
+```
+
 NOTE: `Dry::Validation.Schema` doesn't try to convert string keys
       into atoms and vice versa while `Dry::Validation.Form` performs
       conversion in one direction only: string -> atom.

@@ -135,7 +135,7 @@ update DOM
 
 1. <https://medium.com/@gethylgeorge/how-virtual-dom-and-diffing-works-in-react-6fc805f9f84e>
 
-1. virtual DOM is updated
+1. the virtual DOM is updated
 2. diffing algorithm is run
 3. the actual DOM is updated
 

@@ -137,8 +137,8 @@ update DOM
 
 1. virtual DOM is updated
 2. diffing algorithm is run
-3. actual DOM is updated
+3. the actual DOM is updated
 
 so even if you call `forceUpdate()`, say, on every Redux store update, it
-won't force update actual DOM every time unless markup has really changed
+won't force update the actual DOM every time unless markup has really changed
 (and only the parts that correspond to changed markup will get updated).

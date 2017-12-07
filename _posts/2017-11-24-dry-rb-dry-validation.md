@@ -159,3 +159,18 @@ multiple predicates for each array value:
 ```ruby
 required(:ids).each(:int?, gteq?: 0)
 ```
+
+Dry::Validation.Form
+--------------------
+
+1. <http://dry-rb.org/gems/dry-validation/forms/>
+
+unlike `Dry::Validation.Schema`, `Dry::Validation.Form`:
+
+- symbolizes keys
+- coerces values
+- coerces empty strings to `nil`
+
+NOTE: `Dry::Validation.Schema` doesn't try to convert string keys
+      into atoms and vice versa while `Dry::Validation.Form` performs
+      conversion in one direction only: string -> atom.

@@ -28,3 +28,12 @@ param :user, Types::User
 ```ruby
 param :user, Types.Instance(User)
 ```
+
+optional values
+---------------
+
+<http://dry-rb.org/gems/dry-types/optional-values/>:
+
+```ruby
+option :game, Types.Instance(Game).optional
+```

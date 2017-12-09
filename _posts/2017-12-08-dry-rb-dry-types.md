@@ -35,5 +35,6 @@ optional values
 <http://dry-rb.org/gems/dry-types/optional-values/>:
 
 ```ruby
+# `game` option can be nil
 option :game, Types.Instance(Game).optional
 ```

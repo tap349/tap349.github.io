@@ -63,6 +63,15 @@ iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint.Server
 iex(billing@127.0.0.1)1> :sys.get_state BillingWeb.Endpoint
 ```
 
+memory consumption
+------------------
+
+```elixir
+IO.puts("before foo: " <> inspect(:erlang.memory(:total)))
+foo()
+IO.puts("after foo: " <> inspect(:erlang.memory(:total)))
+```
+
 remote debugging
 ----------------
 

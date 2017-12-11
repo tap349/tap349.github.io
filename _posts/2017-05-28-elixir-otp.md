@@ -131,7 +131,7 @@ child spec map (3) from the given module using its `child_spec/1`
 (also passing specified start argument in case of tuple (2)).
 
 only 1 start argument can be passed to `MyApp.Foo.child_spec/1` =>
-**supervised module must implement start function `start_link/1` that
+**supervised module must implement start function start_link/1 that
 has arity 1** as well. this restriction is usually circumvented by
 passing a list as the only start argument which might contain multiple
 arguments as its elements.

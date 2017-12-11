@@ -138,8 +138,10 @@ arguments as its elements.
 
 NOTE: `MyApp.Foo.start_link/1` has nothing to do with GenServer behaviour -
       it's a custom function of your module (named `start_link` by convention)
-      wrapping some kind of GenServer (and calling `GenServer.start_link/3`,
+      which starts GenServer process (by calling `GenServer.start_link/3`,
       `Agent.start_link/2`, `Supervisor.start_link/3` or whatever inside).
+      still this function must have arity 1 to fit into a supervision tree
+      (see previous paragraph).
 
 also supervisor can supervise an arbitrary module that is not GenServer
 (say, `MyApp.Bar`) if it's given that module's child spec:

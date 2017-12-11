@@ -203,7 +203,7 @@ be safely ignored.
 
 errors occurs when trying to insert into ETS table:
 
-```sh
+```
 ** (exit) exited in: GenServer.call(#PID<0.465.0>, {:update, #Function<4.3141730/1 in Neko.UserRate.Store.reload/2>}, 5000)
     ** (EXIT) an exception was raised:
         ** (ArgumentError) argument error
@@ -225,3 +225,27 @@ table inside anonymous function passed to `Agent.start_link/2`.
 alternatively it's possible to create ETS table with `public` option so
 that any process can write to it - not only its owner (of course if it's
 safe to do in your application).
+
+(MatchError) no match of right hand side value (:undef)
+-------------------------------------------------------
+
+```
+** (Mix) Could not start application neko: Neko.Application.start(:normal, []) returned an error: shutdown: failed to start child: :simple_rule_worker_pool
+    ** (EXIT) an exception was raised:
+        ** (MatchError) no match of right hand side value: {:error, {:EXIT, {:undef, [{Neko.Rules.SimpleRule.Worker, :start_link, [[]], []}, ...]}}}
+```
+
+**solution**
+
+application failed to start because `start_link` function of
+GenServer mentioned (`Neko.Rules.SimpleRule.Worker`) had zero
+arity while it must have arity 1 if it's meant to be supervised
+(see [Elixir - OTP]({% post_url 2017-05-28-elixir-otp %})).
+
+so the error can be fixed by passing dummy initial argument:
+
+```elixir
+def start_link(state \\ []) do
+  GenServer.start_link(__MODULE__, state)
+end
+```

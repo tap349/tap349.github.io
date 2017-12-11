@@ -131,8 +131,10 @@ child spec map (3) from the given module using its `child_spec/1`
 (also passing specified start argument in case of tuple (2)).
 
 only 1 start argument can be passed to `MyApp.Foo.child_spec/1` =>
-supervised module must implement start function `start_link/1` that
-has arity 1 as well.
+**supervised module must implement start function `start_link/1` that
+has arity 1** as well. this restriction is usually circumvented by
+passing a list as the only start argument which might contain multiple
+arguments as its elements.
 
 NOTE: `MyApp.Foo.start_link/1` has nothing to do with GenServer behaviour -
       it's a custom function of your module (named `start_link` by convention)

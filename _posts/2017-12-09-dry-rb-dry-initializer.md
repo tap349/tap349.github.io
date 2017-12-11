@@ -13,12 +13,33 @@ categories: [dry-rb]
 {:toc}
 <hr>
 
-optional attributes
--------------------
+optional attributes and default values
+--------------------------------------
 
-<http://dry-rb.org/gems/dry-initializer/optionals-and-defaults>:
+1. <http://dry-rb.org/gems/dry-initializer/optionals-and-defaults>
 
-```ruby
-# `game` option can be not specified at all
-option :game, Types.Instance(Game), optional: true
-```
+- optional attribute
+
+  ```ruby
+  # option can be not specified at all
+  option :foo, Types::Strict::String, optional: true
+  ```
+
+- default value
+
+  when using `default` key, `optional: true` is implied:
+
+  ```ruby
+  # equivalent to `Types::Strict::String, optional: true`
+  option :foo, Types::Strict::String, default: proc { nil }
+  option :foo, Types::Strict::String, default: proc { 'bar' }
+  ```
+
+  NOTE: the last example is not equivalent to:
+
+  ```ruby
+  option :foo, Types::Strict::String.default('bar'), optional: true
+  ```
+
+  in this case, when option is not specified, it will be assigned
+  `Types::Strict::String.default('bar')` object - not `bar` value!

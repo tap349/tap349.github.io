@@ -29,12 +29,23 @@ param :user, Types::User
 param :user, Types.Instance(User)
 ```
 
-optional values
----------------
+optional and default values
+---------------------------
 
-<http://dry-rb.org/gems/dry-types/optional-values/>:
+1. <http://dry-rb.org/gems/dry-types/optional-values/>
+2. <http://dry-rb.org/gems/dry-types/default-values/>
 
-```ruby
-# `game` option can be nil
-option :game, Types.Instance(Game).optional
-```
+- optional value
+
+  ```ruby
+  # value can be nil
+  Types::Strict::String.optional
+  ```
+
+- default value
+
+  ```ruby
+  # value is 'bar' when input is nil
+  # (final value can't be nil => `default(nil)` is not allowed)
+  Types::Strict::String.default('bar')
+  ```

@@ -61,6 +61,9 @@ sample steps to setup Poolboy worker pool.
     end
 
     def handle_call({:achievements, user_id}, _from, rules) do
+      # achievements are calculated for specified user using
+      # provided rules and user-specific data fetched inside
+      # MyApp.Rule.achievements/2
       achievements = MyApp.Rule.achievements(rules, user_id)
       {:reply, achievements, rules}
     end

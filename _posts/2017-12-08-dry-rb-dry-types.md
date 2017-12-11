@@ -40,7 +40,12 @@ optional and default values
   ```ruby
   # value can be nil
   Types::Strict::String.optional
+  # which is syntactic sugar for
+  Types::Strict::Nil | Types::Strict::String
   ```
+
+  NOTE: optional value is a simplified version of maybe value -
+        `Maybe` types wrap passed values in `Maybe` monad.
 
 - default value
 

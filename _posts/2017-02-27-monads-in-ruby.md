@@ -28,10 +28,10 @@ monad is created by defining:
   `Either::Right` and `Either::Left` (they are subclasses of `Either` class -
   but it's just a Ruby-specific implementation detail).
 
-  monadic value (aka lifted value) is an instance of the monad's type.
-  when some monad value is mentioned it's monadic value that is implied -
-  (`Either` value is monadic value - not plain value wrapped into this monad).
-  to lift a value is to wrap plain value in monad: `Either::Right(5)`.
+  monadic value (aka lifted value, a value with a context) is an instance of the
+  monad's type. when some monad value is mentioned it's monadic value that is
+  implied - (`Either` value is monadic value - not plain value wrapped into this
+  monad). to lift a value is to wrap plain value in a monad: `Either::Right(5)`.
 
 - operations (only the first one is obligatory for all monads):
 
@@ -139,9 +139,9 @@ monads have the following methods:
     end
     ```
 
-    or new `Either` value that wraps what we need
-    (probably leaving original `Left` value intact if it
-    contains comprehensive error message with error source):
+    or new `Either` value that wraps what we need (probably leaving
+    original `Left` value intact if it contains comprehensive error
+    message with error source):
 
     ```ruby
     def _create_site_setting model

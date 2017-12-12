@@ -16,18 +16,21 @@ categories: [js]
 5. <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html>
 6. <https://github.com/ericelliott/class-free-javascript-style>
 
-## space after function name in function declaration
+space after function name in function declaration
+-------------------------------------------------
 
 1. <https://github.com/feross/standard/issues/217>
 
 imho it's a very controversial rule but I'll try to stick it for the time being.
 
-## underscore for private properties
+underscore for private properties
+---------------------------------
 
 1. <https://github.com/airbnb/javascript/issues/1024#issuecomment-242588541>
 2. <https://github.com/ericelliott/class-free-javascript-style#22.4>
 
-## semicolon
+semicolon
+---------
 
 1. <https://github.com/Flet/semistandard>
 2. <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#semicolons>
@@ -71,14 +74,16 @@ class Board extends React.Component {
 }
 ```
 
-## single quotes
+single quotes
+-------------
 
 1. <https://standardjs.com/>
 2. <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html#quotes>
 
 prefer single quotes over double ones.
 
-## parentheses around parameters of arrow functions
+parentheses around parameters of arrow functions
+------------------------------------------------
 
 1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions>
 
@@ -88,3 +93,25 @@ don't wrap single parameter of arrow function in parentheses:
 v => v + 1
 (v, i) => v + 1
 ```
+
+checking for null, undefined or empty string
+--------------------------------------------
+
+1. <https://stackoverflow.com/a/5515349/3632318>
+2. <https://www.sitepoint.com/javascript-truthy-falsy/>
+
+check that variable has a truthy value instead of checking
+for `null`, `undefined` or empty string explicitly:
+
+```javascript
+const foo = '';
+
+// good
+if (foo) { console.log('foo'); }
+// bad (more verbose)
+if (foo != null && foo.length !== 0) { console.log('foo'); }
+```
+
+NOTE: variable must be declared before making these checks.
+NOTE: using `!!foo` to get boolean value is usually redundant in
+      conditions since using just `foo` would have the same effect.

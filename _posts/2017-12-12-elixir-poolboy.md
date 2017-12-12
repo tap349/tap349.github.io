@@ -17,6 +17,7 @@ sample steps to setup Poolboy worker pool.
 
 1. <https://github.com/thestonefox/elixir_poolboy_example>
 2. <https://elixirschool.com/en/lessons/libraries/poolboy>
+3. <http://hashnuke.com/2013/10/03/managing-processes-with-poolboy-in-elixir.html>
 
 - add worker pool configuration
 

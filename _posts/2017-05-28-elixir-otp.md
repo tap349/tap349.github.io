@@ -35,6 +35,12 @@ Task is not a GenServer but you can use GenServer as a Task.
 > and Agents are purely state management. For everything in between, there's
 > GenServer.
 
+## [Agent](https://hexdocs.pm/elixir/Agent.html)
+
+1. <https://elixirforum.com/t/looking-for-clarity-around-using-agent/4750>
+
+all Agent calls except for `cast` are synchronous!
+
 ## [Supervisor](https://hexdocs.pm/elixir/Supervisor.html)
 
 <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>:

@@ -15,19 +15,21 @@ categories: [elixir, otp]
 
 ## [GenServer](https://hexdocs.pm/elixir/GenServer.html)
 
-- <https://medium.com/@adammokan/elixir-genserver-call-vs-cast-ba89fafd8847>
-- <https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>
-- <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
+1. <https://medium.com/@adammokan/elixir-genserver-call-vs-cast-ba89fafd8847>
+2. <https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>
+3. <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
+
+GenServer - generic server process.
 
 GenServers:
 
-- GenServer itself (used for business logic)
-- Agent (GenServer that only saves state)
-- Supervisor (GenServer not meant to be used for business logic)
+- `GenServer` itself (GenServer, used for business logic)
+- `Agent` (agent - GenServer used for storing state only)
+- `Supervisor` (supervisor - GenServer not used for business logic)
 
 > The benefit of an Agent over a GenServer is in the nomenclature.
 
-Task is not a GenServer but you can use GenServer as a Task.
+`Task` (task) is not a GenServer but you can use GenServer as a `Task`.
 
 <https://www.dailydrip.com/topics/elixir/drips/supervising-tasks-and-agents>:
 
@@ -39,7 +41,7 @@ Task is not a GenServer but you can use GenServer as a Task.
 
 1. <https://elixirforum.com/t/looking-for-clarity-around-using-agent/4750>
 
-all Agent calls except for `cast` are synchronous!
+all agent calls except for `cast` are synchronous!
 
 ## [Supervisor](https://hexdocs.pm/elixir/Supervisor.html)
 

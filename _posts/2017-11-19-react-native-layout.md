@@ -27,9 +27,9 @@ style guide
   (components themselves must be responsible for how they look
   INSIDE only without any assumptions about their context)
 
-  if it's necessary to set margins, either wrap component into `View` and
-  style this container with required margins (say, using `section` style)
-  or use `containerStyle` component property.
+  if it's necessary to set margins, either wrap component into `View`
+  and style this container with required margins (say, using `section`
+  style) or use `containerStyle` component property.
 
 flexbox
 -------

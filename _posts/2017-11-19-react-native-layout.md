@@ -29,7 +29,7 @@ style guide
 
   if it's necessary to set margins, either wrap component into `View`
   and style this container with required margins (say, using `section`
-  style) or use `containerStyle` component property.
+  style) or use `containerStyle` component property (or the like).
 
 flexbox
 -------

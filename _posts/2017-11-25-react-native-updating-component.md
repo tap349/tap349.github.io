@@ -135,9 +135,9 @@ update DOM
 
 1. <https://medium.com/@gethylgeorge/how-virtual-dom-and-diffing-works-in-react-6fc805f9f84e>
 
-1. the virtual DOM is updated
-2. diffing algorithm is run
-3. the actual DOM is updated
+1) the virtual DOM is updated
+2) diffing algorithm is run
+3) the actual DOM is updated
 
 so even if you call `forceUpdate()`, say, on every Redux store update, it
 won't force update the actual DOM every time unless markup has really changed

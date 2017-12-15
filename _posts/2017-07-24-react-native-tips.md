@@ -193,3 +193,6 @@ in fact the name can be anything (say, `app1`) but for Vim to find
 the file being imported it must match application top-level directory
 name (`app`) - that's the whole point of using custom name instead of
 `~` prefix.
+
+thunk actions
+-------------

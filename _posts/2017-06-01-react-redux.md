@@ -366,6 +366,30 @@ also it might be more convenient to store both object keyed by ID
 this causes flickering of `RefreshControl` component during animation -
 store it in component state instead.
 
+## style guide
+
+### thunk actions
+
+```javascript
+// pass `params` object when updating the whole model
+export const requestUpdateGame = (id, params) => (
+  (dispatch, getState, api) => {
+    // ...
+    return api.updateGame(token, id, params)
+    // ...
+  }
+)
+
+// pass specific attribute when updating that attribute
+export const requestUpdateGameKind = (id, kind) => (
+  (dispatch, getState, api) => {
+    // ...
+    return api.updateGame(token, id, {kind})
+    // ...
+  }
+)
+```
+
 ## middleware
 
 ### [Redux Thunk](https://github.com/gaearon/redux-thunk)

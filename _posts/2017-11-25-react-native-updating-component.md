@@ -13,7 +13,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-trigger update =\> compare state and props =\> render (update DOM)
+trigger update =\> compare state and props =\> render
 
 trigger update
 --------------
@@ -125,8 +125,8 @@ the only difference is that connected component is subscribed
 to Redux store updates while `PureComponent` is not (so update
 of the latter is triggered only when its props or state change).
 
-render (update DOM)
--------------------
+render
+------
 
 1. <https://medium.com/@gethylgeorge/how-virtual-dom-and-diffing-works-in-react-6fc805f9f84e>
 

@@ -13,7 +13,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-trigger update =\> compare state and props =\> render =\> update DOM
+trigger update =\> compare state and props =\> render (update DOM)
 
 trigger update
 --------------
@@ -125,21 +125,19 @@ the only difference is that connected component is subscribed
 to Redux store updates while `PureComponent` is not (so update
 of the latter is triggered only when its props or state change).
 
-render
-------
-
-`render()` is called every time `shouldComponentUpdate()` returns true.
-
-update DOM
-----------
+render (update DOM)
+-------------------
 
 1. <https://medium.com/@gethylgeorge/how-virtual-dom-and-diffing-works-in-react-6fc805f9f84e>
 
+`render()` is called every time `shouldComponentUpdate()` returns true.
 
-1. the virtual DOM is updated
-2. diffing algorithm is run
-3. the actual DOM is updated
+rendering the component is:
+
+1. updating virtual DOM
+2. running diffing algorithm
+3. updating actual DOM
 
 so even if you call `forceUpdate()`, say, on every Redux store update, it
-won't force update the actual DOM every time unless markup has really changed
+won't force update actual DOM every time unless markup has really changed
 (and only the parts that correspond to changed markup will get updated).

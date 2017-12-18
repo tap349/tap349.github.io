@@ -33,13 +33,21 @@ style guide
 
 - margin vs. padding
 
-  use padding for all containers - even when they are used solely
-  to add space between wrapped and adjacent components.
+  there are cases when either only padding or only margin would fit -
+  say, margin would be used when adding space between child components
+  each with its background color.
 
-  use margin in `containerStyle` properties.
+  but sometimes it's necessary to add spacing between components and
+  both padding and margin would do the job - spacing can be added either
+  via `containerStyle` property or by wrapping adjacent component into
+  `View` container.
 
-  also advantage of using padding over margin is that it's correctly
-  shown by simulator built-in inspector.
+  in both cases I use padding - even when ad-hoc container is used
+  solely to add spacing between wrapped and adjacent components.
+
+  also advantage of using padding instead of margin is in better support
+  of the former by simulator built-in inspector - for some reason inspector
+  is better at highlighting padding rather than margin.
 
 flexbox
 -------

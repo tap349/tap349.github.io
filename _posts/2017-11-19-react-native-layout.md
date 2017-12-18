@@ -31,6 +31,13 @@ style guide
   and style this container with required margins (say, using `section`
   style) or use `containerStyle` component property (or the like).
 
+- margin vs. padding
+
+  use padding for all containers - even when they are used solely
+  to add space between wrapped and adjacent components.
+
+  use margin in `containerStyle` properties.
+
 flexbox
 -------
 

@@ -38,6 +38,9 @@ style guide
 
   use margin in `containerStyle` properties.
 
+  also advantage of using padding over margin is that it's correctly
+  shown by simulator built-in inspector.
+
 flexbox
 -------
 

@@ -41,14 +41,19 @@ style guide
   components (usually by wrapping current component into `View` container)
   and both padding and margin would do the job - use padding in this case.
 
-  so general rule seems to be as follows: add padding to component for
-  spacing only when this component has no its own distinct boundaries
-  (border or background color) - it's some kind of container as a rule.
+  use padding:
 
-  say, you wouldn't use padding for spacing in `containerStyle` property
-  of a button since it would grow the button instead of adding spacing.
+  - for spacing only when component has no its own distinct boundaries
+    (border or background color) - it's some kind of container as a rule
 
-  also advantage of using padding instead of margin is in better support
+  don't use padding:
+
+  - to add spacing via `containerStyle` property of a button since it
+    would grow the button instead
+  - for components with fixed height or width (vertical padding would "eat"
+    component's height and horizontal one would "eat" its width accordingly)
+
+  one advantage of using padding instead of margin is in better support
   of the former by simulator built-in inspector - for some reason inspector
   is better at highlighting padding rather than margin.
 

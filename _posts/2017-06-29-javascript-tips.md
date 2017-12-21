@@ -171,7 +171,11 @@ console.log(picked); // {a: 5, c: 7}
 ```javascript
 const foo = 1;
 const bar = {
-  ...!!foo && {foo},
+  ...!!foo ? {foo} : null,
   baz: 2,
 };
 ```
+
+NOTE: don't use `...!!foo && {foo}` because RN JS server might
+      complain about some performance optimizations if something
+      else but `false` or `undefined` is expanded inside object.

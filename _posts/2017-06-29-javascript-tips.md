@@ -163,3 +163,15 @@ console.log(picked); // {a: 5, c: 7}
 > Array(7).fill(false)
 < [false, false, false, false, false, false, false]
 ```
+
+## [how to] conditionally add property to object
+
+1. <https://stackoverflow.com/a/40560953/3632318>
+
+```javascript
+const foo = 1;
+const bar = {
+  ...!!foo && {foo},
+  baz: 2,
+};
+```

@@ -15,11 +15,13 @@ categories: [elixir, otp]
 
 NOTE: `Neko` is a sample application name in all examples below.
 
-## [GenServer](https://hexdocs.pm/elixir/GenServer.html)
+GenServer
+---------
 
-1. <https://medium.com/@adammokan/elixir-genserver-call-vs-cast-ba89fafd8847>
-2. <https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>
-3. <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
+1. <https://hexdocs.pm/elixir/GenServer.html>
+2. <https://medium.com/@adammokan/elixir-genserver-call-vs-cast-ba89fafd8847>
+3. <https://groups.google.com/forum/#!topic/elixir-lang-talk/DCTXyGV791w>
+4. <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>
 
 GenServer - generic server process.
 
@@ -39,15 +41,19 @@ GenServers:
 > and Agents are purely state management. For everything in between, there's
 > GenServer.
 
-## [Agent](https://hexdocs.pm/elixir/Agent.html)
+Agent
+-----
 
-1. <https://elixirforum.com/t/looking-for-clarity-around-using-agent/4750>
+1. <https://hexdocs.pm/elixir/Agent.html>
+2. <https://elixirforum.com/t/looking-for-clarity-around-using-agent/4750>
 
 all agent calls except for `cast` are synchronous!
 
-## [Task](https://hexdocs.pm/elixir/Task.html)
+Task
+----
 
-1. <https://gist.github.com/moklett/d30fc2dbaf71f3b978da115f8a5f8387>
+1. <https://hexdocs.pm/elixir/Task.html>
+2. <https://gist.github.com/moklett/d30fc2dbaf71f3b978da115f8a5f8387>
 
 - with linking caller to the task
 
@@ -103,7 +109,10 @@ all agent calls except for `cast` are synchronous!
   the task doesn't crash the caller iff `Task.yield/2` is used
   to capture results (it crashes when `Task.await/2` is used).
 
-## [Supervisor](https://hexdocs.pm/elixir/Supervisor.html)
+Supervisor
+----------
+
+1. <https://hexdocs.pm/elixir/Supervisor.html>
 
 <https://elixirforum.com/t/are-supervisor-processes-genserver-processes/1838>:
 
@@ -261,7 +270,8 @@ iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello, :world])
  5000, :worker, [Neko.Achievement.Store.Registry]}
 ```
 
-## linking and monitoring
+linking and monitoring
+----------------------
 
 ### exit signals
 

@@ -101,7 +101,8 @@ checking for null, undefined or empty string
 2. <https://www.sitepoint.com/javascript-truthy-falsy/>
 
 check that variable has a truthy value instead of checking
-for `null`, `undefined` or empty string explicitly:
+for `null`, `undefined` or empty string explicitly but only
+when that variable empty string:
 
 ```javascript
 const foo = '';
@@ -113,5 +114,18 @@ if (foo != null && foo.length !== 0) { console.log('foo'); }
 ```
 
 NOTE: variable must be declared before making these checks.
+
 NOTE: using `!!foo` to get boolean value is usually redundant in
       conditions since using just `foo` would have the same effect.
+
+if variable can't be empty string, check for `null` and `undefined`
+explicitly:
+
+```javascript
+const foo = {a: 1};
+
+// good
+if (foo != null) { console.log('foo'); }
+// worse (assumes that foo can be empty string which can be misleading)
+if (foo) { console.log('foo'); }
+```

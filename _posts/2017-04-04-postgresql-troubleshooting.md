@@ -150,8 +150,16 @@ to solve this problem either:
 
   unversioned formula creates a symlink in _/usr/local/bin/_ automatically.
 
-- create a symlink for old version of PostgreSQL manually
+- create symlinks for binaries from old version of PostgreSQL manually
 
   ```sh
   $ ln -s /usr/local/Cellar/postgresql@9.5/9.5.10/bin/psql /usr/local/bin/psql
+  ```
+
+- add the whole _bin/_ from old version of PostgreSQL to `PATH`
+
+  _~/.zshenv_:
+
+  ```sh
+  path=(/usr/local/Cellar/postgresql@9.5/9.5.10/bin $path)
   ```

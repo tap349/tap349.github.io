@@ -135,7 +135,7 @@ $ brew services restart postgresql@9.5
 ## command not found: psql
 
 ```sh
-psql --version                                                                   tap@MacBook-Pro-Personal
+$ psql --version
 zsh: command not found: psql
 ```
 

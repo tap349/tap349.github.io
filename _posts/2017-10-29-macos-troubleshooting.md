@@ -33,3 +33,10 @@ just switch to Xcode directory:
 ```sh
 $ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 ```
+
+unable to update Xcode from 8.2.1 on El Capitan
+-----------------------------------------------
+
+1. <https://stackoverflow.com/questions/43065475/unable-to-update-to-xcode-8-3>
+
+Xcode 8.3 and higher requires macOS Sierra.

@@ -13,6 +13,15 @@ categories: [react-native]
 {:toc}
 <hr>
 
+iOS
+---
+
+- open _iceperkapp.xcworkspace_ in Xcode
+- select `Generic iOS Device`
+- increment build number: `General` -> `Identity` -> `Build`
+  (it should be incremented synchronously for Android too)
+- create archive: `Product` (top menu) -> `Archive`
+
 troubleshooting
 ---------------
 
@@ -32,4 +41,4 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 either:
 
 - *[RECOMMENDED]* update Xcode to 8.3
-- disable bitcode in project build settings
+- disable bitcode in `Build Settings` -> `Build Options` -> `Enable Bitcode`

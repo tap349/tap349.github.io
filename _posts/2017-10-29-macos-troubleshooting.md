@@ -16,9 +16,9 @@ categories: [macos]
 battery percentage is not properly updating
 -------------------------------------------
 
-reset the SMC:
+1. <https://support.apple.com/en-us/HT201295>
 
-<https://support.apple.com/en-us/HT201295>
+reset the SMC.
 
 active developer directory is a CLT instance
 --------------------------------------------
@@ -26,7 +26,7 @@ active developer directory is a CLT instance
 > xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer
 > directory '/Library/Developer/CommandLineTools' is a command line tools instance
 
-<http://stackoverflow.com/questions/17980759#17980786>
+1. <http://stackoverflow.com/questions/17980759#17980786>
 
 just switch to Xcode directory:
 

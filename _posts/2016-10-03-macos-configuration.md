@@ -132,6 +132,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
 - General (tab):
   - [x] Require password 5 seconds after sleep or screen saver begins
+  - Allow apps downloaded from: Anywhere (for additional software)
 
 ### Displays
 

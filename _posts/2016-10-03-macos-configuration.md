@@ -83,7 +83,6 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - install additional software (must be downloaded manually):
   - Paragon Driver for Mac OS (see above)
   - Adobe Lightroom 5 (latest version as of now - 5.7.1)
-  - TopTracker
 
     <https://forums.adobe.com/thread/1639590>
 
@@ -92,6 +91,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
           (see report details for specific path that failed) and don't forget
           to update symlinks.
 
+  - TopTracker
   - erlang-history (from github)
   - Tomighty
 
@@ -106,6 +106,11 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
       - Hotkeys:
         - Start Pomodoro: `<C-D-p>` (displayed in qwerty: `<C-D-r>`)
         - Stop Pomodoro: `<C-D-s>` (displayed in qwerty: `<C-D-;>`)
+
+  - GoPanda2
+
+  NOTE: additional software is usually stored in _~/soft/_ to keep it all
+        in a single place since it's not managed by any package manager.
 - copy other files from backup (to name a few):
   - _~/Pictures/Lightroom/_
   - _~/backup/_

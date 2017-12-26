@@ -38,6 +38,9 @@ categories: [elixir, mix]
   (`--unused`) and updates _mix.lock_ (`--unlock`).
 
 - `mix deps.update --all` = `bundle update`
+
+  updates all dependencies and writes updated versions to _mix.lock_.
+
 - `mix deps.update <package>` = `bundle update <gem>`
 
   updates dependency and writes updated version to _mix.lock_.

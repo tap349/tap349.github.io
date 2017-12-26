@@ -109,9 +109,7 @@ to use spring preloader:
   significant performance penalty when running spring with bundler
   (`bundle exec spring`) - probably this is not the case now.
 
-- use spring binstubs
-
-  **RECOMMENDED WAY**
+- *[RECOMMENDED]* use spring binstubs
 
   command `spring binstub --all` generates spring binstubs for 3 commands:
 

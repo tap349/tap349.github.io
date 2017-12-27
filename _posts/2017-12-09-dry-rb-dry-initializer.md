@@ -41,5 +41,5 @@ optional attributes and default values
   option :foo, Types::Strict::String.default('bar'), optional: true
   ```
 
-  here when option is not specified, it will be assigned
-  `Types::Strict::String.default('bar')` object - not `bar` value!
+  such usage is incorrect - when option is not specified, it will be
+  assigned `Types::Strict::String.default('bar')` object - not `bar` value!

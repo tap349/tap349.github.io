@@ -465,14 +465,10 @@ if (!__DEV__) { Sentry.install(); }
 ScrollView content is partially hidden below when scrolled to the bottom
 ------------------------------------------------------------------------
 
-**solution**
-
 make sure that all `ScrollView` parents have `flex: 1`.
 
 ScrollView inside Modal doesn't respect `keyboardShouldPersistTaps='handled'`
 -----------------------------------------------------------------------------
-
-**solution**
 
 1. <https://github.com/facebook/react-native/issues/10138>
 

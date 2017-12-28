@@ -110,9 +110,9 @@ sample steps to setup Poolboy worker pool.
     :poolboy.child_spec(
       config[:name],
       [{:name, {:local, config[:name]}},
-        {:worker_module, config[:module]},
-        {:size, config[:size]},
-        {:max_overflow, 2}
+       {:worker_module, config[:module]},
+       {:size, config[:size]},
+       {:max_overflow, 2}
       ])
   end
   ```

@@ -194,5 +194,24 @@ the file being imported it must match application top-level directory
 name (`app`) - that's the whole point of using custom name instead of
 `~` prefix.
 
-thunk actions
--------------
+behaviour of nested ScrollViews
+-------------------------------
+
+`ScrollView` is scrollable if `scrollEnabled={true}` (default value).
+
+```
+ScrollView 1 (scrollable)
+  ScrollView 2 (not scrollable)
+    ScrollView 3 (scrollable)
+```
+
+=> `ScrollView 3` scrolls inside of `ScrollView 2`.
+
+```
+ScrollView 1 (scrollable)
+  ScrollView 2 (scrollable)
+    ScrollView 3 (scrollable)
+```
+
+=> `ScrollView 3` doesn’t scroll inside of `ScrollView 2`
+but they scroll together inside `ScrollView 1`.

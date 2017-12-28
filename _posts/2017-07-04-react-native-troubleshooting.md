@@ -13,7 +13,8 @@ categories: [react-native]
 {:toc}
 <hr>
 
-## Couldn't find preset "es2015"
+Couldn't find preset "es2015"
+-----------------------------
 
 emulator window:
 
@@ -78,7 +79,8 @@ success Saved 3 new dependencies.
 └─ shallowequal@1.0.2
 ```
 
-## React.Children.only expected to receive a single React element child
+React.Children.only expected to receive a single React element child
+--------------------------------------------------------------------
 
 device system log:
 
@@ -93,7 +95,8 @@ device system log:
 > TouchableHighlight must have one child (not zero or more than one).
 > If you wish to have several child components, wrap them in a View.
 
-## errors after upgrading RN to 0.45.1
+errors after upgrading RN to 0.45.1
+-----------------------------------
 
 ### Cannot find module X
 
@@ -177,7 +180,8 @@ $ react-native-git-upgrade
 `react-native-git-upgrade` command downgraded `react` package to
 another alpha version and this is what most likely fixed the issue.
 
-## Maximum call stack size exceeded
+Maximum call stack size exceeded
+--------------------------------
 
 device system log:
 
@@ -216,7 +220,8 @@ to avoid infinite loop dispatch actions and set component state only in
 - constructor or
 - callbacks that are not immediately invoked when component is being rendered
 
-## In next release empty section headers will be rendered
+In next release empty section headers will be rendered
+------------------------------------------------------
 
 emulator window:
 
@@ -242,7 +247,8 @@ headers.
 />
 ```
 
-## onEndReached event of ListView keeps on firing
+onEndReached event of ListView keeps on firing
+----------------------------------------------
 
 **solution**
 
@@ -261,7 +267,8 @@ to use `ListView`:
 - if you used some header in `ScrollView` it's possible to render
   the very same header in `renderHeader` callback of `ListView`
 
-## ListView becomes blank
+ListView becomes blank
+----------------------
 
 when pushing another page and then going back to page with `ListView`
 the latter becomes blank (nothing is rendered where `ListView` is
@@ -281,7 +288,8 @@ rendered properly (=> it's not that wrapped collection becomes empty).
 
 though I guess it's more of a hack than real solution.
 
-## SyntaxError wallet.png: Unexpected character (1:0)
+SyntaxError wallet.png: Unexpected character (1:0)
+--------------------------------------------------
 
 this error occurs sometimes after adding new icon or updating existing one.
 
@@ -289,7 +297,8 @@ this error occurs sometimes after adding new icon or updating existing one.
 
 restart packager (`yarn start`) and reload application in emulator.
 
-## Module JSTimersExecution is not a registered callable module
+Module JSTimersExecution is not a registered callable module
+------------------------------------------------------------
 
 1. <https://stackoverflow.com/questions/45594935>
 
@@ -309,7 +318,8 @@ rebuild application:
 $ react-native run-ios
 ```
 
-## Actions must be plain objects
+Actions must be plain objects
+-----------------------------
 
 emulator window:
 
@@ -333,7 +343,8 @@ I used curly braces instead of parens when defining thunk action creator:
 +)
 ```
 
-## TouchableOpacity ignores initial opacity
+TouchableOpacity ignores initial opacity
+----------------------------------------
 
 `TouchableOpacity` ignores `opacity` property -
 it's set only when application is hot reloaded in emulator.
@@ -359,7 +370,8 @@ anyway I've found a workaround - create nested `View` and set
 ```
 {% endraw %}
 
-## Unknown named module
+Unknown named module
+--------------------
 
 this error occurs when trying to load image using `Image`.
 
@@ -385,7 +397,8 @@ it turns out you cannot load images dynamically - provide static URI instead
 ```
 {% endraw %}
 
-## ScrollView with unbounded height doesn't grow on scrolling
+ScrollView with unbounded height doesn't grow on scrolling
+----------------------------------------------------------
 
 1. <https://stackoverflow.com/a/43525913/3632318>
 
@@ -403,7 +416,8 @@ the solution is to use `flexGrow: 1` instead of `flex: 1` for container:
 ```
 {% endraw %}
 
-## TextInput inside TouchableOpacity intercepts touches
+TextInput inside TouchableOpacity intercepts touches
+----------------------------------------------------
 
 when `TouchableOpacity` wraps `TextInput` and the latter is pressed,
 `onPress` callback of `TouchableOpacity` is not invoked.
@@ -420,7 +434,8 @@ when `TouchableOpacity` wraps `TextInput` and the latter is pressed,
 </TouchableOpacity>
 ```
 
-## `fontWeight={600}` is not applied for TextInput
+`fontWeight={600}` is not applied for TextInput
+-----------------------------------------------
 
 error occurs if Gill Sans font is used only - setting font weight
 works with `Text` and when default font is used instead.
@@ -429,7 +444,8 @@ works with `Text` and when default font is used instead.
 
 TODO
 
-## undefined is not an object (evaluating 'Sentry.options.logLevel')
+undefined is not an object (evaluating 'Sentry.options.logLevel')
+-----------------------------------------------------------------
 
 device system log:
 
@@ -446,7 +462,8 @@ Sentry.config(<sentry_endpoint>);
 if (!__DEV__) { Sentry.install(); }
 ```
 
-## ScrollView content is partially hidden below when scrolled to the bottom
+ScrollView content is partially hidden below when scrolled to the bottom
+------------------------------------------------------------------------
 
 **solution**
 

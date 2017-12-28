@@ -215,3 +215,5 @@ ScrollView 1 (scrollable)
 
 => `ScrollView 3` doesn’t scroll inside of `ScrollView 2`
 but they scroll together inside `ScrollView 1`.
+
+but in general it's better to avoid nested `ScrollView`s.

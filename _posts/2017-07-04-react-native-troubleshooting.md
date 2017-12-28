@@ -434,7 +434,7 @@ when `TouchableOpacity` wraps `TextInput` and the latter is pressed,
 </TouchableOpacity>
 ```
 
-`fontWeight={600}` is not applied for TextInput
+`fontWeight={600}` is not applied to TextInput
 -----------------------------------------------
 
 error occurs if Gill Sans font is used only - setting font weight
@@ -468,3 +468,19 @@ ScrollView content is partially hidden below when scrolled to the bottom
 **solution**
 
 make sure that all `ScrollView` parents have `flex: 1`.
+
+ScrollView inside Modal doesn't respect `keyboardShouldPersistTaps='handled'`
+-----------------------------------------------------------------------------
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/10138>
+
+make sure to set `keyboardShouldPersistTaps='handled'` on
+ALL parent `ScrollView`s outside of `Modal`:
+
+> <Modal> cares about its (scrollview) parent stack,
+> I assumed it would be like if rendered on top level
+
+this error seems to be reproduced only when `ScrollView` is
+rendered inside `Modal`.

@@ -319,7 +319,7 @@ Native module cannot be null.
 
 **solution**
 
-this error occured after installing `react-native-push-notification` package,
+this error occurs after installing `react-native-push-notification` package,
 linking native libraries and trying to launch application:
 
 ```sh
@@ -342,7 +342,7 @@ npm-install info Android module react-native-push-notification is already linked
 solution is to link `PushNotificationIOS` native library manually as instructed in
 [PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html).
 
-## excessive logging in device system log
+### excessive logging in device system log
 
 that is when running `react-native log-ios`.
 
@@ -368,7 +368,7 @@ or else this variable can be exported for all shells in _~/.zshenv_:
 export SIMCTL_CHILD_OS_ACTIVITY_MODE="disable"
 ```
 
-## Domain: NSURLErrorDomain, Error Code: -1200
+### Domain: NSURLErrorDomain, Error Code: -1200
 
 `WebView` component's content when trying to open HTTPS URL:
 
@@ -428,3 +428,25 @@ for offending URL in _Info.plist_:
 or else edit _Info.plist_ in Xcode:
 
 Xcode -> `Project navigator` -> _\<MyApp\>/\<MyApp\>/Info.plist_.
+
+### Library not loaded: /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator
+
+error occurs after updating Xcode from 8.2.1 to 9.2.
+
+{% raw %}
+```sh
+$ react-native run-ios
+...
+instruments[2536:17017] [MT] DVTPlugInLoading: Failed to load code for plug-in com.apple.xray.discovery.mobiledevice (/Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/XRMobileDeviceDiscoveryPlugIn.xrplugin), error = Error Domain=NSCocoaErrorDomain Code=3587 "dlopen_preflight(/Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/XRMobileDeviceDiscoveryPlugIn.xrplugin/Contents/MacOS/XRMobileDeviceDiscoveryPlugIn): Library not loaded: /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator
+  Referenced from: /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/XRMobileDeviceDiscoveryPlugIn.xrplugin/Contents/MacOS/XRMobileDeviceDiscoveryPlugIn
+  Reason: image not found"
+...
+```
+{% endraw %}
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/14342>
+
+install additional components - you'll be prompted to install these
+components when you start Xcode for the first time after updating it.

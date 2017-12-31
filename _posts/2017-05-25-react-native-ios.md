@@ -76,7 +76,7 @@ it's possible to change it to Dvorak inside emulator:
 
 emulator menu:
 
-- `Hardware` -> `Keyboard` -> `Uses the Same Layout as macOS`
+`Hardware` -> `Keyboard` -> `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
@@ -90,6 +90,15 @@ NOTE: hot reloading is recommended over live reload.
 ### scroll with 3 fingers
 
 same as for [Android]({% post_url 2017-05-24-react-native-android %}).
+
+### hide device bezels
+
+device bezels are shown by default since Xcode 9
+(there was no such option at all before Xcode 9 AFAIK).
+
+emulator menu:
+
+`Window` -> `Show Device Bezels` (uncheck)
 
 ## tips
 

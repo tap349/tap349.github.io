@@ -429,7 +429,7 @@ or else edit _Info.plist_ in Xcode:
 
 Xcode -> `Project navigator` -> _\<MyApp\>/\<MyApp\>/Info.plist_.
 
-### Library not loaded: /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator
+### Library not loaded: .../CoreSimulator
 
 error occurs after updating Xcode from 8.2.1 to 9.2.
 

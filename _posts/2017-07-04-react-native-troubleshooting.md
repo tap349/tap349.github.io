@@ -43,18 +43,18 @@ quick-and-dirty fix for both Android and iOS:
 - get that section back
 - restart packager - still no error
 
-even if `shallowequal` package is removed from filesystem and installed again
-the error no longer occurs - maybe the 'right' version of `shallowequal` package
-is cached somewhere?
+even if `shallowequal` package is removed from filesystem and
+installed again the error no longer occurs - maybe the 'right'
+version of `shallowequal` package is cached somewhere?
 
-NOTE: still this error might occur the next time emulator is run.
+NOTE: still the error might occur the next time emulator is run.
 
 [Android] the error might disappear after enabling hot reloading in emulator
 (`<D-m>` -> `Enable Hot Reloading`) - enabling live reload has no effect.
 
 [iOS] enabling hot reloading never helped - use the fix above.
 
-all in all IDK why this error occurs and how to fix it in general.
+all in all IDK why the error occurs and how to fix it in general.
 
 **UPDATE**
 
@@ -291,7 +291,7 @@ though I guess it's more of a hack than real solution.
 SyntaxError wallet.png: Unexpected character (1:0)
 --------------------------------------------------
 
-this error occurs sometimes after adding new icon or updating existing one.
+the error occurs sometimes after adding new icon or updating existing one.
 
 **solution**
 
@@ -327,7 +327,7 @@ emulator window:
 Actions must be plain objects. Use custom middleware for async actions.
 ```
 
-error occurs when trying to dispatch a thunk (Thunk middleware is applied).
+the error occurs when trying to dispatch a thunk (Thunk middleware is applied).
 
 **solution**
 
@@ -373,7 +373,7 @@ anyway I've found a workaround - create nested `View` and set
 Unknown named module
 --------------------
 
-this error occurs when trying to load image using `Image`.
+the error occurs when trying to load image using `Image`.
 
 device system log:
 
@@ -437,8 +437,8 @@ when `TouchableOpacity` wraps `TextInput` and the latter is pressed,
 `fontWeight={600}` is not applied to TextInput
 -----------------------------------------------
 
-error occurs if Gill Sans font is used only - setting font weight
-works with `Text` and when default font is used instead.
+the error occurs if Gill Sans font is used only - setting font
+weight works with `Text` and when default font is used instead.
 
 **solution**
 

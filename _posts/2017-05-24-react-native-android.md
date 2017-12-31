@@ -697,7 +697,7 @@ $ sudo sdkmanager --licenses
 
 ### method does not override or implement a method from a supertype
 
-error occurs after upgrading RN to 0.47.0.
+the error occurs after upgrading RN to 0.47.0.
 
 ```sh
 $ react-native run-android

@@ -16,7 +16,7 @@ categories: [ruby]
 Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
 ------------------------------------------------------------------
 
-error occurs after installing new Ruby version (2.5.0):
+the error occurs after installing new Ruby version (2.5.0):
 
 ```
 $ bundle

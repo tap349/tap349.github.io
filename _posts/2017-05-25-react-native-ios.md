@@ -302,7 +302,7 @@ run application again without closing emulator:
 $ react-native run-ios
 ```
 
-NOTE: this error usually occurs after running application in Android emulator.
+NOTE: the error usually occurs after running application in Android emulator.
 
 ### Native module cannot be null
 
@@ -319,7 +319,7 @@ Native module cannot be null.
 
 **solution**
 
-this error occurs after installing `react-native-push-notification` package,
+the error occurs after installing `react-native-push-notification` package,
 linking native libraries and trying to launch application:
 
 ```sh
@@ -431,7 +431,7 @@ Xcode -> `Project navigator` -> _\<MyApp\>/\<MyApp\>/Info.plist_.
 
 ### Library not loaded: .../CoreSimulator
 
-error occurs after updating Xcode from 8.2.1 to 9.2.
+the error occurs after updating Xcode from 8.2.1 to 9.2.
 
 {% raw %}
 ```sh

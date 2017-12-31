@@ -448,5 +448,5 @@ instruments[2536:17017] [MT] DVTPlugInLoading: Failed to load code for plug-in c
 
 1. <https://github.com/facebook/react-native/issues/14342>
 
-install additional components - you'll be prompted to install these
-components when you start Xcode for the first time after updating it.
+install additional components - you'll be prompted to install
+these components when you first start Xcode after updating it.

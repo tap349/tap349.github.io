@@ -186,6 +186,10 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - Input (tab):
   - Input volume: min (disable microphone)
 
+### App Store
+
+- [ ] Automatically check for updates
+
 ### Network
 
 - PureVPN:

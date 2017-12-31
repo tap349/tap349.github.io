@@ -54,7 +54,7 @@ NOTE: still the error might occur the next time emulator is run.
 
 [iOS] enabling hot reloading never helped - use the fix above.
 
-all in all IDK why the error occurs and how to fix it in general.
+all in all IDK why this error occurs and how to fix it in general.
 
 **UPDATE**
 

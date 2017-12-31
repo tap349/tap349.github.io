@@ -74,7 +74,7 @@ There is a dependency conflict, but the solver could not determine the precise c
 
 **solution**
 
-the error occurs when you add non-existing custom cookbook as dependency in your
+the error occurs after adding non-existing custom cookbook as dependency in
 application cookbook's _metadata.rb_ file - so just remove that dependency.
 
 undefined method `set' for Chef::Platform:Class

@@ -319,8 +319,8 @@ Native module cannot be null.
 
 **solution**
 
-the error occurs after installing `react-native-push-notification` package,
-linking native libraries and trying to launch application:
+the error occurred after installing `react-native-push-notification`
+package, linking native libraries and trying to launch application:
 
 ```sh
 $ npm install --save react-native-push-notification
@@ -431,7 +431,7 @@ Xcode -> `Project navigator` -> _\<MyApp\>/\<MyApp\>/Info.plist_.
 
 ### Library not loaded: .../CoreSimulator
 
-the error occurs after updating Xcode from 8.2.1 to 9.2.
+the error occurred after updating Xcode from 8.2.1 to 9.2.
 
 {% raw %}
 ```sh

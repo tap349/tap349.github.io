@@ -207,7 +207,7 @@ NOTE: currently disabled because of a significant delay
 
 - Mouse & Trackpad (left menu):
   - Trackpad Options... (button):
-    - [x] Enable dragging: three fingers drag
+    - [ ] Enable dragging: three fingers drag
 
 ## font configuration
 

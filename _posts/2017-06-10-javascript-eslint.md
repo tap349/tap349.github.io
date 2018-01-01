@@ -111,7 +111,7 @@ some rules worth mentioning are listed below:
   set rule ID to `error` (2) to turn it on.
 
   this rule has an effect only if `no-unused-rule` is enabled
-  (enabled by default if extending `eslint:recommended`).
+  (enabled by default when extending `eslint:recommended`).
 
   still error is detected properly if JSX component is imported but not used.
 

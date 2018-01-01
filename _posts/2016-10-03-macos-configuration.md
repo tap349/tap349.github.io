@@ -48,9 +48,9 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   e.g. `~/.oh-my-zsh` must be created before running the script:
 
   - _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
-  - oh-my-zsh installation script will rename existing _.zshrc_ config file
-    into _.zshrc.pre-oh-my-zsh_ -\> symlink _.zshrc_ into home directory after
-    oh-my-zsh is installed
+  - oh-my-zsh installation script will rename existing _~/.zshrc_ into
+    _.zshrc.pre-oh-my-zsh_ -\> symlink _~/.zshrc_ into home directory
+    after oh-my-zsh is installed
 
   this script:
 
@@ -69,7 +69,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Safari
   - Google Chrome
   - MacVim
-  - iTerm
+  - iTerm2
   - 2Do
   - Telegram Desktop
 - Dictionary:

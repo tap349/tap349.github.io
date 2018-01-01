@@ -50,7 +50,7 @@ you run gem commands:
 
 - alias common commands to be run with `bundle exec`
 
-  _.zshrc_:
+  _~/.zshrc_:
 
   ```sh
   alias rails='bundle exec rails'
@@ -141,7 +141,7 @@ to use spring preloader:
   end
   ```
 
-- add these (or similar) aliases in _.zshrc_:
+- add these (or similar) aliases in _~/.zshrc_:
 
   ```sh
   alias rails='bin/rails'

@@ -10,8 +10,7 @@ categories: [js, eslint]
 <!-- more -->
 
 1. <https://github.com/eslint/eslint>
-2. <https://medium.com/@hpux/vim-and-eslint-16fa08cc580f>
-3. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
+2. <https://objectcomputing.com/resources/publications/sett/january-2017-eslint-dont-write-javascript-without-it>
 
 ## install ESLint globally
 
@@ -73,11 +72,17 @@ extending `eslint:recommended` configuration enables subset of core rules
 having a check mark on the [rules page](http://eslint.org/docs/rules/):
 
 ```yaml
-extends: 'eslint:recommended'
+extends:
+  - 'eslint:recommended'
 ```
 
 rule modifications are picked immediately on next syntastic run.
 all the rules are added to `rules` section of _.eslintrc.yml_.
+
+rule format: `name: setting` or `name: [setting, config]` where
+
+- `setting` is one of `off` (0), `warn` (1) or `error` (2)
+- `config` is rule-specific
 
 some rules worth mentioning are listed below:
 
@@ -129,7 +134,9 @@ some rules worth mentioning are listed below:
 
 ## configure syntastic
 
-1. <https://github.com/vim-syntastic/syntastic/issues/1692>
+1. <https://medium.com/@hpux/vim-and-eslint-16fa08cc580f>
+2. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
+3. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
 ```vim
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
@@ -139,5 +146,6 @@ let g:syntastic_javascript_checkers=['eslint']
 so the only combination that worked for me (both conditions are mandatory):
 
 - install ESLint globally (for checker to be enabled by syntastic)
-- install ESLint locally (`eslint --init` does it) and specify path to
-  local `eslint` executable as the value of `g:syntastic_javascript_eslint_exe`
+- install ESLint locally (`eslint --init` does it) and specify path
+  to local `eslint` executable (`$(npm bin)/eslint`) as the value of
+  `g:syntastic_javascript_eslint_exe`

@@ -86,6 +86,10 @@ usage
   `@flow` annotation can be placed anywhere in JS file -
   it just instructs Flow to check current file.
 
+  it's possible to use `@flow weak` for weak mode
+  (see <https://github.com/facebook/flow/issues/3316>) -
+  it doesn't require to specify types for all parameters.
+
 - run Flow
 
   ```sh

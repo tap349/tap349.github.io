@@ -9,16 +9,28 @@ categories: [js, eslint]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
+see also [JavaScript - Flow]({% post_url 2018-01-02-javascript-flow %}).
+
 1. <https://github.com/eslint/eslint>
 2. <https://objectcomputing.com/resources/publications/sett/january-2017-eslint-dont-write-javascript-without-it>
 
-## install ESLint globally
+installation
+------------
+
+### install ESLint locally
 
 ```sh
-$ yarn global add eslint
+$ yarn add eslint --dev
 ```
 
-## generate ESLint config
+configuration
+-------------
+
+### generate ESLint config
 
 ```sh
 $ $(npm bin)/eslint --init
@@ -28,8 +40,8 @@ Successfully created .eslintrc.yml file in <project-directory>
 
 also ESLint config is required for syntastic to work (see below).
 
-this will install both `eslint` package and additional plugins (based
-on your answers) locally as development dependencies in _package.json_:
+this will also install any additional plugins (based on your answers)
+locally as development dependencies in _package.json_:
 
 ```javascript
 "devDependencies": {
@@ -40,12 +52,12 @@ on your answers) locally as development dependencies in _package.json_:
 }
 ```
 
-## use babel-eslint parser as default ESLint parser
+### set babel-eslint parser as default ESLint parser
 
 1. <https://github.com/babel/babel-eslint/>
 
 ```sh
-$ npm install babel-eslint --save-dev
+$ yarn add babel-eslint --dev
 ```
 
 _.eslintrc.yml_:
@@ -63,7 +75,7 @@ class Counter extends HTMLElement {
 }
 ```
 
-## configure ESLint rules
+### configure ESLint rules
 
 1. <http://eslint.org/docs/user-guide/configuring>
 
@@ -133,20 +145,51 @@ some rules worth mentioning are listed below:
   see [JavaScript - Style Guide]({% post_url 2017-06-10-javascript-style-guide %})
   for description (section `space after function name in function declaration`).
 
-## configure syntastic
+usage
+-----
+
+### add ESLint script
+
+_package.json_:
+
+```json
+"scripts": {
+  "eslint": "eslint"
+},
+```
+
+now ESLint can be run with any of these commands:
+
+```sh
+$ $(npm bin)/eslint
+$ yarn run eslint
+```
+
+### run ESLint
+
+```sh
+$ yarn run eslint app/services/TeamHelpers.js
+```
+
+Vim integration
+---------------
+
+### syntastic
 
 1. <https://medium.com/@hpux/vim-and-eslint-16fa08cc580f>
 2. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
 3. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
+NOTE: for syntastic `eslint` checker to be available
+      and enabled ESLint must be installed globally!
+
+```sh
+$ yarn global add eslint
+```
+
+_~/.vim/vimrc_:
+
 ```vim
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 let g:syntastic_javascript_checkers=['eslint']
 ```
-
-so the only combination that worked for me (both conditions are mandatory):
-
-- install ESLint globally (for checker to be enabled by syntastic)
-- install ESLint locally (`eslint --init` does it) and specify path
-  to local `eslint` executable (`$(npm bin)/eslint`) as the value of
-  `g:syntastic_javascript_eslint_exe`

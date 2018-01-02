@@ -21,7 +21,7 @@ $ yarn global add eslint
 ## generate ESLint config
 
 ```sh
-$ \$(npm bin)/eslint --init
+$ $(npm bin)/eslint --init
 ...
 Successfully created .eslintrc.yml file in <project-directory>
 ```

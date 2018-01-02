@@ -101,7 +101,7 @@ usage
 
   it's possible to use `@flow weak` for weak mode
   (see <https://github.com/facebook/flow/issues/3316>) -
-  it allows not to specify types for all parameters.
+  e.g. it allows not to specify types for all parameters.
 
 - run Flow
 

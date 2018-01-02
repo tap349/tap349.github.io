@@ -25,13 +25,12 @@ and for syntastic to work (see below).
 ## generate ESLint config
 
 ```sh
-$ cd <project-directory>
 $ $(npm bin)/eslint --init
 ...
 Successfully created .eslintrc.yml file in <project-directory>
 ```
 
-this will install both _eslint_ package and additional plugins (based
+this will install both `eslint` package and additional plugins (based
 on your answers) locally as development dependencies in _package.json_:
 
 ```javascript

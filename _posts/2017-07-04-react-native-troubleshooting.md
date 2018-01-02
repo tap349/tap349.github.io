@@ -26,7 +26,7 @@ Couldn't find preset "es2015" relative to directory "<app_dir>/node_modules/shal
 **solution**
 
 it has turned out that `shallowequal` is the only module in _node_modules/_ that
-configures babel presets to use in its _package.json_:
+configures Babel presets to use in its _package.json_:
 
 ```json
   "babel": {
@@ -62,7 +62,7 @@ all in all IDK why this error occurs and how to fix it in general.
 2. <https://github.com/dashed/shallowequal/commit/f515936c8a790fbc225add864265b6c82881c9b1>
 3. <https://yarnpkg.com/en/docs/cli/upgrade>
 
-bug was fixed in v1.0.2 by moving babel settings to _.babelrc_
+bug was fixed in v1.0.2 by moving Babel settings to _.babelrc_
 so that they are not consumed by RN packager by default.
 
 `react-side-effect` is the only package in my project that depends on

@@ -463,7 +463,6 @@ in order to avoid warning about unhandled promise rejection.
 ### install DevTools npm packages
 
 ```sh
-$ cd <project-directory>
 $ npm install --save-dev remote-redux-devtools remote-redux-devtools
 ```
 

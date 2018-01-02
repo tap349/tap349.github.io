@@ -52,9 +52,9 @@ installation
   > will mute those warnings.
 
   I don't see any warnings mentioned above but this plugin is
-  still useful: say, when type annotation is added to the file
-  but Flow declaration (`@flow`) is missing, ESLint complains
-  once the plugin is installed:
+  still useful: say, it adds ESLint rule to check for presence
+  of Flow declaration (`// @flow`) when type annotation is added
+  to the file - ESLint will complain if it's missing:
 
   ```
   Type annotations require valid Flow declaration.

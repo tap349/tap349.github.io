@@ -45,6 +45,19 @@ installation
 
 - install `eslint-plugin-flowtype` ESLint plugin
 
+  ```sh
+  $ yarn add eslint-plugin-flowtype --dev
+  ```
+
+  _.eslintrc.yml_:
+
+  ```yml
+  extends:
+    - 'plugin:flowtype/recommended'
+  plugins:
+    - flowtype
+  ```
+
   <https://github.com/ryyppy/flow-guide#eslint-configuration>:
 
   > there will be some warnings about unused variables whenever you
@@ -53,8 +66,8 @@ installation
 
   I don't see any warnings mentioned above but this plugin is
   still useful: say, it adds ESLint rule to check for presence
-  of Flow declaration (`// @flow`) when type annotation is added
-  to the file - ESLint will complain if it's missing:
+  of Flow declaration (`// @flow`) if type annotation is added
+  to the file - ESLint will complain if declaration is missing:
 
   ```
   Type annotations require valid Flow declaration.

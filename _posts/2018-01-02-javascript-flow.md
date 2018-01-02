@@ -105,8 +105,8 @@ according to Flow documentation `@flow` annotation can
 be placed anywhere in JS file - it just instructs Flow
 to check current file.
 
-but in my case only the files with `@flow` annotation
-at *the very beginning of the file* are checked by Flow.
+but in my case ONLY the files with `@flow` annotation
+at the very beginning of the file are checked by Flow.
 
 it's possible to use `@flow weak` for weak mode
 (see <https://github.com/facebook/flow/issues/3316>) -

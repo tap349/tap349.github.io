@@ -59,7 +59,7 @@ installation
 
   I don't see any warnings this plugin is supposed to mute either.
 
-  => I have removed this plugin so far.
+  => remove this plugin so far.
 
 usage
 -----

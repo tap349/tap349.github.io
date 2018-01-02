@@ -110,7 +110,7 @@ at the very beginning of the file are checked by Flow.
 
 it's possible to use `@flow weak` for weak mode
 (see <https://github.com/facebook/flow/issues/3316>) -
-e.g. it allows not to specify types for all parameters.
+say, it allows not to specify types for all parameters.
 
 ### add Flow script
 

@@ -164,7 +164,7 @@ provided by this plugin (automatic or manual checks - via
 `FlowMake` command) seems to be superfluous.
 
 still `FlowJumpToDef` and `FlowType` commands might be useful -
-just make sure to disable automatic checks on save!
+just make sure to disable automatic checks on save.
 
 style guide
 -----------

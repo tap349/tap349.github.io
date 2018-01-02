@@ -20,10 +20,10 @@ categories: [js, eslint, flow]
 installation
 ------------
 
-- install Flow globally
+- install Flow locally
 
   ```sh
-  $ brew install flow
+  $ yarn add flow-bin --dev
   ```
 
 - install Babel preset for Flow plugins
@@ -89,7 +89,7 @@ usage
 - prepare project
 
   ```sh
-  $ flow init
+  $ $(npm bin)/flow init
   ```
 
   this will create empty _.flowconfig_ at project root.
@@ -110,9 +110,9 @@ usage
   # does a full check, prints the results and monitors changes to
   # your code in the background checking those changes incrementally
   # for errors - current errors can be shown by typing `flow` again
-  $ flow
+  $ $(npm bin)/flow
   # does a full check in the foreground without starting Flow server
-  $ flow check
+  $ $(npm bin)/flow check
   ```
 
 Vim integration
@@ -123,6 +123,7 @@ Vim integration
   _~/.vim/vimrc_:
 
   ```vim
+  let g:syntastic_javascript_flow_exe = '$(npm bin)/flow'
   let g:syntastic_javascript_checkers = ['eslint', 'flow']
   ```
 

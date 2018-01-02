@@ -43,13 +43,7 @@ installation
   > Now, Babel will always strip away Flow source and your JS runtime can
   > interpret the code. This is especially important for feeding into ESlint.
 
-- install eslint-plugin-flowtype ESLint plugin (?)
-
-  it looks like this plugin provides Flow linting rules for
-  ESLint to be able to use ESLint to find Flow type errors
-  (`yarn run eslint` command or syntastic `eslint` checker)
-  but it's not the case: type errors are found only when using
-  `flow status` command or syntastic `flow` checker.
+- install `eslint-plugin-flowtype` ESLint plugin
 
   <https://github.com/ryyppy/flow-guide#eslint-configuration>:
 
@@ -57,9 +51,24 @@ installation
   > write type declarations. The eslint plugin eslint-plugin-flowtype
   > will mute those warnings.
 
-  I don't see any warnings this plugin is supposed to mute either.
+  I don't see any warnings mentioned above but this plugin is
+  still useful: say, when type annotation is added to the file
+  but Flow declaration (`@flow`) is missing, ESLint complains
+  once the plugin is installed:
 
-  => remove this plugin so far.
+  ```
+  Type annotations require valid Flow declaration.
+  (flowtype/no-types-missing-file-annotation)
+  ```
+
+  this rule `flowtype/no-types-missing-file-annotation` must be a
+  part of recommended configuration (`plugin:flowtype/recommended`).
+
+  NOTE: `eslint-plugin-flowtype` plugin is ESLint plugin - it's
+        not meant to check for Flow type errors or to show them!
+        checking for type errors is performed by `flow` binary
+        (use either `flow status` in terminal or `flow` syntastic
+        JS checker in Vim).
 
 usage
 -----
@@ -74,8 +83,8 @@ usage
 
 - flag files to be checked with `// @flow`
 
-  this flag can be placed anywhere in JS file -
-  it just instructs Flow to check this file.
+  `@flow` annotation can be placed anywhere in JS file -
+  it just instructs Flow to check current file.
 
 - run Flow
 

@@ -91,13 +91,15 @@ some rules worth mentioning are listed below:
   1. <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md>
 
   ```yaml
-  react/jsx-handler-names: warn
+  react/jsx-handler-names:
+    - warn
+    - eventHandlerPrefix: _handle
   ```
 
   this is considered okay:
 
   ```javascript
-  <MyComponent onChange={this.handleChange} />
+  <MyComponent onChange={this._handleChange} />
   <MyComponent onChange={this.props.onFoo} />
   ```
 

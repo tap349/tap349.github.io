@@ -115,6 +115,19 @@ usage
   $ $(npm bin)/flow check
   ```
 
+- add Flow script
+
+  _package.json_:
+
+  ```json
+  "scripts": {
+    "flow": "flow"
+  },
+  ```
+
+  this will allow to run Flow as `yarn run flow` instead of
+  `$(npm bin)/flow` (though the latter command still works).
+
 Vim integration
 ---------------
 

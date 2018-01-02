@@ -18,16 +18,15 @@ categories: [js, eslint]
 $ yarn global add eslint
 ```
 
-it's required to generate initial ESLint config for specific project
-and for syntastic to work (see below).
-
 ## generate ESLint config
 
 ```sh
-$ $(npm bin)/eslint --init
+$ \$(npm bin)/eslint --init
 ...
 Successfully created .eslintrc.yml file in <project-directory>
 ```
+
+also ESLint config is required for syntastic to work (see below).
 
 this will install both `eslint` package and additional plugins (based
 on your answers) locally as development dependencies in _package.json_:

@@ -181,11 +181,13 @@ Vim integration
 3. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
 NOTE: ESLint must be installed globally as well for
-      syntastic `eslint` checker to be available:
+      syntastic `eslint` checker to be available.
 
-      ```
-      CacheErrors: Checker javascript/eslint is not available
-      ```
+syntastic error message when ESLint is not installed globally:
+
+```
+CacheErrors: Checker javascript/eslint is not available
+```
 
 ```sh
 $ yarn global add eslint

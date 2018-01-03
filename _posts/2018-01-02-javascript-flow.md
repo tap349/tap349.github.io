@@ -160,7 +160,9 @@ let g:syntastic_javascript_flow_exe = '$(npm bin)/flow'
 let g:syntastic_javascript_checkers = ['flow']
 ```
 
-### `vim-flow` plugin
+### vim-flow
+
+NOTE: this plugin is currently removed.
 
 syntastic already performs linting of JS files so linting
 provided by this plugin (automatic or manual checks - via

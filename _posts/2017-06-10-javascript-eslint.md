@@ -180,7 +180,7 @@ Vim integration
 2. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
 3. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
-NOTE: ESLint must be installed globally as well for
+NOTE: ESLint must be installed globally for
       syntastic `eslint` checker to be available.
 
 syntastic error message when ESLint is not installed globally:

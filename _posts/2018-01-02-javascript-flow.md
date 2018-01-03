@@ -146,8 +146,8 @@ Vim integration
 
 ### syntastic
 
-NOTE: Flow must be installed globally as well for syntastic
-      `flow` checker to be available (just like for ESLint).
+NOTE: Flow must be installed globally for syntastic
+      `flow` checker to be available (like for ESLint).
 
 ```sh
 $ yarn global add flow-bin

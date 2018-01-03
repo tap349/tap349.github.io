@@ -180,8 +180,12 @@ Vim integration
 2. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
 3. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
-NOTE: for syntastic `eslint` checker to be available
-      and enabled ESLint must be installed globally!
+NOTE: ESLint must be installed globally as well for
+      syntastic `eslint` checker to be available:
+
+      ```
+      CacheErrors: Checker javascript/eslint is not available
+      ```
 
 ```sh
 $ yarn global add eslint

@@ -94,7 +94,27 @@ configuration
 $ $(npm bin)/flow init
 ```
 
-this will create empty _.flowconfig_ at project root.
+this will create empty _.flowconfig_ in the project root.
+
+### suppress `Required module not found` warnings
+
+if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
+Flow can't find some modules like `react-native` or `react-redux` -
+stub them to suppress warnings.
+
+create _ModuleStub.js_ in the project root:
+
+```javascript
+export default {};
+```
+
+_.flowconfig_:
+
+```
+[options]
+module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/ModuleStub'
+module.name_mapper='^react-redux$' -> '<PROJECT_ROOT>/ModuleStub'
+```
 
 usage
 -----

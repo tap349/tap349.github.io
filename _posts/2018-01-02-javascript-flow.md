@@ -96,13 +96,13 @@ $ $(npm bin)/flow init
 
 this will create empty _.flowconfig_ in the project root.
 
-### suppress `Required module not found` warnings
+### suppress `Required module not found` errors
 
 1. <https://github.com/facebook/flow/issues/3875#issuecomment-306219044>
 
 if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
 Flow cannot find some modules like `react-native` or `react-redux` -
-stub them to suppress warnings.
+stub them to suppress errors.
 
 create _ModuleStub.js_ in the project root:
 
@@ -118,7 +118,7 @@ module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/ModuleStub'
 module.name_mapper='^react-redux$' -> '<PROJECT_ROOT>/ModuleStub'
 ```
 
-### suppress `Experimental decorator usage` warnings
+### suppress `Experimental decorator usage` errors
 
 1. <https://github.com/facebook/flow/issues/606#issuecomment-213667957>
 
@@ -127,6 +127,22 @@ _.flowconfig_:
 ```
 [options]
 esproposal.decorators=ignore
+```
+
+### suppress `Property not found` errors for objects
+
+1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
+
+this is usually a problem when adding new object properties dynamically:
+
+```jsx
+<Form ref={ref => this._form = ref}>
+```
+
+cast object to `Object` when adding new properties:
+
+```jsx
+<Form ref={ref => (this: Object)._form = ref}>
 ```
 
 usage

@@ -176,7 +176,9 @@ $ yarn global add flow-bin
 _~/.vim/vimrc_:
 
 ```vim
-let g:syntastic_javascript_flow_exe = '$(npm bin)/flow'
+let g:syntastic_aggregate_errors = 1
+
+let g:syntastic_javascript_flow_exe = '$(npm bin)/flow focus-check'
 let g:syntastic_javascript_checkers = ['flow']
 ```
 

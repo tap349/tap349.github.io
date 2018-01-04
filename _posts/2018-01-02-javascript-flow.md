@@ -205,11 +205,11 @@ let g:syntastic_javascript_checkers = ['flow']
 
 ### vim-flow
 
-NOTE: this plugin is currently removed.
+NOTE: this plugin is currently not used.
 
 syntastic already performs linting of JS files so linting
 provided by this plugin (automatic or manual checks - via
-`FlowMake` command) seems to be superfluous.
+`FlowMake` command) seems to be excessive.
 
 still `FlowJumpToDef` and `FlowType` commands might be useful -
 just make sure to disable automatic checks on save.

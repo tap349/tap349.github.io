@@ -141,9 +141,17 @@ to check current file.
 but in my case ONLY the files with `@flow` annotation
 at the very beginning of the file are checked by Flow.
 
-it's possible to use `@flow weak` for weak mode
-(see <https://github.com/facebook/flow/issues/3316>) -
+<https://github.com/facebook/flow/issues/3316>:
+
+it's possible to use `@flow weak` for weak mode -
 say, it allows not to specify types for all parameters.
+
+### ignore Flow errors on a one-off basis
+
+```javascript
+// $FlowFixMe
+'foo' + {};
+```
 
 ### add Flow script
 
@@ -155,7 +163,7 @@ _package.json_:
 },
 ```
 
-now Flow can be run with any of these commands:
+now Flow can be run using any of these commands:
 
 ```sh
 $ $(npm bin)/flow

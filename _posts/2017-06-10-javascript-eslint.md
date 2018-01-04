@@ -158,7 +158,7 @@ _package.json_:
 },
 ```
 
-now ESLint can be run with any of these commands:
+now ESLint can be run using any of these commands:
 
 ```sh
 $ $(npm bin)/eslint

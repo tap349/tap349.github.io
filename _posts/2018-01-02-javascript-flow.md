@@ -133,7 +133,8 @@ esproposal.decorators=ignore
 
 1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
 
-this is usually a problem when adding new object properties dynamically:
+this is usually a problem when adding new object properties dynamically to a
+[sealed object](https://flow.org/en/docs/types/objects/#toc-sealed-objects):
 
 ```javascript
 <Form ref={ref => this._form = ref}>

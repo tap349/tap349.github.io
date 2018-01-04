@@ -135,13 +135,13 @@ esproposal.decorators=ignore
 
 this is usually a problem when adding new object properties dynamically:
 
-```jsx
+```javascript
 <Form ref={ref => this._form = ref}>
 ```
 
 cast object to `Object` when adding new properties:
 
-```jsx
+```javascript
 <Form ref={ref => (this: Object)._form = ref}>
 ```
 

@@ -101,7 +101,7 @@ this will create empty _.flowconfig_ in the project root.
 1. <https://github.com/facebook/flow/issues/3875#issuecomment-306219044>
 
 if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
-Flow can't find some modules like `react-native` or `react-redux` -
+Flow cannot find some modules like `react-native` or `react-redux` -
 stub them to suppress warnings.
 
 create _ModuleStub.js_ in the project root:

@@ -140,9 +140,8 @@ this is usually a problem when adding new object properties dynamically to a
 <Form ref={ref => this._form = ref}>
 ```
 
-cast object to `Object` when adding new properties (same as using
-[Function](https://flow.org/en/docs/types/functions/#toc-function-type)
-type?):
+cast object to `Object` when adding new properties
+(does it make an object unsealed?):
 
 ```javascript
 <Form ref={ref => (this: Object)._form = ref}>

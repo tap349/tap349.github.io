@@ -203,6 +203,12 @@ let g:syntastic_javascript_flow_exe = '$(npm bin)/flow focus-check'
 let g:syntastic_javascript_checkers = ['flow']
 ```
 
+<https://medium.com/@renatoagds/flow-vim-the-long-journey-497e020114e5>:
+
+another way to integrate Flow with syntastic is to feed file content into
+`flow check-contents` - but now that `flow focus-check` command is added
+this method seems to be obsolete.
+
 ### vim-flow
 
 NOTE: this plugin is currently not used.

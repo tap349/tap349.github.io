@@ -269,6 +269,10 @@ style guide
 notes
 -----
 
+<https://flow.org/en/docs/types/interfaces/>:
+
+use `interface` to add structural typing for classes.
+
 <https://flow.org/en/docs/lang/subtypes/#toc-subtypes-of-functions>:
 
 > the function subtyping rule is this: a function type B is a subtype

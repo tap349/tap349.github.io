@@ -133,19 +133,41 @@ esproposal.decorators=ignore
 
 1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
 
-this is usually a problem when adding new object properties dynamically to a
-[sealed object](https://flow.org/en/docs/types/objects/#toc-sealed-objects):
+this is usually a problem when adding new object property to a [sealed
+object](https://flow.org/en/docs/types/objects/#toc-sealed-objects).
+
+to fix it cast object to `Object` (it makes this object unsealed?):
 
 ```javascript
-<Form ref={ref => this._form = ref}>
+(object: Object).newProp = 'foo';
 ```
 
-cast object to `Object` when adding new properties
-(does it make an object unsealed?):
+for class fields in particular this error can be fixed in 2 ways:
 
-```javascript
-<Form ref={ref => (this: Object)._form = ref}>
-```
+- cast class instance (`this`) to its type (see above)
+
+  ```javascript
+  export default class NewPage extends Component {
+    // ...
+    <Form ref={ref => (this: NewPage)._form = ref}>
+    // this works too:
+    <Form ref={ref => (this: Object)._form = ref}>
+    // ...
+  }
+  ```
+
+- annotate class field within the body of the class
+
+  1. <https://flow.org/en/docs/types/classes/#toc-class-fields-properties>
+
+  ```javascript
+  export default class NewPage extends Component {
+    _form: Form;
+    // ...
+    <Form ref={ref => this._form = ref}>
+    // ...
+  }
+  ```
 
 usage
 -----

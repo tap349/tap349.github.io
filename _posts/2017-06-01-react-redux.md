@@ -20,7 +20,8 @@ categories: [react, react-native, redux]
 >   an object describing what happened.
 > - To specify how the actions transform the state tree, you write pure reducers.
 
-## store
+store
+-----
 
 - create (say, in _Store.js_):
 
@@ -52,7 +53,8 @@ categories: [react, react-native, redux]
   every time state changes listener function is called
   (which re-renders root component with all its child components here).
 
-## actions
+actions
+-------
 
 > Actions are payloads of information that send data from your application
 > to your store. They are the only source of information for the store.
@@ -76,7 +78,8 @@ function setCount (count) {
 }
 ```
 
-## reducers
+reducers
+--------
 
 > The reducer is a pure function that takes the previous state and an action,
 > and returns the next state.
@@ -173,7 +176,8 @@ const badges = combineReducers({count});
 export default badges;
 ```
 
-## react-redux
+react-redux
+-----------
 
 1. <https://github.com/reactjs/react-redux/blob/master/docs/api.md>
 2. <http://redux.js.org/docs/faq/ReactRedux.html>
@@ -260,7 +264,8 @@ using react-redux boils down to using just 2 things:
   class MyComponent extends Component {...}
   ```
 
-## tips
+tips
+----
 
 ### don't share state between child reducers
 
@@ -366,7 +371,8 @@ also it might be more convenient to store both object keyed by ID
 this causes flickering of `RefreshControl` component during animation -
 store it in component state instead.
 
-## style guide
+style guide
+-----------
 
 ### thunk actions
 
@@ -390,7 +396,8 @@ export const requestUpdateGameKind = (id, kind) => (
 )
 ```
 
-## middleware
+middleware
+----------
 
 ### [Redux Thunk](https://github.com/gaearon/redux-thunk)
 
@@ -451,7 +458,8 @@ this.props.store
 in any case it's required to add `catch` method call in component
 in order to avoid warning about unhandled promise rejection.
 
-## debugging
+debugging
+---------
 
 - <https://github.com/zalmoxisus/redux-devtools-extension>
 - <https://github.com/zalmoxisus/remote-redux-devtools>
@@ -498,7 +506,8 @@ export default createStore(reducer, composeWithDevTools(
 
 `Redux DevTools` extension icon menu -> `Open Remote DevTools`
 
-## troubleshooting
+troubleshooting
+---------------
 
 ### component is not re-rendered when it's connected
 

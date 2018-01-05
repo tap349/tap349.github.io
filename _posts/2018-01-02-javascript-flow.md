@@ -242,3 +242,11 @@ style guide
 -----------
 
 1. <https://github.com/ryyppy/flow-guide#flow-style-guide>
+
+notes
+-----
+
+<https://flow.org/en/docs/lang/nominal-structural/>:
+
+> Flow uses structural typing for objects and functions,
+> but nominal typing for classes.

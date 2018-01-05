@@ -148,11 +148,11 @@ for class fields in particular this error can be fixed in 2 ways:
 
   ```javascript
   export default class NewPage extends Component {
-    // ...
-    <Form ref={ref => (this: NewPage)._form = ref}>
-    // this works too:
-    <Form ref={ref => (this: Object)._form = ref}>
-    // ...
+    render () {
+      return <Form ref={ref => (this: NewPage)._form = ref} />;
+      // this works too:
+      return <Form ref={ref => (this: Object)._form = ref} />;
+    }
   }
   ```
 
@@ -163,9 +163,10 @@ for class fields in particular this error can be fixed in 2 ways:
   ```javascript
   export default class NewPage extends Component {
     _form: Form;
-    // ...
-    <Form ref={ref => this._form = ref}>
-    // ...
+
+    render () {
+      return <Form ref={ref => this._form = ref} />;
+    }
   }
   ```
 

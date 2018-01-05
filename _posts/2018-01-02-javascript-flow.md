@@ -133,7 +133,7 @@ esproposal.decorators=ignore
 
 1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
 
-this is usually a problem when adding new object property to a [sealed
+this is usually a problem when adding new properties to a [sealed
 object](https://flow.org/en/docs/types/objects/#toc-sealed-objects).
 
 to fix it cast object to `Object` (it makes this object unsealed?):

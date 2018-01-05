@@ -275,7 +275,7 @@ notes
 > of a function type A if and only if B’s inputs are a superset of A’s,
 > and B’s outputs are a subset of A’s.
 
-<https://flow.org/en/docs/lang/nominal-structural/>:
+<https://flow.org/en/docs/lang/nominal-structural>:
 
 > Flow uses structural typing for objects and functions,
 > but nominal typing for classes.

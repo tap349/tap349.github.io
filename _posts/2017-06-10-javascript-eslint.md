@@ -93,6 +93,7 @@ all the rules are added to `rules` section of _.eslintrc.yml_.
 rule format: `name: setting` or `name: [setting, config]` where
 
 - `setting` is one of `off` (0), `warn` (1) or `error` (2)
+  (prefer 1 instead of `warn` or `error` for `foo-uses-bar` rules)
 - `config` is rule-specific
 
 some rules worth mentioning are listed below:

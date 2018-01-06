@@ -148,6 +148,14 @@ some rules worth mentioning are listed below:
 usage
 -----
 
+### ignore ESLint errors on a one-off basis
+
+```javascript
+// eslint-disable-next-line
+const foo = 123;
+const foo = 123; // eslint-disable-line
+```
+
 ### add ESLint script
 
 _package.json_:

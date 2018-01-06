@@ -182,14 +182,14 @@ $ yarn run eslint app/services/TeamHelpers.js
 Vim integration
 ---------------
 
-### syntastic
+### [NOT USED] syntastic
 
 1. <https://medium.com/@hpux/vim-and-eslint-16fa08cc580f>
 2. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
 3. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
-NOTE: ESLint must be installed globally for
-      syntastic `eslint` checker to be available.
+NOTE: ESLint must be installed globally for syntastic
+      `eslint` checker to be available (like for Flow).
 
 syntastic error message when ESLint is not installed globally:
 
@@ -206,4 +206,17 @@ _~/.vim/vimrc_:
 ```vim
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 let g:syntastic_javascript_checkers=['eslint']
+```
+
+### ale and lightline-ale
+
+unlike syntastic, ALE doesn't require ESLint to be installed globally -
+it finds ESLint script (`$(npm bin)/eslint`) somehow.
+
+_~/.vim/vimrc_:
+
+```vim
+let g:ale_linters = {
+      \   'javascript': ['eslint']
+      \ }
 ```

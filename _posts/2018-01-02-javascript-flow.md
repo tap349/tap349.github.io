@@ -226,7 +226,7 @@ $ yarn run flow check
 Vim integration
 ---------------
 
-### syntastic
+### [NOT USED] syntastic
 
 NOTE: Flow must be installed globally for syntastic
       `flow` checker to be available (like for ESLint).
@@ -250,9 +250,7 @@ another way to integrate Flow with syntastic is to feed file content into
 `flow check-contents` - but now that `flow focus-check` command is added
 this method seems to be obsolete.
 
-### vim-flow
-
-NOTE: this plugin is currently not used.
+### [NOT USED] vim-flow
 
 syntastic already performs linting of JS files so linting
 provided by this plugin (automatic or manual checks - via
@@ -260,6 +258,19 @@ provided by this plugin (automatic or manual checks - via
 
 still `FlowJumpToDef` and `FlowType` commands might be useful -
 just make sure to disable automatic checks on save.
+
+### ale and lightline-ale
+
+unlike syntastic, ALE doesn't require Flow to be installed globally -
+it finds Flow script (`$(npm bin)/flow`) somehow.
+
+_~/.vim/vimrc_:
+
+```vim
+let g:ale_linters = {
+      \   'javascript': ['flow']
+      \ }
+```
 
 style guide
 -----------

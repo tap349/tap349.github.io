@@ -259,7 +259,7 @@ provided by this plugin (automatic or manual checks - via
 still `FlowJumpToDef` and `FlowType` commands might be useful -
 just make sure to disable automatic checks on save.
 
-### ale and lightline-ale
+### ale / lightline-ale
 
 unlike syntastic, ALE doesn't require Flow to be installed globally -
 it finds Flow script (`$(npm bin)/flow`) somehow.

@@ -208,7 +208,7 @@ let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 let g:syntastic_javascript_checkers=['eslint']
 ```
 
-### ale and lightline-ale
+### ale / lightline-ale
 
 unlike syntastic, ALE doesn't require ESLint to be installed globally -
 it finds ESLint script (`$(npm bin)/eslint`) somehow.

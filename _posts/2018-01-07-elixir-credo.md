@@ -101,6 +101,13 @@ _.credo.exs_:
 
 > Priority values are: `low, normal, high, higher`
 
+each Credo check has its own default priority, priority of any
+check can be customized with `priority` parameter in _.credo.exs_:
+
+```elixir
+{Credo.Check.Design.AliasUsage, priority: :low},
+```
+
 ### issue categories
 
 ```sh

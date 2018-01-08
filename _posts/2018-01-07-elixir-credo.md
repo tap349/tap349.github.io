@@ -37,13 +37,12 @@ suggestions + style guide of per file basis:
 $ mix credo list --strict
 ```
 
-by default low priorities issues are not shown -
-`--all-priorities` switch (aliased as `--strict`)
-allows to include them in the output =\> there are
-no special style guide checks enabled by this option.
+by default low priority issues are not shown - `--all-priorities`
+switch (aliased as `--strict`) allows to include them in the output
+=\> there are no special style guide checks enabled by this option.
 
-explain specific issue (`explain` is a default command
-when `filename:line_number:column` string is passed):
+explain specific issue (`explain` is a default command when
+`filename:line_number:column` string is passed):
 
 ```sh
 $ mix credo lib/neko/user_handler.ex:66:5
@@ -78,14 +77,14 @@ let g:ale_linters = {
       \ }
 ```
 
-ALE runs this command when for `credo` linter:
+ALE runs this command for `credo` linter:
 `mix credo suggest --format=flycheck --read-from-stdin %s`.
 
-the main point is that there's no `--strict` option which means
-that low priority issues are not displayed.
+the main point is that `--strict` option is missing which
+means that low priority issues are not displayed by ALE.
 
-this can be circumvented, say, by changing check of interest
-priority in _.credo.exs_:
+this can be circumvented, if required, by changing check of
+interest priority in _.credo.exs_:
 
 ```diff
 -{Credo.Check.Readability.MaxLineLength, priority: :low, max_length: 80},

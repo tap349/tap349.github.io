@@ -284,6 +284,17 @@ notes
 
 use `interface` to add structural typing for classes.
 
+<https://flow.org/en/docs/types/unions/>:
+
+> Union types requires one in, but all out.
+
+<https://flow.org/en/docs/types/intersections/>:
+
+> Intersection types require all in, but one out.
+>
+> When you create an intersection of object types,
+> you merge all of their properties together.
+
 <https://flow.org/en/docs/lang/subtypes/#toc-subtypes-of-functions>:
 
 > the function subtyping rule is this: a function type B is a subtype

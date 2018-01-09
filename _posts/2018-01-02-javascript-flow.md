@@ -338,3 +338,6 @@ use `interface` to add structural typing for classes.
 
 > Width subtyping: a type that is “wider” (i.e., has more properties)
 > is a subtype of a narrower type.
+
+> Exact object types disable width subtyping, and do not allow additional
+> properties to exist.

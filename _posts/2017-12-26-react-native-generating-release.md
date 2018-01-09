@@ -30,6 +30,9 @@ iOS
   ```
 
 - create archive: `Product` (top menu) -> `Archive`
+- click `Upload to App Store..` button when archive is created
+- follow on-screen instructions (leave defaults) and click
+  `Upload` button in the end
 
 Android
 -------
@@ -48,7 +51,7 @@ Android
 troubleshooting
 ---------------
 
-### Invalid bitcode version (Producer: '802.0.41.0_0' Reader: '800.0.42.1_0')
+### [iOS] Invalid bitcode version (Producer: '802.0.41.0_0' Reader: '800.0.42.1_0')
 
 build failed in Xcode:
 
@@ -65,3 +68,12 @@ either:
 
 - *[RECOMMENDED]* update Xcode to 8.3
 - disable bitcode in `Build Settings` -> `Build Options` -> `Enable Bitcode`
+
+### [iOS] "Company" has one iOS Distribution but its private key is not installed
+
+the error occurs when trying to upload archive to App Store.
+
+**solution**
+
+get private key of iOS Distribution certificate (_p12_ file) from its creator
+and import it into the login keychain (via `keychain Access` application).

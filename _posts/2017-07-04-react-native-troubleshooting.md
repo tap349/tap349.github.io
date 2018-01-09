@@ -308,7 +308,7 @@ emulator window:
 Module JSTimersExecution is not a registered callable module (calling callTimers)
 ```
 
-errors occurs after upgrading RN to 0.47.0.
+the error occurs after upgrading RN to 0.47.0.
 
 **solution**
 

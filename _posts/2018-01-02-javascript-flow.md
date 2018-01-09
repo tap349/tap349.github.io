@@ -280,6 +280,8 @@ style guide
 notes
 -----
 
+### [Type Annotations](https://flow.org/en/docs/types)
+
 <https://flow.org/en/docs/types/interfaces/>:
 
 use `interface` to add structural typing for classes.
@@ -295,6 +297,8 @@ use `interface` to add structural typing for classes.
 > When you create an intersection of object types,
 > you merge all of their properties together.
 
+### [Type System](https://flow.org/en/docs/lang)
+
 <https://flow.org/en/docs/lang/subtypes/#toc-subtypes-of-functions>:
 
 > the function subtyping rule is this: a function type B is a subtype
@@ -305,3 +309,8 @@ use `interface` to add structural typing for classes.
 
 > Flow uses structural typing for objects and functions,
 > but nominal typing for classes.
+
+<https://flow.org/en/docs/lang/variance>:
+
+> Flow has contravariant inputs (accepts less specific types to be passed in),
+> and covariant outputs (allows more specific types to be returned).

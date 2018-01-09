@@ -317,3 +317,19 @@ use `interface` to add structural typing for classes.
 
 > Flow has contravariant inputs (accepts less specific types to be passed in),
 > and covariant outputs (allows more specific types to be returned).
+
+<https://flow.org/en/docs/lang/depth-subtyping/>:
+
+> By default, object properties are invariant, which allow both
+> reads and writes, but are more restrictive in the values they
+> accept (when they are declared - my note).
+
+<https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)>:
+
+> One function type is a subtype of another when it is safe to use a function
+> of one type in a context that expects a function of a different type.
+> It is safe to substitute a function f for a function g if f accepts a more
+> general type of arguments and returns a more specific type than g.
+>
+> In other words, the type constructor is contravariant in the input type and
+> covariant in the output type.

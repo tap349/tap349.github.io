@@ -69,11 +69,19 @@ either:
 - *[RECOMMENDED]* update Xcode to 8.3
 - disable bitcode in `Build Settings` -> `Build Options` -> `Enable Bitcode`
 
-### [iOS] "Company" has one iOS Distribution but its private key is not installed
+### [iOS] "<Company>" has one iOS Distribution but its private key is not installed
 
 the error occurs when trying to upload archive to App Store.
 
 **solution**
 
-get private key of iOS Distribution certificate (_p12_ file) from its creator
-and import it into the login keychain (via `keychain Access` application).
+- download iOS certificate for `<Company>` (`iOS Distribution` Type) from
+  [iOS Certificates](https://developer.apple.com/account/ios/certificate/)
+  (_ios\_distribution.cer_ file) and import it into the login keychain
+  (its name is something like `iPhone Distribution: <Company>`)
+
+  NOTE: this certificate might have been imported already
+
+- get private key of iOS Distribution certificate
+  (_iOS Distribution\_<Company>.p12_ file) from its creator and import it into
+  the login keychain (its name is something like `iOS Distribution: <Company>`)

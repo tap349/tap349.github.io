@@ -9,11 +9,13 @@ categories: [chrome]
 
 <!-- more -->
 
-## [how to] delete autosuggested URL
+[how to] delete autosuggested URL
+---------------------------------
 
 `<S-Del>`
 
-## web inspector
+web inspector
+-------------
 
 ### [how to] find elements in Console
 
@@ -26,3 +28,8 @@ it's necessary to select particular element from collection:
 ```javascript
 $('div.phone')[0]
 ```
+
+[how to] disable material design bookmarks
+------------------------------------------
+
+<chrome://flags/#enable-md-bookmarks> -> `Disabled`

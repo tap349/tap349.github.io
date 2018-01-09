@@ -2,7 +2,7 @@
 layout: post
 title: React Native - Generating release
 date: 2017-12-26 17:52:35 +0300
-access: public
+access: private
 comments: true
 categories: [react-native]
 ---
@@ -18,9 +18,32 @@ iOS
 
 - open _iceperkapp.xcworkspace_ in Xcode
 - select `Generic iOS Device`
-- increment build number: `General` -> `Identity` -> `Build`
-  (it should be incremented synchronously for Android too)
+- increment build number:
+
+  Xcode: `General` -> `Identity` -> `Build`
+
+  or else in _ios/iceperkapp/Info.plist_:
+
+  ```xml
+  <key>CFBundleVersion</key>
+  <string>58</string>
+  ```
+
 - create archive: `Product` (top menu) -> `Archive`
+
+Android
+-------
+
+- increment build number
+
+  _android/app/build.gradle_:
+
+  ```groovy
+  versionCode 58
+  ```
+
+- copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
+  from `Complead/iceperkapp_certificates/android` repo
 
 troubleshooting
 ---------------

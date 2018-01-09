@@ -301,7 +301,7 @@ use `interface` to add structural typing for classes.
 
 <https://flow.org/en/docs/lang/subtypes/#toc-subtypes-of-functions>:
 
-> the function subtyping rule is this: a function type B is a subtype
+> The function subtyping rule is this: a function type B is a subtype
 > of a function type A if and only if B’s inputs are a superset of A’s,
 > and B’s outputs are a subset of A’s.
 
@@ -333,3 +333,8 @@ use `interface` to add structural typing for classes.
 >
 > In other words, the type constructor is contravariant in the input type and
 > covariant in the output type.
+
+<https://flow.org/en/docs/lang/width-subtyping/>:
+
+> Width subtyping: a type that is “wider” (i.e., has more properties)
+> is a subtype of a narrower type.

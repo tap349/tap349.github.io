@@ -309,6 +309,9 @@ use `interface` to add structural typing for classes.
 
 > Flow uses structural typing for objects and functions,
 > but nominal typing for classes.
+>
+> If you wanted to use a class structurally you could do
+> that by mixing them with objects as interfaces.
 
 <https://flow.org/en/docs/lang/variance>:
 

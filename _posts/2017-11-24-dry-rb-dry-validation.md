@@ -38,7 +38,7 @@ one of 2 equivalent ways:
 - by their name (atom and hash)
 
   predicate names are passed to some macro - `value` method
-  looks like macro as well (but most generic one):
+  looks like a macro as well (but most generic one):
 
   ```ruby
   required(:foo).value(:int?)
@@ -68,6 +68,12 @@ macros don't share a common pattern - just memorize how they are expanded:
 I've mentioned `value` method that looks like a macro - it just applies
 all specified predicates (joined by conjunction) without introducing any
 additional logic (e.g. `value(:int?) => { int? }`).
+
+it's possible to pass any Dry type into macro:
+
+```ruby
+required(:foo).filled(Types::Strict::String.enum('bar', 'baz'))
+```
 
 predicates with argument
 ------------------------

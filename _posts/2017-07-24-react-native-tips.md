@@ -217,3 +217,13 @@ ScrollView 1 (scrollable)
 but they scroll together inside `ScrollView 1`.
 
 but in general it's better to avoid nested `ScrollView`s.
+
+[how to] add comments inside JSX
+--------------------------------
+
+```jsx
+<MyComponent>
+  {/* some comment... */}
+  {42}
+</MyComponent>
+```

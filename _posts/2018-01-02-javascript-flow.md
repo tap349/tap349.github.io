@@ -341,3 +341,58 @@ use `interface` to add structural typing for classes.
 
 > Exact object types disable width subtyping, and do not allow additional
 > properties to exist.
+
+[React](https://flow.org/en/docs/react/)
+----------------------------------------
+
+annotate component with `@flow`:
+
+```javascript
+// @flow
+import * as React from 'react';
+```
+
+add `Props` type:
+
+```javascript
+type Props = {
+  isChecked: boolean,
+  isDisabled?: boolean,
+};
+```
+
+and pass it into `React.Component` as a type argument
+(`React.Component<Props, State>` is a parameterized generic
+type that takes 2 arguments):
+
+```javascript
+export default class Checkbox extends React.Component<Props> {
+  // ...
+}
+```
+
+add default props as usual:
+
+```javascript
+export default class Checkbox extends React.Component<Props> {
+  static defaultProps = {
+    isDisabled: false,
+  }
+  // ...
+}
+```
+
+NOTE: default prop value is not type checked for some reason -
+      you can set it to any value. to be precise, its type is
+      infered from `defaultProps` but Flow doesn't check that
+      it's the same type as in `Props` type.
+
+add maybe type for component ref:
+
+```jsx
+_form: ?Form;
+
+render () {
+  return <Form ref={ref => this._form = ref} />
+}
+```

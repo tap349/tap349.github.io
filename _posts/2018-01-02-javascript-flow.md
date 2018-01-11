@@ -396,3 +396,21 @@ render () {
   return <Form ref={ref => this._form = ref} />
 }
 ```
+
+install `babel-plugin-react-flow-props-to-prop-types` plugin for
+runtime checks (Flow performs static checks only):
+
+```sh
+$ yarn add prop-types prop-types-extra
+$ yarn add babel-plugin-react-flow-props-to-prop-types --dev
+```
+
+_.babelrc_:
+
+```
+{
+  "plugins": [
+    ["react-flow-props-to-prop-types"]
+  ]
+}
+```

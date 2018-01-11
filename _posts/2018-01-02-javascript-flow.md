@@ -414,3 +414,37 @@ _.babelrc_:
   ]
 }
 ```
+
+types
+-----
+
+a very useful example of using Flow types (with their corresponding prop types)
+from _REAMDE.md_ of `babel-plugin-react-flow-props-to-prop-types` plugin:
+
+```javascript
+type FooProps = {
+  an_optional_string?: string,
+  a_number: number,
+  a_boolean: boolean,
+  a_generic_object: Object,
+  array_of_strings: Array<string>,
+  instance_of_Bar: Bar,
+  anything: any,
+  mixed: mixed,
+  one_of: 'QUACK' | 'BARK' | 5,
+  one_of_type: number | string,
+  nested_object_level_1: {
+    string_property_1: string,
+    nested_object_level_2: {
+      nested_object_level_3: {
+        string_property_3: string,
+      },
+      string_property_2: string,
+    }
+  },
+  should_error_if_provided: void,
+  intersection: {foo: string} & { bar: number } & Qux,
+  some_external_type: SomeExternalType,
+  some_external_type_intersection: {foo: string} & SomeExternalType,
+}
+```

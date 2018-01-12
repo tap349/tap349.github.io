@@ -107,6 +107,16 @@ $ yarn start --reset-cache
 it might be necessary to clean cache, say, when build fails.
 using `yarn start --reset-cache` might be sufficient so try this command first.
 
+(how to) update package
+-----------------------
+
+if Yarn/npm refuses to update package:
+
+- change package version in _package.json_
+- `yarn install`/`npm install`
+
+maybe it's hack but IDK how to update package correctly.
+
 don't use peer dependencies
 ---------------------------
 

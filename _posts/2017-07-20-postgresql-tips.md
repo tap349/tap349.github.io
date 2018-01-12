@@ -222,7 +222,7 @@ $ gunzip PostgreSQL.sql.gz
 $ psql -U username -f ./PostgreSQL.sql database
 ```
 
-[how to] remove all versions of PostgreSQL on Ubuntu
+(how to) remove all versions of PostgreSQL on Ubuntu
 ----------------------------------------------------
 
 <https://askubuntu.com/a/32735>:

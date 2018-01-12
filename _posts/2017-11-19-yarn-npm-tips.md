@@ -15,8 +15,8 @@ categories: [yarn, npm, js]
 
 1. <https://yarnpkg.com/lang/en/docs/migrating-from-npm/>
 
-install package globally
-------------------------
+(how to) install package globally
+---------------------------------
 
 ### Yarn
 
@@ -41,16 +41,16 @@ $ which rnpm
 - global packages are saved to _~/.config/yarn/global/package.json_
   (only when installed with Yarn)
 
-reinstall all packages
-----------------------
+(how to) reinstall all packages
+-------------------------------
 
 ```sh
 $ rm -rf node_modules/ && yarn install
 $ rm -rf node_modules/ && npm install
 ```
 
-[npm] remove not used packages
-------------------------------
+[npm] (how to) remove not used packages
+---------------------------------------
 
 not used packages appear after removing packages from _package.json_ manually.
 
@@ -81,8 +81,8 @@ package as development dependency saves it in `"devDependencies"` section
 (packages is used in development environment only - say, in test suites
 or by transpilers).
 
-run script or locally installed executable
-------------------------------------------
+(how to) run script or locally installed executable
+---------------------------------------------------
 
 - scripts are defined in `scripts` section of _package.json_
 - locally installed executables are stored in _node\_modules/.bin/_
@@ -94,8 +94,8 @@ $ npm run <script>
 $ npm run-script <script>
 ```
 
-clean cache
------------
+(how to) clean cache
+--------------------
 
 1. <https://gist.github.com/jarretmoses/c2e4786fd342b3444f3bc6beff32098d>
 

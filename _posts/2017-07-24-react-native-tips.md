@@ -13,7 +13,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-[how to] set application icon badge number
+(how to) set application icon badge number
 ------------------------------------------
 
 1. <https://stackoverflow.com/questions/40313361>
@@ -53,7 +53,7 @@ RN package which:
 
   in a nutshell - link `PushNotificationIOS` native library manually.
 
-[how to] dismiss keyboard when tapping outside of TextInput
+(how to) dismiss keyboard when tapping outside of TextInput
 -----------------------------------------------------------
 
 1. <https://stackoverflow.com/questions/41426862>
@@ -75,7 +75,7 @@ by default keyboard is not dismissed when tapping outside of
 if there is a `ListView` somewhere below you'll have to wrap
 `ScrollView` in `View` - otherwise it's not visible.
 
-[how to] dismiss keyboard when pressing `<CR>` on keyboard
+(how to) dismiss keyboard when pressing `<CR>` on keyboard
 ----------------------------------------------------------
 
 1. <https://facebook.github.io/react-native/docs/textinput.html>
@@ -87,7 +87,7 @@ if there is a `ListView` somewhere below you'll have to wrap
 />
 ```
 
-[how to] open application in store
+(how to) open application in store
 ----------------------------------
 
 1. <https://stackoverflow.com/questions/35612383>
@@ -158,7 +158,7 @@ in case of unhandled promise rejection there might be no relevant
 messages in `react-native log-ios` output - make sure that errors
 are logged in corresponding `catch` clauses in that case.
 
-[how to] to use absolute paths for imports
+(how to) to use absolute paths for imports
 ------------------------------------------
 
 1. <https://medium.com/@davidjwoody/6b06ae3f65d1>
@@ -218,7 +218,7 @@ but they scroll together inside `ScrollView 1`.
 
 but in general it's better to avoid nested `ScrollView`s.
 
-[how to] add comments inside JSX
+(how to) add comments inside JSX
 --------------------------------
 
 ```jsx

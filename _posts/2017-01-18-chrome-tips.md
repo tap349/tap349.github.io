@@ -9,7 +9,7 @@ categories: [chrome]
 
 <!-- more -->
 
-[how to] delete autosuggested URL
+(how to) delete autosuggested URL
 ---------------------------------
 
 `<S-Del>`
@@ -17,7 +17,7 @@ categories: [chrome]
 web inspector
 -------------
 
-### [how to] find elements in Console
+### (how to) find elements in Console
 
 - by css: `$('div.phone')`
 - by xpath: `$x("//div[contains(@class,'phone')")`
@@ -29,7 +29,7 @@ it's necessary to select particular element from collection:
 $('div.phone')[0]
 ```
 
-[how to] disable material design bookmarks
+(how to) disable material design bookmarks
 ------------------------------------------
 
 <chrome://flags/#enable-md-bookmarks> -> `Disabled`

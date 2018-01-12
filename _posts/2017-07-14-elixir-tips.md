@@ -45,7 +45,7 @@ applicaiton). contexts can be further divided into subdomains (say, I have
 such subdomains named after schemas - they contain operations, queries, etc.
 that refer to (= bounded by) that specific schema).
 
-[how to] convert struct <-> map
+(how to) convert struct <-> map
 -------------------------------
 
 [struct to map](https://hexdocs.pm/elixir/Map.html#from_struct/1):
@@ -66,7 +66,7 @@ struct!(User, %{id: 1, name: "Alice", foo: 123})
 User.new(%{id: 1, name: "Alice", foo: 123})
 ```
 
-[how to] update struct
+(how to) update struct
 ----------------------
 
 ```elixir

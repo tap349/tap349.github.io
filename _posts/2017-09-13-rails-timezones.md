@@ -13,7 +13,7 @@ categories: [rails]
 {:toc}
 <hr>
 
-[how to] parse datetime string wo timezone in specified timezone
+(how to) parse datetime string wo timezone in specified timezone
 ----------------------------------------------------------------
 
 ```ruby

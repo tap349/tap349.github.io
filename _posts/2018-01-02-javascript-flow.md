@@ -98,25 +98,35 @@ this will create empty _.flowconfig_ in the project root.
 
 ### suppress `Required module not found` errors
 
-1. <https://github.com/facebook/flow/issues/3875#issuecomment-306219044>
+- replace not found module with stub module
 
-if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
-Flow cannot find some modules like `react-native` or `react-redux` -
-stub them to suppress errors.
+  1. <https://github.com/facebook/flow/issues/3875#issuecomment-306219044>
+  2. <https://github.com/facebook/flow/issues/2092#issuecomment-286399732>
 
-create _ModuleStub.js_ in the project root:
+  if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
+  Flow cannot find some modules like `react-native` or `react-redux` -
+  stub them to suppress errors.
 
-```javascript
-export default {};
-```
+  create _ModuleStub.js_ in the project root:
 
-_.flowconfig_:
+  ```javascript
+  export default {};
+  ```
 
-```
-[options]
-module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/ModuleStub'
-module.name_mapper='^react-redux$' -> '<PROJECT_ROOT>/ModuleStub'
-```
+  _.flowconfig_:
+
+  ```
+  [options]
+  ; modules
+  module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/ModuleStub'
+  module.name_mapper='^react-native-.+$' -> '<PROJECT_ROOT>/ModuleStub'
+  module.name_mapper='^react-redux$' -> '<PROJECT_ROOT>/ModuleStub'
+
+  ; images
+  module.name_mapper='^$' -> '<PROJECT_ROOT>/ModuleStub'
+  ```
+
+- provide external library definitions from `flow-typed` repository
 
 ### suppress `Experimental decorator usage` errors
 

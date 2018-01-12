@@ -63,6 +63,9 @@ iceperk
   `iceperk` application *after* new `iceperkapp` releases appear in *both*
   App Store and Google Play
 
+  this is required to show a notification message about a new release to all
+  users (modal window inside application).
+
 troubleshooting
 ---------------
 

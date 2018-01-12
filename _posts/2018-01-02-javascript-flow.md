@@ -271,75 +271,78 @@ use `interface` to add structural typing for classes.
 [React](https://flow.org/en/docs/react/)
 ----------------------------------------
 
-annotate component with `@flow`:
+- annotate component with `@flow`
 
-```javascript
-// @flow
-import * as React from 'react';
-```
+  ```javascript
+  // @flow
+  import * as React from 'react';
+  ```
 
-add `Props` type:
+- add `Props` type
 
-```javascript
-type Props = {
-  isChecked: boolean,
-  isDisabled?: boolean,
-};
-```
+  ```javascript
+  type Props = {
+    isChecked: boolean,
+    isDisabled?: boolean,
+  };
+  ```
 
-and pass it into `React.Component` as a type argument
-(`React.Component<Props, State>` is a parameterized generic
-type that takes 2 arguments):
+  and pass it into `React.Component` as a type argument
+  (`React.Component<Props, State>` is a parameterized generic
+  type that takes 2 arguments):
 
-```javascript
-export default class Checkbox extends React.Component<Props> {
-  // ...
-}
-```
-
-add default props as usual:
-
-```javascript
-export default class Checkbox extends React.Component<Props> {
-  static defaultProps = {
-    isDisabled: false,
+  ```javascript
+  export default class Checkbox extends React.Component<Props> {
+    // ...
   }
-  // ...
-}
-```
+  ```
 
-NOTE: default prop value is not type checked for some reason -
-      you can set it to any value. to be precise, its type is
-      infered from `defaultProps` but Flow doesn't check that
-      it's the same type as in `Props` type.
+- add default props as usual
 
-add maybe type for component ref:
+  ```javascript
+  export default class Checkbox extends React.Component<Props> {
+    static defaultProps = {
+      isDisabled: false,
+    }
+    // ...
+  }
+  ```
 
-```jsx
-_form: ?Form;
+  NOTE: default prop value is not type checked for some reason -
+        you can set it to any value. to be precise, its type is
+        infered from `defaultProps` but Flow doesn't check that
+        it's the same type as in `Props` type.
 
-render () {
-  return <Form ref={ref => this._form = ref} />
-}
-```
+- add maybe type for component ref
 
-install `babel-plugin-react-flow-props-to-prop-types` plugin for
-runtime checks (Flow performs static checks only):
+  ```jsx
+  _form: ?Form;
 
-```sh
-$ yarn add prop-types prop-types-extra
-$ yarn add babel-plugin-react-flow-props-to-prop-types --dev
-```
+  render () {
+    return <Form ref={ref => this._form = ref} />
+  }
+  ```
 
-_.babelrc_:
+- install `babel-plugin-react-flow-props-to-prop-types` plugin for
+  runtime checks (Flow performs static checks only)
 
-```
-{
-  "plugins": [
-    ["react-flow-props-to-prop-types"]
-  ]
-}
-```
+  IMPORTANT: don't install this plugin - it causes strange errors
+             (see `troubleshooting` section)!
+
+  ```sh
+  $ yarn add prop-types prop-types-extra
+  $ yarn add babel-plugin-react-flow-props-to-prop-types --dev
+  ```
+
+  _.babelrc_:
+
+  ```
+  {
+    "plugins": [
+      ["react-flow-props-to-prop-types"]
+    ]
+  }
+  ```
 
 types
 -----
@@ -527,7 +530,6 @@ _.babelrc_:
 
 ```diff
  {
-   "presets": ["react-native", "flow"],
    "plugins": [
 -    "react-flow-props-to-prop-types"
    ]

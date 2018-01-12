@@ -94,8 +94,8 @@ $ npm run <script>
 $ npm run-script <script>
 ```
 
-(how to) clean cache
---------------------
+(how to) reset all (and clean cache)
+------------------------------------
 
 1. <https://gist.github.com/jarretmoses/c2e4786fd342b3444f3bc6beff32098d>
 
@@ -105,7 +105,9 @@ $ yarn start --reset-cache
 ```
 
 it might be necessary to clean cache, say, when build fails.
-using `yarn start --reset-cache` might be sufficient so try this command first.
+
+if it's necessary to reset cache only, using `yarn start --reset-cache`
+might suffice - try it first.
 
 (how to) update package
 -----------------------

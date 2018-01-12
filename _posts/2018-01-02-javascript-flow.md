@@ -96,102 +96,6 @@ $ $(npm bin)/flow init
 
 this will create empty _.flowconfig_ in the project root.
 
-### suppress `Required module not found` errors
-
-1. <https://github.com/facebook/flow/issues/1548>
-2. <https://github.com/facebook/flow/issues/1548#issuecomment-198477146>
-
-- replace not found module with stub module
-
-  1. <https://github.com/facebook/flow/issues/3875#issuecomment-306219044>
-  2. <https://github.com/facebook/flow/issues/2092#issuecomment-286399732>
-
-  if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
-  Flow cannot find some modules like `react-native` or `react-redux` -
-  stub them to suppress errors.
-
-  create _ModuleStub.js_ in the project root:
-
-  ```javascript
-  export default {};
-  ```
-
-  _.flowconfig_:
-
-  ```
-  [options]
-  ; modules
-  module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/ModuleStub'
-  module.name_mapper='^react-native-.+$' -> '<PROJECT_ROOT>/ModuleStub'
-  module.name_mapper='^react-redux$' -> '<PROJECT_ROOT>/ModuleStub'
-
-  ; images
-  module.name_mapper='^$' -> '<PROJECT_ROOT>/ModuleStub'
-  ```
-
-- provide external library definitions from `flow-typed` repository
-
-  1. <https://github.com/facebook/flow/issues/1548#issuecomment-318085946>
-
-  _.flowconfig_:
-
-  ```
-  [libs]
-  <PROJECT_ROOT>/flow-typed
-  ```
-
-### suppress `Experimental decorator usage` errors
-
-1. <https://github.com/facebook/flow/issues/606#issuecomment-213667957>
-
-_.flowconfig_:
-
-```
-[options]
-esproposal.decorators=ignore
-```
-
-### suppress `Property not found` errors for objects
-
-1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
-
-this is usually a problem when adding new properties to a [sealed
-object](https://flow.org/en/docs/types/objects/#toc-sealed-objects).
-
-to fix it cast object to `Object` (it makes this object unsealed?):
-
-```javascript
-(object: Object).newProp = 'foo';
-```
-
-for class fields in particular this error can be fixed in 2 ways:
-
-- cast class instance (`this`) to its type (see above)
-
-  ```javascript
-  export default class NewPage extends Component {
-    render () {
-      return <Form ref={ref => (this: NewPage)._form = ref} />;
-      // this works too:
-      return <Form ref={ref => (this: Object)._form = ref} />;
-    }
-  }
-  ```
-
-- annotate class field within the body of the class
-
-  1. <https://flow.org/en/docs/types/classes/#toc-class-fields-properties>
-
-  ```javascript
-  export default class NewPage extends Component {
-    _form: Form;
-
-    render () {
-      return <Form ref={ref => this._form = ref} />;
-    }
-  }
-  ```
-
 usage
 -----
 
@@ -470,3 +374,136 @@ type FooProps = {
   some_external_type_intersection: {foo: string} & SomeExternalType,
 }
 ```
+
+troubleshooting
+---------------
+
+### Flow typechecks the whole node_modules/ directory
+
+1. <https://github.com/facebook/flow/issues/1548>
+
+the best solution so far is to install library definitions from `flow-typed`.
+
+### Required module not found
+
+if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
+Flow cannot find some modules like `react-native` or `react-redux`.
+
+- use more granular ignores in _.flowconfig_
+
+  1. <https://github.com/facebook/flow/issues/1548#issuecomment-198477146>
+
+  that is don't ignore the whole _node\_modules/_ directory but do
+  it on per-package basis so that Flow can find required modules.
+
+- replace not found module with stub module
+
+  1. <https://github.com/facebook/flow/issues/3875#issuecomment-306219044>
+  2. <https://github.com/facebook/flow/issues/2092#issuecomment-286399732>
+
+  create _ModuleStub.js_ in the project root:
+
+  ```javascript
+  export default {};
+  ```
+
+  _.flowconfig_:
+
+  ```
+  [options]
+  ; modules
+  module.name_mapper='^moment$' -> '<PROJECT_ROOT>/ModuleStub'
+  module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/ModuleStub'
+  module.name_mapper='^react-native-.+$' -> '<PROJECT_ROOT>/ModuleStub'
+  module.name_mapper='^react-redux$' -> '<PROJECT_ROOT>/ModuleStub'
+  ```
+
+  also it might be necessary to stub all images since their names
+  are replaced with `RelativeImageStub` in defalut _.flowconfig_
+  but this module is not available if the whole _node\_modules/_
+  directory is ignored.
+
+- provide external library definitions from `flow-typed` repository
+
+  1. <https://github.com/facebook/flow/issues/1548#issuecomment-318085946>
+
+  _.flowconfig_:
+
+  ```
+  [libs]
+  <PROJECT_ROOT>/flow-typed
+  ```
+
+- create external library definitions by yourself
+
+  1. <https://github.com/facebook/flow/issues/1548#issuecomment-198477146>
+
+  this is like manually creating `flow-typed` repository.
+
+  _.flowconfig_:
+
+  ```
+  [libs]
+  flow/
+  ```
+
+  _flow/lodash.js_:
+
+  ```javascript
+  declare module lodash {
+    declare var exports: any;
+  }
+  ```
+
+### suppress `Experimental decorator usage` errors
+
+1. <https://github.com/facebook/flow/issues/606#issuecomment-213667957>
+
+_.flowconfig_:
+
+```
+[options]
+esproposal.decorators=ignore
+```
+
+### suppress `Property not found` errors for objects
+
+1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
+
+this is usually a problem when adding new properties to a [sealed
+object](https://flow.org/en/docs/types/objects/#toc-sealed-objects).
+
+to fix it cast object to `Object` (it makes this object unsealed?):
+
+```javascript
+(object: Object).newProp = 'foo';
+```
+
+for class fields in particular this error can be fixed in 2 ways:
+
+- cast class instance (`this`) to its type (see above)
+
+  ```javascript
+  export default class NewPage extends Component {
+    render () {
+      return <Form ref={ref => (this: NewPage)._form = ref} />;
+      // this works too:
+      return <Form ref={ref => (this: Object)._form = ref} />;
+    }
+  }
+  ```
+
+- annotate class field within the body of the class
+
+  1. <https://flow.org/en/docs/types/classes/#toc-class-fields-properties>
+
+  ```javascript
+  export default class NewPage extends Component {
+    _form: Form;
+
+    render () {
+      return <Form ref={ref => this._form = ref} />;
+    }
+  }
+  ```
+

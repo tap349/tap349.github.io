@@ -524,3 +524,7 @@ it's rather a hack than a solution:
 - remove `flow` preset from `presets` in _.babelrc_
 - run `yarn start`
 - add `flow` preset back to `presets`
+
+IDK if it matters but in the 1 step I also removed
+`react-flow-props-to-prop-types` from `plugins` in _.babelrc_
+(and added it back again accordingly in the 3rd step).

@@ -75,7 +75,7 @@ iceperk
   App Store and Google Play
 
   this is to notify all users about a new release via modal window inside
-  application.
+  application (optional).
 
 troubleshooting
 ---------------

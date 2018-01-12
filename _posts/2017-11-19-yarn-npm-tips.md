@@ -15,8 +15,10 @@ categories: [yarn, npm, js]
 
 1. <https://yarnpkg.com/lang/en/docs/migrating-from-npm/>
 
-[npm] install package globally
+install package globally
 ------------------------------
+
+### Yarn
 
 ```sh
 $ npm install semistandard -g
@@ -27,8 +29,7 @@ $ which semistandard
 
 global packages are stored in _/usr/local/lib/node_modules/_.
 
-[Yarn] install package globally
--------------------------------
+### npm
 
 ```sh
 $ yarn global add rnpm
@@ -44,8 +45,8 @@ reinstall all packages
 ----------------------
 
 ```sh
-$ rm -rf node_modules/ && npm install
 $ rm -rf node_modules/ && yarn install
+$ rm -rf node_modules/ && npm install
 ```
 
 [npm] remove not used packages
@@ -60,14 +61,14 @@ $ npm prune
 dependencies vs. development dependencies
 -----------------------------------------
 
-install as dependencies:
+install package as dependency:
 
 ```sh
 $ npm install <package> --save
 $ yarn add <package>
 ```
 
-install as development dependencies:
+install package as development dependency:
 
 ```sh
 $ npm install <package> --save-dev
@@ -80,12 +81,18 @@ package as development dependency saves it in `"devDependencies"` section
 (packages is used in development environment only - say, in test suites
 or by transpilers).
 
-[Yarn] run script or locally installed executable
--------------------------------------------------
+run script or locally installed executable
+------------------------------------------
 
 - scripts are defined in `scripts` section of _package.json_
 - locally installed executables are stored in _node\_modules/.bin/_
   (`$(npm bin)`) - say, `eslint` or `jest`
+
+```sh
+$ yarn run <script>
+$ npm run <script>
+$ npm run-script <script>
+```
 
 don't use peer dependencies
 ---------------------------

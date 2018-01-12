@@ -1,16 +1,22 @@
 ---
 layout: post
-title: npm - Tips
-date: 2017-05-25 13:02:21 +0300
+title: Yarn/npm - Tips
+date: 2017-11-19 03:09:25 +0300
 access: public
 comments: true
-categories: [npm, js]
+categories: [yarn, npm, js]
 ---
 
 <!-- more -->
 
-install package globally
-------------------------
+* TOC
+{:toc}
+<hr>
+
+1. <https://yarnpkg.com/lang/en/docs/migrating-from-npm/>
+
+[npm] install package globally
+------------------------------
 
 ```sh
 $ npm install semistandard -g
@@ -21,15 +27,29 @@ $ which semistandard
 
 global packages are stored in _/usr/local/lib/node_modules/_.
 
+[Yarn] install package globally
+-------------------------------
+
+```sh
+$ yarn global add rnpm
+$ which rnpm
+/usr/local/bin/rnpm
+```
+
+- global packages are stored in _~/.config/yarn/global/_
+- global packages are saved to _~/.config/yarn/global/package.json_
+  (only when installed with Yarn)
+
 reinstall all packages
 ----------------------
 
 ```sh
 $ rm -rf node_modules/ && npm install
+$ rm -rf node_modules/ && yarn install
 ```
 
-remove not used packages
-------------------------
+[npm] remove not used packages
+------------------------------
 
 not used packages appear after removing packages from _package.json_ manually.
 
@@ -37,17 +57,35 @@ not used packages appear after removing packages from _package.json_ manually.
 $ npm prune
 ```
 
-`--save` vs. `--save-dev` options
----------------------------------
+dependencies vs. development dependencies
+-----------------------------------------
 
-both options allow to save packages to _packages.json_ when running
-`npm install`:
+install as dependencies:
 
-- `--save` saves packages as dependencies in `"dependencies"` section
-  (application cannot run without them)
-- `--save-dev` saves packages as development dependencies in
-  `"devDependencies"` section (they are used in development
-  environment only - say, test suites or transpilers)
+```sh
+$ npm install <package> --save
+$ yarn add <package>
+```
+
+install as development dependencies:
+
+```sh
+$ npm install <package> --save-dev
+$ yarn add <package> --dev
+```
+
+installing package as dependency saves it in `"dependencies"` section
+of _package.json_ (application cannot run without it) while installing
+package as development dependency saves it in `"devDependencies"` section
+(packages is used in development environment only - say, in test suites
+or by transpilers).
+
+[Yarn] run script or locally installed executable
+-------------------------------------------------
+
+- scripts are defined in `scripts` section of _package.json_
+- locally installed executables are stored in _node\_modules/.bin/_
+  (`$(npm bin)`) - say, `eslint` or `jest`
 
 don't use peer dependencies
 ---------------------------

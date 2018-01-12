@@ -521,4 +521,19 @@ and other cryptic errors that seem to be Flow-related.
 
 **solution**
 
-remove `react-flow-props-to-prop-types` from `plugins` in _.babelrc_.
+remove `react-flow-props-to-prop-types` package.
+
+_.babelrc_:
+
+```diff
+ {
+   "presets": ["react-native", "flow"],
+   "plugins": [
+-    "react-flow-props-to-prop-types"
+   ]
+ }
+```
+
+```sh
+$ yarn remove babel-plugin-react-flow-props-to-prop-types --dev
+```

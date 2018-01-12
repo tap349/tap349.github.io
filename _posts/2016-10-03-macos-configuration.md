@@ -73,8 +73,12 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - 2Do
   - Telegram Desktop
 - Dictionary:
-  - Select `New Oxford American Dictionary (American English)` and
+  - select `New Oxford American Dictionary (American English)` and
     `Oxford Russian Dictionary (Russian-English)`
+- Notes:
+  - Preferences:
+    - check `Enable the On My Mac account`
+    - set `Default text size` to next to the last
 - add second Desktop
 - install ruby and gems: [rbenv]({% post_url 2016-03-30-rbenv %})
 - copy history files from backup:

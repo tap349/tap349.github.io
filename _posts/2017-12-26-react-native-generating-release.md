@@ -19,8 +19,7 @@ iceperkapp
 - change environment to `production` in _Env.js_ before generating releases
 - increment build number in iOS and Android projects
 
-  _ios/iceperkapp/Info.plist_
-  (or `General` -> `Identity` -> `Build` in Xcode):
+  _ios/iceperkapp/Info.plist_ (Xcode: `General` -> `Identity` -> `Build`):
 
   ```xml
   <key>CFBundleVersion</key>
@@ -37,24 +36,36 @@ iOS
 ---
 
 - open _iceperkapp.xcworkspace_ in Xcode
-- select `Generic iOS Device`
-- create archive: `Product` (top menu) -> `Archive`
-- click `Upload to App Store..` button when archive is created
-- follow on-screen instructions (leave defaults)
-- click `Upload` button in the end
+  - select `Generic iOS Device`
+  - create archive: `Product` (top menu) -> `Archive`
+  - click `Upload to App Store..` button when archive is created
+  - follow on-screen instructions (leave defaults)
+  - click `Upload` button in the end
+- open `iTunes Connect` in browser
+  - switch to `TestFlight` tab
+  - open just uploaded iOS build
+  - click `Provide Export Compliance Information` button
+  - select `No` (app doesn't use encryption) in pop-up window
+  - click `Start Internal Testing` button
 
 Android
 -------
 
-- copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
-  from `Complead/iceperkapp_certificates/android` GitHub repo (see _README.md_)
+copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
+from `Complead/iceperkapp_certificates/android` GitHub repo (see _README.md_)
+before building releases.
+
 - assemble release
 
   ```sh
-  $ cd android && ./gradlew assembleRelease && cd ..
+  $ cd android && ./gradlew assembleRelease; cd ..
   ```
 
   new release is saved as _android/app/build/outputs/apk/app-release.apk_.
+
+- upload release to Google Drive: `Shared with me` -> `ICEperk` -> `AppBuilds`
+
+  replace existing `app-release.apk` file with a new one.
 
 iceperk
 -------
@@ -63,8 +74,8 @@ iceperk
   `iceperk` application *after* new `iceperkapp` releases appear in *both*
   App Store and Google Play
 
-  this is required to show a notification message about a new release to all
-  users (modal window inside application).
+  this is to notify all users about a new release via modal window inside
+  application.
 
 troubleshooting
 ---------------
@@ -103,3 +114,36 @@ the error occurs when trying to upload archive to App Store.
 - get private key of iOS Distribution certificate
   (_iOS Distribution\_<Company>.p12_ file) from its creator and import it into
   the login keychain (its name is something like `iOS Distribution: <Company>`)
+
+### [Android] ENOTEMPTY: directory not empty
+
+build failed:
+
+{% raw %}
+```sh
+$ cd android && ./gradlew assembleRelease && cd ..
+...
+:app:bundleReleaseJsAndAssets
+Scanning 773 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (41ms)
+Scanning 773 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (37ms)
+Loading dependency graph, done.
+
+ENOTEMPTY: directory not empty, rmdir '/var/folders/1g/28pm7dxn0_l569vjyzlzp2zw0000gn/T/react-native-packager-cache-f18bd0fb39fa7507ecdd2fb6cd91757d41b78c44/cache'
+
+:app:bundleReleaseJsAndAssets FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:bundleReleaseJsAndAssets'.
+> Process 'command 'node'' finished with non-zero exit value 1
+```
+{% endraw %}
+
+**solution**
+
+reset cache:
+
+```sh
+$ yarn start --reset-cache
+```

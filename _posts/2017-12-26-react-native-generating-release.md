@@ -41,12 +41,22 @@ iOS
   - click `Upload to App Store..` button when archive is created
   - follow on-screen instructions (leave defaults)
   - click `Upload` button in the end
-- open `iTunes Connect` in browser
+- [TestFlight] open `iTunes Connect` in browser
   - switch to `TestFlight` tab
   - open just uploaded iOS build
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in pop-up window
   - click `Start Internal Testing` button
+- [App Store] open `iTunes Connect` in browser
+  - switch to `App Store` tab
+  - click `⨁ VERSION OR PLATFORM` link -> `iOS` (pop-up menu)
+  - fill `What's New in This Version` section
+  - select new build
+  - select `Automatically release this version` option
+  - click `Save` button
+  - click `Submit for Review` button
+  - select `No` (app doesn't use IDFA) on `Advertising Identifier` page
+  - click `Submit` button
 
 Android
 -------
@@ -66,6 +76,15 @@ before building releases.
 - upload release to Google Drive: `Shared with me` -> `ICEperk` -> `AppBuilds`
 
   replace existing `app-release.apk` file with a new one.
+
+- open `Google Play Console` in browser
+  - open `Release management` (left menu) -> `App releases`
+  - click `MANAGE PRODUCTION` button in `Production` section
+  - click `CREATE RELEASE` button
+  - select APK to add from filesystem
+  - fill `What's new in this release?` section
+  - click `SAVE` button
+  - click `REVIEW` button
 
 iceperk
 -------

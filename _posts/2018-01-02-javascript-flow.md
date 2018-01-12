@@ -455,7 +455,7 @@ Flow cannot find some modules like `react-native` or `react-redux`.
   }
   ```
 
-### suppress `Experimental decorator usage` errors
+### Experimental decorator usage
 
 1. <https://github.com/facebook/flow/issues/606#issuecomment-213667957>
 
@@ -466,7 +466,7 @@ _.flowconfig_:
 esproposal.decorators=ignore
 ```
 
-### suppress `Property not found` errors for objects
+### Property not found
 
 1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
 
@@ -507,3 +507,20 @@ for class fields in particular this error can be fixed in 2 ways:
   }
   ```
 
+
+### Unexpected super class type: CallExpression
+
+packager log and emulator window:
+
+```
+SyntaxError: <app_dir>/node_modules/react-native/Libraries/Network/XMLHttpRequest.js:
+Unexpected super class type: CallExpression
+```
+
+**solution**
+
+it's rather a hack than a solution:
+
+- remove `flow` preset from `presets` in _.babelrc_
+- run `yarn start`
+- add `flow` preset back to `presets`

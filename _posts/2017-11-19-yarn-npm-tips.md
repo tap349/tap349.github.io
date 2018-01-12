@@ -105,6 +105,7 @@ $ yarn start --reset-cache
 ```
 
 it might be necessary to clean cache, say, when build fails.
+using `yarn start --reset-cache` might be sufficient so try this command first.
 
 don't use peer dependencies
 ---------------------------

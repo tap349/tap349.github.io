@@ -397,7 +397,7 @@ Flow cannot find some modules like `react-native` or `react-redux`.
   1. <https://github.com/facebook/flow/issues/1548#issuecomment-198477146>
 
   that is don't ignore the whole _node\_modules/_ directory but do
-  it on per-package basis so that Flow can find required modules.
+  it on per package basis so that Flow can find required modules.
 
 - replace not found module with stub module
 

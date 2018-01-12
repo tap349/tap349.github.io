@@ -31,7 +31,7 @@ usage
 
 ### run Credo
 
-suggestions + style guide of per file basis:
+suggestions + style guide on a per file basis:
 
 ```sh
 $ mix credo list --strict

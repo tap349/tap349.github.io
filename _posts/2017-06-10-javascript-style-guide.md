@@ -90,6 +90,7 @@ parentheses around parameters of arrow functions
 don't wrap single parameter of arrow function in parentheses:
 
 ```javascript
+() => 1
 v => v + 1
 (v, i) => v + 1
 ```

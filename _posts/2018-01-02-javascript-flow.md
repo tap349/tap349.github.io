@@ -98,6 +98,9 @@ this will create empty _.flowconfig_ in the project root.
 
 ### suppress `Required module not found` errors
 
+1. <https://github.com/facebook/flow/issues/1548>
+2. <https://github.com/facebook/flow/issues/1548#issuecomment-198477146>
+
 - replace not found module with stub module
 
   1. <https://github.com/facebook/flow/issues/3875#issuecomment-306219044>
@@ -127,6 +130,15 @@ this will create empty _.flowconfig_ in the project root.
   ```
 
 - provide external library definitions from `flow-typed` repository
+
+  1. <https://github.com/facebook/flow/issues/1548#issuecomment-318085946>
+
+  _.flowconfig_:
+
+  ```
+  [libs]
+  <PROJECT_ROOT>/flow-typed
+  ```
 
 ### suppress `Experimental decorator usage` errors
 

@@ -16,7 +16,7 @@ categories: [yarn, npm, js]
 1. <https://yarnpkg.com/lang/en/docs/migrating-from-npm/>
 
 install package globally
-------------------------------
+------------------------
 
 ### Yarn
 

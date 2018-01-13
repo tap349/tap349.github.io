@@ -13,7 +13,8 @@ categories: [js]
 {:toc}
 <hr>
 
-## (how to) merge objects
+(how to) merge objects
+----------------------
 
 - using `Object.assign`
 
@@ -35,7 +36,8 @@ categories: [js]
 
   while `Object.assign` modifies target object using spread syntax creates new object.
 
-## (how to) pass class prototype methods as arguments
+(how to) pass class prototype methods as arguments
+--------------------------------------------------
 
 1. <https://stackoverflow.com/questions/35814872/es6-class-pass-function-as-parameter>
 2. <https://stackoverflow.com/questions/35446486/binding-a-function-passed-to-a-component>
@@ -102,7 +104,8 @@ instance properties of current class) there are 2 options:
   now `handleResponse` is bound to `Foo` class instance forever
   (it's even impossible to rebind it explicitly using `bind`).
 
-## (how to) post form data
+(how to) post form data
+-----------------------
 
 1. <https://github.com/facebook/react-native/issues/3349>
 2. <https://stackoverflow.com/a/32445457/3632318>
@@ -127,7 +130,8 @@ const response = fetch(url, {
 })
 ```
 
-## (how to) get subset of object properties
+(how to) get subset of object properties
+----------------------------------------
 
 1. <https://stackoverflow.com/questions/17781472>
 
@@ -147,7 +151,8 @@ const {b, ...picked} = object;
 console.log(picked); // {a: 5, c: 7}
 ```
 
-## (how to) create empty array of N elements
+(how to) create empty array of N elements
+-----------------------------------------
 
 1. <https://stackoverflow.com/a/41246860/3632318>
 
@@ -155,7 +160,8 @@ console.log(picked); // {a: 5, c: 7}
 [...Array(100)]
 ```
 
-## (how to) create array with the same element repeated multiple times
+(how to) create array with the same element repeated multiple times
+-------------------------------------------------------------------
 
 1. <https://stackoverflow.com/a/34104348/3632318>
 
@@ -164,7 +170,8 @@ console.log(picked); // {a: 5, c: 7}
 < [false, false, false, false, false, false, false]
 ```
 
-## (how to) conditionally add property to object
+(how to) conditionally add property to object
+---------------------------------------------
 
 1. <https://stackoverflow.com/a/40560953/3632318>
 
@@ -179,3 +186,26 @@ const bar = {
 NOTE: don't use `...!!foo && {foo}` because RN JS server might
       complain about some performance optimizations if something
       else but `false` or `undefined` is expanded inside object.
+
+(how to) wrap a long template literal to multiline
+--------------------------------------------------
+
+1. <https://stackoverflow.com/a/45153504/3632318>
+
+```jsx
+<Checkbox
+  checkedHint={
+    `foo${gc.NBSP}bar ` +
+    `baz${gc.NBSP}qux`
+  }
+/>
+```
+
+using line continuation at the point of newline in the literal
+preserves all spaces at the beginning of the next line:
+
+```javascript
+const variable =
+  `foo${gc.NBSP}bar \
+   baz${gc.NBSP}qux`; // leading spaces will be preserved
+```

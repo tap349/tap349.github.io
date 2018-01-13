@@ -166,11 +166,11 @@ if (variable == null) {
 <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals>
 
 template literals (formerly known as 'template strings') are
-string literals which allow multi-line strings and string interpolation:
+string literals which allow multiline strings and string interpolation:
 
 ```javascript
 `text line 1
- text line 2`
+text line 2`
 
 `text ${expression} text`
 ```

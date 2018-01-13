@@ -208,9 +208,32 @@ notes
 
 ### [Type Annotations](https://flow.org/en/docs/types)
 
+<https://flow.org/en/docs/types/classes/>:
+
+> JavaScript classes in Flow operate both as a value and a type.
+> You write classes the same way you would without Flow,
+> but then you can use the name of the class as a type:
+>
+> class MyClass {
+>   // ...
+> }
+>
+> let myInstance: MyClass = new MyClass();
+>
+> This is because classes in Flow are nominally typed.
+
 <https://flow.org/en/docs/types/interfaces/>:
 
 use `interface` to add structural typing for classes.
+
+<https://flow.org/en/docs/types/generics/>:
+
+Classes (when being used as a type), type aliases, and interfaces with
+generics are parameterized (all require that you pass type arguments).
+Functions and function types do not have parameterized generics.
+
+say, `React.Component<Props, State>` is a parameterized generic class type
+(it's necessary to pass `Props` and `State` types when using this class type).
 
 <https://flow.org/en/docs/types/unions/>:
 

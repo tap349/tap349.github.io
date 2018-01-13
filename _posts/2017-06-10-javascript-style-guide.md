@@ -9,6 +9,10 @@ categories: [js]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 1. <https://standardjs.com/>
 2. <http://javascript.crockford.com/code.html>
 3. <https://github.com/feross/standard>

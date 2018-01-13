@@ -107,7 +107,7 @@ checking for null, undefined or empty string
 
 check that variable has a truthy value instead of checking
 for `null`, `undefined` or empty string explicitly but only
-when that variable empty string:
+when that variable can be an empty string:
 
 ```javascript
 const foo = '';
@@ -123,8 +123,8 @@ NOTE: variable must be declared before making these checks.
 NOTE: using `!!foo` to get boolean value is usually redundant in
       conditions since using just `foo` would have the same effect.
 
-if variable can't be empty string, prefer checking for `null` and
-`undefined` explicitly:
+if variable can't be an empty string, prefer checking for `null`
+and `undefined` explicitly:
 
 ```javascript
 const foo = {a: 1};

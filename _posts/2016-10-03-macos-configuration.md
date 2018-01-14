@@ -15,7 +15,8 @@ steps to configure new macOS installation.
 {:toc}
 <hr>
 
-## basic setup
+basic setup
+-----------
 
 NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
       (<http://www.seagate.com/support/downloads/item/ntfs-driver-for-mac-os-master-dl>).
@@ -125,7 +126,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - _~/soft/_
 - sign in to iTunes Store
 
-## System Preferences
+System Preferences
+------------------
 
 ### Dock
 
@@ -138,6 +140,21 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - General (tab):
   - [x] Require password 5 seconds after sleep or screen saver begins
   - Allow apps downloaded from: Anywhere (for additional software)
+
+### Spotlight
+
+- Search Results (tab):
+  - Only selected categories will appear in Spotlight search results:
+    - [x] Applications
+    - [x] Calculator
+    - [x] Conversion
+    - [x] Events & Reminders
+    - [x] System Preferences
+  - [ ] Allow Spotlight Suggestions in Look up
+- Privacy (tab):
+  - Prevent Spotlight from searching these locations:
+    - Downloads
+    - media
 
 ### Displays
 
@@ -214,7 +231,8 @@ NOTE: currently disabled because of a significant delay
   - Trackpad Options... (button):
     - [ ] Enable dragging: three fingers drag
 
-## font configuration
+font configuration
+------------------
 
 these fonts should be installed to _~/Library/Fonts/_ directory:
 

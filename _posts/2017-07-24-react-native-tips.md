@@ -227,3 +227,10 @@ but in general it's better to avoid nested `ScrollView`s.
   {42}
 </MyComponent>
 ```
+
+(how to) add newline inside Text
+---------------------------------
+
+```jsx
+<Text>foo{'\n'}bar</Text>
+```

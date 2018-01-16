@@ -37,18 +37,20 @@ iOS
 
 - open _iceperkapp.xcworkspace_ in Xcode
   - select `Generic iOS Device`
-  - create archive: `Product` (top menu) -> `Archive`
+  - create archive: `Product` (top menu) -\> `Archive`
   - click `Upload to App Store..` button when archive is created
   - follow on-screen instructions (leave defaults)
   - click `Upload` button in the end
 - [TestFlight] open `iTunes Connect` in browser
-  - switch to `TestFlight` tab
+  - go to `TestFlight` tab
+  - go to `BUILDS` (left menu) -\> `iOS`
+  - wait till new build is processed (it might temporarily disappear from the list)
   - open just uploaded iOS build
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in pop-up window
   - click `Start Internal Testing` button
 - [App Store] open `iTunes Connect` in browser
-  - switch to `App Store` tab
+  - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link -> `iOS` (pop-up menu)
   - fill `What's New in This Version` section
   - select new build

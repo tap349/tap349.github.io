@@ -255,3 +255,41 @@ _cookbooks/phoenix_nginx/attributes/default.rb_:
 - override['nginx']['init_style'] = 'init'
 + override['nginx']['init_style'] = 'systemd'
 ```
+
+undefined method `definition' for Custom resource ruby_rbenv_ruby from cookbook ruby_rbenv
+------------------------------------------------------------------------------------------
+
+```
+$ knife zero converge 'name:iceperk'
+...
+================================================================================
+Recipe Compile Error in /var/chef/cache/cookbooks/app_iceperk/recipes/default.rb
+================================================================================
+
+NoMethodError
+-------------
+undefined method `definition' for Custom resource ruby_rbenv_ruby from cookbook ruby_rbenv
+
+Cookbook Trace:
+---------------
+  /var/chef/cache/cookbooks/ruby_rbenv/recipes/user.rb:48:in `block (3 levels) in from_file'
+```
+
+**solution**
+
+1. <https://github.com/sous-chefs/ruby_rbenv/issues/166>
+
+this error occurs after updating `ruby_rbenv` cookbook to its latest
+as of now - 2.0.6. so it seems to be a bug in `ruby_rbenv` cookbook
+itself - downgrade it to some earlier version.
+
+_cookbooks/rails_rbenv/metadata.rb_:
+
+```ruby
+depends 'ruby_rbenv', '1.0.1'
+```
+
+```sh
+$ berks update ruby_rbenv
+$ berks vendor && knife zero converge 'name:billing'
+```

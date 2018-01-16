@@ -279,9 +279,9 @@ Cookbook Trace:
 
 1. <https://github.com/sous-chefs/ruby_rbenv/issues/166>
 
-this error occurs after updating `ruby_rbenv` cookbook to its latest
-as of now - 2.0.6. so it seems to be a bug in `ruby_rbenv` cookbook
-itself - downgrade it to some earlier version.
+this error occurs after updating `ruby_rbenv` cookbook to its latest version
+as of now - 2.0.6. so it seems to be a bug in `ruby_rbenv` cookbook itself -
+downgrade it to some earlier version.
 
 _cookbooks/rails_rbenv/metadata.rb_:
 

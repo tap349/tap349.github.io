@@ -260,10 +260,10 @@ undefined method `definition' for Custom resource ruby_rbenv_ruby from cookbook 
 ------------------------------------------------------------------------------------------
 
 ```
-$ knife zero converge 'name:iceperk'
+$ knife zero converge 'name:billing'
 ...
 ================================================================================
-Recipe Compile Error in /var/chef/cache/cookbooks/app_iceperk/recipes/default.rb
+Recipe Compile Error in /var/chef/cache/cookbooks/app_billing/recipes/default.rb
 ================================================================================
 
 NoMethodError

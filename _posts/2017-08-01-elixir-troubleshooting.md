@@ -68,7 +68,7 @@ longer registered in EPMD - see `troubleshooting` section of
 [Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %})
 for explanation of how this could happen and how to fix it.
 
-[phoenix] The task "phx.new" could not be found
+[Phoenix] The task "phx.new" could not be found
 -----------------------------------------------
 
 ```sh
@@ -87,7 +87,7 @@ Are you sure you want to install "https://github.com/phoenixframework/archives/r
 * creating /Users/tap/.asdf/installs/elixir/1.5.1/.mix/archives/phx_new
 ```
 
-[phoenix] all styles are gone
+[Phoenix] all styles are gone
 -----------------------------
 
 **solution**
@@ -249,3 +249,19 @@ def start_link(state \\ []) do
   GenServer.start_link(__MODULE__, state)
 end
 ```
+
+(EXIT) no process: the process is not alive
+-------------------------------------------
+
+```
+** (stop) exited in: GenServer.call(#PID<0.24355.22>, {:get, #Function<0.105777791/1 in Neko.UserRate.Store.all/1>}, 5000)
+    ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
+        (elixir) lib/gen_server.ex:774: GenServer.call/3
+        (neko) lib/neko/rules/simple_rule.ex:43: Neko.Rules.SimpleRule.achievements/2
+        (neko) lib/neko/rules/simple_rule/worker.ex:34: Neko.Rules.SimpleRule.Worker.handle_call/3
+        (stdlib) gen_server.erl:636: :gen_server.try_handle_call/4
+        (stdlib) gen_server.erl:665: :gen_server.handle_msg/6
+        (stdlib) proc_lib.erl:247: :proc_lib.init_p_do_apply/3
+```
+
+**solution**

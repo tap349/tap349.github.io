@@ -265,3 +265,15 @@ end
 ```
 
 **solution**
+
+pacificnew: no such file or directory
+-------------------------------------
+
+```
+[error] GenServer :tzdata_release_updater terminating
+** (File.Error) could not stream "/home/billing/stage/billing/lib/tzdata-0.5.14/priv/tmp_downloads/339626_44358462//pacificnew": no such file or directory
+```
+
+**solution**
+
+1. <https://github.com/lau/tzdata/issues/57>

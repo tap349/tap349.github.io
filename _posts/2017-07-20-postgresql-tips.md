@@ -234,9 +234,13 @@ $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
 (how to) move local database into Docker container
 --------------------------------------------------
 
+TODO: WIP
+
 1. <https://github.com/wsargent/docker-cheat-sheet>
 
-- add `db` service to _docker-compose.yml_:
+- add `db` service
+
+  _docker-compose.yml_:
 
   ```diff
     services:
@@ -248,6 +252,24 @@ $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
   +       - 5433:5432
   ```
 
+- specify new database port (host port mapped to exposed container port)
+
+  _docker-compose.yml_:
+
+  ```diff
+    default: &default
+      # ...
+  -   port: 5432
+  +   port: 5433
+  ```
+
+- create new database inside Docker container
+
+  ```sh
+  $ rake db:create && RAILS_ENV=test rake db:create
+  $ rake db:load:schema && RAILS_ENV=test rake db:load:schema
+  ```
+
 - import local database into Docker container:
 
   ```sh
@@ -255,14 +277,4 @@ $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
   $ DB_USER=postgres
   $ DB_NAME=myapp_development
   $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
-  ```
-
-- specify new database port _config/database.yml_
-  (host port mapped to exposed container port):
-
-  ```diff
-    default: &default
-      # ...
-  -   port: 5432
-  +   port: 5433
   ```

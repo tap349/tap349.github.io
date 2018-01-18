@@ -40,7 +40,9 @@ $ mix compile
 > Add a .tool-versions file to your project dir and versions of those tools
 > will be used. Global defaults can be set in the file $HOME/.tool-versions
 
-now elixir versions are stored in _~/.asdf/installs/elixir/_.
+`asdf global` command writes specified tool version to _$HOME/.tool-versions_.
+
+all elixir versions managed by asdf are stored in _~/.asdf/installs/elixir/_.
 
 _~/.zshenv_:
 

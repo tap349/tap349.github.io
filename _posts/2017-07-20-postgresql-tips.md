@@ -231,12 +231,38 @@ $ psql -U username -f ./PostgreSQL.sql database
 $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
 ```
 
-(how to) import local database into Docker container
-----------------------------------------------------
+(how to) move local database into Docker container
+--------------------------------------------------
 
-```sh
-$ DOCKER_DB_NAME=`docker-compose ps -q db`
-$ DB_USER=postgres
-$ DB_NAME=myapp_development
-$ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
-```
+1. <https://github.com/wsargent/docker-cheat-sheet>
+
+- add `db` service to _docker-compose.yml_:
+
+  ```diff
+    services:
+  +   db:
+  +     image: postgres:9.4
+  +     environment:
+  +       POSTGRES_PASSWORD: myapp
+  +     ports:
+  +       - 5433:5432
+  ```
+
+- import local database into Docker container:
+
+  ```sh
+  $ DOCKER_DB_NAME=`docker-compose ps -q db`
+  $ DB_USER=postgres
+  $ DB_NAME=myapp_development
+  $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+  ```
+
+- specify new database port _config/database.yml_
+  (host port mapped to exposed container port):
+
+  ```diff
+    default: &default
+      # ...
+  -   port: 5432
+  +   port: 5433
+  ```

@@ -42,7 +42,7 @@ $ mix compile
 
 `asdf global` command writes specified tool version to _$HOME/.tool-versions_.
 
-all elixir versions managed by asdf are stored in _~/.asdf/installs/elixir/_.
+all Elixir versions managed by asdf are stored in _~/.asdf/installs/elixir/_.
 
 _~/.zshenv_:
 

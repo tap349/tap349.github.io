@@ -15,6 +15,17 @@ categories: [react-native, redux]
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>
 
+React Developer Tools
+---------------------
+
+1. <https://facebook.github.io/react-native/docs/debugging.html#react-developer-tools>
+
+it's a standalone version of an official Remote Debugger -
+Chrome Developer Tools (CDT).
+
+`react-devtools` connects to simulator automatically
+(additional configuration for Android is required).
+
 Remote Redux DevTools
 ---------------------
 
@@ -23,29 +34,27 @@ Remote Redux DevTools
 
 Chrome: `Redux DevTools` extension icon menu -> `Open Remote DevTools`
 
-React Developer Tools
----------------------
-
-1. <https://facebook.github.io/react-native/docs/debugging.html#react-developer-tools>
-
-`react-devtools` connects to simulator automatically
-(additional configuration for Android is required).
-
-React Native Debugger
----------------------
+[RECOMMENDED] React Native Debugger (RND)
+-----------------------------------------
 
 1. <https://github.com/jhen0409/react-native-debugger>
 2. <https://github.com/jhen0409/react-native-debugger/blob/master/docs/getting-started.md>
 
-NOTE: this is the only debugger I'm currently using.
+RND contains:
 
-### use as custom JavaScript debugger
+- React Developer Tools (CDT - RND is based on CDT)
+- React DevTools
+- Redux DevTools
+
+so RND is an all-in-one solution - there's no need to install
+other tools separately.
+
+### use RND as Remote Debugger
 
 1. <https://facebook.github.io/react-native/docs/debugging.html#debugging-using-a-custom-javascript-debugger>
 
-- Chrome Developer Tools are default JavaScript debugger
-- JavaScript debugger is opened automatically when application is
-  launched and `Debug JS Remotely` option is enabled in Developer Menu
+Remote Debugger is opened automatically when application is launched
+and `Debug JS Remotely` option is enabled in Developer Menu.
 
 _~/.zshenv_:
 

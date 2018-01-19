@@ -52,6 +52,8 @@ other tools separately.
 ### use RND as Remote Debugger
 
 1. <https://facebook.github.io/react-native/docs/debugging.html#debugging-using-a-custom-javascript-debugger>
+2. <https://github.com/jhen0409/react-native-debugger/blob/master/docs/getting-started.md#launch-by-cli-or-react-native-packager-macos-only>
+3. <https://github.com/artsy/emission/blob/45417ca425f2cba7d2da21902ef8ff1cd093a024/package.json#L28>
 
 Remote Debugger is opened automatically when application is launched
 and `Debug JS Remotely` option is enabled in Developer Menu.

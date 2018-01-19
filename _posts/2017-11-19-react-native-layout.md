@@ -54,7 +54,7 @@ style guide
     component's height and horizontal one would "eat" its width accordingly)
 
   one advantage of using padding instead of margin is in better support
-  of the former by simulator built-in inspector - for some reason inspector
+  of the former by simulator built-in Inspector - for some reason Inspector
   is better at highlighting padding rather than margin.
 
 flexbox

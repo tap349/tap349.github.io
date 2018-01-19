@@ -66,3 +66,20 @@ export REACT_DEBUGGER="open -g 'rndebugger://set-debugger-loc?host=localhost&por
 
 adding `--args` option in the end prevents from opening current application
 directory in Finder after launching React Native Debugger.
+
+### tips
+
+it's convenient to dock Developer Tools to bottom and hide either React or
+Redux DevTools - this way there's enough space to the right of RDN to place
+emulator side by side with RDN.
+
+IMO there's no sense in displaying both React and Redux DevTools at the same
+time - show/hide React DevTools (Inspector) with `<D-M-j>` and Redux DevTools
+with `<D-M-k>` on demand (BTW it's easier to use `Command` and `Option` keys
+to the right of `Space` key instead of the ones to the left).
+
+when React DevTools are hidden, emulator's built-in Inspector is used which
+is also very handy - turn on React DevTools only when it's strictly necessary
+to explore React component hierarchy in more detail (I find built-in Inspector
+more convenient for simple cases since results are shown right in emaulator's
+window).

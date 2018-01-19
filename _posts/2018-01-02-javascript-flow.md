@@ -338,6 +338,8 @@ say, `React.Component<Props, State>` is a parameterized generic class type
 
 - add maybe type for component ref
 
+  1. <https://flow.org/en/docs/react/refs/>
+
   ```jsx
   _form: ?Form;
 

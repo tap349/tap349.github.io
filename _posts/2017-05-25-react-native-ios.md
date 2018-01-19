@@ -13,7 +13,8 @@ categories: [react-native, ios]
 {:toc}
 <hr>
 
-## installation
+installation
+------------
 
 1. <https://facebook.github.io/react-native/docs/getting-started.html>
 2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
@@ -28,7 +29,8 @@ $ npm install -g react-native-cli
 install Xcode and Command Line Tools
 (both have been already installed on my MacBook).
 
-## running
+running
+-------
 
 NOTE: emulator for iOS is called Simulator (will be referred
       to as just emulator for the sake of consistency).
@@ -61,7 +63,8 @@ this command:
 
 the first run might take a while since RN will build the whole Xcode project.
 
-## configuration
+configuration
+-------------
 
 ### Dvorak keyboard layout
 
@@ -100,7 +103,8 @@ emulator menu:
 
 `Window` -> `Show Device Bezels` (uncheck)
 
-## tips
+tips
+----
 
 ### change screen resolution (scale) in emulator
 
@@ -161,7 +165,8 @@ iPhone 4s model is not available by default - add it manually:
 
 remove application inside emulator and install it again.
 
-## debugging
+debugging
+---------
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>
 
@@ -201,7 +206,8 @@ $ react-native log-ios
 - emulator menu: `Hardware` -> `Keyboard` -> `Toggle Software Keyboard`
 - `<D-k>`
 
-## troubleshooting
+troubleshooting
+---------------
 
 ### duplicate interface definition for class 'RCTView'
 

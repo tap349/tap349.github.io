@@ -18,7 +18,7 @@ categories: [yarn, npm, js]
 (how to) install package globally
 ---------------------------------
 
-### Yarn
+### npm
 
 ```sh
 $ npm install semistandard -g
@@ -29,7 +29,7 @@ $ which semistandard
 
 global packages are stored in _/usr/local/lib/node_modules/_.
 
-### npm
+### Yarn
 
 ```sh
 $ yarn global add rnpm

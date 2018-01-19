@@ -461,50 +461,7 @@ in order to avoid warning about unhandled promise rejection.
 debugging
 ---------
 
-- <https://github.com/zalmoxisus/redux-devtools-extension>
-- <https://github.com/zalmoxisus/remote-redux-devtools>
-
-### install `Redux DevTools` extension for Chrome
-
-<https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd>
-
-### install DevTools npm packages
-
-```sh
-$ npm install --save-dev remote-redux-devtools remote-redux-devtools
-```
-
-`remote-redux-devtools` is required for RN only (not required for pure React).
-
-### add DevTools store enhancers
-
-<http://redux.js.org/docs/api/compose.html>
-
-add DevTools enhancers from both `redux-devtools-extension` and
-`remote-redux-devtools` packages (it's necessary to compose them
-before adding to store):
-
-```javascript
-import api from './api/redux';
-import reducer from './reducers';
-
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import devToolsEnhancer from 'remote-redux-devtools';
-// it doesn't work the other way round:
-//import {composeWithDevTools} from 'remote-redux-devtools';
-//import devToolsEnhancer from 'redux-devtools-extension';
-
-export default createStore(reducer, composeWithDevTools(
-  applyMiddleware(thunk.withExtraArgument(api)),
-  devToolsEnhancer()
-));
-```
-
-### start application and use Chrome extension for remote monitoring
-
-`Redux DevTools` extension icon menu -> `Open Remote DevTools`
+see [React Native - Debugging]({% post_url 2017-11-14-react-native-debugging %}).
 
 troubleshooting
 ---------------

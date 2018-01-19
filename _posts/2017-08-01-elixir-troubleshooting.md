@@ -277,3 +277,5 @@ pacificnew: no such file or directory
 **solution**
 
 1. <https://github.com/lau/tzdata/issues/57>
+
+fixed in tzdata v0.5.16.

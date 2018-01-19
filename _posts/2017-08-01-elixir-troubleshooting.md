@@ -264,6 +264,15 @@ end
         (stdlib) proc_lib.erl:247: :proc_lib.init_p_do_apply/3
 ```
 
+common (application-specific) conditions under which this error occurs:
+
+- `action` of incoming request is always `reset`
+- user handler process for `user_id` of incoming request
+  has already been started when request is received
+
+WIP: all messages are processed synchronously except for one: `DOWN` message
+sent to user rate store registry.
+
 **solution**
 
 pacificnew: no such file or directory

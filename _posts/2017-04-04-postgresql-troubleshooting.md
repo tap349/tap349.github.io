@@ -67,7 +67,7 @@ so this is what I did to fix problems mentioned above:
 - `brew link postgresql@9.5 --force` (create symlink in _/usr/local/bin_)
 
   it's not recommended though - it must be better to add _bin_ directory
-  of specific postgresql installation to `PATH` explicitly in _~/.zshenv_.
+  of specific PostgreSQL installation to `PATH` explicitly in _~/.zshenv_.
 
 - `cd /usr/local/var && mv postgres postgresql@9.5` (rename directory with databases)
 

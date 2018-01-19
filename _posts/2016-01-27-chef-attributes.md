@@ -24,7 +24,7 @@ guidelines for attributes
   - <http://dougireton.com/blog/2013/02/16/chef-cookbook-anti-patterns/>
   - <http://bytearrays.com/chef-cookbook-patterns/>
 
-- store environment specific attributes in environment files
+- store environment-specific attributes in environment files
 
 - don't store attributes in recipes - keep them in attribute files:
   to initialize attributes in environment cookbooks or

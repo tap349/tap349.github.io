@@ -129,7 +129,7 @@ all methods for `Google Analytics API v3` service are listed
 [here](https://developers.google.com/apis-explorer/#p/analytics/v3/).
 
 these methods are exposed in client libraries for different languages
-and have language specific interfaces to set query parameters.
+and have language-specific interfaces to set query parameters.
 
 API can also be queried as REST-ful endpoint by making HTTP request:
 

@@ -52,7 +52,7 @@ pay additional care not leak memory or otherwise bloat that long-running state.
 
 #### `ready`
 
-`ready` is jQuery specific event - it uses `DOMContentLoaded` event or
+`ready` is jQuery-specific event - it uses `DOMContentLoaded` event or
 emulates it if the former is not available in the browser.
 
 `ready` event occurs when HTML document is finished loading (or reloading)

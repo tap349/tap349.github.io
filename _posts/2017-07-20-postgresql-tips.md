@@ -250,6 +250,12 @@ $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
   +       - 5433:5432
   ```
 
+- run `db` service
+
+  ```sh
+  $ docker-compose up db
+  ```
+
 - configure application to use databases in Docker container
 
   _docker-compose.yml_:
@@ -283,9 +289,17 @@ $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
 
   NOTE: command `rails db:structure:load` doesn't work (some error).
 
+  import development database:
+
   ```sh
   $ DOCKER_DB_NAME=`docker-compose ps -q db`
   $ DB_USER=postgres
   $ DB_NAME=iceperk_development
   $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+  ```
+
+  load test database:
+
+  ```sh
+  $ RAILS_ENV=test rails db:structure:load
   ```

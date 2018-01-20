@@ -15,6 +15,12 @@ of course these commands should work on Ubuntu as well.
 {:toc}
 <hr>
 
+- update (synchronize package index files)
+
+  ```sh
+  $ sudo apt-get update
+  ```
+
 - locate any file:
 
   ```sh

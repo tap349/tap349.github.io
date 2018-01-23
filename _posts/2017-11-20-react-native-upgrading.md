@@ -121,4 +121,17 @@ $ react-native run-ios
 $ react-native run-android
 ```
 
-NOTE: make sure to rebuild applications for both iOS and Android.
+NOTE: don't forget to rebuild applications for both iOS and Android!
+
+**UPDATE**
+
+after fixing different issues related to RN upgrade some libraries
+turned out to be not linked - try to link them again (just in case):
+
+```sh
+$ react-native link
+```
+
+even after running this command I had to link a lot of libraries manually -
+it looks like `react-native link` command is somehow broken in RN 0.52.1
+(see [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})).

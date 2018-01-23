@@ -138,11 +138,7 @@ DeviceInfo native module is not installed correctly
 
 1. <https://github.com/rebeccahughes/react-native-device-info/issues/176>
 
-rebuild application:
-
-```sh
-$ react-native run-ios
-```
+rebuild application (`react-native run-ios`).
 
 ### Unhandled JS Exception: undefined is not an object
 
@@ -311,11 +307,7 @@ the error occurs after upgrading RN to 0.47.0.
 
 **solution**
 
-rebuild application:
-
-```sh
-$ react-native run-ios
-```
+rebuild application.
 
 Actions must be plain objects
 -----------------------------
@@ -638,22 +630,15 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 2. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
 
 link `react-native-onesignal` and `react-native-sentry` libraries manually
-(they are not linked properly by `react-native link` for some reason) and
-rebuild application:
-
-```sh
-$ react-native run-ios
-```
+and rebuild application.
 
 ### Cannot read property 'func' of undefined
 
-error is caused by this line:
+error occurs when evaluating this line:
 
 ```javascript
 onPress: React.PropTypes.func.isRequired
 ```
-
-that is `React.PropTypes` is `undefined`.
 
 **solution**
 
@@ -662,4 +647,28 @@ that is `React.PropTypes` is `undefined`.
 > PropTypes has been moved to a separate package. Accessing React.PropTypes
 > is no longer supported and will be removed completely in React 16.
 
-import `PropTypes` from `prop-types` package instead.
+import `PropTypes` from a separate `prop-types` package.
+
+### Cannot read property 'appVersion' of undefined
+
+error occurs when evaluating this line in _deviceinfo.js_ file
+of `react-native-device-info` package:
+
+```javascript
+return RNDeviceInfo.appVersion;
+```
+
+**solution**
+
+1. <https://github.com/rebeccahughes/react-native-device-info/issues/52#issuecomment-340212477>
+2. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
+
+link `react-native-device-info` library manually and rebuild application.
+
+### Invariant Violation: Native component for "BVLinearGradient" does not exist
+
+**solution**
+
+1. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
+
+link `react-native-linear-gradient` library manually and rebuild application.

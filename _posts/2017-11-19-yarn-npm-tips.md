@@ -109,8 +109,8 @@ it might be necessary to clean cache, say, when build fails.
 if it's necessary to reset cache only, using `yarn start --reset-cache`
 might suffice - try it first.
 
-(how to) update package
------------------------
+(how to) update a package
+-------------------------
 
 if Yarn/npm refuses to update a package:
 

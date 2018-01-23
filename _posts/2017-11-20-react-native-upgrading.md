@@ -87,7 +87,7 @@ resolve conflicts in all modified by `react-native-git-upgrade` files except
 for _project.pbxproj_ - all conflicts should be merged automatically for this
 file because of `union` merge strategy set in _.gitattributes_ previously.
 
-enable gitgutter in MacVim and resolve conflicts in changed files manually
+enable gitgutter in MacVim and resolve conflicts in modified files manually
 one by one (search for `ours`/`theirs` conflict markers).
 
 verify and fix project.pbxproj file

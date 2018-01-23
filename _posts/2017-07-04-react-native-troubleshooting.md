@@ -138,7 +138,7 @@ DeviceInfo native module is not installed correctly
 
 1. <https://github.com/rebeccahughes/react-native-device-info/issues/176>
 
-rebuild application (`react-native run-ios`).
+rebuild application.
 
 ### Unhandled JS Exception: undefined is not an object
 
@@ -557,11 +557,7 @@ pods were added to _ios/Podfile_ after linking corresponding libraries:
   end
 ```
 
-removing these pods fixed the issue:
-
-```sh
-$ git checkout ios/Podfile
-```
+remove `iceperkapp-tvOSTests` and `iceperkappTests` targets altogether.
 
 ### <PBXGroup ...> attempted to initialize an object with an unknown UUID
 
@@ -672,3 +668,11 @@ link `react-native-device-info` library manually and rebuild application.
 1. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
 
 link `react-native-linear-gradient` library manually and rebuild application.
+
+### TypeError: Cannot read property 'isPickerShow' of undefined
+
+**solution**
+
+1. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
+
+link `react-native-picker` library manually and rebuild application.

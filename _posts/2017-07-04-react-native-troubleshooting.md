@@ -292,8 +292,10 @@ the error occurs sometimes after adding new icon or updating existing one.
 
 restart packager (`yarn start`) and reload application in emulator.
 
-Module JSTimersExecution is not a registered callable module
-------------------------------------------------------------
+errors after upgrading RN to 0.47.0
+-----------------------------------
+
+### Module JSTimersExecution is not a registered callable module
 
 1. <https://stackoverflow.com/questions/45594935>
 
@@ -302,8 +304,6 @@ emulator window:
 ```
 Module JSTimersExecution is not a registered callable module (calling callTimers)
 ```
-
-the error occurs after upgrading RN to 0.47.0.
 
 **solution**
 
@@ -630,6 +630,8 @@ and rebuild application.
 
 ### Cannot read property 'func' of undefined
 
+error in device system log and emulator window.
+
 error occurs when evaluating this line:
 
 ```javascript
@@ -647,6 +649,8 @@ import `PropTypes` from a separate `prop-types` package.
 
 ### Cannot read property 'appVersion' of undefined
 
+error in device system log and emulator window.
+
 error occurs when evaluating this line in _deviceinfo.js_ file
 of `react-native-device-info` package:
 
@@ -663,6 +667,8 @@ link `react-native-device-info` library manually and rebuild application.
 
 ### Invariant Violation: Native component for "BVLinearGradient" does not exist
 
+error in device system log and emulator window.
+
 **solution**
 
 1. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
@@ -670,6 +676,8 @@ link `react-native-device-info` library manually and rebuild application.
 link `react-native-linear-gradient` library manually and rebuild application.
 
 ### TypeError: Cannot read property 'isPickerShow' of undefined
+
+error in device system log and emulator window.
 
 **solution**
 

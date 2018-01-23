@@ -61,7 +61,7 @@ set merge strategy for project.pbxproj file
 1. <https://github.com/facebook/react-native/issues/12261#issuecomment-341510929>
 2. <http://roadfiresoftware.com/2015/09/automatically-resolving-git-merge-conflicts-in-xcodes-project-pbxproj/>
 
-using `union` merge strategy for _project.pbxproj_ file instructs
+using `union` merge strategy for _project.pbxproj_ instructs
 Git to use both sides (`ours` and `theirs`) during a merge.
 
 _.gitattributes_:

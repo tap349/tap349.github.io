@@ -102,7 +102,7 @@ $ pip2 install kin
 $ kin ios/iceperkapp.xcodeproj/project.pbxproj
 ```
 
-NOTE: use `pip2` - not `pip3`.
+NOTE: install Kin with `pip2` - not `pip3`.
 
 link all packages
 -----------------

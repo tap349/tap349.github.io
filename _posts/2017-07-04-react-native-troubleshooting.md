@@ -508,7 +508,7 @@ $ react-native run-ios
 
 **solution**
 
-reinstall CocoaPods - see instructions in a solution for `<PBXGroup ...>
+reinstall CocoaPods - see instructions in solution for `<PBXGroup ...>
 attempted to initialize an object with an unknown UUID` issue.
 
 ### CocoaPods could not find compatible versions for pod "react-native-contacts"

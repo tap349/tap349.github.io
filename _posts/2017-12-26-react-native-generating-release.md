@@ -145,8 +145,8 @@ build failed:
 $ cd android && ./gradlew assembleRelease && cd ..
 ...
 :app:bundleReleaseJsAndAssets
-Scanning 773 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (41ms)
-Scanning 773 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (37ms)
+Scanning 773 folders for symlinks in <app_dir>/node_modules (41ms)
+Scanning 773 folders for symlinks in <app_dir>/node_modules (37ms)
 Loading dependency graph, done.
 
 ENOTEMPTY: directory not empty, rmdir '/var/folders/1g/28pm7dxn0_l569vjyzlzp2zw0000gn/T/react-native-packager-cache-f18bd0fb39fa7507ecdd2fb6cd91757d41b78c44/cache'

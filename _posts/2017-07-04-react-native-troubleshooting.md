@@ -101,8 +101,7 @@ errors after upgrading RN to 0.45.1
 ### Cannot find module X
 
 ```sh
-$ npm start
-
+$ yarn start
 ...
 > node node_modules/react-native/local-cli/cli.js start
 
@@ -124,7 +123,7 @@ use yarn instead of npm (somehow it managed to install all required dependencies
 $ rm package-lock.json
 $ rm -rf node-modules/
 $ yarn install
-$ npm start
+$ yarn start
 ```
 
 ### DeviceInfo native module is not installed correctly
@@ -480,3 +479,26 @@ ALL parent `ScrollView`s outside of `Modal`:
 
 this error seems to be reproduced only when `ScrollView` is
 rendered inside `Modal`.
+
+errors after upgrading RN to 0.52.1
+-----------------------------------
+
+### Error: While resolving module `react-native-vector-icons/Octicons`
+
+```sh
+$ yarn start
+...
+error: bundling failed: Error: While resolving module `react-native-vector-icons/Octicons`, the Haste package `react-native-vector-icons` was found. However the module `Octicons` could not be found within the package. Indeed, none of these files exist:
+
+  * `<app_dir>/node_modules/react-native/local-cli/core/__fixtures__/files/Octicons(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json)`
+  * `<app_dir>/node_modules/react-native/local-cli/core/__fixtures__/files/Octicons/index(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json)`
+```
+
+**solution**
+
+1. <https://github.com/oblador/react-native-vector-icons/issues/626#issuecomment-357405396>
+
+```sh
+$ rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
+$ yarn start
+```

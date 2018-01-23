@@ -350,7 +350,7 @@ when linking dependencies for `react-native-push-notification` package
 
 ```sh
 $ react-native link react-native-push-notification
-Scanning 587 folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (6ms)
+Scanning 587 folders for symlinks in <app_dir>/node_modules (6ms)
 npm-install info Android module react-native-push-notification is already linked
 ```
 

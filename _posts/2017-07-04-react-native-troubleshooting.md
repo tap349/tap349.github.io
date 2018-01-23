@@ -644,3 +644,34 @@ rebuild application:
 ```sh
 $ react-native run-ios
 ```
+
+### Cannot read property 'func' of undefined
+
+error is caused by this line:
+
+```javascript
+onPress: React.PropTypes.func.isRequired
+```
+
+that is `React.PropTypes` is `undefined`.
+
+**solution**
+
+1. <https://stackoverflow.com/a/47878585/3632318>
+
+> PropTypes has been moved to a separate package. Accessing React.PropTypes
+> is no longer supported and will be removed completely in React 16.
+
+import `PropTypes` from `prop-types` package instead.
+
+### Module AppRegistry is not a registered callable module
+
+device system log (console of React Developer Tools in fact):
+
+```
+Unhandled JS Exception: Module AppRegistry is not a registered callable module (calling runApplication)
+```
+
+**solution**
+
+

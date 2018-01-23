@@ -600,9 +600,9 @@ the rest of the project (the library is linked to later) has been
 built with `IPHONEOS_DEPLOYMENT_TARGET=8.0` build setting =\>
 hence the error.
 
-the latest version of `react-native-autogrow-textinput` doesn't officially
-support iOS Deployment Target (DT) lower than 9.3 but it's linked to DT 8.0
-(current DT in iOS project)  =\> change DT in iOS project to 9.3 as well:
+the latest version of `react-native-autogrow-textinput` doesn't support
+iOS Deployment Target (DT) lower than 9.3 but current DT in iOS project
+is 8.0 =\> change DT in iOS project to 9.3 as well:
 
 Xcode: `Build Settings` -> `Deployment` -> `iOS Deployment Target`
 

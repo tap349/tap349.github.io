@@ -27,7 +27,7 @@ $ rm -rf ~/.gradle/caches/*
 $ git clone git@github.com:npomfret/upgrading-react-native.git
 $ node upgrading-react-native/unlink.js package.json
 $ sh unlink-packages.sh
-$ rm -rf unlink-packages.sh upgrading-react-native/
+$ rm -rf unlink-packages.sh uninstall-packages.sh upgrading-react-native/
 ```
 
 or else it's possible to use a simple Ruby script _unlink\_all\_packages.rb_:

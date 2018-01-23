@@ -503,28 +503,23 @@ $ rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
 $ yarn start
 ```
 
-### <PBXGroup ...> attempted to initialize an object with an unknown UUID
+### fatal error: 'Flurry.h' file not found
 
 ```sh
-$ pod install
+$ react-native run-ios
 ...
-[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `EEE09AF85CBC4DA8A7C4E137` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
+<app_dir>/node_modules/react-native-flurry-analytics/ios/RNFlurryAnalytics.m:2:9: fatal error: 'Flurry.h' file not found
+#import <Flurry.h>
+        ^~~~~~~~~~
+1 error generated.
 
-[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `9DEE1362370047E5817C99E0` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
-...
+** BUILD FAILED **
 ```
 
 **solution**
 
-1. <https://github.com/CocoaPods/CocoaPods/issues/1822#issuecomment-304815540>
-
-reinstall CocoaPods:
-
-```sh
-$ cd ios/
-$ pod deintegrate
-$ pod install
-```
+reinstall CocoaPods - see instructions in a solution for `<PBXGroup ...>
+attempted to initialize an object with an unknown UUID` issue.
 
 ### CocoaPods could not find compatible versions for pod "react-native-contacts"
 
@@ -568,8 +563,52 @@ these pods were added to _ios/Podfile_ after running some command
   end
 ```
 
-restoring original _ios/Podfile_ fixed the problem:
+restoring original _ios/Podfile_ fixed the issue:
 
 ```sh
 $ git checkout ios/Podfile
 ```
+
+### <PBXGroup ...> attempted to initialize an object with an unknown UUID
+
+```sh
+$ pod install
+...
+[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `EEE09AF85CBC4DA8A7C4E137` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
+
+[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `9DEE1362370047E5817C99E0` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
+...
+```
+
+**solution**
+
+1. <https://github.com/CocoaPods/CocoaPods/issues/1822#issuecomment-304815540>
+
+reinstall CocoaPods:
+
+```sh
+$ cd ios/
+$ pod deintegrate
+$ pod install
+```
+
+### object file (.../libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
+
+```sh
+$ react-native run-ios
+...
+ld: warning: object file (<app_dir>/ios/build/Build/Products/Debug-iphonesimulator/libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
+Undefined symbols for architecture x86_64:
+  "_OBJC_CLASS_$_RCTOneSignal", referenced from:
+      objc-class-ref in AppDelegate.o
+  "_OBJC_CLASS_$_RNSentry", referenced from:
+      objc-class-ref in AppDelegate.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+** BUILD FAILED **
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/32950454/3632318>

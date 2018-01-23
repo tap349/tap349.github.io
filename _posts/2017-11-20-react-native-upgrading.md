@@ -131,7 +131,7 @@ NOTE: don't forget to rebuild applications for both iOS and Android!
 **UPDATE**
 
 after fixing different issues related to RN upgrade some libraries
-turned out to be not linked - try to link them again (just in case):
+turned out to be not linked - link all libraries again (just in case):
 
 ```sh
 $ react-native link

@@ -663,15 +663,3 @@ that is `React.PropTypes` is `undefined`.
 > is no longer supported and will be removed completely in React 16.
 
 import `PropTypes` from `prop-types` package instead.
-
-### Module AppRegistry is not a registered callable module
-
-device system log (console of React Developer Tools in fact):
-
-```
-Unhandled JS Exception: Module AppRegistry is not a registered callable module (calling runApplication)
-```
-
-**solution**
-
-

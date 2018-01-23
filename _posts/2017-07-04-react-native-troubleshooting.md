@@ -66,7 +66,7 @@ bug was fixed in v1.0.2 by moving Babel settings to _.babelrc_
 so that they are not consumed by RN packager by default.
 
 `react-side-effect` is the only package in my project that depends on
-`shallowequal` package (according to _yarn.lock_) =>
+`shallowequal` package (according to _yarn.lock_) =\>
 upgrade `react-side-effect` package to update its dependencies
 (including `shallowequal` package) to their latest version:
 
@@ -272,7 +272,7 @@ ListView becomes blank
 when pushing another page and then going back to page with `ListView`
 the latter becomes blank (nothing is rendered where `ListView` is
 supposed to be rendered). at the same time adjacent components are
-rendered properly (=> it's not that wrapped collection becomes empty).
+rendered properly (=\> it's not that wrapped collection becomes empty).
 
 **solution**
 
@@ -512,8 +512,6 @@ $ react-native run-ios
 #import <Flurry.h>
         ^~~~~~~~~~
 1 error generated.
-
-** BUILD FAILED **
 ```
 
 **solution**
@@ -535,13 +533,17 @@ Specs satisfying the `react-native-contacts (from `../node_modules/react-native-
 
 **solution**
 
-these pods were added to _ios/Podfile_ after running some command
-(maybe `pod outdated` is the culprit but I'm not sure):
+<https://facebook.github.io/react-native/docs/linking-libraries-ios.html>:
+
+> If your iOS project is using CocoaPods (contains Podfile) and linked library
+> has podspec file, then react-native link will link library using Podfile.
+
+pods were added to _ios/Podfile_ after linking corresponding libraries:
 
 ```diff
   target 'iceperkapp-tvOSTests' do
     inherit! :search_paths
-+   # Pods for testing
+    # Pods for testing
 +   pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
 +
 +   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
@@ -563,7 +565,7 @@ these pods were added to _ios/Podfile_ after running some command
   end
 ```
 
-restoring original _ios/Podfile_ fixed the issue:
+removing these pods fixed the issue:
 
 ```sh
 $ git checkout ios/Podfile
@@ -598,6 +600,29 @@ $ pod install
 $ react-native run-ios
 ...
 ld: warning: object file (<app_dir>/ios/build/Build/Products/Debug-iphonesimulator/libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/32950454/3632318>
+
+error explanation: `react-native-autogrow-textinput` library is
+built with `IPHONEOS_DEPLOYMENT_TARGET=9.3` build setting but
+the rest of the project (the library is linked to later) has been
+built with `IPHONEOS_DEPLOYMENT_TARGET=8.0` build setting =\>
+hence the error.
+
+the latest version of `react-native-autogrow-textinput` doesn't officially
+support iOS Deployment Target (DT) lower than 9.3 but it's linked to DT 8.0
+(current DT in iOS project)  =\> change DT in iOS project to 9.3 as well:
+
+Xcode: `Build Settings` -> `Deployment` -> `iOS Deployment Target`
+
+### Undefined symbols for architecture x86_64
+
+```sh
+$ react-native run-ios
+...
 Undefined symbols for architecture x86_64:
   "_OBJC_CLASS_$_RCTOneSignal", referenced from:
       objc-class-ref in AppDelegate.o
@@ -605,10 +630,17 @@ Undefined symbols for architecture x86_64:
       objc-class-ref in AppDelegate.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
-
-** BUILD FAILED **
 ```
 
 **solution**
 
-1. <https://stackoverflow.com/a/32950454/3632318>
+1. <https://github.com/geektimecoil/react-native-onesignal/issues/18#issuecomment-287132994>
+2. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
+
+link `react-native-onesignal` and `react-native-sentry` libraries manually
+(they are not linked properly by `react-native link` for some reason) and
+rebuild application:
+
+```sh
+$ react-native run-ios
+```

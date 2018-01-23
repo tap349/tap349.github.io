@@ -88,7 +88,9 @@ one by one (search for `ours`/`theirs` conflict markers).
 verify and fix project.pbxproj file
 -----------------------------------
 
-check _project.pbxproj_ with `kin`:
+1. <https://github.com/Karumi/Kin>
+
+check _project.pbxproj_ with Kin:
 
 ```sh
 $ pip2 install kin

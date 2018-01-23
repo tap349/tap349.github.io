@@ -13,42 +13,47 @@ categories: [react-native]
 {:toc}
 <hr>
 
-1. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
-2. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
+1. <https://facebook.github.io/react-native/docs/upgrading.html>
+2. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
+3. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
 
 unlink all packages
 -------------------
 
-1. <https://github.com/npomfret/upgrading-react-native>
+- using `upgrading-react-native`
 
-```sh
-$ watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install
-$ rm -rf ~/.gradle/caches/*
-$ git clone git@github.com:npomfret/upgrading-react-native.git
-$ node upgrading-react-native/unlink.js package.json
-$ sh unlink-packages.sh
-$ rm -rf unlink-packages.sh uninstall-packages.sh upgrading-react-native/
-```
+  1. <https://github.com/npomfret/upgrading-react-native>
 
-or else it's possible to use a simple Ruby script _unlink\_all\_packages.rb_:
+  ```sh
+  $ watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install
+  $ rm -rf ~/.gradle/caches/*
+  $ git clone git@github.com:npomfret/upgrading-react-native.git
+  $ node upgrading-react-native/unlink.js package.json
+  $ sh unlink-packages.sh
+  $ rm -rf unlink-packages.sh uninstall-packages.sh upgrading-react-native/
+  ```
 
-```ruby
-require 'json'
+- using my own Ruby script
 
-hash = JSON.parse(File.read('package.json'))
-packages = hash['dependencies'].keys + hash['devDependencies'].keys
+  _unlink\_all\_packages.rb_:
 
-packages.each.with_index(1) do |v, i|
-  puts "(#{i}/#{packages.count}) unlinking #{v}"
-  `react-native unlink #{v}`
-end
-```
+  ```ruby
+  require 'json'
 
-```sh
-$ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
-$ yarn_reset
-$ ruby unlink_all_packages.rb
-```
+  hash = JSON.parse(File.read('package.json'))
+  packages = hash['dependencies'].keys + hash['devDependencies'].keys
+
+  packages.each.with_index(1) do |v, i|
+    puts "(#{i}/#{packages.count}) unlinking #{v}"
+    `react-native unlink #{v}`
+  end
+  ```
+
+  ```sh
+  $ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
+  $ yarn_reset
+  $ ruby unlink_all_packages.rb
+  ```
 
 set merge strategy for project.pbxproj file
 -------------------------------------------
@@ -68,7 +73,7 @@ _.gitattributes_:
 upgrade with react-native-git-upgrade
 -------------------------------------
 
-1. <https://facebook.github.io/react-native/docs/upgrading.html>
+1. <https://facebook.github.io/react-native/docs/upgrading.html#upgrade-based-on-git>
 
 ```sh
 $ yarn global add react-native-git-upgrade

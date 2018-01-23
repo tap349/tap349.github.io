@@ -33,7 +33,7 @@ unlink all packages
   $ rm -rf unlink-packages.sh uninstall-packages.sh upgrading-react-native/
   ```
 
-- using my own Ruby script
+- using my own simple Ruby script
 
   _unlink\_all\_packages.rb_:
 

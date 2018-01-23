@@ -137,6 +137,6 @@ turned out to be not linked - link all libraries again (just in case):
 $ react-native link
 ```
 
-even after running this command I had to link a lot of libraries manually -
+even after running this command I had to link a lot of libraries manually
+(see [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})) -
 it looks like `react-native link` command is somehow broken in RN 0.52.1
-(see [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})).

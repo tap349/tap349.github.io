@@ -502,3 +502,74 @@ error: bundling failed: Error: While resolving module `react-native-vector-icons
 $ rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
 $ yarn start
 ```
+
+### <PBXGroup ...> attempted to initialize an object with an unknown UUID
+
+```sh
+$ pod install
+...
+[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `EEE09AF85CBC4DA8A7C4E137` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
+
+[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `9DEE1362370047E5817C99E0` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
+...
+```
+
+**solution**
+
+1. <https://github.com/CocoaPods/CocoaPods/issues/1822#issuecomment-304815540>
+
+reinstall CocoaPods:
+
+```sh
+$ cd ios/
+$ pod deintegrate
+$ pod install
+```
+
+### CocoaPods could not find compatible versions for pod "react-native-contacts"
+
+```sh
+$ pod install
+...
+[!] CocoaPods could not find compatible versions for pod "react-native-contacts":
+  In Podfile:
+    react-native-contacts (from `../node_modules/react-native-contacts`)
+
+Specs satisfying the `react-native-contacts (from `../node_modules/react-native-contacts`)` dependency were found, but they required a higher minimum deployment target.
+```
+
+**solution**
+
+these pods were added to _ios/Podfile_ after running some command
+(maybe `pod outdated` is the culprit but I'm not sure):
+
+```diff
+  target 'iceperkapp-tvOSTests' do
+    inherit! :search_paths
++   # Pods for testing
++   pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
++
++   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
++
++   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
++
++   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
++
++   pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
++
++   pod 'Picker', :path => '../node_modules/react-native-picker'
++
++   pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
++
++   pod 'RNSVG', :path => '../node_modules/react-native-svg'
++
++   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
++
+  end
+```
+
+restoring original _ios/Podfile_ fixed the problem:
+
+```sh
+$ git checkout ios/Podfile
+```

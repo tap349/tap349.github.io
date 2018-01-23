@@ -106,6 +106,12 @@ link all packages
 $ react-native link
 ```
 
+reinstall CocoaPods
+-------------------
+
+I had to reinstall CocoaPods due to several CocoaPods related problems - see
+[React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %}).
+
 post-upgrade instructions
 -------------------------
 

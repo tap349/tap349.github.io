@@ -112,12 +112,12 @@ might suffice - try it first.
 (how to) update package
 -----------------------
 
-if Yarn/npm refuses to update package:
+if Yarn/npm refuses to update a package:
 
 - change package version in _package.json_
 - `yarn install`/`npm install`
 
-maybe it's hack but IDK how to update package correctly.
+maybe it's hack but IDK how to update a package correctly.
 
 don't use peer dependencies
 ---------------------------

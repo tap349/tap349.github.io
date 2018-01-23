@@ -126,7 +126,7 @@ $ react-native run-ios
 $ react-native run-android
 ```
 
-NOTE: don't forget to rebuild applications for both iOS and Android!
+NOTE: don't forget to rebuild both iOS and Android applications!
 
 **UPDATE**
 

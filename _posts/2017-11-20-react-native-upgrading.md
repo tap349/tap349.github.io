@@ -13,8 +13,8 @@ categories: [react-native]
 {:toc}
 <hr>
 
-1. <https://facebook.github.io/react-native/blog/2016/12/05/easier-upgrades.html>
-2. <https://facebook.github.io/react-native/docs/upgrading.html>
+1. <https://facebook.github.io/react-native/docs/upgrading.html>
+2. <https://medium.zenika.com/easier-react-native-upgrades-with-rn-diff-5020b5c3de2d>
 3. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
 4. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
 
@@ -75,6 +75,7 @@ upgrade with react-native-git-upgrade
 -------------------------------------
 
 1. <https://facebook.github.io/react-native/docs/upgrading.html#upgrade-based-on-git>
+2. <https://facebook.github.io/react-native/blog/2016/12/05/easier-upgrades.html>
 
 ```sh
 $ yarn global add react-native-git-upgrade

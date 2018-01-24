@@ -13,9 +13,10 @@ categories: [react-native]
 {:toc}
 <hr>
 
-1. <https://facebook.github.io/react-native/docs/upgrading.html>
-2. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
-3. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
+1. <https://facebook.github.io/react-native/blog/2016/12/05/easier-upgrades.html>
+2. <https://facebook.github.io/react-native/docs/upgrading.html>
+3. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
+4. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
 
 unlink all packages
 -------------------

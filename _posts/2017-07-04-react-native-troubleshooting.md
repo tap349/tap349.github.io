@@ -13,6 +13,12 @@ categories: [react-native]
 {:toc}
 <hr>
 
+NOTE:
+
+```sh
+$ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
+```
+
 Couldn't find preset "es2015"
 -----------------------------
 
@@ -684,3 +690,33 @@ error in device system log and emulator window.
 1. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
 
 link `react-native-picker` library manually and rebuild application.
+
+### Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'
+
+```sh
+$ cd android && ./gradlew assembleRelease; cd ..
+...
+sentry-cli update to 1.28.1 is available!
+run sentry-cli update to update
+error: http error: [55] Failed sending data to the peer (SSL_write() returned SYSCALL, errno = 32)
+:app:bundleReleaseJsAndAssets FAILED
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Script '<app_dir>/node_modules/react-native-sentry/sentry.gradle' line: 154
+
+* What went wrong:
+Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'.
+> Process 'command 'node_modules/sentry-cli-binary/bin/sentry-cli'' finished with non-zero exit value 1
+```
+
+**solution**
+
+```sh
+$ yarn upgrade react-native-sentry
+$ yarn_reset
+```
+
+upgrading `react-native-sentry` didn't help - cleaning cache
+and reinstalling all node modules fixed the issue.

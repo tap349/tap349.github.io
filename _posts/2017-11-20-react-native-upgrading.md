@@ -18,6 +18,12 @@ categories: [react-native]
 3. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
 4. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
 
+NOTE:
+
+```sh
+$ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
+```
+
 unlink all packages
 -------------------
 
@@ -51,7 +57,6 @@ unlink all packages
   ```
 
   ```sh
-  $ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
   $ yarn_reset
   $ ruby unlink_all_packages.rb
   ```

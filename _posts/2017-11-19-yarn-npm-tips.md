@@ -99,8 +99,13 @@ $ npm run-script <script>
 
 1. <https://gist.github.com/jarretmoses/c2e4786fd342b3444f3bc6beff32098d>
 
+_~/.zshenv_:
+
+```zsh
+alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
+```
+
 ```sh
-$ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
 $ yarn_reset
 $ yarn start --reset-cache
 ```

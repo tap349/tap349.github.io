@@ -495,10 +495,24 @@ error: bundling failed: Error: While resolving module `react-native-vector-icons
 **solution**
 
 1. <https://github.com/oblador/react-native-vector-icons/issues/626#issuecomment-357405396>
+2. <https://github.com/oblador/react-native-vector-icons/issues/626#issuecomment-358018994>
 
 ```sh
 $ rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
 $ yarn start
+```
+
+it looks like this file is recreated after each application build so it
+makes sense to ad this command to `postinstall` script in _package.json_:
+
+```diff
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "eslint": "eslint",
+    "flow": "flow",
++   "postinstall": "rm -f ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
+  },
 ```
 
 ### fatal error: 'Flurry.h' file not found
@@ -563,7 +577,8 @@ pods were added to _ios/Podfile_ after linking corresponding libraries:
   end
 ```
 
-remove `iceperkapp-tvOSTests` and `iceperkappTests` targets altogether.
+remove `iceperkapp-tvOSTests` and `iceperkappTests` targets altogether
+and try to install pods again.
 
 ### <PBXGroup ...> attempted to initialize an object with an unknown UUID
 

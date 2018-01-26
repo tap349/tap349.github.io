@@ -503,7 +503,7 @@ $ yarn start
 ```
 
 it looks like this file is recreated after each application build so it
-makes sense to ad this command to `postinstall` script in _package.json_:
+makes sense to add this command to `postinstall` script in _package.json_:
 
 ```diff
   "scripts": {

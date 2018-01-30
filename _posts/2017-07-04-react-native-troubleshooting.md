@@ -735,3 +735,24 @@ $ yarn_reset
 
 upgrading `react-native-sentry` didn't help - cleaning cache
 and reinstalling all node modules fixed the issue.
+
+### production release crashes on startup (in both Android and iOS devices)
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/16567#issuecomment-340041357>
+2. <https://github.com/facebook/react-native/issues/16542>
+
+<https://github.com/magus/react-native-facebook-login/issues/279>:
+
+> View.propTypes has been removed in 0.49
+
+replace `View.propTypes.style` with `ViewPropTypes.style` in all components.
+
+to debug this and similar problems run application in `release` mode and
+monitor device system log for errors:
+
+```sh
+$ react-native run-android --variant=release
+$ react-native log-android
+```

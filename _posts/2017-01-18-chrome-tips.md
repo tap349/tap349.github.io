@@ -33,3 +33,10 @@ $('div.phone')[0]
 ------------------------------------------
 
 <chrome://flags/#enable-md-bookmarks> -> `Disabled`
+
+(how to) copy percent-encoded URL
+---------------------------------
+
+1. <https://stackoverflow.com/a/34634019/3632318>
+
+add space to the end of URL and copy.

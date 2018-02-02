@@ -19,3 +19,60 @@ categories: [react, reselect]
 > state object in multiple components. You will also want to pass props to
 > your selector. To do this, you need to create a selector function that can
 > be used on multiple instances of the same component at the same time.
+
+troubleshooting
+---------------
+
+### selector is always recomputing when input state stays the same
+
+I had this code:
+
+```javascript
+const getProfilesByUserId = (state) => (
+  state.profiles.all.reduce((acc, v) => {
+    acc[v.user_id] = v;
+    return acc;
+  }, {})
+);
+
+export const getGamersWithProfiles = createCachedSelector(
+  [getGamers, getProfilesByUserId],
+  (gamers, profilesByUserId, _gameId) => (
+    gamers.map(v => ({...v, profile: profilesByUserId[v.id]}))
+  ),
+)((state, gameId) => gameId);
+```
+
+the problem is that `getProfilesByUserId` input selector always returns new
+object causing `getGamersWithProfiles` selector to recompute on each update.
+
+**solution**
+
+input selector must return an existing object (a slice of Redux store state)
+that changes only when state changes =\> don't return a new manually created
+object from input selector.
+
+refactored code:
+
+```javascript
+const getProfiles = (state) => state.profiles.all;
+
+export const getGamersWithProfiles = createCachedSelector(
+  [getGamers, getProfiles],
+  (gamers, profiles, _gameId) => {
+    const profilesByUserId = getProfilesByUserId(profiles);
+    return gamers.map(v => ({...v, profile: profilesByUserId[v.id]}));
+  },
+)((state, gameId) => gameId);
+
+//------------------------------------------------------------------------------
+// helpers
+//------------------------------------------------------------------------------
+
+const getProfilesByUserId = (profiles) => (
+  profiles.reduce((acc, v) => {
+    acc[v.user_id] = v;
+    return acc;
+  }, {})
+);
+```

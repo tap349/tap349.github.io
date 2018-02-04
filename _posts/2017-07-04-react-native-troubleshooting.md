@@ -776,7 +776,7 @@ Could not determine java version from '9.0.4'.
 1. <https://github.com/facebook/react-native/issues/17688>
 2. <https://github.com/facebook/react-native/issues/16536>
 
-maybe not the best but the easiest solution is to rollback to JDK 8:
+probably not the best but the easiest solution is to rollback to JDK 8:
 
 ```sh
 $ brew cask uninstall java

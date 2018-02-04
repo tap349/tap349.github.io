@@ -756,3 +756,30 @@ monitor device system log for errors:
 $ react-native run-android --variant=release
 $ react-native log-android
 ```
+
+Could not determine java version from '9.0.4'
+---------------------------------------------
+
+the error occurs after updating to JDK 9:
+
+```sh
+$ react-native run-android
+...
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not determine java version from '9.0.4'.
+```
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/17688>
+2. <https://github.com/facebook/react-native/issues/16536>
+
+maybe not the best but the easiest solution is to rollback to JDK 8:
+
+```sh
+$ brew cask uninstall java
+$ brew tap caskroom/versions
+$ brew cask install java8
+```

@@ -706,6 +706,16 @@ error in device system log and emulator window.
 
 link `react-native-picker` library manually and rebuild application.
 
+### Cannot read property 'showImagePicker' of undefined
+
+error in device system log and emulator window.
+
+**solution**
+
+1. <https://github.com/react-community/react-native-image-picker/issues/712>
+
+link `react-native-image-picker` library manually and rebuild application.
+
 ### Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'
 
 ```sh

@@ -37,6 +37,8 @@ optional and default values
 
 - optional value
 
+  use optional type (sum type under the hood):
+
   ```ruby
   # value can be nil
   Types::Strict::String.optional
@@ -44,8 +46,8 @@ optional and default values
   Types::Strict::Nil | Types::Strict::String
   ```
 
-  NOTE: optional value is a simplified version of maybe value -
-        `Maybe` types wrap passed values in `Maybe` monad.
+  maybe type is kind of advanced version of optional type
+  (`Maybe` types wrap passed values in `Maybe` monad).
 
 - default value
 

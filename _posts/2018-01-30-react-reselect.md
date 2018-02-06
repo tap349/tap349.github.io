@@ -13,12 +13,24 @@ categories: [react, reselect]
 {:toc}
 <hr>
 
+notes
+-----
+
 <https://medium.com/@parkerdan/react-reselect-and-redux-b34017f8194c>:
 
 > In the real world, you will most likely need the same certain part of your
 > state object in multiple components. You will also want to pass props to
 > your selector. To do this, you need to create a selector function that can
 > be used on multiple instances of the same component at the same time.
+
+if it's necessary to get data from Redux store (or computed data based on
+data from Redux store), wrap component in connected container and provide
+this data via `mapStateFromProps`.
+
+if it's necessary to get the same computed data from Redux store but
+computing this data on each component update is costly, fetch it via
+selector (where it's cached) and provide further via `mapStateFromProps`
+as usual.
 
 troubleshooting
 ---------------

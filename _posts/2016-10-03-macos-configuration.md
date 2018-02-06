@@ -148,6 +148,7 @@ System Preferences
     - [x] Applications
     - [x] Calculator
     - [x] Conversion
+    - [x] Definition
     - [x] Events & Reminders
     - [x] System Preferences
   - [ ] Allow Spotlight Suggestions in Look up

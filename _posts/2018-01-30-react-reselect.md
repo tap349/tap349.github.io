@@ -23,6 +23,8 @@ notes
 > your selector. To do this, you need to create a selector function that can
 > be used on multiple instances of the same component at the same time.
 
+### mapStateFromProps vs. reselect + mapStateFromProps
+
 if it's necessary to get data from Redux store (or computed data based on
 data from Redux store), wrap component in connected container and provide
 this data via `mapStateFromProps`.

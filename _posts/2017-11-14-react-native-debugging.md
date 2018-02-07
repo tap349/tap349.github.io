@@ -83,3 +83,8 @@ is also very handy - turn on React DevTools only when it's strictly necessary
 to explore React component hierarchy in more detail (I find built-in Inspector
 more convenient for simple cases since results are shown right in emaulator's
 window).
+
+Reactotron
+----------
+
+1. <https://github.com/infinitered/reactotron>

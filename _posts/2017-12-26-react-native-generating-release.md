@@ -22,14 +22,18 @@ iceperkapp
   _ios/iceperkapp/Info.plist_ (Xcode: `General` -> `Identity` -> `Build`):
 
   ```xml
+  <key>CFBundleShortVersionString</key>
+  <string>3.11.2</string>
+  <!--...-->
   <key>CFBundleVersion</key>
-  <string>58</string>
+  <string>68</string>
   ```
 
   _android/app/build.gradle_:
 
   ```groovy
-  versionCode 58
+  versionCode 68
+  versionName "3.11.2"
   ```
 
 iOS

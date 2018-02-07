@@ -716,6 +716,14 @@ error in device system log and emulator window.
 
 link `react-native-image-picker` library manually and rebuild application.
 
+### TypeError: undefined is not an object (evaluating 'Contacts.getAll')
+
+error in device system log and emulator window.
+
+**solution**
+
+link `react-native-contacts` library manually and rebuild application.
+
 ### Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'
 
 ```sh

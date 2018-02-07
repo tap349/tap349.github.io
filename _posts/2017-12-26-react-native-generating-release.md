@@ -74,7 +74,8 @@ before building releases.
 - assemble release
 
   ```sh
-  $ cd android && ./gradlew assembleRelease; cd ..
+  $ build_android_release='cd android && ./gradlew assembleRelease; cd ..'
+  $ build_android_release
   ```
 
   new release is saved as _android/app/build/outputs/apk/app-release.apk_.

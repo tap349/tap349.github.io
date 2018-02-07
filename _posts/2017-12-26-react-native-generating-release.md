@@ -49,14 +49,16 @@ iOS
   - go to `TestFlight` tab
   - go to `BUILDS` (left menu) -\> `iOS`
   - wait till new build is processed (it might temporarily disappear from the list)
-  - open just uploaded iOS build
+  - open new iOS build
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in pop-up window
   - click `Start Internal Testing` button
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link -> `iOS` (pop-up menu)
+  - enter new Store Version Number (say, 3.11.2) in pop-up window
   - fill `What's New in This Version` section
+  - screenshots are added for iPhone 5.5" Display only
   - select new build
   - select `Automatically release this version` option
   - click `Save` button

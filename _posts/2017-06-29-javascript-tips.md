@@ -142,6 +142,8 @@ const picked = (({a, c}) => ({a, c}))(object);
 console.log(picked); // {a: 5, c: 7}
 ```
 
+or else remove unnecessary properties (see the next tip).
+
 (how to) remove object property
 ----------------------------------------
 

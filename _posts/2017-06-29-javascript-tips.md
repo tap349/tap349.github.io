@@ -142,13 +142,28 @@ const picked = (({a, c}) => ({a, c}))(object);
 console.log(picked); // {a: 5, c: 7}
 ```
 
-or
+(how to) remove object property
+----------------------------------------
+
+1. <https://stackoverflow.com/a/33053362/3632318>
+
+to remove static property:
 
 ```javascript
 const object = {a: 5, b: 6, c: 7};
-const {b, ...picked} = object;
+const {b, ...rest} = object;
 
-console.log(picked); // {a: 5, c: 7}
+console.log(rest); // {a: 5, c: 7}
+```
+
+to remove calculated property (say, ID):
+
+```javascript
+const object = {1: 'foo', 2: 'bar', 3: 'baz'};
+const id = 2;
+const {[id]: _value, ...rest} = object;
+
+console.log(rest); // {1: "foo", 3: "baz"}
 ```
 
 (how to) create empty array of N elements

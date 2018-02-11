@@ -387,6 +387,17 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   ```javascript
   import {connect, type Connector} from 'react-redux';
 
+  type OwnProps = {
+    foo: Object,
+  };
+  type StateProps = {
+    bar: ?Object,
+  };
+  type DispatchProps = {
+    getBaz: () => Promise<Object>,
+  };
+  type Props = OwnProps & StateProps & DispatchProps;
+
   class MyComponent extends React.Component<Props> {
   }
 

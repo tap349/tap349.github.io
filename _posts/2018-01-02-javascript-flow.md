@@ -371,6 +371,31 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   }
   ```
 
+- don't use decorators - Flow doesn't support them as of now
+
+  1. <https://github.com/facebook/flow/issues/3405>
+
+  ```javascript
+  @connect(mapStateToProps, mapDispatchToProps)
+  export default class MyComponent extends React.Component<Props> {
+  }
+  ```
+
+  =>
+
+  ```javascript
+  import {connect, type Connector} from 'react-redux';
+
+  class MyComponent extends React.Component<Props> {
+  }
+
+  const connector: Connector<OwnProps, Props> = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  );
+  export default connector(MyComponent);
+  ```
+
 types
 -----
 

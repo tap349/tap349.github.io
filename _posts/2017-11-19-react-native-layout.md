@@ -31,6 +31,11 @@ style guide
   and style this container with required margins (say, using `section`
   style) or use `containerStyle` component property (or the like).
 
+  what concerns wrapping ALL standard components (like `Text`) into `View`
+  just to add some padding: now I think it's not strictly necessary since
+  it introduces a lot of nesting - use `View` as container only for custom
+  components only.
+
 - margin vs. padding
 
   there are cases when either only padding or only margin would fit -

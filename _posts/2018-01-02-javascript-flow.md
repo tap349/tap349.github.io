@@ -230,7 +230,9 @@ use `interface` to add structural typing for classes.
 
 Classes (when being used as a type), type aliases, and interfaces with
 generics are parameterized (all require that you pass type arguments).
-Functions and function types do not have parameterized generics.
+Functions and function types do not have parameterized generics
+(functions and function types with generics don't require to pass type
+arguments to use them).
 
 say, `React.Component<Props, State>` is a parameterized generic class type
 (it's necessary to pass `Props` and `State` types when using this class type).

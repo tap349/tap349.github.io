@@ -18,9 +18,9 @@ style guide
 
 - page should be divided into sections
 
-  sections are `View`s - preferably with the same `marginBottom`
+  sections are `View`s - preferably with the same `paddingBottom`
   and (possibly) other properties which can be extracted into local
-  `section` style.
+  `section` style (if it's used more than once of course).
 
 - all standard and custom components (buttons, inputs, pickers,
   etc.) must have ZERO margins and external paddings by default

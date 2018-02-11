@@ -289,9 +289,12 @@ say, you want to calculate total count and save it as a state field in store.
 ### don't pass store to presentational components
 
 1. <https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0>
+2. <https://redux.js.org/docs/basics/UsageWithReact.html#presentational-and-container-components>
 
 only container components are aware of store and provide data from store to
 presentational and other container components.
+
+that is why only container components should be connected to Redux store.
 
 ### initialize state in reducers with ES6 default arguments
 

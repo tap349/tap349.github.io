@@ -35,7 +35,7 @@ style guide
 
   there are cases when either only padding or only margin would fit -
   say, margin will be used when adding space between child components
-  each with its background color.
+  each with its own background color.
 
   but sometimes it's necessary to add spacing between current and adjacent
   components (usually by wrapping current component into `View` container)

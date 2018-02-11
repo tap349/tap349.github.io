@@ -374,6 +374,7 @@ say, `React.Component<Props, State>` is a parameterized generic class type
 - don't use decorators - Flow doesn't support them as of now
 
   1. <https://github.com/facebook/flow/issues/3405>
+  2. <https://github.com/agentcooper/react-redux-flow-example/blob/master/src/Counter.js>
 
   ```javascript
   @connect(mapStateToProps, mapDispatchToProps)

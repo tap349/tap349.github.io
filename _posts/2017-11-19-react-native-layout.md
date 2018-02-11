@@ -33,8 +33,8 @@ style guide
 
   what concerns wrapping ALL standard components (like `Text`) into `View`
   just to add some padding: now I think it's not strictly necessary since
-  it introduces a lot of nesting - use `View` as container only for custom
-  components only.
+  it introduces a lot of nesting - it's allowed to add layout style props
+  right to standard components.
 
 - margin vs. padding
 

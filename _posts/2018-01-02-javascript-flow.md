@@ -322,6 +322,17 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   }
   ```
 
+  if component extends another custom component (not `React.Component`),
+  specify props type inside class body:
+
+  ```javascript
+  export default class Checkbox extends BaseCheckbox {
+    props: Props;
+    // ....
+  }
+  ```
+
+
 - add default props as usual
 
   ```javascript

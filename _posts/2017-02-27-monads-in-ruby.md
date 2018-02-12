@@ -275,7 +275,7 @@ monads have the following methods:
   # using block
 
   Right(model).tee(force_collect) do |model, force_collect|
-    CollectProducts.perform_later(model, force_collect)
+    CollectProductsJob.perform_later(model, force_collect)
   end
   ```
 
@@ -337,9 +337,9 @@ class Site::Create
     end
   end
 
-  def collect_products model
+  def collect_products model, force_collect
     return Right(nil) unless model.data_source_SITE?
-    CollectProductsJob.perform_assured(model.site_setting)
+    CollectProductsJob.perform_later(model, force_collect)
 
     Right(nil)
   end

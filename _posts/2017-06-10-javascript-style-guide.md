@@ -110,18 +110,14 @@ for `null`, `undefined` or empty string explicitly but only
 when that variable can be an empty string:
 
 ```javascript
+// variable must be declared before making checks
 const foo = '';
 
-// good
-if (foo) { console.log('foo'); }
+// good (using `!!foo` to get boolean value is usually redundant)
+if (foo) { console.log(foo); } // nothing printed
 // bad (more verbose)
-if (foo != null && foo.length !== 0) { console.log('foo'); }
+if (foo != null && foo.length !== 0) { console.log(foo); } // nothing printed
 ```
-
-NOTE: variable must be declared before making these checks.
-
-NOTE: using `!!foo` to get boolean value is usually redundant in
-      conditions since using just `foo` would have the same effect.
 
 if variable can't be an empty string, prefer checking for `null`
 and `undefined` explicitly:

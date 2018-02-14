@@ -801,3 +801,26 @@ $ brew cask uninstall java
 $ brew tap caskroom/versions
 $ brew cask install java8
 ```
+
+Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
+-------------------------------------------------------------
+
+the error occurs when trying to install application with lower version
+(`versionCode` in _android/app/build.gradle_) on device that already has
+this application installed with higher version:
+
+```sh
+$ react-native run-android
+...
+:app:installDebug FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:installDebug'.
+> com.android.builder.testing.api.DeviceException: com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
+```
+
+**solution**
+
+uninstall application on device (emulator) and build application again.

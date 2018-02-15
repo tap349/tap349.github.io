@@ -253,6 +253,9 @@ end
 (EXIT) no process: the process is not alive
 -------------------------------------------
 
+getting agent value (in `Neko.UserRate.Store.all/1`) fails
+since agent is no longer alive:
+
 ```
 ** (stop) exited in: GenServer.call(#PID<0.24355.22>, {:get, #Function<0.105777791/1 in Neko.UserRate.Store.all/1>}, 5000)
     ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
@@ -264,16 +267,44 @@ end
         (stdlib) proc_lib.erl:247: :proc_lib.init_p_do_apply/3
 ```
 
-common (application-specific) conditions under which this error occurs:
+common application-specific conditions under which this error occurs:
 
 - `action` of incoming request is always `reset`
 - user handler process for `user_id` of incoming request
   has already been started when request is received
 
-WIP: all messages are processed synchronously except for one: `DOWN` message
-sent to user rate store registry.
-
 **solution**
+
+error was caused by this sequence of steps:
+
+- request to reset user rates (`reset` action) is received
+- agent that stores user rates is stopped
+
+  `DOWN` message is sent *asynchronously* - the process that monitors
+  this agent (user rate store registry) will receive it eventually and
+  will remove agent's record (agent PID is stored under `user_id` key)
+  from ETS table.
+
+- user rates are loaded
+
+  they are meant to be reloaded (fetched from shikimori) but it doesn't
+  happen: `DOWN` message is not received in user rate store registry yet
+  => agent's record is still present in ETS table => user rates are not
+  reloaded because they are reloaded only when agent is not started yet
+  (and agent is started when they are reloaded).
+
+- agent value is retrieved to calculate new achievements
+
+  this results into error in description above: agent is not alive
+  but its PID is still stored in ETS table since `DOWN` message is
+  not received yet in user rate store registry.
+
+- `DOWN` message is received eventually but it doesn't matter now
+
+to fix this problem I have to make sure that user rates are loaded
+only once `DOWN` message is received in monitoring process - IDK how
+to secure this so I've decided to refuse from stopping agent at all -
+now user rates are force reloaded instead (see commit a72aa5b).
 
 pacificnew: no such file or directory
 -------------------------------------

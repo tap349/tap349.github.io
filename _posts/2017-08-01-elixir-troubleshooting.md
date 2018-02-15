@@ -280,7 +280,7 @@ error was caused by this sequence of steps:
 - request to reset user rates (`reset` action) is received
 - agent that stores user rates is stopped synchronously
 
-  `DOWN` message is sent *asynchronously* - the process that monitors
+  `:DOWN` message is sent *asynchronously* - the process that monitors
   this agent (user rate store registry) will receive it eventually and
   will remove agent's record (agent PID is stored under `user_id` key)
   from ETS table.
@@ -288,7 +288,7 @@ error was caused by this sequence of steps:
 - user rates are loaded
 
   they are meant to be reloaded (fetched from shikimori) but it doesn't
-  happen: `DOWN` message is not received in user rate store registry yet
+  happen: `:DOWN` message is not received in user rate store registry yet
   => agent's record is still present in ETS table => user rates are not
   reloaded because they are reloaded only when agent is not started yet
   (and agent is started when they are reloaded).
@@ -296,12 +296,12 @@ error was caused by this sequence of steps:
 - agent value is retrieved to calculate new achievements
 
   this results into error in description above: agent is not alive but
-  its stale PID is still stored in ETS table since `DOWN` message is not
-  received yet in user rate store registry.
+  its stale PID is still stored in ETS table since `:DOWN` message is
+  not received yet in user rate store registry.
 
-- `DOWN` message is received eventually but it doesn't matter now
+- `:DOWN` message is received eventually but it doesn't matter now
 
-  or else `DOWN` message may be received right after the step where user
+  or else `:DOWN` message may be received right after the step where user
   rates are loaded - in this case agent's record will be removed from ETS
   table and retrieving agent value in the next step (where agent value is
   retrieved) will result in almost the same error (PID will be `nil`).
@@ -327,7 +327,7 @@ error was caused by this sequence of steps:
   ```
 
 to fix this problem I have to make sure that user rates are loaded
-only once `DOWN` message is received in monitoring process. IDK how
+only once `:DOWN` message is received in monitoring process. IDK how
 to secure this so I've decided to refuse from stopping agent at all -
 now user rates are force reloaded instead (see commit a72aa5b).
 

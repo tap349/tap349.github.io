@@ -278,7 +278,7 @@ common application-specific conditions under which this error occurs:
 error was caused by this sequence of steps:
 
 - request to reset user rates (`reset` action) is received
-- agent that stores user rates is stopped
+- agent that stores user rates is stopped synchronously
 
   `DOWN` message is sent *asynchronously* - the process that monitors
   this agent (user rate store registry) will receive it eventually and
@@ -295,14 +295,39 @@ error was caused by this sequence of steps:
 
 - agent value is retrieved to calculate new achievements
 
-  this results into error in description above: agent is not alive
-  but its PID is still stored in ETS table since `DOWN` message is
-  not received yet in user rate store registry.
+  this results into error in description above: agent is not alive but
+  its stale PID is still stored in ETS table since `DOWN` message is not
+  received yet in user rate store registry.
 
 - `DOWN` message is received eventually but it doesn't matter now
 
+  or else `DOWN` message may be received right after the step where user
+  rates are loaded - in this case agent's record will be removed from ETS
+  table and retrieving agent value in the next step (where agent value is
+  retrieved) will result in almost the same error (PID will be `nil`).
+
+  using stale PID:
+
+  ```
+  iex> {:ok, pid} = Agent.start_link(fn -> %{} end)
+  iex> Agent.stop(pid)
+  iex> Agent.get(nil, &(&1))
+  ** (exit) exited in: GenServer.call(#PID<0.437.0>, {:get, #Function<6.99386804/1 in :erl_eval.expr/5>}, 5000)
+      ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
+      (elixir) lib/gen_server.ex:774: GenServer.call/3
+  ```
+
+  using `nil` as PID:
+
+  ```
+  iex> Agent.get(nil, &(&1))
+  ** (exit) exited in: GenServer.call(nil, {:get, #Function<6.99386804/1 in :erl_eval.expr/5>}, 5000)
+      ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
+      (elixir) lib/gen_server.ex:766: GenServer.call/3
+  ```
+
 to fix this problem I have to make sure that user rates are loaded
-only once `DOWN` message is received in monitoring process - IDK how
+only once `DOWN` message is received in monitoring process. IDK how
 to secure this so I've decided to refuse from stopping agent at all -
 now user rates are force reloaded instead (see commit a72aa5b).
 

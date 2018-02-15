@@ -207,7 +207,7 @@ errors occurs when trying to insert into ETS table:
 ** (exit) exited in: GenServer.call(#PID<0.465.0>, {:update, #Function<4.3141730/1 in Neko.UserRate.Store.reload/2>}, 5000)
     ** (EXIT) an exception was raised:
         ** (ArgumentError) argument error
-            (stdlib) :ets.insert(:user_anime_ids, {#PID<0.465.0>, #MapSet<[]>})
+        (stdlib) :ets.insert(:user_anime_ids, {#PID<0.465.0>, #MapSet<[]>})
 ```
 
 **solution**
@@ -259,12 +259,12 @@ since agent is no longer alive:
 ```
 ** (stop) exited in: GenServer.call(#PID<0.24355.22>, {:get, #Function<0.105777791/1 in Neko.UserRate.Store.all/1>}, 5000)
     ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
-        (elixir) lib/gen_server.ex:774: GenServer.call/3
-        (neko) lib/neko/rules/simple_rule.ex:43: Neko.Rules.SimpleRule.achievements/2
-        (neko) lib/neko/rules/simple_rule/worker.ex:34: Neko.Rules.SimpleRule.Worker.handle_call/3
-        (stdlib) gen_server.erl:636: :gen_server.try_handle_call/4
-        (stdlib) gen_server.erl:665: :gen_server.handle_msg/6
-        (stdlib) proc_lib.erl:247: :proc_lib.init_p_do_apply/3
+    (elixir) lib/gen_server.ex:774: GenServer.call/3
+    (neko) lib/neko/rules/simple_rule.ex:43: Neko.Rules.SimpleRule.achievements/2
+    (neko) lib/neko/rules/simple_rule/worker.ex:34: Neko.Rules.SimpleRule.Worker.handle_call/3
+    (stdlib) gen_server.erl:636: :gen_server.try_handle_call/4
+    (stdlib) gen_server.erl:665: :gen_server.handle_msg/6
+    (stdlib) proc_lib.erl:247: :proc_lib.init_p_do_apply/3
 ```
 
 common application-specific conditions under which this error occurs:
@@ -344,3 +344,23 @@ pacificnew: no such file or directory
 1. <https://github.com/lau/tzdata/issues/57>
 
 fixed in tzdata v0.5.16.
+
+(HTTPoison.Error) :eaddrinuse
+-----------------------------
+
+```
+$ journalctl --no-tail --since '2018-02-02 13:39:20' --until '2018-02-02 13:39:30' -u neko
+...
+** (exit) exited in: GenServer.call({:via, Registry, {:user_handler_registry, 139794}}, {:process, %Neko.Request{action: "put", id: 29099818, score: 9, status: "watching", target_id: 34497, user_id: 139794}}, 120000)
+    ** (EXIT) exited in: GenServer.call(#PID<0.24050.10>, {:update, #Function<1.33065197/1 in Neko.Achievement.Store.reload/2>}, 90000)
+        ** (EXIT) an exception was raised:
+            ** (HTTPoison.Error) :eaddrinuse
+            (neko) lib/neko/shikimori/http_client.ex:9: Neko.Shikimori.HTTPClient.request!/5
+            (neko) lib/neko/shikimori/http_client.ex:42: Neko.Shikimori.HTTPClient.make_request!/3
+            (neko) lib/neko/shikimori/http_client.ex:25: Neko.Shikimori.HTTPClient.get_achievements!/1
+            (neko) lib/neko/achievement/store.ex:44: Neko.Achievement.Store.achievements/1
+```
+
+**solution**
+
+WIP

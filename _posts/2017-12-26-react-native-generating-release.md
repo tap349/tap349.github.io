@@ -36,8 +36,7 @@ iceperkapp
   versionName "3.11.2"
   ```
 
-iOS
----
+### iOS
 
 - open _iceperkapp.xcworkspace_ in Xcode
   - select `Generic iOS Device`
@@ -66,8 +65,7 @@ iOS
   - select `No` (app doesn't use IDFA) on `Advertising Identifier` page
   - click `Submit` button
 
-Android
--------
+### Android
 
 copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
 from `Complead/iceperkapp_certificates/android` GitHub repo (see _README.md_)
@@ -175,3 +173,13 @@ reset cache:
 ```sh
 $ yarn start --reset-cache
 ```
+
+### [iOS] uploaded build doesn't appear on `TestFlight` tab
+
+it's okay for build to disappear temporarily from the list of builds
+but sometimes it might not appear in the list again - no matter how
+long you wait.
+
+**solution**
+
+bump build number and upload new build.

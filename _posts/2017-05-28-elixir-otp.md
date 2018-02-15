@@ -107,7 +107,7 @@ Task
   ```
 
   the task doesn't crash the caller iff `Task.yield/2` is used
-  to capture results (it crashes when `Task.await/2` is used).
+  to capture results (task crashes when `Task.await/2` is used).
 
 Supervisor
 ----------

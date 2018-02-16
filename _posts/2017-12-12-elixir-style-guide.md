@@ -61,4 +61,10 @@ fn(foo, bar) -> IO.puts("hello #{foo} and #{bar}") end
 
 **UPDATE**
 
-`mix format` removes parens for anonymous functions of any arity.
+`mix format` removes parens for anonymous functions of any arity:
+
+```elixir
+Enum.reduce(achievements, %{}, fn x, acc ->
+  Map.put(acc, comparison_key(x), x)
+end)
+```

@@ -181,7 +181,7 @@ Supervisor
 
 ### child specifications (child specs)
 
-1. <https://hexdocs.pm/elixir/Supervisor.html#module-child-specification>
+1. <https://hexdocs.pm/elixir/Supervisor.html>
 2. <https://hexdocs.pm/elixir/Supervisor.html#module-start_link-2-init-2-and-strategies>
 3. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L573>
 4. <https://hexdocs.pm/elixir/GenServer.html#start_link/3>
@@ -190,17 +190,18 @@ sample child spec:
 
 ```elixir
 iex> Neko.Achievement.Store.Registry.child_spec(:hello)
-%{id: Neko.Achievement.Store.Registry, restart: :permanent, shutdown: 5000,
-  start: {Neko.Achievement.Store.Registry, :start_link, [:hello]},
-  type: :worker}
+%{
+  id: Neko.Achievement.Store.Registry,
+  start: {Neko.Achievement.Store.Registry, :start_link, [:hello]}
+}
 ```
 
 supervisor is passed a list of children when started with
 `Supervisor.start_link/2`, each child can be specified in 4 ways:
 
+- child spec map (`Neko.Foo.child_spec(arg)`)
 - module (`Neko.Foo` = `{Neko.Foo, []}`)
 - tuple with module and start argument (`{Neko.Foo, arg}`)
-- child spec map (`Neko.Foo.child_spec(arg)`)
 - *[DEPRECATED]* child spec tuple (`Supervisor.Spec` helpers)
 
 when module (1) or tuple (2) are provided, supervisor retrieves

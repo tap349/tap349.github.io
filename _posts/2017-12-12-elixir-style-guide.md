@@ -32,6 +32,20 @@ defmodule MyApp.Rule do
 end
 ```
 
+**UPDATE**
+
+`mix format` adds parens for built-in types:
+
+```elixir
+@type rule_t :: %Neko.Rules.SimpleRule{}
+@type rules_t :: MapSet.t(rule_t)
+
+@spec set(String.t(), rules_t) :: :ok
+def set(name \\ __MODULE__, rules) do
+  Agent.update(name, fn _ -> rules |> calc() end)
+end
+```
+
 anonymous functions
 -------------------
 
@@ -44,3 +58,7 @@ fn(_) -> IO.puts("hello") end
 fn(foo) -> IO.puts("hello #{foo}") end
 fn(foo, bar) -> IO.puts("hello #{foo} and #{bar}") end
 ```
+
+**UPDATE**
+
+`mix format` removes parens for anonymous functions of any arity.

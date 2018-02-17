@@ -181,10 +181,9 @@ Supervisor
 
 ### child specifications (child specs)
 
-1. <https://hexdocs.pm/elixir/Supervisor.html>
-2. <https://hexdocs.pm/elixir/Supervisor.html#module-start_link-2-init-2-and-strategies>
-3. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L573>
-4. <https://hexdocs.pm/elixir/GenServer.html#start_link/3>
+1. <https://hexdocs.pm/elixir/Supervisor.html#module-start_link-2-init-2-and-strategies>
+2. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L573>
+3. <https://hexdocs.pm/elixir/GenServer.html#start_link/3>
 
 sample child spec:
 

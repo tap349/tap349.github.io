@@ -13,7 +13,10 @@ categories: [elixir]
 {:toc}
 <hr>
 
-1. <https://stackoverflow.com/a/46869400/3632318>
+memory management
+-----------------
+
+<https://stackoverflow.com/a/46869400/3632318>:
 
 > In principle everything is copied. Every process has its own heap.
 >

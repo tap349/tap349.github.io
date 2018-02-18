@@ -16,9 +16,9 @@ categories: [elixir]
 1. <https://stackoverflow.com/a/46869400/3632318>
 
 > In principle everything is copied. Every process has its own heap.
-
+>
 > In reality there are a few underlying speed hacks. The most notable are:
-
+>
 > - Literals known at compile time are referenced from the global heap
 >   (which is some cases is a huge performance gain)
 > - Binaries larger than 64 bytes are referenced from the global heap

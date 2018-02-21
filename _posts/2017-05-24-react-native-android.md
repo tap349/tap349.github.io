@@ -669,7 +669,8 @@ com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED
 1. <https://stackoverflow.com/questions/13808599>
 
 RN fails to install application with lower versionCode than currently installed
-in emulator - uninstall application with higher versionCode and build again.
+in emulator - uninstall application with higher versionCode inside emulator and
+build again.
 
 ### You have not accepted the license agreements of the following SDK components
 

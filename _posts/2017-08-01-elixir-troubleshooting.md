@@ -345,6 +345,17 @@ pacificnew: no such file or directory
 
 fixed in tzdata v0.5.16.
 
+(HTTPoison.Error) :closed
+-------------------------
+
+**solution**
+
+1. <https://github.com/edgurgel/httpoison#note-about-broken-ssl-in-erlang-19>
+2. <http://campezzi.ghost.io/httpoison-ssl-connection-closed/>
+
+related issue in Erlang/OTP ([ERL-192](https://bugs.erlang.org/browse/ERL-192))
+is resolved now so you shouldn't be receiving this error since Erlang/OTP 20.
+
 (HTTPoison.Error) :eaddrinuse
 -----------------------------
 
@@ -363,4 +374,27 @@ $ journalctl --no-tail --since '2018-02-02 13:39:20' --until '2018-02-02 13:39:3
 
 **solution**
 
-WIP
+1. <https://github.com/edgurgel/httpoison#connection-pools>
+2. <http://coderstocks.blogspot.co.at/2016/01/sqs-throughput-over-https-with-elixir.html>
+3. <https://elixirforum.com/t/odd-slowdowns-with-concurrent-https-requests-http-client-concurrency/1221/12>
+
+on startup, hackney creates a default pool of connections which are reused
+globally in application for requests to the same host but doesn't use this
+pool - hackney creates and closes connections dynamically by default.
+
+to use the default pool, add it to `hackney` options:
+
+```elixir
+HTTPoison.get("httpbin.org/get", [], hackney: [pool: :default])
+```
+
+**NOTE**
+
+there's a good chance that this error has nothing to do with creating too
+many concurrent connections - Elixir should support much more concurrent
+connections than are currently created.
+
+<https://elixirforum.com/t/odd-slowdowns-with-concurrent-https-requests-http-client-concurrency/1221/7>:
+
+> You should be able to do a lot more than 100 concurrent connections
+> (I was testing my server with 60k concurrent connections)...

@@ -378,8 +378,8 @@ $ journalctl --no-tail --since '2018-02-02 13:39:20' --until '2018-02-02 13:39:3
 2. <http://coderstocks.blogspot.co.at/2016/01/sqs-throughput-over-https-with-elixir.html>
 3. <https://elixirforum.com/t/odd-slowdowns-with-concurrent-https-requests-http-client-concurrency/1221/12>
 
-on startup, hackney creates a default pool of connections which are reused
-globally in application for requests to the same host but doesn't use this
+on startup hackney creates a default pool of connections which can be reused
+globally in application (for requests to the same host) but doesn't use this
 pool - by default hackney creates and closes connections dynamically.
 
 to use the default pool, add it to `hackney` options:

@@ -453,6 +453,18 @@ type FooProps = {
 }
 ```
 
+libdefs
+-------
+
+1. <https://flow.org/en/docs/libdefs/>
+
+> Using the /flow-typed directory for libdefs is a convention that enables
+> Flow to JustWork™ out of the box and encourages consistency across projects
+> that use Flow
+
+=\> it's not necessary to specify _flow-typed/_ as libdefs directory
+explicitly using `[libs]` section of _.flowconfig_.
+
 troubleshooting
 ---------------
 

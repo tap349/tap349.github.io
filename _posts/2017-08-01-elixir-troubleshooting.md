@@ -380,7 +380,7 @@ $ journalctl --no-tail --since '2018-02-02 13:39:20' --until '2018-02-02 13:39:3
 
 on startup hackney creates a default pool of connections which can be reused
 globally in application (for requests to the same host) but doesn't use this
-pool - by default hackney creates and closes connections dynamically.
+pool - by default all connections are created and closed dynamically.
 
 to use the default pool, add it to `hackney` options:
 

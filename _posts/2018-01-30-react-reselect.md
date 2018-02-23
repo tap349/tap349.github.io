@@ -34,6 +34,41 @@ computing this data on each component update is costly, fetch it via
 selector (where it's cached) and provide further via `mapStateFromProps`
 as usual.
 
+### input selectors are always computed
+
+1. <https://github.com/toomuchdesign/re-reselect/blob/master/examples/1-join-selectors.md>
+
+try to use selectors created with `createSelector` as input selectors
+so that they are not recomputed on each call.
+
+consider this example:
+
+```javascript
+export const getTeamGames = createCachedSelector(
+  (state, teamId) => state.games.all.filter(v => v.team_id === teamId),
+  (games) => games,
+)((_state, teamId) => teamId);
+```
+
+even though cached selector is returned for each `teamId` but then
+input selector is always computed and the most expensive operation
+here - filtering - is performed on each call.
+
+this example can be refactored into:
+
+```javascript
+export const getTeamGames = createCachedSelector(
+  [
+    getGames,
+    (state, teamId) => teamId,
+  ],
+  (games, teamId) => games.filter(v => v.team_id === teamId),
+)((_state, teamId) => teamId);
+```
+
+here filtering happens inside result function (not input selector)
+and therefore properly cached.
+
 troubleshooting
 ---------------
 

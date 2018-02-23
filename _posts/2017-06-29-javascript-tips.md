@@ -248,6 +248,11 @@ const foo = 1;
 const bar = 2;
 export {foo, bar};
 
+// or mix both variants:
+export const foo = 1;
+const bar = 2;
+export {bar};
+
 //---------------------------
 // import.js
 //---------------------------

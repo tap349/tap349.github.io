@@ -226,3 +226,52 @@ const variable =
   `foo${gc.NBSP}bar \
    baz${gc.NBSP}qux`; // leading spaces will be preserved
 ```
+
+(how to) export and import
+--------------------------
+
+1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export>
+2. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/import>
+
+named export:
+
+```javascript
+//---------------------------
+// export.js
+//---------------------------
+
+export const foo = 1;
+export const bar = 2;
+
+// same as above:
+const foo = 1;
+const bar = 2;
+export {foo, bar};
+
+//---------------------------
+// import.js
+//---------------------------
+
+// import selected exports
+import {foo, bar} from '.export';
+// import all exports
+import * as baz from '.export';
+```
+
+default export:
+
+```javascript
+//---------------------------
+// export.js
+//---------------------------
+
+const foo = 1;
+const bar = 2;
+export default {foo, bar};
+
+//---------------------------
+// import.js
+//---------------------------
+
+import baz from '.export';
+```

@@ -13,7 +13,8 @@ categories: [js, es6, es7, es8, esnext]
 {:toc}
 <hr>
 
-## functions
+functions
+---------
 
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions>
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions>
@@ -47,7 +48,8 @@ to be function object and then use parentheses to call that function object.
 
 <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#Description>
 
-## properties
+properties
+----------
 
 - <http://diegobarahona.com/javascript/es6/2015/01/05/understanding-es6-classes/>
 - <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Boxing_with_prototype_and_static_methods>
@@ -109,7 +111,8 @@ to be function object and then use parentheses to call that function object.
   same considerations regarding autoboxing as for static properties
   apply here as well.
 
-## falsy values
+falsy values
+------------
 
 <https://stackoverflow.com/a/5515349/3632318>
 
@@ -120,7 +123,8 @@ to be function object and then use parentheses to call that function object.
 - 0
 - `false`
 
-## switch statements
+switch statements
+-----------------
 
 - <https://stackoverflow.com/a/6612676/3632318>
 - <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/switch>
@@ -136,7 +140,8 @@ it jumps to the next case clause and checks whether it's matched against
 `return` statement returns result from function - it's okay to use it if there
 is nothing else after `switch` statement.
 
-## comparison operators
+comparison operators
+--------------------
 
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators>
 - <https://stackoverflow.com/a/15992131/3632318>
@@ -161,7 +166,8 @@ if (variable == null) {
 }
 ```
 
-## [ES6] template literals
+[ES6] template literals
+-----------------------
 
 <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals>
 
@@ -175,12 +181,13 @@ text line 2`
 `text ${expression} text`
 ```
 
-## [ES6] promises
+[ES6] promises
+--------------
 
-- <https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261>
-- <https://learn.javascript.ru/promise>
-- <https://stackoverflow.com/a/35282921/3632318>
-- <https://stackoverflow.com/a/30741722/3632318>
+1. <https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261>
+2. <https://learn.javascript.ru/promise>
+3. <https://stackoverflow.com/a/35282921/3632318>
+4. <https://stackoverflow.com/a/30741722/3632318>
 
 the result of a promise chain is always a promise - either resolved or
 rejected one. this is what allows to chain promises endlessly.
@@ -201,7 +208,8 @@ passed to corresponding callback functions attached to `then()`.
 > - returns an already resolved promise, the promise returned by then gets resolved with that promise's value as its value;
 > - returns an already rejected promise, the promise returned by then gets rejected with that promise's value as its value.
 
-## [ES6] shorthand property names
+[ES6] shorthand property names
+------------------------------
 
 - <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer>
 - <http://www.benmvp.com/learning-es6-enhanced-object-literals/>
@@ -213,14 +221,16 @@ passed to corresponding callback functions attached to `then()`.
 "foo"
 ```
 
-## [ES6] arrow functions
+[ES6] arrow functions
+---------------------
 
 <https://stackoverflow.com/questions/33308121/can-you-bind-arrow-functions>
 
 it's impossible to rebind arrow function - just use normal function if
 you need to bind it to another context later.
 
-## [ESNext] field declarations
+[ESNext] field declarations
+---------------------------
 
 <https://github.com/tc39/proposal-class-fields#field-declarations>
 
@@ -239,34 +249,4 @@ class Counter extends HTMLElement {
     this.x = 0;
   }
 }
-```
-
-## [ES6] export
-
-<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export>:
-
-> it is not possible to use var, let or const with export default
-
-if it's still necessary to use default export with, say,
-a constant declare and export it in separate statements:
-
-```javascript
-const foo = 123;
-export default foo;
-```
-
-exports can be either named or default, named exports are
-imported as a single object (usually using destructuring):
-
-```javascript
-// export
-
-export const foo = () => { console.log('foo') };
-const bar = () => { console.log('bar'); }
-
-export {bar};
-
-// import
-
-import {foo, bar} from 'module.js';
 ```

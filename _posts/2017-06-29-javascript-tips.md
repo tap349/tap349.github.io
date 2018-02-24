@@ -24,7 +24,7 @@ categories: [js]
   Object.assign({a: 1, b: 2}, {b: 3}) // {a: 1, b: 3}
   ```
 
-- using spread operator (`...`)
+- [ES6] using spread operator (`...`)
 
   1. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator#Spread_in_object_literals>
 
@@ -130,8 +130,8 @@ const response = fetch(url, {
 })
 ```
 
-(how to) get subset of object properties
-----------------------------------------
+[ES6] (how to) get subset of object properties
+----------------------------------------------
 
 1. <https://stackoverflow.com/questions/17781472>
 
@@ -144,8 +144,8 @@ console.log(picked); // {a: 5, c: 7}
 
 or else remove unnecessary properties (see the next tip).
 
-(how to) remove object property
-----------------------------------------
+[ES6] (how to) remove object property
+-------------------------------------
 
 1. <https://stackoverflow.com/a/33053362/3632318>
 
@@ -168,8 +168,8 @@ const {[id]: _value, ...rest} = object;
 console.log(rest); // {1: "foo", 3: "baz"}
 ```
 
-(how to) create empty array of N elements
------------------------------------------
+[ES6] (how to) create empty array of N elements
+-----------------------------------------------
 
 1. <https://stackoverflow.com/a/41246860/3632318>
 
@@ -187,8 +187,8 @@ console.log(rest); // {1: "foo", 3: "baz"}
 < [false, false, false, false, false, false, false]
 ```
 
-(how to) conditionally add property to object
----------------------------------------------
+[ES6] (how to) conditionally add property to object
+---------------------------------------------------
 
 1. <https://stackoverflow.com/a/40560953/3632318>
 
@@ -227,56 +227,70 @@ const variable =
    baz${gc.NBSP}qux`; // leading spaces will be preserved
 ```
 
-(how to) export and import
---------------------------
+[ES6] (how to) export and import
+--------------------------------
 
 1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export>
 2. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/import>
 
-named export:
+- named export
 
-```javascript
-//---------------------------
-// export.js
-//---------------------------
+  ```javascript
+  //---------------------------------------------------------
+  // export.js
+  //---------------------------------------------------------
 
-export const foo = 1;
-export const bar = 2;
+  export const foo = 1;
+  export const bar = 2;
 
-// same as above:
-const foo = 1;
-const bar = 2;
-export {foo, bar};
+  // same as above:
+  const foo = 1;
+  const bar = 2;
+  export {foo, bar};
 
-// or mix both variants:
-export const foo = 1;
-const bar = 2;
-export {bar};
+  // or mix both variants:
+  export const foo = 1;
+  const bar = 2;
+  export {bar};
 
-//---------------------------
-// import.js
-//---------------------------
+  //---------------------------------------------------------
+  // import.js
+  // named exports are imported as a single object
+  //---------------------------------------------------------
 
-// import selected exports
-import {foo, bar} from '.export';
-// import all exports
-import * as baz from '.export';
-```
+  // import selected exports using destructuring
+  import {foo, bar} from '.export';
+  // import all exports
+  import * as baz from '.export';
+  ```
 
-default export:
+- default export
 
-```javascript
-//---------------------------
-// export.js
-//---------------------------
+  ```javascript
+  //---------------------------------------------------------
+  // export.js
+  //---------------------------------------------------------
 
-const foo = 1;
-const bar = 2;
-export default {foo, bar};
+  const foo = 1;
+  const bar = 2;
+  export default {foo, bar};
 
-//---------------------------
-// import.js
-//---------------------------
+  //---------------------------------------------------------
+  // import.js
+  //---------------------------------------------------------
 
-import baz from '.export';
-```
+  import baz from '.export';
+  ```
+
+  **NOTE**
+
+  it's not possible to use `var`, `let` or `const` with `export default`:
+  if it's still necessary to use default export with, say, a constant,
+  declare and export it in a separate statements:
+
+  ```javascript
+  // not allowed:
+  //export default const foo = 123;
+  const foo = 123;
+  export default foo;
+  ```

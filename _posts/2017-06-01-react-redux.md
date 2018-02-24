@@ -339,8 +339,8 @@ export default function memberships (state = initialState, action = {}) {
 
 ### store object keyed by ID instead of array
 
-- <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
-- <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
+1. <http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html>
+2. <https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7>
 
 {% raw %}
 ```javascript
@@ -368,6 +368,27 @@ const arrayToMap = (array) =>
 
 also it might be more convenient to store both object keyed by ID
 (`byId` store key) and array of all items (`all` store key).
+
+**UPDATE**
+
+try to store object keyed by ID (`byId`) only - maintaining array of
+all items (`all`) is complex and error-prone (say, adding item with
+existing ID to `byId` just overwrites existing item while adding that
+item to `all` would result in 2 items with the same ID to coexist -
+unless this is explicitly checked).
+
+### normalize state
+
+1. <https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape>
+
+> Note that a normalized state structure generally implies that more components
+> are connected and each component is responsible for looking up its own data,
+> as opposed to a few connected components looking up large amounts of data and
+> passing all that data downwards.
+>
+> As it turns out, having connected parent components simply pass item IDs to
+> connected children is a good pattern for optimizing UI performance in a React
+> Redux application.
 
 ### don't store refreshing flag in Redux store
 

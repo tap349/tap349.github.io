@@ -4,7 +4,7 @@ title: JavaScript
 date: 2017-05-30 16:20:16 +0300
 access: public
 comments: true
-categories: [js, es6, es7, es8, esnext]
+categories: [js, es6, es7, esnext]
 ---
 
 <!-- more -->
@@ -16,9 +16,9 @@ categories: [js, es6, es7, es8, esnext]
 functions
 ---------
 
-- <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions>
-- <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions>
-- <https://stackoverflow.com/a/155655/3632318>
+1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions>
+2. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions>
+3. <https://stackoverflow.com/a/155655/3632318>
 
 > Every function in JavaScript is a Function object.
 
@@ -46,13 +46,13 @@ to be function object and then use parentheses to call that function object.
 
 ### constructor function
 
-<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#Description>
+1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#Description>
 
 properties
 ----------
 
-- <http://diegobarahona.com/javascript/es6/2015/01/05/understanding-es6-classes/>
-- <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Boxing_with_prototype_and_static_methods>
+1. <http://diegobarahona.com/javascript/es6/2015/01/05/understanding-es6-classes/>
+2. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Boxing_with_prototype_and_static_methods>
 
 - static properties
 
@@ -114,7 +114,7 @@ properties
 falsy values
 ------------
 
-<https://stackoverflow.com/a/5515349/3632318>
+1. <https://stackoverflow.com/a/5515349/3632318>
 
 - `null`
 - `undefined`
@@ -126,8 +126,8 @@ falsy values
 switch statements
 -----------------
 
-- <https://stackoverflow.com/a/6612676/3632318>
-- <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/switch>
+1. <https://stackoverflow.com/a/6612676/3632318>
+2. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/switch>
 
 switch statement doesn't return value - it's used for side effects only.
 
@@ -143,8 +143,8 @@ is nothing else after `switch` statement.
 comparison operators
 --------------------
 
-- <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators>
-- <https://stackoverflow.com/a/15992131/3632318>
+1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators>
+2. <https://stackoverflow.com/a/15992131/3632318>
 
 - equality (`==`)
 
@@ -169,7 +169,7 @@ if (variable == null) {
 [ES6] template literals
 -----------------------
 
-<https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals>
+1. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals>
 
 template literals (formerly known as 'template strings') are
 string literals which allow multiline strings and string interpolation:
@@ -211,8 +211,8 @@ passed to corresponding callback functions attached to `then()`.
 [ES6] shorthand property names
 ------------------------------
 
-- <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer>
-- <http://www.benmvp.com/learning-es6-enhanced-object-literals/>
+1. <https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer>
+2. <http://www.benmvp.com/learning-es6-enhanced-object-literals/>
 
 ```javascript
 > var a = 'foo', b = 42, c = {};
@@ -224,7 +224,7 @@ passed to corresponding callback functions attached to `then()`.
 [ES6] arrow functions
 ---------------------
 
-<https://stackoverflow.com/questions/33308121/can-you-bind-arrow-functions>
+1. <https://stackoverflow.com/questions/33308121/can-you-bind-arrow-functions>
 
 it's impossible to rebind arrow function - just use normal function if
 you need to bind it to another context later.
@@ -232,7 +232,7 @@ you need to bind it to another context later.
 [ESNext] field declarations
 ---------------------------
 
-<https://github.com/tc39/proposal-class-fields#field-declarations>
+1. <https://github.com/tc39/proposal-class-fields#field-declarations>
 
 ```javascript
 class Counter extends HTMLElement {

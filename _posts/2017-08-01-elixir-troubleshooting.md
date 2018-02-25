@@ -398,3 +398,7 @@ Elixir supports much more concurrent connections than are currently created.
 
 > You should be able to do a lot more than 100 concurrent connections
 > (I was testing my server with 60k concurrent connections)...
+
+**UPDATE**
+
+error hasn't occurred in the last 4 days since the fix (2018-02-22 01:48).

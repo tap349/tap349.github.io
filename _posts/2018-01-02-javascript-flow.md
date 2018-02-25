@@ -206,6 +206,84 @@ style guide
 notes
 -----
 
+### function and property variance
+
+1. <https://flow.org/blog/2016/10/04/Property-Variance/>
+
+<https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)>:
+
+> One function type is a subtype of another when it is safe to use a function
+> of one type in a context that expects a function of a different type.
+> It is safe to substitute a function f for a function g (substitute function g
+> with function f) if f accepts a more general type of arguments and returns
+> a more specific type than g.
+>
+> In other words, the type constructor is contravariant in the input type and
+> covariant in the output type.
+
+<https://flow.org/en/docs/lang/variance>:
+
+> Flow has contravariant inputs (accepts less specific types to be passed in),
+> and covariant outputs (allows more specific types to be returned).
+
+<https://flow.org/en/docs/lang/depth-subtyping/>:
+
+> By default, object properties are invariant, which allow both
+> reads and writes, but are more restrictive in the values they
+> accept (when they are declared - my note).
+
+- invariant properties accept specified type only
+
+  invariant properties can be read from and written to:
+
+  ```javascript
+  function f(o: {p: string}): number {
+    // we can read from o.p
+    const len = o.p.length;
+    // we can write to o.p
+    o.p = 'bar';
+
+    return len;
+  }
+
+  var o1: {p: string} = {p: 'foo'};
+  f(o1);
+  ```
+
+- covariant properties accept specified type or its subtype
+
+  covariant properties are read-only (appear in output positions only):
+
+  ```javascript
+  function f(o: {+p: ?string}): number {
+    // we cannot write to o.p - the property might have type that is
+    // a subtype of ?string (say, string - then after writing null to
+    // o.p, o1.p would no longer have type string)
+    //o.p = null;
+    return o.p ? o.p.length : 0;
+  }
+
+  var o1: {p: string} = {p: 'foo'};
+  f(o1);
+  ```
+
+- contravariant properties accept specified type or its supertype
+
+  contravariant properties are write-only (appear in input positions only):
+
+  ```javascript
+  function f(o: {-p: string}): number {
+    // we cannot read from o.p - the property might have type that is
+    // a supertype of string (say, ?string - then o.p might have type
+    // that we don't expect and can't process in this function)
+    //const len = o.p.length;
+    o.p = 'default';
+  }
+
+  var o1: {p: ?string} = {p: null};
+  f(o1);
+  ```
+
 ### [Type Annotations](https://flow.org/en/docs/types)
 
 <https://flow.org/en/docs/types/classes/>:
@@ -263,27 +341,6 @@ say, `React.Component<Props, State>` is a parameterized generic class type
 >
 > If you wanted to use a class structurally you could do
 > that by mixing them with objects as interfaces.
-
-<https://flow.org/en/docs/lang/variance>:
-
-> Flow has contravariant inputs (accepts less specific types to be passed in),
-> and covariant outputs (allows more specific types to be returned).
-
-<https://flow.org/en/docs/lang/depth-subtyping/>:
-
-> By default, object properties are invariant, which allow both
-> reads and writes, but are more restrictive in the values they
-> accept (when they are declared - my note).
-
-<https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)>:
-
-> One function type is a subtype of another when it is safe to use a function
-> of one type in a context that expects a function of a different type.
-> It is safe to substitute a function f for a function g if f accepts a more
-> general type of arguments and returns a more specific type than g.
->
-> In other words, the type constructor is contravariant in the input type and
-> covariant in the output type.
 
 <https://flow.org/en/docs/lang/width-subtyping/>:
 

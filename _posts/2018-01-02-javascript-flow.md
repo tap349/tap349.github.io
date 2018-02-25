@@ -275,7 +275,7 @@ notes
   function f(o: {-p: string}): number {
     // we cannot read from o.p - the property might have type that is
     // a supertype of string (say, ?string - then o.p might have type
-    // that we don't expect and can't process in this function)
+    // that we don't expect and process in the body of this function)
     //const len = o.p.length;
     o.p = 'default';
   }

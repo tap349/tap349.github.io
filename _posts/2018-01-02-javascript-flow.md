@@ -256,9 +256,9 @@ notes
 
   ```javascript
   function f(o: {+p: ?string}): number {
-    // we cannot write to o.p - the property might have type that is
-    // a subtype of ?string (say, string - then after writing null to
-    // o.p, o1.p would no longer have type string)
+    // we cannot write to o.p:
+    // o.p might have type that is a subtype of ?string (say, string)
+    // but after writing null to o.p, o1.p would no longer have type string
     //o.p = null;
     return o.p ? o.p.length : 0;
   }
@@ -273,9 +273,10 @@ notes
 
   ```javascript
   function f(o: {-p: string}): number {
-    // we cannot read from o.p - the property might have type that is
-    // a supertype of string (say, ?string - then o.p might have type
-    // that we don't expect and process in the body of this function)
+    // we cannot read from o.p:
+    // o.p might have type that is a supertype of string (say, ?string)
+    // but we don't expect and process other types but string in this
+    // function (say, if o.p is null, then o.p.length would raise error)
     //const len = o.p.length;
     o.p = 'default';
   }

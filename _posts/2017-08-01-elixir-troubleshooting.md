@@ -401,4 +401,4 @@ Elixir supports much more concurrent connections than are currently created.
 
 **UPDATE**
 
-error hasn't occurred in the last 4 days since the fix (2018-02-22 01:48).
+error hasn't occurred in the last 5 days since the fix (2018-02-22 01:48).

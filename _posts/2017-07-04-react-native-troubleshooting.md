@@ -824,3 +824,20 @@ Execution failed for task ':app:installDebug'.
 **solution**
 
 uninstall application on device (emulator) and build application again.
+
+Swiper image (child) is occasionally blank
+------------------------------------------
+
+this often happens, say, after removing the child (game in my application) -
+adjacent game should become visible but blank area is shown instead.
+
+**solution**
+
+1. <https://github.com/leecade/react-native-swiper/issues/196#issuecomment-249540289>
+2. <https://github.com/leecade/react-native-swiper/issues/609>
+3. <https://facebook.github.io/react-native/docs/scrollview.html#removeclippedsubviews>
+
+adding `removeClippedSubviews={false}` property to `Swiper` component seems
+to solve the problem for the time being (AFAIU when this property is false,
+all offscreen children are force rendered - this might be not suitable for
+long lists but in my case all lists are short so it shouldn't be a problem).

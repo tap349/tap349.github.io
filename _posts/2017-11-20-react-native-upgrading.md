@@ -118,6 +118,9 @@ link all packages
 $ react-native link
 ```
 
+NOTE: this command didn't link all packages when upgrading to RN 0.52.1 -
+      still it might be necessary to link some packages manually.
+
 reinstall CocoaPods
 -------------------
 

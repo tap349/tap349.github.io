@@ -253,8 +253,8 @@ end
 (EXIT) no process: the process is not alive
 -------------------------------------------
 
-getting agent value (in `Neko.UserRate.Store.all/1`) fails
-since agent is no longer alive:
+getting agent value (in `Neko.UserRate.Store.all/1`) fails since agent is
+no longer alive:
 
 ```
 ** (stop) exited in: GenServer.call(#PID<0.24355.22>, {:get, #Function<0.105777791/1 in Neko.UserRate.Store.all/1>}, 5000)
@@ -290,8 +290,8 @@ error was caused by this sequence of steps:
   they are meant to be reloaded (fetched from shikimori) but it doesn't
   happen: `:DOWN` message is not received in user rate store registry yet
   => agent's record is still present in ETS table => user rates are not
-  reloaded because they are reloaded only when agent is not started yet
-  (and agent is started when they are reloaded).
+  reloaded because they are reloaded only if agent is not started yet
+  (which in turn starts the agent - it's started right before reloading).
 
 - agent value is retrieved to calculate new achievements
 
@@ -401,4 +401,5 @@ Elixir supports much more concurrent connections than are currently created.
 
 **UPDATE**
 
-error hasn't occurred in the last 5 days since the fix (2018-02-22 01:48).
+error hasn't occurred in the last 5 days since the fix was deployed
+(2018-02-22 01:48).

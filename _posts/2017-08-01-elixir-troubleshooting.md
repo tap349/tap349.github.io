@@ -290,8 +290,11 @@ error was caused by this sequence of steps:
   they are meant to be reloaded (fetched from shikimori) but it doesn't
   happen: `:DOWN` message is not received in user rate store registry yet
   => agent's record is still present in ETS table => user rates are not
-  reloaded because they are reloaded only if agent is not started yet
-  (which in turn starts the agent - it's started right before reloading).
+  reloaded because agent is still running according to this lookup in ETS
+  table - and user rates are reloaded only if agent is not running
+  (reloading user rates in turn starts the agent and saves its PID in
+  ETS table which prevents user rates from reloading upon receiving the
+  next request).
 
 - agent value is retrieved to calculate new achievements
 

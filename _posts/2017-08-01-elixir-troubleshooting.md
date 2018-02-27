@@ -352,16 +352,20 @@ a similar error occurred but in other circumstances:
   it's **unknown** when `:DOWN` message will arrive since it was sent
   asynchronously
 
-- another request is received and new user handler process is spawned
-  but `:DOWN` message hasn't been received yet so user rates are not
-  reloaded
+- another request for the same `user_id` is received and new user handler
+  process is spawned but `:DOWN` message hasn't been received yet so user
+  rates are not reloaded
 
-- `:DOWN` message is received and handled by user rate store registry -
+- `:DOWN` message is received and handled in user rate store registry -
   agent PID is removed from ETS table
 
 - agent value is attempted to be retrieved to delete user rate from store
   but store PID (that is agent PID) is gone now which results into error
   (this error is raised manually when store PID is not found in registry)
+
+in brief: user rate store (agent) crashed in previous request and `:DOWN`
+message was received only after loading user rates (reloading was skipped)
+but before accessing user rate store in current request.
 
 once again IDK how to solve this problem properly - this must be a rare
 case so I've just made error message more informative.

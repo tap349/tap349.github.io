@@ -361,10 +361,10 @@ a similar error occurred but in other circumstances:
 
 - agent value is attempted to be retrieved to delete user rate from store
   but store PID (that is agent PID) is gone now which results into error
-  (this error is raised manually when store PID is not found in ETS table)
+  (this error is raised manually when store PID is not found in registry)
 
-once again IDK how to solve this problem propertly - this must be a rare
-case so I've just made error text more informative.
+once again IDK how to solve this problem properly - this must be a rare
+case so I've just made error message more informative.
 
 pacificnew: no such file or directory
 -------------------------------------

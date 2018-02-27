@@ -219,7 +219,7 @@ errors occurs when trying to insert into ETS table:
 > that created the table can write values to it.
 
 I tried to write to ETS table inside agent process while it was created
-outside of it in agent's wrapper - problem was solved by creating ETS
+outside of it in agent wrapper - problem was solved by creating ETS
 table inside anonymous function passed to `Agent.start_link/2`.
 
 alternatively it's possible to create ETS table with `public` option so
@@ -282,21 +282,21 @@ error was caused by this sequence of steps:
 
   `:DOWN` message is sent *asynchronously* - the process that monitors
   this agent (user rate store registry) will receive it eventually and
-  will remove agent's record (agent PID is stored under `user_id` key)
+  will remove agent record (agent PID is stored under `user_id` key)
   from ETS table.
 
 - user rates are loaded
 
   they are meant to be reloaded (fetched from shikimori) but it doesn't
   happen: `:DOWN` message is not received in user rate store registry yet
-  => agent's record is still present in ETS table => user rates are not
+  => agent record is still present in ETS table => user rates are not
   reloaded because agent is still running according to the lookup in ETS
   table - and user rates are reloaded only if agent is not running
   (reloading user rates in turn starts the agent and saves its PID in
   ETS table which prevents user rates from reloading upon receiving the
   next request).
 
-- agent value is retrieved to calculate new achievements
+- agent value is attempted to be retrieved to calculate new achievements
 
   this results into error as described above: agent is not alive but
   its stale PID is still stored in ETS table since `:DOWN` message is
@@ -305,10 +305,10 @@ error was caused by this sequence of steps:
 - `:DOWN` message is received eventually but it doesn't matter now
 
   or else `:DOWN` message may be received right after the step where user
-  rates are loaded - in this case agent's record will be removed from ETS
+  rates are loaded - in this case agent record will be removed from ETS
   table and retrieving agent value in the next step (where agent value is
   retrieved to calculate new achievements) will result in almost the same
-  error (PID will be `nil`).
+  error (but PID will be `nil` instead of being stale).
 
   using stale PID:
 
@@ -334,6 +334,37 @@ to fix this problem I have to make sure that user rates are loaded
 only once `:DOWN` message is received in monitoring process. IDK how
 to secure this so I've decided to refuse from stopping agent at all -
 now user rates are force reloaded instead (see commit a72aa5b).
+
+**UPDATE**
+
+a similar error occurred but in other circumstances:
+
+- agent crashes the caller (user handler process) because
+  network request to shikimori has timed out (shikimori is down)
+
+  <https://hexdocs.pm/elixir/Agent.html#get/3>:
+
+  > If no result is received within the specified time,
+  > the function call fails and the caller exits.
+
+- since user rate store registry monitors all agents, it will receive
+  and handle monitor `:DOWN` message sent by `Process.monitor/1` but
+  it's **unknown** when `:DOWN` message will arrive since it was sent
+  asynchronously
+
+- another request is received and new user handler process is spawned
+  but `:DOWN` message hasn't been received yet so user rates are not
+  reloaded
+
+- `:DOWN` message is received and handled by user rate store registry -
+  agent PID is removed from ETS table
+
+- agent value is attempted to be retrieved to delete user rate from store
+  but store PID (that is agent PID) is gone now which results into error
+  (this error is raised manually when store PID is not found in ETS table)
+
+once again IDK how to solve this problem propertly - this must be a rare
+case so I've just made error text more informative.
 
 pacificnew: no such file or directory
 -------------------------------------

@@ -337,7 +337,7 @@ now user rates are force reloaded instead (see commit a72aa5b).
 
 **UPDATE**
 
-a similar error occurred but in other circumstances:
+a similar error would occur but in other circumstances:
 
 - agent crashes the caller (user handler process) because
   network request to shikimori has timed out (shikimori is down)
@@ -359,16 +359,19 @@ a similar error occurred but in other circumstances:
 - `:DOWN` message is received and handled in user rate store registry -
   agent PID is removed from ETS table
 
-- agent value is attempted to be retrieved to delete user rate from store
-  but store PID (that is agent PID) is gone now which results into error
-  (this error is raised manually when store PID is not found in registry)
+- agent value is attempted to be retrieved to delete user rate from
+  store but store PID (that is agent PID) is gone now which results
+  into manually raised error
 
-in brief: user rate store (agent) crashed in previous request and `:DOWN`
-message was received only after loading user rates (reloading was skipped)
-but before accessing user rate store in current request.
+SUMMARY:
+
+user rate store (agent) crashes in previous request but `:DOWN` message
+is received while processing current request only - after loading user
+rates (actual reloading of user rates is skipped as store PID is still
+present) but before accessing user rate store.
 
 once again IDK how to solve this problem properly - this must be a rare
-case so I've just made error message more informative.
+case so I've just made an error message more informative.
 
 pacificnew: no such file or directory
 -------------------------------------

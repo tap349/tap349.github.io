@@ -290,7 +290,7 @@ error was caused by this sequence of steps:
   they are meant to be reloaded (fetched from shikimori) but it doesn't
   happen: `:DOWN` message is not received in user rate store registry yet
   => agent's record is still present in ETS table => user rates are not
-  reloaded because agent is still running according to this lookup in ETS
+  reloaded because agent is still running according to the lookup in ETS
   table - and user rates are reloaded only if agent is not running
   (reloading user rates in turn starts the agent and saves its PID in
   ETS table which prevents user rates from reloading upon receiving the
@@ -298,7 +298,7 @@ error was caused by this sequence of steps:
 
 - agent value is retrieved to calculate new achievements
 
-  this results into error in description above: agent is not alive but
+  this results into error as described above: agent is not alive but
   its stale PID is still stored in ETS table since `:DOWN` message is
   not received yet in user rate store registry.
 
@@ -307,7 +307,8 @@ error was caused by this sequence of steps:
   or else `:DOWN` message may be received right after the step where user
   rates are loaded - in this case agent's record will be removed from ETS
   table and retrieving agent value in the next step (where agent value is
-  retrieved) will result in almost the same error (PID will be `nil`).
+  retrieved to calculate new achievements) will result in almost the same
+  error (PID will be `nil`).
 
   using stale PID:
 

@@ -343,6 +343,8 @@ user rate store registry (backed by ETS table) when I try to lookup the
 former:
 
 ```
+$ journalctl --no-tail --since '2018-02-08 00:04:00' --until '2018-02-08 00:07:00' -u neko
+...
 ** (RuntimeError) load user_rate store first
     (neko) lib/neko/user_rate.ex:67: Neko.UserRate.store/1
     (neko) lib/neko/user_rate.ex:61: Neko.UserRate.delete/2
@@ -361,10 +363,33 @@ error is caused by this sequence of steps:
 - store (agent) crashes the caller (user handler process) because
   network request to shikimori has timed out (shikimori is down)
 
+  <https://hexdocs.pm/elixir/Task.html#await/2>:
+
+  > In case the task process dies, the current process will
+  > exit with the same reason as the task.
+
   <https://hexdocs.pm/elixir/Agent.html#get/3>:
 
   > If no result is received within the specified time,
   > the function call fails and the caller exits.
+
+  agent call timeout and network request receive timeout are both
+  90 seconds in my case.
+
+  1st scenario:
+
+  - agent call has timed out
+  - the caller (task process) exits (see `Agent.get/3` doc)
+  - the caller that spawned the task (user handler process) exits too
+    (see `Task.await/2` doc)
+
+  2nd scenario:
+
+  - network request has timed out
+  - HTTPoison raises `%HTTPoison.Error{id: nil, reason: :timeout}}`
+  - agent process crashes (network request is performed inside it)
+  - the caller (task process) exits too - WHY if task process is not
+    linked to agent process? all synchronous calls crash the caller?
 
 - since user rate store registry monitors all stores, it will receive
   and handle monitor `:DOWN` message sent by `Process.monitor/1` but

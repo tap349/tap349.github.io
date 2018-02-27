@@ -841,3 +841,10 @@ adding `removeClippedSubviews={false}` property to `Swiper` component seems
 to solve the problem for the time being (AFAIU when this property is false,
 all offscreen children are force rendered - this might be not suitable for
 long lists but in my case all lists are short so it shouldn't be a problem).
+
+**UPDATE**
+
+still this doesn't help - the only solution that works thus far is
+<https://github.com/leecade/react-native-swiper/issues/609#issuecomment-338190488>.
+
+also consider using `react-native-snap-carousel` instead of `react-native-swiper`.

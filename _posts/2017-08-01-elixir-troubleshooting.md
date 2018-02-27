@@ -388,7 +388,8 @@ SUMMARY:
 user rate store crashes in previous request but `:DOWN` message is
 received while processing current request only - after loading user
 rates but before using the store (error occurs because store PID is
-removed from ETS table but anyway agent process is not alive now).
+not found in ETS table but anyway agent process itself is not alive
+now - it crashed in previous request).
 
 once again IDK how to solve this problem properly - this must be a rare
 case so I've just made an error message more informative.

@@ -275,7 +275,7 @@ common application-specific conditions under which this error occurs:
 
 **solution**
 
-error was caused by this sequence of steps:
+error is caused by this sequence of steps:
 
 - request to reset user rates (`reset` action) is received
 - agent that stores user rates is stopped synchronously
@@ -335,11 +335,30 @@ only once `:DOWN` message is received in monitoring process. IDK how
 to secure this so I've decided to refuse from stopping agent at all -
 now user rates are force reloaded instead (see commit a72aa5b).
 
-**UPDATE**
+(RuntimeError) load user_rate store first
+-----------------------------------------
 
-a similar error would occur but in other circumstances:
+this error resembles the previous one - user rate store is not found in
+user rate store registry (backed by ETS table) when I try to lookup the
+former:
 
-- agent crashes the caller (user handler process) because
+```
+** (RuntimeError) load user_rate store first
+    (neko) lib/neko/user_rate.ex:67: Neko.UserRate.store/1
+    (neko) lib/neko/user_rate.ex:61: Neko.UserRate.delete/2
+    (neko) lib/neko/request.ex:28: Neko.Request.process/1
+    (neko) lib/neko/user_handler.ex:55: Neko.UserHandler.handle_call/3
+    (stdlib) gen_server.erl:636: :gen_server.try_handle_call/4
+    (stdlib) gen_server.erl:665: :gen_server.handle_msg/6
+    (stdlib) proc_lib.erl:247: :proc_lib.init_p_do_apply/3
+Last message (from #PID<0.11351.59>): {:process, %Neko.Request{action: "put", id: 33277258, score: 1, status: "watching", target_id: 36840, user_id: 187700}}
+```
+
+**solution**
+
+error is caused by this sequence of steps:
+
+- store (agent) crashes the caller (user handler process) because
   network request to shikimori has timed out (shikimori is down)
 
   <https://hexdocs.pm/elixir/Agent.html#get/3>:
@@ -347,28 +366,29 @@ a similar error would occur but in other circumstances:
   > If no result is received within the specified time,
   > the function call fails and the caller exits.
 
-- since user rate store registry monitors all agents, it will receive
+- since user rate store registry monitors all stores, it will receive
   and handle monitor `:DOWN` message sent by `Process.monitor/1` but
   it's **unknown** when `:DOWN` message will arrive since it was sent
   asynchronously
 
 - another request for the same `user_id` is received and new user handler
   process is spawned but `:DOWN` message hasn't been received yet so user
-  rates are not reloaded
+  rates are not reloaded (it's skipped because store PID is still present
+  in store registry)
 
 - `:DOWN` message is received and handled in user rate store registry -
-  agent PID is removed from ETS table
+  store PID (that is agent PID) is removed from ETS table
 
 - agent value is attempted to be retrieved to delete user rate from
-  store but store PID (that is agent PID) is gone now which results
-  into manually raised error
+  store but store PID is gone now which results into runtime error
+  (I raise it manually when store is not found in store registry)
 
 SUMMARY:
 
-user rate store (agent) crashes in previous request but `:DOWN` message
-is received while processing current request only - after loading user
-rates (actual reloading of user rates is skipped as store PID is still
-present) but before accessing user rate store.
+user rate store crashes in previous request but `:DOWN` message is
+received while processing current request only - after loading user
+rates but before using the store (error occurs because store PID is
+removed from ETS table but anyway agent process is not alive now).
 
 once again IDK how to solve this problem properly - this must be a rare
 case so I've just made an error message more informative.

@@ -220,9 +220,10 @@ $ tar xvf model_name.tar
 $ cd model_name/databases/
 $ gunzip PostgreSQL.sql.gz
 $ psql -U username -f ./PostgreSQL.sql database
+$ RAILS_ENV=test rails db:structure:load
 ```
 
-to restore our database running in Docker:
+say, to restore our database running in Docker:
 
 ```sh
 $ psql -U postgres -h localhost -p 5433 -f ./PostgreSQL.sql iceperk_development

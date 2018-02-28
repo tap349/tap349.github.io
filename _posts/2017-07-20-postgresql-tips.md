@@ -222,6 +222,12 @@ $ gunzip PostgreSQL.sql.gz
 $ psql -U username -f ./PostgreSQL.sql database
 ```
 
+to restore our database running in Docker:
+
+```sh
+$ psql -U postgres -h localhost -p 5433 -f ./PostgreSQL.sql iceperk_development
+```
+
 (how to) remove all versions of PostgreSQL on Ubuntu
 ----------------------------------------------------
 

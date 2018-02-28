@@ -204,7 +204,7 @@ $ git checkout master
 $ rake db:reset
 ```
 
-### [Rails] using `backup` gem
+### [Rails] using `backup` gem (with data)
 
 create:
 

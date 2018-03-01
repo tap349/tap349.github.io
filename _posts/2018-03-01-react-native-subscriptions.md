@@ -16,7 +16,7 @@ categories: [react-native]
 iOS
 ---
 
-### create new in-app purchase (IAP)
+### create in-app purchase (IAP)
 
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 

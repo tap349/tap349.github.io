@@ -27,19 +27,22 @@ iOS
 
     > Select the in-app purchase you want to create.
 
-    [x] select `Auto-Renewable Subscription`
+    [x] `Auto-Renewable Subscription`
 
     > Create Auto-Renewable Subscription
 
     fill `Reference Name` and `Product ID` fields
-    (say, `Subscription to Remove Ads` and `<tld>.<site>.<app>.removeads`)
+
+    e.g.: `Subscription to Remove Ads` and `<tld>.<site>.<app>.removeads`
 
     product ID must be unique - even after deleting subscription
     its product ID cannot be used for new subscriptions.
 
     > Create Subscription Group
 
-    create new subscription group (say, `Subscriptions to Remove Ads`)
+    [x] `Create New Subscription Group`
+
+    e.g.: `Subscriptions to Remove Ads`
 
   - add localization in at least one language for subscription group
   - add localization in at least one language for subscription

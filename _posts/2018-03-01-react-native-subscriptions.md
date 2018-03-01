@@ -35,7 +35,7 @@ iOS
     (say, `Subscription to Remove Ads` and `<tld>.<site>.<app>.removeads`)
 
     product ID must be unique - even after deleting subscription
-    you cannot use its product ids for new subscriptions.
+    its product ID cannot be used for new subscriptions.
 
     > Create Subscription Group
 

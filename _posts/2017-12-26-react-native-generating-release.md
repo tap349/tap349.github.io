@@ -191,7 +191,7 @@ the error occurs when trying to upload archive to App Store:
 ```
 iTunes Store Operation Failed
 
-The status is FAILED for the file named /var/folders/... and the error
+The status is FAILED for the file named /var/folders/<...> and the error
 description is 'Destination: Disk quota exceeded (5)'
 ```
 

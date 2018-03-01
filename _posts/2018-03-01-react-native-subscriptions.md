@@ -34,7 +34,7 @@ iOS
     fill `Reference Name` and `Product ID` fields
     (say, `Subscription to Remove Ads` and `<tld>.<site>.<app>.removeads`)
 
-    product id must be unique - even after deleting subscription
+    product ID must be unique - even after deleting subscription
     you cannot use its product ids for new subscriptions.
 
     > Create Subscription Group

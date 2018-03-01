@@ -275,7 +275,7 @@ common application-specific conditions under which this error occurs:
 
 **solution**
 
-error is caused by this sequence of steps:
+error must be caused by this sequence of steps:
 
 - request to reset user rates (`reset` action) is received
 - agent that stores user rates is stopped synchronously
@@ -342,6 +342,15 @@ this error resembles the previous one - user rate store is not found in
 user rate store registry (backed by ETS table) when I try to lookup the
 former:
 
+```elixir
+defp store(user_id) do
+  case Registry.lookup(user_id) do
+    {:ok, store} -> store
+    :error -> raise "load user_rate store first"
+  end
+end
+```
+
 ```
 $ journalctl --no-tail --since '2018-02-08 00:04:00' --until '2018-02-08 00:07:00' -u neko
 ...
@@ -358,38 +367,40 @@ Last message (from #PID<0.11351.59>): {:process, %Neko.Request{action: "put", id
 
 **solution**
 
-error is caused by this sequence of steps:
+error must be caused by this sequence of steps:
 
 - store (agent) crashes the caller (user handler process) because
   network request to shikimori has timed out (shikimori is down)
 
-  <https://hexdocs.pm/elixir/Task.html#await/2>:
-
-  > In case the task process dies, the current process will
-  > exit with the same reason as the task.
-
-  <https://hexdocs.pm/elixir/Agent.html#get/3>:
-
-  > If no result is received within the specified time,
-  > the function call fails and the caller exits.
-
   agent call timeout and network request receive timeout are both
-  90 seconds in my case.
+  90 seconds in my case so any of them might have happened.
 
   1st scenario:
 
   - agent call has timed out
-  - the caller (task process) exits (see `Agent.get/3` doc)
+  - the caller (task process) exits
+
+    <https://hexdocs.pm/elixir/Agent.html#get/3>:
+
+    > If no result is received within the specified time,
+    > the function call fails and the caller exits.
+
   - the caller that spawned the task (user handler process) exits too
-    (see `Task.await/2` doc)
+
+    <https://hexdocs.pm/elixir/Task.html#await/2>:
+
+    > In case the task process dies, the current process will
+    > exit with the same reason as the task.
 
   2nd scenario:
 
   - network request has timed out
   - HTTPoison raises `%HTTPoison.Error{id: nil, reason: :timeout}}`
   - agent process crashes (network request is performed inside it)
-  - the caller (task process) exits too - WHY if task process is not
-    linked to agent process? all synchronous calls crash the caller?
+  - the caller (task process) exits too
+
+    TODO: WHY task process exits if it's not linked to agent process?
+          all synchronous calls crash the caller?
 
 - since user rate store registry monitors all stores, it will receive
   and handle monitor `:DOWN` message sent by `Process.monitor/1` but
@@ -398,15 +409,15 @@ error is caused by this sequence of steps:
 
 - another request for the same `user_id` is received and new user handler
   process is spawned but `:DOWN` message hasn't been received yet so user
-  rates are not reloaded (it's skipped because store PID is still present
-  in store registry)
+  rates are not reloaded (reloading is skipped because store PID is still
+  present in store registry)
 
 - `:DOWN` message is received and handled in user rate store registry -
   store PID (that is agent PID) is removed from ETS table
 
-- agent value is attempted to be retrieved to delete user rate from
-  store but store PID is gone now which results into runtime error
-  (I raise it manually when store is not found in store registry)
+- agent value is attempted to be retrieved to delete user rate from store
+  but store PID is gone now which results into runtime error (it's raised
+  manually when store is not found in store registry)
 
 SUMMARY:
 
@@ -416,8 +427,8 @@ rates but before using the store (error occurs because store PID is
 not found in ETS table but anyway agent process itself is not alive
 now - it crashed in previous request).
 
-once again IDK how to solve this problem properly - this must be a rare
-case so I've just made an error message more informative.
+once again IDK how to solve this problem properly - this must be a
+very rare case so I've just made an error message more informative.
 
 pacificnew: no such file or directory
 -------------------------------------
@@ -489,5 +500,5 @@ Elixir supports much more concurrent connections than are currently created.
 
 **UPDATE**
 
-error hasn't occurred in the last 5 days since the fix was deployed
+error hasn't occurred in the last 8 days since the fix was deployed
 (2018-02-22 01:48).

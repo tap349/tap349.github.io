@@ -17,7 +17,7 @@ iceperkapp
 -----------
 
 - change environment to `production` in _Env.js_ before generating releases
-- increment build number in iOS and Android projects
+- change version name and increment build number in iOS and Android projects
 
   _ios/iceperkapp/Info.plist_ (Xcode: `General` -> `Identity` -> `Build`):
 
@@ -183,3 +183,26 @@ long you wait.
 **solution**
 
 bump build number and upload new build.
+
+### [iOS] iTunes Store Operation Failed
+
+the error occurs when trying to upload archive to App Store:
+
+```
+iTunes Store Operation Failed
+
+The status is FAILED for the file named /var/folders/... and the error
+description is 'Destination: Disk quota exceeded (5)'
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/49045515/3632318>
+
+I bumped build number but forgot to change version name as well
+(`CFBundleVersion` and `CFBundleShortVersionString` properties in
+_Info.plist_ accordingly).
+
+it might also help to validate archive before uploading it to App Store
+(`Validate...` button) - this gives more meaningful error messages when
+archive is not valid.

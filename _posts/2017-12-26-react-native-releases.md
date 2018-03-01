@@ -1,6 +1,6 @@
 ---
 layout: post
-title: React Native - Generating release
+title: React Native - Releases
 date: 2017-12-26 17:52:35 +0300
 access: private
 comments: true
@@ -17,7 +17,7 @@ iceperkapp
 -----------
 
 - change environment to `production` in _Env.js_ before generating releases
-- change version name and increment build number in iOS and Android projects
+- change version number and increment build number in iOS and Android projects
 
   _ios/iceperkapp/Info.plist_ (Xcode: `General` -> `Identity` -> `Build`):
 
@@ -199,7 +199,7 @@ description is 'Destination: Disk quota exceeded (5)'
 
 1. <https://stackoverflow.com/a/49045515/3632318>
 
-I bumped build number but forgot to change version name as well
+I bumped build number but forgot to change version number as well
 (`CFBundleVersion` and `CFBundleShortVersionString` properties in
 _Info.plist_ accordingly).
 

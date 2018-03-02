@@ -21,7 +21,7 @@ iOS
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-> `iTunes Connect` → `Features` (tab) → `In-App Purchases` (left menu)
+> iTunes Connect: `Features` (tab) → `In-App Purchases` (left menu)
 
 - click `⨁` link to start IAP creation wizard:
 

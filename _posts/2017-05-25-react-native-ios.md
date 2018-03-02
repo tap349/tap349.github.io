@@ -73,13 +73,11 @@ also means that all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-`Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English` → `Dvorak`
+> `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English` → `Dvorak`
 
 ### Russian keyboard layout
 
-emulator menu:
-
-`Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
+> emulator menu: `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
@@ -99,9 +97,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 device bezels are shown by default since Xcode 9
 (there was no such option at all before Xcode 9 AFAIK).
 
-emulator menu:
-
-`Window` → `Show Device Bezels` (uncheck)
+> emulator menu: `Window` → `Show Device Bezels` (uncheck)
 
 tips
 ----
@@ -110,7 +106,7 @@ tips
 
 1. <https://stackoverflow.com/questions/10481412>
 
-emulator menu: `Window` → `Scale`
+> emulator menu: `Window` → `Scale`
 
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
@@ -213,7 +209,7 @@ troubleshooting
 
 1. <https://github.com/shoutem/ui/issues/134>
 
-Xcode → `Issue navigator` → `Buildtime`:
+> Xcode: `Issue navigator` → `Buildtime`
 
 ```sh
 > BVLinearGradient:
@@ -251,7 +247,7 @@ there are 2 ways to solve the problem:
 
 - manually edit files in `react-native-linear-gradient` package
 
-  Xcode → `Project navigator`
+  > Xcode: `Project navigator`
 
   replace old imports with new ones in all files inside
   _\<MyApp\>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
@@ -442,7 +438,7 @@ for offending URL in _Info.plist_:
 
 or else edit _Info.plist_ in Xcode:
 
-Xcode → `Project navigator` → _\<MyApp\>/\<MyApp\>/Info.plist_.
+> Xcode: `Project navigator` → _\<MyApp\>/\<MyApp\>/Info.plist_
 
 ### Library not loaded: .../CoreSimulator
 

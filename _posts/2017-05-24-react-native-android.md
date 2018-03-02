@@ -216,11 +216,11 @@ NOTE: hot reloading is recommended over live reload.
 
 - Android:
 
-  `<D-m>` → `Dev Settings` → `Force GPU rendering`
+  > `<D-m>` → `Dev Settings` → `Force GPU rendering`
 
 - emulator:
 
-  Settings → `OpenGL ES renderer (requires restart)` → `SwiftShader`
+  > Settings → `OpenGL ES renderer (requires restart)` → `SwiftShader`
 
 ### enable hardware keyboard
 

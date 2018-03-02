@@ -18,12 +18,12 @@ iOS
 
 ### create in-app purchase (IAP)
 
+> iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-> iTunes Connect: `Features` (tab) → `In-App Purchases` (left menu)
-
-- `In-App Purchases` → `⨁`
+- create new IAP: `In-App Purchases (left menu)` → `In-App Purchases ⨁`
 
   > `Select the in-app purchase you want to create.`
 
@@ -47,12 +47,25 @@ iOS
 
       must be more general than subscription reference name.
 
-- [x] `Cleared for Sale`
-- `Subscription Duration` → `1 Month`
-- `Subscription Prices` → `⨁`
-  - `Currency`: `RUB - Russian Ruble`
-  - `Price`: `149 р.`
-- `Localizations` → `⨁` → `Russian`
-  - `Subscription Display Name`: `Скрытие рекламы на месяц`
-  - `Description`: don't add so far (maybe it's not required)
-- don't add localization for subscription group so far
+- configure new IAP: `In-App Purchases (left menu)` → `<new_subscription>`
+
+  - [x] `Cleared for Sale`
+  - `Subscription Duration` → `1 Month`
+  - `Subscription Prices ⨁`
+    - `Currency`: `RUB - Russian Ruble`
+    - `Price`: `149 р.`
+  - `Localizations ⨁` → `Russian`
+    - `Subscription Display Name`: `Скрытие рекламы на месяц`
+    - `Description`: don't add so far (maybe not required)
+
+- don't add localization for subscription group (maybe not required)
+
+> iTunes Connect: `My Apps` → `Users and Roles`
+
+1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
+2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
+
+- create test user: `Sandbox Testers` (tab) → `Testers ⨁`
+
+  don't forget to verify new test account (follow the link sent
+  to supplied email) - or else any purchases will silently fail.

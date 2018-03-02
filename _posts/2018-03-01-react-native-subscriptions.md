@@ -60,7 +60,7 @@ iOS
 
 - don't add localization for subscription group (maybe not required)
 
-> iTunes Connect: `My Apps` → `Users and Roles`
+| iTunes Connect: `My Apps` → `Users and Roles`
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>

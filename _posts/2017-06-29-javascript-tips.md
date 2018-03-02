@@ -204,6 +204,21 @@ NOTE: don't use `...!!foo && {foo}` because RN JS server might
       complain about some performance optimizations if something
       else but `false` or `undefined` is expanded inside object.
 
+[ES6] (how to) remove duplicate values from array
+-------------------------------------------------
+
+1. <https://stackoverflow.com/a/41364433/3632318>
+
+```javascript
+> Array.from(new Set([1, 2, 3, 2, 2, 3, 1]))
+< [1, 2, 3]
+```
+
+NOTE:
+
+- insertion order is preserved
+- all duplicates values but the 1st one are removed
+
 (how to) wrap a long template literal to multiline
 --------------------------------------------------
 

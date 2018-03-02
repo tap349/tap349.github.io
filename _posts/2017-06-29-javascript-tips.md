@@ -217,7 +217,7 @@ NOTE: don't use `...!!foo && {foo}` because RN JS server might
 NOTE:
 
 - insertion order is preserved
-- all duplicates values but the 1st one are removed
+- all duplicate values but the 1st one are removed
 
 (how to) wrap a long template literal to multiline
 --------------------------------------------------

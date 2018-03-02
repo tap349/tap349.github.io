@@ -24,7 +24,7 @@ categories: [markdown]
   | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 
   NOTE: quotation marks are used for exact names.
-  NOTE: multiline rows are not supported (table just won't be rendered).
+  NOTE: keep text on a single line (or else table won't be rendered).
 
 - when location/path is inlined, don't wrap it in table:
 

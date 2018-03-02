@@ -32,6 +32,32 @@ API
 1. <https://github.com/ueberauth/guardian>
 2. <http://blog.overstuffedgorilla.com/simple-guardian-api-authentication/>
 
+#### signing out
+
+1. <http://blog.overstuffedgorilla.com/simple-guardian-api-authentication/#logout>
+
+<https://elixirforum.com/t/guardian-jwt-vs-phoenix-token/853/29>:
+
+> The first question is whether you need to revoke the jwt at all -
+> in many cases, it might be enough to just let it expire. With many
+> apis, there isn’t really a logout functionality - the user will just
+> access the resources he / she needs and then stop using it.
+> If you do want to revoke jwts, I know that many developers use Redis for
+> this, and that might be quicker than a db lookup.
+
+that is you need external storage to revoke JWT token before it expires -
+say, `Guardian DB` package allows to track tokens in dataabase when using
+`Guardian`.
+
+<https://github.com/ueberauth/guardian_db#disadvantages>:
+
+> With Guardian.DB, every request requires a trip to the database,
+> as Guardian now needs to ensure that a record of the token exists.
+> This can arguably eliminate the main advantage of using a JWT
+> authentication solution, which is statelessness.
+
+when using JWT token for browser sessions, just flush the session.
+
 basic authentication
 --------------------
 

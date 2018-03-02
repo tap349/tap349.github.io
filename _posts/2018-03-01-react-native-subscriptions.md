@@ -73,7 +73,9 @@ iOS
   for each new sandox tester right after it's added here.
 
   don't forget to verify new test account (follow the link sent to specified
-  email) - or else any purchases might silently fail.
+  email):
+
+  > You must validate your e-mail, or any purchases you make will silently fail.
 
   **UPDATE**
 

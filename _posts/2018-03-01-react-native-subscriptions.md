@@ -21,6 +21,7 @@ iOS
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
+> `iTunes Connect` → `Features` (tab) → `In-App Purchases` (left menu)
 - open `iTunes Connect` in browser
   - go to `Features` tab
   - go to `In-App Purchases` (left menu)
@@ -50,6 +51,8 @@ iOS
   - make sure new subscription is cleared for sale
 
     [x] `Cleared for Sale`
+
+  - 
 
   - add localization in at least one language for subscription group
   - add localization in at least one language for subscription

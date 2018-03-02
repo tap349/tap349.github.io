@@ -23,7 +23,7 @@ iOS
 
 > iTunes Connect: `Features` (tab) → `In-App Purchases` (left menu)
 
-- click `⨁` link to start IAP creation wizard:
+- `In-App Purchases` → `⨁`
 
   > `Select the in-app purchase you want to create.`
 
@@ -49,7 +49,10 @@ iOS
 
 - [x] `Cleared for Sale`
 - `Subscription Duration` → `1 Month`
-- `Localizations` → `Russian`
+- `Subscription Prices` → `⨁`
+  - `Currency`: `RUB - Russian Ruble`
+  - `Price`: `149 р.`
+- `Localizations` → `⨁` → `Russian`
   - `Subscription Display Name`: `Скрытие рекламы на месяц`
   - `Description`: don't add so far (maybe it's not required)
 - don't add localization for subscription group so far

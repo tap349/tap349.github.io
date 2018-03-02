@@ -86,5 +86,5 @@ iOS
   because it violates the following Content Security Policy directive...
   ```
 
-  so I'll try to use this test account without verifying supplied email -
-  they say on the Internet that it might come off.
+  still I'll try to use this account for testing subscriptions - they say
+  on the Internet it might come off even though it's not verified.

@@ -23,13 +23,13 @@ iOS
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-- create new IAP: | `In-App Purchases (left menu)` → `In-App Purchases ⨁` |
+- create new IAP: `In-App Purchases (left menu)` → `In-App Purchases ⨁`
 
-  | `Select the in-app purchase you want to create.`
+  | `Select the in-app purchase you want to create.` |
 
   - [x] `Auto-Renewable Subscription`
 
-  | `Create Auto-Renewable Subscription`
+  | `Create Auto-Renewable Subscription` |
 
   - `Reference Name`: `No Ads Monthly`
   - `Product ID`: `<bundle_id>.sub.noads.monthly`

@@ -25,11 +25,11 @@ iOS
 
 - create new IAP: `In-App Purchases (left menu)` → `In-App Purchases ⨁`
 
-  | `Select the in-app purchase you want to create.`
+  > Select the in-app purchase you want to create.
 
   - [x] `Auto-Renewable Subscription`
 
-  | `Create Auto-Renewable Subscription`
+  > Create Auto-Renewable Subscription
 
   - `Reference Name`: `No Ads Monthly`
   - `Product ID`: `<bundle_id>.sub.noads.monthly`
@@ -40,7 +40,7 @@ iOS
     product ID must be unique - even after deleting subscription
     its product ID cannot be reused for new subscriptions.
 
-  | `Create Subscription Group`
+  > Create Subscription Group
 
   - [x] `Create New Subscription Group`
     - `Subscription Group Reference Name`: `No Ads`
@@ -72,8 +72,7 @@ iOS
   error when I tried to add myself as a sandbox tester - Apple ID is created
   for each new sandox tester right after it's added here.
 
-  don't forget to verify new test account (follow the link sent to specified
-  email):
+  then verify new test account by following the link sent to specified email:
 
   > You must validate your e-mail, or any purchases you make will silently fail.
 
@@ -90,3 +89,6 @@ iOS
 
   still I'll try to use this account for testing subscriptions - they say
   on the Internet it might come off even though it's not verified.
+
+  IDK if it matters or not but I signed in to iCloud with this account and
+  completed registration by adding 3 secret questions.

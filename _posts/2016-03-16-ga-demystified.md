@@ -23,67 +23,68 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 ### ACCOUNT (1st column)
 
-  **account ID**
+**account ID**
 
-  - path: `Account Settings → Basic Settings → Account Id`
-  - format: `\d+`
-  - parameter in API: `accountId`
-  - usage: API (e.g. `analytics.management.goals.*`)
-  - pumba: `additional_ids['account_id']` in `Google::Analytics::Counter`
+| `Account Settings` → `Basic Settings` → `Account Id`
+
+- format: `\d+`
+- parameter in API: `accountId`
+- usage: API (e.g. `analytics.management.goals.*`)
+- pumba: `additional_ids['account_id']` in `Google::Analytics::Counter`
 
 ### PROPERTY (2nd column)
 
-  **tracking ID**
+**tracking ID**
 
-  - path (displayed in both places):
-    - `Property Settings → Basic Settings → Tracking Id`
-    - `Tracking Info → Tracking Code → Tracking ID`
-  - format: `UA-XXXX-Y` where `XXXX` - account ID (see above),
-    `Y` - ordinal number of tracking ID (1, 2, etc.)
-  - parameter in API: `webPropertyId`
-  - usage:
-    - API (e.g. `analytics.management.goals.*`)
-    - in Universal Analytics tracking code
-      (GA JS script embedded on each tracked page)
-  - pumba: `additional_ids['web_property_id']` in `Google::Analytics::Counter`
+it's displayed in both places:
+
+| `Property Settings` → `Basic Settings` → `Tracking Id`
+| `Tracking Info` → `Tracking Code` → `Tracking ID`
+
+- format: `UA-XXXX-Y` where `XXXX` - account ID (see above),
+  `Y` - ordinal number of tracking ID (1, 2, etc.)
+- parameter in API: `webPropertyId`
+- usage:
+  - API (e.g. `analytics.management.goals.*`)
+  - in Universal Analytics tracking code
+    (GA JS script embedded on each tracked page)
+- pumba: `additional_ids['web_property_id']` in `Google::Analytics::Counter`
 
 ### VIEW (3rd column)
 
-  **view ID (profile ID)**
+**view ID (profile ID)**
 
-  - path: `View Settings → Basic Settings → View ID`
-  - format: `\d+`
-  - parameter in API: `profileId`
-  - usage: API (e.g. `analytics.management.goals.*`)
-  - pumba: not stored
+| `View Settings` → `Basic Settings` → `View ID`
 
-  **table ID**
+- format: `\d+`
+- parameter in API: `profileId`
+- usage: API (e.g. `analytics.management.goals.*`)
+- pumba: not stored
 
-  - path: not displayed in UI
-  - format: `ga:XXXX` where `XXXX` - View ID
-  - parameter in API: `ids` (in `analytics.data.ga.get`)
-  - usage: API (e.g. `analytics.data.ga.get`)
-  - pumba: `counter_id` in `Google::Analytics::Counter`
+**table ID**
+
+NOTE: not displayed in UI
+
+- format: `ga:XXXX` where `XXXX` - View ID
+- parameter in API: `ids` (in `analytics.data.ga.get`)
+- usage: API (e.g. `analytics.data.ga.get`)
+- pumba: `counter_id` in `Google::Analytics::Counter`
 
 ## API Manager (client IDs)
 
-<https://console.developers.google.com>
+1. <https://console.developers.google.com>
+
+| `Credentials` (left sidebar) → `Credentials` → `Credentials` (tab)
 
 OAuth 2.0 client IDs:
 
 - are used to identify your application (project)
 - have corresponding client secrets (don't confuse with API keys!)
-- are managed in API Manager:
-
-  `Credentials (left sidebar) → Credentials → Credentials (tab)`
 
 API keys:
 
 - are used to identify your application (project)
 - don't request user consent unlike OAuth 2.0 client ID
-- are managed in API Manager:
-
-  `Credentials (left sidebar) → Credentials → Credentials (tab)`
 
 ### pumba client IDs
 
@@ -107,7 +108,7 @@ API keys are not used in pumba.
 
 ## APIs Explorer
 
-<https://developers.google.com/apis-explorer>
+1. <https://developers.google.com/apis-explorer>
 
 <https://ga-dev-tools.appspot.com/query-explorer> - Query Explorer
 (almost the same as APIs Explorer but somewhat easier to use since it requires
@@ -178,22 +179,22 @@ to get Google Analytics data it's necessary to approve at least the last scope.
 
 ### application and user authentication
 
-APIs Explorer provides its own default credentials
-(client ID and client secret) when executing queries.
-or else it's possible to provide custom credentials:
+APIs Explorer provides its own default credentials (client ID and client secret)
+when executing queries. or else it's possible to provide custom credentials:
 
-`Settings icon in upper right corner → Set API key / OAuth 2.0 Client ID → Custom credentials`
+| `Settings` (icon in upper right corner) → `Set API key / OAuth 2.0 Client ID` → `Custom credentials`
 
 as a rule using default credentials must be sufficient as it's all the same
 it's necessary to grant access to application when OAuth 2.0 consent screen
 is displayed - it doesn't matter whether this is pumba application or not.
 
-to execute query it's necessary to get access to user data -
-for this to happen user must authenticate himself (log in) and approve
-scopes application (either default one or pumba) is requesting.
+to execute query it's necessary to get access to user data - for this to happen
+user must authenticate himself (log in) and approve scopes application (either
+default one or pumba) is requesting.
 
-**NOTE**: beware of the situation when user is already logged in (either in Chrome
-          browser or via website) and this is a wrong user - log out in this case.
+**NOTE**: beware of the situation when user is already logged in (either in
+          Chrome browser or via website) and this is a wrong user - log out
+          in this case.
 
 ### pumba accounts
 

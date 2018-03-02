@@ -28,7 +28,7 @@ iOS
 
     > Select the in-app purchase you want to create.
 
-    [x] Auto-Renewable Subscription
+    [x] `Auto-Renewable Subscription`
 
     > Create Auto-Renewable Subscription
 
@@ -42,14 +42,14 @@ iOS
 
     > Create Subscription Group
 
-    [x] Create New Subscription Group
+    [x] `Create New Subscription Group`
 
     fill `Subscription Group Reference Name` field:
     say, `No Ads` (must be more general than subscription reference name).
 
   - make sure new subscription is cleared for sale
 
-    [x] Cleared for Sale
+    [x] `Cleared for Sale`
 
   - add localization in at least one language for subscription group
   - add localization in at least one language for subscription

@@ -27,31 +27,29 @@ iOS
 
   > `Select the in-app purchase you want to create.`
 
-  [x] `Auto-Renewable Subscription`
+  - [x] `Auto-Renewable Subscription`
 
   > `Create Auto-Renewable Subscription`
 
-  fill `Reference Name` and `Product ID` fields:
-  say, `No Ads Monthly` and `<bundle_id>.sub.noads.monthly` where
-  `<bundle_id>` is the value of `PRODUCT_BUNDLE_IDENTIFIER` property
-  in _project.pbxproj_ (`com.iceperk.iceperkapp` for our application).
+  - `Reference Name`: `No Ads Monthly`
+  - `Product ID`: `<bundle_id>.sub.noads.monthly`
 
-  product ID must be unique - even after deleting subscription
-  its product ID cannot be reused for new subscriptions.
+    `<bundle_id>` is the value of `PRODUCT_BUNDLE_IDENTIFIER` property
+    in _project.pbxproj_ - `com.iceperk.iceperkapp` for our application.
+
+    product ID must be unique - even after deleting subscription
+    its product ID cannot be reused for new subscriptions.
 
   > `Create Subscription Group`
 
-  [x] `Create New Subscription Group`
+  - [x] `Create New Subscription Group`
+    - `Subscription Group Reference Name`: `No Ads`
 
-  fill `Subscription Group Reference Name` field:
-  say, `No Ads` (must be more general than subscription reference name).
+      must be more general than subscription reference name.
 
-- make sure new subscription is cleared for sale
-
-  [x] `Cleared for Sale`
-
-- TODO: subscription, localization (Скрытие рекламы на месяц),
-  no localization for subscription group
-
-- add localization in at least one language for subscription group
-- add localization in at least one language for subscription
+- [x] `Cleared for Sale`
+- `Subscription Duration` → `1 Month`
+- `Localizations` → `Russian`
+  - `Subscription Display Name`: `Скрытие рекламы на месяц`
+  - `Description`: don't add so far (maybe it's not required)
+- don't add localization for subscription group so far

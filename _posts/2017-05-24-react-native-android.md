@@ -207,15 +207,14 @@ TODO: still not resolved.
 
 1. <https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
 
-NOTE: hot reloading is recommended over live reload.
+| `<D-m>` → `Enable Live Reload`
+| `<D-m>` → `Enable Hot Reloading`
 
-- `<D-m>` → `Enable Live Reload`
-- `<D-m>` → `Enable Hot Reloading`
+NOTE: hot reloading is recommended over live reload.
 
 ### performance tweaks
 
 | Android: `<D-m>` → `Dev Settings` → `Force GPU rendering`
-
 | emulator: `Settings` → `OpenGL ES renderer (requires restart)` → `SwiftShader`
 
 ### enable hardware keyboard

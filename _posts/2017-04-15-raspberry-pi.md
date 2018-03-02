@@ -108,9 +108,9 @@ $ logout
 / login
 ```
 
-- Locales to be generated:
+- `Locales to be generated`:
   - [x] `en_US.UTF-8 UTF-8`
-- Default locale for the system environment: `en_US.UTF-8`
+- `Default locale for the system environment`: `en_US.UTF-8`
 
 when connecting via SSH remote host will try to set the same
 locale as on local machine - this operation will fail if

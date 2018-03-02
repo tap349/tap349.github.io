@@ -11,22 +11,22 @@ loading order of Zsh startup files:
 
 _~/.zshenv_ → _~/.zshrc_ → _~/.zlogin_
 
-interactive login shell (`zsh -il -c "cmd"` or opening new tab in iTerm2):
+- interactive login shell (`zsh -il -c "cmd"` or opening new tab in iTerm2):
 
-- _~/.zshenv_
-- _~/.zshrc_
-- _~/.zlogin_
+  - _~/.zshenv_
+  - _~/.zshrc_
+  - _~/.zlogin_
 
-interactive shell (`zsh -i -c "cmd"`):
+- interactive shell (`zsh -i -c "cmd"`):
 
-- _~/.zshenv_
-- _~/.zshrc_
+  - _~/.zshenv_
+  - _~/.zshrc_
 
-login shell (`zsh -l -c "cmd"`):
+- login shell (`zsh -l -c "cmd"`):
 
-- _~/.zshenv_
-- _~/.zlogin_
+  - _~/.zshenv_
+  - _~/.zlogin_
 
-non-interactive and not login shell (`zsh -c "cmd"`):
+- non-interactive and not login shell (`zsh -c "cmd"`):
 
-- _~/.zshenv_
+  - _~/.zshenv_

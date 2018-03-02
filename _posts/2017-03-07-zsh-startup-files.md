@@ -9,7 +9,7 @@ categories: [zsh]
 
 loading order of Zsh startup files:
 
-| _~/.zshenv_ → _~/.zshrc_ → _~/.zlogin_
+_~/.zshenv_ → _~/.zshrc_ → _~/.zlogin_
 
 interactive login shell (`zsh -il -c "cmd"` or opening new tab in iTerm2):
 

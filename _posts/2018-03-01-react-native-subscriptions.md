@@ -26,11 +26,11 @@ iOS
   - go to `In-App Purchases` (left menu)
   - click `⨁` link to start IAP creation wizard:
 
-    > Select the in-app purchase you want to create.
+    > `Select the in-app purchase you want to create.`
 
     [x] `Auto-Renewable Subscription`
 
-    > Create Auto-Renewable Subscription
+    > `Create Auto-Renewable Subscription`
 
     fill `Reference Name` and `Product ID` fields:
     say, `No Ads Monthly` and `<bundle_id>.sub.noads.monthly` where
@@ -40,7 +40,7 @@ iOS
     product ID must be unique - even after deleting subscription
     its product ID cannot be reused for new subscriptions.
 
-    > Create Subscription Group
+    > `Create Subscription Group`
 
     [x] `Create New Subscription Group`
 

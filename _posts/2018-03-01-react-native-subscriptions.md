@@ -65,7 +65,26 @@ iOS
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-- create test user: `Sandbox Testers` (tab) → `Testers ⨁`
+- create sandbox tester (test user): `Sandbox Testers` (tab) → `Testers ⨁`
 
-  don't forget to verify new test account (follow the link sent
-  to supplied email) - or else any purchases will silently fail.
+  new sandbox tester shouldn't have an existing Apple ID (for some reason):
+  I got `That email address is already associated with an existing Apple ID`
+  error when I tried to add myself as a sandbox tester - Apple ID is created
+  for each new sandox tester right after it's added here.
+
+  don't forget to verify new test account (follow the link sent to specified
+  email) - or else any purchases might silently fail.
+
+  **UPDATE**
+
+  I couldn't verify account of a new sandbox tester - after clicking the
+  link email verification page kept on loading forever with an activity
+  indicator in the middle of the screen and JS errors in Chrome Console:
+
+  ```
+  bundle.js:46270 Refused to create a worker from 'blob:https://id.apple.com/...'
+  because it violates the following Content Security Policy directive...
+  ```
+
+  so I'll try to use this test account without verifying supplied email -
+  they say on the Internet that it might come off.

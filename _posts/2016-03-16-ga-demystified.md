@@ -75,7 +75,7 @@ OAuth 2.0 client IDs:
 - have corresponding client secrets (don't confuse with API keys!)
 - are managed in API Manager:
 
-  `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
+  `Credentials (left sidebar) → Credentials → Credentials (tab)`
 
 API keys:
 
@@ -83,7 +83,7 @@ API keys:
 - don't request user consent unlike OAuth 2.0 client ID
 - are managed in API Manager:
 
-  `Credentials (left sidebar) -> Credentials -> Credentials (tab)`
+  `Credentials (left sidebar) → Credentials → Credentials (tab)`
 
 ### pumba client IDs
 
@@ -182,7 +182,7 @@ APIs Explorer provides its own default credentials
 (client ID and client secret) when executing queries.
 or else it's possible to provide custom credentials:
 
-`Settings icon in upper right corner -> Set API key / OAuth 2.0 Client ID -> Custom credentials`
+`Settings icon in upper right corner → Set API key / OAuth 2.0 Client ID → Custom credentials`
 
 as a rule using default credentials must be sufficient as it's all the same
 it's necessary to grant access to application when OAuth 2.0 consent screen

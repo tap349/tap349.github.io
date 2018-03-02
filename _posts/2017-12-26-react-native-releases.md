@@ -19,7 +19,7 @@ iceperkapp
 - change environment to `production` in _Env.js_ before generating releases
 - change version number and increment build number in iOS and Android projects
 
-  _ios/iceperkapp/Info.plist_ (Xcode: `General` -> `Identity` -> `Build`):
+  _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
 
   ```xml
   <key>CFBundleShortVersionString</key>
@@ -54,7 +54,7 @@ iceperkapp
   - click `Start Internal Testing` button
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
-  - click `⨁ VERSION OR PLATFORM` link -> `iOS` (pop-up menu)
+  - click `⨁ VERSION OR PLATFORM` link → `iOS` (pop-up menu)
   - enter new Store Version Number (say, 3.11.2) in pop-up window
   - fill `What's New in This Version` section
   - screenshots are added for iPhone 5.5" Display only
@@ -80,12 +80,12 @@ before building releases.
 
   new release is saved as _android/app/build/outputs/apk/app-release.apk_.
 
-- upload release to Google Drive: `Shared with me` -> `ICEperk` -> `AppBuilds`
+- upload release to Google Drive: `Shared with me` → `ICEperk` → `AppBuilds`
 
   replace existing `app-release.apk` file with a new one.
 
 - open `Google Play Console` in browser
-  - open `Release management` (left menu) -> `App releases`
+  - open `Release management` (left menu) → `App releases`
   - click `MANAGE PRODUCTION` button in `Production` section
   - click `CREATE RELEASE` button
   - select APK to add from filesystem
@@ -122,7 +122,7 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 either:
 
 - *[RECOMMENDED]* update Xcode to 8.3
-- disable bitcode in `Build Settings` -> `Build Options` -> `Enable Bitcode`
+- disable bitcode in `Build Settings` → `Build Options` → `Enable Bitcode`
 
 ### [iOS] "<Company>" has one iOS Distribution but its private key is not installed
 

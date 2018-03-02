@@ -73,13 +73,13 @@ also means that all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-`Settings` -> `General` -> `Keyboards` -> `Hardware Keyboard` -> `English` -> `Dvorak`
+`Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English` → `Dvorak`
 
 ### Russian keyboard layout
 
 emulator menu:
 
-`Hardware` -> `Keyboard` -> `Use the Same Keyboard Language as macOS`
+`Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
@@ -87,8 +87,8 @@ emulator menu:
 
 NOTE: hot reloading is recommended over live reload.
 
-- `<D-d>` -> `Enable Live Reload`
-- `<D-d>` -> `Enable Hot Reloading`
+- `<D-d>` → `Enable Live Reload`
+- `<D-d>` → `Enable Hot Reloading`
 
 ### scroll with 3 fingers
 
@@ -101,7 +101,7 @@ device bezels are shown by default since Xcode 9
 
 emulator menu:
 
-`Window` -> `Show Device Bezels` (uncheck)
+`Window` → `Show Device Bezels` (uncheck)
 
 tips
 ----
@@ -110,7 +110,7 @@ tips
 
 1. <https://stackoverflow.com/questions/10481412>
 
-emulator menu: `Window` -> `Scale`
+emulator menu: `Window` → `Scale`
 
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
@@ -141,7 +141,7 @@ NOTE: it's necessary to configure new simulator separately
 
 #### switch from inside simulator
 
-- emulator menu: `Hardware` -> `Device` -> `iOS 10.2` -> `iPhone 5`
+- emulator menu: `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
 - `$ react-native run-ios` (reinstall application)
 
 ### upload file to emulator
@@ -155,9 +155,9 @@ is currently opened.
 
 iPhone 4s model is not available by default - add it manually:
 
-- Xcode -> `Product` (top menu) -> `Destination` -> `Add Additional Simulators...`
+- Xcode → `Product` (top menu) → `Destination` → `Add Additional Simulators...`
 - press `+` icon (`Add Simulator`) in bottom left corner
-- `OS Version` (dropdown menu) -> `Download more simulator runtimes...`
+- `OS Version` (dropdown menu) → `Download more simulator runtimes...`
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
 - create simulator for iPhone 4s using downloaded runtime
 
@@ -180,7 +180,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### Inspector
 
-- `<D-d>` -> `Show Inspector`
+- `<D-d>` → `Show Inspector`
 - `<D-i>` (toggle)
 
 ### device system log (`iOS device syslog`)
@@ -191,19 +191,19 @@ $ react-native log-ios
 
 ### reload application in emulator manually
 
-- `<D-d>` -> `Reload` or
+- `<D-d>` → `Reload` or
 - `<D-r>`
 
 ### show touchable areas
 
-- `<D-d>` -> `Show Inspector`
+- `<D-d>` → `Show Inspector`
 - click `Touchables` in bottom menu
-- `<D-d>` -> `Hide Inspector`
+- `<D-d>` → `Hide Inspector`
 - touchable areas are still marked with dotted line
 
 ### toggle software keyboard
 
-- emulator menu: `Hardware` -> `Keyboard` -> `Toggle Software Keyboard`
+- emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard`
 - `<D-k>`
 
 troubleshooting
@@ -213,7 +213,7 @@ troubleshooting
 
 1. <https://github.com/shoutem/ui/issues/134>
 
-Xcode -> `Issue navigator` -> `Buildtime`:
+Xcode → `Issue navigator` → `Buildtime`:
 
 ```sh
 > BVLinearGradient:
@@ -251,7 +251,7 @@ there are 2 ways to solve the problem:
 
 - manually edit files in `react-native-linear-gradient` package
 
-  Xcode -> `Project navigator`
+  Xcode → `Project navigator`
 
   replace old imports with new ones in all files inside
   _\<MyApp\>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
@@ -442,7 +442,7 @@ for offending URL in _Info.plist_:
 
 or else edit _Info.plist_ in Xcode:
 
-Xcode -> `Project navigator` -> _\<MyApp\>/\<MyApp\>/Info.plist_.
+Xcode → `Project navigator` → _\<MyApp\>/\<MyApp\>/Info.plist_.
 
 ### Library not loaded: .../CoreSimulator
 

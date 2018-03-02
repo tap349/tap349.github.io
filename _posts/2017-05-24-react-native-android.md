@@ -209,18 +209,18 @@ TODO: still not resolved.
 
 NOTE: hot reloading is recommended over live reload.
 
-- `<D-m>` -> `Enable Live Reload`
-- `<D-m>` -> `Enable Hot Reloading`
+- `<D-m>` → `Enable Live Reload`
+- `<D-m>` → `Enable Hot Reloading`
 
 ### performance tweaks
 
 - Android:
 
-  `<D-m>` -> `Dev Settings` -> `Force GPU rendering`
+  `<D-m>` → `Dev Settings` → `Force GPU rendering`
 
 - emulator:
 
-  Settings -> `OpenGL ES renderer (requires restart)` -> `SwiftShader`
+  Settings → `OpenGL ES renderer (requires restart)` → `SwiftShader`
 
 ### enable hardware keyboard
 
@@ -281,7 +281,7 @@ perform these steps to upload a file:
   ```
 
   also it must be possible to rescan SD card by clicking `SCAN SD CARD` button
-  in Applications -> `Dev Tools` -> `Media Provider`. but it doesn't work -
+  in Applications → `Dev Tools` → `Media Provider`. but it doesn't work -
   something crashes with the message `Unfortunately, Dev Tools has stopped`.
 
 ### delete all application data
@@ -315,14 +315,14 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 
 ### Inspector
 
-- `<D-m>` -> `Toggle Inspector`
+- `<D-m>` → `Toggle Inspector`
 
 ### Dev Settings
 
 in Android:
 
-- Applications -> `Dev Settings`
-- `<D-m>` -> `Dev Settings`
+- Applications → `Dev Settings`
+- `<D-m>` → `Dev Settings`
 
 ### verbose emulator log
 
@@ -352,7 +352,7 @@ $ avd -verbose
 ### reload application in emulator manually
 
 - `rr`
-- `<D-m>` -> `Reload`
+- `<D-m>` → `Reload`
 
 ### run remote interactive shell
 
@@ -379,9 +379,9 @@ development machine).
 
 ### show touchable areas
 
-- `<D-m>` -> `Toggle Inspector`
+- `<D-m>` → `Toggle Inspector`
 - click `Touchables` in bottom menu
-- `<D-m>` -> `Toggle Inspector`
+- `<D-m>` → `Toggle Inspector`
 - touchable areas are still marked with dotted line
 
 ## troubleshooting

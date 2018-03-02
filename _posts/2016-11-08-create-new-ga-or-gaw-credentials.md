@@ -16,7 +16,7 @@ steps to get new GAW or GA credentials.
 ### create (or get) OAuth 2.0 credentials in Google API Console
 
 - select project in top left menu (say, `adwords-api`)
-- `Credentials` (left sidebar) -> `Credentials` -> `Credentials` (tab)
+- `Credentials` (left sidebar) → `Credentials` → `Credentials` (tab)
 
 here you can find OAuth 2.0 client ID and client secret.
 
@@ -26,7 +26,7 @@ we have only one developer token (obtained for manager account) for
 all our projects (including umka).
 
 - select manager account (top-level account that manages nested accounts)
-- click gear icon (top right menu) -> `Account settings`
+- click gear icon (top right menu) → `Account settings`
 - `AdWords API Center` (left sidebar)
 
 here you can find developer token.

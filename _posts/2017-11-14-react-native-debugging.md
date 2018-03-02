@@ -32,7 +32,7 @@ Remote Redux DevTools
 1. <https://github.com/zalmoxisus/remote-redux-devtools>
 2. <https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd>
 
-Chrome: `Redux DevTools` extension icon menu -> `Open Remote DevTools`
+Chrome: `Redux DevTools` extension icon menu → `Open Remote DevTools`
 
 [RECOMMENDED] React Native Debugger (RND)
 -----------------------------------------

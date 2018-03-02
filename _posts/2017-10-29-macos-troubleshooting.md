@@ -68,7 +68,7 @@ and because it introduces significant and annoying delay when pasting):
 
   1. <https://gitlab.com/gnachman/iterm2/issues/5698#note_27701613>
 
-  `Preferences` -> `Profiles` -> `Default` -> `Keys`:
+  `Preferences` → `Profiles` → `Default` → `Keys`:
 
   map `<D-v>` keyboard shortcut to `Paste..` action and
   disable `Bracketed paste mode` in action settings.

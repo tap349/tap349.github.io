@@ -21,38 +21,37 @@ iOS
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-> `iTunes Connect` → `Features` (tab) → `In-App Purchases` (left menu)
-- open `iTunes Connect` in browser
-  - go to `Features` tab
-  - go to `In-App Purchases` (left menu)
-  - click `⨁` link to start IAP creation wizard:
+| `iTunes Connect` → `Features` (tab) → `In-App Purchases` (left menu)
 
-    > `Select the in-app purchase you want to create.`
+- click `⨁` link to start IAP creation wizard:
 
-    [x] `Auto-Renewable Subscription`
+  > `Select the in-app purchase you want to create.`
 
-    > `Create Auto-Renewable Subscription`
+  [x] `Auto-Renewable Subscription`
 
-    fill `Reference Name` and `Product ID` fields:
-    say, `No Ads Monthly` and `<bundle_id>.sub.noads.monthly` where
-    `<bundle_id>` is the value of `PRODUCT_BUNDLE_IDENTIFIER` property
-    in _project.pbxproj_ (`com.iceperk.iceperkapp` for our application).
+  > `Create Auto-Renewable Subscription`
 
-    product ID must be unique - even after deleting subscription
-    its product ID cannot be reused for new subscriptions.
+  fill `Reference Name` and `Product ID` fields:
+  say, `No Ads Monthly` and `<bundle_id>.sub.noads.monthly` where
+  `<bundle_id>` is the value of `PRODUCT_BUNDLE_IDENTIFIER` property
+  in _project.pbxproj_ (`com.iceperk.iceperkapp` for our application).
 
-    > `Create Subscription Group`
+  product ID must be unique - even after deleting subscription
+  its product ID cannot be reused for new subscriptions.
 
-    [x] `Create New Subscription Group`
+  > `Create Subscription Group`
 
-    fill `Subscription Group Reference Name` field:
-    say, `No Ads` (must be more general than subscription reference name).
+  [x] `Create New Subscription Group`
 
-  - make sure new subscription is cleared for sale
+  fill `Subscription Group Reference Name` field:
+  say, `No Ads` (must be more general than subscription reference name).
 
-    [x] `Cleared for Sale`
+- make sure new subscription is cleared for sale
 
-  - 
+  [x] `Cleared for Sale`
 
-  - add localization in at least one language for subscription group
-  - add localization in at least one language for subscription
+- TODO: subscription, localization (Скрытие рекламы на месяц),
+  no localization for subscription group
+
+- add localization in at least one language for subscription group
+- add localization in at least one language for subscription

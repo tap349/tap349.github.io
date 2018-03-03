@@ -312,7 +312,7 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 
 ### Developer Menu
 
-- `<D-m>`
+| emulator (app): `<D-m>`
 
 ### Inspector
 
@@ -321,6 +321,8 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 ### Dev Settings
 
 | emulator (OS): Applications → `Dev Settings`
+
+or:
 
 | emulator (app): `<D-m>` → `Dev Settings`
 
@@ -351,8 +353,11 @@ $ avd -verbose
 
 ### reload application in emulator manually
 
-| emulator (app): `rr`
 | emulator (app): `<D-m>` → `Reload`
+
+or:
+
+| emulator (app): `rr`
 
 ### run remote interactive shell
 

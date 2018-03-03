@@ -80,9 +80,11 @@ before building releases.
 
   new release is saved as _android/app/build/outputs/apk/app-release.apk_.
 
-- upload release to Google Drive: `Shared with me` → `ICEperk` → `AppBuilds`
+- upload release to Google Drive
 
-  replace existing `app-release.apk` file with a new one.
+  | Google Drive: `Shared with me` → `ICEperk` → `AppBuilds`
+
+  - replace existing `app-release.apk` file with a new one
 
 - open `Google Play Console` in browser
   - open `Release management` (left menu) → `App releases`

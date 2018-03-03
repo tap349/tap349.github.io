@@ -625,7 +625,7 @@ the latest version of `react-native-autogrow-textinput` doesn't support
 iOS Deployment Target (DT) lower than 9.3 but current DT in iOS project
 is 8.0 =\> change DT in iOS project to 9.3 as well:
 
-> Xcode: `Build Settings` → `Deployment` → `iOS Deployment Target`
+| Xcode: `Build Settings` → `Deployment` → `iOS Deployment Target`
 
 ### Undefined symbols for architecture x86_64
 

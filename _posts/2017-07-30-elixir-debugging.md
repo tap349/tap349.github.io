@@ -118,9 +118,7 @@ otherwise you won't be able to connect to `foo` next.
 
 ### connect to remote node
 
-observer menu:
-
-`Nodes` → `Connect Node` (type `foo@127.0.0.1`)
+| observer menu: `Nodes` → `Connect Node` (type `foo@127.0.0.1`)
 
 **IMPORTANT**
 

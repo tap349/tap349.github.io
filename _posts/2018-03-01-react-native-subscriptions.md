@@ -23,7 +23,9 @@ iOS
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-- create new IAP: `In-App Purchases (left menu)` → `In-App Purchases ⨁`
+- create new IAP
+
+  | `In-App Purchases (left menu)` → `In-App Purchases ⨁`
 
   > Select the in-app purchase you want to create.
 
@@ -47,7 +49,9 @@ iOS
 
       must be more general than subscription reference name.
 
-- configure new IAP: `In-App Purchases (left menu)` → `<new_subscription>`
+- configure new IAP
+
+  | `In-App Purchases (left menu)` → `<new_subscription>`
 
   - [x] `Cleared for Sale`
   - `Subscription Duration` → `1 Month`
@@ -65,7 +69,9 @@ iOS
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-- create sandbox tester (test user): `Sandbox Testers` (tab) → `Testers ⨁`
+- create sandbox tester (test user)
+
+  | `Sandbox Testers` (tab) → `Testers ⨁`
 
   new sandbox tester shouldn't have an existing Apple ID (for some reason):
   I got `That email address is already associated with an existing Apple ID`

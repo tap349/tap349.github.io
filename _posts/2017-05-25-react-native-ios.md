@@ -77,7 +77,7 @@ it's possible to change it to Dvorak inside emulator:
 
 ### Russian keyboard layout
 
-| emulator (menu): `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
+| emulator menu: `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
@@ -95,10 +95,10 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### hide device bezels
 
+| emulator menu: `Window` → [ ] `Show Device Bezels`
+
 device bezels are shown by default since Xcode 9
 (there was no such option at all before Xcode 9 AFAIK).
-
-| emulator (menu): `Window` → [ ] `Show Device Bezels`
 
 tips
 ----
@@ -107,7 +107,9 @@ tips
 
 1. <https://stackoverflow.com/questions/10481412>
 
-| emulator (menu): `Window` → `Scale`
+| emulator menu: `Window` → `Scale`
+
+or in emulator (app):
 
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
@@ -138,7 +140,7 @@ NOTE: it's necessary to configure new simulator separately
 
 #### switch from inside simulator
 
-- emulator (menu): `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
+- emulator menu: `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
 - `$ react-native run-ios` (reinstall application)
 
 ### upload file to emulator
@@ -152,7 +154,7 @@ is currently opened.
 
 iPhone 4s model is not available by default - add it manually:
 
-- Xcode → `Product` (top menu) → `Destination` → `Add Additional Simulators...`
+- Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`
 - press `+` icon (`Add Simulator`) in bottom left corner
 - `OS Version` (dropdown menu) → `Download more simulator runtimes...`
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
@@ -177,8 +179,11 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### Inspector
 
-- `<D-d>` → `Show Inspector`
-- `<D-i>` (toggle)
+| emulator (app): `<D-d>` → `Show Inspector`
+
+or:
+
+| emulator (app): `<D-i>` (toggle)
 
 ### device system log (`iOS device syslog`)
 
@@ -188,8 +193,11 @@ $ react-native log-ios
 
 ### reload application in emulator manually
 
-- `<D-d>` → `Reload` or
-- `<D-r>`
+| emulator (app): `<D-d>` → `Reload`
+
+or:
+
+| emulator (app): `<D-r>`
 
 ### show touchable areas
 
@@ -200,8 +208,11 @@ $ react-native log-ios
 
 ### toggle software keyboard
 
-- emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard`
-- `<D-k>`
+| emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard`
+
+or:
+
+| `<D-k>`
 
 troubleshooting
 ---------------
@@ -210,7 +221,7 @@ troubleshooting
 
 1. <https://github.com/shoutem/ui/issues/134>
 
-> Xcode: `Issue navigator` → `Buildtime`
+| Xcode: `Issue navigator` → `Buildtime`
 
 ```sh
 > BVLinearGradient:
@@ -439,7 +450,7 @@ for offending URL in _Info.plist_:
 
 or else edit _Info.plist_ in Xcode:
 
-> Xcode: `Project navigator` → _\<MyApp\>/\<MyApp\>/Info.plist_
+| Xcode: `Project navigator` → _\<MyApp>/\<MyApp>/Info.plist_
 
 ### Library not loaded: .../CoreSimulator
 

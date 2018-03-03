@@ -83,7 +83,7 @@ Google Analytics
 
 - create account and new property (= your website) in GA
 
-  > `Property` → `Tracking Info` → `Tracking Code`
+  | `Property` → `Tracking Info` → `Tracking Code`
 
   in the end you'll be provided with Tracking ID and tracking code
   (Global Site Tag) that can be pasted into the `<HEAD>` of every

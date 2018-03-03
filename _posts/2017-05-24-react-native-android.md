@@ -369,7 +369,7 @@ run remote interactive shell:
 $ adb shell
 ```
 
-run single remote shell command:
+run single remote shell command and exit:
 
 ```sh
 $ adb shell ls

@@ -199,6 +199,12 @@ the first run might take a while since RN will build the whole Android project.
 
 ## configuration
 
+### Dvorak keyboard layout
+
+it should work out of the box.
+
+| emulator (OS): `Settings` → `Language & input` → `Current keyboard` → `Hardware` [x] / `English (US)` [x]
+
 ### Russian keyboard layout
 
 TODO: still not resolved.
@@ -207,15 +213,15 @@ TODO: still not resolved.
 
 1. <https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
 
-| `<D-m>` → `Enable Live Reload`
-| `<D-m>` → `Enable Hot Reloading`
+| emulator (app): `<D-m>` → `Enable Live Reload`
+
+| emulator (app): `<D-m>` → `Enable Hot Reloading`
 
 NOTE: hot reloading is recommended over live reload.
 
 ### performance tweaks
 
-| Android: `<D-m>` → `Dev Settings` → `Force GPU rendering`
-| emulator: `Settings` → `OpenGL ES renderer (requires restart)` → `SwiftShader`
+| emulator (OS): Applications → `Dev Settings` → `Force GPU rendering` [x]
 
 ### enable hardware keyboard
 
@@ -306,18 +312,17 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 
 ### Developer Menu
 
-`<D-m>`
+- `<D-m>`
 
 ### Inspector
 
-- `<D-m>` → `Toggle Inspector`
+| emulator (app): `<D-m>` → `Toggle Inspector`
 
 ### Dev Settings
 
-in Android:
+| emulator (OS): Applications → `Dev Settings`
 
-- Applications → `Dev Settings`
-- `<D-m>` → `Dev Settings`
+| emulator (app): `<D-m>` → `Dev Settings`
 
 ### verbose emulator log
 
@@ -346,8 +351,8 @@ $ avd -verbose
 
 ### reload application in emulator manually
 
-- `rr`
-- `<D-m>` → `Reload`
+| emulator (app): `rr`
+| emulator (app): `<D-m>` → `Reload`
 
 ### run remote interactive shell
 

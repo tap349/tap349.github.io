@@ -73,11 +73,11 @@ also means that all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-> `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English` → `Dvorak`
+| emulator (OS): `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English (United States)` → `Dvorak`
 
 ### Russian keyboard layout
 
-> emulator menu: `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
+| emulator (menu): `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
@@ -85,8 +85,9 @@ it's possible to change it to Dvorak inside emulator:
 
 NOTE: hot reloading is recommended over live reload.
 
-- `<D-d>` → `Enable Live Reload`
-- `<D-d>` → `Enable Hot Reloading`
+| emulator (app): `<D-d>` → `Enable Live Reload`
+
+| emulator (app): `<D-d>` → `Enable Hot Reloading`
 
 ### scroll with 3 fingers
 
@@ -97,7 +98,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 device bezels are shown by default since Xcode 9
 (there was no such option at all before Xcode 9 AFAIK).
 
-> emulator menu: `Window` → `Show Device Bezels` (uncheck)
+| emulator (menu): `Window` → [ ] `Show Device Bezels`
 
 tips
 ----
@@ -106,7 +107,7 @@ tips
 
 1. <https://stackoverflow.com/questions/10481412>
 
-> emulator menu: `Window` → `Scale`
+| emulator (menu): `Window` → `Scale`
 
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
@@ -137,7 +138,7 @@ NOTE: it's necessary to configure new simulator separately
 
 #### switch from inside simulator
 
-- emulator menu: `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
+- emulator (menu): `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
 - `$ react-native run-ios` (reinstall application)
 
 ### upload file to emulator

@@ -259,10 +259,10 @@ there are 2 ways to solve the problem:
 
 - manually edit files in `react-native-linear-gradient` package
 
-  > Xcode: `Project navigator`
+  | Xcode: `Project navigator`
 
   replace old imports with new ones in all files inside
-  _\<MyApp\>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
+  _\<MyApp>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
 
   ```objc
   // old import

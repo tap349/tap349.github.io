@@ -19,13 +19,22 @@ categories: [markdown]
 
   NOTE: quotation marks are not used.
 
-- use table row to specify path/location (within a web page or program):
+- use table row to specify path (location within a web page or program):
 
   | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 
+  path might include action or setting as a final node (say, menu item).
+  if there are multiple settings they are specified separately as a list:
+
+  | `Preferences` → `Keys` → `Hotkey`
+
+  - [x] `Show/hide iTerm2 with a system-wide hotkey`
+  - `Hotkey`: `<C-D-t>`
+
   NOTE: quotation marks are used for exact names.
-  NOTE: keep text on a single line (or else table won't be rendered).
+  NOTE: keep path on a single line (or else table won't be rendered).
 
-- when location/path is inlined, don't wrap it in table:
+- when path is inlined (say, element of the list), don't wrap it in table:
 
-  create sandbox tester (test user): `Sandbox Testers` (tab) → `Testers ⨁`
+  - Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`
+  - press `+` icon (`Add Simulator`) in bottom left corner

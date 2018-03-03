@@ -17,7 +17,7 @@ categories: [markdown]
 
   > 1) Step 1: Create Policy
 
-  NOTE: quotation marks are not used.
+  NOTE: backticks are not used.
 
 - use table row to specify path (location within a web page or program):
 
@@ -31,7 +31,7 @@ categories: [markdown]
   - [x] `Show/hide iTerm2 with a system-wide hotkey`
   - `Hotkey`: `<C-D-t>`
 
-  NOTE: quotation marks are used for exact names.
+  NOTE: backticks are used for exact names.
   NOTE: keep path on a single line (or else table won't be rendered).
 
 - when path is inlined (say, element of the list), don't wrap it in table:

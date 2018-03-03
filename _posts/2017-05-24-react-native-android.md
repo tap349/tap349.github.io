@@ -201,9 +201,7 @@ the first run might take a while since RN will build the whole Android project.
 
 ### Dvorak keyboard layout
 
-it should work out of the box.
-
-| emulator (OS): `Settings` → `Language & input` → `Current keyboard` → `Hardware` [x] / `English (US)` [x]
+just enable hardware keyboard (see below).
 
 ### Russian keyboard layout
 
@@ -237,6 +235,10 @@ hw.keyboard=yes
 ```
 
 by default `hw.keyboard=no`.
+
+or else it's possible to enable hardware keyboard inside emulator OS:
+
+| emulator (OS): `Settings` → `Language & input` → `Current keyboard` → `Hardware` [x] / `English (US)` [x]
 
 ### scroll with 3 fingers
 

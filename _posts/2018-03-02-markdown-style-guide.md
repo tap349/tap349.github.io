@@ -19,9 +19,11 @@ categories: [markdown]
 
   NOTE: backticks are not used.
 
-- use table row to specify path (location within a web page or program):
+- use table row to specify path (location within a web page, program, etc.):
 
   | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+
+  environment (web page, program, etc.) can be specified before the path.
 
   path might include action or setting as a final node (say, menu item).
   if there are multiple settings they are specified separately as a list:
@@ -32,6 +34,7 @@ categories: [markdown]
   - `Hotkey`: `<C-D-t>`
 
   NOTE: backticks are used for exact names.
+
   NOTE: keep path on a single line (or else table won't be rendered).
 
 - when path is inlined (say, element of the list), don't wrap it in table:

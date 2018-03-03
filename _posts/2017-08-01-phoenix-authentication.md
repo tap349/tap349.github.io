@@ -46,7 +46,7 @@ API
 > this, and that might be quicker than a db lookup.
 
 that is you need external storage to revoke JWT token before it expires -
-say, `Guardian DB` package allows to track tokens in dataabase when using
+say, `Guardian DB` package allows to track tokens in database when using
 `Guardian`.
 
 <https://github.com/ueberauth/guardian_db#disadvantages>:

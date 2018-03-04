@@ -34,7 +34,14 @@ end
 
 **UPDATE**
 
-`mix format` adds parens for built-in types:
+`mix format` adds parens for types when they are referenced using their
+qualified names (by specifying the module where they are defined - say,
+`String.t()` or `Agent.on_start()`). this doesn't apply to most built-in
+types since they are referenced as is: `any`, `atom`, `pid`, etc.
+
+=\> stick to this convention for both built-in and user-defined types: use
+parens only when type is referenced using its qualified name (it's allowed
+to always use parens but omit them where possible to reduce visual noise):
 
 ```elixir
 @type rule_t :: %Neko.Rules.SimpleRule{}

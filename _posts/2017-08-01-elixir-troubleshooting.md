@@ -500,5 +500,5 @@ Elixir supports much more concurrent connections than are currently created.
 
 **UPDATE**
 
-error hasn't occurred in the last 8 days since the fix was deployed
+error hasn't occurred in the last 11 days since the fix was deployed
 (2018-02-22 01:48).

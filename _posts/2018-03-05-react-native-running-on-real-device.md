@@ -13,6 +13,9 @@ categories: [react-native]
 {:toc}
 <hr>
 
+iOS
+---
+
 1. <https://facebook.github.io/react-native/docs/running-on-device.html>
 
 - make sure notebook and real device use the same Wi-Fi network

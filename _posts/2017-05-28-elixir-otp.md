@@ -119,73 +119,43 @@ Supervisor
 > Supervisors should be extremely lightweight with low risk of having
 > their own bugs because their job is to restart other processes.
 
-2 ways to define supervisor:
+<https://hexdocs.pm/elixir/Supervisor.html>:
 
-- dynamic supervisor (defined in application callback module)
+> A supervisor may be started directly with a list of children
+> via start_link/2 or you may define a module-based supervisor
+> that implements the required callbacks.
 
-  1. <https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#the-application-callback>
+when supervisor is to be put under a supervision tree, it must be defined
+as a module-based supervisor - once it's added to the list of children of
+top-level supervisor, the latter will use this supervisor's `child_spec/1`
+function to retrieve its child spec and start it.
 
-  _lib/neko/application.ex_:
+NOTE: top-level supervisor is started via `start_link/2` directly:
 
-  ```elixir
-  defmodule Neko.Application do
-    use Application
+```elixir
+defmodule Neko.Application do
+  use Application
 
-    def start(_type, _args) do
-      import Supervisor.Spec, warn: false
+  def start(_type, _args) do
+    children = [
+      Neko.Anime.Store,
+      # ...
+    ]
 
-      children = [worker(Neko.Achievement.Store.Registry, [])]
-
-      opts = [strategy: :one_for_one, name: Neko.Supervisor]
-      Supervisor.start_link(children, opts)
-    end
+    opts = [strategy: :rest_for_one, name: Neko.Supervisor]
+    Supervisor.start_link(children, opts)
   end
-  ```
-
-- module-based supervisor (defined in a separate module)
-
-  1. <https://hexdocs.pm/elixir/Supervisor.html#module-module-based-supervisors>
-
-  _lib/neko/supervisor.ex_:
-
-  ```elixir
-  defmodule Neko.Supervisor do
-    # automatically imports Supervisor.Spec
-    use Supervisor
-
-    def start_link do
-      Supervisor.start_link(__MODULE__, :ok, name: Neko.Supervisor)
-    end
-
-    def init(:ok) do
-      children = [worker(Neko.Achievement.Store.Registry, [])]
-
-      # strategy is passed to Supervisor.Spec.supervise/2 -
-      # not to Supervisor.start_link/2 like for dynamic supervisor
-      supervise(children, strategy: :one_for_one)
-    end
-  end
-  ```
-
-  _lib/neko/application.ex_:
-
-  ```elixir
-  defmodule Neko.Application do
-    use Application
-
-    def start(_type, _args) do
-      Neko.Supervisor.start_link()
-    end
-  end
-  ```
+end
+```
 
 ### child specifications (child specs)
 
 1. <https://hexdocs.pm/elixir/Supervisor.html#module-start_link-2-init-2-and-strategies>
-2. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L573>
-3. <https://hexdocs.pm/elixir/GenServer.html#start_link/3>
+2. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L608>
+3. <https://github.com/elixir-lang/elixir/blob/v1.6.1/lib/elixir/lib/supervisor.ex#L566>
 
-sample child spec:
+`use GenServer`, `use Agent` and `use Supervisor` all define
+`child_spec/1` function (default implementation of child spec):
 
 ```elixir
 iex> Neko.Achievement.Store.Registry.child_spec(:hello)
@@ -195,55 +165,33 @@ iex> Neko.Achievement.Store.Registry.child_spec(:hello)
 }
 ```
 
-supervisor is passed a list of children when started with
-`Supervisor.start_link/2`, each child can be specified in 4 ways:
+supervisor child can be specified in 4 ways:
 
-- child spec map (`Neko.Foo.child_spec(arg)`)
-- module (`Neko.Foo` = `{Neko.Foo, []}`)
-- tuple with module and start argument (`{Neko.Foo, arg}`)
+- child spec map itself
+- tuple with module and start argument
+  (`{Neko.Foo, arg}` → `Neko.Foo.child_spec(arg)` is called)
+- module (`Neko.Foo` → `Neko.Foo.child_spec([])` is called)
 - *[DEPRECATED]* child spec tuple (`Supervisor.Spec` helpers)
 
-when module (1) or tuple (2) are provided, supervisor retrieves
-child spec map (3) from the given module using its `child_spec/1`
-(also passing specified start argument in case of tuple (2)).
+supervisor children are started by calling their start function
+(`start_link/1` by default) - both start function and its arity
+(determined by the number of specified arguments) can be changed
+by providing a custom child spec (with a custom `:start` key):
 
-only 1 start argument can be passed to `Neko.Foo.child_spec/1` =>
-**supervised module must implement start function start_link/1 that
-has arity 1** as well. this restriction is usually circumvented by
-passing a list as the only start argument which might contain multiple
-arguments as its elements.
+- override `child_spec/1` function inside `Neko.Foo`
+- customize existing child spec with `Supervisor.child_spec/2`
 
-NOTE: `Neko.Foo.start_link/1` has nothing to do with GenServer behaviour -
-      it's a custom function of your module (named `start_link` by convention)
-      which starts GenServer process (by calling `GenServer.start_link/3`,
-      `Agent.start_link/2`, `Supervisor.start_link/3` or whatever inside).
-      still this function must have arity 1 to fit into a supervision tree
-      (see previous paragraph).
+also supervisor can supervise an arbitrary module (say, `Neko.Bar`)
+if that module implements `child_spec/1` function.
 
-also supervisor can supervise an arbitrary module that is not GenServer
-(say, `Neko.Bar`) if it's given that module's child spec:
+**NOTE**
 
-- provided my module itself
+`Neko.Foo.start_link/1` has nothing to do with GenServer behaviour -
+it's a custom function of your module (named `start_link` by convention)
+which starts GenServer process (by calling `GenServer.start_link/3`,
+`Agent.start_link/2`, `Supervisor.start_link/3` or whatever inside).
 
-  in this case `Neko.Bar` module must implement `child_spec/1` that
-  returns its child spec map which instructs supervisor how to start
-  that module.
-
-  in theory provided child spec might instruct supervisor to start
-  module using another start function (not necessarily `start_link/1`)
-  but I guess this is highly not recommended.
-
-- *[DEPRECATED]* generated by `Supervisor.Spec` helpers
-
-  in this case `Neko.Bar` module must implement `start_link`
-  (with any arity - all arguments supplied to `Supervisor.Spec`
-  helper will be passed down to `Neko.Bar.start_link`).
-
-#### Supervisor.Spec helpers (worker/3 and supervisor/3)
-
-1. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L608>
-
-NOTE: `Supervisor.Spec` helpers are deprecated now.
+#### about Supervisor.Spec helpers (worker/3 and supervisor/3)
 
 Jose Valim (<http://disq.us/p/1nbxadq>):
 
@@ -259,9 +207,9 @@ Jose Valim (<http://disq.us/p/1nbxadq>):
 these helpers generate child spec tuple which consists of values from
 corresponding child spec map.
 
-also it's possible to pass as many arguments to start function of
-underlying module as you want - up to max allowed function arity 255
-(which can be confusing - see Jose Valim's comment above).
+it's possible to pass as many arguments to start function of underlying
+module as you want - up to max allowed function arity 255 (which can be
+confusing - see Jose Valim's comment above).
 
 ```elixir
 iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello, :world])

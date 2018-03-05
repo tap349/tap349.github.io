@@ -15,8 +15,6 @@ categories: [react-native]
 
 1. <https://facebook.github.io/react-native/docs/running-on-device.html>
 
-application:
-
 - make sure notebook and real device use the same Wi-Fi network
 - open _\<project_name>.xcworkspace_
 - select real device as the build target in Xcode toolbar

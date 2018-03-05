@@ -181,6 +181,9 @@ by providing a custom child spec (with a custom `:start` key):
 - override `child_spec/1` function inside `Neko.Foo`
 - customize existing child spec with `Supervisor.child_spec/2`
 
+in general keep arity of 1 - it's be confusing when `start_link` and
+`init` functions have different arities (see Jose Valim's quote below).
+
 also supervisor can supervise an arbitrary module (say, `Neko.Bar`)
 if that module implements `child_spec/1` function.
 

@@ -473,3 +473,21 @@ instruments[2536:17017] [MT] DVTPlugInLoading: Failed to load code for plug-in c
 
 install additional components - you'll be prompted to install
 these components when you first start Xcode after updating it.
+
+### ld: library not found for -lFlurry-iOS-SDK
+
+build inside Xcode failed:
+
+```
+ld: warning: directory not found for option '-L/Users/tap/Library/Developer/Xcode/DerivedData/iceperkapp-agmwzlgvaynpvuadwqakyphzpfof/Build/Products/Debug-iphoneos/Flurry-iOS-SDK'
+ld: library not found for -lFlurry-iOS-SDK
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+
+**solution**
+
+1. <https://github.com/xxsnakerxx/react-native-flurry-analytics/issues/8>
+
+> Try closing the Xcode project and instead open <project name>.xcworkspace.
+> Since this is using Cocopods you need to use the workspace instead for
+> everything to get resolved correctly.

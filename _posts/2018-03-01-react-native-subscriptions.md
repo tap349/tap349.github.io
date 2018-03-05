@@ -106,4 +106,6 @@ completed registration by adding 3 secret questions.
 
 ### run application on real device
 
-1. <https://facebook.github.io/react-native/docs/running-on-device.html>
+see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
+
+now you should be able to load products from iTunes Connect.

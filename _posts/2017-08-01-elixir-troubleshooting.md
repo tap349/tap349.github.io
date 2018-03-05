@@ -502,3 +502,36 @@ Elixir supports much more concurrent connections than are currently created.
 
 error hasn't occurred in the last 11 days since the fix was deployed
 (2018-02-22 01:48).
+
+(HTTPoison.Error) :connect_timeout
+----------------------------------
+
+[appsignal](https://appsignal.com/neko/sites/59f22b2a6a21db47fddd50be/incidents/142):
+
+```
+HTTP request error: {
+  {
+    {
+      %HTTPoison.Error{id: nil, reason: :connect_timeout},
+      [
+        {Neko.Shikimori.HTTPClient, :request!, 5, [file: 'lib/neko/shikimori/http_client.ex', line: 9]},
+        {Neko.Shikimori.HTTPClient, :make_request!, 3, [file: 'lib/neko/shikimori/http_client.ex', line: 43]},
+        {Neko.Shikimori.HTTPClient, :get_user_rates!, 1, [file: 'lib/neko/shikimori/http_client.ex', line: 16]},
+        {Neko.UserRate.Store, :user_rates, 1, [file: 'lib/neko/user_rate/store.ex', line: 54]},
+        {Agent.Server, :handle_call, 3, [file: 'lib/agent/server.ex', line: 23]},
+        {:gen_server, :try_handle_call, 4, [file: 'gen_server.erl', line: 636]},
+        {:gen_server, :handle_msg, 6, [file: 'gen_server.erl', line: 665]},
+        {:proc_lib, :init_p_do_apply, 3, [file: 'proc_lib.erl', line: 247]}
+      ]
+    },
+    {GenServer, :call, [#PID<0.23945.1>, {:update, #Function<3.20078263/1 in Neko.UserRate.Store.reload/2>}, 90000]}
+  },
+  {GenServer, :call, [{:via, Registry, {:user_handler_registry, 78123}}, {:process, %Neko.Request{action: "put", id: 36135257, score: 0, status: "watching", target_id: 20583, user_id: 78123}}, 120000]}
+}
+```
+
+**solution**
+
+1. <https://hexdocs.pm/httpoison/HTTPoison.html#request/5>
+
+try to increase connect timeout named `timeout` in HTTPoison.

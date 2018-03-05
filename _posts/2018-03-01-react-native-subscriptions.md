@@ -80,19 +80,44 @@ it's required to add localization for subscription group as well:
 | iTunes Connect: `My Apps` → `Users and Roles`
 | `Sandbox Testers` (tab) → `Testers ⨁`
 
-new sandbox tester shouldn't have an existing Apple ID (for some reason):
-I got `That email address is already associated with an existing Apple ID`
-error when I tried to add myself as a sandbox tester - Apple ID is created
-for each new sandox tester right after it's added here.
+NOTE: test account == sandbox tester account.
 
-then verify new test account by following the link sent to specified email:
+tips and notes about sandbox environment:
+
+- new sandbox tester shouldn't have an existing Apple ID
+
+  I got `That email address is already associated with an existing Apple ID`
+  error when I tried to add myself as a sandbox tester - Apple ID is created
+  for each new sandox tester right after it's added here.
+
+- sign out of Apple ID on iPhone before testing subscriptions
+
+  it's also important not to sign in as a sandbox tester in `Settings` but
+  in application only (when prompted before making a purchase) - a sandbox
+  tester account is not a fully functional one and tester's Apple ID cannot
+  be used to access iTunes Store or App Store.
+
+- subscription periods:
+
+  - shortened (say, 1 month is shortened to 5 minutes)
+  - renew 5 times only (cancelled afterwards)
+  - cannot be managed (say, cancelled manually)
+
+  <https://forums.developer.apple.com/thread/14702>:
+
+  > the sandbox environment handles auto-renewing subscriptions in an automated
+  > fashion - that is subscription periods are shortened and renew only 5 times
+  > and not controlled through the subscription management screen.
+
+#### about verification of sandbox tester email
+
+generally speaking it's necessary to verify new test account by following
+the link sent to specified email:
 
 > You must validate your e-mail, or any purchases you make will silently fail.
 
-**UPDATE**
-
-I couldn't verify account of a new sandbox tester - after clicking the
-link email verification page kept on loading forever with an activity
+but I couldn't verify account of a new sandbox tester - after clicking
+the link email verification page kept on loading forever with an activity
 indicator in the middle of the screen and JS errors in Chrome Console:
 
 ```
@@ -100,22 +125,10 @@ bundle.js:46270 Refused to create a worker from 'blob:https://id.apple.com/...'
 because it violates the following Content Security Policy directive...
 ```
 
-still I'll try to use this account for testing subscriptions - they say
-on the Internet it might come off even though it's not verified.
+IDK if it matters or not but I signed in to iCloud with this account
+(in browser) and completed registration by adding 3 secret questions.
 
-IDK if it matters or not but I signed in to iCloud with this account and
-completed registration by adding 3 secret questions.
-
-**UPDATE**
-
-I could make a purchase using not verified test account but now I cannot
-manage my subscriptions - both in iOS (on iPhone) and iTunes (on MacBook).
-
-<https://forums.developer.apple.com/thread/14702>:
-
-> the sandbox environment handles auto-renewing subscriptions in an automated
-> fashion - that is subscription periods are shortened and renew only 5 times
-> and not controlled through the subscription management screen.
+in the end I could make a purchase using not verified test account.
 
 ### obtain a shared secret
 

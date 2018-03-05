@@ -103,3 +103,7 @@ completed registration by adding 3 secret questions.
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret`
+
+### run application on real device
+
+1. <https://facebook.github.io/react-native/docs/running-on-device.html>

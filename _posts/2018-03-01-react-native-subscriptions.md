@@ -66,7 +66,14 @@ iOS
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `<subscription_group>` (link)
 
-don't add localization for subscription group (maybe not required)
+it's required to add localization for subscription group as well:
+
+> Before you can submit your in-app purchase for review,
+> you must add at least one localization to your subscription group.
+
+- `Localizations ⨁` → `Russian`
+  - `Subscription Group Display Name`: `Подписки`
+  - `App Name Display Name`: [x] Use App Name
 
 ### create sandbox tester (test user)
 
@@ -98,6 +105,17 @@ on the Internet it might come off even though it's not verified.
 
 IDK if it matters or not but I signed in to iCloud with this account and
 completed registration by adding 3 secret questions.
+
+**UPDATE**
+
+I could make a purchase using not verified test account but now I cannot
+manage my subscriptions - both in iOS (on iPhone) and iTunes (on MacBook).
+
+<https://forums.developer.apple.com/thread/14702>:
+
+> the sandbox environment handles auto-renewing subscriptions in an automated
+> fashion - that is subscription periods are shortened and renew only 5 times
+> and not controlled through the subscription management screen.
 
 ### obtain a shared secret
 

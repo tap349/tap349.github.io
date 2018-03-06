@@ -503,6 +503,16 @@ Elixir supports much more concurrent connections than are currently created.
 error hasn't occurred in the last 11 days since the fix was deployed
 (2018-02-22 01:48).
 
+**UPDATE**
+
+error occurred again under heavy load.
+
+even though Elixir might support lots of concurrent connection but here we
+are talking about outbound connections - not inbound web server connections.
+
+and max number of outbound connections should be configured on HTTPoison
+(hackney) level.
+
 (HTTPoison.Error) :connect_timeout
 ----------------------------------
 

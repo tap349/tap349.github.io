@@ -44,5 +44,5 @@ iOS
   ```
 
 - build and run application
-- hot reloading usually works (use live reload if it doesn't)
+- hot reloading works as a rule (use live reload if it doesn't)
 - shake real device to access Developer Menu

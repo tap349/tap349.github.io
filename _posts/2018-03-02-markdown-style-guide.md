@@ -35,9 +35,8 @@ categories: [markdown]
 
   NOTE: backticks are used for exact names.
 
-  NOTE: keep path on a single line (or else table won't be rendered)
-
-- when path is inlined (say, element of the list), don't wrap it in table:
-
-  - Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`
-  - press `+` icon (`Add Simulator`) in bottom left corner
+  keep path on a single line (or else table won't be rendered) but it's
+  allowed to use multiple table rows each row containing the path on a
+  separate screen (window or page). or else it's multiple table rows can
+  be used to split path into 2 parts - high-level part and the one that
+  specifies exact location of UI element).

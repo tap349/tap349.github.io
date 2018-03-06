@@ -109,6 +109,8 @@ tips
 
 | emulator menu: `Window` → `Scale`
 
+or
+
 | emulator (app):
 
 - `<D-1>` - 100% (default)
@@ -140,7 +142,8 @@ NOTE: it's necessary to configure new simulator separately
 
 #### switch from inside simulator
 
-- emulator menu: `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
+| emulator menu: `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
+
 - `$ react-native run-ios` (reinstall application)
 
 ### upload file to emulator
@@ -154,9 +157,10 @@ is currently opened.
 
 iPhone 4s model is not available by default - add it manually:
 
-- Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`
-- press `+` icon (`Add Simulator`) in bottom left corner
-- `OS Version` (dropdown menu) → `Download more simulator runtimes...`
+| Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`
+| `Simulators` (tab) → `+` (icon at the bottom left corner)
+| `OS Version` (dropdown menu) → `Download more simulator runtimes...`
+
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
 - create simulator for iPhone 4s using downloaded runtime
 
@@ -175,14 +179,15 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### Developer Menu
 
-- emulator (app): `<D-d>`
+| emulator (app): `<D-d>`
 
 ### Inspector
 
-emulator (app):
+| emulator (app): `<D-d>` → `Show Inspector`
 
-- `<D-d>` → `Show Inspector`
-- `<D-i>` (toggle)
+or
+
+| emulator (app): `<D-i>` (toggle)
 
 ### device system log (`iOS device syslog`)
 
@@ -192,22 +197,26 @@ $ react-native log-ios
 
 ### reload application in emulator manually
 
-emulator (app):
+| emulator (app): `<D-d>` → `Reload`
 
-- `<D-d>` → `Reload` or
-- `<D-r>`
+or
+
+| emulator (app): `<D-r>`
 
 ### show touchable areas
 
-- `<D-d>` → `Show Inspector`
-- click `Touchables` in bottom menu
-- `<D-d>` → `Hide Inspector`
-- touchable areas are still marked with dotted line
+| emulator (app): `<D-d>` → `Show Inspector` → `Touchables` (bottom menu)
+| `<D-d>` → `Hide Inspector`
+
+=\> touchable areas are still marked with dotted line
 
 ### toggle software keyboard
 
-- emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard` or
-- emulator (app): `<D-k>`
+| emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard`
+
+or
+
+| emulator (app): `<D-k>`
 
 troubleshooting
 ---------------

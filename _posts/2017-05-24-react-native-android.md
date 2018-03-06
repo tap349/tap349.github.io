@@ -234,7 +234,7 @@ _$HOME/.android/avd/\<name\>.avd/config.ini_:
 hw.keyboard=yes
 ```
 
-by default `hw.keyboard=no`.
+NOTE: by default `hw.keyboard=no`.
 
 or else it's possible to enable hardware keyboard inside emulator OS:
 
@@ -324,7 +324,7 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 
 | emulator (OS): Applications → `Dev Settings`
 
-or:
+or
 
 | emulator (app): `<D-m>` → `Dev Settings`
 
@@ -357,7 +357,7 @@ $ avd -verbose
 
 | emulator (app): `<D-m>` → `Reload`
 
-or:
+or
 
 | emulator (app): `rr`
 
@@ -386,10 +386,10 @@ development machine).
 
 ### show touchable areas
 
-- `<D-m>` → `Toggle Inspector`
-- click `Touchables` in bottom menu
-- `<D-m>` → `Toggle Inspector`
-- touchable areas are still marked with dotted line
+| emulator (app): `<D-m>` → `Toggle Inspector` → `Touchables` (bottom menu)
+| `<D-m>` → `Toggle Inspector`
+
+=\> touchable areas are still marked with dotted line
 
 ## troubleshooting
 

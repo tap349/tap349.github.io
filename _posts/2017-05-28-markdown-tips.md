@@ -42,3 +42,5 @@ it's not required to escape right angle bracket:
 =>
 \<foo>
 ```
+
+don't escape anything inside blocks of code.

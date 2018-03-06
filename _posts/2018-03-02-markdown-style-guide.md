@@ -42,6 +42,8 @@ categories: [markdown]
   | iTunes Connect: `My Apps` → `Users and Roles`
   | `Sandbox Testers` (tab) → `Testers ⨁`
 
+  try not to overuse it for hotkeys and menu selections.
+
 - when path is inlined (say, element of the list), don't wrap it in table:
 
   - Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`

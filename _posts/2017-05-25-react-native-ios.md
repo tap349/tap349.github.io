@@ -96,7 +96,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### hide device bezels
 
-- emulator menu: `Window` → [ ] `Show Device Bezels`
+emulator menu: `Window` → [ ] `Show Device Bezels`
 
 device bezels are shown by default since Xcode 9
 (there was no such option at all before Xcode 9 AFAIK).

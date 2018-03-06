@@ -73,11 +73,11 @@ also means that all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-| emulator (OS): `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English (United States)` | `Dvorak`
+| emulator (OS): `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English (United States)` → `Dvorak`
 
 ### Russian keyboard layout
 
-| emulator menu: `Hardware` → `Keyboard` | `Use the Same Keyboard Language as macOS`
+| emulator menu: `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
@@ -87,8 +87,8 @@ NOTE: hot reloading is recommended over live reload.
 
 emulator (app):
 
-- `<D-d>` | `Enable Live Reload`
-- `<D-d>` | `Enable Hot Reloading`
+- `<D-d>` → `Enable Live Reload`
+- `<D-d>` → `Enable Hot Reloading`
 
 ### scroll with 3 fingers
 

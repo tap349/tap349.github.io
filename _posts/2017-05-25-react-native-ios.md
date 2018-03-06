@@ -73,7 +73,7 @@ also means that all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-| emulator (OS): `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English (United States)` → `Dvorak`
+| emulator (OS): `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English (United States)` | `Dvorak`
 
 ### Russian keyboard layout
 

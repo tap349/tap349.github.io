@@ -139,4 +139,5 @@ in the end I could make a purchase using not verified test account.
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
 
-now you should be able to load products from iTunes Connect.
+it's required to run application on real device to make purchases:
+the only action allowed from inside emulator is loading products.

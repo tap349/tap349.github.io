@@ -136,7 +136,7 @@ IDK if it matters or not but I signed in to iCloud with this account
 in the end I could make a purchase using not verified test account.
 
 ### obtain a shared secret
-
+ 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret`
 

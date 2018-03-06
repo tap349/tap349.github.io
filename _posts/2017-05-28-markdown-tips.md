@@ -32,3 +32,13 @@ wrap code block with `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}` tags:
     <link rel="stylesheet" href="{{ site.baseurl }}public/css/hyde.css">
     ```
     {% endraw %}{{ "{% endraw " }}%}
+
+escape left angle bracket only
+------------------------------
+
+it's not required to escape right angle bracket:
+
+```
+=>
+\<foo>
+```

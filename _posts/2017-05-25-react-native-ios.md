@@ -109,14 +109,14 @@ tips
 1. <https://stackoverflow.com/questions/10481412>
 
 | emulator menu: `Window` → `Scale`
-or
+
 | emulator (app):
 
-  - `<D-1>` - 100% (default)
-  - `<D-2>` - 75%
-  - `<D-3>` - 50%
-  - `<D-4>` - 33%
-  - `<D-5>` - 25%
+- `<D-1>` - 100% (default)
+- `<D-2>` - 75%
+- `<D-3>` - 50%
+- `<D-4>` - 33%
+- `<D-5>` - 25%
 
 also there must be a way to change default scale by setting a value for
 appropriate preference key via `defaults write` as described in the link

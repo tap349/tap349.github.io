@@ -73,17 +73,19 @@ also means that all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-| emulator (OS): `Settings` → `General` → `Keyboards` → `Hardware Keyboard` → `English (United States)` → **`Dvorak`**
+| emulator (OS): `Settings` → `General` → `Keyboards` → `Hardware Keyboard`
+| `English (United States)` → `Dvorak`
 
 ### Russian keyboard layout
 
-| emulator menu: `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
+| emulator menu: `Hardware` → `Keyboard`
+| `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
 1. <https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
 
-NOTE: hot reloading is recommended over live reload.
+NOTE: hot reloading is recommended over live reload (the former is much faster).
 
 emulator (app):
 

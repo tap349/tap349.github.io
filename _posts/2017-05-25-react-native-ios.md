@@ -205,8 +205,7 @@ or
 
 ### show touchable areas
 
-| emulator (app): `<D-d>` → `Show Inspector` → `Touchables` (bottom menu)
-| `<D-d>` → `Hide Inspector`
+| emulator (app): `<D-i>` → `Touchables` (bottom menu) → `<D-i>`
 
 => touchable areas are still marked with dotted line
 

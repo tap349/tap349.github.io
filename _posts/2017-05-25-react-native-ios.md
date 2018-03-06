@@ -175,15 +175,14 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### Developer Menu
 
-`<D-d>`
+- emulator (app): `<D-d>`
 
 ### Inspector
 
-| emulator (app): `<D-d>` → `Show Inspector`
+emulator (app):
 
-or:
-
-| emulator (app): `<D-i>` (toggle)
+- `<D-d>` → `Show Inspector`
+- `<D-i>` (toggle)
 
 ### device system log (`iOS device syslog`)
 
@@ -193,11 +192,10 @@ $ react-native log-ios
 
 ### reload application in emulator manually
 
-| emulator (app): `<D-d>` → `Reload`
+emulator (app):
 
-or:
-
-| emulator (app): `<D-r>`
+- `<D-d>` → `Reload` or
+- `<D-r>`
 
 ### show touchable areas
 
@@ -208,11 +206,8 @@ or:
 
 ### toggle software keyboard
 
-| emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard`
-
-or:
-
-| `<D-k>`
+- emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard` or
+- emulator (app): `<D-k>`
 
 troubleshooting
 ---------------

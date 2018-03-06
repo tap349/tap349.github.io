@@ -208,7 +208,7 @@ or
 | emulator (app): `<D-d>` → `Show Inspector` → `Touchables` (bottom menu)
 | `<D-d>` → `Hide Inspector`
 
-=\> touchable areas are still marked with dotted line
+=> touchable areas are still marked with dotted line
 
 ### toggle software keyboard
 

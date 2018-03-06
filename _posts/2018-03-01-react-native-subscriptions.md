@@ -97,9 +97,9 @@ tips and notes about sandbox environment:
   tester account is not a fully functional one and tester's Apple ID cannot
   be used to access iTunes Store or App Store.
 
-  occasionally `Apple ID Verification` alert dialog might appear asking
-  to enter password for test account in `Settings` - it's safe to ignore
-  it and press `Not Now` button all the time.
+  occasionally `Apple ID Verification` alert dialog might appear asking to
+  enter password for test account in `Settings` - it's safe to ignore it and
+  press `Not Now` button all the time.
 
 - subscription periods:
 

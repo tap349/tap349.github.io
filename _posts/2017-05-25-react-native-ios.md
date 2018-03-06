@@ -32,8 +32,8 @@ install Xcode and Command Line Tools
 running
 -------
 
-NOTE: emulator for iOS is called Simulator (will be referred
-      to as just emulator for the sake of consistency).
+NOTE: emulator for iOS is called Simulator (will be referred to as just
+      emulator for the sake of consistency).
 
 ### start backend server
 
@@ -78,8 +78,7 @@ it's possible to change it to Dvorak inside emulator:
 
 ### Russian keyboard layout
 
-| emulator menu: `Hardware` → `Keyboard`
-| `Use the Same Keyboard Language as macOS`
+| emulator menu: `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
 
 ### enable live/hot reloading
 
@@ -87,10 +86,9 @@ it's possible to change it to Dvorak inside emulator:
 
 NOTE: hot reloading is recommended over live reload (the former is much faster).
 
-emulator (app):
+| emulator (app) → `<D-d>` → `Enable Live Reload`
 
-- `<D-d>` → `Enable Live Reload`
-- `<D-d>` → `Enable Hot Reloading`
+| emulator (app) → `<D-d>` → `Enable Hot Reloading`
 
 ### scroll with 3 fingers
 
@@ -98,7 +96,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### hide device bezels
 
-emulator menu: `Window` → [ ] `Show Device Bezels`
+| emulator menu: `Window` → [ ] `Show Device Bezels`
 
 device bezels are shown by default since Xcode 9
 (there was no such option at all before Xcode 9 AFAIK).
@@ -110,8 +108,10 @@ tips
 
 1. <https://stackoverflow.com/questions/10481412>
 
-- emulator menu: `Window` → `Scale`
-- emulator (app):
+| emulator menu: `Window` → `Scale`
+or
+| emulator (app):
+
   - `<D-1>` - 100% (default)
   - `<D-2>` - 75%
   - `<D-3>` - 50%

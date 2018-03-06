@@ -35,14 +35,7 @@ categories: [markdown]
 
   NOTE: backticks are used for exact names.
 
-  NOTE: keep path on a single line (or else table won't be rendered) though
-        it's possible to have 2 table rows (the 1st one for high-level path
-        and the 2nd one - to specify exact location of UI element):
-
-  | iTunes Connect: `My Apps` → `Users and Roles`
-  | `Sandbox Testers` (tab) → `Testers ⨁`
-
-  try not to overuse it for hotkeys and menu selections.
+  NOTE: keep path on a single line (or else table won't be rendered)
 
 - when path is inlined (say, element of the list), don't wrap it in table:
 

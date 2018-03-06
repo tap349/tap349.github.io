@@ -438,6 +438,13 @@ middleware
 that is dispatching a thunk returns whatever thunk itself returns -
 not necessarily `Promise` object (even though it's highly recommended).
 
+<https://stackoverflow.com/a/35415559/3632318> (Dan Abramov):
+
+> This was the motivation for finding a way to “legitimize” this pattern
+> of providing dispatch to a helper function, and help Redux “see” such
+> asynchronous action creators as a special case of normal action creators
+> rather than totally different functions.
+
 #### handling rejected promises in thunks
 
 in thunk:

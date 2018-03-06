@@ -18,7 +18,6 @@ iOS
 
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
-3. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
 ### create in-app purchase (IAP)
 
@@ -76,6 +75,8 @@ it's required to add localization for subscription group as well:
   - `App Name Display Name`: [x] Use App Name
 
 ### create sandbox tester (test user)
+
+1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
 | iTunes Connect: `My Apps` → `Users and Roles`
 | `Sandbox Testers` (tab) → `Testers ⨁`
@@ -145,3 +146,10 @@ see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-
 
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
+
+### programming tips
+
+1. <https://github.com/chirag04/react-native-in-app-utils>
+2. [Adding In-App Purchase to Your Applications](https://developer.apple.com/library/content/technotes/tn2259/_index.html)
+3. [Validating Receipts With the App Store](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html)
+4. [Receipt Fields](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html)

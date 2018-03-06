@@ -85,9 +85,10 @@ it's possible to change it to Dvorak inside emulator:
 
 NOTE: hot reloading is recommended over live reload.
 
-| emulator (app): `<D-d>` → `Enable Live Reload`
+emulator (app):
 
-| emulator (app): `<D-d>` → `Enable Hot Reloading`
+- `<D-d>` → `Enable Live Reload`
+- `<D-d>` → `Enable Hot Reloading`
 
 ### scroll with 3 fingers
 
@@ -95,7 +96,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### hide device bezels
 
-| emulator menu: `Window` → [ ] `Show Device Bezels`
+- emulator menu: `Window` → [ ] `Show Device Bezels`
 
 device bezels are shown by default since Xcode 9
 (there was no such option at all before Xcode 9 AFAIK).
@@ -107,15 +108,13 @@ tips
 
 1. <https://stackoverflow.com/questions/10481412>
 
-| emulator menu: `Window` → `Scale`
-
-or in emulator (app):
-
-- `<D-1>` - 100% (default)
-- `<D-2>` - 75%
-- `<D-3>` - 50%
-- `<D-4>` - 33%
-- `<D-5>` - 25%
+- emulator menu: `Window` → `Scale`
+- emulator (app):
+  - `<D-1>` - 100% (default)
+  - `<D-2>` - 75%
+  - `<D-3>` - 50%
+  - `<D-4>` - 33%
+  - `<D-5>` - 25%
 
 also there must be a way to change default scale by setting a value for
 appropriate preference key via `defaults write` as described in the link

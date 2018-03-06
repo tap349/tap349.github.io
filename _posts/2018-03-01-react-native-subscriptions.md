@@ -147,7 +147,7 @@ see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
 
-### programming tips
+### programming resources
 
 1. <https://github.com/chirag04/react-native-in-app-utils>
 2. [Adding In-App Purchase to Your Applications](https://developer.apple.com/library/content/technotes/tn2259/_index.html)

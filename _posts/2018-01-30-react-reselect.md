@@ -98,7 +98,7 @@ object causing `getGamersWithProfiles` selector to recompute on each update.
 **solution**
 
 input selector must return an existing object (a slice of Redux store state)
-that changes only when state changes =\> don't return a new manually created
+that changes only when state changes => don't return a new manually created
 object from input selector.
 
 refactored code:

@@ -235,7 +235,7 @@ using react-redux boils down to using just 2 things:
 
   think of `connect()` as a Redux store facade for component.
 
-  state \<=\> `connect()` \<=\> component
+  state \<=> `connect()` \<=> component
 
   ```javascript
   import {connect} from 'react-redux';

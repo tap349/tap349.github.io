@@ -389,7 +389,7 @@ development machine).
 | emulator (app): `<D-m>` → `Toggle Inspector` → `Touchables` (bottom menu)
 | `<D-m>` → `Toggle Inspector`
 
-=\> touchable areas are still marked with dotted line
+=> touchable areas are still marked with dotted line
 
 ## troubleshooting
 

@@ -72,7 +72,7 @@ bug was fixed in v1.0.2 by moving Babel settings to _.babelrc_
 so that they are not consumed by RN packager by default.
 
 `react-side-effect` is the only package in my project that depends on
-`shallowequal` package (according to _yarn.lock_) =\>
+`shallowequal` package (according to _yarn.lock_) =>
 upgrade `react-side-effect` package to update its dependencies
 (including `shallowequal` package) to their latest version:
 
@@ -274,7 +274,7 @@ ListView becomes blank
 when pushing another page and then going back to page with `ListView`
 the latter becomes blank (nothing is rendered where `ListView` is
 supposed to be rendered). at the same time adjacent components are
-rendered properly (=\> it's not that wrapped collection becomes empty).
+rendered properly (=> it's not that wrapped collection becomes empty).
 
 **solution**
 
@@ -618,12 +618,12 @@ ld: warning: object file (<app_dir>/ios/build/Build/Products/Debug-iphonesimulat
 error explanation: `react-native-autogrow-textinput` library is
 built with `IPHONEOS_DEPLOYMENT_TARGET=9.3` build setting but
 the rest of the project (the library is linked to later) has been
-built with `IPHONEOS_DEPLOYMENT_TARGET=8.0` build setting =\>
+built with `IPHONEOS_DEPLOYMENT_TARGET=8.0` build setting =>
 hence the error.
 
 the latest version of `react-native-autogrow-textinput` doesn't support
 iOS Deployment Target (DT) lower than 9.3 but current DT in iOS project
-is 8.0 =\> change DT in iOS project to 9.3 as well:
+is 8.0 => change DT in iOS project to 9.3 as well:
 
 | Xcode: `Build Settings` → `Deployment` → `iOS Deployment Target`
 

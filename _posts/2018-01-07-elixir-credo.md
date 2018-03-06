@@ -39,7 +39,7 @@ $ mix credo list --strict
 
 by default low priority issues are not shown - `--all-priorities`
 switch (aliased as `--strict`) allows to include them in the output
-=\> there are no special style guide checks enabled by this option.
+=> there are no special style guide checks enabled by this option.
 
 explain specific issue (`explain` is a default command when
 `filename:line_number:column` string is passed):

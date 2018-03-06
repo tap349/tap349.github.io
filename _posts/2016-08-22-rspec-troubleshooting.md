@@ -32,7 +32,7 @@ require File.expand_path('../../config/environment', __FILE__)
 
 also _spec/rails_helper.rb_ requires _spec/spec_helper.rb_.
 
-=\> just require `rails_helper` instead of `spec_helper` in _.rspec_:
+=> just require `rails_helper` instead of `spec_helper` in _.rspec_:
 
 ```ruby
 --color

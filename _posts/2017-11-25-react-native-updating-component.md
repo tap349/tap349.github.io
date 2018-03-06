@@ -13,7 +13,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-trigger update =\> compare state and props =\> render
+trigger update => compare state and props => render
 
 trigger update
 --------------
@@ -67,7 +67,7 @@ comparison is made inside `shouldComponentUpdate()` which is
   <https://hackernoon.com/react-purecomponent-considered-harmful-8155b5c1d4bc>:
 
   when using `React.PureComponent`, performance might even degrade a little
-  bit if some object that is passed as property value is created in place =\>
+  bit if some object that is passed as property value is created in place =>
   `shouldComponentUpdate()` will always return `true` but still it has to
   iterate over all keys of both props and nextProps on each update.
 
@@ -109,7 +109,7 @@ comparison is made inside `shouldComponentUpdate()` which is
 
 NOTE: in all cases where state or props are compared, shallow comparison is
       used - only prop references are compared! if you pass mutated property
-      (say, some nested value is updated), it'll be considered unchanged =\>
+      (say, some nested value is updated), it'll be considered unchanged =>
       always return new objects from reducers!
 
 ### connected component vs. PureComponent

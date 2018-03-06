@@ -158,7 +158,7 @@ is currently opened.
 iPhone 4s model is not available by default - add it manually:
 
 | Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`
-| `Simulators` (tab) → `+` (icon at the bottom left corner)
+| `Simulators` (tab) → `+` (icon in bottom left corner)
 | `OS Version` (dropdown menu) → `Download more simulator runtimes...`
 
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)

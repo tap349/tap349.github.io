@@ -2,7 +2,7 @@
 layout: post
 title: React - Reselect
 date: 2018-01-30 03:06:46 +0300
-access: private
+access: public
 comments: true
 categories: [react, reselect]
 ---

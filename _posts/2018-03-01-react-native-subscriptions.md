@@ -49,7 +49,7 @@ iOS
 ### configure IAP
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
-| `In-App Purchases (left menu)` → `<subscription>` (link)
+| `In-App Purchases` (left menu) → `<subscription>` (link)
 
 - [x] `Cleared for Sale`
 - `Subscription Duration` → `1 Month`
@@ -78,8 +78,8 @@ it's required to add localization for subscription group as well:
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
-| iTunes Connect: `My Apps` → `Users and Roles`
-| `Sandbox Testers` (tab) → `Testers ⨁`
+| iTunes Connect: `My Apps` → `Users and Roles` → `Sandbox Testers` (tab)
+| `Testers ⨁` (link)
 
 NOTE: test account == sandbox tester account.
 
@@ -138,7 +138,7 @@ in the end I could make a purchase using not verified test account.
 ### obtain a shared secret
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
-| `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret`
+| `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
 
 ### run application on real device
 

@@ -60,6 +60,13 @@ iOS
   - `Subscription Display Name`: `Скрытие рекламы на месяц`
   - `Description`: don't add so far (maybe not required)
 
+<https://developer.apple.com/library/content/technotes/tn2259/_index.html#//apple_ref/doc/uid/DTS40009578-CH1-ITUNES_CONNECT>:
+
+> Leave the state of your product as Missing Metadata.
+>
+> Upload a a screenshot of your in-app purchase product once you
+> are done testing it and ready to upload it for review.
+
 ### configure subscription group
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
@@ -146,6 +153,18 @@ see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-
 
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
+
+### add new IAP when submitting new app version
+
+| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+| `In-App Purchases (left menu)`
+
+> Your first in-app purchase must be submitted with a new app version.
+> Select it from the app’s In-App Purchases section and click Submit.
+>
+> Once your binary has been uploaded and your first in-app purchase has
+> been submitted for review, additional in-app purchases can be submitted
+> using the table below.
 
 ### programming resources
 

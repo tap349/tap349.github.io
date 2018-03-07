@@ -234,3 +234,14 @@ but in general it's better to avoid nested `ScrollView`s.
 ```jsx
 <Text>foo{'\n'}bar</Text>
 ```
+
+(how to) add whitespace (not NBSP) inside Text
+----------------------------------------------
+
+```jsx
+<Text>
+  click{' '}
+  <Text>
+    "this link"
+  </Text>
+```

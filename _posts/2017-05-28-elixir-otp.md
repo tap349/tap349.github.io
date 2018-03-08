@@ -223,6 +223,43 @@ iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello, :world])
  5000, :worker, [Neko.Achievement.Store.Registry]}
 ```
 
+### about extra argument passed to supervisor child's start function
+
+1. <https://blog.carbonfive.com/2018/01/30/comparing-dynamic-supervision-strategies-in-elixir-1-5-and-1-6/>
+
+this only happens when using both:
+
+- supervisor with `:simple_one_for_one` strategy
+- a new way to fetch a child spec with `child_spec/1` function
+
+  supervised child is usually specified as either tuple with module and
+  start argument or just module - in both cases start argument must be
+  passed (explicit argument in the 1st case and default one `[]` in the
+  2nd case) since the arity of `child_spec/1` function is 1 (of course
+  we can define our own `child_spec` function with any arity - but then
+  we would have to fetch child spec manually with `Foo.child_spec(1, 2)`
+  while `child_spec/1` function is called by supervisor automatically).
+
+  then when starting a new child with `Supervisor.start_child/2` we might
+  pass some dynamic arguments which are appended to the list of arguments
+  in child spec:
+
+  ```elixir
+  %{
+    id: Foo,
+    start: {Foo, :start_link, [[], dynamic_arg_1, dynamic_arg_2]}
+  }
+  ```
+
+  so now it turns out that `Foo.start_link` is called with 2+ arguments
+  the 1st argument being totally useless - it's here only to satisfy the
+  arity of default implementation of `child_spec/1`.
+
+this problem is fixed by `DynamicSupervisor` in Elixir 1.6: it allows to
+pass child spec right into `start_child/2` instead of `Supervisor.init/2`
+and specify only those arguments for child's start function that we really
+need.
+
 linking and monitoring
 ----------------------
 

@@ -31,6 +31,7 @@ at compile time (using `Application.get_env/3`):
   # client module
   defmodule MyApp.Foo do
     @api Application.get_env(:my_app, :api)
+
     def foo, do: @api.fetch()
   end
   ```
@@ -62,6 +63,7 @@ behaviour module (BM)
     @callback fetch() :: any()
 
     @behaviour __MODULE__
+
     def fetch, do: 123
   end
   ```
@@ -75,6 +77,7 @@ behaviour module (BM)
     end
 
     @behaviour Behaviour
+
     def fetch, do: 123
   end
   ```
@@ -87,6 +90,7 @@ callback module (CM)
   ```elixir
   defmodule MyApp.API.HTTPClient do
     @behaviour MyApp.API
+
     def fetch, do: 123
   end
   ````
@@ -116,6 +120,7 @@ callback module (CM)
     end
 
     @behaviour Behaviour
+
     @api Application.get_env(:my_app, :api)
 
     defdelegate fetch, to: @api

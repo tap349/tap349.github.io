@@ -507,11 +507,27 @@ error hasn't occurred in the last 11 days since the fix was deployed
 
 error occurred again under heavy load.
 
-even though Elixir might support lots of concurrent connection but here we
-are talking about outbound connections - not inbound web server connections.
+1. <https://github.com/edgurgel/httpoison#explicit-pool-creation>
 
-and max number of outbound connections should be configured on HTTPoison
-(hackney) level.
+even though Elixir might support lots of concurrent connection but here we
+are talking about outbound connections - not inbound web server connections
+=> it looks like this should be configured on HTTPoison (hackney) level.
+
+<https://github.com/benoitc/hackney#use-the-default-pool>:
+
+> `timeout` is the time we keep the connection alive in the pool,
+> `max_connections` is the number of connections maintained in the pool.
+
+so I've created a custom hackney pool for shikimori with these options:
+
+- `timeout`: 150_000 ms (default) → 30 * 60_000 ms
+- `max_connections`: 50 (default) → 150
+
+default values for these options can be found in:
+
+- project: _deps/hackney/src/hackney.app.src_
+- release: _\<release_name>/\<app>.script_
+  (say, _/home/apps/neko/releases/0.1.0/neko.script_)
 
 (HTTPoison.Error) :connect_timeout
 ----------------------------------

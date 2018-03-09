@@ -560,4 +560,4 @@ HTTP request error: {
 
 1. <https://hexdocs.pm/httpoison/HTTPoison.html#request/5>
 
-try to increase connect timeout (`timeout` option in HTTPoison).
+try to increase connect timeout (`timeout` request option in HTTPoison).

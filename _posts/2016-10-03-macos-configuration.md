@@ -209,6 +209,22 @@ System Preferences
 - Input (tab):
   - Input volume: min (disable microphone)
 
+### iCloud
+
+- [x] iCloud Drive:
+  - Options (button):
+    - [x] iBooks
+    - [x] Reminders
+    - [x] Weather
+    - [x] System Preferences
+- [x] Contacts
+- [x] Calendars
+- [x] Reminders
+- [x] Safari
+- [x] Notes
+- [x] Keychain
+- [x] Find My Mac
+
 ### App Store
 
 - [ ] Automatically check for updates

@@ -529,6 +529,20 @@ default values for these options can be found in:
 - release: _\<release_name>/\<app>.script_
   (say, _/home/apps/neko/releases/0.1.0/neko.script_)
 
+**UPDATE (2018-03-10)**
+
+most likely this is what causes the error:
+
+shikimori is rebooted and there are lots of timeout errors in shikimori
+(not only when it's down but right after it's started as well because of
+high incoming traffic) - this means connections are taken from the pool
+but not returned till they time out (in 90 seconds). at some point all
+connections in the pool (50 connections by default) are open waiting for
+shikimori to respond and new incoming request causes `eaddrinuse` error.
+
+still it's a little bit unclear why this error happened when I didn't use
+the pool - AFAIU there was no limit on max number of open connections then.
+
 (HTTPoison.Error) :connect_timeout
 ----------------------------------
 

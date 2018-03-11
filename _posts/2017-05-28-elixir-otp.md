@@ -41,6 +41,12 @@ GenServers:
 > and Agents are purely state management. For everything in between, there's
 > GenServer.
 
+<https://elixirforum.com/t/can-a-genserver-state-be-too-big-and-general-application-architecture/469/3>:
+
+GenServers should be used for runtime organization - not code organization:
+implement your logic in dedicated modules and use these modules from inside
+GenServers.
+
 Agent
 -----
 

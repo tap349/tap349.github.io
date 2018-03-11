@@ -43,9 +43,9 @@ GenServers:
 
 <https://elixirforum.com/t/can-a-genserver-state-be-too-big-and-general-application-architecture/469/3>:
 
-GenServers should be used for runtime organization - not code organization:
-implement your logic in dedicated modules and use these modules from inside
-GenServers.
+GenServers (and processes in general) should be used for runtime organization
+(running different tasks separately) - not code organization: required logic
+must be implemented in dedicated modules which are used from inside GenServers.
 
 Agent
 -----

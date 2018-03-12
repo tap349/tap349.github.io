@@ -218,7 +218,7 @@ errors occurs when trying to insert into ETS table:
 > that any process can read values from the table, but only the process
 > that created the table can write values to it.
 
-I tried to write to ETS table inside agent process while it was created
+I tried to write to ETS table inside agent while it was created
 outside of it in agent wrapper - problem was solved by creating ETS
 table inside anonymous function passed to `Agent.start_link/2`.
 
@@ -378,7 +378,7 @@ error must be caused by this sequence of steps:
   1st scenario:
 
   - agent call has timed out
-  - the caller (task process) exits
+  - the caller (task) exits
 
     <https://hexdocs.pm/elixir/Agent.html#get/3>:
 
@@ -396,10 +396,10 @@ error must be caused by this sequence of steps:
 
   - network request has timed out
   - HTTPoison raises `%HTTPoison.Error{id: nil, reason: :timeout}}`
-  - agent process crashes (network request is performed inside it)
-  - the caller (task process) exits too
+  - agent crashes (network request is performed inside it)
+  - the caller (task) exits too
 
-    TODO: WHY task process exits if it's not linked to agent process?
+    TODO: WHY task process exits if it's not linked to agent?
           all synchronous calls crash the caller?
 
 - since user rate store registry monitors all stores, it will receive
@@ -410,22 +410,22 @@ error must be caused by this sequence of steps:
 - another request for the same `user_id` is received and new user handler
   process is spawned but `:DOWN` message hasn't been received yet so user
   rates are not reloaded (reloading is skipped because store PID is still
-  present in store registry)
+  present in store registry even though it's stale now)
 
 - `:DOWN` message is received and handled in user rate store registry -
   store PID (that is agent PID) is removed from ETS table
 
-- agent value is attempted to be retrieved to delete user rate from store
-  but store PID is gone now which results into runtime error (it's raised
-  manually when store is not found in store registry)
+- store PID is attempted to be retrieved (say, to delete user rate from
+  store) but it's no longer available which results into runtime error
+  (it's raised manually when store PID is not found in store registry)
 
 SUMMARY:
 
 user rate store crashes in previous request but `:DOWN` message is
 received while processing current request only - after loading user
 rates but before using the store (error occurs because store PID is
-not found in ETS table but anyway agent process itself is not alive
-now - it crashed in previous request).
+not found in ETS table but anyway agent itself is not alive now -
+it crashed in previous request).
 
 once again IDK how to solve this problem properly - this must be a
 very rare case so I've just made an error message more informative.

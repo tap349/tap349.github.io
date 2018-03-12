@@ -79,17 +79,39 @@ Android
 
 - connect to development server
 
-  ```
-  $ adb reverse tcp:8081 tcp:8081
-  ```
+  1. <https://stackoverflow.com/a/43277765/3632318>
 
-  NOTE: maybe it's not required since:
+  forward port (Android 5.0+ only):
 
   ```
-  $ react-native run-android
-  ...
-  Running /usr/local/share/android-sdk/platform-tools/adb -s 4d00af1d6fa7306d reverse tcp:8081 tcp:8081
-  Starting the app on 4d00af1d6fa7306d (/usr/local/share/android-sdk/platform-tools/adb -s 4d00af1d6fa7306d shell am start -n com.iceperkapp/com.iceperkapp.MainActivity)...
+  $ adb reverse tcp:3000 tcp:3000
+  ```
+
+  now local `3000` port is mapped to mobile's `3000` port.
+
+  NOTE: `3000` is the port development server is listening on (it's
+        used in _app/api/ApiHelpers.js_ and _app/api/graphql/run.js_).
+
+  also change server IP address for development environment: development
+  server is available by both `localhost` and notebook's local IP address
+  (but not `10.0.2.2` - like in case of emulator).
+
+  _app/api/ApiHelpers.js_:
+
+  ```diff
+    const LOCALHOST = Platform.OS === 'ios'
+      ? 'http://localhost:3000'
+  -   ? 'http://10.0.2.2:3000'
+  +   : 'http://localhost:3000';
+  ```
+
+  _app/api/graphql/run.js_:
+
+  ```diff
+    const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
+      ? 'http://localhost:3000'
+  -   ? 'http://10.0.2.2:3000'
+  +   : 'http://localhost:3000';
   ```
 
 - build and run application

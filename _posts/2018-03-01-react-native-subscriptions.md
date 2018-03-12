@@ -130,7 +130,7 @@ IDK if it matters or not but I signed in to iCloud with this account
 
 in the end I could make a purchase using not verified test account.
 
-### add implementation
+### implement subscription in application
 
 1. <https://github.com/chirag04/react-native-in-app-utils>
 2. <https://github.com/sibelius/iap-receipt-validator>
@@ -167,7 +167,7 @@ see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
 
-### prepare release
+### prepare release with subscription
 
 #### add new IAP when submitting new app version
 
@@ -184,7 +184,7 @@ the only action allowed from inside emulator is loading products.
 Android
 -------
 
-### add implementation
+### implement subscription in application
 
 1. <https://github.com/idehub/react-native-billing>
 
@@ -197,11 +197,12 @@ subscriptions in test environment:
 - have shortened periods (say, 1 month → 5 minutes)
 - renew 6 times only (cancelled afterwards)
 
-#### include `null` license key in application build
+#### set license key to `null`
 
-use `null` license key in test environment because:
+1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
 
-> your actual license key will not validate when using these productids
+use `null` license key when testing with static responses
+(using reserved product IDs - `android.test.purchased`, etc.).
 
 _android/app/src/main/res/values/strings.xml_:
 
@@ -212,8 +213,8 @@ _android/app/src/main/res/values/strings.xml_:
   </resources>
 ```
 
-still you can't just remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
-at all - you'll get `String resource ID #0x0` error then.
+however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
+altogether - or else you'll get `String resource ID #0x0` error.
 
 #### run application on real device
 
@@ -224,7 +225,7 @@ it's required to run application on real device even for testing:
 > Error: InAppBilling is not available. InAppBilling will not work/test on
 > an emulator, only a physical Android device.
 
-### prepare release
+### prepare release with subscription
 
 #### include license key in application build
 

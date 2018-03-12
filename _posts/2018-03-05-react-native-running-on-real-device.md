@@ -29,8 +29,8 @@ iOS
 - select real device as the build target in Xcode toolbar
 - connect to development server
 
-  change server IP address for development environment: development
-  server is available by notebook's local IP address - not `localhost`.
+  change server address for development environment: development server
+  is now available by notebook's local IP address - not `localhost`.
 
   _app/api/ApiHelpers.js_:
 
@@ -68,7 +68,7 @@ Android
   ```
 
 - enable `USB debugging` and plug in real device via USB
-- make sure real device is listed in `adb devices`
+- make sure real device is listed in `adb devices` output
 
   ```
   $ adb devices
@@ -89,12 +89,13 @@ Android
 
   now local `3000` port is mapped to mobile's `3000` port.
 
-  NOTE: `3000` is the port development server is listening on (it's
-        used in _app/api/ApiHelpers.js_ and _app/api/graphql/run.js_).
+  NOTE: `3000` is the port development server is listening on
+        (accordingly it's specified as development server port in
+        both _app/api/ApiHelpers.js_ and _app/api/graphql/run.js_).
 
-  also change server IP address for development environment: development
-  server is available by both `localhost` and notebook's local IP address
-  (but not `10.0.2.2` - like in case of emulator).
+  also change server address for development environment: development
+  server is now available by both `localhost` and notebook's local IP
+  address (but not `10.0.2.2` - like in case of emulator).
 
   _app/api/ApiHelpers.js_:
 

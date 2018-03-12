@@ -98,7 +98,7 @@ tips and notes regarding test account:
   error when I tried to add myself as a sandbox tester - Apple ID is created
   for each new sandox tester right after it's added here.
 
-- sign out of Apple ID on iPhone before testing subscriptions
+- sign out of Apple ID on iPhone before testing subscription
 
   it's also important not to sign in as a sandbox tester in `Settings` but
   in application only (when prompted before making a purchase) - a sandbox
@@ -130,10 +130,22 @@ IDK if it matters or not but I signed in to iCloud with this account
 
 in the end I could make a purchase using not verified test account.
 
-### test subscriptions
+### add subscription functionality to application
 
 1. <https://github.com/chirag04/react-native-in-app-utils>
 2. <https://github.com/sibelius/iap-receipt-validator>
+3. [Adding In-App Purchase to Your Applications](https://developer.apple.com/library/content/technotes/tn2259/_index.html)
+4. [Validating Receipts With the App Store](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html)
+5. [Receipt Fields](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html)
+
+#### obtain a shared secret
+
+| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+| `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
+
+use shared secret to validate receipts with `iap-receipt-validator` npm package.
+
+### test subscription
 
 subscriptions in test environment:
 
@@ -147,13 +159,6 @@ subscriptions in test environment:
 > fashion - that is subscription periods are shortened and renew only 5 times
 > and not controlled through the subscription management screen.
 
-#### obtain a shared secret
-
-| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
-| `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
-
-use it to validate receipts using `iap-receipt-validator` npm package.
-
 #### run application on real device
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
@@ -161,7 +166,9 @@ see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
 
-### add new IAP when submitting new app version
+### prepare for production
+
+#### add new IAP when submitting new app version
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases (left menu)`
@@ -173,25 +180,50 @@ the only action allowed from inside emulator is loading products.
 > been submitted for review, additional in-app purchases can be submitted
 > using the table below.
 
-### programming resources
-
-1. <https://github.com/chirag04/react-native-in-app-utils>
-2. [Adding In-App Purchase to Your Applications](https://developer.apple.com/library/content/technotes/tn2259/_index.html)
-3. [Validating Receipts With the App Store](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html)
-4. [Receipt Fields](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html)
-
 Android
 -------
 
-### test subscriptions
+### add subscription functionality to application
 
 1. <https://github.com/idehub/react-native-billing>
-2. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
+
+### test subscription
+
+1. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
 
 subscriptions in test environment:
 
 - have shortened periods (say, 1 month → 5 minutes)
 - renew 6 times only (cancelled afterwards)
+
+#### include `null` license key in application build
+
+in test environment use `null` license key because:
+
+> your actual license key will not validate when using these productids
+
+_android/app/src/main/res/values/strings.xml_:
+
+```diff
+  <resources>
+      <string name="app_name">Хоккей</string>
++     <string name="RNB_GOOGLE_PLAY_LICENSE_KEY" />
+  </resources>
+```
+
+still you can't just remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
+altogether - you'll get `String resource ID #0x0` error then.
+
+#### run application on real device
+
+see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
+
+it's required to run application on real device even for testing:
+
+> Error: InAppBilling is not available. InAppBilling will not work/test on
+> an emulator, only a physical Android device.
+
+### prepare for production
 
 #### include license key in application build
 
@@ -212,25 +244,3 @@ as `RNB_GOOGLE_PLAY_LICENSE_KEY` property:
 +     <string name="RNB_GOOGLE_PLAY_LICENSE_KEY">YOUR_GOOGLE_PLAY_LICENSE_KEY_HERE</string>
   </resources>
 ```
-
-NOTE: it's necessary to use `null` license key because:
-
-> your actual license key will not validate when using these productids
-
-_android/app/src/main/res/values/strings.xml_ (for testing):
-
-```diff
-  <resources>
-      <string name="app_name">Хоккей</string>
-+     <string name="RNB_GOOGLE_PLAY_LICENSE_KEY" />
-  </resources>
-```
-
-#### run application on real device
-
-see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
-
-it's required to run application on real device even for testing:
-
-> Error: InAppBilling is not available. InAppBilling will not work/test on
-> an emulator, only a physical Android device.

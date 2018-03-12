@@ -143,7 +143,8 @@ in the end I could make a purchase using not verified test account.
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
 
-use shared secret to validate receipts with `iap-receipt-validator` npm package.
+shared secret is used to validate receipts with `iap-receipt-validator`
+npm package.
 
 ### test subscription
 
@@ -166,7 +167,7 @@ see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
 
-### prepare for production
+### prepare release
 
 #### add new IAP when submitting new app version
 
@@ -223,7 +224,7 @@ it's required to run application on real device even for testing:
 > Error: InAppBilling is not available. InAppBilling will not work/test on
 > an emulator, only a physical Android device.
 
-### prepare for production
+### prepare release
 
 #### include license key in application build
 

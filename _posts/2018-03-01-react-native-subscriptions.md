@@ -130,7 +130,7 @@ IDK if it matters or not but I signed in to iCloud with this account
 
 in the end I could make a purchase using not verified test account.
 
-### add subscription functionality to application
+### add implementation
 
 1. <https://github.com/chirag04/react-native-in-app-utils>
 2. <https://github.com/sibelius/iap-receipt-validator>
@@ -183,7 +183,7 @@ the only action allowed from inside emulator is loading products.
 Android
 -------
 
-### add subscription functionality to application
+### add implementation
 
 1. <https://github.com/idehub/react-native-billing>
 
@@ -198,7 +198,7 @@ subscriptions in test environment:
 
 #### include `null` license key in application build
 
-in test environment use `null` license key because:
+use `null` license key in test environment because:
 
 > your actual license key will not validate when using these productids
 
@@ -212,7 +212,7 @@ _android/app/src/main/res/values/strings.xml_:
 ```
 
 still you can't just remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
-altogether - you'll get `String resource ID #0x0` error then.
+at all - you'll get `String resource ID #0x0` error then.
 
 #### run application on real device
 
@@ -235,8 +235,7 @@ it's required to run application on real device even for testing:
 | Google Play Console: `All applications` → `<my_app>`
 | `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
 
-add this license key to _android/app/src/main/res/values/strings.xml_
-as `RNB_GOOGLE_PLAY_LICENSE_KEY` property:
+_android/app/src/main/res/values/strings.xml_:
 
 ```diff
   <resources>

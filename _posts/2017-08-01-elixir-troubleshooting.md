@@ -546,7 +546,8 @@ the pool - AFAIU there was no limit on max number of open connections then.
 **UPDATE (2018-03-12)**
 
 I've compared CPU usage of application with and without connection pool -
-it's approximately the same (\< 2% in average, peak usage is about 6-7%).
+it's approximately the same (\< 2% in average, peak usage is about 6-7%,
+max 100 RPM).
 
 (HTTPoison.Error) :connect_timeout
 ----------------------------------

@@ -24,6 +24,7 @@ test subscription
 -----------------
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
+2. <http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>
 
 subscriptions in test environment:
 

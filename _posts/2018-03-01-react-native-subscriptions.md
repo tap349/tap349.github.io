@@ -253,6 +253,11 @@ not subscribe. all other subscription related methods from `react-native-billing
 package (`isSubscribed`, `getSubscriptionDetails`) are working as expected (that
 is they return relevant static responses - for subscriptions, not for purchases).
 
+<https://github.com/idehub/react-native-billing#testing-with-your-own-in-app-products>:
+
+> Testing with static responses is limited, because you are only able to test
+> the purchase function.
+
 ##### about error codes
 
 1. <https://developer.android.com/google/play/billing/billing_reference.html>

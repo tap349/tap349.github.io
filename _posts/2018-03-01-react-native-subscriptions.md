@@ -226,6 +226,16 @@ in the end I did factory data reset to get rid of this error - though it might
 be sufficient just to remove/add Google account (see also other advice in the
 article mentioned).
 
+#### Error: This version of the application is not configured for billing through Google Play
+
+I got this error when tried to subscribe using reserved product ID
+(`android.test.purchased`).
+
+it has turned that you can only purchase when testing with static responses but
+not subscribe. all other subscription related methods from `react-native-billing`
+package (`isSubscribed`, `getSubscriptionDetails`) are working as expected (that
+is they return relevant static responses - for subscriptions, not for purchases).
+
 #### run application on real device
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).

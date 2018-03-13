@@ -256,18 +256,20 @@ is they return relevant static responses - for subscriptions, not for purchases)
 ##### about error codes
 
 1. <https://developer.android.com/google/play/billing/billing_reference.html>
-2. <https://github.com/idehub/react-native-billing/issues/17>
+2. <https://github.com/idehub/react-native-billing/issues/17#issuecomment-228036758>
 3. <https://github.com/anjlab/android-inapp-billing-v3/blob/master/library/src/main/java/com/anjlab/android/iab/v3/Constants.java>
+4. <https://github.com/idehub/react-native-billing/blob/master/android/src/main/java/com/idehub/Billing/InAppBillingBridge.java>
 
-`react-native-billing` is wrapping `android-inapp-billing-v3` library so
-some error codes may come from there, say:
+- standard response codes from Google are 0-8
+- `react-native-billing` is wrapping `android-inapp-billing-v3` library
+  which may return its own error codes (> 100)
+
+in both cases `react-native-billing` rejects promise with the same error
+message containing returned error code:
 
 ```
-Purchase or subscribe failed with error: 110
+Purchase or subscribe failed with error: <error_code>
 ```
-
-standard response codes from Google (0-8) should be properly replaced with
-their descriptions (I guess).
 
 #### testing on real device
 

@@ -91,6 +91,10 @@ is they return relevant static responses - for subscription, not for purchase).
 > Testing with static responses is limited, because you are only able to test
 > the purchase function.
 
+<http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>:
+
+> Subscriptions can't be tested using static responses...
+
 #### about error codes
 
 1. <https://developer.android.com/google/play/billing/billing_reference.html>

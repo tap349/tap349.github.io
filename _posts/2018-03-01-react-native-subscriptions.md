@@ -253,6 +253,22 @@ not subscribe. all other subscription related methods from `react-native-billing
 package (`isSubscribed`, `getSubscriptionDetails`) are working as expected (that
 is they return relevant static responses - for subscriptions, not for purchases).
 
+##### about error codes
+
+1. <https://developer.android.com/google/play/billing/billing_reference.html>
+2. <https://github.com/idehub/react-native-billing/issues/17>
+3. <https://github.com/anjlab/android-inapp-billing-v3/blob/master/library/src/main/java/com/anjlab/android/iab/v3/Constants.java>
+
+`react-native-billing` is wrapping `android-inapp-billing-v3` library so
+some error codes may come from there, say:
+
+```
+Purchase or subscribe failed with error: 110
+```
+
+standard response codes from Google (0-8) should be properly replaced with
+their descriptions (I guess).
+
 #### testing on real device
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).

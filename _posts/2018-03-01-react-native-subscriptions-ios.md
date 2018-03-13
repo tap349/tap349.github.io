@@ -1,10 +1,10 @@
 ---
 layout: post
-title: React Native - Subscriptions
+title: React Native - Subscriptions (iOS)
 date: 2018-03-01 18:40:21 +0300
 access: public
 comments: true
-categories: [react-native]
+categories: [react-native, ios]
 ---
 
 <!-- more -->
@@ -13,13 +13,11 @@ categories: [react-native]
 {:toc}
 <hr>
 
-iOS
----
-
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-### create in-app purchase (IAP)
+create in-app purchase (IAP)
+----------------------------
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `In-App Purchases ⨁`
@@ -46,7 +44,8 @@ iOS
 
     must be more general than subscription reference name.
 
-### configure IAP
+configure IAP
+-------------
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `<subscription>` (link)
@@ -67,7 +66,8 @@ iOS
 > Upload a a screenshot of your in-app purchase product once you
 > are done testing it and ready to upload it for review.
 
-### configure subscription group
+configure subscription group
+----------------------------
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `<subscription_group>` (link)
@@ -81,7 +81,8 @@ it's required to add localization for subscription group as well:
   - `Subscription Group Display Name`: `Подписки`
   - `App Name Display Name`: [x] Use App Name
 
-### create sandbox tester (test user)
+create sandbox tester (test user)
+---------------------------------
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
@@ -109,7 +110,7 @@ tips and notes regarding test account:
   enter password for test account in `Settings` - it's safe to ignore it and
   press `Not Now` button all the time.
 
-#### about verification of sandbox tester email
+### about verification of sandbox tester email
 
 generally speaking it's necessary to verify new test account by following
 the link sent to specified email:
@@ -130,7 +131,8 @@ IDK if it matters or not but I signed in to iCloud with this account
 
 in the end I could make a purchase using not verified test account.
 
-### implement subscription in application
+implement subscription in application
+-------------------------------------
 
 1. <https://github.com/chirag04/react-native-in-app-utils>
 2. <https://github.com/sibelius/iap-receipt-validator>
@@ -138,7 +140,7 @@ in the end I could make a purchase using not verified test account.
 4. [Validating Receipts With the App Store](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html)
 5. [Receipt Fields](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html)
 
-#### obtain a shared secret
+### obtain a shared secret
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
@@ -146,7 +148,8 @@ in the end I could make a purchase using not verified test account.
 shared secret is used to validate receipts with `iap-receipt-validator`
 npm package.
 
-### test subscription
+test subscription
+-----------------
 
 subscriptions in test environment:
 
@@ -160,16 +163,17 @@ subscriptions in test environment:
 > fashion - that is subscription periods are shortened and renew only 5 times
 > and not controlled through the subscription management screen.
 
-#### testing on real device
+### testing on real device
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
 
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
 
-### prepare release with subscription
+prepare release with subscription
+---------------------------------
 
-#### add new IAP when submitting new app version
+### add new IAP when submitting new app version
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases (left menu)`
@@ -180,128 +184,3 @@ the only action allowed from inside emulator is loading products.
 > Once your binary has been uploaded and your first in-app purchase has
 > been submitted for review, additional in-app purchases can be submitted
 > using the table below.
-
-Android
--------
-
-### implement subscription in application
-
-1. <https://github.com/idehub/react-native-billing>
-
-### test subscription
-
-1. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
-
-subscriptions in test environment:
-
-- have shortened periods (say, 1 month → 5 minutes)
-- renew 6 times only (cancelled afterwards)
-
-#### testing with static responses
-
-1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
-2. <https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static>
-
-> You do not need to list the reserved products in your application's product list.
-> Google Play already knows about the reserved product IDs. Also, you do not need
-> to upload your application to the Play Console to perform static response tests
-> with the reserved product IDs. You can simply install your application on a device,
-> log into the device, and make billing requests using the reserved product IDs.
-
-reserved product IDs:
-
-- android.test.purchased
-- android.test.canceled
-- android.test.refunded
-- android.test.item_unavailable
-
-##### set license key to `null`
-
-1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
-
-use `null` license key when testing with static responses.
-
-_android/app/src/main/res/values/strings.xml_:
-
-```diff
-  <resources>
-      <string name="app_name">Хоккей</string>
-+     <string name="RNB_GOOGLE_PLAY_LICENSE_KEY" />
-  </resources>
-```
-
-however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
-altogether - or else you'll get `String resource ID #0x0` error.
-
-##### Error: Authentication is required. You need to sign in to your Google Account
-
-1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>
-
-I got this error when I tried to test subscriptions with static responses.
-
-in the end I did factory data reset to get rid of the error - though it might
-be sufficient just to remove/add Google account (see also other advice in the
-article mentioned).
-
-##### Error: This version of the application is not configured for billing through Google Play
-
-I got this error when I tried to subscribe using reserved product ID
-(`android.test.purchased`).
-
-it has turned that you can only purchase when testing with static responses but
-not subscribe. all other subscription related methods from `react-native-billing`
-package (`isSubscribed`, `getSubscriptionDetails`) are working as expected (that
-is they return relevant static responses - for subscriptions, not for purchases).
-
-<https://github.com/idehub/react-native-billing#testing-with-your-own-in-app-products>:
-
-> Testing with static responses is limited, because you are only able to test
-> the purchase function.
-
-##### about error codes
-
-1. <https://developer.android.com/google/play/billing/billing_reference.html>
-2. <https://github.com/idehub/react-native-billing/issues/17#issuecomment-228036758>
-3. <https://github.com/anjlab/android-inapp-billing-v3/blob/master/library/src/main/java/com/anjlab/android/iab/v3/Constants.java>
-4. <https://github.com/idehub/react-native-billing/blob/master/android/src/main/java/com/idehub/Billing/InAppBillingBridge.java>
-
-- standard response codes from Google are 0-8
-- `react-native-billing` is wrapping `android-inapp-billing-v3` library
-  which may return its own error codes (> 100)
-
-in both cases `react-native-billing` rejects promise with the same error
-message containing returned error code:
-
-```
-Purchase or subscribe failed with error: <error_code>
-```
-
-#### testing on real device
-
-see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
-
-it's required to run application on real device even for testing:
-
-> Error: InAppBilling is not available. InAppBilling will not work/test on
-> an emulator, only a physical Android device.
-
-### prepare release with subscription
-
-#### include license key in application build
-
-1. <https://support.google.com/googleplay/android-developer/answer/186113?hl=en>
-
-> Licensing allows you to prevent unauthorized distribution of your app.
-> It can also be used to verify in-app billing purchases.
-
-| Google Play Console: `All applications` → `<my_app>`
-| `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
-
-_android/app/src/main/res/values/strings.xml_:
-
-```diff
-  <resources>
-      <string name="app_name">Хоккей</string>
-+     <string name="RNB_GOOGLE_PLAY_LICENSE_KEY">YOUR_GOOGLE_PLAY_LICENSE_KEY_HERE</string>
-  </resources>
-```

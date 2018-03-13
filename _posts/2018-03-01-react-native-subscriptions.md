@@ -216,6 +216,16 @@ _android/app/src/main/res/values/strings.xml_:
 however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
 altogether - or else you'll get `String resource ID #0x0` error.
 
+#### Error: Authentication is required. You need to sign in to your Google Account
+
+1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>
+
+I got this error when tried to test subscriptions with static responses.
+
+in the end I did factory data reset to get rid of this error - though it might
+be sufficient just to remove/add Google account (see also other advice in the
+article mentioned).
+
 #### run application on real device
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).

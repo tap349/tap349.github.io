@@ -160,7 +160,7 @@ subscriptions in test environment:
 > fashion - that is subscription periods are shortened and renew only 5 times
 > and not controlled through the subscription management screen.
 
-#### run application on real device
+#### testing on real device
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
 
@@ -197,12 +197,18 @@ subscriptions in test environment:
 - have shortened periods (say, 1 month → 5 minutes)
 - renew 6 times only (cancelled afterwards)
 
-#### set license key to `null`
+#### testing with static responses
 
 1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
 
-use `null` license key when testing with static responses
-(using reserved product IDs - `android.test.purchased`, etc.).
+testing with static responses implies using reserved product IDs -
+`android.test.purchased`, etc.
+
+##### set license key to `null`
+
+1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
+
+use `null` license key when testing with static responses.
 
 _android/app/src/main/res/values/strings.xml_:
 
@@ -216,19 +222,19 @@ _android/app/src/main/res/values/strings.xml_:
 however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
 altogether - or else you'll get `String resource ID #0x0` error.
 
-#### Error: Authentication is required. You need to sign in to your Google Account
+##### Error: Authentication is required. You need to sign in to your Google Account
 
 1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>
 
-I got this error when tried to test subscriptions with static responses.
+I got this error when I tried to test subscriptions with static responses.
 
-in the end I did factory data reset to get rid of this error - though it might
+in the end I did factory data reset to get rid of the error - though it might
 be sufficient just to remove/add Google account (see also other advice in the
 article mentioned).
 
-#### Error: This version of the application is not configured for billing through Google Play
+##### Error: This version of the application is not configured for billing through Google Play
 
-I got this error when tried to subscribe using reserved product ID
+I got this error when I tried to subscribe using reserved product ID
 (`android.test.purchased`).
 
 it has turned that you can only purchase when testing with static responses but
@@ -236,7 +242,7 @@ not subscribe. all other subscription related methods from `react-native-billing
 package (`isSubscribed`, `getSubscriptionDetails`) are working as expected (that
 is they return relevant static responses - for subscriptions, not for purchases).
 
-#### run application on real device
+#### testing on real device
 
 see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
 

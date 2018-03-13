@@ -200,9 +200,20 @@ subscriptions in test environment:
 #### testing with static responses
 
 1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
+2. <https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static>
 
-testing with static responses implies using reserved product IDs -
-`android.test.purchased`, etc.
+> You do not need to list the reserved products in your application's product list.
+> Google Play already knows about the reserved product IDs. Also, you do not need
+> to upload your application to the Play Console to perform static response tests
+> with the reserved product IDs. You can simply install your application on a device,
+> log into the device, and make billing requests using the reserved product IDs.
+
+reserved product IDs:
+
+- android.test.purchased
+- android.test.canceled
+- android.test.refunded
+- android.test.item_unavailable
 
 ##### set license key to `null`
 

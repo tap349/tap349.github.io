@@ -18,8 +18,8 @@ categories: [react-native, android]
 
 IAB - In-app Billing
 
-implement subscription in application
--------------------------------------
+implement subscriptions in application
+--------------------------------------
 
 1. <https://github.com/idehub/react-native-billing>
 
@@ -85,7 +85,7 @@ _android/app/src/main/AndroidManifest.xml_:
 test subscription on real device
 --------------------------------
 
-1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
+1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 2. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
 3. <http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>
 4. <https://www.youtube.com/watch?v=XMrUBC4Xgl8>
@@ -100,7 +100,7 @@ subscriptions in test environment:
 - have shortened periods (say, 1 month → 5 minutes)
 - renew 6 times only (cancelled afterwards)
 
-### testing with static responses
+### test with static responses
 
 1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
 2. <https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static>
@@ -165,9 +165,73 @@ is they return relevant static responses - for subscription, not for purchase).
 
 > Subscriptions can't be tested using static responses...
 
-### testing with real subscriptions
+### test with real subscriptions
+
+1. <https://github.com/idehub/react-native-billing#testing-with-your-own-in-app-products>
+
+#### create signed APK
+
+1. [React Native - Releases]({% post_url 2017-12-26-react-native-releases %})
+2. <https://facebook.github.io/react-native/docs/signed-apk-android.html>
+
+assemble production release as usual:
+
+- change environment to `production`
+- change version number and increment build number
+
+  NOTE: you cannot upload APK with the same build number twice.
+
+- assemble release
+
+  ```sh
+  $ build_android_release='cd android && ./gradlew assembleRelease; cd ..'
+  $ build_android_release
+  ```
+
+#### upload APK to alpha channel
+
+NOTE: it's required to upload APK with IAB permission to be able to set up
+      subscription.
+
+| Google Play Console: `All applications` → `<my_app>`
+| `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) -> `EDIT RELEASE` (button)
+
+- `BROWSE_FILES` (button) → add new APK
+- `Release name` (input): `3.14.alpha` (for example)
+- `What's new in this release?` (textarea): `Добавили подписку` (it's for alpha only)
+- `SAVE` (button) → `REVIEW` (button)
+
+DON'T rollout release to alpha now - we need to set up subscription and add
+testers first.
+
+#### add pricing template
 
 TODO
+
+#### set up subscription
+
+NOTE: you cannot set up subscription unless you upload APK with IAB permission
+      (it's enough just to upload APK to alpha channel without publishing it).
+
+| Google Play Console: `All applications` → `<my_app>`
+| `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button)
+
+TODO (import existing pricing template)
+
+#### add testers for release
+
+release review summary when trying to rollout release to alpha without testers:
+
+> This release will not be available to any users because you haven't specified
+> any testers for it yet. Tip: configure your testing track to ensure that the
+> release is available to your testers.
+
+#### configure alpha channel
+
+| Google Play Console: `All applications` → `<my_app>`
+| `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button)
+
+TODO (make new testers active)
 
 ### subscription error codes
 

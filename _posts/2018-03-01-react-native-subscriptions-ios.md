@@ -28,8 +28,8 @@ create in-app purchase (IAP)
 
 > Create Auto-Renewable Subscription
 
-- `Reference Name`: `No Ads Monthly`
-- `Product ID`: `<bundle_id>.sub.noads.monthly`
+- `Reference Name` (input): `No Ads Monthly`
+- `Product ID` (input): `<bundle_id>.sub.noads.monthly`
 
   `<bundle_id>` is the value of `PRODUCT_BUNDLE_IDENTIFIER` property
   in _project.pbxproj_ - `com.iceperk.iceperkapp` for our application.
@@ -40,7 +40,7 @@ create in-app purchase (IAP)
 > Create Subscription Group
 
 - [x] `Create New Subscription Group`
-  - `Subscription Group Reference Name`: `No Ads`
+  - `Subscription Group Reference Name` (input): `No Ads`
 
     must be more general than subscription reference name.
 
@@ -51,13 +51,13 @@ configure IAP
 | `In-App Purchases` (left menu) → `<subscription>` (link)
 
 - [x] `Cleared for Sale`
-- `Subscription Duration` → `1 Month`
+- `Subscription Duration` (combobox): `1 Month`
 - `Subscription Prices ⨁`
-  - `Currency`: `RUB - Russian Ruble`
-  - `Price`: `149 р.`
+  - `Currency` (combobox): `RUB - Russian Ruble`
+  - `Price` (combobox): `149 р.`
 - `Localizations ⨁` → `Russian`
-  - `Subscription Display Name`: `Скрытие рекламы на месяц`
-  - `Description`: don't add so far (maybe not required)
+  - `Subscription Display Name` (input): `Скрытие рекламы на месяц`
+  - `Description` (input): don't add so far (maybe not required)
 
 <https://developer.apple.com/library/content/technotes/tn2259/_index.html#//apple_ref/doc/uid/DTS40009578-CH1-ITUNES_CONNECT>:
 
@@ -78,7 +78,7 @@ it's required to add localization for subscription group as well:
 > you must add at least one localization to your subscription group.
 
 - `Localizations ⨁` → `Russian`
-  - `Subscription Group Display Name`: `Подписки`
+  - `Subscription Group Display Name` (input): `Подписки`
   - `App Name Display Name`: [x] Use App Name
 
 create sandbox tester (test user)
@@ -131,8 +131,8 @@ IDK if it matters or not but I signed in to iCloud with this account
 
 in the end I could make a purchase using not verified test account.
 
-implement subscription in application
--------------------------------------
+implement subscriptions in application
+--------------------------------------
 
 1. <https://github.com/chirag04/react-native-in-app-utils>
 2. <https://github.com/sibelius/iap-receipt-validator>

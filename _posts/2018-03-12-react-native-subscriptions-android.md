@@ -20,6 +20,10 @@ implement subscription in application
 
 1. <https://github.com/idehub/react-native-billing>
 
+<https://developer.android.com/google/play/billing/api.html#subs>:
+
+> Unlike managed products, subscriptions cannot be consumed.
+
 test subscription
 -----------------
 
@@ -52,6 +56,7 @@ reserved product IDs:
 #### set license key to `null`
 
 1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
+2. <https://www.youtube.com/watch?v=XMrUBC4Xgl8>
 
 use `null` license key when testing with static responses.
 
@@ -66,6 +71,20 @@ _android/app/src/main/res/values/strings.xml_:
 
 however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
 altogether - or else you'll get `String resource ID #0x0` error.
+
+alternatively it's possible to set license key programmatically:
+
+```javascript
+import Env from 'app/services/Env';
+
+if (Env.isDevelopment()) {
+  // pass license key
+  new InAppBilling(null);
+}
+```
+
+but still I prefer to do it in _strings.xml_ because even in development
+you don't always test with static responses.
 
 #### Error: Authentication is required. You need to sign in to your Google Account
 

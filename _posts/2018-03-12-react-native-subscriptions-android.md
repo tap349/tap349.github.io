@@ -14,6 +14,7 @@ categories: [react-native, android]
 <hr>
 
 1. <https://developer.android.com/google/play/billing/index.html>
+2. <https://developer.android.com/google/play/billing/billing_subscriptions.html>
 
 IAB - In-app Billing
 

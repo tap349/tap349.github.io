@@ -13,7 +13,8 @@ categories: [react-native, android]
 {:toc}
 <hr>
 
-## installation
+installation
+------------
 
 1. <https://facebook.github.io/react-native/docs/getting-started.html>
 2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
@@ -154,7 +155,8 @@ Hax ram_size 0x40000000
 HAX is working and emulator runs in fast virt mode.
 ```
 
-## running
+running
+-------
 
 NOTE: emulator for Android is called Android Emulator
       (will be referred to as just emulator for the sake of consistency).
@@ -197,7 +199,8 @@ this command:
 
 the first run might take a while since RN will build the whole Android project.
 
-## configuration
+configuration
+-------------
 
 ### Dvorak keyboard layout
 
@@ -245,7 +248,8 @@ or else it's possible to enable hardware keyboard inside emulator OS:
 see `Accessibility` section of
 [macOS configuration]({% post_url 2016-10-03-macos-configuration %}).
 
-## tips
+tips
+----
 
 ### change screen resolution (scale) in emulator
 
@@ -300,7 +304,8 @@ $ adb shell pm clear com.iceperkapp
 Success
 ```
 
-## debugging
+debugging
+---------
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>
 
@@ -391,7 +396,24 @@ development machine).
 
 => touchable areas are still marked with dotted line
 
-## troubleshooting
+### run application in `release` mode
+
+1. <https://facebook.github.io/react-native/docs/signed-apk-android.html#testing-the-release-build-of-your-app>
+
+this can be useful, say, to debug production release crashes:
+
+```sh
+$ react-native run-android --variant=release
+$ react-native log-android
+```
+
+NOTE: it's not required to run `yarn start`:
+
+> You can kill any running packager instances, all your framework and
+> JavaScript code is bundled in the APK's assets.
+
+troubleshooting
+---------------
 
 NOTE: all emulator options are omitted for brevity in examples below.
 

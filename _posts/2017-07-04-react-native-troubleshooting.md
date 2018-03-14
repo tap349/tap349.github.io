@@ -767,13 +767,8 @@ and reinstalling all node modules fixed the issue.
 
 replace `View.propTypes.style` with `ViewPropTypes.style` in all components.
 
-to debug this and similar problems run application in `release` mode and
-monitor device system log for errors:
-
-```sh
-$ react-native run-android --variant=release
-$ react-native log-android
-```
+see also [React Native - Android]({% post_url 2017-05-24-react-native-android %})
+(`debugging` section) on how to debug similar problems on Android.
 
 Could not determine java version from '9.0.4'
 ---------------------------------------------

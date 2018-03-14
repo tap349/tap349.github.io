@@ -148,8 +148,13 @@ implement subscription in application
 shared secret is used to validate receipts with `iap-receipt-validator`
 npm package.
 
-test subscription
------------------
+test subscription on real device
+--------------------------------
+
+1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
+
+it's required to run application on real device to make purchases:
+the only action allowed from inside emulator is loading products.
 
 subscriptions in test environment:
 
@@ -162,13 +167,6 @@ subscriptions in test environment:
 > the sandbox environment handles auto-renewing subscriptions in an automated
 > fashion - that is subscription periods are shortened and renew only 5 times
 > and not controlled through the subscription management screen.
-
-### testing on real device
-
-see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
-
-it's required to run application on real device to make purchases:
-the only action allowed from inside emulator is loading products.
 
 prepare release with subscription
 ---------------------------------

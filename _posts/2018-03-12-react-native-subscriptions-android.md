@@ -15,6 +15,8 @@ categories: [react-native, android]
 
 1. <https://developer.android.com/google/play/billing/index.html>
 
+IAB - In-app Billing
+
 implement subscription in application
 -------------------------------------
 
@@ -24,11 +26,70 @@ implement subscription in application
 
 > Unlike managed products, subscriptions cannot be consumed.
 
-test subscription
------------------
+### include license key in application build
 
-1. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
-2. <http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>
+<https://developer.android.com/google/play/billing/billing_integrate.html#billing-security>:
+
+> To help ensure the integrity of the transaction information that is sent to
+> your application, Google Play signs the JSON string that contains the response
+> data for a purchase order. Google Play uses the private key that is associated
+> with your application in the Play Console to create this signature. The Play
+> Console generates an RSA key pair for each application.
+>
+> To find the public key portion of this key pair, open your application's
+> details in the Play Console, click 'Services & APIs', and review the field
+> titled 'Your License Key for This Application'.
+
+Google Play Console:
+
+> Licensing allows you to prevent unauthorized distribution of your app.
+> It can also be used to verify in-app billing purchases.
+
+<https://support.google.com/googleplay/android-developer/answer/186113?hl=en>:
+
+| Google Play Console: `All applications` → `<my_app>`
+| `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
+
+_android/app/src/main/res/values/strings.xml_:
+
+```diff
+  <resources>
+      <string name="app_name">Хоккей</string>
++     <string name="RNB_GOOGLE_PLAY_LICENSE_KEY">YOUR_GOOGLE_PLAY_LICENSE_KEY_HERE</string>
+  </resources>
+```
+
+### declare IAB permission
+
+<https://developer.android.com/google/play/billing/billing_integrate.html#billing-permission>:
+
+> In-app billing relies on the Google Play application, which handles all of the
+> communication between your application and the Google Play server. To use the
+> Google Play application, your application must request the proper permission.
+>
+> If your application does not declare the In-app Billing permission, but attempts
+> to send billing requests, Google Play refuses the requests and responds with an error.
+
+_android/app/src/main/AndroidManifest.xml_:
+
+```diff
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
++ <uses-permission android:name="com.android.vending.BILLING" />
+  <uses-feature android:name="android.hardware.camera" android:required="false"/>
+```
+
+test subscription on real device
+--------------------------------
+
+1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
+2. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
+3. <http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>
+4. <https://www.youtube.com/watch?v=XMrUBC4Xgl8>
+
+emulator (app):
+
+> Error: InAppBilling is not available. InAppBilling will not work/test on
+> an emulator, only a physical Android device.
 
 subscriptions in test environment:
 
@@ -53,10 +114,9 @@ reserved product IDs:
 - android.test.refunded
 - android.test.item_unavailable
 
-#### set license key to `null`
+#### set license key to `null` temporarily
 
 1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
-2. <https://www.youtube.com/watch?v=XMrUBC4Xgl8>
 
 use `null` license key when testing with static responses.
 
@@ -101,7 +161,11 @@ is they return relevant static responses - for subscription, not for purchase).
 
 > Subscriptions can't be tested using static responses...
 
-#### about error codes
+### testing with real subscriptions
+
+TODO
+
+### subscription error codes
 
 1. <https://developer.android.com/google/play/billing/billing_reference.html>
 2. <https://github.com/idehub/react-native-billing/issues/17#issuecomment-228036758>
@@ -109,43 +173,16 @@ is they return relevant static responses - for subscription, not for purchase).
 4. <https://github.com/idehub/react-native-billing/blob/master/android/src/main/java/com/idehub/Billing/InAppBillingBridge.java>
 
 - standard response codes from Google are 0-8
-- `react-native-billing` is wrapping `android-inapp-billing-v3` library
-  which may return its own error codes (> 100)
+- `react-native-billing` is wrapping `android-inapp-billing-v3` library which
+  may return its own error codes (> 100)
 
-in both cases `react-native-billing` rejects promise with the same error
-message containing returned error code:
+in both cases `react-native-billing` rejects promise with this error message:
 
 ```
 Purchase or subscribe failed with error: <error_code>
 ```
 
-### testing on real device
-
-see [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %}).
-
-it's required to run application on real device even for testing:
-
-> Error: InAppBilling is not available. InAppBilling will not work/test on
-> an emulator, only a physical Android device.
-
 prepare release with subscription
 ---------------------------------
 
-### include license key in application build
-
-1. <https://support.google.com/googleplay/android-developer/answer/186113?hl=en>
-
-> Licensing allows you to prevent unauthorized distribution of your app.
-> It can also be used to verify in-app billing purchases.
-
-| Google Play Console: `All applications` → `<my_app>`
-| `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
-
-_android/app/src/main/res/values/strings.xml_:
-
-```diff
-  <resources>
-      <string name="app_name">Хоккей</string>
-+     <string name="RNB_GOOGLE_PLAY_LICENSE_KEY">YOUR_GOOGLE_PLAY_LICENSE_KEY_HERE</string>
-  </resources>
-```
+TODO

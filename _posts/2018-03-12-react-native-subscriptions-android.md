@@ -39,6 +39,9 @@ implement subscription in application
 > To find the public key portion of this key pair, open your application's
 > details in the Play Console, click 'Services & APIs', and review the field
 > titled 'Your License Key for This Application'.
+>
+> When your application receives this signed response, you can use the public
+> key portion of your RSA key pair to verify the signature.
 
 Google Play Console:
 

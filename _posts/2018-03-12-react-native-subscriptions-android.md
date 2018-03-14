@@ -206,6 +206,8 @@ testers first.
 
 #### add pricing template
 
+1. <https://support.google.com/googleplay/android-developer/answer/138000?hl=en&ref_topic=3452890>
+
 | Google Play Console: `Settings` (left menu)
 | `Pricing templates` (left menu) → `NEW PRICING TEMPLATE` (button)
 
@@ -252,6 +254,8 @@ release review summary when trying to rollout release to alpha without testers:
 > This release will not be available to any users because you haven't specified
 > any testers for it yet. Tip: configure your testing track to ensure that the
 > release is available to your testers.
+
+TODO (add testers in `Manage testers` or in `Account details`?)
 
 #### configure alpha channel
 

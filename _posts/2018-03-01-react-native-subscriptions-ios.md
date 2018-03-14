@@ -16,8 +16,10 @@ categories: [react-native, ios]
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
-create in-app purchase (IAP)
-----------------------------
+add subscription in iTunes Connect
+----------------------------------
+
+### create in-app purchase (IAP)
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `In-App Purchases ⨁`
@@ -44,8 +46,7 @@ create in-app purchase (IAP)
 
     must be more general than subscription reference name.
 
-configure IAP
--------------
+### configure IAP
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `<subscription>` (link)
@@ -57,7 +58,7 @@ configure IAP
   - `Price` (combobox): `149 р.`
 - `Localizations ⨁` → `Russian`
   - `Subscription Display Name` (input): `Скрытие рекламы на месяц`
-  - `Description` (input): don't add so far (maybe not required)
+  - `Description` (input): `Полное отключение рекламы в приложении` (not required)
 
 <https://developer.apple.com/library/content/technotes/tn2259/_index.html#//apple_ref/doc/uid/DTS40009578-CH1-ITUNES_CONNECT>:
 
@@ -66,8 +67,7 @@ configure IAP
 > Upload a a screenshot of your in-app purchase product once you
 > are done testing it and ready to upload it for review.
 
-configure subscription group
-----------------------------
+### configure subscription group
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
 | `<subscription_group>` (link)
@@ -80,56 +80,6 @@ it's required to add localization for subscription group as well:
 - `Localizations ⨁` → `Russian`
   - `Subscription Group Display Name` (input): `Подписки`
   - `App Name Display Name`: [x] Use App Name
-
-create sandbox tester (test user)
----------------------------------
-
-1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
-
-| iTunes Connect: `My Apps` → `Users and Roles` → `Sandbox Testers` (tab)
-| `Testers ⨁` (link)
-
-NOTE: test account == sandbox tester account.
-
-tips and notes regarding test account:
-
-- new sandbox tester shouldn't have an existing Apple ID
-
-  I got `That email address is already associated with an existing Apple ID`
-  error when I tried to add myself as a sandbox tester - Apple ID is created
-  for each new sandox tester right after it's added here.
-
-- sign out of Apple ID on iPhone before testing subscription
-
-  it's also important not to sign in as a sandbox tester in `Settings` but
-  in application only (when prompted before making a purchase) - a sandbox
-  tester account is not a fully functional one and tester's Apple ID cannot
-  be used to access iTunes Store or App Store.
-
-  occasionally `Apple ID Verification` alert dialog might appear asking to
-  enter password for test account in `Settings` - it's safe to ignore it and
-  press `Not Now` button all the time.
-
-### about verification of sandbox tester email
-
-generally speaking it's necessary to verify new test account by following
-the link sent to specified email:
-
-> You must validate your e-mail, or any purchases you make will silently fail.
-
-but I couldn't verify account of a new sandbox tester - after clicking
-the link email verification page kept on loading forever with an activity
-indicator in the middle of the screen and JS errors in Chrome Console:
-
-```
-bundle.js:46270 Refused to create a worker from 'blob:https://id.apple.com/...'
-because it violates the following Content Security Policy directive...
-```
-
-IDK if it matters or not but I signed in to iCloud with this account
-(in browser) and completed registration by adding 3 secret questions.
-
-in the end I could make a purchase using not verified test account.
 
 implement subscriptions in application
 --------------------------------------
@@ -167,6 +117,55 @@ subscriptions in test environment:
 > the sandbox environment handles auto-renewing subscriptions in an automated
 > fashion - that is subscription periods are shortened and renew only 5 times
 > and not controlled through the subscription management screen.
+
+### create sandbox tester (test user)
+
+1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
+
+| iTunes Connect: `My Apps` → `Users and Roles` → `Sandbox Testers` (tab)
+| `Testers ⨁` (link)
+
+NOTE: test account == sandbox tester account.
+
+tips and notes regarding test account:
+
+- new sandbox tester shouldn't have an existing Apple ID
+
+  I got `That email address is already associated with an existing Apple ID`
+  error when I tried to add myself as a sandbox tester - Apple ID is created
+  for each new sandox tester right after it's added here.
+
+- sign out of Apple ID on iPhone before testing subscription
+
+  it's also important not to sign in as a sandbox tester in `Settings` but
+  in application only (when prompted before making a purchase) - a sandbox
+  tester account is not a fully functional one and tester's Apple ID cannot
+  be used to access iTunes Store or App Store.
+
+  occasionally `Apple ID Verification` alert dialog might appear asking to
+  enter password for test account in `Settings` - it's safe to ignore it and
+  press `Not Now` button all the time.
+
+#### about verification of sandbox tester email
+
+generally speaking it's necessary to verify new test account by following
+the link sent to specified email:
+
+> You must validate your e-mail, or any purchases you make will silently fail.
+
+but I couldn't verify account of a new sandbox tester - after clicking
+the link email verification page kept on loading forever with an activity
+indicator in the middle of the screen and JS errors in Chrome Console:
+
+```
+bundle.js:46270 Refused to create a worker from 'blob:https://id.apple.com/...'
+because it violates the following Content Security Policy directive...
+```
+
+IDK if it matters or not but I signed in to iCloud with this account
+(in browser) and completed registration by adding 3 secret questions.
+
+in the end I could make a purchase using not verified test account.
 
 prepare release with subscription
 ---------------------------------

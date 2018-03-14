@@ -18,6 +18,106 @@ categories: [react-native, android]
 
 IAB - In-app Billing
 
+add subscription in Google Play Console
+---------------------------------------
+
+### create signed APK
+
+1. [React Native - Releases]({% post_url 2017-12-26-react-native-releases %})
+2. <https://facebook.github.io/react-native/docs/signed-apk-android.html>
+
+assemble production release as usual:
+
+- change environment to `production`
+- change version number and increment build number
+
+  NOTE: you cannot upload APK with the same build number twice.
+
+- assemble release
+
+  ```sh
+  $ build_android_release='cd android && ./gradlew assembleRelease; cd ..'
+  $ build_android_release
+  ```
+
+### upload APK to alpha channel
+
+<https://developer.android.com/google/play/billing/billing_admin.html#billing-list-setup>:
+
+> The link to the In-app Products page appears only if you have a
+> Google payments merchant account and the app's manifest includes
+> the com.android.vending.BILLING permission.
+
+NOTE: in fact `In-app products` page is available even when application with
+      IAB permission is not uploaded but there are no `MANAGED PRODUCTS` and
+      `SUBSCRIPTIONS` tabs to manage corresponding items in product list.
+
+=> upload APK with IAB permission to alpha channel to be able to set up
+subscription (actually upload APK anywhere - alpha channel is just the
+safest option).
+
+at the same time it's not required to publish (rollout) application - you
+can both set up subscription and test it on real device without publishing
+(see `test with real subscriptions` section).
+
+| Google Play Console: `All applications` → `<my_app>`
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `EDIT RELEASE` (button)
+
+- `BROWSE_FILES` (button) → add new APK
+- `Release name` (input): `3.14.alpha` (for example)
+- `What's new in this release?` (textarea): `Добавили подписку` (it's for alpha only)
+- `SAVE` (button) → `REVIEW` (button)
+
+### add pricing template
+
+1. <https://support.google.com/googleplay/android-developer/answer/138000?hl=en&ref_topic=3452890>
+
+| Google Play Console: `Settings` (left menu)
+| `Pricing templates` (left menu) → `NEW PRICING TEMPLATE` (button)
+
+- `Name` (input): `Подписка на месяц`
+- `Price` (input): `149`
+- `Tax`: [x] `Add applicable tax on top of price`
+- `SAVE` (button)
+
+about `Add applicable tax on top of price` tax option:
+
+> Local tax is added in addition to set price in select countries. Local
+> prices are generated using exchange rates and local pricing patterns.
+> Tax is only added in countries with set tax rates.
+
+=> EUR 2.09 (~ RUB 149) becomes EUR 2.49 (~ RUB 179).
+
+### set up subscription (add subscription item to product list)
+
+1. <https://developer.android.com/google/play/billing/billing_admin.html#billing-form-add>
+
+NOTE: you can't set up subscription until you upload APK with IAB permission
+      (see `upload APK to alpha channel` section).
+
+| Google Play Console: `All applications` → `<my_app>`
+| `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button)
+
+- `Product ID` (input): `com.iceperk.iceperkapp.sub.noads.monthly`
+- `Title` (input): `Скрытие рекламы на месяц`
+- `Description` (input): `Полное отключение рекламы в приложении`
+- `Status` (radiobutton): `ACTIVE`
+
+  setting `ACTIVE` status means subscription is published (activated) after
+  it's created - once subscription is published, it can't be deactivated or
+  deleted, neither can you modify the price or billing period afterwards.
+
+  you can opt to publish subscription later but still it must be done
+  eventually - no account (even test one) can purchase a subscription
+  until it's published (see `test with real subscriptions` section).
+
+- `Pricing` (combobox): `Import from pricing template` →
+  `RUB 149.00 - Подписка на месяц` → `IMPORT` (button)
+- `Billing period` (combobox): `Monthly`
+- `Free trial period` (input): empty (will be set to `0`)
+- `Grace period` (radiobutton): `7 DAYS` (default)
+- `SAVE` (button)
+
 implement subscriptions in application
 --------------------------------------
 
@@ -49,7 +149,8 @@ Google Play Console:
 > Licensing allows you to prevent unauthorized distribution of your app.
 > It can also be used to verify in-app billing purchases.
 
-<https://support.google.com/googleplay/android-developer/answer/186113?hl=en>:
+1. <https://support.google.com/googleplay/android-developer/answer/186113?hl=en>
+2. <https://developer.android.com/google/play/billing/billing_admin.html#license_key>
 
 | Google Play Console: `All applications` → `<my_app>`
 | `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
@@ -101,6 +202,8 @@ subscriptions in test environment:
 - renew 6 times only (cancelled afterwards)
 
 ### test with static responses
+
+YOU DON'T NEED TO TOUCH GOOGLE PLAY CONSOLE AT ALL TO TEST WITH STATIC RESPONSES.
 
 1. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
 2. <https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static>
@@ -169,100 +272,77 @@ is they return relevant static responses - for subscription, not for purchase).
 
 1. <https://github.com/idehub/react-native-billing#testing-with-your-own-in-app-products>
 
-#### create signed APK
+it's required to create and publish a real subscription in iTunes Connect as
+described above before you proceed (application itself can stay unpublished).
 
-1. [React Native - Releases]({% post_url 2017-12-26-react-native-releases %})
-2. <https://facebook.github.io/react-native/docs/signed-apk-android.html>
+<https://developer.android.com/google/play/billing/billing_admin.html#billing-form-add>:
 
-assemble production release as usual:
+> To be visible to a user during checkout, an item's publishing state must be
+> set to Active, and the item's app must be published on Google Play.
+>
+> If you're using a test account, users can see active items within unpublished
+> apps, as well.
 
-- change environment to `production`
-- change version number and increment build number
+<https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-test>:
 
-  NOTE: you cannot upload APK with the same build number twice.
+> A test account can purchase an item in your product list only if the item is
+> published.
 
-- assemble release
+#### add license test accounts
 
-  ```sh
-  $ build_android_release='cd android && ./gradlew assembleRelease; cd ..'
-  $ build_android_release
-  ```
-
-#### upload APK to alpha channel
-
-NOTE: it's required to upload APK with IAB permission to be able to set up
-      subscription.
-
-| Google Play Console: `All applications` → `<my_app>`
-| `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) -> `EDIT RELEASE` (button)
-
-- `BROWSE_FILES` (button) → add new APK
-- `Release name` (input): `3.14.alpha` (for example)
-- `What's new in this release?` (textarea): `Добавили подписку` (it's for alpha only)
-- `SAVE` (button) → `REVIEW` (button)
-
-DON'T rollout release to alpha now - we need to set up subscription and add
-testers first.
-
-#### add pricing template
-
-1. <https://support.google.com/googleplay/android-developer/answer/138000?hl=en&ref_topic=3452890>
+1. <https://developer.android.com/google/play/billing/billing_testing.html#setup>
+2. <https://developer.android.com/google/play/billing/billing_admin.html#billing-testing-setup>
 
 | Google Play Console: `Settings` (left menu)
-| `Pricing templates` (left menu) → `NEW PRICING TEMPLATE` (button)
+| `Account details` (left menu) → `License Testing` (section)
 
-- `Name` (input): `Подписка на месяц`
-- `Price` (input): `149`
-- `Tax`: [x] `Add applicable tax on top of price`
-- `SAVE` (button)
+- `Gmail accounts with testing access` (textarea): `*.tap349@gmail.com`
 
-about `Add applicable tax on top of price` tax option:
+NOTE: license test account must be a primary account on real device!
 
-> Local tax is added in addition to set price in select countries. Local
-> prices are generated using exchange rates and local pricing patterns.
-> Tax is only added in countries with set tax rates.
+<https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-test>:
 
-=> EUR 2.09 (~ RUB 149) becomes EUR 2.49 (~ RUB 179).
+> The only way to change the primary account on a device is to do a factory
+> reset, making sure you log on with your primary account first.
 
-#### set up subscription
+#### run application on real device
 
-NOTE: you cannot set up subscription unless you upload APK with IAB permission
-      (it's enough just to upload APK to alpha channel without publishing it).
+1. <https://developer.android.com/studio/build/building-cmdline.html#RunningOnDevice>
 
-| Google Play Console: `All applications` → `<my_app>`
-| `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button)
+```sh
+$ adb uninstall com.iceperkapp
+$ adb -d install android/app/build/outputs/apk/app-release.apk
+```
 
-- `Product ID` (input): `com.iceperk.iceperkapp.sub.noads.monthly`
-- `Title` (input): `Скрытие рекламы на месяц`
-- `Description` (input): `Полное отключение рекламы в приложении`
-- `Status`: `INACTIVE`
-- `Pricing` (combobox): `Import from pricing template` → `RUB 149.00 - Подписка на месяц` → `IMPORT` (button)
-- `Billing period` (combobox): `Monthly`
-- `Free trial period` (input): empty (will be set to `0`)
-- `Grace period`: `7 DAYS` (default)
-- `SAVE` (button)
+NOTE: package name is `applicationId` from _android/app/build.gradle_.
 
-NOTE: don't make subscription active so far:
+it's necessary to uninstall application from device beforehand
+or else you'll get either `INSTALL_FAILED_DUPLICATE_PERMISSION`
+or `INSTALL_FAILED_ALREADY_EXISTS` error.
 
-> You can’t modify the price and billing period of a subscription afteL
-> it is activated.
+#### [OPTIONAL] publish release to alpha channel
 
-#### add testers for release
+<https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-test>:
 
-release review summary when trying to rollout release to alpha without testers:
+> You can do end-to-end testing of your app by publishing it to an alpha
+> distribution channel. This allows you to publish the app to the Google
+> Play Store, but limit its availability to just the testers you designate.
+
+NOTE: publish release to alpha only if you're planning to start Alpha Testing
+      (either open or closed) - don't publish if you will test application by
+      installing and running it on real device with `adb`.
+
+release review summary when trying to publish release to alpha without testers:
 
 > This release will not be available to any users because you haven't specified
-> any testers for it yet. Tip: configure your testing track to ensure that the
-> release is available to your testers.
+> any testers for it yet.
 
-TODO (add testers in `Manage testers` or in `Account details`?)
-
-#### configure alpha channel
+TODO: add testers in `Manage testers`
 
 | Google Play Console: `All applications` → `<my_app>`
 | `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button)
 
-TODO (make new testers active)
+TODO: make new testers active and publish release to alpha
 
 ### subscription error codes
 

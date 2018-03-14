@@ -72,20 +72,6 @@ _android/app/src/main/res/values/strings.xml_:
 however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
 altogether - or else you'll get `String resource ID #0x0` error.
 
-alternatively it's possible to set license key programmatically:
-
-```javascript
-import Env from 'app/services/Env';
-
-if (Env.isDevelopment()) {
-  // pass license key
-  new InAppBilling(null);
-}
-```
-
-but still I prefer to do it in _strings.xml_ because even in development
-you don't always test with static responses.
-
 #### Error: Authentication is required. You need to sign in to your Google Account
 
 1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>

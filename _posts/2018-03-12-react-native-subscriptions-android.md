@@ -206,7 +206,21 @@ testers first.
 
 #### add pricing template
 
-TODO
+| Google Play Console: `Settings` (left menu)
+| `Pricing templates` (left menu) → `NEW PRICING TEMPLATE` (button)
+
+- `Name` (input): `Подписка на месяц`
+- `Price` (input): `149`
+- `Tax`: [x] `Add applicable tax on top of price`
+- `SAVE` (button)
+
+about `Add applicable tax on top of price` tax option:
+
+> Local tax is added in addition to set price in select countries. Local
+> prices are generated using exchange rates and local pricing patterns.
+> Tax is only added in countries with set tax rates.
+
+=> EUR 2.09 (~ RUB 149) becomes EUR 2.49 (~ RUB 179).
 
 #### set up subscription
 
@@ -216,7 +230,20 @@ NOTE: you cannot set up subscription unless you upload APK with IAB permission
 | Google Play Console: `All applications` → `<my_app>`
 | `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button)
 
-TODO (import existing pricing template)
+- `Product ID` (input): `com.iceperk.iceperkapp.sub.noads.monthly`
+- `Title` (input): `Скрытие рекламы на месяц`
+- `Description` (input): `Полное отключение рекламы в приложении`
+- `Status`: `INACTIVE`
+- `Pricing` (combobox): `Import from pricing template` → `RUB 149.00 - Подписка на месяц` → `IMPORT` (button)
+- `Billing period` (combobox): `Monthly`
+- `Free trial period` (input): empty (will be set to `0`)
+- `Grace period`: `7 DAYS` (default)
+- `SAVE` (button)
+
+NOTE: don't make subscription active so far:
+
+> You can’t modify the price and billing period of a subscription afteL
+> it is activated.
 
 #### add testers for release
 

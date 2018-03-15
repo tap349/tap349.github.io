@@ -757,3 +757,26 @@ if it doesn't help, try to unlink/link failing package manually:
 $ react-native unlink <package_name>
 $ react-native link <package_name>
 ```
+
+### Configuration with name 'default' not found.
+
+```sh
+$ react-native run-android
+...
+Building and installing the app on the device (cd android && ./gradlew installDebug)...
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring project ':app'.
+> Could not resolve all dependencies for configuration ':app:_debugApk'.
+   > Configuration with name 'default' not found.
+```
+
+**solution**
+
+I haven't installed new dependencies after rebase:
+
+```
+$ yarn
+```

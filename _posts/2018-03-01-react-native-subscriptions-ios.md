@@ -16,6 +16,23 @@ categories: [react-native, ios]
 1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 
+implement subscriptions in application
+--------------------------------------
+
+1. <https://github.com/chirag04/react-native-in-app-utils>
+2. <https://github.com/sibelius/iap-receipt-validator>
+3. [Adding In-App Purchase to Your Applications](https://developer.apple.com/library/content/technotes/tn2259/_index.html)
+4. [Validating Receipts With the App Store](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html)
+5. [Receipt Fields](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html)
+
+### obtain a shared secret
+
+| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+| `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
+
+shared secret is used to validate receipts with `iap-receipt-validator`
+npm package.
+
 add subscription in iTunes Connect
 ----------------------------------
 
@@ -80,23 +97,6 @@ it's required to add localization for subscription group as well:
 - `Localizations ⨁` → `Russian`
   - `Subscription Group Display Name` (input): `Подписки`
   - `App Name Display Name`: [x] Use App Name
-
-implement subscriptions in application
---------------------------------------
-
-1. <https://github.com/chirag04/react-native-in-app-utils>
-2. <https://github.com/sibelius/iap-receipt-validator>
-3. [Adding In-App Purchase to Your Applications](https://developer.apple.com/library/content/technotes/tn2259/_index.html)
-4. [Validating Receipts With the App Store](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html)
-5. [Receipt Fields](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html)
-
-### obtain a shared secret
-
-| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
-| `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
-
-shared secret is used to validate receipts with `iap-receipt-validator`
-npm package.
 
 test subscription on real device
 --------------------------------

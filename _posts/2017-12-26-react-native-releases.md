@@ -50,12 +50,12 @@ iceperkapp
   - wait till new build is processed (it might temporarily disappear from the list)
   - open new iOS build
   - click `Provide Export Compliance Information` button
-  - select `No` (app doesn't use encryption) in pop-up window
+  - select `No` (app doesn't use encryption) in popup window
   - click `Start Internal Testing` button
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
-  - click `⨁ VERSION OR PLATFORM` link → `iOS` (pop-up menu)
-  - enter new Store Version Number (say, 3.11.2) in pop-up window
+  - click `⨁ VERSION OR PLATFORM` link → `iOS` (popup menu)
+  - enter new `Store Version Number` (say, 3.11.2) in popup window
   - fill `What's New in This Version` section
   - screenshots are added for iPhone 5.5" Display only
   - select new build

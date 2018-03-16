@@ -39,7 +39,7 @@ add subscription in iTunes Connect
 ### create in-app purchase (IAP)
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
-| `In-App Purchases` (left menu) → `In-App Purchases ⨁`
+| `In-App Purchases` (left menu) → `In-App Purchases` (section) → `⨁` (link)
 
 > Select the in-app purchase you want to create.
 
@@ -70,10 +70,10 @@ add subscription in iTunes Connect
 
 - [x] `Cleared for Sale`
 - `Subscription Duration` (combobox): `1 Month`
-- `Subscription Prices ⨁`
+- `Subscription Prices` (section) → `⨁` (link)
   - `Currency` (combobox): `RUB - Russian Ruble`
   - `Price` (combobox): `149 р.`
-- `Localizations ⨁` → `Russian`
+- `Localizations` (section) → `⨁` (link) → `Russian`
   - `Subscription Display Name` (input): `Скрытие рекламы на месяц`
   - `Description` (input): `Полное отключение рекламы в приложении` (not required)
 
@@ -94,7 +94,7 @@ it's required to add localization for subscription group as well:
 > Before you can submit your in-app purchase for review,
 > you must add at least one localization to your subscription group.
 
-- `Localizations ⨁` → `Russian`
+- `Localizations` (section) → `⨁` (link) → `Russian`
   - `Subscription Group Display Name` (input): `Подписки`
   - `App Name Display Name`: [x] Use App Name
 
@@ -123,7 +123,7 @@ subscriptions in test environment:
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
 | iTunes Connect: `My Apps` → `Users and Roles` → `Sandbox Testers` (tab)
-| `Testers ⨁` (link)
+| `Testers` (section) → `⨁` (link)
 
 NOTE: test account == sandbox tester account.
 
@@ -170,10 +170,29 @@ in the end I could make a purchase using not verified test account.
 prepare release with subscription
 ---------------------------------
 
-### add new IAP when submitting new app version
+### fill review information
+
+1. <https://stackoverflow.com/questions/4802810/iphone-in-app-purchase-screen-shot/4803012>
+2. <https://developer.apple.com/app-store/review/guidelines/>
+3. <https://help.apple.com/itunes-connect/developer/#/dev84b80958f>
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
-| `In-App Purchases (left menu)`
+| `In-App Purchases` (left menu) → `<subscription>` (link) → `Review Information` (section)
+
+- `Screenshot`: screenshot of your app with subscription popup
+- `Review Notes`: details on how you work with subscription in your app
+
+  notes might also include details about how you're going to monetize your
+  application and some implementation details (the more the better I guess).
+
+- `Save` (button)
+
+after you fill review information, subscription status is automatically
+changed from `Missing Metadata` to `Ready to Submit`.
+
+### create new app version
+
+`In-App Purchases` page:
 
 > Your first in-app purchase must be submitted with a new app version.
 > Select it from the app’s In-App Purchases section and click Submit.
@@ -181,3 +200,24 @@ prepare release with subscription
 > Once your binary has been uploaded and your first in-app purchase has
 > been submitted for review, additional in-app purchases can be submitted
 > using the table below.
+
+| iTunes Connect: `My Apps` → `<my_app>` → `App Store` (tab)
+| `⨁ VERSION OR PLATFORM` (link in left menu) → `iOS` (popup menu)
+
+- `Store Version Number`: new version number (say, `3.14`)
+- `Create` button
+
+new app version has `Prepare for Submission` status now.
+
+### add IAP to new app version
+
+| iTunes Connect: `My Apps` → `<my_app>` → `App Store` (tab)
+| `3.14 Prepare for Submission` (left menu) → `In-App Purchases` (section) → `⨁` (link)
+
+- select IAP (your subscription) in popup window
+
+  > Select in-app purchases for us to review with this app version.
+  > The in-app purchases shown below are the only ones in the Ready to Submit state.
+
+- `Done` (button to select IAP and close popup window)
+- `Save` (button to save changes to app version)

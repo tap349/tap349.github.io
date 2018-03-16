@@ -89,9 +89,20 @@ Android
 
   now local `3000` port is mapped to mobile's `3000` port.
 
-  NOTE: `3000` is the port development server is listening on
-        (accordingly it's specified as development server port in
-        both _app/api/ApiHelpers.js_ and _app/api/graphql/run.js_).
+  `3000` is the port development server is listening on
+  (accordingly it's specified as development server port in
+  both _app/api/ApiHelpers.js_ and _app/api/graphql/run.js_).
+
+  it's not required to forward `8081` port which is used to
+  communicate with packager - this is done automatically when
+  you run application:
+
+  ```sh
+  $ react-native run-android
+  ...
+  Running /usr/local/share/android-sdk/platform-tools/adb -s 4d00af1d6fa7306d reverse tcp:8081 tcp:8081
+  ```
+
 
   also change server address for development environment: development
   server is now available by both `localhost` and notebook's local IP

@@ -272,7 +272,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
 1. <https://developer.android.com/google/play/billing/billing_testing.html#test-purchases-sandbox>
 
 it's required to create and publish a real subscription in iTunes Connect as
-described above before you proceed (application itself can stay unpublished).
+described above before you proceed (application itself may stay unpublished).
 
 <https://developer.android.com/google/play/billing/billing_admin.html#billing-form-add>:
 
@@ -311,10 +311,7 @@ NOTE: it's not required that license test account is linked to a valid payment
 
 see `include license key in application build` section.
 
-#### install application on real device
-
-NOTE: application (being installed now) and APK (uploaded to GPC)
-      must have the same version name and build number.
+#### uninstall existing application from real device
 
 it's necessary to uninstall application from device beforehand
 or else you'll get either `INSTALL_FAILED_DUPLICATE_PERMISSION`
@@ -324,8 +321,19 @@ or `INSTALL_FAILED_ALREADY_EXISTS` error:
 $ adb uninstall com.iceperkapp
 ```
 
-NOTE: `com.iceperkapp` is both package name and `applicationId` from
-      _android/app/build.gradle_.
+NOTE: `com.iceperkapp` is both package name and `applicationId`
+      from _android/app/build.gradle_.
+
+#### set either development or production environment
+
+it's possible to make test purchases of real subscriptions in
+both `development` and `production` environments - just don't
+forget to forward ports in `development` environment.
+
+#### install application on real device
+
+NOTE: application (being installed now) and APK (uploaded to GPC)
+      must have the same version name and build number.
 
 - run application in debug mode
 
@@ -341,8 +349,6 @@ NOTE: `com.iceperkapp` is both package name and `applicationId` from
   - `__DEV__` variable is set to false
   - you cannot debug JS remotely
 
-  so it's almost the same as installing APK.
-
   ```sh
   $ react-native run-android --variant release
   ```
@@ -350,6 +356,11 @@ NOTE: `com.iceperkapp` is both package name and `applicationId` from
 - install APK on real device
 
   1. <https://developer.android.com/studio/build/building-cmdline.html#RunningOnDevice>
+
+  same as running application in release mode:
+
+  - `__DEV__` variable is set to false
+  - you cannot debug JS remotely
 
   ```sh
   $ adb -d install android/app/build/outputs/apk/app-release.apk
@@ -370,6 +381,27 @@ test account email each time subscription is renewed or cancelled).
   => you cannot use developer account to test real subscriptions -
   even with test transactions (and of course you cannot make real
   purchases since you cannot pay to yourself).
+
+- `isSubscribed` returns true after subscription is cancelled
+
+  1. <https://github.com/idehub/react-native-billing/issues/62>
+  2. <https://github.com/idehub/react-native-billing/issues/57>
+
+  when test subscription is cancelled, `isSubscribed` keeps on returning
+  true. reinstalling application and using `loadOwnedPurchasesFromGoogle`
+  don't help - most likely there is nothing wrong with my implementation
+  and `react-native-billing` package itself:
+
+  > if im not wrong, thats the way PlayStore works, its cycle can take
+  > days to remove the "Subscribed" item from user PlayStore/Account.
+  > Even coding in Android, after canceled the subscription take some
+  > days to disappear.
+
+  possible solution is to use server-side validation of subscriptions
+  with `in-app-purchase` package but it's not an easy option.
+
+  or else just wait longer till subscription status is updated in GP
+  eventually (maybe).
 
 ### test with real subscriptions and real transactions
 
@@ -486,5 +518,5 @@ prepare release with subscription
 > Certificate of Foreign Status
 
 - `Classification` (combobox): `LLC`
-- `Signature of beneficial owner (or individual authorized to sign for beneficial owner):` (input): `T* S*`
+- `Signature of beneficial owner (or individual authorized to sign for beneficial owner):` (input): `T* Sm*`
 - `SUBMIT` (button)

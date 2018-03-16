@@ -403,7 +403,7 @@ development machine).
 this can be useful, say, to debug production release crashes:
 
 ```sh
-$ react-native run-android --variant=release
+$ react-native run-android --variant release
 $ react-native log-android
 ```
 

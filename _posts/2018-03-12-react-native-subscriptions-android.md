@@ -311,23 +311,47 @@ NOTE: it's not required that license test account is linked to a valid payment
 
 see `include license key in application build` section.
 
-#### install application (APK) on real device
+#### install application on real device
 
-1. <https://developer.android.com/studio/build/building-cmdline.html#RunningOnDevice>
-
-NOTE: APK must have the same version name and build number as the one
-      uploaded to GPC previously.
+NOTE: application (being installed now) and APK (uploaded to GPC)
+      must have the same version name and build number.
 
 it's necessary to uninstall application from device beforehand
 or else you'll get either `INSTALL_FAILED_DUPLICATE_PERMISSION`
 or `INSTALL_FAILED_ALREADY_EXISTS` error:
 
-```sh
-$ adb uninstall com.iceperkapp
-$ adb -d install android/app/build/outputs/apk/app-release.apk
-```
+- run application in debug mode
 
-NOTE: package name is `applicationId` from _android/app/build.gradle_.
+  - `__DEV__` is set to true
+  - you can debug JS remotely
+
+  ```sh
+  $ adb uninstall com.iceperkapp
+  $ react-native run-android
+  ```
+
+- run application in release mode
+
+  - `__DEV__` is set to false
+  - you cannot debug JS remotely
+
+  so it's almost the same as installing APK.
+
+  ```sh
+  $ adb uninstall com.iceperkapp
+  $ react-native run-android --variant release
+  ```
+
+- install APK on real device
+
+  1. <https://developer.android.com/studio/build/building-cmdline.html#RunningOnDevice>
+
+  ```sh
+  $ adb uninstall com.iceperkapp
+  $ adb -d install android/app/build/outputs/apk/app-release.apk
+  ```
+
+  NOTE: package name is `applicationId` from _android/app/build.gradle_.
 
 #### view financial reports
 

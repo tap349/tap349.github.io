@@ -322,7 +322,7 @@ or `INSTALL_FAILED_ALREADY_EXISTS` error:
 
 - run application in debug mode
 
-  - `__DEV__` is set to true
+  - `__DEV__` variable is set to true
   - you can debug JS remotely
 
   ```sh
@@ -332,7 +332,7 @@ or `INSTALL_FAILED_ALREADY_EXISTS` error:
 
 - run application in release mode
 
-  - `__DEV__` is set to false
+  - `__DEV__` variable is set to false
   - you cannot debug JS remotely
 
   so it's almost the same as installing APK.

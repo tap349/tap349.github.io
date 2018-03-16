@@ -320,13 +320,19 @@ it's necessary to uninstall application from device beforehand
 or else you'll get either `INSTALL_FAILED_DUPLICATE_PERMISSION`
 or `INSTALL_FAILED_ALREADY_EXISTS` error:
 
+```sh
+$ adb uninstall com.iceperkapp
+```
+
+NOTE: `com.iceperkapp` is both package name and `applicationId` from
+      _android/app/build.gradle_.
+
 - run application in debug mode
 
   - `__DEV__` variable is set to true
   - you can debug JS remotely
 
   ```sh
-  $ adb uninstall com.iceperkapp
   $ react-native run-android
   ```
 
@@ -338,7 +344,6 @@ or `INSTALL_FAILED_ALREADY_EXISTS` error:
   so it's almost the same as installing APK.
 
   ```sh
-  $ adb uninstall com.iceperkapp
   $ react-native run-android --variant release
   ```
 
@@ -347,11 +352,8 @@ or `INSTALL_FAILED_ALREADY_EXISTS` error:
   1. <https://developer.android.com/studio/build/building-cmdline.html#RunningOnDevice>
 
   ```sh
-  $ adb uninstall com.iceperkapp
   $ adb -d install android/app/build/outputs/apk/app-release.apk
   ```
-
-  NOTE: package name is `applicationId` from _android/app/build.gradle_.
 
 #### view financial reports
 

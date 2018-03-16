@@ -459,7 +459,6 @@ or else edit _Info.plist_ in Xcode:
 
 the error occurred after updating Xcode from 8.2.1 to 9.2.
 
-{% raw %}
 ```sh
 $ react-native run-ios
 ...
@@ -468,7 +467,6 @@ instruments[2536:17017] [MT] DVTPlugInLoading: Failed to load code for plug-in c
   Reason: image not found"
 ...
 ```
-{% endraw %}
 
 **solution**
 
@@ -494,3 +492,33 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 > Try closing the Xcode project and instead open <project name>.xcworkspace.
 > Since this is using Cocopods you need to use the workspace instead for
 > everything to get resolved correctly.
+
+### CocoaPods could not find compatible versions for pod "Google-Mobile-Ads-SDK"
+
+```sh
+$ cd ios && pod install
+...
+Analyzing dependencies
+[!] CocoaPods could not find compatible versions for pod "Google-Mobile-Ads-SDK":
+  In snapshot (Podfile.lock):
+    Google-Mobile-Ads-SDK (= 7.29.0)
+
+  In Podfile:
+    Google-Mobile-Ads-SDK
+
+None of your spec sources contain a spec satisfying the dependencies: `Google-Mobile-Ads-SDK, Google-Mobile-Ads-SDK (= 7.29.0)`.
+
+You have either:
+ * out-of-date source repos which you can update with `pod repo update` or with `pod install --repo-update`.
+ * mistyped the name or version.
+ * not added the source repo that hosts the Podspec to your Podfile.
+
+Note: as of CocoaPods 1.0, `pod repo update` does not happen on `pod install` by default.
+```
+
+**solution**
+
+```sh
+$ pod repo update
+$ pod install
+```

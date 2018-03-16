@@ -180,8 +180,9 @@ test subscription on real device
 --------------------------------
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
-2. <http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>
-3. <https://www.youtube.com/watch?v=XMrUBC4Xgl8>
+2. <https://stackoverflow.com/a/22469253/3632318> (list of requirements)
+3. <http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>
+4. <https://www.youtube.com/watch?v=XMrUBC4Xgl8>
 
 emulator (app):
 

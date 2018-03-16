@@ -253,7 +253,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
   I got this error when I tried to subscribe using reserved product ID
   (`android.test.purchased`).
 
-  it has turned that you can only purchase when testing with static responses but
+  it has turned out you can only purchase when testing with static responses but
   not subscribe. all other subscription related methods from `react-native-billing`
   package (`isSubscribed`, `getSubscriptionDetails`) are working as expected (that
   is they return relevant static responses - for subscription, not for purchase).
@@ -334,6 +334,16 @@ NOTE: package name is `applicationId` from _android/app/build.gradle_.
 test transactions are not shown in financial reports. IDK how to view them -
 currently I can track them through GP emails only (they are sent to license
 test account email each time subscription is renewed or cancelled).
+
+#### troubleshooting
+
+- `Error: The publisher cannot purchase the item.`
+
+  I got this error when I tried to purchase subscription.
+
+  => you cannot use developer account to test real subscriptions -
+  even with test transactions (and of course you cannot make real
+  purchases since you cannot pay to yourself).
 
 ### test with real subscriptions and real transactions
 

@@ -211,8 +211,12 @@ new app version has `Prepare for Submission` status now.
 
 ### add IAP to new app version
 
+1. <https://stackoverflow.com/a/42191936/3632318>
+
 | iTunes Connect: `My Apps` → `<my_app>` → `App Store` (tab)
 | `3.14 Prepare for Submission` (left menu) → `In-App Purchases` (section) → `⨁` (link)
+
+NOTE: `In-App Purchases` section is available only if you've created IAP before.
 
 - select IAP (your subscription) in popup window
 

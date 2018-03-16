@@ -293,7 +293,7 @@ described above before you proceed (application itself can stay unpublished).
 2. <https://developer.android.com/google/play/billing/billing_admin.html#billing-testing-setup>
 
 | GPC: `Settings` (left menu)
-| `Account details` (left menu) → `License Testing` (section)
+| `Developer account` (left menu) → `Account details` → `License Testing` (section)
 
 - `Gmail accounts with testing access` (textarea): `*.tap349@gmail.com`
 
@@ -436,4 +436,19 @@ Purchase or subscribe failed with error: <error_code>
 prepare release with subscription
 ---------------------------------
 
-TODO
+### update tax info (if necessary)
+
+| GPC: `Settings` (left menu)
+| `Developer account` (left menu) → `Payment settings` → `Settings` (section) → `MANAGE SETTINGS` (button)
+| `Payments profile` (section) → `United States tax info` → `✎` (link) → `UPDATE TAX INFO` (link)
+
+> Tax form questions
+
+- `Are you a US citizen, US resident alien, US corporation or US partnership?` (radiobutton): [x] `No`
+- `CONTINUE` (button)
+
+> Certificate of Foreign Status
+
+- `Classification` (combobox): `LLC`
+- `Signature of beneficial owner (or individual authorized to sign for beneficial owner):` (input): `T* S*`
+- `SUBMIT` (button)

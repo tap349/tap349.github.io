@@ -413,8 +413,10 @@ test account email each time subscription is renewed or cancelled).
   of subscriptions with `in-app-purchase` package.
 
   even though `isSubscribed` returns true, subscription is not actually
-  active - you can purchase it again (though it's prohibited from inside
-  application because of `isSuscribed` returning true).
+  active - you can purchase it again (though it's button to purchase is
+  hidden inside application because of `isSuscribed` returning true).
+
+  UPDATE: `isSubscribed` is still true 12 hours later.
 
 ### real subscriptions
 

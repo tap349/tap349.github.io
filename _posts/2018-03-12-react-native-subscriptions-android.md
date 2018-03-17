@@ -388,20 +388,21 @@ test account email each time subscription is renewed or cancelled).
   2. <https://github.com/idehub/react-native-billing/issues/57>
 
   when test subscription is cancelled, `isSubscribed` keeps on returning
-  true. reinstalling application and using `loadOwnedPurchasesFromGoogle`
-  don't help - most likely there is nothing wrong with my implementation
-  and `react-native-billing` package itself:
+  true. reinstalling application and refreshing subscription status cache
+  with `loadOwnedPurchasesFromGoogle` doesn't help - most likely there is
+  nothing wrong with my implementation and `react-native-billing` package:
 
   > if im not wrong, thats the way PlayStore works, its cycle can take
   > days to remove the "Subscribed" item from user PlayStore/Account.
   > Even coding in Android, after canceled the subscription take some
   > days to disappear.
 
-  possible solution is to use server-side validation of subscriptions
-  with `in-app-purchase` package but it's not an easy option.
+  possible solution (but not a fast one) is to use server-side validation
+  of subscriptions with `in-app-purchase` package.
 
-  or else just wait longer till subscription status is updated in GP
-  eventually (maybe).
+  even though `isSubscribed` returns true, subscription is not actually
+  active - you can purchase it again (though it's prohibited from inside
+  application because of `isSuscribed` returning true).
 
 ### test with real subscriptions and real transactions
 

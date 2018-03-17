@@ -115,7 +115,7 @@ safest option).
 
 at the same time it's not required to publish (rollout) application - you
 can both set up subscription and test it on real device without publishing
-(see `test with real subscriptions but test transactions` section).
+(see `test with a test subscription` section).
 
 | GPC: `All applications` → `<my_app>`
 | `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE ALPHA` (button)
@@ -167,7 +167,7 @@ NOTE: you can't set up subscription until you upload APK with IAB permission
 
   you can opt to publish subscription later but still it must be done
   eventually - no account (even test one) can purchase a subscription
-  until it's published (see `test with real subscriptions` section).
+  until it's published (see `test with a real subscription` section).
 
 - `Pricing` (combobox): `Import from pricing template` →
   `RUB 149.00 - Подписка на месяц` → `IMPORT` (button)
@@ -189,12 +189,7 @@ emulator (app):
 > Error: InAppBilling is not available. InAppBilling will not work/test on
 > an emulator, only a physical Android device.
 
-subscriptions in test environment:
-
-- have shortened periods (say, 1 month → 5 minutes)
-- renew 6 times only (cancelled afterwards)
-
-### test with static responses
+### static responses
 
 YOU DON'T NEED TO TOUCH GOOGLE PLAY CONSOLE AT ALL TO TEST WITH STATIC RESPONSES.
 
@@ -267,12 +262,22 @@ altogether - or else you'll get `String resource ID #0x0` error.
 
   > Subscriptions can't be tested using static responses...
 
-### test with real subscriptions but test transactions
+### test subscriptions
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#test-purchases-sandbox>
 
-it's required to create and publish a real subscription in iTunes Connect as
-described above before you proceed (application itself may stay unpublished).
+test subscriptions are:
+
+- purchased with a test card (test trasactions are created)
+- have shortened periods (say, 1 month → 5 minutes)
+- renew 6 times only (cancelled automatically afterwards)
+- can be managed (say, cancelled in GP)
+
+test subscriptions are not created separately - they are real subscriptions
+but with special characteristics and behaviour for license testers.
+
+=> it's required to create and publish a real subscription in iTunes
+Connect as described above (application itself may stay unpublished).
 
 <https://developer.android.com/google/play/billing/billing_admin.html#billing-form-add>:
 
@@ -297,15 +302,18 @@ described above before you proceed (application itself may stay unpublished).
 
 - `Gmail accounts with testing access` (textarea): `*.tap349@gmail.com`
 
+it's not required that license test account is linked to a valid payment
+method (I could make a test purchase without any linked payment method).
+
+if user is registered as both license and alpha tester, being a license
+tester has priority: he'll be offered to purchase test subscription only.
+
 NOTE: license test account must be a primary account on real device!
 
 <https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-test>:
 
 > The only way to change the primary account on a device is to do a factory
 > reset, making sure you log on with your primary account first.
-
-NOTE: it's not required that license test account is linked to a valid payment
-      method (I could make a test purchase without any linked payment method).
 
 #### set valid license key
 
@@ -326,9 +334,9 @@ NOTE: `com.iceperkapp` is both package name and `applicationId`
 
 #### set either development or production environment
 
-it's possible to make test purchases of real subscriptions in
-both `development` and `production` environments - just don't
-forget to forward ports in `development` environment.
+it's possible to purchase test subscriptions in both `development`
+and `production` environments - just don't forget to forward ports
+in `development`.
 
 #### install application on real device
 
@@ -374,6 +382,10 @@ test account email each time subscription is renewed or cancelled).
 
 #### troubleshooting
 
+- `Error: The item you requested is not available for purchase.`
+
+  current primary account is not a license test account.
+
 - `Error: The publisher cannot purchase the item.`
 
   I got this error when I tried to purchase subscription.
@@ -397,14 +409,14 @@ test account email each time subscription is renewed or cancelled).
   > Even coding in Android, after canceled the subscription take some
   > days to disappear.
 
-  possible solution (but not a fast one) is to use server-side validation
+  possible solution (but not an easy one) is to use server-side validation
   of subscriptions with `in-app-purchase` package.
 
   even though `isSubscribed` returns true, subscription is not actually
   active - you can purchase it again (though it's prohibited from inside
   application because of `isSuscribed` returning true).
 
-### test with real subscriptions and real transactions
+### real subscriptions
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#transactions>
 2. <https://github.com/idehub/react-native-billing#testing-with-your-own-in-app-products>
@@ -452,7 +464,7 @@ make sure to add payment info for this account before trying to make a purchase.
 - `Users`: [x] `team` (activate the list)
 - `SAVE` (button)
 
-NOTE: it's possible to add/remove alpha testers after release is published.
+it's possible to add/remove alpha testers after release is published.
 
 #### publish release to alpha
 

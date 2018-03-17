@@ -106,10 +106,10 @@ test subscription on real device
 it's required to run application on real device to make purchases:
 the only action allowed from inside emulator is loading products.
 
-subscriptions in test environment:
+test subscriptions:
 
 - have shortened periods (say, 1 month → 5 minutes)
-- renew 5 times only (cancelled afterwards)
+- renew 5 times only (cancelled automatically afterwards)
 - cannot be managed (say, cancelled manually)
 
 <https://forums.developer.apple.com/thread/14702>:

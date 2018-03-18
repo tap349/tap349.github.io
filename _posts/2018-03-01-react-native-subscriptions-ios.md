@@ -13,10 +13,10 @@ categories: [react-native, ios]
 {:toc}
 <hr>
 
-1. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
-2. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
-3. [Workflow for configuring in-app purchases](https://help.apple.com/itunes-connect/developer/#/devb57be10e7)
-4. [In-App Purchase Programming Guide](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Introduction.html)
+1. [Workflow for configuring in-app purchases](https://help.apple.com/itunes-connect/developer/#/devb57be10e7)
+2. [In-App Purchase Programming Guide](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Introduction.html)
+3. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
+4. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 
 implement subscriptions in application
 --------------------------------------
@@ -138,6 +138,8 @@ tips and notes regarding test account:
   for each new sandox tester right after it's added here.
 
 - sign out of Apple ID on iPhone before testing subscription
+
+  1. <https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/ShowUI.html#//apple_ref/doc/uid/TP40008267-CH3-SW11>
 
   it's also important not to sign in as a sandbox tester in `Settings` but
   in application only (when prompted before making a purchase) - a sandbox
@@ -308,3 +310,7 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 >
 > If the above information is in your app, please reply to this message in
 > Resolution Center to provide details on where to locate it.
+
+1. <https://stackoverflow.com/a/43651411/3632318>
+2. <https://forums.developer.apple.com/thread/70917>
+3. <http://captaindanko.blogspot.ru/2017/06/addressing-app-review-rejections-for.html>

@@ -176,6 +176,10 @@ in the end I could make a purchase using not verified test account.
 I have succesfully verified email of another sandbox tester -
 most likely it was temporary technical problem on Apple side.
 
+#### run application on real device
+
+1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
+
 prepare release with subscription
 ---------------------------------
 

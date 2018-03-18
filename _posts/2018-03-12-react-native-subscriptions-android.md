@@ -338,7 +338,9 @@ it's possible to purchase test subscriptions in both `development`
 and `production` environments - just don't forget to forward ports
 in `development`.
 
-#### install application on real device
+#### run or install application on real device
+
+1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
 NOTE: application (being installed now) and APK (uploaded to GPC)
       must have the same version name and build number.

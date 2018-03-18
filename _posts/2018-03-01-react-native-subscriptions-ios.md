@@ -263,22 +263,26 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 >
 > Your app's **binary** did not include:
 >
-> – The following information about the auto-renewable nature of the subscription
->   - Title of publication or service
->   - Length of subscription (time period and content or services provided during
->     each subscription period)
->   - Price of subscription, and price per unit if appropriate
->   - Payment will be charged to iTunes Account at confirmation of purchase
->   - Subscription automatically renews unless auto-renew is turned off at least
->     24-hours before the end of the current period
->   - Account will be charged for renewal within 24-hours prior to the end of
->     the current period, and identify the cost of the renewal
->   - Subscriptions may be managed by the user and auto-renewal may be turned off
->     by going to the user's Account Settings after purchase
->   - Any unused portion of a free trial period, if offered, will be forfeited
->     when the user purchases a subscription to that publication, where applicable
-> – A link to the terms of use
-> – A link to the privacy policy
+> <ul>
+> <li> The following information about the auto-renewable nature of the subscription
+>   <ul>
+>   <li> Title of publication or service
+>   <li> Length of subscription (time period and content or services provided
+>        during each subscription period)
+>   <li> Price of subscription, and price per unit if appropriate
+>   <li> Payment will be charged to iTunes Account at confirmation of purchase
+>   <li> Subscription automatically renews unless auto-renew is turned off at
+>        least 24-hours before the end of the current period
+>   <li> Account will be charged for renewal within 24-hours prior to the end of
+>        the current period, and identify the cost of the renewal
+>   <li> Subscriptions may be managed by the user and auto-renewal may be turned
+>        off by going to the user's Account Settings after purchase
+>   <li> Any unused portion of a free trial period, if offered, will be forfeited
+>        when the user purchases a subscription to that publication, where applicable
+>   </ul>
+> <li> A link to the terms of use
+> <li> A link to the privacy policy
+> </ul>
 >
 > Note: Adding the above information to the StoreKit modal alert is not
 > sufficient; the information must also be displayed within the app itself,
@@ -288,10 +292,12 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 >
 > Your app's **metadata** did not include:
 >
-> – The following information about the auto-renewable nature of the subscription
->   (with the same items in sublist as for app's binary)
-> – A link to the terms of use
-> – A privacy policy link in the Privacy Policy URL field of iTunes Connect
+> <ul>
+> <li> The following information about the auto-renewable nature of the
+>      subscription (with the same items in sublist as for app's binary)
+> <li> A link to the terms of use
+> <li> A privacy policy link in the Privacy Policy URL field of iTunes Connect
+> </ul>
 >
 > **Next Steps**
 >

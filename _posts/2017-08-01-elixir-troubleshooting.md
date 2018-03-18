@@ -549,6 +549,11 @@ I've compared CPU usage of application with and without connection pool -
 it's approximately the same (\< 2% in average, peak usage is about 6-7%,
 max 100 RPM).
 
+**UPDATE (2018-03-19)**
+
+the error is still present - it occurs repeatedly within a short period of time
+(about 1 minute).
+
 (HTTPoison.Error) :connect_timeout
 ----------------------------------
 

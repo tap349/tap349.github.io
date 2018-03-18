@@ -281,8 +281,8 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 >        when the user purchases a subscription to that publication, where applicable
 >   </ul>
 > </li>
-> <li> A link to the terms of use
-> <li> A link to the privacy policy
+> <li> A link to the terms of use </li>
+> <li> A link to the privacy policy </li>
 > </ul>
 >
 > Note: Adding the above information to the StoreKit modal alert is not
@@ -296,8 +296,9 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 > <ul>
 > <li> The following information about the auto-renewable nature of the
 >      subscription (with the same items in sublist as for app's binary)
-> <li> A link to the terms of use
-> <li> A privacy policy link in the Privacy Policy URL field of iTunes Connect
+> </li>
+> <li> A link to the terms of use </li>
+> <li> A privacy policy link in the Privacy Policy URL field of iTunes Connect </li>
 > </ul>
 >
 > **Next Steps**

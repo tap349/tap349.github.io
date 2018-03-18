@@ -266,19 +266,24 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 > <ul>
 > <li> The following information about the auto-renewable nature of the subscription
 >   <ul>
->   <li> Title of publication or service
+>   <li> Title of publication or service </li>
 >   <li> Length of subscription (time period and content or services provided
 >        during each subscription period)
->   <li> Price of subscription, and price per unit if appropriate
->   <li> Payment will be charged to iTunes Account at confirmation of purchase
+>   </li>
+>   <li> Price of subscription, and price per unit if appropriate </li>
+>   <li> Payment will be charged to iTunes Account at confirmation of purchase </li>
 >   <li> Subscription automatically renews unless auto-renew is turned off at
 >        least 24-hours before the end of the current period
+>   </li>
 >   <li> Account will be charged for renewal within 24-hours prior to the end of
 >        the current period, and identify the cost of the renewal
+>   </li>
 >   <li> Subscriptions may be managed by the user and auto-renewal may be turned
 >        off by going to the user's Account Settings after purchase
+>   </li>
 >   <li> Any unused portion of a free trial period, if offered, will be forfeited
 >        when the user purchases a subscription to that publication, where applicable
+>   </li>
 >   </ul>
 > </li>
 > <li> A link to the terms of use </li>

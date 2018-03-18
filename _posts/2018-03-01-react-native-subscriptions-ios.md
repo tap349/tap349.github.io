@@ -235,8 +235,8 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 | iTunes Connect: `My Apps` → `<my_app>` → `Activity` (tab)
 | `App Store Versions` (left menu) → `Resolution Center` (link)
 
-> 2. 1 Performance: App Completeness
-> 3. 1.2 Business: Payments - Subscriptions
+> **2.** 1 Performance: App Completeness
+> **3.** 1.2 Business: Payments - Subscriptions
 
 > <h4>Guideline 2.1 - Performance - App Completeness</h4>
 >

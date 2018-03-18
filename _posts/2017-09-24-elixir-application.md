@@ -116,7 +116,7 @@ NOTE: `run` is a default Mix task - specify it explicitly
 start/stop in IEx
 -----------------
 
-```sh
+```elixir
 iex> Application.start(:neko)
 iex> Application.stop(:neko)
 iex> Application.stop(:logger)

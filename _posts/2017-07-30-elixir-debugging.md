@@ -124,3 +124,28 @@ otherwise you won't be able to connect to `foo` next.
 
 make sure node name matches the one from _foo/var/vm.args_ exactly
 (`foo@localhost` != `foo@127.0.0.1`).
+
+### (how to) debug process inside BEAM
+
+1. <https://www.youtube.com/watch?v=pO4_Wlq8JeI&feature=youtu.be&t=853>
+
+the higher number of reductions is, the more process loads CPU:
+
+```elixir
+iex> Process.list
+  |> Enum.map(& {Process.info(&1, :reductions), &1})
+  |> Enum.sort(&>=/2)
+  |> Enum.take(5)
+  |> Enum.each(&IO.inspect)
+iex> pid = pid(0,4225,0)
+iex> Process.info(pid, :current_stacktrace)
+```
+
+debug that process with `dbg` (for some reason Sasa Juric doesn't recommend
+it for production):
+
+```elixir
+iex> :dbg.tracer()
+iex> :dbg.p(pid, [:call])
+iex> :dbg.tpl(:_, []); :timer.sleep(1000); :dbg.stop()
+```

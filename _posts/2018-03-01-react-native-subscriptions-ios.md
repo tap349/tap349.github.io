@@ -230,77 +230,77 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 
 #### troubleshooting
 
-- binary rejected (release didn't pass a review due to IAP)
+- binary rejected (release didn't pass a review because of IAP)
 
 | iTunes Connect: `My Apps` → `<my_app>` → `Activity` (tab)
 | `App Store Versions` (left menu) → `Resolution Center` (link)
 
 <details>
-<summary>message from Apple</summary>
+<summary>Message from Apple</summary>
 
-> 2. 1 Performance: App Completeness
-> 3. 1.2 Business: Payments - Subscriptions
+2. 1 Performance: App Completeness
+3. 1.2 Business: Payments - Subscriptions
 
-> <h3>Guideline 2.1 - Performance - App Completeness</h3>
->
-> We found that while you have submitted in-app purchase products for your app,
-> the in-app purchase functionality is not present in your binary.
->
-> **Next Steps**
->
-> If you would like to include in-app purchases in your app, you will need to
-> upload a new binary that incorporates the in-app purchase API to enable users
-> to make a purchase.
->
-> Once you revise and resubmit your binary, you will also need to resubmit your
-> in-app purchases for review since they are in the Developer Action Required
-> state. For each in-app purchase product submitted, please be sure to edit the
-> detail information or cancel the request to change the detail information for
-> the in-app purchases using iTunes Connect.
+<h3>Guideline 2.1 - Performance - App Completeness</h3>
 
-> Guideline 3.1.2 - Business - Payments - Subscriptions
->
-> We noticed that your app or its metadata did not fully meet the terms and
-> conditions for auto-renewing subscriptions, as specified in Schedule 2,
-> section 3.8(b) of the Paid Applications agreement.
->
-> Your app's **binary** did not include:
->
-> – The following information about the auto-renewable nature of the subscription
->   • Title of publication or service
->   • Length of subscription (time period and content or services provided during
->     each subscription period)
->   • Price of subscription, and price per unit if appropriate
->   • Payment will be charged to iTunes Account at confirmation of purchase
->   • Subscription automatically renews unless auto-renew is turned off at least
->     24-hours before the end of the current period
->   • Account will be charged for renewal within 24-hours prior to the end of
->     the current period, and identify the cost of the renewal
->   • Subscriptions may be managed by the user and auto-renewal may be turned off
->     by going to the user's Account Settings after purchase
->   • Any unused portion of a free trial period, if offered, will be forfeited
->     when the user purchases a subscription to that publication, where applicable
-> – A link to the terms of use
-> – A link to the privacy policy
->
-> Note: Adding the above information to the StoreKit modal alert is not
-> sufficient; the information must also be displayed within the app itself,
-> and it must be displayed clearly and conspicuously during the purchase
-> flow without requiring additional action from the user, such as opening
-> a link.
->
-> Your app's **metadata** did not include:
->
-> – The following information about the auto-renewable nature of the subscription
->   (with the same items in sublist as for app's binary)
-> – A link to the terms of use
-> – A privacy policy link in the Privacy Policy URL field of iTunes Connect
->
-> **Next Steps**
->
-> To resolve this issue, please revise your app or its metadata to include
-> the missing information.
->
-> If the above information is in your app, please reply to this message in
-> Resolution Center to provide details on where to locate it.
+We found that while you have submitted in-app purchase products for your app,
+the in-app purchase functionality is not present in your binary.
+
+**Next Steps**
+
+If you would like to include in-app purchases in your app, you will need to
+upload a new binary that incorporates the in-app purchase API to enable users
+to make a purchase.
+
+Once you revise and resubmit your binary, you will also need to resubmit your
+in-app purchases for review since they are in the Developer Action Required
+state. For each in-app purchase product submitted, please be sure to edit the
+detail information or cancel the request to change the detail information for
+the in-app purchases using iTunes Connect.
+
+Guideline 3.1.2 - Business - Payments - Subscriptions
+
+We noticed that your app or its metadata did not fully meet the terms and
+conditions for auto-renewing subscriptions, as specified in Schedule 2,
+section 3.8(b) of the Paid Applications agreement.
+
+Your app's **binary** did not include:
+
+– The following information about the auto-renewable nature of the subscription
+  • Title of publication or service
+  • Length of subscription (time period and content or services provided during
+    each subscription period)
+  • Price of subscription, and price per unit if appropriate
+  • Payment will be charged to iTunes Account at confirmation of purchase
+  • Subscription automatically renews unless auto-renew is turned off at least
+    24-hours before the end of the current period
+  • Account will be charged for renewal within 24-hours prior to the end of
+    the current period, and identify the cost of the renewal
+  • Subscriptions may be managed by the user and auto-renewal may be turned off
+    by going to the user's Account Settings after purchase
+  • Any unused portion of a free trial period, if offered, will be forfeited
+    when the user purchases a subscription to that publication, where applicable
+– A link to the terms of use
+– A link to the privacy policy
+
+Note: Adding the above information to the StoreKit modal alert is not
+sufficient; the information must also be displayed within the app itself,
+and it must be displayed clearly and conspicuously during the purchase
+flow without requiring additional action from the user, such as opening
+a link.
+
+Your app's **metadata** did not include:
+
+– The following information about the auto-renewable nature of the subscription
+  (with the same items in sublist as for app's binary)
+– A link to the terms of use
+– A privacy policy link in the Privacy Policy URL field of iTunes Connect
+
+**Next Steps**
+
+To resolve this issue, please revise your app or its metadata to include
+the missing information.
+
+If the above information is in your app, please reply to this message in
+Resolution Center to provide details on where to locate it.
 </details>

@@ -236,6 +236,7 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 | `App Store Versions` (left menu) → `Resolution Center` (link)
 
 > **2.** 1 Performance: App Completeness
+> <br>
 > **3.** 1.2 Business: Payments - Subscriptions
 
 > <h4>Guideline 2.1 - Performance - App Completeness</h4>

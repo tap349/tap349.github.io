@@ -417,6 +417,7 @@ test account email each time subscription is renewed or cancelled).
   hidden inside application because of `isSuscribed` returning true).
 
   UPDATE: `isSubscribed` is still true 12 hours later.
+  UPDATE: `isSubscribed` is eventually false 2 days later.
 
 ### real subscriptions
 

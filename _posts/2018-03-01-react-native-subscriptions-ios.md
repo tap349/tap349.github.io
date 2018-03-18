@@ -171,6 +171,11 @@ IDK if it matters or not but I signed in to iCloud with this account
 
 in the end I could make a purchase using not verified test account.
 
+**UPDATE (2018-03-19)**
+
+I have succesfully verified email of another sandbox tester -
+most likely it was temporary technical problem on Apple side.
+
 prepare release with subscription
 ---------------------------------
 

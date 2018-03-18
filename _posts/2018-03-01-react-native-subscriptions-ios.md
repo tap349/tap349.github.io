@@ -238,8 +238,8 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 > **2.** 1 Performance: App Completeness
 > <br>
 > **3.** 1.2 Business: Payments - Subscriptions
-
-> <h4>Guideline 2.1 - Performance - App Completeness</h4>
+>
+> <h3>Guideline 2.1 - Performance - App Completeness</h3>
 >
 > We found that while you have submitted in-app purchase products for your app,
 > the in-app purchase functionality is not present in your binary.
@@ -255,8 +255,8 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 > state. For each in-app purchase product submitted, please be sure to edit the
 > detail information or cancel the request to change the detail information for
 > the in-app purchases using iTunes Connect.
-
-> <h4>Guideline 3.1.2 - Business - Payments - Subscriptions</h4>
+>
+> <h3>Guideline 3.1.2 - Business - Payments - Subscriptions</h3>
 >
 > We noticed that your app or its metadata did not fully meet the terms and
 > conditions for auto-renewing subscriptions, as specified in Schedule 2,

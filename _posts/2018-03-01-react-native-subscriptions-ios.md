@@ -280,6 +280,7 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 >   <li> Any unused portion of a free trial period, if offered, will be forfeited
 >        when the user purchases a subscription to that publication, where applicable
 >   </ul>
+> </li>
 > <li> A link to the terms of use
 > <li> A link to the privacy policy
 > </ul>

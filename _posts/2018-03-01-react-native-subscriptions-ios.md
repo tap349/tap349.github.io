@@ -296,7 +296,7 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 >
 > <ul>
 > <li> The following information about the auto-renewable nature of the
->      subscription: (same subitems as for app's binary) </li>
+>      subscription (same subitems as for app's binary) </li>
 > <li> A link to the terms of use </li>
 > <li> A privacy policy link in the Privacy Policy URL field of iTunes Connect </li>
 > </ul>

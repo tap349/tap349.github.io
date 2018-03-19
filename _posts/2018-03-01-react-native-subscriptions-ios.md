@@ -202,6 +202,7 @@ below for details).
 - `App installation failed. An unknown error has occurred.`
 
   where | when
+  --- | ---
   Xcode modal window | running application on real device
 
   <https://stackoverflow.com/a/41138265/3632318>:

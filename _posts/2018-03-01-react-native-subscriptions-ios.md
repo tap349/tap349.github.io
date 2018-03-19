@@ -196,7 +196,7 @@ most likely it was temporary technical problem on Apple side.
   this is exactly the previous error - you cannot validate receipt of
   sandbox tester in `production` environment.
 
-  this is why Apple reviewer couldn't test subscription:
+  and this is why Apple reviewer couldn't test subscription:
 
   - he is signed in as sandbox tester on his iPhone
   - he uses production release - so it's a `production` environment
@@ -206,7 +206,18 @@ most likely it was temporary technical problem on Apple side.
   - subscription status remains to be `true`
   - reviewer doesn't see the button to subscribe and decides that
     subscription functionality is not implemented
-  - binary is rejected :(
+  - binary is rejected in iTunes Connect :(
+
+  solution? I guess production releases shouldn't be tested by sandbox
+  testers since we can't tell sandbox tester from real user inside our
+  application - it's not our application user but currently signed in
+  Apple ID on iPhone itself. so we always have to assume `production`
+  environment when validating receipt in production release.
+
+  the only we can do here is to change behaviour of our application and
+  set default subscription status to `false` so that button to subscribe
+  is shown by default - it will be always shown for sandbox tester since
+  all subsequent subscription status checks will fail.
 
 prepare release with subscription
 ---------------------------------

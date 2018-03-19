@@ -188,7 +188,7 @@ most likely it was temporary technical problem on Apple side.
   function of `iap-receipt-validator` package when trying to validate receipt
   of sandbox tester.
 
-  so switch to `development` environment or send `production` environment
+  so switch to `development` environment or send `development` environment
   to `iapReceiptValidator` function regardless of current environment.
 
 prepare release with subscription

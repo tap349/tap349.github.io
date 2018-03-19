@@ -344,7 +344,7 @@ just like sandbox testers they:
 when beta tester is making a purchase, all Apple dialogs no longer
 have the line `[Environment: Sandbox]` (like for sandbox testers).
 
-prepare release with subscription
+publish release with subscription
 ---------------------------------
 
 ### fill review information
@@ -403,7 +403,32 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 - `Done` (button to select IAP and close popup window)
 - `Save` (button to save changes to app version)
 
-#### troubleshooting
+### troubleshooting
+
+- `Your app is using the Advertising Identifier (IDFA)`
+
+  when trying to submit a binary:
+
+  ```
+  Your app is using the Advertising Identifier (IDFA).
+  You must either provide details about the IDFA usage or
+  remove it from the app and submit your binary again.
+  ```
+
+  <https://developers.google.com/admob/ios/download>:
+
+  > The Mobile Ads SDK for iOS utilizes Apple's advertising identifier (IDFA).
+
+  | IC: `My Apps` → `<my_app>` → `App Store` (tab)
+  | `3.14 Prepare for Submission` (left menu) → `Submit for Review` (button)
+
+  - `Does this app use the Advertising Identifier (IDFA)?`: [x] `Yes`
+  - `This app uses the Advertising Identifier to (select all that apply):`
+    - [x] `Serve advertisements within the app`
+    - [ ] `Attribute this app installation to a previously served advertisement`
+    - [ ] `Attribute an action taken within this app to a previously served advertisement`
+  - [x] `I, <my_name>, confirm that this app...`
+  - `Submit` (button)
 
 - binary rejected (release didn't pass a review because of IAP)
 

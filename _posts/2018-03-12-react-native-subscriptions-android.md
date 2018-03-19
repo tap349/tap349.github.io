@@ -552,7 +552,7 @@ in both cases `react-native-billing` rejects promise with this error message:
 Purchase or subscribe failed with error: <error_code>
 ```
 
-prepare release with subscription
+publish release with subscription
 ---------------------------------
 
 ### update tax info (if necessary)

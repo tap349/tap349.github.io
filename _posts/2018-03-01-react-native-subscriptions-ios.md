@@ -193,6 +193,20 @@ below for details).
 
 ### troubleshooting
 
+- `App installation failed. An unknown error has occurred.`
+
+  modal window with this error is shown in Xcode when trying to run
+  application on real device.
+
+  <https://stackoverflow.com/a/41138265/3632318>:
+
+  - close Xcode
+  - unplug device
+  - uninstall application from device
+  - open Xcode
+  - clean build in Xcode
+  - run application on device again
+
 - `Sandbox receipt sent to Production environment`
 
   current environment is `production` and it's passed to `iapReceiptValidator`
@@ -238,6 +252,15 @@ below for details).
 
   I guess all of this should be properly taken down in review notes for IAP in
   iTunes Connect.
+
+  <https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/AppReview.html>:
+
+  > When validating receipts on your server, your server needs to be able
+  > to handle a production-signed app getting its receipts from Apple’s test
+  > environment. The recommended approach is for your production server
+  > to always validate receipts against the production App Store first. If
+  > validation fails with the error code “Sandbox receipt used in production”,
+  > validate against the test environment instead.
 
 prepare release with subscription
 ---------------------------------

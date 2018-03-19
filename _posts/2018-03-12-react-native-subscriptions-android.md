@@ -236,7 +236,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
 - `Authentication is required. You need to sign in to your Google Account`
 
   where | when
-  ---   | ---
+  --- | ---
   standard in-app Google popup | testing subscription with static responses
 
   1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>
@@ -248,8 +248,8 @@ altogether - or else you'll get `String resource ID #0x0` error.
 - `This version of the application is not configured for billing through Google Play`
 
   where | when
-  ---   | ---
-  standard in-app Google popup | trying to subscribe using reserved product ID (`android.test.purchased`)
+  --- | ---
+  standard in-app Google popup | subscribe using reserved product ID (`android.test.purchased`)
 
   it has turned out you can only purchase when testing with static responses but
   not subscribe. all other subscription related methods from `react-native-billing`
@@ -392,16 +392,16 @@ test account email each time subscription is renewed or cancelled).
 - `The item you requested is not available for purchase.`
 
   where | when
-  ---   | ---
-  standard in-app Google popup | trying to purchase a subscription
+  --- | ---
+  standard in-app Google popup | purchase a subscription
 
   current primary account is not a license test account.
 
 - `The publisher cannot purchase the item.`
 
   where | when
-  ---   | ---
-  standard in-app Google popup | trying to purchase a subscription
+  --- | ---
+  standard in-app Google popup | purchase a subscription
 
   you cannot use developer account to test real subscriptions -
   even with test transactions (and of course you cannot make real

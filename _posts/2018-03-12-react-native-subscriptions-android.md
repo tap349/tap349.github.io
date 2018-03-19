@@ -235,9 +235,16 @@ altogether - or else you'll get `String resource ID #0x0` error.
 
 - `Authentication is required. You need to sign in to your Google Account`
 
-  where | when
-  --- | ---
-  standard in-app Google popup | testing subscription with static responses
+  <table>
+    <tr>
+      <th>where</th>
+      <th>when</th>
+    </tr>
+    <tr>
+      <td>standard in-app Google popup</td>
+      <td>testing subscription with static responses</td>
+    </tr>
+  </table>
 
   1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>
 
@@ -247,9 +254,16 @@ altogether - or else you'll get `String resource ID #0x0` error.
 
 - `This version of the application is not configured for billing through Google Play`
 
-  where | when
-  --- | ---
-  standard in-app Google popup | subscribe using reserved product ID (`android.test.purchased`)
+  <table>
+    <tr>
+      <th>where</th>
+      <th>when</th>
+    </tr>
+    <tr>
+      <td>standard in-app Google popup</td>
+      <td>trying to subscribe using reserved product ID (`android.test.purchased`)</td>
+    </tr>
+  </table>
 
   it has turned out you can only purchase when testing with static responses but
   not subscribe. all other subscription related methods from `react-native-billing`
@@ -391,17 +405,31 @@ test account email each time subscription is renewed or cancelled).
 
 - `The item you requested is not available for purchase.`
 
-  where | when
-  --- | ---
-  standard in-app Google popup | purchase a subscription
+  <table>
+    <tr>
+      <th>where</th>
+      <th>when</th>
+    </tr>
+    <tr>
+      <td>standard in-app Google popup</td>
+      <td>purchasing a subscription</td>
+    </tr>
+  </table>
 
   current primary account is not a license test account.
 
 - `The publisher cannot purchase the item.`
 
-  where | when
-  --- | ---
-  standard in-app Google popup | purchase a subscription
+  <table>
+    <tr>
+      <th>where</th>
+      <th>when</th>
+    </tr>
+    <tr>
+      <td>standard in-app Google popup</td>
+      <td>purchasing a subscription</td>
+    </tr>
+  </table>
 
   you cannot use developer account to test real subscriptions -
   even with test transactions (and of course you cannot make real

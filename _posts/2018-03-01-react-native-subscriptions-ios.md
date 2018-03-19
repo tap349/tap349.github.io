@@ -229,7 +229,7 @@ below for details).
       <th>when</th>
     </tr>
     <tr>
-      <td>`Log.error`</td>
+      <td>Log.error</td>
       <td>checking subscription status</td>
     </tr>
   </table>
@@ -247,7 +247,7 @@ below for details).
       <th>when</th>
     </tr>
     <tr>
-      <td>`Log.error`</td>
+      <td>Log.error</td>
       <td>checking subscription status</td>
     </tr>
   </table>

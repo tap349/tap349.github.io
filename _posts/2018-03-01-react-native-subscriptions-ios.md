@@ -272,7 +272,7 @@ below for details).
   to its default value `false` which won't change even though subscription has
   been just purchased.
 
-  I guess all of this should be properly taken down in review notes for IAP in
+  I guess all of this should be taken down properly in review notes for IAP in
   iTunes Connect.
 
   <https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/AppReview.html>:

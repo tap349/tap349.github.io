@@ -440,6 +440,9 @@ test account email each time subscription is renewed or cancelled).
   1. <https://github.com/idehub/react-native-billing/issues/62>
   2. <https://github.com/idehub/react-native-billing/issues/57>
 
+  NOTE: this problem is Android-specific since we validate receipt by
+        ourselves on iOS (and subscription status is always up-to-date).
+
   when test subscription is cancelled, `isSubscribed` keeps on returning
   true. reinstalling application and refreshing subscription status cache
   with `loadOwnedPurchasesFromGoogle` doesn't help - most likely there is

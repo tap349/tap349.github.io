@@ -180,6 +180,17 @@ most likely it was temporary technical problem on Apple side.
 
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
+#### troubleshooting
+
+- `Sandbox receipt sent to Production environment`
+
+  current environment is `production` and it's passed to `iapReceiptValidator`
+  function of `iap-receipt-validator` package when trying to validate receipt
+  of sandbox tester.
+
+  so switch to `development` environment or send `production` environment
+  to `iapReceiptValidator` function regardless of current environment.
+
 prepare release with subscription
 ---------------------------------
 

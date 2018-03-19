@@ -214,10 +214,16 @@ most likely it was temporary technical problem on Apple side.
   Apple ID on iPhone itself. so we always have to assume `production`
   environment when validating receipt in production release.
 
-  the only we can do here is to change behaviour of our application and
-  set default subscription status to `false` so that button to subscribe
-  is shown by default - it will be always shown for sandbox tester since
-  all subsequent subscription status checks will fail.
+  the only thing we can do here is to change behaviour of our application
+  and set default subscription status to `false` so that button to subscribe
+  is shown by default - all subsequent subscription status checks will fail
+  so it will be always shown until a sandbox tester purchases a subscription.
+  then subscription status should change to `true` though since this is done
+  inside operation to purchase a subscription - not within operation to check
+  subscription status which keeps on failing forever. it's all okay until the
+  user decides to restart application - then subscription status is reset to
+  its default value `false` which won't change even though subscription has
+  been purchased.
 
 prepare release with subscription
 ---------------------------------

@@ -33,6 +33,16 @@ notes for both iOS and Android
   - hot reloading and live reload don't work
   - you cannot debug JS remotely
 
+all in all these combinations of environment and build configuration are
+possible in both iOS and Android:
+
+- development + debug
+- production + debug
+- production + release
+
+the value of `__DEV__` variable is determined by current build
+configuration (debug or release) - not by current environment.
+
 iOS
 ---
 

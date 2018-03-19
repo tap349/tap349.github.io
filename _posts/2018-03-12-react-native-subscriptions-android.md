@@ -189,7 +189,7 @@ emulator (app):
 > Error: InAppBilling is not available. InAppBilling will not work/test on
 > an emulator, only a physical Android device.
 
-### static responses
+### testing with static responses
 
 YOU DON'T NEED TO TOUCH GOOGLE PLAY CONSOLE AT ALL TO TEST WITH STATIC RESPONSES.
 
@@ -262,7 +262,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
 
   > Subscriptions can't be tested using static responses...
 
-### test subscriptions
+### testing with test subscriptions
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#test-purchases-sandbox>
 
@@ -332,11 +332,11 @@ $ adb uninstall com.iceperkapp
 NOTE: `com.iceperkapp` is both package name and `applicationId`
       from _android/app/build.gradle_.
 
-#### set either development or production environment
+#### set either development or production environment in application
 
 it's possible to purchase test subscriptions in both `development`
-and `production` environments - just don't forget to forward ports
-in `development`.
+and `production` environments (see the next section) - just don't
+forget to forward ports in `development`.
 
 #### run or install application on real device
 
@@ -345,7 +345,7 @@ in `development`.
 NOTE: application (being installed now) and APK (uploaded to GPC)
       must have the same version name and build number.
 
-TODO: need to check previous statement and find its source.
+TODO: check previous statement and find its source.
 
 - run application in debug mode
 
@@ -423,7 +423,7 @@ test account email each time subscription is renewed or cancelled).
   UPDATE: `isSubscribed` is still true 12 hours later.
   UPDATE: `isSubscribed` is eventually false 2 days later.
 
-### real subscriptions
+### testing with real subscriptions
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#transactions>
 2. <https://github.com/idehub/react-native-billing#testing-with-your-own-in-app-products>

@@ -176,6 +176,12 @@ in the end I could make a purchase using not verified test account.
 I have succesfully verified email of another sandbox tester -
 most likely it was temporary technical problem on Apple side.
 
+### set either development or production environment in application
+
+it's possible to purchase test subscriptions in both `development`
+and `production` environments but read the caveats about `production`
+environment in the next section.
+
 ### run application on real device
 
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
@@ -213,16 +219,16 @@ below for details).
     subscription functionality is not implemented
   - binary is rejected in iTunes Connect :(
 
-  solution? I guess production releases shouldn't be tested by sandbox
-  testers since we can't tell sandbox tester from real user inside our
-  application - it's not our application user but currently signed in
-  Apple ID on iPhone itself. so we always have to assume `production`
-  environment when validating receipt in production release.
+  solution? I guess production releases shouldn't be tested by sandbox testers at
+  all since we can't tell sandbox tester from real user inside our application -
+  it's not our application user but currently signed in Apple ID on iPhone itself.
+  so we always have to assume `production` environment when validating receipt in
+  production release.
 
-  the only thing we can do here is to change behaviour of our application
-  and set default subscription status to `false` so that button to subscribe
-  is shown by default - all subsequent subscription status checks will fail
-  so the button will be always shown until sandbox tester makes a purchase.
+  the only thing we can do here is to change behaviour of our application and
+  set default subscription status to `false` so that button to subscribe is
+  shown by default - all subsequent subscription status checks will fail so
+  the button will be always shown until sandbox tester makes a purchase.
   then subscription status should change to `true` though since this is done
   inside operation to purchase a subscription - not within operation to check
   subscription status which keeps on failing forever. and it's all okay until

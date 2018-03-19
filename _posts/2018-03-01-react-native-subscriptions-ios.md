@@ -176,11 +176,16 @@ in the end I could make a purchase using not verified test account.
 I have succesfully verified email of another sandbox tester -
 most likely it was temporary technical problem on Apple side.
 
-#### run application on real device
+### run application on real device
 
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
-#### troubleshooting
+sandbox tester can purchase a subscription in production release but
+subscription status cannot be checked because sandbox receipt cannot
+be validated in `production` environment (see `troubleshooting` section
+below for details).
+
+### troubleshooting
 
 - `Sandbox receipt sent to Production environment`
 
@@ -217,13 +222,13 @@ most likely it was temporary technical problem on Apple side.
   the only thing we can do here is to change behaviour of our application
   and set default subscription status to `false` so that button to subscribe
   is shown by default - all subsequent subscription status checks will fail
-  so it will be always shown until a sandbox tester purchases a subscription.
+  so the button will be always shown until sandbox tester makes a purchase.
   then subscription status should change to `true` though since this is done
   inside operation to purchase a subscription - not within operation to check
-  subscription status which keeps on failing forever. it's all okay until the
-  user decides to restart application - then subscription status is reset to
-  its default value `false` which won't change even though subscription has
-  been purchased.
+  subscription status which keeps on failing forever. and it's all okay until
+  the user decides to restart application - then subscription status is reset
+  to its default value `false` which won't change even though subscription has
+  been just purchased.
 
 prepare release with subscription
 ---------------------------------

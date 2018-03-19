@@ -114,6 +114,9 @@ test subscriptions:
 - renew 5 times only (cancelled automatically afterwards)
 - cannot be managed (say, cancelled manually)
 
+test subscriptions are not created separately - they are real subscriptions
+but with special characteristics and behaviour sandbox testers.
+
 <https://forums.developer.apple.com/thread/14702>:
 
 > the sandbox environment handles auto-renewing subscriptions in an automated
@@ -182,6 +185,9 @@ it's possible to purchase test subscriptions in both `development` and
 `production` environments but read the caveats about validating receipt
 from sandbox tester in `production` environment in the next section.
 
+NOTE: there are lots of `Network request failed` errors when trying
+      to purchase test subscription - so keep on trying :)
+
 ### run application on real device
 
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
@@ -195,8 +201,8 @@ below for details).
 
 - `App installation failed. An unknown error has occurred.`
 
-  - where: Xcode modal window
-  - when: running applicatino on real device
+  where: | Xcode modal window
+  when:  | running application on real device
 
   <https://stackoverflow.com/a/41138265/3632318>:
 

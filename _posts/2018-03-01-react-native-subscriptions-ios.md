@@ -178,9 +178,9 @@ most likely it was temporary technical problem on Apple side.
 
 ### set either development or production environment in application
 
-it's possible to purchase test subscriptions in both `development`
-and `production` environments but read the caveats about `production`
-environment in the next section.
+it's possible to purchase test subscriptions in both `development` and
+`production` environments but read the caveats about validating receipt
+from sandbox tester in `production` environment in the next section.
 
 ### run application on real device
 

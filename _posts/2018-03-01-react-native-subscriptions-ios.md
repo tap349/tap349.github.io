@@ -201,9 +201,16 @@ below for details).
 
 - `App installation failed. An unknown error has occurred.`
 
-  where | when
-  --- | ---
-  Xcode modal window | run application on real device
+  <table>
+    <tr>
+      <th>where</th>
+      <th>when</th>
+    </tr>
+    <tr>
+      <td>Xcode modal window</td>
+      <td>trying to run application on real device</td>
+    </tr>
+  </table>
 
   <https://stackoverflow.com/a/41138265/3632318>:
 
@@ -216,9 +223,16 @@ below for details).
 
 - `not_available`
 
-  where | when
-  --- | ---
-  `Log.error` | check subscription status
+  <table>
+    <tr>
+      <th>where</th>
+      <th>when</th>
+    </tr>
+    <tr>
+      <td>`Log.error`</td>
+      <td>checking subscription status</td>
+    </tr>
+  </table>
 
   there is no signed in Apple ID => no receipt is found.
 
@@ -227,9 +241,16 @@ below for details).
 
 - `Sandbox receipt sent to Production environment`
 
-  where | when
-  --- | ---
-  `Log.error` | check subscription status
+  <table>
+    <tr>
+      <th>where</th>
+      <th>when</th>
+    </tr>
+    <tr>
+      <td>`Log.error`</td>
+      <td>checking subscription status</td>
+    </tr>
+  </table>
 
   current environment is `production` and it's passed to `iapReceiptValidator`
   function of `iap-receipt-validator` package when trying to validate receipt

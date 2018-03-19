@@ -203,8 +203,10 @@ most likely it was temporary technical problem on Apple side.
   - by default subscription status is `true` (before any checks)
   - checking subscription status always fails for sandbox tester in
     production release
-  - subscription status remains to be `true` and reviewer doesn't see
-    the button to subscribe
+  - subscription status remains to be `true`
+  - reviewer doesn't see the button to subscribe and decides that
+    subscription functionality is not implemented
+  - binary is rejected :(
 
 prepare release with subscription
 ---------------------------------

@@ -341,6 +341,9 @@ just like sandbox testers they:
 
 #### install application from TestFlight
 
+when beta tester is making a purchase, all Apple dialogs no longer
+have the line `[Environment: Sandbox]` (like for sandbox testers).
+
 prepare release with subscription
 ---------------------------------
 

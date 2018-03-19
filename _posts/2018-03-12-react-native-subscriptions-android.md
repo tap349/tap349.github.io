@@ -241,7 +241,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
       <th>when</th>
     </tr>
     <tr>
-      <td>standard in-app Google popup</td>
+      <td>standard in-app Google dialog</td>
       <td>testing subscription with static responses</td>
     </tr>
   </table>
@@ -260,7 +260,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
       <th>when</th>
     </tr>
     <tr>
-      <td>standard in-app Google popup</td>
+      <td>standard in-app Google dialog</td>
       <td>trying to subscribe using reserved product ID (`android.test.purchased`)</td>
     </tr>
   </table>
@@ -359,8 +359,8 @@ forget to forward ports in `development`.
 
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
-NOTE: application (being installed now) and APK (uploaded to GPC)
-      must have the same version name and build number.
+NOTE: application (being installed now) and APK (uploaded to GPC) must
+      have the same version name and build number.
 
 TODO: check previous statement and find the source of this information.
 
@@ -402,7 +402,7 @@ test account email each time subscription is renewed or cancelled).
       <th>when</th>
     </tr>
     <tr>
-      <td>standard in-app Google popup</td>
+      <td>standard in-app Google dialog</td>
       <td>purchasing a subscription</td>
     </tr>
   </table>
@@ -417,7 +417,7 @@ test account email each time subscription is renewed or cancelled).
       <th>when</th>
     </tr>
     <tr>
-      <td>standard in-app Google popup</td>
+      <td>standard in-app Google dialog</td>
       <td>purchasing a subscription</td>
     </tr>
   </table>
@@ -483,9 +483,9 @@ release review summary when trying to publish release to alpha without testers:
 
 => license testers cannot make real purchases!
 
-so I have removed myself from license testers (`*.tap349@gmail.com` email) and
+so I've removed myself from license testers (`*.tap349@gmail.com` email) and
 added to alpha testers instead (see below). also unlike for license test account
-it's important that alpha tester account is linked to a valid payment method -
+it's important that alpha tester account be linked to a valid payment method -
 so make sure to add payment info for this account before trying to make a purchase.
 
 | GPC: `Settings` (left menu)

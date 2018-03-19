@@ -15,10 +15,14 @@ categories: [react-native]
 
 1. <https://facebook.github.io/react-native/docs/running-on-device.html>
 
-notes for both iOS and Android
-------------------------------
+debug and release modes
+-----------------------
 
-- when running application in debug mode:
+NOTE: all the notes below are true for both iOS and Android.
+
+NOTE: APKs and TestFlight builds are always built in release mode.
+
+- in debug mode:
 
   - `__DEV__` variable is set to true
   - Developer Menu is available - shake real device to access it
@@ -26,23 +30,21 @@ notes for both iOS and Android
   - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu
     to open React Native Debugger
 
-- when running application in release mode
-  (same as installing APK or TestFlight build):
+- in release mode:
 
   - `__DEV__` variable is set to false
   - Developer Menu is not available
   - hot reloading and live reload don't work
   - you cannot debug JS remotely
 
-all in all these combinations of environment and build configuration are
-possible in both iOS and Android:
+all possible combinations of environment and build configuration are:
 
 - development + debug
 - production + debug
 - production + release
 
-the value of `__DEV__` variable is determined by current build
-configuration (debug or release) - not by current environment.
+the value of `__DEV__` variable is determined by current build configuration
+(debug or release) - not by current environment.
 
 iOS
 ---

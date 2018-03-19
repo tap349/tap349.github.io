@@ -345,6 +345,8 @@ in `development`.
 NOTE: application (being installed now) and APK (uploaded to GPC)
       must have the same version name and build number.
 
+TODO: need to check previous statement and find its source.
+
 - run application in debug mode
 
   - `__DEV__` variable is set to true

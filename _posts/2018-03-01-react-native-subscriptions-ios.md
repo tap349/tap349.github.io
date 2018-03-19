@@ -191,6 +191,21 @@ most likely it was temporary technical problem on Apple side.
   so switch to `development` environment or send `development` environment
   to `iapReceiptValidator` function regardless of current environment.
 
+- checking subscription status always fails in production release
+
+  this is exactly the previous error - you cannot validate receipt of
+  sandbox tester in `production` environment.
+
+  this is why Apple reviewer couldn't test subscription:
+
+  - he is signed in as sandbox tester on his iPhone
+  - he uses production release - so it's a `production` environment
+  - by default subscription status is `true` (before any checks)
+  - checking subscription status always fails for sandbox tester in
+    production release
+  - subscription status remains to be `true` and reviewer doesn't see
+    the button to subscribe
+
 prepare release with subscription
 ---------------------------------
 

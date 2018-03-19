@@ -230,6 +230,9 @@ below for details).
   to its default value `false` which won't change even though subscription has
   been just purchased.
 
+  I guess all of this should be properly taken down in review notes for IAP in
+  iTunes Connect.
+
 prepare release with subscription
 ---------------------------------
 

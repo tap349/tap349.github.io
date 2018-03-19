@@ -191,11 +191,32 @@ NOTE: there are lots of `Network request failed` errors when trying
 ### run application on real device
 
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
+2. <http://pinkstone.co.uk/deploying-your-app-from-xcode-to-a-device-with-release-build-configuration/>
 
 sandbox tester can purchase a subscription in production release but
 subscription status cannot be checked because sandbox receipt cannot
 be validated in `production` environment (see `troubleshooting` section
 below for details).
+
+- run application in debug mode (default build configuration)
+
+  | Xcode: `Product` (menu) → `Scheme` → `Edit Scheme...`
+  | `Run` (left menu) → `Info` (tab)
+
+  - `Build Configuration` (combobox): `Debug`
+  - `Close` (button)
+
+  | Xcode: `▶` (button in toolbar)
+
+- run application in release mode
+
+  | Xcode: `Product` (menu) → `Scheme` → `Edit Scheme...`
+  | `Run` (left menu) → `Info` (tab)
+
+  - `Build Configuration` (combobox): `Release`
+  - `Close` (button)
+
+  | Xcode: `▶` (button in toolbar)
 
 ### troubleshooting
 

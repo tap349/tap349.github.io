@@ -15,11 +15,23 @@ categories: [react-native]
 
 1. <https://facebook.github.io/react-native/docs/running-on-device.html>
 
-notes for both iOS and Android:
+notes for both iOS and Android
+------------------------------
 
-- hot reloading works as a rule (use live reload if it doesn't)
-- shake real device to access Developer Menu
-- select `Debug JS Remotely` in Developer Menu to open React Native Debugger
+- when running application in debug mode:
+
+  - `__DEV__` variable is set to true
+  - Developer Menu is available - shake real device to access it
+  - hot reloading works as a rule (use live reload if it doesn't)
+  - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu
+    to open React Native Debugger
+
+- when running application in release mode (also when installing APK):
+
+  - `__DEV__` variable is set to false
+  - Developer Menu is not available
+  - hot reloading and live reload don't work
+  - you cannot debug JS remotely
 
 iOS
 ---

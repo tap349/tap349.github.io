@@ -362,21 +362,15 @@ forget to forward ports in `development`.
 NOTE: application (being installed now) and APK (uploaded to GPC)
       must have the same version name and build number.
 
-TODO: check previous statement and find its source.
+TODO: check previous statement and find the source of this information.
 
 - run application in debug mode
-
-  - `__DEV__` variable is set to true
-  - you can debug JS remotely
 
   ```sh
   $ react-native run-android
   ```
 
 - run application in release mode
-
-  - `__DEV__` variable is set to false
-  - you cannot debug JS remotely
 
   ```sh
   $ react-native run-android --variant release
@@ -386,10 +380,7 @@ TODO: check previous statement and find its source.
 
   1. <https://developer.android.com/studio/build/building-cmdline.html#RunningOnDevice>
 
-  same as running application in release mode:
-
-  - `__DEV__` variable is set to false
-  - you cannot debug JS remotely
+  it's almost the same as running application in release mode.
 
   ```sh
   $ adb -d install android/app/build/outputs/apk/app-release.apk

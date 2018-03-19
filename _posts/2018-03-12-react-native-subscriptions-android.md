@@ -465,7 +465,7 @@ test account email each time subscription is renewed or cancelled).
 > distribution channel. This allows you to publish the app to the Google
 > Play Store, but limit its availability to just the testers you designate.
 
-#### add alpha testers (alpha test accounts, alpha tester accounts)
+#### add alpha testers (alpha tester accounts)
 
 release review summary when trying to publish release to alpha without testers:
 
@@ -485,8 +485,8 @@ release review summary when trying to publish release to alpha without testers:
 
 so I have removed myself from license testers (`*.tap349@gmail.com` email) and
 added to alpha testers instead (see below). also unlike for license test account
-it's important that alpha test account is linked to a valid payment method - so
-make sure to add payment info for this account before trying to make a purchase.
+it's important that alpha tester account is linked to a valid payment method -
+so make sure to add payment info for this account before trying to make a purchase.
 
 | GPC: `Settings` (left menu)
 | `Manage testers` (left menu) → `CREATE LIST` (button)

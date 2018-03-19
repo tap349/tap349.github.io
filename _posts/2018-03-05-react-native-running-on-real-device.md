@@ -26,7 +26,8 @@ notes for both iOS and Android
   - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu
     to open React Native Debugger
 
-- when running application in release mode (also when installing APK):
+- when running application in release mode
+  (same as installing APK or TestFlight build):
 
   - `__DEV__` variable is set to false
   - Developer Menu is not available

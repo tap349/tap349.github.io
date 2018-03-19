@@ -18,6 +18,9 @@ categories: [react-native, ios]
 3. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 4. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
 
+- IC - iTunes Connect
+- IAP - in-app purchase
+
 implement subscriptions in application
 --------------------------------------
 
@@ -29,18 +32,18 @@ implement subscriptions in application
 
 ### obtain a shared secret
 
-| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
-| `In-App Purchases (left menu)` → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
+| IC: `My Apps` → `<my_app>` → `Features` (tab)
+| `In-App Purchases` (left menu) → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
 
 shared secret is used to validate receipts with `iap-receipt-validator`
 npm package.
 
-add subscription in iTunes Connect
-----------------------------------
+add subscription in IC
+----------------------
 
-### create in-app purchase (IAP)
+### create IAP
 
-| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `In-App Purchases` (section) → `⨁` (link)
 
 > Select the in-app purchase you want to create.
@@ -67,7 +70,7 @@ add subscription in iTunes Connect
 
 ### configure IAP
 
-| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `<subscription>` (link)
 
 - [x] `Cleared for Sale`
@@ -88,7 +91,7 @@ add subscription in iTunes Connect
 
 ### configure subscription group
 
-| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<my_app>` → `Features` (tab)
 | `<subscription_group>` (link)
 
 it's required to add localization for subscription group as well:
@@ -123,16 +126,16 @@ but with special characteristics and behaviour sandbox testers.
 > fashion - that is subscription periods are shortened and renew only 5 times
 > and not controlled through the subscription management screen.
 
-### create sandbox tester (test user)
+### sandbox testing
+
+#### add sandbox testers (sandbox tester accounts)
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
-| iTunes Connect: `My Apps` → `Users and Roles` → `Sandbox Testers` (tab)
+| IC: `My Apps` → `Users and Roles` → `Sandbox Testers` (tab)
 | `Testers` (section) → `⨁` (link)
 
-NOTE: test account == sandbox tester account.
-
-tips and notes regarding test account:
+tips and notes regarding sandbox tester:
 
 - new sandbox tester shouldn't have an existing Apple ID
 
@@ -149,14 +152,14 @@ tips and notes regarding test account:
   tester account is not a fully functional one and tester's Apple ID cannot
   be used to access iTunes Store or App Store.
 
-  occasionally `Apple ID Verification` alert dialog might appear asking to
-  enter password for test account in `Settings` - it's safe to ignore it and
-  press `Not Now` button all the time.
+  occasionally `Apple ID Verification` alert dialog might appear asking
+  to enter password for sandbox tester account in `Settings` - it's safe
+  to ignore it and press `Not Now` button all the time.
 
-#### about verification of sandbox tester email
+##### about verification of sandbox tester email
 
-generally speaking it's necessary to verify new test account by following
-the link sent to specified email:
+generally speaking it's necessary to verify new sandbox tester account by
+following the link sent to specified email:
 
 > You must validate your e-mail, or any purchases you make will silently fail.
 
@@ -172,23 +175,23 @@ because it violates the following Content Security Policy directive...
 IDK if it matters or not but I signed in to iCloud with this account
 (in browser) and completed registration by adding 3 secret questions.
 
-in the end I could make a purchase using not verified test account.
+in the end I could make a purchase using not verified sandbox tester account.
 
 **UPDATE (2018-03-19)**
 
-I have succesfully verified email of another sandbox tester -
+I have successfully verified email of another sandbox tester -
 most likely it was temporary technical problem on Apple side.
 
-### set either development or production environment in application
+#### set either development or production environment in application
 
 it's possible to purchase test subscriptions in both `development` and
 `production` environments but read the caveats about validating receipt
 from sandbox tester in `production` environment in the next section.
 
-NOTE: there are lots of `Network request failed` errors when trying
-      to purchase test subscription - so keep on trying :)
+NOTE: there were lots of `Network request failed` errors when trying
+      to purchase a test subscription - so keep on trying.
 
-### run application on real device
+#### run application on real device
 
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 2. <http://pinkstone.co.uk/deploying-your-app-from-xcode-to-a-device-with-release-build-configuration/>
@@ -218,7 +221,7 @@ below for details).
 
   | Xcode: `▶` (button in toolbar)
 
-### troubleshooting
+#### troubleshooting
 
 - `App installation failed. An unknown error has occurred.`
 
@@ -282,20 +285,20 @@ below for details).
 
 - checking subscription status always fails in production release
 
-  this is exactly the previous error - you cannot validate receipt of
+  this is exactly the error above - you cannot validate receipt of
   sandbox tester in `production` environment.
 
   and this is why Apple reviewer couldn't test subscription:
 
-  - he is signed in as sandbox tester on his iPhone
+  - he signs in as sandbox tester on his iPhone
   - he uses production release - so it's a `production` environment
   - by default subscription status is `true` (before any checks)
   - checking subscription status always fails for sandbox tester in
     production release
   - subscription status remains to be `true`
-  - reviewer doesn't see the button to subscribe and decides that
-    subscription functionality is not implemented
-  - binary is rejected in iTunes Connect :(
+  - reviewer doesn't see subscribe button and decides that subscription
+    functionality is not implemented
+  - binary is rejected in IC :(
 
   solution? I guess production releases shouldn't be tested by sandbox testers at
   all since we can't tell sandbox tester from real user inside our application -
@@ -303,19 +306,17 @@ below for details).
   so we always have to assume `production` environment when validating receipt in
   production release.
 
-  the only thing we can do here is to change behaviour of our application and
-  set default subscription status to `false` so that button to subscribe is
-  shown by default - all subsequent subscription status checks will fail so
-  the button will be always shown until sandbox tester makes a purchase.
-  then subscription status should change to `true` though since this is done
-  inside operation to purchase a subscription - not within operation to check
-  subscription status which keeps on failing forever. and it's all okay until
-  the user decides to restart application - then subscription status is reset
-  to its default value `false` which won't change even though subscription has
-  been just purchased.
+  one thing we can do here is to change behaviour of our application and set
+  default subscription status to `false` so that subscribe button is shown by
+  default - all subsequent subscription status checks will fail so the button
+  will always be shown until sandbox tester makes a purchase.
 
-  I guess all of this should be taken down properly in review notes for IAP in
-  iTunes Connect.
+  after making a purchase subscription status should change to `true` though
+  since this is done inside operation to purchase a subscription - not within
+  operation to check subscription status which keeps on failing forever. and
+  it's all okay until the user decides to restart application - subscription
+  status is then reset to its default value `false` (which is incorrect) but
+  this value won't change because of failing checks.
 
   <https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/AppReview.html>:
 
@@ -326,6 +327,20 @@ below for details).
   > validation fails with the error code “Sandbox receipt used in production”,
   > validate against the test environment instead.
 
+### beta testing
+
+| IC: `My Apps` → `<my_app>` → `TestFlight` (tab)
+| `All Testers` (left menu)
+
+beta testers (or just testers) are IC users who are invited to test
+TestFlight builds - that is they must have been already added before.
+just like sandbox testers they:
+
+- deal with test subscriptions only (shortened periods, etc.)
+- are not charged when making IAP
+
+#### install application from TestFlight
+
 prepare release with subscription
 ---------------------------------
 
@@ -335,7 +350,7 @@ prepare release with subscription
 2. <https://developer.apple.com/app-store/review/guidelines/>
 3. <https://help.apple.com/itunes-connect/developer/#/dev84b80958f>
 
-| iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<my_app>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `<subscription>` (link) → `Review Information` (section)
 
 - `Screenshot`: screenshot of your app with subscription popup
@@ -360,7 +375,7 @@ changed from `Missing Metadata` to `Ready to Submit`.
 > been submitted for review, additional in-app purchases can be submitted
 > using the table below.
 
-| iTunes Connect: `My Apps` → `<my_app>` → `App Store` (tab)
+| IC: `My Apps` → `<my_app>` → `App Store` (tab)
 | `⨁ VERSION OR PLATFORM` (link in left menu) → `iOS` (popup menu)
 
 - `Store Version Number`: new version number (say, `3.14`)
@@ -372,7 +387,7 @@ new app version has `Prepare for Submission` status now.
 
 1. <https://stackoverflow.com/a/42191936/3632318>
 
-| iTunes Connect: `My Apps` → `<my_app>` → `App Store` (tab)
+| IC: `My Apps` → `<my_app>` → `App Store` (tab)
 | `3.14 Prepare for Submission` (left menu) → `In-App Purchases` (section) → `⨁` (link)
 
 NOTE: `In-App Purchases` section is available only if you've created IAP before.
@@ -389,7 +404,7 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 
 - binary rejected (release didn't pass a review because of IAP)
 
-| iTunes Connect: `My Apps` → `<my_app>` → `Activity` (tab)
+| IC: `My Apps` → `<my_app>` → `Activity` (tab)
 | `App Store Versions` (left menu) → `Resolution Center` (link)
 
 > **2.** 1 Performance: App Completeness

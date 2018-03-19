@@ -186,7 +186,7 @@ test subscription on real device
 
 emulator (app):
 
-> Error: InAppBilling is not available. InAppBilling will not work/test on
+> InAppBilling is not available. InAppBilling will not work/test on
 > an emulator, only a physical Android device.
 
 ### testing with static responses
@@ -233,20 +233,21 @@ altogether - or else you'll get `String resource ID #0x0` error.
 
 #### troubleshooting
 
-- `Error: Authentication is required. You need to sign in to your Google Account`
+- `Authentication is required. You need to sign in to your Google Account`
+
+  - where: standard Google popup in application
+  - when: testing subscription with static responses
 
   1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>
-
-  I got this error when I tried to test subscription with static responses.
 
   in the end I did factory data reset to get rid of the error - though it might
   be sufficient just to remove/add Google account (see also other advice in the
   article mentioned).
 
-- `Error: This version of the application is not configured for billing through Google Play`
+- `This version of the application is not configured for billing through Google Play`
 
-  I got this error when I tried to subscribe using reserved product ID
-  (`android.test.purchased`).
+  - where: standard Google popup in application
+  - when: trying to subscribe using reserved product ID (`android.test.purchased`)
 
   it has turned out you can only purchase when testing with static responses but
   not subscribe. all other subscription related methods from `react-native-billing`
@@ -386,15 +387,19 @@ test account email each time subscription is renewed or cancelled).
 
 #### troubleshooting
 
-- `Error: The item you requested is not available for purchase.`
+- `The item you requested is not available for purchase.`
+
+  - where: standard Google popup in application
+  - when: trying to purchase a subscription
 
   current primary account is not a license test account.
 
-- `Error: The publisher cannot purchase the item.`
+- `The publisher cannot purchase the item.`
 
-  I got this error when I tried to purchase subscription.
+  - where: standard Google popup in application
+  - when: trying to purchase a subscription
 
-  => you cannot use developer account to test real subscriptions -
+  you cannot use developer account to test real subscriptions -
   even with test transactions (and of course you cannot make real
   purchases since you cannot pay to yourself).
 

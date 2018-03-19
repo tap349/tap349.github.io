@@ -195,8 +195,8 @@ below for details).
 
 - `App installation failed. An unknown error has occurred.`
 
-  modal window with this error is shown in Xcode when trying to run
-  application on real device.
+  - where: Xcode modal window
+  - when: running applicatino on real device
 
   <https://stackoverflow.com/a/41138265/3632318>:
 
@@ -207,7 +207,20 @@ below for details).
   - clean build in Xcode
   - run application on device again
 
+- `not_available`
+
+  - where: `Log.error`
+  - when: checking subscription status
+
+  there is no signed in Apple ID => no receipt is found.
+
+  wait for `Sign-In Required` modal window or sign in manually in
+  iPhone's `Settings`.
+
 - `Sandbox receipt sent to Production environment`
+
+  - where: `Log.error`
+  - when: checking subscription status
 
   current environment is `production` and it's passed to `iapReceiptValidator`
   function of `iap-receipt-validator` package when trying to validate receipt

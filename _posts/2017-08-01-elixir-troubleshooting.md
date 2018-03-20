@@ -545,14 +545,84 @@ the pool - AFAIU there was no limit on max number of open connections then.
 
 **UPDATE (2018-03-12)**
 
-I've compared CPU usage of application with and without connection pool -
-it's approximately the same (\< 2% in average, peak usage is about 6-7%,
-max 100 RPM).
+I've compared CPU usage of application with and without connection pool - it's
+approximately the same (less than 2% in average, peak usage is about 6-7%, max
+100 RPM).
 
 **UPDATE (2018-03-19)**
 
 the error is still present - it occurs repeatedly within a short period of time
 (about 1 minute).
+
+**UPDATE (2018-03-20)**
+
+1. <http://erlang.org/pipermail/erlang-questions/2013-September/075275.html>
+2. <https://github.com/benoitc/hackney/pull/136>
+
+<https://stackoverflow.com/a/14388707/3632318> (brilliant answer):
+
+> A TCP/UDP connection is identified by a tuple of five values:
+>
+> {<protocol>, <src addr>, <src port>, <dest addr>, <dest port>}
+>
+> Any unique combination of these values identifies a connection. As a result,
+> no two connections can have the same five values, otherwise the system would
+> not be able to distinguish these connections any longer.
+>
+> The protocol of a socket is set when a socket is created with the socket()
+> function. The source address and port are set with the bind() function.
+> The destination address and port are set with the connect() function.
+
+> If SO_REUSEADDR is enabled on a socket prior to binding it, the socket can
+> be successfully bound unless there is a conflict with another socket bound
+> to **exactly** the same combination of source address and port.
+>
+> ...SO_REUSEADDR has an effect on wildcard addresses, good to know.
+>
+> If SO_REUSEADDR is set for the socket you are trying to bind, another socket
+> bound to the same address and port in state TIME_WAIT is simply ignored,
+> after all its already "half dead", and your socket can bind to exactly the
+> same address without any problem.
+
+> Most people know that bind() may fail with the error EADDRINUSE, however,
+> when you start playing around with address reuse, you may run into the strange
+> situation that connect() fails with that error as well. How can this be?
+>
+> Well, with address reuse, you can bind two sockets of the same protocol to
+> the same source address and port. That means three of those five values are
+> already the same for these two sockets. If you now try to connect both of
+> these sockets also to the same destination address and port, you would create
+> two connected sockets, whose tuples are absolutely identical.
+
+socket lifecycle:
+
+- socket is bound
+- socket is connected
+- socket is closed
+
+so the issue might be with `reuseaddr` option that is turned on by default when
+using the pool - didn't find this option in hackney sources though. at least
+it's said to be turned on [here](https://github.com/vhf/parareq/commit/50818b).
+
+the root of my problem is that I connect to the same destination address
+(shikimori URL) and there's a high chance of connection tuple collisions
+which would result into `EADDRINUSE` error.
+
+what can I do?
+
+- use different destination ports when making requests
+  (obviously it's not an option in most cases)
+- disable address reuse if you don't make too many concurrent connections
+  (or else you might run out of ports)
+
+  then new sockets will be bound to new ports each time without reusing
+  existing sockets in `TIME_WAIT` state.
+
+  running out of ports doesn't seem to be a problem for me since I have 100
+  RPM max now and requests are not long-running - sockets should be closed
+  pretty quickly allowing their ports to be reused when new sockets are bound
+  (binding socket is setting its source address and port).
+
 
 (HTTPoison.Error) :connect_timeout
 ----------------------------------

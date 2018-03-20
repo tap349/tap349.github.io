@@ -22,6 +22,8 @@ NOTE: all the notes below are true for both iOS and Android.
 
 NOTE: APKs and TestFlight builds are always built in release mode.
 
+mode is a build configuration (in Xcode parlance).
+
 - in debug mode:
 
   - `__DEV__` variable is set to true

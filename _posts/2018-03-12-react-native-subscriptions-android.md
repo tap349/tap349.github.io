@@ -248,7 +248,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
 
   1. <https://www.androidpit.com/how-to-fix-google-play-authentication-is-required-error>
 
-  in the end I did factory data reset to get rid of the error - though it might
+  in the end I did a factory data reset to get rid of the error - though it may
   be sufficient just to remove/add Google account (see also other advice in the
   article mentioned).
 
@@ -275,7 +275,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
   > Testing with static responses is limited, because you are only able to test
   > the purchase function.
 
-  <http://suda.pl/the-hell-of-testing-google-play-in-app-billing/>:
+  <http://suda.pl/the-hell-of-testing-google-play-in-app-billing>:
 
   > Subscriptions can't be tested using static responses...
 

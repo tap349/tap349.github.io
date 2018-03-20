@@ -62,7 +62,8 @@ iceperkapp
   - select `Automatically release this version` option
   - click `Save` button
   - click `Submit for Review` button
-  - select `No` (app doesn't use IDFA) on `Advertising Identifier` page
+  - select `Yes` (app uses IDFA now) on `Advertising Identifier` page
+    - [x] `Serve advertisements within the app`
   - click `Submit` button
 
 ### Android

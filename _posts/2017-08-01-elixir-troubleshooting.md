@@ -526,7 +526,7 @@ so I've created a custom hackney pool for shikimori with these options:
 default values for these options can be found in:
 
 - project: _deps/hackney/src/hackney.app.src_
-- release: _\<release_name>/\<app>.script_
+- release: _\<app_name>/releases/\<release_name>/\<app>.script_
   (say, _/home/apps/neko/releases/0.1.0/neko.script_)
 
 **UPDATE (2018-03-10)**

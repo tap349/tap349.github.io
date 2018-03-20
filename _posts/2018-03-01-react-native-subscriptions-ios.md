@@ -512,3 +512,30 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 1. <https://stackoverflow.com/a/43651411/3632318>
 2. <https://forums.developer.apple.com/thread/70917>
 3. <http://captaindanko.blogspot.ru/2017/06/addressing-app-review-rejections-for.html>
+
+what we made to resolve these issues:
+
+> 1 Performance: App Completeness
+
+we fixed an issue when sandbox tester receipt couldn't be validated in
+production environment - as a result subscription status checks didn't
+work and subscription remained active forever (it's active by default)
+effectively hiding subscription functionality (subscribe button).
+
+> 1.2 Business: Payments - Subscriptions
+
+we added this information to both subscription page in application and
+application description in IC:
+
+- subscription title
+- subscription length
+- subscription price
+- information about auto-renewable nature of subscription
+
+  it's pretty standard and can be safely copied from description of
+  any application in App Store that provides subscriptions.
+
+- link to privacy policy
+- link to terms of use
+
+in addition I edited review notes for our IAP to reflect new changes.

@@ -524,10 +524,16 @@ what we made to resolve these issues:
 
 > 1 Performance: App Completeness
 
-we fixed an issue when sandbox tester receipt couldn't be validated in
+I fixed an issue when sandbox tester receipt couldn't be validated in
 production environment - as a result subscription status checks didn't
 work and subscription remained active forever (it's active by default)
 effectively hiding subscription functionality (subscribe button).
+
+also I processed the situation when user had never purchased subscription
+before - `InAppUtils.receiptData` returns error `not_available` in this
+case and you should return subscription status `false` instead of raising
+error (the latter wouldn't change subscription status and user would remain
+subscribed).
 
 > 1.2 Business: Payments - Subscriptions
 

@@ -842,4 +842,8 @@ long lists but in my case all lists are short so it shouldn't be a problem).
 still this doesn't help - the only solution that works thus far is
 <https://github.com/leecade/react-native-swiper/issues/609#issuecomment-338190488>.
 
-also consider using `react-native-snap-carousel` instead of `react-native-swiper`.
+**UPDATE**
+
+nothing of the above works )
+
+consider using `react-native-snap-carousel` instead of `react-native-swiper`.

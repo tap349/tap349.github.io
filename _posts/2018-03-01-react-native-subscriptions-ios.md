@@ -258,10 +258,17 @@ below for details).
     </tr>
   </table>
 
-  there is no signed in Apple ID => no receipt is found.
+  no receipt is found:
 
-  wait for `Sign-In Required` modal window or sign in manually in
-  iPhone's `Settings`.
+  - there is no signed in Apple ID
+
+    wait for `Sign-In Required` modal window or sign in manually in
+    iPhone's `Settings`.
+
+  - current Apple ID has never made a purchase in this application
+
+    process this error in application so that user is considered to
+    be unsubscribed.
 
 - `Sandbox receipt sent to Production environment`
 

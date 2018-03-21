@@ -563,7 +563,7 @@ the error is still present - it occurs repeatedly within a short period of time
 
 > A TCP/UDP connection is identified by a tuple of five values:
 >
-> {<protocol>, <src addr>, <src port>, <dest addr>, <dest port>}
+> {\<protocol>, \<src addr>, \<src port>, \<dest addr>, \<dest port>}
 >
 > Any unique combination of these values identifies a connection. As a result,
 > no two connections can have the same five values, otherwise the system would

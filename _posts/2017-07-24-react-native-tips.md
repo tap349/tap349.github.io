@@ -244,4 +244,43 @@ but in general it's better to avoid nested `ScrollView`s.
   <Text>
     "this link"
   </Text>
+</Text>
+```
+
+(how to) make animations smooth
+-------------------------------
+
+1. <https://facebook.github.io/react-native/docs/interactionmanager.html>
+
+fetching data in the background might prevent animations from running smoothly
+so schedule fetching data after all interactions have completed (animations are
+interactions as well):
+
+```javascript
+import {
+  InteractionManager,
+} from 'react-native';
+
+export default class ShowPage extends React.Component {
+  state = {
+    interactionsComplete: false,
+  }
+
+  componentDidMount () {
+    InteractionManager.runAfterInteractions(() => {
+      Promise
+        .all([
+          this.props.getGame(),
+          this.props.getGameStat(),
+        ])
+        .then(() => this.setState({interactionsComplete: true}))
+        .catch(AlertHelpers.serverError);
+    });
+  }
+
+  render () {
+    if (!this.state.interactionsComplete) { return <IndicatorHOC />; }
+    // ...
+  }
+}
 ```

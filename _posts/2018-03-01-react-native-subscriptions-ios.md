@@ -529,11 +529,11 @@ production environment - as a result subscription status checks didn't
 work and subscription remained active forever (it's active by default)
 effectively hiding subscription functionality (subscribe button).
 
-also I processed the situation when user had never purchased subscription
-before - `InAppUtils.receiptData` returns error `not_available` in this
-case and you should return subscription status `false` instead of raising
-error (the latter wouldn't change subscription status and user would remain
-subscribed).
+also I processed the situation when user had never made IAP before and thus
+had no receipt at all - `InAppUtils.receiptData` returns `not_available`
+error in this case and you should return subscription status `false` instead
+of raising error (the latter wouldn't change subscription status and user
+would remain subscribed).
 
 > 1.2 Business: Payments - Subscriptions
 

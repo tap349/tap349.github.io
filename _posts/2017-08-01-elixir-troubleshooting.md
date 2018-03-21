@@ -600,9 +600,9 @@ socket lifecycle:
 - socket is connected
 - socket is closed
 
-so the issue might be with `reuseaddr` option that is turned on by default when
-using the pool - didn't find this option in hackney sources though. at least
-it's said to be turned on [here](https://github.com/vhf/parareq/commit/50818b).
+so the issue might be with `reuseaddr` option using the pool - didn't find this
+option in hackney sources though. at least it's said to be turned on by default
+when using the pool [here](https://github.com/vhf/parareq/commit/50818b).
 
 the root of my problem is that I connect to the same destination address
 (shikimori URL) and there's a high chance of connection tuple collisions

@@ -552,3 +552,23 @@ application description in IC:
 - link to terms of use
 
 in addition I edited review notes for our IAP to reflect new changes.
+
+after making all required changes it's necessary:
+
+- make sure IAP status is changed from `Developer Action Needed` to
+  `Waiting for Review`
+
+  1. <https://stackoverflow.com/a/7764496/3632318>
+
+  find the section that has a red circle mark - it's necessary to update
+  information in that section. in my case it was `Localizations` section
+  and I had a red circle next to `Russian` language.
+
+  if you're not going to change anything and just want to re-submit IAP,
+  edit rejected section (say, localized russian description in my case),
+  save IAP, revert the changes and save again => red circle turns into a
+  yellow one and IAP status becomes `Waiting for Review`.
+
+- upload new build and select it in current application version
+
+  after that you can submit application version for review again.

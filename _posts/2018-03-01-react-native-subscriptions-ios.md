@@ -439,138 +439,153 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 
 - binary rejected (release didn't pass a review because of IAP)
 
-| IC: `My Apps` → `<my_app>` → `Activity` (tab)
-| `App Store Versions` (left menu) → `Resolution Center` (link)
+  | IC: `My Apps` → `<my_app>` → `Activity` (tab)
+  | `App Store Versions` (left menu) → `Resolution Center` (link)
 
-> **2.** 1 Performance: App Completeness
-> <br>
-> **3.** 1.2 Business: Payments - Subscriptions
->
-> <h3>Guideline 2.1 - Performance - App Completeness</h3>
->
-> We found that while you have submitted in-app purchase products for your app,
-> the in-app purchase functionality is not present in your binary.
->
-> **Next Steps**
->
-> If you would like to include in-app purchases in your app, you will need to
-> upload a new binary that incorporates the in-app purchase API to enable users
-> to make a purchase.
->
-> Once you revise and resubmit your binary, you will also need to resubmit your
-> in-app purchases for review since they are in the Developer Action Required
-> state. For each in-app purchase product submitted, please be sure to edit the
-> detail information or cancel the request to change the detail information for
-> the in-app purchases using iTunes Connect.
->
-> <h3>Guideline 3.1.2 - Business - Payments - Subscriptions</h3>
->
-> We noticed that your app or its metadata did not fully meet the terms and
-> conditions for auto-renewing subscriptions, as specified in Schedule 2,
-> section 3.8(b) of the Paid Applications agreement.
->
-> Your app's **binary** did not include:
->
-> <ul>
-> <li> The following information about the auto-renewable nature of the subscription
->   <ul>
->   <li> Title of publication or service </li>
->   <li> Length of subscription (time period and content or services provided
->        during each subscription period) </li>
->   <li> Price of subscription, and price per unit if appropriate </li>
->   <li> Payment will be charged to iTunes Account at confirmation of purchase </li>
->   <li> Subscription automatically renews unless auto-renew is turned off at
->        least 24-hours before the end of the current period </li>
->   <li> Account will be charged for renewal within 24-hours prior to the end of
->        the current period, and identify the cost of the renewal </li>
->   <li> Subscriptions may be managed by the user and auto-renewal may be turned
->        off by going to the user's Account Settings after purchase </li>
->   <li> Any unused portion of a free trial period, if offered, will be forfeited
->        when the user purchases a subscription to that publication, where applicable </li>
->   </ul>
-> </li>
-> <li> A link to the terms of use </li>
-> <li> A link to the privacy policy </li>
-> </ul>
->
-> Note: Adding the above information to the StoreKit modal alert is not
-> sufficient; the information must also be displayed within the app itself,
-> and it must be displayed clearly and conspicuously during the purchase
-> flow without requiring additional action from the user, such as opening
-> a link.
->
-> Your app's **metadata** did not include:
->
-> <ul>
-> <li> The following information about the auto-renewable nature of the
->      subscription (same subitems as for app's binary) </li>
-> <li> A link to the terms of use </li>
-> <li> A privacy policy link in the Privacy Policy URL field of iTunes Connect </li>
-> </ul>
->
-> **Next Steps**
->
-> To resolve this issue, please revise your app or its metadata to include
-> the missing information.
->
-> If the above information is in your app, please reply to this message in
-> Resolution Center to provide details on where to locate it.
+  > **2.** 1 Performance: App Completeness
+  > <br>
+  > **3.** 1.2 Business: Payments - Subscriptions
+  >
+  > <h3>Guideline 2.1 - Performance - App Completeness</h3>
+  >
+  > We found that while you have submitted in-app purchase products for your app,
+  > the in-app purchase functionality is not present in your binary.
+  >
+  > **Next Steps**
+  >
+  > If you would like to include in-app purchases in your app, you will need to
+  > upload a new binary that incorporates the in-app purchase API to enable users
+  > to make a purchase.
+  >
+  > Once you revise and resubmit your binary, you will also need to resubmit your
+  > in-app purchases for review since they are in the Developer Action Required
+  > state. For each in-app purchase product submitted, please be sure to edit the
+  > detail information or cancel the request to change the detail information for
+  > the in-app purchases using iTunes Connect.
+  >
+  > <h3>Guideline 3.1.2 - Business - Payments - Subscriptions</h3>
+  >
+  > We noticed that your app or its metadata did not fully meet the terms and
+  > conditions for auto-renewing subscriptions, as specified in Schedule 2,
+  > section 3.8(b) of the Paid Applications agreement.
+  >
+  > Your app's **binary** did not include:
+  >
+  > <ul>
+  > <li> The following information about the auto-renewable nature of the subscription
+  >   <ul>
+  >   <li> Title of publication or service </li>
+  >   <li> Length of subscription (time period and content or services provided
+  >        during each subscription period) </li>
+  >   <li> Price of subscription, and price per unit if appropriate </li>
+  >   <li> Payment will be charged to iTunes Account at confirmation of purchase </li>
+  >   <li> Subscription automatically renews unless auto-renew is turned off at
+  >        least 24-hours before the end of the current period </li>
+  >   <li> Account will be charged for renewal within 24-hours prior to the end of
+  >        the current period, and identify the cost of the renewal </li>
+  >   <li> Subscriptions may be managed by the user and auto-renewal may be turned
+  >        off by going to the user's Account Settings after purchase </li>
+  >   <li> Any unused portion of a free trial period, if offered, will be forfeited
+  >        when the user purchases a subscription to that publication, where applicable </li>
+  >   </ul>
+  > </li>
+  > <li> A link to the terms of use </li>
+  > <li> A link to the privacy policy </li>
+  > </ul>
+  >
+  > Note: Adding the above information to the StoreKit modal alert is not
+  > sufficient; the information must also be displayed within the app itself,
+  > and it must be displayed clearly and conspicuously during the purchase
+  > flow without requiring additional action from the user, such as opening
+  > a link.
+  >
+  > Your app's **metadata** did not include:
+  >
+  > <ul>
+  > <li> The following information about the auto-renewable nature of the
+  >      subscription (same subitems as for app's binary) </li>
+  > <li> A link to the terms of use </li>
+  > <li> A privacy policy link in the Privacy Policy URL field of iTunes Connect </li>
+  > </ul>
+  >
+  > **Next Steps**
+  >
+  > To resolve this issue, please revise your app or its metadata to include
+  > the missing information.
+  >
+  > If the above information is in your app, please reply to this message in
+  > Resolution Center to provide details on where to locate it.
 
-1. <https://stackoverflow.com/a/43651411/3632318>
-2. <https://forums.developer.apple.com/thread/70917>
-3. <http://captaindanko.blogspot.ru/2017/06/addressing-app-review-rejections-for.html>
+  1. <https://stackoverflow.com/a/43651411/3632318>
+  2. <https://forums.developer.apple.com/thread/70917>
+  3. <http://captaindanko.blogspot.ru/2017/06/addressing-app-review-rejections-for.html>
 
-what we made to resolve these issues:
+  what we made to resolve these issues:
 
-> 1 Performance: App Completeness
+  > 1 Performance: App Completeness
 
-I fixed an issue when sandbox tester receipt couldn't be validated in
-production environment - as a result subscription status checks didn't
-work and subscription remained active forever (it's active by default)
-effectively hiding subscription functionality (subscribe button).
+  I fixed an issue when sandbox tester receipt couldn't be validated in
+  production environment - as a result subscription status checks didn't
+  work and subscription remained active forever (it's active by default)
+  effectively hiding subscription functionality (subscribe button).
 
-also I processed the situation when user had never made IAP before and thus
-had no receipt at all - `InAppUtils.receiptData` returns `not_available`
-error in this case and you should return subscription status `false` instead
-of raising error (the latter wouldn't change subscription status and user
-would remain subscribed).
+  also I processed the situation when user had never made IAP before and thus
+  had no receipt at all - `InAppUtils.receiptData` returns `not_available`
+  error in this case and you should return subscription status `false` instead
+  of raising error (the latter wouldn't change subscription status and user
+  would remain subscribed).
 
-> 1.2 Business: Payments - Subscriptions
+  > 1.2 Business: Payments - Subscriptions
 
-we added this information to both subscription page in application and
-application description in IC:
+  we added this information to both subscription page in application and
+  application description in IC:
 
-- subscription title
-- subscription length
-- subscription price
-- information about auto-renewable nature of subscription
+  - subscription title
+  - subscription length
+  - subscription price
+  - information about auto-renewable nature of subscription
 
   it's pretty standard and can be safely copied from description of
   any application in App Store that provides subscriptions.
 
-- link to privacy policy
-- link to terms of use
+  - link to privacy policy
+  - link to terms of use
 
-in addition I edited review notes for our IAP to reflect new changes.
+  in addition I edited review notes for our IAP to reflect new changes.
 
-after making all required changes it's necessary:
+  after making all required changes it's necessary:
 
-- make sure IAP status is changed from `Developer Action Needed` to
-  `Waiting for Review`
+  - make sure IAP status is changed from `Developer Action Needed` to
+    `Waiting for Review`
 
-  1. <https://stackoverflow.com/a/7764496/3632318>
+    1. <https://stackoverflow.com/a/7764496/3632318>
 
-  find the section that has a red circle mark - it's necessary to update
-  information in that section. in my case it was `Localizations` section
-  and I had a red circle next to `Russian` language.
+    find the section that has a red circle mark - it's necessary to update
+    information in that section. in my case it was `Localizations` section
+    and I had a red circle next to `Russian` language.
 
-  if you're not going to change anything and just want to re-submit IAP,
-  edit rejected section (say, localized russian description in my case),
-  save IAP, revert the changes and save again => red circle turns into a
-  yellow one and IAP status becomes `Waiting for Review`.
+    if you're not going to change anything and just want to re-submit IAP,
+    edit rejected section (say, localized russian description in my case),
+    save IAP, revert the changes and save again => red circle turns into a
+    yellow one and IAP status becomes `Waiting for Review`.
 
-- upload new build and select it in current application version
+  - upload new build, select it in current application version and submit
+    the latter for review
 
-  after that you can submit application version for review again.
+    after that you can submit application version for review again.
 
-  TODO: there are no IAPs available in application version!
+- `In-App Purchases` section is gone in application version
+
+  I found this out after submitting application for review (previous
+  binary was rejected and IAP status was `Developer Action Needed`).
+
+  after that we decided that IAP status was the reason why IAP section
+  was missing in application version and that IAP wouldn't be included
+  in a new release at all.
+
+  thus we removed current application version from review and updated IAP
+  status (see notes above) but IAP section still didn't appear so we had
+  to submit application version for review just like before - without any
+  mentions of IAP in application version.
+
+  TODO: now we're waiting for Apple response.

@@ -13,9 +13,9 @@ categories: [phoenix, ecto]
 {:toc}
 <hr>
 
-- <https://hexdocs.pm/phoenix/ecto.html>
-- <https://hexdocs.pm/ecto/getting-started.html>
-- <https://hexdocs.pm/ecto/Ecto.html>
+1. <https://hexdocs.pm/phoenix/ecto.html>
+2. <https://hexdocs.pm/ecto/getting-started.html>
+3. <https://hexdocs.pm/ecto/Ecto.html>
 
 migrations
 ----------
@@ -70,7 +70,7 @@ associations
 
 ### associations vs. FK columns
 
-<http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
+1. <http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
 
 prefer defining associations to specifying FK columns in schema
 definitions (or else you won't be able to use them in queries):
@@ -87,7 +87,7 @@ end
 
 ### preloading associations
 
-<https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
+1. <https://hexdocs.pm/ecto/Ecto.html#module-other-topics>
 
 assocations are never preloaded by default - load them explicitly!
 
@@ -124,8 +124,8 @@ associations can be loaded in:
 
 #### `put_assoc` vs. `cast_assoc`
 
-- <https://medium.com/coryodaniel/til-elixir-ecto-put-assoc-vs-cast-assoc-7c80f35f6e6>
-- <https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_assoc/3>
+1. <https://medium.com/coryodaniel/til-elixir-ecto-put-assoc-vs-cast-assoc-7c80f35f6e6>
+2. <https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_assoc/3>
 
 - when using `put_assoc`:
 
@@ -141,11 +141,11 @@ associations can be loaded in:
 
 though in both cases corresponding association must be preloaded so that
 Ecto knows what to do in case it already exists (of course it only makes
-sense when parent has `id` field but it doesn't raise error otherwise).
+sense when parent has `id` field - but it doesn't raise error otherwise).
 
 #### `build_assoc` vs. building association explicitly
 
-<https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
+1. <https://elixirforum.com/t/why-do-we-have-ecto-build-assoc/4152>
 
 ```elixir
 # build association using parent struct and association name
@@ -267,9 +267,9 @@ models have been deprecated in Phoenix 1.3 - they are called just schemas now.
 Ecto.Multi
 ----------
 
-- <https://hexdocs.pm/ecto/Ecto.Multi.html>
-- <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>
-- <https://medium.com/@feymartynov/an-example-of-using-ecto-multi-5f7fc8cf3cc1>
+1. <https://hexdocs.pm/ecto/Ecto.Multi.html>
+2. <http://blog.danielberkompas.com/2016/09/27/ecto-multi-services.html>
+3. <https://medium.com/@feymartynov/an-example-of-using-ecto-multi-5f7fc8cf3cc1>
 
 - replace `before` callbacks with functions in changesets
 - replace `after` callbacks with operations in `Ecto.Multi`
@@ -323,7 +323,7 @@ statement instead.
 get query SQL
 -------------
 
-<https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
+1. <https://hexdocs.pm/ecto/Ecto.Adapters.SQL.html#to_sql/3>
 
 ```elixir
 > import Ecto.Query
@@ -407,4 +407,47 @@ if it's nil it means global prefix is used
 [%Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "videos">, ...}
 > new_prefix_video = Ecto.put_meta(video, prefix: "new_prefix")
 %Rumbl.Video{__meta__: #Ecto.Schema.Metadata<:loaded, "new_prefix", "videos">, ...}
+```
+
+embeds
+------
+
+1. <http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
+2. <https://robots.thoughtbot.com/embedding-elixir-structs-in-ecto-models>
+3. <https://elixirforum.com/t/cast-embed-causing-error/6678/3>
+
+### updating
+
+you cannot update embed unless you set `on_replace: :update` option:
+
+```elixir
+embeds_one :data, TransferData, on_replace: :update
+```
+
+otherwise calling `cast_embed(changeset, :data)` will raise error:
+
+```
+** (RuntimeError) you are attempting to change relation :data of
+Billing.App.Transfer but the `:on_replace` option of
+this relation is set to `:raise`.
+```
+
+after that you are allowed to pass updated fields as a map only:
+
+```
+** (RuntimeError) you have set that the relation :data of Billing.App.Transfer
+has `:on_replace` set to `:update` but you are giving it a struct/
+changeset to put_assoc/put_change.
+
+Since you have set `:on_replace` to `:update`, you are only allowed
+to update the existing entry by giving updated fields as a map or
+keyword list or set it to nil.
+```
+
+complete example:
+
+```elixir
+iex> transfer = Billing.Repo.get(Billing.App.Transfer, 11)
+iex> attrs = %{data: %{acs_url: "foo"}}
+iex> transfer |> cast(attrs, []) |> cast_embed(:data) |> Repo.update()
 ```

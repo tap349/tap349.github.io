@@ -560,9 +560,12 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 
     1. <https://stackoverflow.com/a/7764496/3632318>
 
+    | IC: `My Apps` → `<my_app>` → `Features` (tab)
+    | `In-App Purchases` (left menu) → `<subscription>` (link)
+
     find the section that has a red circle mark - it's necessary to update
-    information in that section. in my case it was `Localizations` section
-    and I had a red circle next to `Russian` language.
+    information there. in my case it was `Localizations` section and I had
+    a red circle next to `Russian` language.
 
     if you're not going to change anything and just want to re-submit IAP,
     edit rejected section (say, localized russian description in my case),

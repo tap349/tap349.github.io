@@ -376,15 +376,6 @@ changed from `Missing Metadata` to `Ready to Submit`.
 
 ### create new app version
 
-`In-App Purchases` page:
-
-> Your first in-app purchase must be submitted with a new app version.
-> Select it from the app’s In-App Purchases section and click Submit.
->
-> Once your binary has been uploaded and your first in-app purchase has
-> been submitted for review, additional in-app purchases can be submitted
-> using the table below.
-
 | IC: `My Apps` → `<my_app>` → `App Store` (tab)
 | `⨁ VERSION OR PLATFORM` (link in left menu) → `iOS` (popup menu)
 
@@ -394,6 +385,15 @@ changed from `Missing Metadata` to `Ready to Submit`.
 new app version has `Prepare for Submission` status now.
 
 ### add IAP to new app version
+
+`In-App Purchases` page:
+
+> Your first in-app purchase must be submitted with a new app version.
+> Select it from the app’s In-App Purchases section and click Submit.
+>
+> Once your binary has been uploaded and your first in-app purchase has
+> been submitted for review, additional in-app purchases can be submitted
+> using the table below.
 
 1. <https://stackoverflow.com/a/42191936/3632318>
 
@@ -572,3 +572,5 @@ after making all required changes it's necessary:
 - upload new build and select it in current application version
 
   after that you can submit application version for review again.
+
+  TODO: there are no IAPs available in application version!

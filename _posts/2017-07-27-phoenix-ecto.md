@@ -20,11 +20,28 @@ categories: [phoenix, ecto]
 migrations
 ----------
 
+1. <https://devhints.io/phoenix-migrations>
+
+create migration:
+
+```sh
+$ mix ecto.gen.migration add_payment_service_to_transfers
+```
+
+run all pending migrations:
+
+```sh
+$ mix ecto.migrate
+```
+
+rollback last applied migration:
+
+```sh
+$ mix ecto.rollback
+```
+
 NOTE: there is nothing like _schema.rb_ file in Phoenix project -
       database schema is not dumped to file after running migrations.
-
-- `mix ecto.migrate` - runs all pending migrations
-- `mix ecto.rollback` - rollbacks last applied migration
 
 primitive column types that can be used in migrations:
 [Types and casting](https://hexdocs.pm/ecto/Ecto.Schema.html#module-types-and-casting).

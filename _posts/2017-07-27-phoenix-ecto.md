@@ -451,3 +451,63 @@ iex> transfer = Billing.Repo.get(Billing.App.Transfer, 11)
 iex> attrs = %{data: %{acs_url: "foo"}}
 iex> transfer |> cast(attrs, []) |> cast_embed(:data) |> Repo.update()
 ```
+
+### nested embeds
+
+1. <https://hexdocs.pm/ecto/Ecto.Schema.html#embeds_one/3-inline-embedded-schema>
+
+_lib/billing/app/transfer.ex_:
+
+```elixir
+defmodule Billing.App.Transfer do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  alias Billing.App.{Card, TransferData}
+
+  schema "transfers" do
+    field :fee, :decimal
+    embeds_one :data, TransferData, on_replace: :update
+
+    timestamps type: :utc_datetime
+  end
+
+  # > casting embeds with cast/4 is not supported,
+  # > use cast_embed/3 instead
+  @doc false
+  def update_changeset(%__MODULE__{} = transfer, attrs) do
+    transfer
+    |> cast(attrs, [:fee])
+    |> cast_embed(:data)
+  end
+end
+```
+
+_lib/billing/app/transfer_data.ex_:
+
+```elixir
+defmodule Billing.App.TransferData do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  @primary_key false
+  embedded_schema do
+    field :acs_url, :string
+    embeds_one :error, Error, primary_key: false, on_replace: :update do
+      field :service, :integer
+    end
+  end
+
+  # changeset/2 is called by cast_embed/3 by default
+  def changeset(%__MODULE__{} = data, attrs) do
+    data
+    |> cast(attrs, [:acs_url])
+    |> cast_embed(:error, with: &errors_changeset/2)
+  end
+
+  defp errors_changeset(%__MODULE__.Error{} = error, attrs) do
+    error
+    |> cast(attrs, [:service])
+  end
+end
+```

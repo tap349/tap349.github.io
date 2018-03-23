@@ -293,3 +293,28 @@ depends 'ruby_rbenv', '1.0.1'
 $ berks update ruby_rbenv
 $ berks vendor && knife zero converge 'name:billing'
 ```
+
+1 node found, but does not have the required attribute to establish the connection
+----------------------------------------------------------------------------------
+
+```sh
+$ knife zero converge 'name:billing'
+...
+FATAL: 1 node found, but does not have the required attribute to establish the connection.
+Try setting another attribute to open the connection using --attribute.
+```
+
+**solution**
+
+the error must be caused by compatibility issues: Chef version
+doesn't match `knife` version or vice versa.
+
+probably these issues are solved inside ChefDK but in my case
+`chef` and `knife-zero` are installed separately with Bundler.
+
+working combination of gem versions in _Gemfile_:
+
+```ruby
+gem 'knife-zero', '1.19'
+gem 'chef', '13.5.3'
+```

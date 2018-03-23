@@ -307,7 +307,7 @@ Try setting another attribute to open the connection using --attribute.
 **solution**
 
 the error must be caused by compatibility issues: Chef version
-doesn't match `knife` version or vice versa.
+(13.8.5) doesn't match `knife` version or vice versa.
 
 probably these issues are solved inside ChefDK but in my case
 `chef` and `knife-zero` are installed separately with Bundler.
@@ -315,6 +315,6 @@ probably these issues are solved inside ChefDK but in my case
 working combination of gem versions in _Gemfile_:
 
 ```ruby
-gem 'knife-zero', '1.19'
 gem 'chef', '13.5.3'
+gem 'knife-zero', '1.19'
 ```

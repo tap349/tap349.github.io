@@ -591,4 +591,11 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
   to submit application version for review just like before - without any
   mentions of IAP in application version.
 
-  TODO: now we're waiting for Apple response.
+  **UPDATE (2018-03-24)**
+
+  Apple has approved of our release eventually (it took 3 days for them to
+  review our release):
+
+  - iOS App status is changed to `Pending Developer Release`
+    (we checked `Manually release this version` option)
+  - IAP status is changed to `Approved`

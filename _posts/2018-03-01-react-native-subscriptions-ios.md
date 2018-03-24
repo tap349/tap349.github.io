@@ -346,6 +346,8 @@ just like sandbox testers they:
 - deal with test subscriptions only (shortened periods, etc.)
 - are not charged when making IAP
 
+NOTE: beta testers can't buy subscription even if it's approved it IC.
+
 #### install application from TestFlight
 
 when beta tester is making a purchase, all Apple dialogs no longer

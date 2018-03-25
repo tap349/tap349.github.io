@@ -60,7 +60,7 @@ repositories
 schemas
 -------
 
-<https://hexdocs.pm/ecto/Ecto.Schema.html>
+1. <https://hexdocs.pm/ecto/Ecto.Schema.html>
 
 changesets
 ----------
@@ -525,6 +525,34 @@ defmodule Billing.App.TransferData do
   defp errors_changeset(%__MODULE__.Error{} = error, attrs) do
     error
     |> cast(attrs, [:service])
+  end
+end
+```
+
+pipe vs. keyword syntax
+-----------------------
+
+<https://github.com/elixir-ecto/ecto>:
+
+```elixir
+defmodule Sample.App do
+  import Ecto.Query
+  alias Sample.Weather
+  alias Sample.Repo
+
+  def keyword_query do
+    query = from w in Weather,
+         where: w.prcp > 0 or is_nil(w.prcp),
+         select: w
+    Repo.all(query)
+  end
+
+  def pipe_query do
+    Weather
+    |> where(city: "Tula")
+    |> order_by(:temp_lo)
+    |> limit(10)
+    |> Repo.all()
   end
 end
 ```

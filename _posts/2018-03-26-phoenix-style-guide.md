@@ -13,8 +13,10 @@ categories: [phoenix]
 {:toc}
 <hr>
 
-attrs vs. params
-----------------
+naming
+------
+
+### attrs vs. params
 
 `params` is what comes from controller - they might map to `attrs` exactly or
 not => use `params` everywhere except for cases when it's clear that you deal

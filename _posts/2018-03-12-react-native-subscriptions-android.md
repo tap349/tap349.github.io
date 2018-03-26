@@ -386,12 +386,6 @@ TODO: previous statement should be checked (and find its source).
   $ adb -d install android/app/build/outputs/apk/app-release.apk
   ```
 
-#### view financial reports
-
-test transactions are not shown in financial reports. IDK how to view them -
-currently I can track them through GP emails only (they are sent to license
-test account email each time subscription is renewed or cancelled).
-
 #### troubleshooting
 
 - `The item you requested is not available for purchase.`
@@ -528,13 +522,6 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
 - install application from Google Play Store
 - try to make a purchase
 
-#### view financial reports
-
-| GPC: `All applications` → `<my_app>`
-| `Financial reports` (left menu) → `Subscriptions`
-
-statistics are collected with 2 days delay (there're no data for the last 2 days).
-
 ### subscription error codes
 
 1. <https://developer.android.com/google/play/billing/billing_reference.html>
@@ -575,3 +562,19 @@ publish release with subscription
 ### rollout app to production
 
 new app appeared in GP almost immediately (it took about 1 minute).
+
+view financial reports
+----------------------
+
+### test subscriptions
+
+test transactions are not shown in financial reports. IDK how to view them -
+currently I can track them through GP emails only (they are sent to license
+test account email each time subscription is renewed or cancelled).
+
+### real subscriptions
+
+| GPC: `All applications` → `<my_app>`
+| `Financial reports` (left menu) → `Subscriptions`
+
+statistics are collected with 2 days delay (there're no data for the last 2 days).

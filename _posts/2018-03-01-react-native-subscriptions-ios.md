@@ -612,3 +612,12 @@ in fact it took about 30 minutes for new app version to appear in App Store.
   - iOS App status is changed to `Pending Developer Release`
     (we checked `Manually release this version` option)
   - IAP status is changed to `Approved`
+
+view financial reports
+----------------------
+
+| IC: `App Analytics` → `Overview` (tab)
+| `In-App Purchases` (widget) or `Sales` (widget)
+
+| IC: `App Analytics` → `Metrics` (tab)
+| `In-App Purchases` (left menu) or `Sales` (left menu)

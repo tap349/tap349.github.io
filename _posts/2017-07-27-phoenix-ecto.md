@@ -461,6 +461,38 @@ to update the existing entry by giving updated fields as a map or
 keyword list or set it to nil.
 ```
 
+when using `on_replace: :update` you cannot update embed by passing struct
+or changeset - use map or keywords list of fields instead:
+
+```
+** (exit) an exception was raised:
+    ** (RuntimeError) you have set that the relation :data of Billing.App.Transfer
+has `:on_replace` set to `:update` but you are giving it a struct/
+changeset to put_assoc/put_change.
+
+Since you have set `:on_replace` to `:update`, you are only allowed
+to update the existing entry by giving updated fields as a map or
+keyword list or set it to nil.
+```
+
+```diff
+- transfer = md |> App.get_own_transfer_by_md!(user)
+- # don't use atom key for pares or else it can be accessed
+- # using only atom key in API.complete_transfer/1 - key will
+- # be stringified only when transfer is read from DB again
+- data = Map.put(transfer.data, "pares", attrs["pares"])
+-
+- transfer
+- |> Transfer.update_changeset(%{data: data})
+- |> Repo.update()
++ transfer = md |> App.get_own_transfer_by_md!(user)
++ attrs = %{data: %{pares: pares}}
++
++ transfer
++ |> Transfer.update_changeset(attrs)
++ |> Repo.update()
+```
+
 complete example:
 
 ```elixir

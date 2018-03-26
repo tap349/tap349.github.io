@@ -412,6 +412,17 @@ NOTE: `In-App Purchases` section is available only if you've created IAP before.
 - `Done` (button to select IAP and close popup window)
 - `Save` (button to save changes to app version)
 
+### release new app version
+
+according to `iTunes Store` email received after releasing new app version:
+
+```
+It can take up to 24 hours before your app is available on the App Store.
+This delay is dependent on any app availability issues
+```
+
+in fact it took about 30 minutes for new app version to appear in App Store.
+
 ### troubleshooting
 
 - `Your app is using the Advertising Identifier (IDFA)`

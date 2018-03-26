@@ -362,7 +362,7 @@ forget to forward ports in `development`.
 NOTE: application (being installed now) and APK (uploaded to GPC) must
       have the same version name and build number.
 
-TODO: check previous statement and find the source of this information.
+TODO: previous statement should be checked (and find its source).
 
 - run application in debug mode
 
@@ -571,3 +571,7 @@ publish release with subscription
 - `Classification` (combobox): `LLC`
 - `Signature of beneficial owner (or individual authorized to sign for beneficial owner):` (input): `T* Sm*`
 - `SUBMIT` (button)
+
+### rollout app to production
+
+new app appeared in GP almost immediately (it took about 1 minute).

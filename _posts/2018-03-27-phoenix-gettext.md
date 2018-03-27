@@ -13,6 +13,8 @@ categories: [phoenix, gettext]
 {:toc}
 <hr>
 
+1. <http://blog.plataformatec.com.br/2016/03/using-gettext-to-internationalize-a-phoenix-application/>
+
 configuration
 -------------
 

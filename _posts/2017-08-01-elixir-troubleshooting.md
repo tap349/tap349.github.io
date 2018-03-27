@@ -655,3 +655,27 @@ HTTP request error: {
 1. <https://hexdocs.pm/httpoison/HTTPoison.html#request/5>
 
 try to increase connect timeout (`timeout` request option in HTTPoison).
+
+could not compile dependency :appsignal, "mix compile" failed
+-------------------------------------------------------------
+
+```sh
+$ mix test
+...
+==> appsignal
+could not compile dependency :appsignal, "mix compile" failed. You can
+recompile this dependency with "mix deps.compile appsignal", update it
+with "mix deps.update appsignal" or clean it with "mix deps.clean appsignal"
+** (UndefinedFunctionError) function Appsignal.System.agent_platform/0 is undefined or private
+    Appsignal.System.agent_platform()
+    mix_helpers.exs:12: Mix.Appsignal.Helper.verify_system_architecture/0
+    /Users/tap/dev/complead/iceperkbilling/deps/appsignal/mix.exs:17: Mix.Tasks.Compile.Appsignal.run/1
+```
+
+**solution**
+
+```sh
+$ mix deps.clean appsignal
+$ mix deps.get
+$ mix test
+```

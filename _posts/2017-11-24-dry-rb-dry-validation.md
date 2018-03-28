@@ -146,18 +146,25 @@ nested arrays
 1. <http://dry-rb.org/gems/dry-validation/nested-data/>
 2. <https://github.com/dry-rb/dry-validation/issues/175>
 
-array can be empty but not `nil`:
+array cannot be `nil` but can be empty:
 
 ```ruby
 required(:ids).each(:int?)
 ```
 
-array cannot be empty:
+array cannot be `nil` or empty:
 
 ```ruby
 required(:ids).filled { each(:int?) }
 # NOTE: this doesn't apply `each` predicates:
 required(:ids).filled.each(:int?)
+```
+
+array elements can be either positive integers or `nil`s (empty
+strings will be coerced to `nil`s when using `Form` validation):
+
+```ruby
+required(:ids).each { int? > gt?(0) }
 ```
 
 multiple predicates for each array value:

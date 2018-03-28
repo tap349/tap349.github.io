@@ -178,8 +178,8 @@ unlike `Dry::Validation.Schema`, `Dry::Validation.Form`:
 - coerces values
 - coerces empty strings to `nil` (applies to array elements too)
 
-nested data is validated in the same way -
-even though nested hash is specified with `schema` macro:
+nested data is validated in the same way - even though nested hash
+is specified with `schema` macro:
 
 ```ruby
 required(:quiz).schema do

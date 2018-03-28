@@ -176,7 +176,7 @@ unlike `Dry::Validation.Schema`, `Dry::Validation.Form`:
 
 - symbolizes keys
 - coerces values
-- coerces empty strings to `nil` (this applies to array elements too)
+- coerces empty strings to `nil` (applies to array elements too)
 
 nested data is validated in the same way -
 even though nested hash is specified with `schema` macro:

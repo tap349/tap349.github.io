@@ -204,7 +204,7 @@ $ git checkout master
 $ rake db:reset
 ```
 
-### [Rails] using `backup` gem (with data)
+### [Rails] using `backup` gem (structure + data)
 
 create:
 
@@ -243,66 +243,82 @@ $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
 
 1. <https://github.com/wsargent/docker-cheat-sheet>
 
-- add `db` service
+### add `db` service
 
-  _docker-compose.yml_:
+_docker-compose.yml_:
 
-  ```diff
-    services:
-  +   db:
-  +     image: postgres:9.4
-  +     environment:
-  +       POSTGRES_PASSWORD: iceperk
-  +     ports:
-  +       - 5433:5432
-  ```
+```diff
+  services:
++   db:
++     image: postgres:9.4
++     environment:
++       POSTGRES_PASSWORD: iceperk
++     ports:
++       - 5433:5432
+```
 
-- run `db` service
+### run `db` service
 
-  ```sh
-  $ docker-compose up db
-  ```
+```sh
+$ docker-compose up db
+```
 
-- configure application to use databases in Docker container
+### configure application to use databases in Docker container
 
-  _docker-compose.yml_:
+_docker-compose.yml_:
 
-  ```diff
-    default: &default
-  -   port: 5432
-  +   port: 5433
+```diff
+  default: &default
+-   port: 5432
++   port: 5433
 
-    development:
-  -   username: iceperk_development
-  +   username: postgres
+  development:
+-   username: iceperk_development
++   username: postgres
 
-    test:
-  -   username: iceperk_test
-  +   username: postgres
-  ```
+  test:
+-   username: iceperk_test
++   username: postgres
+```
 
-  `postgres` is a default superuser in PostgreSQL image - it can be changed
-  by setting `POSTGRES_USER` environment variable in _docker-compose.yml_.
+`postgres` is a default superuser in PostgreSQL image - it can be changed
+by setting `POSTGRES_USER` environment variable in _docker-compose.yml_.
 
-- create new databases in Docker container
+### create new databases in Docker container
 
-  ```sh
-  $ rails db:create
-  Created database 'iceperk_development'
-  Created database 'iceperk_test'
-  ```
+```sh
+$ rails db:create
+Created database 'iceperk_development'
+Created database 'iceperk_test'
+```
 
-- import local database into Docker container
+### import local database into Docker container
 
-  NOTE: command `rails db:structure:load` doesn't work (some error).
-
-  import development database:
+- using `pg_dump` (structure + data)
 
   ```sh
   $ DOCKER_DB_NAME=`docker-compose ps -q db`
   $ DB_USER=postgres
   $ DB_NAME=iceperk_development
   $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+  ```
+
+  load test database:
+
+  ```sh
+  $ RAILS_ENV=test rails db:structure:load
+  ```
+
+- using _db/structure.sql_ (structure only)
+
+  command `rails db:structure:load` doesn't work (some error) but
+  still it's possible to load _db/structure.sql_:
+
+  ```sh
+  $ DOCKER_DB_NAME=`docker-compose ps -q db`
+  $ DB_USER=postgres
+  $ DB_NAME=iceperk_development
+  $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -v ON_ERROR_STOP=1 "${DB_NAME}"
   ```
 
   load test database:

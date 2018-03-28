@@ -146,30 +146,24 @@ nested arrays
 1. <http://dry-rb.org/gems/dry-validation/nested-data/>
 2. <https://github.com/dry-rb/dry-validation/issues/175>
 
-array cannot be `nil` but can be empty:
-
 ```ruby
+# array cannot be nil but can be empty
 required(:ids).each(:int?)
-```
 
-array cannot be `nil` or empty:
-
-```ruby
+# array cannot be nil or empty
 required(:ids).filled { each(:int?) }
-# NOTE: this doesn't apply `each` predicates:
+
+# NOTE: this doesn't apply `each` predicates
 required(:ids).filled.each(:int?)
-```
 
-array elements can be either positive integers or `nil`s (empty
-strings will be coerced to `nil`s when using `Form` validation):
-
-```ruby
+# all array element types are allowed but
+# integers must be positive
 required(:ids).each { int? > gt?(0) }
-```
 
-multiple predicates for each array value:
+# array elements can nils or positive integers
+required(:ids).each { none? | (int? & gt?(0)) }
 
-```ruby
+# multiple predicates for each array value
 required(:ids).each(:int?, gteq?: 0)
 ```
 
@@ -182,7 +176,7 @@ unlike `Dry::Validation.Schema`, `Dry::Validation.Form`:
 
 - symbolizes keys
 - coerces values
-- coerces empty strings to `nil`
+- coerces empty strings to `nil` (this applies to array elements too)
 
 nested data is validated in the same way -
 even though nested hash is specified with `schema` macro:

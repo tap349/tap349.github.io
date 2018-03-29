@@ -42,7 +42,7 @@ Remote Redux DevTools
 
 RND contains:
 
-- React Developer Tools (CDT - RND is based on CDT)
+- Developer Tools (CDT - RND is based on CDT)
 - React DevTools
 - Redux DevTools
 
@@ -67,7 +67,15 @@ export REACT_DEBUGGER="open -g 'rndebugger://set-debugger-loc?host=localhost&por
 adding `--args` option in the end prevents from opening current application
 directory in Finder after launching React Native Debugger.
 
-### tips
+### record network log
+
+| Redux DevTools: RMB → `Enable Network Inspect` (menu)
+
+| Developer Tools: `Network` (tab) → `Record network log` (button)
+
+it's not sufficient to press `Record network log` button only.
+
+### window configuration tips
 
 it's convenient to dock Developer Tools to bottom and hide either React or
 Redux DevTools - this way there's enough space to the right of RDN to place

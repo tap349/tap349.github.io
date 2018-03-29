@@ -45,3 +45,7 @@ you might try to disable it:
 ```ruby
 config.action_dispatch.perform_deep_munge = false
 ```
+
+but I've chosen to send `null` array elements as empty strings - they are
+not removed by Rails and are properly converted to `nil`s by `Form` schema
+of dry-validation.

@@ -847,3 +847,18 @@ still this doesn't help - the only solution that works thus far is
 nothing of the above works )
 
 consider using `react-native-snap-carousel` instead of `react-native-swiper`.
+
+TextInput jumps when added dynamically
+--------------------------------------
+
+**solution**
+
+set `minHeight` and `initialHeight` properties:
+
+```jsx
+<TextInput
+  value="foo"
+  minHeight={20}
+  initialHeight={20}
+/>
+```

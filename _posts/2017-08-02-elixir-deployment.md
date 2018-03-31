@@ -187,7 +187,8 @@ _config/prod.exs_:
 > Runtime configuration
 >
 > :server - when true, starts the web server when the endpoint supervision tree
-> starts. Defaults to false. The mix phx.server task automatically sets this to true.
+> starts. Defaults to false. The mix phx.server task automatically sets this to
+> true.
 
 _config/prod.exs_ (see also auto-generated comment titled `Using releases`):
 

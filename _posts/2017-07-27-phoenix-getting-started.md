@@ -9,7 +9,7 @@ categories: [phoenix]
 
 <!-- more -->
 
-<https://hexdocs.pm/phoenix/overview.html>
+1. <https://hexdocs.pm/phoenix/overview.html>
 
 install or update Hex package manager:
 
@@ -72,8 +72,8 @@ $ iex -S mix phx.server
 
 add support for Slime template engine:
 
-- <https://github.com/slime-lang/phoenix_slime>
-- <https://github.com/slime-lang/slime>
+1. <https://github.com/slime-lang/phoenix_slime>
+2. <https://github.com/slime-lang/slime>
 
 generate schemas (add all required columns in generated migrations -
 IDK how to pass `precision` and `scale` options for decimal column to

@@ -23,6 +23,6 @@ _config/config.exs_:
 
 ```diff
   config :billing, BillingWeb.Endpoint,
-    # bind application to local IP address
++   # bind application to local IP address
 +   http: [ip: {192, 168, 0, 36}, port: 4000],
 ```

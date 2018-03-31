@@ -136,7 +136,6 @@ Android
   Running /usr/local/share/android-sdk/platform-tools/adb -s 4d00af1d6fa7306d reverse tcp:8081 tcp:8081
   ```
 
-
   also change server address for development environment: development
   server is now available by both `localhost` and notebook's local IP
   address (but not `10.0.2.2` - like in case of emulator).
@@ -146,7 +145,7 @@ Android
   ```diff
     const LOCALHOST = Platform.OS === 'ios'
       ? 'http://localhost:3000'
-  -   ? 'http://10.0.2.2:3000'
+  -   : 'http://10.0.2.2:3000';
   +   : 'http://localhost:3000';
   ```
 
@@ -155,7 +154,7 @@ Android
   ```diff
     const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
       ? 'http://localhost:3000'
-  -   ? 'http://10.0.2.2:3000'
+  -   : 'http://10.0.2.2:3000';
   +   : 'http://localhost:3000';
   ```
 

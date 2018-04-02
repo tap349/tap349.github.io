@@ -22,7 +22,7 @@ NOTE: all the notes below are true for both iOS and Android.
 
 NOTE: APKs and TestFlight builds are always built in release mode.
 
-mode is a build configuration (in Xcode parlance).
+mode is a build configuration in Xcode parlance.
 
 - in debug mode:
 
@@ -39,13 +39,13 @@ mode is a build configuration (in Xcode parlance).
   - hot reloading and live reload don't work
   - you cannot debug JS remotely
 
-all possible combinations of environment and build configuration are:
+all possible combinations of environment and mode are:
 
 - development + debug
 - production + debug
 - production + release
 
-the value of `__DEV__` variable is determined by current build configuration
+the value of `__DEV__` variable is determined by current mode
 (debug or release) - not by current environment.
 
 iOS

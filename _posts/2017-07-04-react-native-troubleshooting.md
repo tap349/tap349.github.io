@@ -651,9 +651,9 @@ and rebuild application.
 
 ### Cannot read property 'func' of undefined
 
-error in device system log and emulator window.
+error is shown in device system log and emulator window.
 
-error occurs when evaluating this line:
+the error occurs when evaluating this line:
 
 ```javascript
 onPress: React.PropTypes.func.isRequired
@@ -670,9 +670,9 @@ import `PropTypes` from a separate `prop-types` package.
 
 ### Cannot read property 'appVersion' of undefined
 
-error in device system log and emulator window.
+error is shown in device system log and emulator window.
 
-error occurs when evaluating this line in _deviceinfo.js_ file
+the error occurs when evaluating this line in _deviceinfo.js_ file
 of `react-native-device-info` package:
 
 ```javascript
@@ -862,3 +862,26 @@ set `minHeight` and `initialHeight` properties:
   initialHeight={20}
 />
 ```
+
+Could not parse the simulator list output
+-----------------------------------------
+
+the error occurs after new Xcode has been downloaded (9.3 in my case):
+
+```sh
+$ react-native run-ios
+Scanning folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (43ms)
+Found Xcode workspace iceperkapp.xcworkspace
+dyld: Symbol not found: _SimDeviceBootKeyDisabledJobs
+  Referenced from: /Applications/Xcode.app/Contents/Developer/usr/bin/simctl
+  Expected in: /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator
+ in /Applications/Xcode.app/Contents/Developer/usr/bin/simctl
+
+Could not parse the simulator list output
+```
+
+**solution**
+
+1. <https://joelennon.com/resolving-could-not-parse-the-simulator-list-output-when-running-react-native-apps-on-ios-simulator>
+
+launch Xcode and install additional required components when prompted.

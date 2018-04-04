@@ -2,7 +2,7 @@
 layout: post
 title: PostgreSQL - Tips
 date: 2017-07-20 16:09:32 +0300
-access: private
+access: public
 comments: true
 categories: [postgresql, rails]
 ---

@@ -17,7 +17,7 @@ categories: [postgresql, rails]
 psql tips
 ---------
 
-- <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>
+1. <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>
 
 ### users
 
@@ -88,7 +88,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 query optimization
 ------------------
 
-<https://robots.thoughtbot.com/why-postgres-wont-always-use-an-index>
+1. <https://robots.thoughtbot.com/why-postgres-wont-always-use-an-index>
 
 ### Rails notes
 
@@ -112,7 +112,7 @@ query optimization
 
 ### LIKE operator
 
-<https://stackoverflow.com/questions/1566717>
+1. <https://stackoverflow.com/questions/1566717>
 
 - create B-tree index
 
@@ -125,8 +125,8 @@ query optimization
 
 - create trigram index (GIN index using operator class provided by `pg_trgm` module)
 
-  - <https://www.postgresql.org/docs/9.6/static/pgtrgm.html>
-  - (!) <http://blog.scoutapp.com/articles/2016/07/12/how-to-make-text-searches-in-postgresql-faster-with-trigram-similarity>
+  1. <https://www.postgresql.org/docs/9.6/static/pgtrgm.html>
+  2. (!) <http://blog.scoutapp.com/articles/2016/07/12/how-to-make-text-searches-in-postgresql-faster-with-trigram-similarity>
 
   all kinds of patterns (not only left-anchored ones) are supported by
   trigram indexes => it makes them good for general searches.
@@ -146,9 +146,9 @@ query optimization
 
 - create combined multicolumn GIN index
 
-  - <https://stackoverflow.com/a/29414489>
-  - <https://stackoverflow.com/questions/40409997>
-  - <https://www.postgresql.org/docs/current/static/btree-gin.html>
+  1. <https://stackoverflow.com/a/29414489>
+  2. <https://stackoverflow.com/questions/40409997>
+  3. <https://www.postgresql.org/docs/current/static/btree-gin.html>
 
   this is useful when you want to search on some column using B-tree index
   and another column using trigram index (that is using `LIKE` operator).

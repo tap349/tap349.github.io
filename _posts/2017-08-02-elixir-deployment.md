@@ -168,7 +168,7 @@ end
 
 #### `url` option
 
-set host and port to be used in generated urls using `url` option.
+set host and port to be used in generated URLs using `url` option.
 
 _config/prod.exs_:
 

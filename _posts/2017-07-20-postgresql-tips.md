@@ -201,7 +201,7 @@ required schema. say, in Rails project:
 
 ```sh
 $ git checkout master
-$ rake db:reset
+$ rails db:reset
 ```
 
 ### [Rails] using `backup` gem (structure + data)
@@ -326,3 +326,20 @@ Created database 'iceperk_test'
   ```sh
   $ RAILS_ENV=test rails db:structure:load
   ```
+
+### run psql
+
+list Docker containers:
+
+```sh
+$ docker-compose ps
+          Name                        Command               State                           Ports
+--------------------------------------------------------------------------------------------------------------------------
+iceperk_db_1               docker-entrypoint.sh postgres    Up      0.0.0.0:5433->5432/tcp
+```
+
+run psql in a running Docker container:
+
+```sh
+$ docker exec -it iceperk_db_1 psql -U 'postgres' -d iceperk_development
+```

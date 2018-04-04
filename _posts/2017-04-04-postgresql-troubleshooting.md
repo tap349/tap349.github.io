@@ -44,9 +44,8 @@ but this migration was not smooth and resulted in many errors, to name a few:
 
 - `command not found: psql`
 
-  `psql` must have a symlink in _/usr/local/bin/_
-  (it has been added to `PATH` in _~/.zshenv_ in my case) -
-  it's gone now for some mysterious reason.
+  psql must have a symlink in _/usr/local/bin/_ (it has been added to `PATH`
+  in _~/.zshenv_ in my case) - it's gone now for some mysterious reason.
 
 - `psql: FATAL:  database "db_name" does not exist`
 
@@ -142,7 +141,7 @@ zsh: command not found: psql
 **solution**
 
 in my case only versioned formula of PostgreSQL (`postgresql@9.5`) was
-installed but it didn't create a symlink to `psql` in _/usr/local/bin/_.
+installed but it didn't create a symlink to psql in _/usr/local/bin/_.
 
 to solve this problem either:
 

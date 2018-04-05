@@ -100,6 +100,12 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 device bezels are shown by default since Xcode 9
 (there was no such option at all before Xcode 9 AFAIK).
 
+### turn on pixel accurate mode
+
+| emulator menu: `Window` → [x] `Pixel Accurate`
+
+otherwise actual paddings, margins, etc. might be different from specified ones.
+
 tips
 ----
 

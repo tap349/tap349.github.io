@@ -113,3 +113,35 @@ padding and border are not included in component's width and height).
   get it clear if the problem with invalid text component height exists
   on real Android device before using hacks mentioned above - maybe this
   is an emulator-specific issue.
+
+### flex item and fixed width item in the same row
+
+what we want to get in the end:
+
+```
+|John Doe foo foo foo foo foo...  20 y.o.|
+|Jane Doe                         30 y.o.|
+```
+
+here the name item is flexible, age item is fixed. but in case of a long
+name (the 1st row) it wouldn't be truncated pushing age item to the right =>
+total width of row items becomes larger than the width of flex container:
+
+```
+|John Doe foo foo foo foo foo foo   20 y.o.
+|Jane Doe                         30 y.o.|
+```
+
+we need to shrink flexible item (name item) when row items overflow their
+flex container - use `flexShrink: 1` property to achieve this behaviour:
+
+```jsx
+<View style={{flexDirection: 'row'}}>
+  <View style={{flex: 1, flexShrink: 1, marginRight: 4}}>
+    <Text numberOfLines={1}>{this.props.name}</Text>
+  </View>
+  <View style={{width: 48}}>
+    <Text>{this.props.age}</Text>
+  </View>
+</View>
+```

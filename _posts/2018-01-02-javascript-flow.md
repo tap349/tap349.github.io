@@ -137,6 +137,10 @@ $ $(npm bin)/flow
 $ yarn run flow
 ```
 
+**UPDATE**
+
+it's not required to add `flow` script.
+
 ### run Flow
 
 ```sh

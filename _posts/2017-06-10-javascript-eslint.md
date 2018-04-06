@@ -170,14 +170,18 @@ _package.json_:
 now ESLint can be run using any of these commands:
 
 ```sh
-$ $(npm bin)/eslint
-$ yarn run eslint
+$ $(npm bin)/eslint file.js
+$ yarn run eslint file.js
 ```
+
+**UPDATE**
+
+it's not required to add `eslint` script.
 
 ### run ESLint
 
 ```sh
-$ yarn run eslint app/services/TeamHelpers.js
+$ yarn run eslint file.js
 ```
 
 Vim integration

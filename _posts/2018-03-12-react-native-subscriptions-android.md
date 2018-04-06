@@ -266,7 +266,7 @@ altogether - or else you'll get `String resource ID #0x0` error.
     </tr>
     <tr>
       <td>standard in-app Google dialog</td>
-      <td>trying to subscribe using reserved product ID (`android.test.purchased`)</td>
+      <td>trying to subscribe using reserved product ID (android.test.purchased)</td>
     </tr>
   </table>
 

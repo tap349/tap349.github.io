@@ -30,7 +30,7 @@ AFTER release is published in both stores and all seems to be okay:
 
 - create new release on Github
 
-  | Github: `37 releases` (link) → `Draft a new release` (button) → `Releases` (tab)
+  | Github: `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab)
 
   - `Tag version` (input + combobox): `3.15`
   - `Target` (combobox): `master`

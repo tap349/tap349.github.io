@@ -139,7 +139,7 @@ $ yarn run flow
 
 **UPDATE**
 
-it's not required to add `flow` script for commands above to work.
+it's not required to add `flow` script - everything works as is.
 
 ### run Flow
 

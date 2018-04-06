@@ -176,7 +176,7 @@ $ yarn run eslint file.js
 
 **UPDATE**
 
-it's not required to add `eslint` script.
+it's not required to add `eslint` script for commands above to work.
 
 ### run ESLint
 

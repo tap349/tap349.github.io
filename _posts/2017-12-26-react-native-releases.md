@@ -13,6 +13,30 @@ categories: [react-native]
 {:toc}
 <hr>
 
+Github
+------
+
+- merge `release_3_15` branch into `develop` branch (manually or via PR)
+
+  - PR name: set automatically based on branch name (`Release 3 15`)
+
+- switch to `develop` branch (we build releases on this branch)
+
+AFTER release is published in both stores and all seems to be okay:
+
+- merge `develop` branch into `master` branch (manually or via PR)
+
+  - PR name: `Master (Release 3.15)`
+
+- create new release on Github
+
+  | Github: `37 releases` (link) → `Draft a new release` (button) → `Releases` (tab)
+
+  - `Tag version` (input + combobox): `3.15`
+  - `Target` (combobox): `master`
+  - `Release title` (input): `Release 3.15`
+  - `Publish release` (button)
+
 iceperkapp
 -----------
 
@@ -36,7 +60,8 @@ iceperkapp
   versionName "3.11.2"
   ```
 
-### iOS
+iOS
+---
 
 - open _iceperkapp.xcworkspace_ in Xcode
   - select `Generic iOS Device`
@@ -66,7 +91,8 @@ iceperkapp
     - [x] `Serve advertisements within the app`
   - click `Submit` button
 
-### Android
+Android
+-------
 
 copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
 from `Complead/iceperkapp_certificates/android` GitHub repo (see _README.md_)
@@ -87,14 +113,22 @@ before building releases.
 
   - replace existing `app-release.apk` file with a new one
 
-- open `Google Play Console` in browser
-  - open `Release management` (left menu) → `App releases`
-  - click `MANAGE PRODUCTION` button in `Production` section
-  - click `CREATE RELEASE` button
-  - select APK to add from filesystem
-  - fill `What's new in this release?` section
-  - click `SAVE` button
-  - click `REVIEW` button
+- publish release in Google Play Console
+
+  | GPC: `All applications` → `<my_app>`
+  | `Release management` (left menu) → `App releases` → `MANAGE PRODUCTION` (button) → `CREATE RELEASE` (button)
+
+  > New release to production
+
+  - `BROWSE_FILES` (button) → add new APK
+  - `Release name` (input): `3.15` (for example)
+  - `What's new in this release?` (textarea): release notes
+  - `SAVE` (button) → `REVIEW` (button)
+
+  > Confirm rollout to production: 3.15
+
+  - `Rollout percentage` (input): `100%`
+  - `START ROLLOUT TO PRODUCTION` (button)
 
 iceperk
 -------

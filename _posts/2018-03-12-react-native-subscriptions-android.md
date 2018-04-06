@@ -118,13 +118,18 @@ can both set up subscription and test it on real device without publishing
 (see `test with a test subscription` section).
 
 | GPC: `All applications` → `<my_app>`
-| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE ALPHA` (button)
+| `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) → `CREATE RELEASE` (button)
 
-- `CREATE RELEASE` (button)
+> New release to alpha
+
 - `BROWSE_FILES` (button) → add new APK
-- `Release name` (input): `3.14.alpha` (for example)
-- `What's new in this release?` (textarea): `Добавили подписку` (it's for alpha only)
+- `Release name` (input): `3.15-alpha` (for example)
+- `What's new in this release?` (textarea): release notes (they will be used for alpha only)
 - `SAVE` (button) → `REVIEW` (button)
+
+> Confirm rollout to alpha: 3.15
+
+- `START ROLLOUT TO ALPHA` (button)
 
 ### add pricing template
 
@@ -505,11 +510,16 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
       installing and running it on real device with `adb`.
 
 | GPC: `All applications` → `<my_app>`
-| `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button)
+| `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) → `EDIT RELEASE` (button)
 
-- `EDIT RELEASE` (button)
+> New release to alpha
+
 - upload new release if necessary
-- `SAVE` (button) → `REVIEW` (button) → `START ROLLOUT TO ALPHA` (button)
+- `SAVE` (button) → `REVIEW` (button)
+
+> Confirm rollout to alpha: 3.15
+
+- `START ROLLOUT TO ALPHA` (button)
 
 #### open opt-in URL in browser
 

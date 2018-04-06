@@ -127,7 +127,7 @@ before building releases.
 
   > Confirm rollout to production: 3.15
 
-  - `Rollout percentage` (input): `100%`
+  - `Rollout percentage` (input): `100%` (it's `50%` by default)
   - `START ROLLOUT TO PRODUCTION` (button)
 
 iceperk

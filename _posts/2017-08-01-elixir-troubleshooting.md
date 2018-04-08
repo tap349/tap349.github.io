@@ -623,6 +623,10 @@ what can I do?
   pretty quickly allowing their ports to be reused when new sockets are bound
   (binding socket is setting its source address and port).
 
+**UPDATE (2018-04-08)**
+
+the error is back after 16 days of silence - I have run out of ideas.
+
 (HTTPoison.Error) :connect_timeout
 ----------------------------------
 

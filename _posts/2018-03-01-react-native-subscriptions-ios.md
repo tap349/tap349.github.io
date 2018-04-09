@@ -118,7 +118,7 @@ test subscriptions:
 - cannot be managed (say, cancelled manually)
 
 test subscriptions are not created separately - they are real subscriptions
-but with special characteristics and behaviour sandbox testers.
+but with special characteristics and behaviour for sandbox testers.
 
 <https://forums.developer.apple.com/thread/14702>:
 

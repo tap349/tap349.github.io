@@ -137,3 +137,21 @@ setup vs. setup_all
 
 this makes sense since `setup_all` is run before the whole suite -
 not before each test.
+
+use Logger in tests
+-------------------
+
+1. <https://stackoverflow.com/a/36349341/3632318>
+
+_config/test.exs_:
+
+```elixir
+- config :logger, level: :warn
++ config :logger, level: :info
+```
+
+this will print all info messages in tests:
+
+```elixir
+Logger.info("foo")
+```

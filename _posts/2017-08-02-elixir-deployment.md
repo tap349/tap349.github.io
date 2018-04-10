@@ -132,7 +132,7 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
   + }
   ```
 
-### artifacts (say, YAML files)
+### artifacts (say, YAML or JSON files)
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:
 

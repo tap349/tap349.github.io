@@ -13,7 +13,8 @@ categories: [elixir, testing]
 $ mix test
 ```
 
-## mocks
+mocks
+-----
 
 1. <http://blog.plataformatec.com.br/2015/10/mocks-and-explicit-contracts/>
 
@@ -37,7 +38,8 @@ when using `Mox.stub` it's almost the same as just defining mock module
 except that we don't do it in our codebase polluting it with mock modules
 (usually Mox mocks are stubbed inside tests or in _test_helper.exs_).
 
-## add _test/support/_ to compilation paths
+add _test/support/_ to compilation paths
+----------------------------------------
 
 1. <https://github.com/thoughtbot/ex_machina#install-in-just-the-test-environment-for-non-phoenix-projects>
 2. <https://elixirforum.com/t/load-module-during-test/7400/2>
@@ -57,7 +59,8 @@ defp elixirc_paths(:test), do: ["lib", "test/support"]
 defp elixirc_paths(_), do: ["lib"]
 ```
 
-## run specific tests (same as `focus` in RSpec)
+run specific tests (same as `focus` in RSpec)
+---------------------------------------------
 
 - provide test path and line number to `mix test`
 
@@ -80,7 +83,8 @@ defp elixirc_paths(_), do: ["lib"]
   $ mix test --only wip
   ```
 
-## show detailed information (same as `--format documentation` in RSpec)
+show detailed information (same as `--format documentation` in RSpec)
+---------------------------------------------------------------------
 
 ```sh
 $ mix test --trace
@@ -88,7 +92,8 @@ $ mix test --trace
 
 `--trace` option also sets timeout to infinity - useful when using `IEx.pry`.
 
-## run tests synchronously
+run tests synchronously
+-----------------------
 
 `async: true` has no effect - useful in case of race conditions.
 
@@ -96,7 +101,8 @@ $ mix test --trace
 $ mix test --trace
 ```
 
-## use IEx.pry in tests
+use IEx.pry in tests
+--------------------
 
 to make pry work in tests run `mix test` in IEx session:
 
@@ -119,3 +125,15 @@ NOTE: test will time out after 60000ms by default:
 
 Timeouts are given as integers in milliseconds.
 ```
+
+setup vs. setup_all
+-------------------
+
+`context` variable in `setup_all` doesn't have `test` key:
+
+```elixir
+%{case: MyApp.FooTest, module: MyApp.FooTest}
+```
+
+this makes sense since `setup_all` is run before the whole suite -
+not before each test.

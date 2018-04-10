@@ -160,8 +160,8 @@ end
 2. <https://github.com/elixir-lang/elixir/blob/v1.5.2/lib/elixir/lib/supervisor.ex#L608>
 3. <https://github.com/elixir-lang/elixir/blob/v1.6.1/lib/elixir/lib/supervisor.ex#L566>
 
-`use GenServer`, `use Agent` and `use Supervisor` - all define
-`child_spec/1` function (default implementation of child spec):
+since from Elixir 1.5 `use GenServer`, `use Agent` and `use Supervisor`
+define `child_spec/1` function (default implementation of child spec):
 
 ```elixir
 iex> Neko.Achievement.Store.Registry.child_spec(:hello)
@@ -171,7 +171,27 @@ iex> Neko.Achievement.Store.Registry.child_spec(:hello)
 }
 ```
 
-supervisor child can be specified in 4 ways:
+and it's possible to specify module only as a supervisor child:
+
+```elixir
+children = [
+  Neko.UserRate.Store
+]
+```
+
+so default `child_spec/1` has arity 1 and you have to supply one argument -
+when only module is specified as supervisor child, default argument `[]` is
+passed. it's okay if this argument is discarded in `Neko.Foo.start_link/1`.
+otherwise (say, when argument is a name used to register current GenServer)
+it's necessary to pass along some meaningful value:
+
+```elixir
+children = [
+  {Neko.UserRate.Store.Registry, Neko.UserRate.Store.Registry}
+]
+```
+
+in general supervisor child can be specified now in 4 ways:
 
 - child spec map itself
 - tuple with module and start argument

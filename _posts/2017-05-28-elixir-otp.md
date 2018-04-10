@@ -201,7 +201,7 @@ it's a custom function of your module (named `start_link` by convention)
 which starts GenServer process (by calling `GenServer.start_link/3`,
 `Agent.start_link/2`, `Supervisor.start_link/3` or whatever inside).
 
-#### about Supervisor.Spec helpers (worker/3 and supervisor/3)
+#### about deprecated Supervisor.Spec helpers (worker/3 and supervisor/3)
 
 Jose Valim (<http://disq.us/p/1nbxadq>):
 

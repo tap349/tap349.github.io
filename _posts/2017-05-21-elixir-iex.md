@@ -146,7 +146,7 @@ using `erlang-history` is no longer required
 
 1. <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
-```sh
+```
 iex> 123
 123
 iex> v()
@@ -162,7 +162,7 @@ number indicates relative one (say, `v()` == `v(-1)`).
 1. <https://stackoverflow.com/questions/27591417>
 2. <https://hexdocs.pm/iex/1.0.5/IEx.html>
 
-```sh
+```
 iex> foo =
 ...> #iex:break
 ```
@@ -181,13 +181,13 @@ the line from current cursor position backwards to the start of the line.
 
 1. <http://stackoverflow.com/a/36494891/3632318>
 
-```sh
+```
 iex> recompile()
 ```
 
 also it's possible to recompile specific module:
 
-```sh
+```
 iex> r(Foo.Bar)
 ```
 
@@ -197,7 +197,7 @@ iex> r(Foo.Bar)
 
 add another expression at the end of the line after semicolon:
 
-```sh
+```
 iex> Foo.bar(); 0
 0
 ```

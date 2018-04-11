@@ -163,7 +163,7 @@ end
 since from Elixir 1.5 `use GenServer`, `use Agent` and `use Supervisor`
 define `child_spec/1` function (default implementation of child spec):
 
-```elixir
+```
 iex> Neko.Achievement.Store.Registry.child_spec(:hello)
 %{
   id: Neko.Achievement.Store.Registry,
@@ -242,7 +242,7 @@ start function of underlying module as you want - up to max allowed
 function arity 255 (which can be confusing - see Jose Valim's comment
 above).
 
-```elixir
+```
 iex> Supervisor.Spec.worker(Neko.Achievement.Store.Registry, [:hello, :world])
 {Neko.Achievement.Store.Registry,
  {Neko.Achievement.Store.Registry, :start_link, [:hello, :world]}, :permanent,

@@ -121,7 +121,7 @@ sample steps to setup Poolboy worker pool.
 
   1. <https://github.com/devinus/poolboy/issues/91>
 
-  ```elixir
+  ```
   iex> GenServer.call(MyApp.Rule.worker_pool_config()[:name], :get_avail_workers)
   [#PID<0.367.0>, #PID<0.366.0>, #PID<0.365.0>, #PID<0.364.0>, #PID<0.363.0>,
    #PID<0.362.0>, #PID<0.361.0>, #PID<0.360.0>, #PID<0.359.0>, #PID<0.358.0>]

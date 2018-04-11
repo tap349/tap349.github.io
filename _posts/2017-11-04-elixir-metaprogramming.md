@@ -39,7 +39,7 @@ note that there'll be no error at compile time if you unquote
 not AST literal inside a macro - error will occur when you'll
 try to evaluate resulting quoted expression:
 
-```elixir
+```
 iex> quote do: "123" == unquote(%{a: 1})
 {:==, [context: Elixir, import: Kernel], ["123", %{a: 1}]}
 iex> Code.eval_quoted(quote do: "123" == unquote(%{a: 1}))

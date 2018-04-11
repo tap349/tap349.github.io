@@ -131,7 +131,7 @@ make sure node name matches the one from _foo/var/vm.args_ exactly
 
 the higher number of reductions is, the more process loads CPU:
 
-```elixir
+```
 iex> Process.list
   |> Enum.map(& {Process.info(&1, :reductions), &1})
   |> Enum.sort(&>=/2)
@@ -144,7 +144,7 @@ iex> Process.info(pid, :current_stacktrace)
 debug that process with `dbg` (for some reason Sasa Juric doesn't recommend
 it for production):
 
-```elixir
+```
 iex> :dbg.tracer()
 iex> :dbg.p(pid, [:call])
 iex> :dbg.tpl(:_, []); :timer.sleep(1000); :dbg.stop()

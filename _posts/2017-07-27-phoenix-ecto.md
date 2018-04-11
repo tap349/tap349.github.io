@@ -495,7 +495,7 @@ keyword list or set it to nil.
 
 complete example:
 
-```elixir
+```
 iex> transfer = Billing.Repo.get(Billing.App.Transfer, 11)
 iex> attrs = %{data: %{acs_url: "foo"}}
 iex> transfer |> cast(attrs, []) |> cast_embed(:data) |> Repo.update()

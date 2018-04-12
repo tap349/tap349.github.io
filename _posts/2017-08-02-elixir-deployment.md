@@ -1002,3 +1002,6 @@ is when argument is a string):
 - Logger.info("API REQUEST:\n" <> inspect(soap))
 + Logger.info("API REQUEST:\n" <> soap)
 ```
+
+NOTE: long request parameter values are still truncated by Phoenix -
+      IDK how to change this behaviour.

@@ -985,3 +985,20 @@ running `mix release --verbose` command) to _rel/config.exs_:
     ]
   end
 ```
+
+logs are truncated in systemd journal
+-------------------------------------
+
+say, we have a very long `PARes` XML field that used to be truncated
+in systemd journal all the time.
+
+**solution**
+
+log message was truncated by `Kernel.inspect/2` - not by systemd journal.
+solution is not to use the former (where it's possible of course - that
+is when argument is a string):
+
+```diff
+- Logger.info("API REQUEST:\n" <> inspect(soap))
++ Logger.info("API REQUEST:\n" <> soap)
+```

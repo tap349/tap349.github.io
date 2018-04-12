@@ -919,3 +919,69 @@ in another terminal:
 $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
 ```
 {% endraw %}
+
+troubleshooting
+---------------
+
+dependency is not included in distillery release
+------------------------------------------------
+
+`phoenix_expug` package has `expug` dependency but it's not added to
+distillery release (raising error at runtime):
+
+```sh
+$ mix release --verbose
+...
+=> One or more direct or transitive dependencies are missing from
+    :applications or :included_applications, they will not be included
+    in the release:
+
+    :expug
+    :parse_trans
+
+    This can cause your application to fail at runtime. If you are sure
+    that this is not an issue, you may ignore this warning.
+```
+
+systemd journal:
+
+```
+Request: GET /admin/transfers
+** (exit) an exception was raised:
+    ** (UndefinedFunctionError) function Expug.Runtime.attr/2 is undefined (module Expug.Runtime is not available)
+        Expug.Runtime.attr("lang", "en")
+        (billing) lib/billing_web/templates/layout/admin.html.pug:2: BillingWeb.LayoutView."admin.html"/1
+```
+
+**solution**
+
+1. <https://github.com/hashrocket/gatling/issues/24#issuecomment-270044265>
+2. <https://github.com/bitwalker/distillery/issues/55>
+
+probably this is because `phoenix_expug` uses `applications` option in
+_mix.exs_ (`application` callback) where all dependencies that should
+be started are listed explicitly. it's deprecated now and overrides new
+default behaviour when all dependencies from `deps` option (`project`
+callback) are added to `applications` implicitly.
+
+while `iex phx.server` seems to start all dependencies listed both in
+`applications` and `deps`, distillery apparently does add `applications`
+only to release treating `deps` as compile-time dependencies.
+
+one solution is to remove `applications` altogether so that all `deps`
+are added to `applications` by default though it's not an option when
+dealing with external dependencies (unless you fork them).
+
+another solution is to add those missing depedencies (from the ouput of
+running `mix release --verbose` command) to _rel/config.exs_:
+
+```diff
+  release :billing do
+    set version: current_version(:billing)
+    set applications: [
+-     :runtime_tools
++     :runtime_tools,
++     expug: :load
+    ]
+  end
+```

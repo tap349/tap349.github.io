@@ -13,9 +13,9 @@ categories: []
 {:toc}
 <hr>
 
-phone numbers: +7 800 000-00-01
-profile names: beta0001
-team names: beat0001 team
+- phone numbers: +7 900 000-00-01
+- profile names: beta0001
+- team names: beta0001 team
 
 say, new release branch name is `release_3_16`.
 

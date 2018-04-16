@@ -13,10 +13,10 @@ categories: [react-native]
 {:toc}
 <hr>
 
-Github
-------
+merge branches in Github
+------------------------
 
-`iceperk`:
+### iceperk repo
 
 - merge `release_3_15` branch into `develop` branch (manually or via PR)
 
@@ -26,10 +26,7 @@ Github
 
   - PR name: `Master (Release 3.15)`
 
-- test server side (common features) against old `iceperkapp` version
-  (`develop` branch)
-
-`iceperkapp`:
+### iceperkapp repo
 
 - merge `release_3_15` branch into `develop` branch (manually or via PR)
 
@@ -52,8 +49,8 @@ AFTER release is published in both stores and all seems to be okay:
   - `Release title` (input): `Release 3.15`
   - `Publish release` (button)
 
-iceperkapp
------------
+change version number and build number in iceperkapp
+----------------------------------------------------
 
 - change environment to `production` in _Env.js_ before generating releases
 - change version number and increment build number in iOS and Android projects
@@ -75,8 +72,8 @@ iceperkapp
   versionName "3.11.2"
   ```
 
-iOS
----
+build and publish iOS release
+-----------------------------
 
 - open _iceperkapp.xcworkspace_ in Xcode
   - select `Generic iOS Device`
@@ -106,8 +103,8 @@ iOS
     - [x] `Serve advertisements within the app`
   - click `Submit` button
 
-Android
--------
+build and publish Android release
+---------------------------------
 
 copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
 from `Complead/iceperkapp_certificates/android` GitHub repo (see _README.md_)
@@ -144,16 +141,6 @@ before building releases.
 
   - `Rollout percentage` (input): `100%` (it's `50%` by default)
   - `START ROLLOUT TO PRODUCTION` (button)
-
-iceperk
--------
-
-- increment build numbers in `Api::V1::UserUpdatedAtsController` and deploy
-  `iceperk` application *after* new `iceperkapp` releases appear in *both*
-  App Store and Google Play
-
-  this is to notify all users about a new release via modal window inside
-  application (optional).
 
 troubleshooting
 ---------------

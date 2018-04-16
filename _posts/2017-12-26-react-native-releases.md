@@ -16,6 +16,20 @@ categories: [react-native]
 Github
 ------
 
+`iceperk`:
+
+- merge `release_3_15` branch into `develop` branch (manually or via PR)
+
+  - PR name: `Develop (Release 3.15)`
+
+- merge `develop` branch into `master` branch (manually or via PR)
+
+  - PR name: `Master (Release 3.15)`
+
+- test server side against old `iceperkapp` version (`develop` branch)
+
+`iceperkapp`:
+
 - merge `release_3_15` branch into `develop` branch (manually or via PR)
 
   - PR name: set automatically based on branch name (`Release 3 15`)

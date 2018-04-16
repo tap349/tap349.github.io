@@ -26,7 +26,8 @@ Github
 
   - PR name: `Master (Release 3.15)`
 
-- test server side against old `iceperkapp` version (`develop` branch)
+- test server side (common features) against old `iceperkapp` version
+  (`develop` branch)
 
 `iceperkapp`:
 

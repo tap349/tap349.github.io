@@ -13,7 +13,7 @@ categories: []
 {:toc}
 <hr>
 
-- phone numbers: +7 900 000-00-01
+- phone numbers: +7 900 000-00-00 (and so forth)
 - profile names: beta0001
 - team names: beta0001 team
 

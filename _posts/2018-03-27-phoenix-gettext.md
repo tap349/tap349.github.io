@@ -49,32 +49,36 @@ NOTE: only dynamic translations are added manually to POT file:
 > Add new translations manually only if they're dynamic
 > translations that can't be statically extracted.
 
-### generate PO files
+### generate PO files for all present locales
 
-PO files are generated for all locales which are present in _priv/gettext/_:
+PO files are generated for all locales which are present in _priv/gettext/_
+(only `en` locale is present by default):
 
 ```sh
 $ mix gettext.merge priv/gettext
 ```
 
-### translate text dynamically
+### add translations for all present locales
 
-say, in a view module helper:
+_priv/gettext/en/LC_MESSAGES/default.po_:
 
-```elixir
-# api_error_enum = "system_error"
-def human_api_error(api_error_enum) do
-  Gettext.gettext(BillingWeb.Gettext, api_error_enum)
-end
+```diff
+  msgid ""
+  msgstr ""
+  "Language: en\n"
+  "Plural-Forms: nplurals=2\n"
+
+  msgid "system_error"
++ msgstr "system error"
 ```
 
-### add new language
+### add new locale
 
 ```sh
 $ mix gettext.merge priv/gettext --locale ru
 ```
 
-### add translation for new language
+### add translation for new locale
 
 _priv/gettext/ru/LC_MESSAGES/default.po_:
 
@@ -86,4 +90,15 @@ _priv/gettext/ru/LC_MESSAGES/default.po_:
 
   msgid "system_error"
 + msgstr "системная ошибка"
+```
+
+### translate text dynamically in code
+
+say, in a view module helper:
+
+```elixir
+# api_error_enum = "system_error"
+def human_api_error(api_error_enum) do
+  Gettext.gettext(BillingWeb.Gettext, api_error_enum)
+end
 ```

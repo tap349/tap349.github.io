@@ -53,8 +53,15 @@ this is to make sure nothing is broken for old releases.
 - [`iceperk`] switch to `master` branch
 - use emulator and development server to test new features from Trello
 
-prepare new release
--------------------
+Github (part 2)
+---------------
+
+- [`iceperkapp`] merge `release_3_16` branch into `develop` branch
+  - PR name: set automatically based on branch name (`Release 3 16`)
+- [`iceperkapp`] switch to `develop` branch (we use it to build releases)
+
+prepare new release in iceperkapp
+---------------------------------
 
 - change environment to `production` in _Env.js_ before generating releases
 - change version number and increment build number in iOS and Android projects
@@ -66,25 +73,20 @@ prepare new release
 
   ```xml
   <key>CFBundleShortVersionString</key>
-  <string>3.11.2</string>
+  <string>3.16</string>
   <!--...-->
   <key>CFBundleVersion</key>
-  <string>68</string>
+  <string>93</string>
   ```
 
   _android/app/build.gradle_:
 
   ```groovy
-  versionCode 68
-  versionName "3.11.2"
+  versionCode 93
+  versionName "3.16"
   ```
 
-Github (part 2)
----------------
-
-- [`iceperkapp`] merge `release_3_16` branch into `develop` branch
-  - PR name: set automatically based on branch name (`Release 3 16`)
-- [`iceperkapp`] switch to `develop` branch (we use it to build releases)
+- commit changes and push to `develop` branch
 
 build and publish new release
 -----------------------------

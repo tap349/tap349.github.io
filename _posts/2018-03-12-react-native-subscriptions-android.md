@@ -90,8 +90,7 @@ add subscription in GPC
 
 ### create signed APK
 
-1. [React Native - Releases]({% post_url 2017-12-26-react-native-releases %})
-2. <https://facebook.github.io/react-native/docs/signed-apk-android.html>
+1. <https://facebook.github.io/react-native/docs/signed-apk-android.html>
 
 assemble production release with IAB permission as usual.
 

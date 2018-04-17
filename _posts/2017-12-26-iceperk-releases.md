@@ -38,16 +38,16 @@ test data:
 
 ### test backend against old release
 
-- [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperkapp`] switch to `develop` branch (previous release)
+- [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperk`] switch to `master` branch
 - use emulator and development server to run all sanity checks
 - [`iceperk`] deploy `master` branch to production
 
 ### test new release
 
-- [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
+- [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperk`] switch to `master` branch
 - use emulator and development server to test new features from Trello
 

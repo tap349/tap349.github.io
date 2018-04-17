@@ -13,44 +13,53 @@ categories: [react-native]
 {:toc}
 <hr>
 
-merge branches in Github
-------------------------
+say, new release branch name is `release_3_16`.
 
-### iceperk repo
+Github (part 1)
+---------------
 
-- merge `release_3_15` branch into `develop` branch (manually or via PR)
+NOTE: branches can be merged manually or via PR.
 
-  - PR name: `Develop (Release 3.15)`
+- [`iceperk`] merge `release_3_16` branch into `develop` branch
+  - PR name: `Develop (Release 3.16)`
+- [`iceperk`] merge `develop` branch into `master` branch
+  - PR name: `Master (Release 3.16)`
+- [`iceperkapp`] don't merge `release_3_16` branch into `develop`
+  branch so far!
 
-- merge `develop` branch into `master` branch (manually or via PR)
+test backend and new release
+----------------------------
 
-  - PR name: `Master (Release 3.15)`
+test data:
 
-### iceperkapp repo
+- phone numbers: +7 900 000-00-00 (and so forth)
+- profile names: beta0001
+- team names: beta0001 team
 
-- merge `release_3_15` branch into `develop` branch (manually or via PR)
+### test backend against old release
 
-  - PR name: set automatically based on branch name (`Release 3 15`)
+- [`iceperkapp`] change environment to `development` in _Env.js_
+- [`iceperkapp`] switch to `develop` branch (previous release)
+- [`iceperk`] switch to `master` branch
+- use emulator and development server to run all sanity checks
+- [`iceperk`] deploy `master` branch to production
 
-- switch to `develop` branch (we build releases on this branch)
+### test new release
 
-AFTER release is published in both stores and all seems to be okay:
+- [`iceperkapp`] change environment to `development` in _Env.js_
+- [`iceperkapp`] switch to `release_3_16` branch (new release)
+- [`iceperk`] switch to `master` branch
+- use emulator and development server to test new features from Trello
 
-- merge `develop` branch into `master` branch (manually or via PR)
+Github (part 2)
+---------------
 
-  - PR name: `Master (Release 3.15)`
+- [`iceperkapp`] merge `release_3_16` branch into `develop` branch
+  - PR name: set automatically based on branch name (`Release 3 16`)
+- [`iceperkapp`] switch to `develop` branch (we use it to build releases)
 
-- create new release on Github
-
-  | Github: `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab)
-
-  - `Tag version` (input + combobox): `3.15`
-  - `Target` (combobox): `master`
-  - `Release title` (input): `Release 3.15`
-  - `Publish release` (button)
-
-change version number and build number in iceperkapp
-----------------------------------------------------
+bump versions in iceperkapp
+---------------------------
 
 - change environment to `production` in _Env.js_ before generating releases
 - change version number and increment build number in iOS and Android projects
@@ -133,14 +142,31 @@ before building releases.
   > New release to production
 
   - `BROWSE_FILES` (button) → add new APK
-  - `Release name` (input): `3.15` (for example)
+  - `Release name` (input): `3.16` (for example)
   - `What's new in this release?` (textarea): release notes
   - `SAVE` (button) → `REVIEW` (button)
 
-  > Confirm rollout to production: 3.15
+  > Confirm rollout to production: 3.16
 
   - `Rollout percentage` (input): `100%` (it's `50%` by default)
   - `START ROLLOUT TO PRODUCTION` (button)
+
+Github (part 3)
+---------------
+
+this is done AFTER release is published in both stores and all seems
+to working okay:
+
+- [`iceperkapp`] merge `develop` branch into `master` branch
+  - PR name: `Master (Release 3.16)`
+- [`iceperkapp`] create new release on Github
+
+  | Github: `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab)
+
+  - `Tag version` (input + combobox): `3.16`
+  - `Target` (combobox): `master`
+  - `Release title` (input): `Release 3.16`
+  - `Publish release` (button)
 
 troubleshooting
 ---------------

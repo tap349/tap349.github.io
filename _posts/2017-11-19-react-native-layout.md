@@ -135,6 +135,7 @@ total width of row items becomes larger than the width of flex container:
 we need to shrink flexible item (name item) when row items overflow their
 flex container - use `flexShrink: 1` property to achieve this behaviour:
 
+{% raw %}
 ```jsx
 <View style={{flexDirection: 'row'}}>
   <View style={{flex: 1, flexShrink: 1, marginRight: 4}}>
@@ -145,3 +146,4 @@ flex container - use `flexShrink: 1` property to achieve this behaviour:
   </View>
 </View>
 ```
+{% endraw %}

@@ -30,13 +30,15 @@ NOTE: branches can be merged manually or via PR.
 test backend and new release
 ----------------------------
 
-test data:
+seed data for testing:
 
 - phone numbers: +7 900 000-00-00 (and so forth)
 - profile names: beta0001
 - team names: beta0001 team
 
-### test backend against old release
+### test new backend against old release
+
+this is to make sure nothing is broken for old releases.
 
 - [`iceperkapp`] switch to `develop` branch (previous release)
 - [`iceperkapp`] change environment to `development` in _Env.js_
@@ -51,18 +53,14 @@ test data:
 - [`iceperk`] switch to `master` branch
 - use emulator and development server to test new features from Trello
 
-Github (part 2)
----------------
-
-- [`iceperkapp`] merge `release_3_16` branch into `develop` branch
-  - PR name: set automatically based on branch name (`Release 3 16`)
-- [`iceperkapp`] switch to `develop` branch (we use it to build releases)
-
-bump versions in iceperkapp
----------------------------
+prepare new release
+-------------------
 
 - change environment to `production` in _Env.js_ before generating releases
 - change version number and increment build number in iOS and Android projects
+
+  NOTE: these number might have been already changed right after creating
+        `release_3_16` branch.
 
   _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
 
@@ -81,8 +79,17 @@ bump versions in iceperkapp
   versionName "3.11.2"
   ```
 
-build and publish iOS release
+Github (part 2)
+---------------
+
+- [`iceperkapp`] merge `release_3_16` branch into `develop` branch
+  - PR name: set automatically based on branch name (`Release 3 16`)
+- [`iceperkapp`] switch to `develop` branch (we use it to build releases)
+
+build and publish new release
 -----------------------------
+
+### iOS
 
 - open _iceperkapp.xcworkspace_ in Xcode
   - select `Generic iOS Device`
@@ -112,8 +119,7 @@ build and publish iOS release
     - [x] `Serve advertisements within the app`
   - click `Submit` button
 
-build and publish Android release
----------------------------------
+### Android
 
 copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
 from `Complead/iceperkapp_certificates/android` GitHub repo (see _README.md_)

@@ -123,8 +123,8 @@ what we want to get in the end:
 |Jane Doe                         30 y.o.|
 ```
 
-here the name item is flexible, age item is fixed. but in case of a long
-name (the 1st row) it wouldn't be truncated pushing age item to the right =>
+here name item is flexible, age item is fixed. but in case of a long name
+(the 1st row) it wouldn't be truncated pushing age item to the right =>
 total width of row items becomes larger than the width of flex container:
 
 ```

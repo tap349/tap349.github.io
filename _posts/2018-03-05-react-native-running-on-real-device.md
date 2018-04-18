@@ -28,6 +28,7 @@ mode is a build configuration in Xcode parlance.
 
   - `__DEV__` variable is set to true
   - Developer Menu is available - shake real device to access it
+    (or press Menu button on Android devices if it's available)
   - hot reloading works as a rule (use live reload if it doesn't)
   - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu
     to open React Native Debugger

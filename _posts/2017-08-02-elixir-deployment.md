@@ -923,8 +923,7 @@ $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json"
 troubleshooting
 ---------------
 
-dependency is not included in distillery release
-------------------------------------------------
+### dependency is not included in distillery release
 
 `phoenix_expug` package has `expug` dependency but it's not added to
 distillery release (raising error at runtime):
@@ -986,8 +985,7 @@ running `mix release --verbose` command) to _rel/config.exs_:
   end
 ```
 
-logs are truncated in systemd journal
--------------------------------------
+### logs are truncated in systemd journal
 
 say, we have a very long `PARes` XML field that used to be truncated
 in systemd journal all the time.

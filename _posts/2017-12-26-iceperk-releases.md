@@ -186,6 +186,43 @@ to be working okay:
   - `Release title` (input): `Release 3.16`
   - `Publish release` (button)
 
+if you have accidentally published release with a wrong target (branch), you
+cannot edit target afterwards (though you can edit, say, tag or release title).
+
+follow these steps in this case to create new release with the same tag
+but different target:
+
+- delete release
+
+  | Github: `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button)
+
+- delete current tag
+
+  1. <https://gist.github.com/mobilemind/7883996>
+
+  you won't be able to create new release with this tag but different target
+  unless you remove this tag from Github.
+
+  fetch changes (including new tag) from Github:
+
+  ```sh
+  $ git up
+  ```
+
+  delete local tag:
+
+  ```sh
+  $ git tag -d 3.16
+  ```
+
+  delete remote tag:
+
+  ```sh
+  $ git push origin :refs/tags/3.16
+  / or
+  $ git push --delete origin 3.16
+  ```
+
 troubleshooting
 ---------------
 

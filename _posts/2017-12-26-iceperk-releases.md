@@ -36,7 +36,7 @@ seed data for testing:
 - profile names: beta0001
 - team names: beta0001 team
 
-### test new backend against old release
+### test new backend against old release (sanity checks)
 
 this is to make sure nothing is broken for old releases.
 
@@ -46,12 +46,22 @@ this is to make sure nothing is broken for old releases.
 - use emulator and development server to run all sanity checks
 - [`iceperk`] deploy `master` branch to production
 
-### test new release
+### test new release (new features)
 
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
 - [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperk`] switch to `master` branch
 - use emulator and development server to test new features from Trello
+
+### test new release (sanity checks)
+
+- [`iceperkapp`] switch to `release_3_16` branch (new release)
+- [`iceperkapp`] change environment to `development` in _Env.js_
+- [`iceperk`] switch to `master` branch
+- use emulator and development server to run all sanity checks
+
+or else it's possible to run sanity checks on real device using test build
+and production server.
 
 Github (part 2)
 ---------------

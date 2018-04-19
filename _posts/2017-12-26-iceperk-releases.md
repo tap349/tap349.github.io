@@ -120,7 +120,7 @@ build and publish new release
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link → `iOS` (popup menu)
-  - enter new `Store Version Number` (say, 3.11.2) in popup window
+  - enter new `Store Version Number` (say, 3.16) in popup window
   - fill `What's New in This Version` section
   - screenshots are added for iPhone 5.5" Display only
   - select new build

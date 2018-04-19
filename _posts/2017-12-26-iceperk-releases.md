@@ -76,7 +76,7 @@ prepare new release in iceperkapp
 - change environment to `production` in _Env.js_ before generating releases
 - change version number and increment build number in iOS and Android projects
 
-  NOTE: these number might have been already changed right after creating
+  NOTE: these numbers might have been already changed right after creating
         `release_3_16` branch.
 
   _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
@@ -186,42 +186,47 @@ to be working okay:
   - `Release title` (input): `Release 3.16`
   - `Publish release` (button)
 
-if you have accidentally published release with a wrong target (branch), you
-cannot edit target afterwards (though you can edit, say, tag or release title).
+  if you have accidentally published release with a wrong target (branch), you
+  cannot edit target afterwards (though you can edit, say, tag or release title).
 
-follow these steps in this case to create new release with the same tag
-but different target:
+  follow these steps in this case to create new release with the same tag
+  but different target:
 
-- delete release
+  - delete release
 
-  | Github: `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button)
+    | Github: `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button)
 
-- delete current tag
+  - delete current tag
 
-  1. <https://gist.github.com/mobilemind/7883996>
+    1. <https://gist.github.com/mobilemind/7883996>
 
-  you won't be able to create new release with this tag but different target
-  unless you remove this tag from Github.
+    you won't be able to create new release with this tag but different target
+    unless you remove this tag from Github.
 
-  fetch changes (including new tag) from Github:
+    fetch changes (including new tag) from Github:
 
-  ```sh
-  $ git up
-  ```
+    ```sh
+    $ git up
+    ```
 
-  delete local tag:
+    delete local tag:
 
-  ```sh
-  $ git tag -d 3.16
-  ```
+    ```sh
+    $ git tag -d 3.16
+    ```
 
-  delete remote tag:
+    delete remote tag:
 
-  ```sh
-  $ git push origin :refs/tags/3.16
-  / or
-  $ git push --delete origin 3.16
-  ```
+    ```sh
+    $ git push origin :refs/tags/3.16
+    / or
+    $ git push --delete origin 3.16
+    ```
+
+- [`iceperk`] create and push branch for new release from `develop` branch
+  (say, `release_3_17`)
+- [`iceperkapp`] create and push branch for new release from `develop` branch
+  (say, `release_3_17`)
 
 troubleshooting
 ---------------

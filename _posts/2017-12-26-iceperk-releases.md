@@ -32,7 +32,7 @@ test backend and new release
 
 seed data for testing:
 
-- phone numbers: +7 900 000-00-00 (and so forth)
+- phone numbers: +7 900 000-00-01 (and so forth)
 - profile names: beta0001
 - team names: beta0001 team
 
@@ -56,7 +56,7 @@ this is to make sure nothing is broken for old releases.
 ### test new release (sanity checks)
 
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
-- [`iceperkapp`] change environment to `development` in _Env.js_
+- [`iceperkapp`] change environment to `production` in _Env.js_
 - [`iceperk`] switch to `master` branch
 - use emulator and development server to run all sanity checks
 

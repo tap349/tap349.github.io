@@ -173,7 +173,7 @@ Github (part 3)
 ---------------
 
 this is done AFTER release is published in both stores and all seems
-to working okay:
+to be working okay:
 
 - [`iceperkapp`] merge `develop` branch into `master` branch
   - PR name: `Master (Release 3.16)`

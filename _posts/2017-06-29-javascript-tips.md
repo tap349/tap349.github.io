@@ -104,8 +104,15 @@ instance properties of current class) there are 2 options:
   now `handleResponse` is bound to `Foo` class instance forever
   (it's even impossible to rebind it explicitly using `bind`).
 
-(how to) post form data
------------------------
+(how to) print form data (multipart/form-data)
+----------------------------------------------
+
+```javascript
+console.log('formData: ' + JSON.stringify(formData));
+```
+
+(how to) post form data (application/x-www-form-urlencoded)
+-----------------------------------------------------------
 
 1. <https://github.com/facebook/react-native/issues/3349>
 2. <https://stackoverflow.com/a/32445457/3632318>

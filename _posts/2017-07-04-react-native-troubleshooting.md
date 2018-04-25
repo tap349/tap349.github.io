@@ -885,3 +885,31 @@ Could not parse the simulator list output
 1. <https://joelennon.com/resolving-could-not-parse-the-simulator-list-output-when-running-react-native-apps-on-ios-simulator>
 
 launch Xcode and install additional required components when prompted.
+
+image uploading doesn't work in simulator
+-----------------------------------------
+
+response from AWS:
+
+```xml
+<Error>
+  <Code>MalformedPOSTRequest</Code>
+  <Message>The body of your POST request is not well-formed multipart/form-data.</Message>
+</Error>
+```
+
+yellow warning in simulator:
+
+```
+[RNDebugger] Detected you've enabled Network Inspect and you're using `uri`
+in FormData, it will be a problem if you use it for upload, please see the
+documentation (https://goo.gl/yEcRrU) for more information.
+```
+
+**solution**
+
+1. <https://github.com/jhen0409/react-native-debugger/blob/master/docs/network-inspect-of-chrome-devtools.md>
+
+disable `Network Inspect`:
+
+| Redux DevTools: RMB → `Disable Network Inspect` (menu)

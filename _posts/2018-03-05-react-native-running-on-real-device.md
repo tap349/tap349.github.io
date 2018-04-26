@@ -139,7 +139,7 @@ Android
 
   also change server address for development environment: development
   server is now available by both `localhost` and notebook's local IP
-  address (but not `10.0.2.2` - like in case of emulator).
+  address (but not `10.0.2.2` or `10.0.3.2` - like in case of emulator).
 
   _app/api/ApiHelpers.js_:
 

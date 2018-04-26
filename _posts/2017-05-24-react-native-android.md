@@ -208,14 +208,6 @@ the first run might take a while since RN will build the whole Android project.
 configuration
 -------------
 
-### [Genymotion] virtual keyboard
-
-it's enabled by default on Android Emulator.
-
-| Genymotion: `Configure this virtual device` (tool icon)
-
-- [x] `Use virtual keyboard for text input`
-
 ### Dvorak keyboard layout
 
 just enable hardware keyboard (see below).
@@ -397,14 +389,11 @@ $ adb shell ls
 ### connect to local web server
 
 1. <https://stackoverflow.com/questions/9808560>
-1. <https://stackoverflow.com/a/20257547/3632318>
 
 use `10.0.2.2:3000` instead of `127.0.0.1:3000` to send requests to local web
 server (say, puma) because emulator runs behind virtual router and `10.0.2.2`
 is a special alias to you host loopback interface (that is, `127.0.0.1` on
 development machine).
-
-for Genymotion Android Emulator use `10.0.3.2:3000`.
 
 ### show touchable areas
 

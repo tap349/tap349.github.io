@@ -149,7 +149,7 @@ alias avd='emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920'
 according to emulator's log there is no need to install HAXM separately
 (it appears to have been already enabled):
 
-```sh
+```
 Hax is enabled
 Hax ram_size 0x40000000
 HAX is working and emulator runs in fast virt mode.
@@ -207,6 +207,14 @@ the first run might take a while since RN will build the whole Android project.
 
 configuration
 -------------
+
+### [Genymotion] virtual keyboard
+
+it's enabled by default on Android Emulator.
+
+| Genymotion: `Configure this virtual device` (tool icon)
+
+- [x] `Use virtual keyboard for text input`
 
 ### Dvorak keyboard layout
 

@@ -284,3 +284,8 @@ export default class ShowPage extends React.Component {
   }
 }
 ```
+
+(how to) disable keyboard for not editable Input
+------------------------------------------------
+
+TODO

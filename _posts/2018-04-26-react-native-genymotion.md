@@ -16,19 +16,59 @@ categories: [react-native]
 configuration
 -------------
 
+### install GApps
+
+| emulator (app): right toolbar → `Open GAPPS` (button)
+
+GApps are required to receive pushes and notifications,
+also reloading application doesn't work without them.
+
 ### virtual keyboard
 
 it's enabled by default on Android Emulator.
 
-| Genymotion: `Configure this virtual device` (tool icon)
+| Genymotion: `Configure this virtual device` (tool icon button)
 
 - [x] `Use virtual keyboard for text input`
 
 debugging
 ---------
 
+### Developer Menu
+
+| emulator (app): `<D-m>`
+
+or
+
+| emulator (app): right toolbar → `Menu` (drawer icon button)
+
 ### connect to local web server
 
 1. <https://stackoverflow.com/a/20257547/3632318>
 
 use `10.0.3.2:3000`.
+
+troubleshooting
+---------------
+
+### reloading doesn't work
+
+there's a connection with packager but no requests are sent to
+development server for some reason.
+
+so requests are sent to development server only after running
+application with `react-native run-android` but are no longer
+sent after the first reload.
+
+**solution**
+
+install GApps (see configuration).
+
+### pushes and notifications are not received
+
+it turns out no push token is associated with user device
+(just like on iOS emulator).
+
+**solution**
+
+install GApps (see configuration).

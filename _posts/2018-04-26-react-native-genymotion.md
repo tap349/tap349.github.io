@@ -22,11 +22,7 @@ configuration
 
 | emulator (app): right toolbar → `Open GAPPS` (button)
 
-GApps are required to receive pushes, also reloading application
-doesn't work without them (see `troubleshooting` section).
-
-NOTE: it might be required to restart emulator and run application
-      again for pushes to work.
+GApps are required to receive pushes (see `troubleshooting` section).
 
 ### virtual keyboard
 
@@ -66,6 +62,14 @@ sent after the first reload (connection with packager is not lost).
 
 install GApps (see `configuration` section).
 
+temporary fixes:
+
+- run application again with `react-native run-android`
+- force close and open application inside emulator
+
+UPDATE: reloading doesn't work again so temporary fixes are still
+        of current interest.
+
 ### pushes are not received
 
 no push token is associated with user device (just like on iOS emulator).
@@ -73,3 +77,6 @@ no push token is associated with user device (just like on iOS emulator).
 **solution**
 
 install GApps (see `configuration` section).
+
+NOTE: it might be required to restart emulator and run application
+      again for pushes to work.

@@ -58,10 +58,10 @@ troubleshooting
 
 ### reloading doesn't work
 
-there's a connection with packager but no requests are sent to development
-server for some reason.
+there is a connection with packager but no network requests are sent to
+development server for some reason.
 
-so requests are sent to development server only after running application
+network requests are sent to development server only after running application
 with `react-native run-android` but are no longer sent after the first reload.
 
 **solution**

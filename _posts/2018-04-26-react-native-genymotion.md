@@ -23,7 +23,7 @@ configuration
 | emulator (app): right toolbar → `Open GAPPS` (button)
 
 GApps are required to receive pushes, also reloading application
-doesn't work without them (see troubleshooting).
+doesn't work without them (see `troubleshooting` section).
 
 NOTE: it might be required to restart emulator and run application
       again for pushes to work.
@@ -66,7 +66,7 @@ with `react-native run-android` but are no longer sent after the first reload.
 
 **solution**
 
-install GApps (see configuration).
+install GApps (see `configuration` section).
 
 ### pushes are not received
 
@@ -74,4 +74,4 @@ no push token is associated with user device (just like on iOS emulator).
 
 **solution**
 
-install GApps (see configuration).
+install GApps (see `configuration` section).

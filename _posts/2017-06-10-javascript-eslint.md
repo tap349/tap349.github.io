@@ -174,7 +174,7 @@ $ $(npm bin)/eslint file.js
 $ yarn run eslint file.js
 ```
 
-**UPDATE**
+***UPDATE***
 
 it's not required to add `eslint` script - everything works as is.
 

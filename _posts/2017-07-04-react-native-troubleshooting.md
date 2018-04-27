@@ -62,7 +62,7 @@ NOTE: still the error might occur the next time emulator is run.
 
 all in all IDK why this error occurs and how to fix it in general.
 
-**UPDATE**
+***UPDATE***
 
 1. <https://github.com/dashed/shallowequal/issues/11>
 2. <https://github.com/dashed/shallowequal/commit/f515936c8a790fbc225add864265b6c82881c9b1>
@@ -837,12 +837,12 @@ to solve the problem for the time being (AFAIU when this property is false,
 all offscreen children are force rendered - this might be not suitable for
 long lists but in my case all lists are short so it shouldn't be a problem).
 
-**UPDATE**
+***UPDATE***
 
 still this doesn't help - the only solution that works thus far is
 <https://github.com/leecade/react-native-swiper/issues/609#issuecomment-338190488>.
 
-**UPDATE**
+***UPDATE***
 
 nothing of the above works )
 

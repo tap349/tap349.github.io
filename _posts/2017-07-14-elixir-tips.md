@@ -37,7 +37,7 @@ and so on and on...
 
 that is why IMO Elixir modules tend to be bigger than Ruby classes.
 
-**UPDATE**
+***UPDATE***
 
 the same principles apply to contexts (new feature of Phoenix 1.3) - they
 group common functionality together (contexts are top-level domains of your

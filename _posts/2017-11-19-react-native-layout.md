@@ -108,7 +108,7 @@ padding and border are not included in component's width and height).
 
   `actual_height` = `number_of_lines` x `original_line_height`
 
-  **UPDATE**
+  ***UPDATE***
 
   get it clear if the problem with invalid text component height exists
   on real Android device before using hacks mentioned above - maybe this

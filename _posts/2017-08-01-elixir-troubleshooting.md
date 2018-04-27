@@ -498,12 +498,12 @@ Elixir supports much more concurrent connections than are currently created.
 > You should be able to do a lot more than 100 concurrent connections
 > (I was testing my server with 60k concurrent connections)...
 
-**UPDATE (2018-03-05)**
+***UPDATE (2018-03-05)***
 
 error hasn't occurred in the last 11 days since the fix was deployed
 (2018-02-22 01:48).
 
-**UPDATE (2018-03-09)**
+***UPDATE (2018-03-09)***
 
 error occurred again under heavy load.
 
@@ -529,7 +529,7 @@ default values for these options can be found in:
 - release: _\<app_name>/releases/\<release_name>/\<app>.script_
   (say, _/home/apps/neko/releases/0.1.0/neko.script_)
 
-**UPDATE (2018-03-10)**
+***UPDATE (2018-03-10)***
 
 most likely this is what causes the error:
 
@@ -543,18 +543,18 @@ shikimori to respond and new incoming request causes `eaddrinuse` error.
 still it's a little bit unclear why this error happened when I didn't use
 the pool - AFAIU there was no limit on max number of open connections then.
 
-**UPDATE (2018-03-12)**
+***UPDATE (2018-03-12)***
 
 I've compared CPU usage of application with and without connection pool - it's
 approximately the same (less than 2% in average, peak usage is about 6-7%, max
 100 RPM).
 
-**UPDATE (2018-03-19)**
+***UPDATE (2018-03-19)***
 
 the error is still present - it occurs repeatedly within a short period of time
 (about 1 minute).
 
-**UPDATE (2018-03-20)**
+***UPDATE (2018-03-20)***
 
 1. <http://erlang.org/pipermail/erlang-questions/2013-September/075275.html>
 2. <https://github.com/benoitc/hackney/pull/136>
@@ -623,7 +623,7 @@ what can I do?
   pretty quickly allowing their ports to be reused when new sockets are bound
   (binding socket is setting its source address and port).
 
-**UPDATE (2018-04-08)**
+***UPDATE (2018-04-08)***
 
 the error is back after 16 days of silence - I have run out of ideas.
 

@@ -277,7 +277,7 @@ models vs. changesets
 > Typically, you'd work with a changeset for making modifications to a model
 > via the repo, and you'd work with the model when fetching the data for display.
 
-**UPDATE**:
+***UPDATE***
 
 models have been deprecated in Phoenix 1.3 - they are called just schemas now.
 

@@ -369,7 +369,7 @@ const arrayToMap = (array) =>
 also it might be more convenient to store both object keyed by ID
 (`byId` store key) and array of all items (`all` store key).
 
-**UPDATE**
+***UPDATE***
 
 try to store object keyed by ID (`byId`) only - maintaining array of
 all items (`all`) is complex and error-prone (say, adding item with

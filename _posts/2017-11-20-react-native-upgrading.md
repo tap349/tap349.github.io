@@ -138,7 +138,7 @@ $ react-native run-android
 
 NOTE: don't forget to rebuild both iOS and Android applications!
 
-**UPDATE**
+***UPDATE***
 
 after fixing different issues related to RN upgrade some libraries
 turned out to be not linked - link all libraries again (just in case):

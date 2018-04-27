@@ -500,7 +500,7 @@ alias avd='emulator -avd Nexus_5X_API_23_x86_64'
 alias emulator='cd $ANDROID_HOME/emulator && ./emulator'
 ```
 
-**UPDATE**
+***UPDATE***
 
 after updating emulator to version 26.1.4.0 it's no longer necessary to
 cd to emulator directory.

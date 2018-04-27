@@ -177,7 +177,7 @@ IDK if it matters or not but I signed in to iCloud with this account
 
 in the end I could make a purchase using not verified sandbox tester account.
 
-**UPDATE (2018-03-19)**
+***UPDATE (2018-03-19)***
 
 I have successfully verified email of another sandbox tester -
 most likely it was temporary technical problem on Apple side.
@@ -604,7 +604,7 @@ in fact it took about 30 minutes for new app version to appear in App Store.
   to submit application version for review just like before - without any
   mentions of IAP in application version.
 
-  **UPDATE (2018-03-24)**
+  ***UPDATE (2018-03-24)***
 
   Apple has approved of our release eventually (it took 3 days for them to
   review our release):

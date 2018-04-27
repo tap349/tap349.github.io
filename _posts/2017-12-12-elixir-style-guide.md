@@ -32,7 +32,7 @@ defmodule MyApp.Rule do
 end
 ```
 
-**UPDATE**
+***UPDATE***
 
 `mix format` adds parens for types when they are referenced using their
 qualified names (by specifying the module where they are defined - say,
@@ -66,7 +66,7 @@ fn(foo) -> IO.puts("hello #{foo}") end
 fn(foo, bar) -> IO.puts("hello #{foo} and #{bar}") end
 ```
 
-**UPDATE**
+***UPDATE***
 
 `mix format` removes parens for anonymous functions of any arity:
 

@@ -55,7 +55,7 @@ package (though it wasn't working for me when I tried it).
 
 only graceful ways to quit IEx save shell history (when using `erlang-history`).
 
-**UPDATE (2017-07-28)**
+***UPDATE (2017-07-28)***
 
 since Erlang/OTP 20 shell history is supported out of the box - if using it
 instead of `erlang-history` patch all ways to quit IEx allow to save shell
@@ -74,13 +74,13 @@ $ sudo make install
 shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
 (it's a binary file - not plain text).
 
-**UPDATE**: shell history is now stored in _~/.erlang-history/_ - you might
-            need to remove _~/.erlang-hist.nonode@nohost_ for it to work.
+UPDATE: shell history is now stored in _~/.erlang-history/_ - you might
+need to remove _~/.erlang-hist.nonode@nohost_ for it to work.
 
-**NOTE**: for shell history to be saved quit IEx gracefully -
-          using either `<C-c>a<CR>` or `<C-g>q<CR>` commands.
+for shell history to be saved quit IEx gracefully - using either `<C-c>a<CR>`
+or `<C-g>q<CR>` commands.
 
-`erlang-history` must be compiled for each new version of Erlang/OTP kernel!
+`erlang-history` must be compiled for each new version of Erlang/OTP kernel:
 
 - get current version of Kernel library:
 
@@ -118,7 +118,7 @@ shell history since from now is stored in _~/.erlang-hist.nonode@nohost_
   current version of Kernel library is not supported and you should
   probably update `erlang-history` repo.
 
-**UPDATE (2017-07-28)**
+***UPDATE (2017-07-28)***
 
 <https://hexdocs.pm/iex/IEx.html#module-shell-history>:
 

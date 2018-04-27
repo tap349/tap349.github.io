@@ -142,7 +142,7 @@ in my case returning null from top level component (i.e. component
 rendered right in _App.js_ for specified route) caused application
 to crash.
 
-**UPDATE**
+***UPDATE***
 
 well, I cannot reproduce it now - returning null just hides component.
 according to docs returning null used to be not supported in the past

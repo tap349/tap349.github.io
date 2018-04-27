@@ -137,7 +137,7 @@ $ $(npm bin)/flow
 $ yarn run flow
 ```
 
-**UPDATE**
+***UPDATE***
 
 it's not required to add `flow` script - everything works as is.
 

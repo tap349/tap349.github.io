@@ -18,6 +18,8 @@ configuration
 
 ### install GApps
 
+1. <https://stackoverflow.com/a/20137324/3632318>
+
 | emulator (app): right toolbar → `Open GAPPS` (button)
 
 GApps are required to receive pushes and notifications,

@@ -290,8 +290,6 @@ export default class ShowPage extends React.Component {
 
 on Android keyboard pops up when not editable `TextInput` is tapped.
 
-**solution**
-
 in my case this was caused by focusing `TextInput` on each tap manually
 (it's wrapped into `TouchableWithoutFeedback` to extend tappable area):
 
@@ -314,7 +312,7 @@ _handlePress = () => {
 }
 ```
 
-solution is to disable focusing for not editable `TextInput`:
+solution is to disable focusing not editable `TextInput`:
 
 ```diff
   _handlePress = () => {
@@ -322,3 +320,21 @@ solution is to disable focusing for not editable `TextInput`:
     this._textInput.focus();
   }
 ```
+
+not editable `TextInput` itself doesn't receive touch events.
+
+(how to) handle press on not editable TextInput
+-----------------------------------------------
+
+1. <https://github.com/facebook/react-native/issues/14958>
+
+```jsx
+<TouchableOpacity onPress={this._handlePress}>
+  <View pointerEvents='none'>
+    <TextInput editable={false} />
+  </View>
+</TouchableOpacity>
+```
+
+it's required to add proxy `View` with `pointerEvents='none'` -
+otherwise `_handlePress` callback is not even called.

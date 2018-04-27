@@ -67,8 +67,9 @@ temporary fixes:
 - run application again with `react-native run-android`
 - force close and open application inside emulator
 
-UPDATE: reloading doesn't work again so temporary fixes are still
-        of current interest.
+**UPDATE**
+
+reloading doesn't work again so temporary fixes are still pertinent.
 
 ### pushes are not received
 

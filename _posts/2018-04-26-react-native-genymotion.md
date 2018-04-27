@@ -23,7 +23,7 @@ configuration
 | emulator (app): right toolbar → `Open GAPPS` (button)
 
 GApps are required to receive pushes, also reloading application
-doesn't work without them.
+doesn't work without them (see troubleshooting).
 
 NOTE: it might be required to restart emulator and run application
       again for pushes to work.

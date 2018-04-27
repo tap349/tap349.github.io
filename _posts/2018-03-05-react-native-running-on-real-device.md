@@ -84,7 +84,7 @@ iOS
 
 - build and run application
 
-  | Xcode: `▶` (button in toolbar)
+  | Xcode: `▶` (toolbar button)
 
 Android
 -------

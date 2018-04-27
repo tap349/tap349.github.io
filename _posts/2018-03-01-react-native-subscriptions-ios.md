@@ -209,7 +209,7 @@ below for details).
   - `Build Configuration` (combobox): `Debug`
   - `Close` (button)
 
-  | Xcode: `▶` (button in toolbar)
+  | Xcode: `▶` (toolbar button)
 
 - run application in release mode
 
@@ -219,7 +219,7 @@ below for details).
   - `Build Configuration` (combobox): `Release`
   - `Close` (button)
 
-  | Xcode: `▶` (button in toolbar)
+  | Xcode: `▶` (toolbar button)
 
 #### troubleshooting
 

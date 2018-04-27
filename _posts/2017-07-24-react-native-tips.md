@@ -285,7 +285,40 @@ export default class ShowPage extends React.Component {
 }
 ```
 
-(how to) disable keyboard for not editable Input
-------------------------------------------------
+(how to) disable keyboard for not editable TextInput
+----------------------------------------------------
 
-TODO
+on Android keyboard pops up when not editable `TextInput` is tapped.
+
+**solution**
+
+in my case this was caused by focusing `TextInput` on each tap manually
+(it's wrapped into `TouchableWithoutFeedback` to extend tappable area):
+
+```jsx
+render () {
+  return (
+    <TouchableWithoutFeedback onPress={this._handlePress}>
+      <View style={this._containerStyle()}>
+        {this._renderTextInput()}
+        {this._renderActivityIndicactor()}
+        {this.props.children}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+}
+
+// this._textInput is a ref to TextInput
+_handlePress = () => {
+  this._textInput.focus();
+}
+```
+
+solution is to disable focusing for not editable `TextInput`:
+
+```diff
+  _handlePress = () => {
++   if (!this.props.editable) { return; }
+    this._textInput.focus();
+  }
+```

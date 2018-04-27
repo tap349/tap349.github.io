@@ -449,8 +449,13 @@ TODO: previous statement should be checked (and find its source).
   active - you can purchase it again (though it's button to purchase is
   hidden inside application because of `isSuscribed` returning true).
 
-  UPDATE: `isSubscribed` is still true 12 hours later.
-  UPDATE: `isSubscribed` is eventually false 2 days later.
+  ***UPDATE***
+
+  `isSubscribed` is still true 12 hours later.
+
+  ***UPDATE***
+
+  `isSubscribed` is eventually false 2 days later.
 
 ### testing with real subscriptions
 

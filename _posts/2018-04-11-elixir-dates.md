@@ -52,6 +52,14 @@ Timex package
 # => ~N[2019-09-30 23:59:59.999999]
 ```
 
+### get beginning of next month
+
+```elixir
+~N[2019-09-01 03:00:00]
+|> Timex.shift(months: 1)
+# => ~N[2019-10-01 03:00:00]
+```
+
 Ecto dates
 ----------
 

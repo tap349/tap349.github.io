@@ -314,7 +314,7 @@ linking and monitoring
 
 ### exit signals
 
-1. <http://crypt.codemancers.com/posts/2016-01-24-understanding-exit-signals-in-erlang-slash-elixir/>
+1. <https://crypt.codemancers.com/posts/2016-01-24-understanding-exit-signals-in-erlang-slash-elixir>
 2. <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
 
 exit signal is a special type of message.
@@ -343,7 +343,7 @@ classification of exit signals by their exit reasons:
   other exit signals terminate receiving process unless the latter
   traps exits - these signals will be received as messages then.
 
-![exit signal cheatsheet](http://crypt.codemancers.com/assets/images/elixir_processes/elixir_exit_signal_cheatsheet-6f1371dea9066489fe5a287abc81d460c2c85785c32efbbb65a5837bb98d635f.png)
+![exit signal cheatsheet](https://crypt.codemancers.com/assets/images/elixir_processes/elixir_exit_signal_cheatsheet-f3204f86.png)
 
 ### getting notification about terminated process
 

@@ -15,7 +15,7 @@ categories: [js]
 
 1. <https://standardjs.com/>
 2. <http://javascript.crockford.com/code.html>
-3. <https://github.com/feross/standard>
+3. <https://github.com/standard/standard>
 4. <https://github.com/Flet/semistandard>
 5. <https://basarat.gitbooks.io/typescript/content/docs/styleguide/styleguide.html>
 6. <https://github.com/ericelliott/class-free-javascript-style>
@@ -23,7 +23,7 @@ categories: [js]
 space after function name in function declaration
 -------------------------------------------------
 
-1. <https://github.com/feross/standard/issues/217>
+1. <https://github.com/standard/standard/issues/217>
 
 imho it's a very controversial rule but I'll try to stick it for the time being.
 

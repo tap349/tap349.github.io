@@ -315,7 +315,8 @@ linking and monitoring
 ### exit signals
 
 1. <https://crypt.codemancers.com/posts/2016-01-24-understanding-exit-signals-in-erlang-slash-elixir>
-2. <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
+2. <http://disq.us/p/1i0j8f3>
+3. <https://groups.google.com/forum/#!topic/elixir-lang-talk/vxOtIXdqiWw>
 
 exit signal is a special type of message.
 
@@ -347,7 +348,21 @@ classification of exit signals by their exit reasons:
 
 ### getting notification about terminated process
 
-<http://disq.us/p/1g92p7f>
+monitor is identified by a reference returned by _Process.monitor/1_ -
+this reference can used to pattern match on messages from mailbox of
+monitoring process which have the following format:
+
+```elixir
+{:DOWN, ref, :process, object, reason}
+```
+
+<http://disq.us/p/1g92p7f>:
+
+> Yes, if a process is only interested in getting a DOWN message when another
+> process terminates, using a monitor will suffice - no need of creating a link
+> and trapping exits. Apart from the fact that monitors only send messages which
+> will arrive in the inbox of the monitoring process, another important thing
+> to note is that monitors are uni directional.
 
 - create a monitor
 

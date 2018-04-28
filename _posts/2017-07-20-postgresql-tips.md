@@ -311,21 +311,31 @@ Created database 'iceperk_test'
 
 - using _db/structure.sql_ (structure only)
 
-  command `rails db:structure:load` doesn't work (some error) but
-  still it's possible to load _db/structure.sql_:
+  command `rails db:structure:load` doesn't work (some error) when database is
+  inside Docker container but still it's possible to load _db/structure.sql_:
 
   ```sh
   $ DOCKER_DB_NAME=`docker-compose ps -q db`
   $ DB_USER=postgres
   $ DB_NAME=iceperk_development
-  $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -v ON_ERROR_STOP=1 "${DB_NAME}"
+  $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -v ON_ERROR_STOP=1 -U "${DB_USER}" -d "${DB_NAME}"
   ```
 
-  load test database:
+  in case there are errors executing previous command:
 
-  ```sh
-  $ RAILS_ENV=test rails db:structure:load
-  ```
+  - drop and create test database
+
+    ```sh
+    $ RAILS_ENV=test rails db:drop
+    $ RAILS_ENV=test rails db:create
+    / run command to load structure.sql
+    ```
+
+  - remove `-v ON_ERROR_STOP=1` psql option to skip errors
+
+    ```sh
+    $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+    ```
 
 ### run psql
 

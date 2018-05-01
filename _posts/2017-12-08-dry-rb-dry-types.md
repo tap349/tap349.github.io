@@ -43,8 +43,8 @@ param :user, Types::Strict::Array.of(Types.Instance(User))
 optional and default values
 ---------------------------
 
-1. <http://dry-rb.org/gems/dry-types/optional-values/>
-2. <http://dry-rb.org/gems/dry-types/default-values/>
+1. <http://dry-rb.org/gems/dry-types/optional-values>
+2. <http://dry-rb.org/gems/dry-types/default-values>
 
 - optional value
 

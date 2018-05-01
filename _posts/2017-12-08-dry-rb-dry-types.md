@@ -16,17 +16,28 @@ categories: [dry-rb]
 custom types
 ------------
 
-[old way](https://gist.github.com/AMHOL/0671986632fe734189c4c73e2a665f8b):
+### old way
+
+1. <https://gist.github.com/AMHOL/0671986632fe734189c4c73e2a665f8b>
 
 ```ruby
 Dry::Types.register_class(User)
 param :user, Types::User
 ```
 
-[new way](http://dry-rb.org/gems/dry-types/custom-types/):
+### new way
+
+1. <http://dry-rb.org/gems/dry-types/custom-types/>
+2. <http://dry-rb.org/gems/dry-types/array-with-member/>
 
 ```ruby
 param :user, Types.Instance(User)
+```
+
+array with members of custom type:
+
+```ruby
+param :user, Types::Strict::Array.of(Types.Instance(User))
 ```
 
 optional and default values

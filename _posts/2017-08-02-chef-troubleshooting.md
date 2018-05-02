@@ -318,3 +318,20 @@ working combination of gem versions in _Gemfile_:
 gem 'chef', '13.5.3'
 gem 'knife-zero', '1.19'
 ```
+
+fatal: could not read Username for 'https://github.com': Device not configured
+------------------------------------------------------------------------------
+
+```
+$ berks
+...
+Fetching 'redisio' from https://github.com/leaprail/redisio.git (at chef-13)
+Git error: command `git clone https://github.com/leaprail/redisio.git "/Users/tap/.berkshelf/.cache/git/bb551905ffaed7b4e09723a35c33d6918eb5fa38" --bare --no-hardlinks` failed. If this error persists, try removing the cache directory at '/Users/tap/.berkshelf/.cache/git/bb551905ffaed7b4e09723a35c33d6918eb5fa38'.Output from the command:
+
+Cloning into bare repository '/Users/tap/.berkshelf/.cache/git/bb551905ffaed7b4e09723a35c33d6918eb5fa38'...
+fatal: could not read Username for 'https://github.com': Device not configured
+```
+
+**solution**
+
+specified repo (`leaprail/redisio`) no longer exists.

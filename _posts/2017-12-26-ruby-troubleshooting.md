@@ -39,8 +39,7 @@ uninitialized constant Gem::BundlerVersionFinder (NameError)
 ```
 $ berks
 ...
-/Users/tap/.rbenv/versions/2.5.0/lib/ruby/2.5.0/rubygems/dependency.rb:283:in
-`matching_specs': uninitialized constant Gem::BundlerVersionFinder (NameError)
+/Users/tap/.rbenv/versions/2.5.0/lib/ruby/2.5.0/rubygems/dependency.rb:283:in `matching_specs': uninitialized constant Gem::BundlerVersionFinder (NameError)
 ```
 
 **solution**

@@ -32,3 +32,21 @@ try to update offending gem:
 ```sh
 $ bundle update json
 ```
+
+uninitialized constant Gem::BundlerVersionFinder (NameError)
+------------------------------------------------------------
+
+```
+$ berks
+...
+/Users/tap/.rbenv/versions/2.5.0/lib/ruby/2.5.0/rubygems/dependency.rb:283:in
+`matching_specs': uninitialized constant Gem::BundlerVersionFinder (NameError)
+```
+
+**solution**
+
+error was gone after upgrading Ruby version from 2.5.0 to 2.5.1:
+
+```
+$ echo 2.5.1 > .ruby-version
+```

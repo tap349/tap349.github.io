@@ -673,7 +673,7 @@ with "mix deps.update appsignal" or clean it with "mix deps.clean appsignal"
 ** (UndefinedFunctionError) function Appsignal.System.agent_platform/0 is undefined or private
     Appsignal.System.agent_platform()
     mix_helpers.exs:12: Mix.Appsignal.Helper.verify_system_architecture/0
-    /Users/tap/dev/complead/iceperkbilling/deps/appsignal/mix.exs:17: Mix.Tasks.Compile.Appsignal.run/1
+    /Users/tap/dev/iceperkbilling/deps/appsignal/mix.exs:17: Mix.Tasks.Compile.Appsignal.run/1
 ```
 
 **solution**

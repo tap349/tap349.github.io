@@ -870,7 +870,7 @@ the error occurs after new Xcode has been downloaded (9.3 in my case):
 
 ```sh
 $ react-native run-ios
-Scanning folders for symlinks in /Users/tap/dev/complead/iceperkapp/node_modules (43ms)
+Scanning folders for symlinks in /Users/tap/dev/iceperkapp/node_modules (43ms)
 Found Xcode workspace iceperkapp.xcworkspace
 dyld: Symbol not found: _SimDeviceBootKeyDisabledJobs
   Referenced from: /Applications/Xcode.app/Contents/Developer/usr/bin/simctl

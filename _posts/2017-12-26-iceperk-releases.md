@@ -120,6 +120,7 @@ build and publish new release
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in popup window
   - click `Start Internal Testing` button
+  - run selective sanity checks
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link → `iOS` (popup menu)
@@ -155,6 +156,7 @@ before building releases.
 
   - replace existing `app-release.apk` file with a new one
 
+- run selective sanity checks
 - publish release in Google Play Console
 
   | GPC: `All applications` → `<my_app>`

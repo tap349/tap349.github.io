@@ -17,13 +17,12 @@ using `IEx.pry` (= `binding.pry` in Ruby)
 -----------------------------------------
 
 1. <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
-2. <https://stackoverflow.com/questions/29671156/pry-while-testing>
 
 - add `IEx.pry` breakpoint
 
   ```elixir
-  defmodule Test do
-    def foo do
+  defmodule Foo do
+    def bar do
       require IEx; IEx.pry
     end
   end
@@ -39,6 +38,9 @@ using `IEx.pry` (= `binding.pry` in Ruby)
   ```
 
 - finish pry session by calling `respawn()`
+
+NOTE: there are peculiarities when using pry in tests
+      (see [Elixir - Testing]({% post_url 2017-06-04-elixir-testing %})).
 
 debugging dependencies
 ----------------------

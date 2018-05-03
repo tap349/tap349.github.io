@@ -104,6 +104,8 @@ $ mix test --trace
 use IEx.pry in tests
 --------------------
 
+1. <https://stackoverflow.com/a/34863997/3632318>
+
 to make pry work in tests run `mix test` in IEx session:
 
 ```sh

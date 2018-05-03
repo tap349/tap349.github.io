@@ -43,6 +43,7 @@ this is to make sure nothing is broken for old releases.
 - [`iceperkapp`] switch to `develop` branch (previous release)
 - [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperk`] switch to `master` branch
+- [`iceperk`] switch to production billing in _billing.yml_
 - use emulator and development server to run all sanity checks
 - [`iceperk`] deploy `master` branch to production
 
@@ -51,6 +52,7 @@ this is to make sure nothing is broken for old releases.
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
 - [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperk`] switch to `master` branch
+- [`iceperk`] switch to production billing in _billing.yml_
 - use emulator and development server to test new features from Trello
 
 ### test new release (sanity checks)
@@ -58,6 +60,7 @@ this is to make sure nothing is broken for old releases.
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
 - [`iceperkapp`] change environment to `production` in _Env.js_
 - [`iceperk`] switch to `master` branch
+- [`iceperk`] switch to production billing in _billing.yml_
 - use emulator and development server to run all sanity checks
 
 or else it's possible to run sanity checks on real device using test

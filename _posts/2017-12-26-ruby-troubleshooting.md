@@ -49,3 +49,15 @@ error was gone after upgrading Ruby version from 2.5.0 to 2.5.1:
 ```
 $ echo 2.5.1 > .ruby-version
 ```
+
+if this doesn't help, try to clean up old versions of installed gems
+(this will remove currently installed versions as well):
+
+```sh
+$ gem cleanup
+$ bundle
+```
+
+`gem cleanup` removes bundled gems only (gems specified in _Gemfile_ of
+current project) though it might affect other projects if they are using
+the same gems (run `bundle` for those projects as well in that case).

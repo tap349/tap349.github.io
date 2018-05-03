@@ -159,7 +159,7 @@ before building releases.
 - run selective checks
 - publish release in Google Play Console
 
-  | GPC: `All applications` → `<my_app>`
+  | GPC: `All applications` → `Хоккей. Ледовое братство`
   | `Release management` (left menu) → `App releases` → `MANAGE PRODUCTION` (button) → `CREATE RELEASE` (button)
 
   > New release to production

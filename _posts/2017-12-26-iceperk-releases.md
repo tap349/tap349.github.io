@@ -52,7 +52,7 @@ this is to make sure nothing is broken for old releases.
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
 - [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperk`] switch to `master` branch
-- [`iceperk`] switch to production billing in _billing.yml_
+- [`iceperk`] switch to production billing in _billing.yml_ (if necessary)
 - use emulator and development server to test new features from Trello
 
 ### test new release (sanity checks)

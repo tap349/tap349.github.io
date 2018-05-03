@@ -15,8 +15,8 @@ categories: [react-native]
 
 say, new release branch name is `release_3_16`.
 
-Github (part 1)
----------------
+Github (part 1): merge into iceperk master branch
+-------------------------------------------------
 
 NOTE: branches can be merged manually or via PR.
 
@@ -66,18 +66,18 @@ this is to make sure nothing is broken for old releases.
 or else it's possible to run sanity checks on real device using test
 build and production server.
 
-Github (part 2)
----------------
+Github (part 2): merge into iceperkapp develop branch
+-----------------------------------------------------
 
 - [`iceperkapp`] merge `release_3_16` branch into `develop` branch
-  - PR name: set automatically based on branch name (`Release 3 16`)
+  - PR name: `Develop (Release 3.16)`
 - [`iceperkapp`] switch to `develop` branch (we use it to build releases)
 
 prepare new release in iceperkapp
 ---------------------------------
 
 - change environment to `production` in _Env.js_ before generating releases
-- change version number and increment build number in iOS and Android projects
+- increment version number and build number in both iOS and Android projects
 
   NOTE: these numbers might have been already changed right after creating
         `release_3_16` branch.
@@ -89,13 +89,13 @@ prepare new release in iceperkapp
   <string>3.16</string>
   <!--...-->
   <key>CFBundleVersion</key>
-  <string>93</string>
+  <string>96</string>
   ```
 
   _android/app/build.gradle_:
 
   ```groovy
-  versionCode 93
+  versionCode 96
   versionName "3.16"
   ```
 
@@ -172,8 +172,8 @@ before building releases.
   - `Rollout percentage` (input): `100%` (it's `50%` by default)
   - `START ROLLOUT TO PRODUCTION` (button)
 
-Github (part 3)
----------------
+Github (part 3): create iceperkapp release on Github
+----------------------------------------------------
 
 this is done AFTER release is published in both stores and all seems
 to be working okay:

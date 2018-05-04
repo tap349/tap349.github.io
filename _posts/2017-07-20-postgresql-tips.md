@@ -323,18 +323,18 @@ Created database 'iceperk_test'
 
   in case there are errors executing previous command:
 
-  - drop and create test database
+  - remove `-v ON_ERROR_STOP=1` psql option to skip errors
+
+    ```sh
+    $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+    ```
+
+  - drop and create test database if skipping errors doesn't help
 
     ```sh
     $ RAILS_ENV=test rails db:drop
     $ RAILS_ENV=test rails db:create
     / run command to load structure.sql
-    ```
-
-  - remove `-v ON_ERROR_STOP=1` psql option to skip errors
-
-    ```sh
-    $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
     ```
 
 ### run psql

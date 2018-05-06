@@ -202,7 +202,7 @@ iex> Foo.bar(); 0
 0
 ```
 
-## don't truncate long list or string
+## don't truncate long lists or strings
 
 1. <https://stackoverflow.com/questions/29566248/elixir-io-inspect-to-not-trim-a-long-list>
 2. <https://hexdocs.pm/elixir/Inspect.Opts.html>

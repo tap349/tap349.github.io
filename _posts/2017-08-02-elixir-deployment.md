@@ -278,9 +278,8 @@ NOTE: distillery must have been installed to make this configuration.
 
 1. <http://erlang.org/doc/man/erl.html>
 
-when using distillery EVM flags are set in _rel/vm.args_
-(or any other file set with `vm_args` setting for specific
-environment in _rel/config.exs_).
+when using distillery EVM flags are set in _rel/vm.args_ (or any other file
+set with `vm_args` setting for specific environment in _rel/config.exs_).
 
 options set there are passed as is to EVM process:
 

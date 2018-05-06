@@ -458,17 +458,43 @@ is resolved now so you shouldn't be receiving this error since Erlang/OTP 20.
 (HTTPoison.Error) :eaddrinuse
 -----------------------------
 
+<https://appsignal.com/neko/sites/59f22b2a6a21db47fddd50be/incidents/163>:
+
 ```
-$ journalctl --no-tail --since '2018-02-02 13:39:20' --until '2018-02-02 13:39:30' -u neko
-...
-** (exit) exited in: GenServer.call({:via, Registry, {:user_handler_registry, 139794}}, {:process, %Neko.Request{action: "put", id: 29099818, score: 9, status: "watching", target_id: 34497, user_id: 139794}}, 120000)
-    ** (EXIT) exited in: GenServer.call(#PID<0.24050.10>, {:update, #Function<1.33065197/1 in Neko.Achievement.Store.reload/2>}, 90000)
-        ** (EXIT) an exception was raised:
-            ** (HTTPoison.Error) :eaddrinuse
-            (neko) lib/neko/shikimori/http_client.ex:9: Neko.Shikimori.HTTPClient.request!/5
-            (neko) lib/neko/shikimori/http_client.ex:42: Neko.Shikimori.HTTPClient.make_request!/3
-            (neko) lib/neko/shikimori/http_client.ex:25: Neko.Shikimori.HTTPClient.get_achievements!/1
-            (neko) lib/neko/achievement/store.ex:44: Neko.Achievement.Store.achievements/1
+HTTP request error: {
+  {
+    {
+      %HTTPoison.Error{id: nil, reason: :eaddrinuse},
+      [
+        {Neko.Shikimori.HTTPClient, :request!, 5, [file: 'lib/neko/shikimori/http_client.ex', line: 8]},
+        {Neko.Shikimori.HTTPClient, :make_request!, 3, [file: 'lib/neko/shikimori/http_client.ex', line: 45]},
+        {Neko.Shikimori.HTTPClient, :get_achievements!, 1, [file: 'lib/neko/shikimori/http_client.ex', line: 28]},
+        {Neko.Achievement.Store, :achievements, 1, [file: 'lib/neko/achievement/store.ex', line: 46]},
+        {Agent.Server, :handle_call, 3, [file: 'lib/agent/server.ex', line: 23]},
+        {:gen_server, :try_handle_call, 4, [file: 'gen_server.erl', line: 636]},
+        {:gen_server, :handle_msg, 6, [file: 'gen_server.erl', line: 665]},
+        {:proc_lib, :init_p_do_apply, 3, [file: 'proc_lib.erl', line: 247]}
+      ]
+    },
+    {
+      GenServer,
+      :call,
+      [#PID<0.13805.26>, {:update, #Function<1.31387221/1 in Neko.Achievement.Store.reload/2>}, 110000]
+    }
+  },
+  {
+    GenServer,
+    :call,
+    [
+      {:via, Registry, {:user_handler_registry, 48519}},
+      {
+        :process,
+        %Neko.Request{action: "put", id: 37660338, score: 7, status: "completed", target_id: 32998, user_id: 48519}
+      },
+      120000
+    ]
+  }
+}
 ```
 
 **solution**
@@ -648,9 +674,24 @@ HTTP request error: {
         {:proc_lib, :init_p_do_apply, 3, [file: 'proc_lib.erl', line: 247]}
       ]
     },
-    {GenServer, :call, [#PID<0.23945.1>, {:update, #Function<3.20078263/1 in Neko.UserRate.Store.reload/2>}, 90000]}
+    {
+      GenServer,
+      :call,
+      [#PID<0.23945.1>, {:update, #Function<3.20078263/1 in Neko.UserRate.Store.reload/2>}, 90000]
+    }
   },
-  {GenServer, :call, [{:via, Registry, {:user_handler_registry, 78123}}, {:process, %Neko.Request{action: "put", id: 36135257, score: 0, status: "watching", target_id: 20583, user_id: 78123}}, 120000]}
+  {
+    GenServer,
+    :call,
+    [
+      {:via, Registry, {:user_handler_registry, 78123}},
+      {
+        :process,
+        %Neko.Request{action: "put", id: 36135257, score: 0, status: "watching", target_id: 20583, user_id: 78123}
+      },
+      120000
+    ]
+  }
 }
 ```
 
@@ -682,4 +723,98 @@ with "mix deps.update appsignal" or clean it with "mix deps.clean appsignal"
 $ mix deps.clean appsignal
 $ mix deps.get
 $ mix test
+```
+
+system_limit
+------------
+
+[appsignal](https://appsignal.com/neko/sites/59f22b2a6a21db47fddd50be/incidents/287):
+
+```
+HTTP request error: {
+  {
+    :system_limit,
+    [
+      {
+        :erlang,
+        :spawn_link,
+        [
+          :proc_lib,
+          :init_p,
+          [
+            #PID<0.2386.88>,
+            [Neko.UserHandler.DynamicSupervisor, Neko.Supervisor, #PID<0.1005.0>],
+            Task.Supervised,
+            :reply,
+            [#PID<0.2386.88>, :nomonitor, {:"neko@127.0.0.1", #PID<0.2386.88>}, {Neko.Achievement, :load, [88533]}]
+          ]
+        ],
+        []
+      },
+      {:proc_lib, :spawn_link, 3, [file: 'proc_lib.erl', line: 100]},
+      {Task, :async, 3, [file: 'lib/task.ex', line: 339]},
+      {Neko.Request, :load_user_data, 1, [file: 'lib/neko/request.ex', line: 52]},
+      {Neko.Request, :process, 1, [file: 'lib/neko/request.ex', line: 27]},
+      {Neko.UserHandler, :handle_call, 3, [file: 'lib/neko/user_handler/user_handler.ex', line: 59]},
+      {:gen_server, :try_handle_call, 4, [file: 'gen_server.erl', line: 636]},
+      {:gen_server, :handle_msg, 6, [file: 'gen_server.erl', line: 665]}
+    ]
+  },
+  {
+    GenServer,
+    :call,
+    [
+      {:via, Registry, {:user_handler_registry, 88533}},
+      {
+        :process,
+        %Neko.Request{action: "reset", id: nil, score: nil, status: nil, target_id: nil, user_id: 88533}
+      },
+      120000
+    ]
+  }
+}
+```
+
+**solution**
+
+1. <https://groups.google.com/forum/#!msg/elixir-lang-talk/No1Qq0huj_E/3Zsr6cCil_oJ>
+2. <http://erlang.org/documentation/doc-5.8.5/doc/efficiency_guide/advanced.html>
+3. <http://erlang.org/documentation/doc-5.8.5//erts-5.8.5/doc/html/erl.html#max_processes>
+4. <https://github.com/bitwalker/distillery/blob/master/docs/files/vm.args.md>
+
+<http://erlang.org/documentation/doc-5.8.5/doc/efficiency_guide/advanced.html>:
+
+> The maximum number of simultaneously alive Erlang processes is by default 32768.
+> This limit can be raised up to at most 268435456 processes at startup
+> (see documentation of the system flag +P in the erl(1) documentation).
+> The maximum limit of 268435456 processes will at least on a 32-bit architecture
+> be impossible to reach due to memory shortage.
+
+create _rel/vm.args_:
+
+```diff
+  ## Enable kernel poll and a few async threads
+  ##+K true
+  ##+A 5
+
++ ## Set the maximum number of concurrent processes (default is 32768)
++ +P 65536
+```
+
+this file would replace _vm.args_ generated by distillery → instead
+of creating it from scratch it's better to copy already generated file
+_releases/\<release_name>/vm.args_ (it can be found locally either in
+_\_build/prod/rel/neko/_ or inside release from _.deliver/release/_)
+and make changes to it.
+
+provide this file via `vm_args` option in _rel/config.exs_:
+
+```elixir
++ # cookie is set in vm.args
+  environment :prod do
++   set vm_args: "rel/vm.args"
+    set include_erts: true
+    set include_src: false
+-   set cookie: :"my_cookie"
+  end
 ```

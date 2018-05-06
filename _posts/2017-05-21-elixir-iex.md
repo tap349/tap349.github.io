@@ -201,3 +201,20 @@ add another expression at the end of the line after semicolon:
 iex> Foo.bar(); 0
 0
 ```
+
+## don't truncate long list or string
+
+1. <https://stackoverflow.com/questions/29566248/elixir-io-inspect-to-not-trim-a-long-list>
+2. <https://hexdocs.pm/elixir/Inspect.Opts.html>
+
+for collections (defaults to 50 items):
+
+```elixir
+iex> IO.inspect(list, limit: :infinity)
+```
+
+for strings and char lists (defaults to 4096 bytes):
+
+```elixir
+iex> IO.inspect(list, printable_limit: :infinity)
+```

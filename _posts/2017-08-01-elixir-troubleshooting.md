@@ -777,10 +777,13 @@ HTTP request error: {
 
 **solution**
 
-1. <https://groups.google.com/forum/#!msg/elixir-lang-talk/No1Qq0huj_E/3Zsr6cCil_oJ>
-2. <http://erlang.org/documentation/doc-5.8.5/doc/efficiency_guide/advanced.html>
-3. <http://erlang.org/documentation/doc-5.8.5//erts-5.8.5/doc/html/erl.html#max_processes>
+1. <http://erlang.org/documentation/doc-5.8.5/doc/efficiency_guide/advanced.html>
+2. <http://erlang.org/documentation/doc-5.8.5//erts-5.8.5/doc/html/erl.html#max_processes>
+3. <https://groups.google.com/forum/#!msg/elixir-lang-talk/No1Qq0huj_E/3Zsr6cCil_oJ>
 4. <https://github.com/bitwalker/distillery/blob/master/docs/files/vm.args.md>
+
+maximum number of concurrent processes (created via `spawn_link`) is reached
+(32768 by default).
 
 <http://erlang.org/documentation/doc-5.8.5/doc/efficiency_guide/advanced.html>:
 

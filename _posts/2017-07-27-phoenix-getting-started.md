@@ -9,7 +9,11 @@ categories: [phoenix]
 
 <!-- more -->
 
+install Phoenix
+---------------
+
 1. <https://hexdocs.pm/phoenix/overview.html>
+2. <https://hexdocs.pm/phoenix/installation.html>
 
 install or update Hex package manager:
 
@@ -23,11 +27,34 @@ install latest Phoenix version:
 $ mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez
 ```
 
+create new project
+------------------
+
+1. <https://hexdocs.pm/phoenix/up_and_running.html>
+
 create new project without Brunch:
 
 ```sh
+$ cd ~/dev
 $ mix phx.new billing --no-brunch
 ```
+
+setup Git repo
+---------------
+
+1. <https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/>
+
+```sh
+$ cd billing
+$ git init
+$ git add -A .
+$ git commit -m 'initial commit'
+$ get remote add origin <remote_repo_url>
+$ git push
+```
+
+setup database
+---------------
 
 create database users:
 
@@ -58,7 +85,8 @@ create database:
 $ mix ecto.create && MIX_ENV=test mix ecto.create
 ```
 
-start Phoenix app:
+start app
+---------
 
 ```sh
 $ mix phx.server
@@ -70,10 +98,16 @@ or inside IEx:
 $ iex -S mix phx.server
 ```
 
-add support for Slime template engine:
+customize app
+-------------
 
-1. <https://github.com/slime-lang/phoenix_slime>
-2. <https://github.com/slime-lang/slime>
+1. <https://hexdocs.pm/phoenix/adding_pages.html>
+
+### add packages
+
+add support for Slime or Expug template engine.
+
+### generate schemas
 
 generate schemas (add all required columns in generated migrations -
 IDK how to pass `precision` and `scale` options for decimal column to

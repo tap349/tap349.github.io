@@ -103,9 +103,26 @@ customize app
 
 1. <https://hexdocs.pm/phoenix/adding_pages.html>
 
-### add packages
+### add useful packages
 
-add support for Slime or Expug template engine.
+_mix.exs_:
+
+```diff
+  defp deps do
+    [
+      # ...
++     {:httpoison, "~> 0.12"},
++     {:distillery, "~> 1.5", runtime: false},
++     {:edeliver, "~> 1.4.4"},
++     {:timex, "~> 3.1"},
++     {:appsignal, "~> 1.4"},
++     {:jason, "~> 1.0"},
++     {:exconstructor, "~> 1.1.0"},
++     {:credo, "~> 0.9", only: [:dev, :test], runtime: false},
++     {:phoenix_expug, "~> 0.1.1"}
+    ]
+  end
+```
 
 ### generate schemas
 
@@ -120,8 +137,15 @@ $ mix phx.gen.schema Transfer transfers
 $ mix ecto.migrate && MIX_ENV=test mix ecto.migrate
 ```
 
-use [mix phx.gen.json](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Json.html) task
-instead - otherwise some useful modules (like `ChangesetView`) are not generated.
+### generate schemas with context and supplementary modules
 
-see the list of modules that should be generated when using this task
-[here](https://github.com/phoenixframework/phoenix/tree/master/priv/templates/phx.gen.json).
+1. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Html.html>
+2. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Json.html>
+3. <https://github.com/phoenixframework/phoenix/tree/master/priv/templates>
+
+using `phx.gen.html` or `phx.gen.json` tasks allows to generate not only
+schemas but some supplementary modules as well (including context module
+and `ChangesetView`).
+
+see templates of corresponding `gen` tasks in the source code to get the
+list of modules that should be generated.

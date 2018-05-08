@@ -32,3 +32,7 @@ using SSL
 
 1. <https://hexdocs.pm/phoenix/endpoint.html#using-ssl>
 2. <http://ohanhi.com/phoenix-ssl-localhost.html>
+3. <https://gist.github.com/tadast/9932075>
+
+the idea is that it's possible to generate private key and self-signed
+certificate and specify them in `https` key of endpoint configuration.

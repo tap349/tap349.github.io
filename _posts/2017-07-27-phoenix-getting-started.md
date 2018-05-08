@@ -56,7 +56,7 @@ $ git push
 setup database
 ---------------
 
-### create missing users (roles)
+### create users (roles)
 
 - variant 1: create separate users for each environment
 
@@ -155,15 +155,15 @@ _mix.exs_:
   defp deps do
     [
       # ...
-+     {:httpoison, "~> 0.12"},
-+     {:distillery, "~> 1.5", runtime: false},
-+     {:edeliver, "~> 1.4.4"},
-+     {:timex, "~> 3.1"},
 +     {:appsignal, "~> 1.4"},
-+     {:jason, "~> 1.0"},
-+     {:exconstructor, "~> 1.1.0"},
 +     {:credo, "~> 0.9", only: [:dev, :test], runtime: false},
-+     {:phoenix_expug, "~> 0.1.1"}
++     {:distillery, "~> 1.5", runtime: false},
++     {:edeliver, "~> 1.4"},
++     {:exconstructor, "~> 1.1.0"},
++     {:httpoison, "~> 0.12"},
++     {:jason, "~> 1.0"},
++     {:phoenix_expug, "~> 0.1.1"},
++     {:timex, "~> 3.1"}
     ]
   end
 ```

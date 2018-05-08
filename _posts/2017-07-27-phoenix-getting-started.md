@@ -155,12 +155,12 @@ _mix.exs_:
   defp deps do
     [
       # ...
-+     {:appsignal, "~> 1.4"},
++     {:appsignal, "~> 1.5"},
 +     {:credo, "~> 0.9", only: [:dev, :test], runtime: false},
 +     {:distillery, "~> 1.5", runtime: false},
 +     {:edeliver, "~> 1.4"},
 +     {:exconstructor, "~> 1.1.0"},
-+     {:httpoison, "~> 0.12"},
++     {:httpoison, "~> 1.0"},
 +     {:jason, "~> 1.0"},
 +     {:phoenix_expug, "~> 0.1.1"},
 +     {:timex, "~> 3.1"}

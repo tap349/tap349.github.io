@@ -13,6 +13,8 @@ categories: [facebook]
 {:toc}
 <hr>
 
+- FD - Facebook for Developers
+
 change language
 ---------------
 
@@ -57,6 +59,12 @@ webhook
 > subscribe your webhook to during the setup process. At a minimum, you should
 > subscribe to the messages and messaging_postbacks webhook events to be able
 > to implement basic Platform features in your bot.
+
+### edit callback URL
+
+1. <https://stackoverflow.com/a/37853597/3632318>
+
+| FD: `PRODUCTS` (section in left menu) → `Webhooks` (link) → `Edit Subscription` (button)
 
 notes
 -----

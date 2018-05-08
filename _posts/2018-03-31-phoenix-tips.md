@@ -26,3 +26,9 @@ _config/config.exs_:
 +   # bind application to local IP address
 +   http: [ip: {192, 168, 0, 36}, port: 4000],
 ```
+
+using SSL
+---------
+
+1. <https://hexdocs.pm/phoenix/endpoint.html#using-ssl>
+2. <http://ohanhi.com/phoenix-ssl-localhost.html>

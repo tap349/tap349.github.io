@@ -157,3 +157,16 @@ this will print all info messages in tests:
 ```elixir
 Logger.info("foo")
 ```
+
+pass params in controller tests
+-------------------------------
+
+1. <https://medium.com/@lasseebert/test-driving-a-phoenix-endpoint-part-i-b53e300c1a0a>
+
+params can be specified as either keyword list or map:
+
+```elixir
+conn = get(conn, webhook_path(conn, :show), %{"hub.mode" => "subscribe"})
+# or
+conn = get(conn, webhook_path(conn, :show), ["hub.mode": "subscribe"])
+```

@@ -49,3 +49,21 @@ config.action_dispatch.perform_deep_munge = false
 but I've chosen to send `null` array elements as empty strings - they are
 not removed by Rails and are properly converted to `nil`s by `Form` schema
 of dry-validation.
+
+Could not load 'guard/rails' or '~/.guard/templates/rails' or find class Guard::Rails
+-------------------------------------------------------------------------------------
+
+```
+$ guard init rails
+ERROR - Could not load 'guard/rails' or '~/.guard/templates/rails' or find class Guard::Rails
+```
+
+**solution**
+
+don't run `guard init rails` - I have no `guard-rails` gem in _Gemfile_.
+follow instructions from <https://github.com/guard/guard-rspec> instead
+to create _Guardfile_:
+
+```sh
+$ guard init rspec
+```

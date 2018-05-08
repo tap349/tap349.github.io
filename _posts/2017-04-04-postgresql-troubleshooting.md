@@ -27,11 +27,10 @@ common ways to diagnose and fix the problem:
   $ brew services restart postgresql@9.5
   ```
 
-## problems with new homebrew versioning scheme
+problems with new homebrew versioning scheme
+--------------------------------------------
 
-- <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
-
-**description**
+1. <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
 running `brew upgrade` has created quite a mess for me because of a new
 versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`
@@ -86,11 +85,10 @@ NOTE: installing `postgresql` formula still installs the latest version
       by default (now they all point to 9.5 installation) -
       if you need it run `brew link postgresql --force` manually.
 
-## could not connect to server: Connection refused
+psql: could not connect to server: Connection refused
+-----------------------------------------------------
 
-**description**
-
-```sh
+```
 $ psql -d <my_database>
 psql: could not connect to server: Connection refused
   Is the server running locally and accepting
@@ -99,7 +97,7 @@ psql: could not connect to server: Connection refused
 
 rails console:
 
-```sh
+```
 PG::ConnectionBad: could not connect to server: Connection refused
   Is the server running on host "localhost" (127.0.0.1) and accepting
   TCP/IP connections on port 5432?
@@ -131,9 +129,10 @@ remove obsolete PID file - I didn't try this method though):
 $ brew services restart postgresql@9.5
 ```
 
-## command not found: psql
+command not found: psql
+-----------------------
 
-```sh
+```
 $ psql --version
 zsh: command not found: psql
 ```
@@ -159,6 +158,84 @@ to solve this problem either:
 
   _~/.zshenv_:
 
-  ```sh
+  ```zsh
   path=(/usr/local/Cellar/postgresql@9.5/9.5.10/bin $path)
   ```
+
+psql: could not connect to server: No such file or director
+-----------------------------------------------------------
+
+```
+$ psql -d postgres
+psql: could not connect to server: No such file or directory
+        Is the server running locally and accepting
+        connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+```
+
+**solution**
+
+to diagnose this and similar problems run `postgres` in the foreground
+(see `brew info postgresql output`):
+
+```
+$ pg_ctl -D /usr/local/var/postgres start
+waiting for server to start....
+[10867] FATAL: database files are incompatible with server
+[10867] DETAIL: The data directory was initialized by PostgreSQL version 9.6, which is not compatible with this version 10.3.
+ stopped waiting
+pg_ctl: could not start server
+Examine the log output.
+```
+
+it turns out _/usr/local/var/postgres_ contains data for PostgreSQL 9.6
+(when `postgresql` formula was installed, 9.6 was the latest version).
+
+=> it's necessary to migrate existing data from a previous major version
+(9.6) to the latest one (10) (see `brew info postgresql output`):
+
+```
+$ brew postgresql-upgrade-database
+==> brew install postgresql@9.6
+...
+==> Upgrading postgresql data from 9.6 to 10...
+Stopping `postgresql`... (might take a while)
+==> Successfully stopped `postgresql` (label: homebrew.mxcl.postgresql)
+==> Moving postgresql data from /usr/local/var/postgres to /usr/local/var/postgres.old...
+The files belonging to this database system will be owned by user "tap".
+This user must also own the server process.
+...
+==> Upgraded postgresql data from 9.6 to 10!
+==> Your postgresql 9.6 data remains at /usr/local/var/postgres.old
+==> Successfully started `postgresql` (label: homebrew.mxcl.postgresql)
+```
+
+this command will install a previous major version of PostgreSQL
+(if it has been uninstalled) which is required to upgrade database.
+
+after upgrade is complete, you can remove old major version along
+with its data (_/usr/local/var/postgres.old_):
+
+```sh
+$ brew uninstall postgresql@9.6
+$ rm -rf /usr/local/var/postgres.old
+```
+
+now make sure `postgresql` service is started:
+
+```
+$ brew services list
+Name       Status  User Plist
+memcached  started tap  /Users/tap/Library/LaunchAgents/homebrew.mxcl.memcached.plist
+postgresql started tap  /Users/tap/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+redis      started tap  /Users/tap/Library/LaunchAgents/homebrew.mxcl.redis.plist
+```
+
+and try to run `psql` again:
+
+```
+$ psql -d postgres
+psql (10.3)
+Type "help" for help.
+
+postgres=#
+```

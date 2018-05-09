@@ -30,6 +30,9 @@ usage
 for x in (0..19) # rubocop:disable Style/For
 ```
 
+it's required to re-enable checks or else Rubocop will issue warning
+that would remind you to do that.
+
 ### run Rubocop
 
 ```sh

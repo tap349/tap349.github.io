@@ -64,6 +64,8 @@ MapSet.new(list_1)
 |> MapSet.intersection(MapSet.new(list_2))
 ```
 
+it's not required to re-enable checks just like for Rubocop.
+
 Vim integration
 ---------------
 

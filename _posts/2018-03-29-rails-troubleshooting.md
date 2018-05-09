@@ -67,3 +67,24 @@ to create _Guardfile_:
 ```sh
 $ guard init rspec
 ```
+
+ActionController::InvalidAuthenticityToken
+------------------------------------------
+
+1. <https://github.com/omniauth/omniauth/issues/237#issuecomment-908481>
+2. <https://stackoverflow.com/questions/941594/understanding-the-rails-authenticity-token>
+
+it's possible to disable CSRF for API requests altogether either in
+`ApplicationController` or specific controller with:
+
+```ruby
+skip_before_action :verify_authenticity_token
+```
+
+<https://security.stackexchange.com/a/166798>:
+
+> Browsers send cookies along with all requests. CSRF attacks depend upon
+> this behavior. If you do not use cookies, and don't rely on cookies for
+> authentication, then there is absolutely no room for CSRF attacks, and
+> no reason to put in CSRF protection. If you have cookies, especially if
+> you use them for authentication, then you need CSRF protection.

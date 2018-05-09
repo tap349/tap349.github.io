@@ -88,14 +88,15 @@ after adding unknown keys to struct using `Map` module functions struct is no
 longer recognized as original struct - now it's just a map with a `__struct__`
 field.
 
-(how to) remove newline at the end of heredoc
----------------------------------------------
+(how to) remove newline inside or at the end of heredoc
+-------------------------------------------------------
 
 1. <https://elixirforum.com/t/line-break-at-the-end-of-a-multiline-string/12694/4>
 
 ```
 iex> """
-...> foo\
+...> foo \
+...> bar\
 ...> """
-"foo"
+"foo bar"
 ```

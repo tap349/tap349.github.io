@@ -36,3 +36,15 @@ using SSL
 
 the idea is that it's possible to generate private key and self-signed
 certificate and specify them in `https` key of endpoint configuration.
+
+umbrella apps vs. contexts
+--------------------------
+
+<https://www.reddit.com/r/elixir/comments/6bpah8/phoenix_context_vs_elixir_umbrella_apps/dhprpl5/>:
+
+> The rule of thumb is to use umbrellas where you can use separate storage
+> and contexts everywhere else. Many quite big apps use only one database.
+> It doesn't make sense to configure them separately in Umbrellas and you
+> can't stop one part without bringing entire system down. It doesn't make
+> sense to extract them to umbrellas, but you still don't want to tangle
+> stuff too much.

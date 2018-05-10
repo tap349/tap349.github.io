@@ -81,7 +81,7 @@ http://sith.local:4000/auth/facebook?scope=email,public_profile
 the 1st time you make a request Facebook will ask currently signed in user
 for specified permissions (to view email address in this case):
 
-> <my_app> will receive: your email address
+> \<my_app> will receive: your email address
 
 on the 2nd and subsequent requests Facebook will remember user choice and
 will return requested information without prompting user.

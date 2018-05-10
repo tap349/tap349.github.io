@@ -2,7 +2,7 @@
 layout: post
 title: Facebook - OAuth
 date: 2018-05-10 13:06:44 +0300
-access: public
+access: private
 comments: true
 categories: [facebook]
 ---

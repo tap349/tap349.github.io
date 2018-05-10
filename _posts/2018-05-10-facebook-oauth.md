@@ -89,5 +89,8 @@ will return requested information without prompting user.
 NOTE: a new token will be returned on each request which will invalidate
       a previous one (I guess).
 
-TODO: IDK yet how to revoke access to information about user (so that user
-      is prompted again).
+IDK yet how to revoke access to user information that has been granted to
+my app (so that user is prompted again) - my app is not listed here:
+
+| Facebook: `▼` (top right menu) → `Settings`
+| `Apps and Websites` (left menu) → `Active` (tab)

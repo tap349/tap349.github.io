@@ -88,3 +88,10 @@ skip_before_action :verify_authenticity_token
 > authentication, then there is absolutely no room for CSRF attacks, and
 > no reason to put in CSRF protection. If you have cookies, especially if
 > you use them for authentication, then you need CSRF protection.
+
+request is nil in ActionController::ParamsWrapper
+-------------------------------------------------
+
+error was caused by having `request` action in controller which returned
+nil (this action must have overriden corresponding Rails method) => don't
+use `request` name for any methods inside controllers.

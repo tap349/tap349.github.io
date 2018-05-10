@@ -88,3 +88,6 @@ will return requested information without prompting user.
 
 NOTE: a new token will be returned on each request which will invalidate
       a previous one (I guess).
+
+TODO: IDK yet how to revoke access to information about user (so that user
+      is prompted again).

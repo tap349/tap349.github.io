@@ -67,7 +67,8 @@ webhook
 
 1. <https://stackoverflow.com/a/37853597/3632318>
 
-| FD: `PRODUCTS` (section in left menu) → `Webhooks` → `Edit Subscription` (button)
+| FD: `PRODUCTS` (section in left menu) → `Webhooks`
+| `Edit Subscription` (button)
 
 notes
 -----

@@ -78,6 +78,10 @@ the request is made on behalf of your app (OAuth implementation would add
 http://sith.local:4000/auth/facebook?scope=email,public_profile
 ```
 
+Facebook returns, inter alia, JWT token (aka access token) in response.
+token will be different on each request - all previous tokens will be
+invalidated, I guess.
+
 the 1st time you make a request Facebook will ask currently signed in user
 for specified permissions (to view email address in this case):
 
@@ -85,9 +89,6 @@ for specified permissions (to view email address in this case):
 
 on the 2nd and subsequent requests Facebook will remember user choice and
 will return requested information without prompting user.
-
-NOTE: a new token will be returned on each request which will invalidate
-      a previous one (I guess).
 
 IDK yet how to revoke access to user information that has been granted to
 my app (so that user is prompted again) - my app is not listed here:

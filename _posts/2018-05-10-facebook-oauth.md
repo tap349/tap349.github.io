@@ -126,8 +126,8 @@ scopes - most likely this will invalidate previous tokens.
 
   app is added with `email,public_profile` permissions.
 
-  - OmniAuth: returns access token with `email,public_profile` scopes
-  - Ueberauth: returns access token with `email,public_profile` scopes
+  - OmniAuth: returns new access token with `email,public_profile` scopes
+  - Ueberauth: returns new access token with `email,public_profile` scopes
 
 ### [STEP 2] Facebook asks for `ads_management,ads_read` permissions
 
@@ -138,16 +138,16 @@ this prompt is shown iff user has granted `email,public_profile` permissions.
 
   app remains unchanged, business integration is not added.
 
-  - OmniAuth: raises error, doesn't invoke callback
-  - Ueberauth: invokes callback and passes struct with error details
+  - OmniAuth: returns new access token with `email,public_profile` scopes
+  - Ueberauth: returns new access token with `email,public_profile` scopes
 
 - user presses `Continue` button
 
   app is removed, business integration is added with all permissions
   (`email,public_profile,ads_management,ads_read`).
 
-  - OmniAuth: returns access token with all scopes
-  - Ueberauth: returns access token with all scopes
+  - OmniAuth: returns new access token with all scopes
+  - Ueberauth: returns new access token with all scopes
 
 troubleshooting
 ---------------

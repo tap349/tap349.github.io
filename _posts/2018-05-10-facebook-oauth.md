@@ -13,6 +13,8 @@ categories: [facebook]
 {:toc}
 <hr>
 
+1. <https://paw.cloud/docs/examples/facebook-api>
+
 - FD - Facebook for Developers
 
 whitelist redirect URI
@@ -72,22 +74,81 @@ request user for permissions
 ----------------------------
 
 1. <https://developers.facebook.com/docs/marketing-api/access#manually-getting-access-tokens>
-2. <https://developers.gigya.com/display/GD/Facebook+Login+Permissions#FacebookLoginPermissions-AvailablePermissions>
 
 NOTE: scopes = permissions.
 
-first user clicks the link:
+### about OAuth libraries
 
-```
-http://sith.local:4000/auth/facebook?scope=email,public_profile,ads_management,ads_read
-```
+both OmniAuth and Ueberauth work alike under the hood:
 
-then OAuth library redirects to `https://www.facebook.com/dialog/oauth`
-with additional query params including `client_id` (the request is made
-on behalf of your app).
+- user clicks request URL
 
-there're 2 possible outcomes from here on depending on user choice -
-either app or business integration can be added to his Facebook account:
+  ```
+  http://myapp.com:4000/auth/facebook
+  ```
+
+  this link might already contain requested scopes:
+
+  ```
+  http://example.com:4000/auth/facebook?scope=email,public_profile,ads_management,ads_read
+  ```
+
+  otherwise OAuth library will add default scopes on the next step.
+
+- OAuth library redirects to authorize URL
+
+  OAuth library adds query params to authorize URL including
+  `client_id` so that the request is made on behalf of your app:
+
+  ```
+  https://www.facebook.com/dialog/oauth?
+    client_id=<YOUR_APP_ID>
+    &redirect_uri=<YOUR_REDIRECT_URL>
+    &scope=ads_management
+  ```
+
+- Facebook redirects to callback URL
+
+  ```
+  http://YOUR_REDIRECT_URL?code=<AUTHORIZATION_CODE>
+  ```
+
+  this happens when user finishes authentication flow by granting or
+  declining requested permissions. in the former case Facebook adds
+  `code` query param (authorization code).
+
+- OAuth library makes request to access token URL
+
+  OAuth library intercepts Facebook request with authorization code
+  in query params and uses it to fetch new access token:
+
+  ```
+  https://graph.facebook.com/oauth/access_token?
+    client_id=<YOUR_APP_ID>
+    &redirect_uri=<YOUR_REDIRECT_URL>
+    &client_secret=<YOUR_APP_SECRET>
+    &code=<AUTHORIZATION_CODE>
+  ```
+
+  if Facebook request doesn't have `code` query param, OAuth library
+  can either raise error (OmniAuth) or populate error data structure
+  (Ueberauth).
+
+- OAuth library populates auth data structure
+
+  when OAuth library fetches access token, it continues processing
+  Facebook request to callback URL and populates auth data structure
+  (`%Ueberauth.Auth` in Ueberauth, `request.env['omniauth.auth']` in
+  OmniAuth) with access token and other requested information about
+  user which can be used later to find or create user and sign him in.
+
+### server-side authentication flow
+
+1. <https://developers.gigya.com/display/GD/Facebook+Login+Permissions#FacebookLoginPermissions-AvailablePermissions>
+
+there are 2 possible outcomes when user is prompted by Facebook to give
+permissions - either app or business integration can be added to user's
+Facebook account:
 
 - app with data access
 
@@ -107,47 +168,48 @@ either app or business integration can be added to his Facebook account:
 corresponding permissions might be revoked by removing either app or
 business integration from user's Facebook account.
 
-any successful response from Facebook contains, inter alia, access token
-(JWT token) but its scopes may different based on user action. if access
-token with requested scopes has been created before, Facebook won't prompt
-user next time request is made but will return a new token with the same
-scopes - most likely this will invalidate previous tokens.
+any successful response from Facebook contains, inter alia, persistent
+access token (JWT token) but its scopes may be different based on user
+action. if access token with requested scopes has been created before,
+Facebook won't prompt user next time request is made but will return a
+new token with the same scopes - this will invalidate previous tokens
+most likely.
 
-### [STEP 1] Facebook asks for `email,public_profile` permissions
+- [STEP 1] Facebook asks for `email,public_profile` permissions
 
-- user presses `Cancel` button
+  - user presses `Cancel` button
 
-  neither app nor business integration is added.
+    neither app nor business integration is added.
 
-  - OmniAuth: raises error, doesn't invoke callback
-  - Ueberauth: invokes callback and passes struct with error details
+    - OmniAuth: raises error, doesn't invoke callback
+    - Ueberauth: invokes callback and passes struct with error details
 
-- user presses `Continue` button
+  - user presses `Continue` button
 
-  app is added with `email,public_profile` permissions.
+    app is added with `email,public_profile` permissions.
 
-  - OmniAuth: returns new access token with `email,public_profile` scopes
-  - Ueberauth: returns new access token with `email,public_profile` scopes
+    - OmniAuth: returns new access token with `email,public_profile` scopes
+    - Ueberauth: returns new access token with `email,public_profile` scopes
 
-### [STEP 2] Facebook asks for `ads_management,ads_read` permissions
+- [STEP 2] Facebook asks for `ads_management,ads_read` permissions
 
-these are extended permissions - that's why a separate prompt is required.
-this prompt is shown iff user has granted `email,public_profile` permissions.
+  these are extended permissions - that's why a separate prompt is required.
+  this prompt is shown iff user has granted `email,public_profile` permissions.
 
-- user presses `Cancel` button
+  - user presses `Cancel` button
 
-  app remains unchanged, business integration is not added.
+    app remains unchanged, business integration is not added.
 
-  - OmniAuth: returns new access token with `email,public_profile` scopes
-  - Ueberauth: returns new access token with `email,public_profile` scopes
+    - OmniAuth: returns new access token with `email,public_profile` scopes
+    - Ueberauth: returns new access token with `email,public_profile` scopes
 
-- user presses `Continue` button
+  - user presses `Continue` button
 
-  app is removed, business integration is added with all permissions
-  (`email,public_profile,ads_management,ads_read`).
+    app is removed, business integration is added with all permissions
+    (`email,public_profile,ads_management,ads_read`).
 
-  - OmniAuth: returns new access token with all scopes
-  - Ueberauth: returns new access token with all scopes
+    - OmniAuth: returns new access token with all scopes
+    - Ueberauth: returns new access token with all scopes
 
 troubleshooting
 ---------------
@@ -219,4 +281,10 @@ permissions - this doesn't happen when dealing with basic permissions.
 
 **solution**
 
-TODO: not found yet.
+TODO: not resolved yet.
+
+maybe this is caused by request to fetch access token - OAuth library
+adds `redirect_uri` query param to this request. so Facebook can make
+request to the same callback URL twice. but in theory OAuth library
+should differentiate between these requests and shouldn't try to fetch
+access token again using the same authorization code.

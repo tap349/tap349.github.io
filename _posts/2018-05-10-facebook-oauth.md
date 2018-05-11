@@ -77,7 +77,7 @@ request user for permissions
 
 NOTE: scopes = permissions.
 
-### about OAuth libraries
+### how OAuth library works
 
 both OmniAuth and Ueberauth work alike under the hood:
 
@@ -142,7 +142,7 @@ both OmniAuth and Ueberauth work alike under the hood:
   OmniAuth) with access token and other requested information about
   user which can be used later to find or create user and sign him in.
 
-### server-side authentication flow
+### server-side authentication flow in Facebook
 
 1. <https://developers.gigya.com/display/GD/Facebook+Login+Permissions#FacebookLoginPermissions-AvailablePermissions>
 
@@ -170,10 +170,10 @@ business integration from user's Facebook account.
 
 any successful response from Facebook contains, inter alia, persistent
 access token (JWT token) but its scopes may be different based on user
-action. if access token with requested scopes has been created before,
-Facebook won't prompt user next time request is made but will return a
-new token with the same scopes - this will invalidate previous tokens
-most likely.
+action (`scopes` is a JWT token field). if access token with requested
+scopes has been created before, Facebook won't prompt user next time
+request is made but will return a new token with the same scopes - this
+will invalidate previous tokens most likely.
 
 - [STEP 1] Facebook asks for `email,public_profile` permissions
 

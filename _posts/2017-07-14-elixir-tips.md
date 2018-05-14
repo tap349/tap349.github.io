@@ -62,6 +62,9 @@ be used outside current context (from inside other contexts or in web part of
 Phoenix application). all other operations are considered internal and should
 used inside current context directly (via corresponding loaders and mutators).
 
+this approach has the benefit of not polluting context interface with lots of
+functions which are not meant to be used outside current context.
+
 still it makes sense complex operations (which use their own private functions)
 into their own modules with schema namespace - these operations would be able
 to use functions from loaders and mutators and would be exposed via context.

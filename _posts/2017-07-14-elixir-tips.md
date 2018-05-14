@@ -63,9 +63,10 @@ web part of Phoenix application). all other operations are considered to be
 internal and should be used inside current context by calling functions from
 required loaders and mutators directly.
 
-implementing most operations inside schema loaders and mutators and adding only
-required ones to context public interface has the benefit of not polluting the
-latter with operations which are not meant to be used outside current context.
+implementing most operations in schema loaders and mutators and adding only
+required ones to context public interface has the benefit of not polluting
+the latter with operations which are not meant to be used outside current
+context.
 
 still it makes sense to extract complex operations (which might have private
 helper functions) into their own modules (services, operations) within schema

@@ -61,3 +61,22 @@ $ bundle
 `gem cleanup` removes bundled gems only (gems specified in _Gemfile_ of
 current project) though it might affect other projects if they are using
 the same gems (run `bundle` for those projects as well in that case).
+
+***UPDATE***
+
+it has turned out the problem was caused by specific version of either
+`berkshelf` or `chef` or both.
+
+old versions (there is error):
+
+```ruby
+gem 'berkshelf', '6.3.1'
+gem 'chef', '13.5.3'
+```
+
+old versions (error is gone):
+
+```ruby
+gem 'berkshelf', '7.0.2'
+gem 'chef', '14.1.1'
+```

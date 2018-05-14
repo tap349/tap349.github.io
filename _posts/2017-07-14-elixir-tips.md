@@ -74,6 +74,9 @@ namespace - just like when not using CQRS approach. these operations can use
 different schema loaders and mutators and can be added to context interface.
 for example, these operations can be placed inside `ops` namespace.
 
+alternatively complex operations might be implemented as context functions
+if they are just a sequence of calls to corresponding loaders and mutators.
+
 (how to) convert struct <-> map
 -------------------------------
 

@@ -9,6 +9,10 @@ categories: [elixir, testing]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 ```sh
 $ mix test
 ```

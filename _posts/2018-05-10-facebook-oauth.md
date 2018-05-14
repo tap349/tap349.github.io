@@ -288,3 +288,32 @@ adds `redirect_uri` query param to this request. so Facebook can make
 request to the same callback URL twice. but in theory OAuth library
 should differentiate between these requests and shouldn't try to fetch
 access token again using the same authorization code.
+
+### The parameter app_id is required
+
+Facebook response when making request to request URL:
+
+> The parameter app_id is required
+
+**solution**
+
+this means `client_id` query param has no value or missing.
+
+in my case I misspelled environment variable name in OmniAuth initializer
+(_config/initializers/omniauth.rb_):
+
+```diff
+  Rails.application.config.middleware.use OmniAuth::Builder do
+-   provider :facebook, ENV['FACEBOOK_APP_KEY'], ENV['FACEBOOK_APP_SECRET'],
++   provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'],
+    display: 'page',
+    info_fields: 'name,email,first_name,last_name',
+    scope: 'email,public_profile,ads_management,ads_read'
+  end
+```
+
+as a result `client_id` query param had no value:
+
+```
+...?client_id&redirect_uri=...
+```

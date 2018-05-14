@@ -64,7 +64,7 @@ used inside current context directly (via corresponding loaders and mutators).
 
 implementing most operations inside schema loaders and mutators and adding only
 required ones to context public interface has the benefit of not polluting the
-latter with functions which are not meant to be used outside current context.
+latter with operations which are not meant to be used outside current context.
 
 still it makes sense to extract complex operations (which might have private
 helper functions) into their own modules (services, operations) within schema

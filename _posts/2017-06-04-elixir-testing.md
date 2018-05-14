@@ -170,3 +170,33 @@ conn = get(conn, webhook_path(conn, :show), %{"hub.mode" => "subscribe"})
 # or
 conn = get(conn, webhook_path(conn, :show), ["hub.mode": "subscribe"])
 ```
+
+style guide
+-----------
+
+1. <https://groups.google.com/forum/#!topic/elixir-ecto/BKpLf092dWs>
+
+<https://groups.google.com/d/msg/elixir-ecto/BKpLf092dWs/VaCvfZpEBQAJ>:
+
+> * test/models/user_test.exs - you will test your changeset and others.
+> Again, only data transformation, tests can be "async: true" because it
+> doesn't talk to the database.
+>
+> * test/models/user_repo_test.exs - you will test anything the model
+> returns that needs the repository to be tested, like complex queries.
+> Here it makes no sense to mock because you *need* the repo, testing a
+> complex query against a fake repo makes no purpose. Also, since it
+> depends on the Repo, tests cannot be concurrent (until Ecto 1.1 where
+> we solve this problem)
+>
+> * test/views/user_test.exs - you will test how your views are rendered.
+> Again, it is only data transformation, so tests can be "async: true"
+> because it doesn't talk to the database.
+>
+> * test/controllers/user_controller_test.exs - integration layer. You'll
+> test a simple pass through the different layers and the expected result.
+> Important: you are not going to test "models" and "views" combinations here.
+> For example, you won't test that when you POST attributes A and B, field C
+> will be added to the model. That's is going to be in the model test. In the
+> same way you are not going to test how users with different attributes are
+> rendered. That's in the view test.

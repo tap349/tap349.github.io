@@ -15,8 +15,8 @@ categories: [elixir]
 
 1. <https://github.com/blackode/elixir-tips>
 
-ramblings about module naming in Elixir
----------------------------------------
+ramblings about module naming in Elixir and code organization
+-------------------------------------------------------------
 
 as far as I can see folks prefer nouns to verbs when naming modules.
 
@@ -44,6 +44,23 @@ group common functionality together (contexts are top-level domains of your
 applicaiton). contexts can be further divided into subdomains (say, I have
 such subdomains named after schemas - they contain operations, queries, etc.
 that refer to (= bounded by) that specific schema).
+
+### CQRS approach
+
+1. <https://blog.lelonek.me/command-query-separation-in-elixir-ac742e60fc7d>
+
+when using contexts most operations (that constitute context public interface)
+are implemented inside contexts themselves. complex operations can be extracted
+into their own modules (services, operations) bounded by schemas as described
+above.
+
+in CQRS approach it's recommended to separate read and write operations and
+group them by related schema. in this case it's possible to expose only those
+operations via context (by using `import` with `only` option inside context)
+which are meant to be part of public interface - that is might be used outside
+current context (from other contexts or in web part of Phoenix application).
+all other operations are considered internal and are used directly in current
+context (via corresponding loaders and mutators).
 
 (how to) convert struct <-> map
 -------------------------------

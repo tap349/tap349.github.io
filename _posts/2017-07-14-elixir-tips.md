@@ -49,18 +49,18 @@ that refer to (= bounded by) that specific schema).
 
 1. <https://blog.lelonek.me/command-query-separation-in-elixir-ac742e60fc7d>
 
-when using contexts most operations (that constitute context public interface)
-are implemented inside contexts themselves. complex operations can be extracted
-into their own modules (services, operations) bounded by schemas as described
-above.
+when using context most operations that constitute context public interface
+and are used internally inside context are implemented inside context module
+itself. complex operations can be extracted into their own modules (services,
+operations) bounded by schemas as described above.
 
 in CQRS approach it's recommended to separate read and write operations and
 group them by related schema. in this case it's possible to expose only those
 operations via context (by using `import` with `only` option inside context)
-which are meant to be part of public interface - that is might be used outside
-current context (from other contexts or in web part of Phoenix application).
-all other operations are considered internal and are used directly in current
-context (via corresponding loaders and mutators).
+which are meant to be part of aforementioned public interface - that is might
+be used outside current context (from inside other contexts or in web part of
+Phoenix application). all other operations are considered internal and should
+used inside current context directly (via corresponding loaders and mutators).
 
 (how to) convert struct <-> map
 -------------------------------

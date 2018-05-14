@@ -138,3 +138,25 @@ E345: Can't find file "/Users/tap/dev/sith/spec/controllers/webhooks_controller_
 I created new Rails project with `--no-skip-test` => `test` directory
 was created instead of `spec` one and `vim-rails` plugin couldn't find
 or create alternate file. so just rename directory to fix the issue.
+
+incorrect folding of lines with equal indent
+--------------------------------------------
+
+_~/.vim/vimrc_:
+
+```
+set foldmethod=indent
+```
+
+lines with equal indent don't form a fold - folding stops at blank line.
+
+**solution**
+
+comment to <https://stackoverflow.com/a/14803964/3632318>:
+
+> If I've reproduced the problem and run :set shiftwidth=2 after the text has
+> already been input, it works as expected but not if i do :set shiftwidth=2
+> before the text has been input. Similarly if the file has been saved and
+> reopened, the shiftwidth=2 in .vimrc works and the fold works as expected.
+
+all in all if folding is somehow broken, just reload file with `:e` command.

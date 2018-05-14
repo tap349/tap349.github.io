@@ -83,7 +83,7 @@ _~/.ssh/config_:
 ```
 Host billing
  User billing
- Hostname <hostname>
+ Hostname LINODE_IP
  IdentityFile ~/.ssh/id_rsa
  ForwardAgent yes
 ```
@@ -124,6 +124,34 @@ NOTE: you cannot change node name by renaming node file and changing the name
       remote node: if you change it locally new node file with the name from
       _/etc/chef/client.rb_ will be created after converging (its `run_list`
       will be empty).
+
+create production environment
+-----------------------------
+
+```sh
+(ws)$ knife environment create production
+```
+
+_environments/production.json_ file will be created with the following
+content:
+
+```json
+{
+  "name": "production"
+}
+```
+
+this file can be created manually of course.
+
+it doesn't matter much what the name of production environment is -
+be it `production` or `prod`. these names are mostly used internally
+when passing attributes for different environments between cookbooks.
+
+still stick to `prod` name when you are going to create application
+cookbook for Phoenix project inside this Chef repo and `production`
+- for Rails project: environment name might be interpolated inside
+config templates so it's better to use native environment names to
+avoid confusion.
 
 converge remote node
 --------------------

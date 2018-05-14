@@ -55,19 +55,21 @@ itself. complex operations can be extracted into their own modules (services,
 operations) bounded by schemas as described above.
 
 in CQRS approach it's recommended to separate read and write operations and
-group them by related schema. in this case it's possible to expose only those
-operations via context (by using `import` with `only` option inside context)
-which are meant to be part of aforementioned public interface - that is might
-be used outside current context (from inside other contexts or in web part of
+group them by related schema inside loaders and mutators. in this case it's
+possible to expose only those operations via context public interface (say,
+by using `import` with `only` option inside context) which are meant to be
+used outside current context (from inside other contexts or in web part of
 Phoenix application). all other operations are considered internal and should
 used inside current context directly (via corresponding loaders and mutators).
 
-this approach has the benefit of not polluting context interface with lots of
-functions which are not meant to be used outside current context.
+implementing most operations inside schema loaders and mutators and adding only
+required ones to context public interface has the benefit of not polluting the
+latter with functions which are not meant to be used outside current context.
 
-still it makes sense complex operations (which use their own private functions)
-into their own modules with schema namespace - these operations would be able
-to use functions from loaders and mutators and would be exposed via context.
+still it makes sense to extract complex operations (which might have private
+helper functions) into their own modules (services, operations) within schema
+namespace - just like when not using CQRS approach. these operations can use
+different schema loaders and mutators and can be added to context interface.
 
 (how to) convert struct <-> map
 -------------------------------

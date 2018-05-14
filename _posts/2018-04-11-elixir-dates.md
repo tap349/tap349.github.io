@@ -77,3 +77,39 @@ ECTO TYPE         | ELIXIR TYPE
 `:time`           | `Time`
 `:naive_datetime` | `NaiveDateTime`
 `:utc_datetime`   | `DateTime`
+
+timezones
+---------
+
+1. <https://www.amberbit.com/blog/2017/8/3/time-zones-in-postgresql-elixir-and-phoenix/>
+
+migration:
+
+```elixir
+defmodule MyApp.Repo.Migrations.CreateUsers do
+  use Ecto.Migration
+
+  def change do
+    create table("users") do
+      # ...
+
+      timestamps(type: :utc_datetime)
+    end
+  end
+end
+```
+
+schema:
+
+```elixir
+defmodule MyApp.User do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "users" do
+    # ...
+
+    timestamps(type: :utc_datetime)
+  end
+end
+```

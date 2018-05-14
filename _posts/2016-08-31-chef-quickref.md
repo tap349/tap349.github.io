@@ -114,13 +114,16 @@ here first `billing` is a host name from SSH config.
 if you don't specify node name explicitly, FQDN will be used by default -
 this is the name by which node is registered in a `chef-zero` server.
 
-as a result of bootstrapping _clients/billing.json_ file will be created
-(contains public key).
+2 files will be created after bootstrapping:
+
+- _clients/billing.json_ (contains public key)
+- _nodes/billing.json_ (contains automatic whitelisted attributes now)
 
 NOTE: you cannot change node name by renaming node file and changing the name
       inside this file - node name is also stored in _/etc/chef/client.rb_ on
       remote node: if you change it locally new node file with the name from
-      _/etc/chef/client.rb_ will be created after converging (with empty run_list).
+      _/etc/chef/client.rb_ will be created after converging (its `run_list`
+      will be empty).
 
 converge remote node
 --------------------

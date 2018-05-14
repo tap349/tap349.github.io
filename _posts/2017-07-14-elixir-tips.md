@@ -57,10 +57,11 @@ operations) bounded by schemas as described above.
 in CQRS approach it's recommended to separate read and write operations and
 group them by related schema inside loaders and mutators. in this case it's
 possible to expose only those operations via context public interface (say,
-by using `import` with `only` option inside context) which are meant to be
-used outside current context (from inside other contexts or in web part of
-Phoenix application). all other operations are considered internal and should
-used inside current context directly (via corresponding loaders and mutators).
+by importing these operations or by creating wrapper functions) which are
+meant to be used outside current context (from inside other contexts or in
+web part of Phoenix application). all other operations are considered to be
+internal and should be used inside current context by calling functions from
+loaders and mutators directly.
 
 implementing most operations inside schema loaders and mutators and adding only
 required ones to context public interface has the benefit of not polluting the

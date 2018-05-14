@@ -71,3 +71,24 @@ group :development, :test do
   ...
 end
 ```
+
+undefined method `create'
+-------------------------
+
+when running specs (with `guard` or via `bundle exec rspec`):
+
+```
+NoMethodError:
+  undefined method `create' for #<RSpec::ExampleGroups::UserSave::SuccessExistingUserWithTheSameUid:0x00007fa728b8efd0>
+```
+
+**solution**
+
+_rails\_helper.rb_:
+
+```diff
+  RSpec.configure do |config|
+    # ...
++   config.include FactoryBot::Syntax::Methods
+  end
+```

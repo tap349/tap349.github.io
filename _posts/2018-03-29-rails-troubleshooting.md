@@ -99,6 +99,8 @@ use `request` name for any methods inside controllers.
 `rails credentials:edit` opens empty file every time
 ----------------------------------------------------
 
+1. <https://github.com/rails/rails/issues/31286>
+
 whatever I type in this file is not saved to _config/credentials.yml.enc_.
 
 **solution**

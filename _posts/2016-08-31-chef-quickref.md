@@ -153,11 +153,17 @@ cookbook for Phoenix project inside this Chef repo and `production`
 config templates so it's better to use native environment names to
 avoid confusion.
 
+add application cookbook default recipe to node run list
+--------------------------------------------------------
+
+```sh
+(ws)$ knife node run_list add billing 'recipe[app_billing]'
+```
+
 converge remote node
 --------------------
 
 ```sh
-(ws)$ knife node run_list add billing 'recipe[billing_app]'
 (ws)$ knife node environment_set billing prod
 (ws)$ berks vendor
 (ws)$ knife zero converge 'name:billing'

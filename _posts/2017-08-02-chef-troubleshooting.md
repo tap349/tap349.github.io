@@ -35,7 +35,7 @@ Delete your validation key in order to use your user credentials instead
 
 **solution**
 
-<https://github.com/higanworks/knife-zero/issues/24>
+<https://github.com/higanworks/knife-zero/issues/24>:
 
 > Don't worry about it.
 > This warning message is not effect Knife-Zero's behavior.
@@ -111,8 +111,8 @@ Relevant File Content:
 
 **solution**
 
-- <https://github.com/chef-cookbooks/git/issues/121>
-- <https://github.com/chef-cookbooks/git/issues/119>
+1. <https://github.com/chef-cookbooks/git/issues/121>
+2. <https://github.com/chef-cookbooks/git/issues/119>
 
 ```sh
 $ berks update git
@@ -163,7 +163,7 @@ Recipe: postgresql::setup_users
 
 **solution**
 
-<https://github.com/realchrisolin/chef-postgresql/commit/7683f11aedf967bca4c40eb8a72dc14d0f0ebf03>
+1. <https://github.com/realchrisolin/chef-postgresql/commit/7683f11aedf967bca4c40eb8a72dc14d0f0ebf03>
 
 it looks like new version of Chef doesn't provide `Chef::Resource::PostgresqlUser`
 resource (same for `PostgresqlDatabase` and `PostgresqlExtension` resources).
@@ -202,7 +202,7 @@ Cookbook Trace:
 
 **solution**
 
-<https://github.com/miketheman/nginx/issues/419>
+1. <https://github.com/miketheman/nginx/issues/419>
 
 use [chef_nginx](https://github.com/chef-cookbooks/chef_nginx) cookbook instead.
 
@@ -354,3 +354,103 @@ fatal: could not read Username for 'https://github.com': Device not configured
 **solution**
 
 specified repo (`leaprail/redisio`) no longer exists.
+
+Could not satisfy version constraints for: ruby_rbenv
+-----------------------------------------------------
+
+```
+$ knife zero converge 'name:sith'
+...
+resolving cookbooks for run list: ["app_sith"]
+
+================================================================================
+Error Resolving Cookbooks for Run List:
+================================================================================
+
+Missing Cookbooks:
+------------------
+Could not satisfy version constraints for: ruby_rbenv
+```
+
+still I cannot find any version constraints for specified cookbook.
+
+**solution**
+
+try to remove `Berksfile.lock` and run `berks` or `berks vendor` again.
+if that doesn't help, remove vendored cookbook from _berks-cookbooks/_
+(see [Chef - Tips]({% post_url 2018-01-16-chef-tips %}) on how to update
+cookbook).
+
+git-core is a virtual package provided by multiple packages, you must explicitly select one
+-------------------------------------------------------------------------------------------
+
+```
+$ knife zero converge 'name:sith'
+...
+Recipe: ruby_rbenv::user_install
+  * apt_package[git-core] action install
+
+    ================================================================================
+    Error executing action `install` on resource 'apt_package[git-core]'
+    ================================================================================
+
+    Chef::Exceptions::Package
+    -------------------------
+    git-core is a virtual package provided by multiple packages, you must explicitly select one
+
+    Resource Declaration:
+    ---------------------
+    # In /var/chef/cache/cookbooks/ruby_rbenv/libraries/chef_rbenv_recipe_helpers.rb
+
+     34:         node['rbenv']['install_pkgs'].each { |pkg| package pkg }
+     35:       end
+```
+
+**solution**
+
+server OS: Ubuntu 18.04 LTS.
+
+_berks-cookbooks/ruby_rbenv/attributes/default.rb_:
+
+```ruby
+case node['platform_family']
+# ...
+when 'debian', 'suse'
+  default['rbenv']['install_pkgs'] = %w(git-core grep)
+  default['rbenv']['user_home_root'] = '/home'
+```
+
+solution is to use `git` package instead of `git-core`. it's possible to
+override this attribute in application cookbook until it's fixed in repo:
+
+```ruby
+override['rbenv']['install_pkgs'] = %w[git-core grep]
+```
+
+No candidate version available for libgdbm3
+-------------------------------------------
+
+server OS: Ubuntu 18.04 LTS.
+
+```
+$ knife zero converge 'name:sith'
+...
+Recipe: ruby_rbenv::user
+  ...
+  * apt_package[libgdbm3] action install
+    * No candidate version available for libgdbm3
+    ================================================================================
+    Error executing action `install` on resource 'apt_package[libgdbm3]'
+    ================================================================================
+
+    Chef::Exceptions::Package
+    -------------------------
+    No candidate version available for libgdbm3
+```
+
+**solution**
+
+`ruby-rbenv` tries to install outdated package - `libgdbm4` package
+should be installed instead of `libgdbm3` one.
+
+solution is to update `ruby-rbenv` cookbook that has correct dependencies.

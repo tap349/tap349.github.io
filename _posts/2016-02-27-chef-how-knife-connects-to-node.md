@@ -137,5 +137,5 @@ Exception: NoMethodError: undefined method `each' for "ipaddress":String
 ```
 
 it's all really confusing :) the point might be that knife-zero is a
-3rd-party gem not officially supported by chef and
-it hasn't been tested with all available knife options.
+3rd-party gem not officially supported by chef and it hasn't been tested
+with all available knife options.

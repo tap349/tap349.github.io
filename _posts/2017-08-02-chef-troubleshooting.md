@@ -319,6 +319,32 @@ gem 'chef', '13.5.3'
 gem 'knife-zero', '1.19'
 ```
 
+***UPDATE***
+
+this problem is caused by new version of `knife` which doesn't understand
+`knife[:attribute]` setting in _.chef/knife.rb_ any more.
+
+<https://docs.chef.io/config_rb_knife.html>:
+
+> knife[:ssh_attribute]
+>   The attribute used when opening an SSH connection.
+
+so either specify `-a` option on command line:
+
+```sh
+$ knife zero converge 'name:billing' -a ipaddress
+```
+
+or use new `ssh_attribute` setting in _.chef/knife.rb_:
+
+```diff
+- knife[:attribute] = 'ipaddress'
++ knife[:ssh_attribute] = 'ipaddress'
+```
+
+see also discussion on `ipaddress` vs. `['ipaddress']` in
+[Chef - How knife connects to node]({% post_url 2016-02-27-chef-how-knife-connects-to-node %}).
+
 fatal: could not read Username for 'https://github.com': Device not configured
 ------------------------------------------------------------------------------
 

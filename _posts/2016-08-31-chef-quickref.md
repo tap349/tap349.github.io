@@ -106,8 +106,10 @@ bootstrap remote node
 
 ```sh
 (ws)$ knife zero bootstrap billing --node-name billing
-/ enter devops password for sudo command twice
+/ enter devops password twice (for login and sudo command)
 ```
+
+for login and running `sudo` command.
 
 here first `billing` is a host name from SSH config.
 
@@ -167,7 +169,7 @@ converge remote node
 (ws)$ knife node environment_set billing prod
 (ws)$ berks vendor
 (ws)$ knife zero converge 'name:billing'
-/ enter devops password for sudo command twice (on first converge only)
+/ enter devops password twice (on first converge only)
 ```
 
 `berks` vendors cookbooks to _berks-cookbooks/_ by default (both community

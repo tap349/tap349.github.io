@@ -420,14 +420,15 @@ when 'debian', 'suse'
   default['rbenv']['user_home_root'] = '/home'
 ```
 
-solution is to use `git` package instead of `git-core`. it's possible to
-override this attribute in application cookbook until it's fixed in repo:
+solution is to use `git` package instead of `git-core`: override the
+following attribute in application or wrapper cookbook (this is still
+not fixed in master branch of `ruby_rbenv` cookbook):
 
 ```ruby
-override['rbenv']['install_pkgs'] = %w[git-core grep]
+override['rbenv']['install_pkgs'] = %w[git grep]
 ```
 
-***UPDATE***
+***NOTE***
 
 since version 2.0.0 `ruby-rbenv` cookbook uses resources instead of
 attributes and recipes - so you cannot override installed packages
@@ -457,7 +458,29 @@ Recipe: ruby_rbenv::user
 
 **solution**
 
-`ruby-rbenv` tries to install outdated package - `libgdbm4` package
-should be installed instead of `libgdbm3` one.
+`ruby_build` cookbook (`ruby_rbenv`'s dependency) tries to install outdated
+package - `libgdbm3` (current package version is `libgdbm5`).
 
-solution is to update `ruby-rbenv` cookbook that has correct dependencies.
+override this attribute in application or wrapper cookbook:
+
+```ruby
+override['ruby_build']['install_pkgs_cruby'] = %w[
+  autoconf
+  bison
+  build-essential
+  libssl-dev
+  libyaml-dev
+  libreadline6-dev
+  zlib1g-dev
+  libsqlite3-dev
+  libxml2-dev
+  libxslt1-dev
+  libc6-dev
+  libffi-dev
+  libgdbm5
+  libgdbm-dev
+]
+```
+
+this is fixed in 2.x.x branch of `ruby_rbenv` cookbook itself but I'm not
+going to use that branch (see comments above) so this is the only solution.

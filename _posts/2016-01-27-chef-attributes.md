@@ -27,8 +27,8 @@ guidelines for attributes
 - store environment-specific attributes in environment files
 
 - don't store attributes in recipes - keep them in attribute files:
-  to initialize attributes in environment cookbooks or
-  override attributes in wrapper cookbooks
+  to initialize attributes in environment cookbooks or override
+  attributes in wrapper cookbooks
 
   1. <http://deadunicornz.org/blog/2014/06/11/chef-attribute-overrides-in-recipes-is-a-bad-idea>
   2. <http://agiletesting.blogspot.ru/2010/11/working-with-chef-attributes.html>

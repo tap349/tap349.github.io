@@ -306,20 +306,13 @@ Try setting another attribute to open the connection using --attribute.
 
 **solution**
 
-the error must be caused by compatibility issues: Chef version
-(13.8.5) doesn't match `knife` version or vice versa.
-
-probably these issues are solved inside ChefDK but in my case
-`chef` and `knife-zero` are installed separately with Bundler.
-
-working combination of gem versions in _Gemfile_:
+_Gemfile_:
 
 ```ruby
-gem 'chef', '13.5.3'
-gem 'knife-zero', '1.19'
+gem 'berkshelf', '7.0.2'
+gem 'chef', '14.1.1'
+gem 'knife-zero', '1.19.3'
 ```
-
-***UPDATE***
 
 this problem is caused by new version of `knife` which doesn't understand
 `knife[:attribute]` setting in _.chef/knife.rb_ any more.

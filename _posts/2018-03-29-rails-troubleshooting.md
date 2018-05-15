@@ -95,3 +95,17 @@ request is nil in ActionController::ParamsWrapper
 error was caused by having `request` action in controller which returned
 nil (this action must have overriden corresponding Rails method) => don't
 use `request` name for any methods inside controllers.
+
+`rails credentials:edit` opens empty file every time
+----------------------------------------------------
+
+whatever I type in this file is not saved to _config/credentials.yml.enc_.
+
+**solution**
+
+use terminal-based editor instead of my default editor MacVim:
+
+```sh
+$ EDITOR=vim rails credentials:edit
+$ rails credentials:show
+```

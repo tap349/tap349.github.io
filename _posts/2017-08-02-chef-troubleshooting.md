@@ -427,6 +427,13 @@ override this attribute in application cookbook until it's fixed in repo:
 override['rbenv']['install_pkgs'] = %w[git-core grep]
 ```
 
+***UPDATE***
+
+since version 2.0.0 `ruby-rbenv` cookbook uses resources instead of
+attributes and recipes - so you cannot override installed packages
+any longer. if you still don't want to refuse from attributes-based
+configuration stick to the latest 1.x.x version - 1.2.1.
+
 No candidate version available for libgdbm3
 -------------------------------------------
 

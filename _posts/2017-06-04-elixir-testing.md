@@ -87,7 +87,7 @@ style guide
 
 ### (how to) name tests
 
-- `test doing smth` => `do smth`
+- `test doing smth` → `do smth`
 
   it's like you continue the phrase starting with `test` and
   replace gerund with plain infinitive in the end.
@@ -98,7 +98,7 @@ style guide
   end
   ```
 
-- `test that smb/smth is/does` => `smb/smth is/does`
+- `test that smb/smth is/does` → `smb/smth is/does`
 
   ```elixir
   # test that user is admin now =>
@@ -110,7 +110,7 @@ style guide
   end
   ```
 
-- `it does smth` => `does smth`
+- `it does smth` → `does smth`
 
   this naming convention is adopted in RSpec since tests are starting
   with `it` there.

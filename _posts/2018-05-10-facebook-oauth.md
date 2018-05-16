@@ -242,6 +242,7 @@ permissions - this doesn't happen when dealing with basic permissions.
 
 - Phoenix
 
+  {% raw %}
   ```
   14:24:26.995 [info] GET /auth/facebook/callback
   14:24:26.996 [debug] Processing with SithexWeb.AuthController.callback/2
@@ -275,6 +276,7 @@ permissions - this doesn't happen when dealing with basic permissions.
           (ueberauth_facebook) lib/ueberauth/strategy/facebook.ex:48: Ueberauth.Strategy.Facebook.handle_callback!/1
           ...
   ```
+  {% endraw %}
 
   in Phoenix app this results into `This authorization code has been used.`
   because the same code is used twice to get new access token.

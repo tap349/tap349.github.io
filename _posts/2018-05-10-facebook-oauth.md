@@ -339,3 +339,13 @@ when access token obtained from another user is used:
 
 error occurs in Chrome browser only (I guess because of numerous blocker
 browser extensions installed) - try to use another browser (say, Safari).
+
+### You are not logged in
+
+Facebook response when making request to request URL:
+
+> You are not logged in: You are not logged in. Please log in and try again.
+
+**solution**
+
+this means that passed redirect URI is not whitelisted (see above).

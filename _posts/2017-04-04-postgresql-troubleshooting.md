@@ -239,3 +239,36 @@ Type "help" for help.
 
 postgres=#
 ```
+
+Error: Invalid data directory for cluster 10 main
+-------------------------------------------------
+
+```sh
+$ psql sith_production -d sith_production
+Error: Invalid data directory for cluster 10 main
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/26183931/3632318>
+
+```sh
+$ psql sith_production -d sith_production -h localhost
+/ enter password for database user sith_production
+```
+
+for this to be possible it's necessary to have this line in
+_/etc/postgresql/10/main/pg_hba.conf_:
+
+```conf
+local   sith_production sith_production                         md5
+```
+
+restart `postgresql` service for changes to take effect.
+
+<https://stackoverflow.com/a/26735105/3632318>:
+
+> Authentication methods details:
+> trust - anyone who can connect to the server is authorized to access the database
+> peer - use client's operating system user name as database user name to access it.
+> md5 - password-base authentication

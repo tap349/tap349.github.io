@@ -222,6 +222,9 @@ troubleshooting
 callback is called twice after user either grants or declines extended
 permissions - this doesn't happen when dealing with basic permissions.
 
+this error doesn't occur if user has already granted permissions before
+and Facebook just returns a new access token with the same scopes.
+
 - Rails
 
   ```
@@ -286,10 +289,10 @@ permissions - this doesn't happen when dealing with basic permissions.
 TODO: not resolved yet.
 
 maybe this is caused by request to fetch access token - OAuth library
-adds `redirect_uri` query param to this request. so Facebook can make
-request to the same callback URL twice. but in theory OAuth library
-should differentiate between these requests and shouldn't try to fetch
-access token again using the same authorization code.
+adds `redirect_uri` query param to this request as well. so Facebook
+can make request to the same callback URL twice. but in theory OAuth
+library should differentiate between these requests and shouldn't try
+to fetch access token again using the same authorization code.
 
 ### The parameter app_id is required
 

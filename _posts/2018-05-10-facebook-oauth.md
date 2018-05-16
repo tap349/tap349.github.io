@@ -317,3 +317,25 @@ as a result `client_id` query param had no value:
 ```
 ...?client_id&redirect_uri=...
 ```
+
+### unknown error in Graph API Explorer
+
+response to sample request (`me?fields=id,name`) in Graph API Explorer
+when access token obtained from another user is used:
+
+```json
+{
+  "error": {
+    "code": 1,
+    "error_subcode": 1357045,
+    "message": "unknown error (empty response)",
+    "type": "http",
+    "status": 0
+  }
+}
+```
+
+**solution**
+
+error occurs in Chrome browser only (I guess because of numerous blocker
+browser extensions installed) - try to use another browser (say, Safari).

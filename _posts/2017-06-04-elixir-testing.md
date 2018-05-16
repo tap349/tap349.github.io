@@ -85,6 +85,42 @@ style guide
 > same way you are not going to test how users with different attributes are
 > rendered. That's in the view test.
 
+### (how to) name tests
+
+- `test doing smth` => `do smth`
+
+  it's like you continue the phrase starting with `test` and
+  replace gerund with plain infinitive in the end.
+
+  ```elixir
+  # test getting user by email =>
+  test "get user by email" do
+  end
+  ```
+
+- `test that smb/smth is/does` => `smb/smth is/does`
+
+  ```elixir
+  # test that user is admin now =>
+  test "user is admin now" do
+  end
+
+  # test that user has become admin =>
+  test "user has become admin" do
+  end
+  ```
+
+- `it does smth` => `does smth`
+
+  this naming convention is adopted in RSpec since tests are starting
+  with `it` there.
+
+  ```elixir
+  # it converts string to integer
+  test "converts string to integer" do
+  end
+  ```
+
 tips
 ----
 

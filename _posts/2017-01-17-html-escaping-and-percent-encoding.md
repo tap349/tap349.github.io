@@ -63,14 +63,20 @@ used to escape `&`, `<`, `>` and `"` in HTML document.
 
 #### escape
 
-```elixir
-~s(hello "world")
-|> Phoenix.HTML.html_escape()
-|> Phoenix.HTML.safe_to_string()
-# => "hello &quot;world&quot;"
-```
+- `Phoenix.HTML.html_escape/1`
+
+  ```elixir
+  ~s(hello "world")
+  |> Phoenix.HTML.html_escape()
+  |> Phoenix.HTML.safe_to_string()
+  # => "hello &quot;world&quot;"
+  ```
+
+- `HtmlEntities.encode/1`
 
 #### unescape
+
+- `HtmlEntities.decode/1`
 
 TODO
 

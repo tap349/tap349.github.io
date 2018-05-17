@@ -123,7 +123,7 @@ reserved characters are always encoded).
 
 test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
-### encode (escape, percent-encode, percent-escape)
+### encode (percent-encode, escape, percent-escape)
 
 #### Rails
 
@@ -207,7 +207,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   # => "redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
-### decode (unescape, percent-decode, percent-unscape)
+### decode (percent-decode, unescape, percent-unscape)
 
 #### Rails
 

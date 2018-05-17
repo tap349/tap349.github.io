@@ -106,7 +106,7 @@ reserved characters are always encoded).
   ```
 
   they are percent-encoded only when they have no special meaning
-  (that is they are always percent-encoded in query param value).
+  (that is they are always percent-encoded in query param values).
 
 - unreserved characters
 

@@ -120,7 +120,7 @@ reserved characters are always encoded).
 
   they are always percent-encoded.
 
-test URL: 'http://test.com?q1=foo,bar&q2=http://foo.com'.
+test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 ### encode (percent-escape, percent-encode)
 

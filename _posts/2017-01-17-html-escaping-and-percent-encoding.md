@@ -18,9 +18,9 @@ HTML escaping
 
 used to escape `&`, `<`, `>` and `"` in HTML document.
 
-### Rails
+### encode (escape, html-escape)
 
-#### escape
+#### Rails
 
 - `CGI.escapeHTML`
 
@@ -48,20 +48,9 @@ used to escape `&`, `<`, `>` and `"` in HTML document.
 
   NOTE: it doesn't unescape all HTML entities! (e.g., `&lt;`/`&gt;`).
 
-#### unescape
-
-- `CGI.unescapeHTML`
-
-  ```ruby
-  CGI.unescapeHTML 'hello &quot;world&quot;!'
-  # => "hello \"world\"!"
-  ```
-
-### Phoenix
+#### Phoenix
 
 1. <https://github.com/martinsvalin/html_entities>
-
-#### escape
 
 - `Phoenix.HTML.html_escape/1`
 
@@ -74,14 +63,35 @@ used to escape `&`, `<`, `>` and `"` in HTML document.
 
 - `HtmlEntities.encode/1`
 
-#### unescape
+  ```elixir
+  ~s(hello "world")
+  |> HtmlEntities.encode()
+  # => "hello &quot;world&quot;"
+  ```
+
+### decode (unescape)
+
+#### Rails
+
+- `CGI.unescapeHTML`
+
+  ```ruby
+  CGI.unescapeHTML 'hello &quot;world&quot;!'
+  # => "hello \"world\"!"
+  ```
+
+#### Phoenix
 
 - `HtmlEntities.decode/1`
 
-TODO
+  ```elixir
+  "hello &quot;world&quot;"
+  |> HtmlEntities.decode()
+  # => "hello \"world\""
+  ```
 
-percent-encoding (aka percent-escaping, aka URL encoding)
----------------------------------------------------------
+percent-encoding (percent-escaping, URL encoding)
+-------------------------------------------------
 
 1. <https://en.wikipedia.org/wiki/Percent-encoding>
 
@@ -112,9 +122,9 @@ reserved characters are always encoded).
 
 test URL: 'http://test.com?q1=foo,bar&q2=http://foo.com'.
 
-### Rails
+### encode (percent-escape, percent-encode)
 
-#### encode
+#### Rails
 
 - `CGI.escape`
 
@@ -154,42 +164,7 @@ test URL: 'http://test.com?q1=foo,bar&q2=http://foo.com'.
   # => "redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
-#### decode
-
-- `CGI.unescape`
-
-  ```ruby
-  CGI.unescape('http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
-  # => "http://test.com?q1=foo,bar&q2=http://foo.com"
-  ```
-
-- `URI.decode_www_form`
-
-  ```ruby
-  URI.decode_www_form('redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
-  # => [
-  #     [0] [
-  #         [0] "redirect_uri",
-  #         [1] "http://test.com?q1=foo,bar&q2=http://foo.com"
-  #     ]
-  # ]
-  ```
-
-- `Addressable::URI.form_unencode`
-
-  ```ruby
-  Addressable::URI.form_unencode('redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
-  # => [
-  #     [0] [
-  #         [0] "redirect_uri",
-  #         [1] "http://test.com?q1=foo,bar&q2=http://foo.com"
-  #     ]
-  # ]
-  ```
-
-### Phoenix
-
-#### encode (percent-escape, percent-encode)
+#### Phoenix
 
 - `URI.encode/2` (any string)
 
@@ -231,7 +206,42 @@ test URL: 'http://test.com?q1=foo,bar&q2=http://foo.com'.
   # => "redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
-#### decode (percent-unscape)
+### decode (percent-unscape)
+
+#### Rails
+
+- `CGI.unescape`
+
+  ```ruby
+  CGI.unescape('http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
+  # => "http://test.com?q1=foo,bar&q2=http://foo.com"
+  ```
+
+- `URI.decode_www_form`
+
+  ```ruby
+  URI.decode_www_form('redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
+  # => [
+  #     [0] [
+  #         [0] "redirect_uri",
+  #         [1] "http://test.com?q1=foo,bar&q2=http://foo.com"
+  #     ]
+  # ]
+  ```
+
+- `Addressable::URI.form_unencode`
+
+  ```ruby
+  Addressable::URI.form_unencode('redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
+  # => [
+  #     [0] [
+  #         [0] "redirect_uri",
+  #         [1] "http://test.com?q1=foo,bar&q2=http://foo.com"
+  #     ]
+  # ]
+  ```
+
+#### Phoenix
 
 - `URI.decode/1` (any string)
 

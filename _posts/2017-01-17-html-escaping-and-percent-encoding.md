@@ -105,7 +105,8 @@ reserved characters are always encoded).
   [!*'();:@&=+$,/?#[\]]
   ```
 
-  they are percent-encoded only when they have no special meaning.
+  they are percent-encoded only when they have no special meaning
+  (that is they are always percent-encoded in query param value).
 
 - unreserved characters
 
@@ -122,7 +123,7 @@ reserved characters are always encoded).
 
 test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
-### encode (percent-escape, percent-encode)
+### encode (percent-encode, percent-escape)
 
 #### Rails
 
@@ -206,7 +207,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   # => "redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
-### decode (percent-unscape)
+### decode (percent-decode, percent-unscape)
 
 #### Rails
 

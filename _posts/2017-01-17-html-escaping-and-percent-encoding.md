@@ -46,7 +46,7 @@ used to escape `&`, `<`, `>` and `"` in HTML document.
   # => "hello &gt; \"world\""
   ```
 
-  NOTE: it doesn't unescape all HTML entities! (e.g., `&lt;`/`&gt;`).
+  NOTE: it doesn't unescape all HTML entities (say, `&lt;`/`&gt;`)!
 
 #### Phoenix
 

@@ -166,7 +166,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 #### Phoenix
 
-- `URI.encode/2` (any string)
+- `URI.encode/2`
 
   ```elixir
   "http://test.com?q1=foo,bar&q2=http://foo.com"
@@ -190,7 +190,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   > characters, which have the same meaning both escaped and unescaped,
   > won’t be escaped by default
 
-- `URI.encode_www_form/1` (any string)
+- `URI.encode_www_form/1`
 
   ```elixir
   "http://test.com?q1=foo,bar&q2=http://foo.com"
@@ -198,7 +198,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   # => "http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
-- `URI.encode_query/1` (query map)
+- `URI.encode_query/1`
 
   ```elixir
   %{"redirect_uri" => "http://test.com?q1=foo,bar&q2=http://foo.com"}
@@ -243,7 +243,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 #### Phoenix
 
-- `URI.decode/1` (any string)
+- `URI.decode/1`
 
   ```elixir
   "http://test.com?q1=foo,bar&q2=http://foo.com"
@@ -255,7 +255,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   # => "http://test.com?q1=foo,bar&q2=http://foo.com"
   ```
 
-- `URI.decode_www_form/1` (any string)
+- `URI.decode_www_form/1`
 
   ```elixir
   "http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
@@ -263,7 +263,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   # => "http://test.com?q1=foo,bar&q2=http://foo.com"
   ```
 
-- `URI.decode_query/2` (query string)
+- `URI.decode_query/2`
 
   ```elixir
   "redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"

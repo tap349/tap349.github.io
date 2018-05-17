@@ -76,7 +76,7 @@ used to escape `&`, `<`, `>` and `"` in HTML document.
 - `CGI.unescapeHTML`
 
   ```ruby
-  CGI.unescapeHTML 'hello &quot;world&quot;!'
+  CGI.unescapeHTML('hello &quot;world&quot;!')
   # => "hello \"world\"!"
   ```
 

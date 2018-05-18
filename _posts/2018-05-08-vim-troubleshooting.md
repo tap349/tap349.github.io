@@ -24,7 +24,6 @@ in that case just follow on-screen instructions and fix _.rubocop.yml_.
 to debug inside Vim turn on syntastic debugging messages in command-line mode:
 
 ```vim
-:::foo
 :let g:syntastic_debug = 1 " or 3 or 33
 ```
 

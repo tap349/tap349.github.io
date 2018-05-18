@@ -24,8 +24,7 @@ author:
 #==============================================================================
 
 markdown:             kramdown
-#highlighter:          rouge
-highlighter:          pygments
+highlighter:          rouge
 
 # http://kramdown.gettalong.org/options.html
 kramdown:

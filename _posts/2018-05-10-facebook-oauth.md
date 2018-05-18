@@ -286,13 +286,85 @@ and Facebook just returns a new access token with the same scopes.
 
 **solution**
 
-TODO: not resolved yet.
+most likely errors in Rails and Phoenix are caused by Facebook calling
+callback URL twice but are still different.
 
-maybe this is caused by request to fetch access token - OAuth library
-adds `redirect_uri` query param to this request as well. so Facebook
-can make request to the same callback URL twice. but in theory OAuth
-library should differentiate between these requests and shouldn't try
-to fetch access token again using the same authorization code.
+- OmniAuth (Rails)
+
+  1. <https://github.com/ShippingEasy/omniauth-ecwid/issues/2>
+  2. <https://github.com/omniauth/omniauth-oauth2/issues/32>
+
+  before making request to authorize URL OmniAuth creates `omniauth.state`
+  session variable whose value is a randomnly generated string.
+
+  OmniAuth adds `state` query param with this value to authorize URL,
+  this param is then returned by Facebook in his request to callback URL:
+
+  ```
+  Started GET "/auth/facebook/callback?code=<code>&state=f8bf618347523613f0240f76e38c4a7fd3c9348472de343a"
+  ```
+
+  in callback phase OmniAuth tries to verify the value of `state` query param
+  against the value stored in session - if they match, OmniAuth makes a request
+  to obtain new access token. when comparing `state` values, OmniAuth removes
+  `omniauth.state` session variable from session storage so that another request
+  to callback URL with the same `state` cannot be made.
+
+  CSRF attack will be detected if `state` values don't match - this is what
+  happens when duplicate request from Facebook is received: `omniauth.auth`
+  session variable has been already removed from session storage by the 1st
+  request => `state` query param value doesn't match `nil`.
+
+  <https://github.com/omniauth/omniauth-oauth2/blob/ee63077b1c3f677f0042010e393e9fd0bf1d69d2/lib/omniauth/strategies/oauth2.rb#L66>:
+
+  ```ruby
+  def callback_phase
+    error = request.params["error_reason"] || request.params["error"]
+    if error
+      # ...
+    elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
+      fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
+    else
+      self.access_token = build_access_token
+      self.access_token = access_token.refresh! if access_token.expired?
+      super
+    end
+    # ...
+  end
+  ```
+
+  workaround (as seen from the code) is to disable checking `state` at all
+  with `provider_ignores_state` option in _config/initializers/omniauth.rb_:
+
+  ```ruby
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :facebook, app_id, app_secret,
+      # ...
+      provider_ignores_state: true
+  end
+  ```
+
+  even though it's not recommended since it makes your application susceptible
+  to CSRF attacks but I haven't found better solution so far.
+
+  in previous versions of OmniAuth library (prior to 4.0.0, current version
+  is 5.0.0) this problem had different origin so solutions proposed in these
+  issues no longer work:
+
+  - <https://github.com/mkdynamic/omniauth-facebook/issues/276>
+  - <https://github.com/mkdynamic/omniauth-facebook/issues/278>
+  - <https://github.com/mkdynamic/omniauth-facebook/issues/284>
+
+- Ueberauth library (Phoenix)
+
+  Ueberauth doesn't use `state` to prevent CSRF attacks like Omniauth does
+  (that is Ueberauth doesn't add `state` query param to authorize URL) but
+  when Ueberauth makes the 2nd request to get access token using the same
+  code, Facebook returns `This authorization code has been used` error as
+  might be expected.
+
+eventually the problem must be with Facebook Graph API making double request
+to callback URL - not with OAuth library (OmniAuth or Ueberauth).
 
 ### The parameter app_id is required
 

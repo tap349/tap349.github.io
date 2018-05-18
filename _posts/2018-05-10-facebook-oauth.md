@@ -364,7 +364,7 @@ callback URL twice but are still different.
   might be expected.
 
 eventually the problem must be with Facebook Graph API making double request
-to callback URL - not with OAuth library (OmniAuth or Ueberauth).
+to callback URL - not with any OAuth library (OmniAuth or Ueberauth).
 
 ### The parameter app_id is required
 

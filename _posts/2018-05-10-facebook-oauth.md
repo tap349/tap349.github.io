@@ -294,6 +294,9 @@ callback URL twice but are still different.
   1. <https://github.com/ShippingEasy/omniauth-ecwid/issues/2>
   2. <https://github.com/omniauth/omniauth-oauth2/issues/32>
 
+  OmniAuth uses `state` authentication parameter to help mitigate CSRF attacks
+  (see [The State Parameter](https://auth0.com/docs/protocols/oauth2/oauth-state)).
+
   before making request to authorize URL OmniAuth creates `omniauth.state`
   session variable whose value is a randomnly generated string.
 
@@ -357,11 +360,11 @@ callback URL twice but are still different.
 
 - Ueberauth library (Phoenix)
 
-  Ueberauth doesn't use `state` to prevent CSRF attacks like Omniauth does
-  (that is Ueberauth doesn't add `state` query param to authorize URL) but
-  when Ueberauth makes the 2nd request to get access token using the same
-  code, Facebook returns `This authorization code has been used` error as
-  might be expected.
+  Ueberauth doesn't use `state` authentication parameter to prevent CSRF
+  attacks like Omniauth does (that is Ueberauth doesn't add `state` query
+  param to authorize URL) but when Ueberauth makes the 2nd request to get
+  access token using the same code, Facebook returns `This authorization
+  code has been used` error as might be expected.
 
 eventually the problem must be with Facebook Graph API making double request
 to callback URL - not with any OAuth library (OmniAuth or Ueberauth).

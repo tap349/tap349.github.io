@@ -78,7 +78,7 @@ $ yarn add <package> --dev
 installing package as dependency saves it in `"dependencies"` section
 of _package.json_ (application cannot run without it) while installing
 package as development dependency saves it in `"devDependencies"` section
-(packages is used in development environment only - say, in test suites
+(packages are used in development environment only - say, in test suites
 or by transpilers).
 
 (how to) run script or locally installed executable

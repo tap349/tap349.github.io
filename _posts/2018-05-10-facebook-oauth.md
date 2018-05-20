@@ -32,9 +32,9 @@ blocked by Facebook:
 
 ### add local domain to /etc/hosts
 
-_/etc/hosts_:
-
 ```diff
+  # /etc/hosts
+
 + 127.0.0.1 sith.local
 ```
 

@@ -53,6 +53,9 @@ categories: [markdown]
 
 - use comment line followed by blank line to specify file path
 
+  1. <https://sass-lang.com/guide>
+  2. <https://rossta.net/blog/from-sprockets-to-webpack.html>
+
   ```javascript
   // yarn.lock
 

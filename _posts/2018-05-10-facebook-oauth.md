@@ -379,10 +379,11 @@ Facebook response when making request to request URL:
 
 this means `client_id` query param has no value or missing.
 
-in my case I misspelled environment variable name in OmniAuth initializer
-(_config/initializers/omniauth.rb_):
+in my case I misspelled environment variable name in OmniAuth initializer:
 
 ```diff
+  # config/initializers/omniauth.rb
+
   Rails.application.config.middleware.use OmniAuth::Builder do
 -   provider :facebook, ENV['FACEBOOK_APP_KEY'], ENV['FACEBOOK_APP_SECRET'],
 +   provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'],

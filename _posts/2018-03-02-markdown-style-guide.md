@@ -40,3 +40,22 @@ categories: [markdown]
   separate screen (window or page). or else it's multiple table rows can
   be used to split path into 2 parts - high-level part and the one that
   specifies exact location of UI element).
+
+- use comment with arrow to specify return value
+
+  ```elixir
+  ~N[2019-09-01 03:00:00]
+  |> Timex.shift(months: 1)
+  # => ~N[2019-10-01 03:00:00]
+  ```
+
+  use this format instead of `pry>` or `iex>` prompts where possible.
+
+- use comment line followed by blank line to specify file path
+
+  ```javascript
+  // yarn.lock
+
+  "@rails/webpacker@3.5":
+    version "3.5.3"
+  ```

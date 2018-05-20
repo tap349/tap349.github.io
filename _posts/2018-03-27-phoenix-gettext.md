@@ -20,10 +20,9 @@ configuration
 
 1. <https://hexdocs.pm/gettext/Gettext.html#module-default-locale>
 
-_config/config.exs_:
-
 ```elixir
-# gettext
+# config/config.exs
+
 config :billing, BillingWeb.Gettext,
   default_locale: "ru"
 ```
@@ -33,9 +32,9 @@ dynamic translations
 
 ### create default POT file
 
-create _priv/gettext/default.pot_ if it's missing:
-
 ```po
+## priv/gettext/default.pot (create if missing)
+
 msgid "system_error"
 msgstr ""
 ```
@@ -60,9 +59,9 @@ $ mix gettext.merge priv/gettext
 
 ### add translations for all present locales
 
-_priv/gettext/en/LC_MESSAGES/default.po_:
-
 ```diff
+  ## priv/gettext/en/LC_MESSAGES/default.po
+
   msgid ""
   msgstr ""
   "Language: en\n"
@@ -80,9 +79,9 @@ $ mix gettext.merge priv/gettext --locale ru
 
 ### add translation for new locale
 
-_priv/gettext/ru/LC_MESSAGES/default.po_:
-
 ```diff
+  ## priv/gettext/ru/LC_MESSAGES/default.po
+
   msgid ""
   msgstr ""
   "Language: ru\n"

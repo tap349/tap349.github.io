@@ -102,8 +102,6 @@ end
 schema:
 
 ```elixir
-# schema
-
 defmodule MyApp.User do
   use Ecto.Schema
   import Ecto.Changeset

@@ -59,3 +59,6 @@ categories: [markdown]
   "@rails/webpacker@3.5":
     version "3.5.3"
   ```
+
+  use this format instead of specifying file path in front of cobe block
+  in italics (_yarn.lock_) where possible.

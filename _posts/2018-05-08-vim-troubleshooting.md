@@ -62,9 +62,9 @@ the whole screen went blank when starting to move a cursor around.
 2. <https://github.com/macvim-dev/macvim/issues/557>
 3. <https://github.com/macvim-dev/macvim/commit/b115d75a66847c4a49770161b105a9a64685c043>
 
-_~/.zlogin_:
-
 ```zsh
+# ~/.zlogin
+
 defaults write org.vim.MacVim MMUseCGLayerAlways 1
 ```
 
@@ -108,16 +108,19 @@ to circumvent this problem it's possible:
 when using mouse, cursor is positioned with noticeable lag
 ----------------------------------------------------------
 
-this might be caused by source code tooltips (balloons) -
-disable them in _~/.vim/vimrc_:
+this might be caused by source code tooltips (balloons) - disable them:
 
 ```vim
+" ~/.vim/vimrc
+
 set noballooneval
 ```
 
-for Ruby it's also necessary to unset `balloonexpr` in _ftplugin/ruby.vim_:
+for Ruby it's also necessary to unset `balloonexpr` ftplugin file:
 
 ```vim
+" ftplugin/ruby.vim
+
 setlocal balloonexpr=
 ```
 
@@ -142,9 +145,9 @@ or create alternate file. so just rename directory to fix the issue.
 incorrect folding of lines with equal indent
 --------------------------------------------
 
-_~/.vim/vimrc_:
+```vim
+" ~/.vim/vimrc
 
-```
 set foldmethod=indent
 ```
 

@@ -79,5 +79,5 @@ no push token is associated with user device (just like on iOS emulator).
 
 install GApps (see `configuration` section).
 
-NOTE: it might be required to restart emulator and run application
-      again for pushes to work.
+NOTE: it might be required to restart emulator and run application again
+      for pushes to work.

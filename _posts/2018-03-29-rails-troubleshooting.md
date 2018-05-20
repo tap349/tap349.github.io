@@ -23,14 +23,16 @@ data is sent in JSON format via POST request.
 `null` array elements are present when reading request body directly:
 
 ```ruby
-# in controller
+# controller
+
 request.body.read
 ```
 
 but they are already removed in parsed params:
 
 ```ruby
-# in controller
+# controller
+
 params.to_unsafe_h
 ```
 

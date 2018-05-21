@@ -151,3 +151,14 @@ iex> :dbg.tracer()
 iex> :dbg.p(pid, [:call])
 iex> :dbg.tpl(:_, []); :timer.sleep(1000); :dbg.stop()
 ```
+
+debugging deployment
+--------------------
+
+1. <https://github.com/edeliver/edeliver#help>
+
+use `--debug` option to run in shell debug mode, say:
+
+``` sh
+$ mix edeliver start production --debug
+```

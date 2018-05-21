@@ -228,17 +228,17 @@ and Facebook just returns a new access token with the same scopes.
 - Rails
 
   ```
-  Started GET "/auth/facebook/callback?code=AQAkrZOPRkXJ..." for 127.0.0.1 at 2018-05-11 15:07:41 +0300
-  I, [2018-05-11T15:07:41.146820 #57974]  INFO -- omniauth: (facebook) Callback phase initiated.
+  Started GET "/auth/facebook/callback?code=<code>&state=<state>" for 127.0.0.1 at 2018-05-11 15:07:41 +0300
+  INFO -- omniauth: (facebook) Callback phase initiated.
   Processing by AuthController#callback as HTML
     Parameters: {"code"=>"AQAkrZOPRkXJ...", "state"=>"dfa379a6c9fad3b74429f5fbfaf17087ad808306d655d899", "provider"=>"facebook"}
   ...
   Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.0ms)
 
-  Started GET "/auth/facebook/callback?code=AQAkrZOPRkXJ..." for 127.0.0.1 at 2018-05-11 15:07:41 +0300
-  I, [2018-05-11T15:07:41.834104 #57974]  INFO -- omniauth: (facebook) Callback phase initiated.
-  E, [2018-05-11T15:07:41.834788 #57974] ERROR -- omniauth: (facebook) Authentication failure! csrf_detected: OmniAuth::Strategies::OAuth2::CallbackError, csrf_detected | CSRF detected
-  E, [2018-05-11T15:07:41.836356 #57974] ERROR -- omniauth: (facebook) Authentication failure! invalid_credentials: OmniAuth::Strategies::OAuth2::CallbackError, csrf_detected | CSRF detected
+  Started GET "/auth/facebook/callback?code=<code>" for 127.0.0.1 at 2018-05-11 15:07:41 +0300
+  INFO -- omniauth: (facebook) Callback phase initiated.
+  ERROR -- omniauth: (facebook) Authentication failure! csrf_detected: OmniAuth::Strategies::OAuth2::CallbackError, csrf_detected | CSRF detected
+  ERROR -- omniauth: (facebook) Authentication failure! invalid_credentials: OmniAuth::Strategies::OAuth2::CallbackError, csrf_detected | CSRF detected
   ```
 
   in Rails this results into CSRF error.
@@ -247,21 +247,21 @@ and Facebook just returns a new access token with the same scopes.
 
   {% raw %}
   ```
-  14:24:26.995 [info] GET /auth/facebook/callback
-  14:24:26.996 [debug] Processing with SithexWeb.AuthController.callback/2
+  [info] GET /auth/facebook/callback
+  [debug] Processing with SithexWeb.AuthController.callback/2
     Parameters: %{"code" => "AQCK2OKEvra6", "provider" => "facebook"}
     Pipelines: [:browser]
   ...
-  14:24:27.207 [info] Sent 200 in 211ms
+  [info] Sent 200 in 211ms
 
-  14:24:27.236 [info] GET /auth/facebook/callback
-  14:24:27.236 [debug] Processing with SithexWeb.AuthController.callback/2
+  [info] GET /auth/facebook/callback
+  [debug] Processing with SithexWeb.AuthController.callback/2
     Parameters: %{"code" => "AQCK2OKEvra6", "provider" => "facebook"}
     Pipelines: [:browser]
-  14:24:27.456 [info] Sent 500 in 220ms
-  14:24:27.459 [error] #PID<0.752.0> running SithexWeb.Endpoint terminated
+  [info] Sent 500 in 220ms
+  [error] #PID<0.752.0> running SithexWeb.Endpoint terminated
   Server: sith.local:4000 (http)
-  Request: GET /auth/facebook/callback?code=AQCK2OKEvra6
+  Request: GET /auth/facebook/callback?code=<code>
   ** (exit) an exception was raised:
       ** (OAuth2.Error) Server responded with status: 400
 
@@ -304,7 +304,7 @@ callback URL twice but are still different.
   this param is then returned by Facebook in his request to callback URL:
 
   ```
-  Started GET "/auth/facebook/callback?code=<code>&state=f8bf618347523613f0240f76e38c4a7fd3c9348472de343a"
+  Started GET "/auth/facebook/callback?code=<code>&state=<state>"
   ```
 
   in callback phase OmniAuth tries to verify the value of `state` query param
@@ -357,6 +357,21 @@ callback URL twice but are still different.
   - <https://github.com/mkdynamic/omniauth-facebook/issues/276>
   - <https://github.com/mkdynamic/omniauth-facebook/issues/278>
   - <https://github.com/mkdynamic/omniauth-facebook/issues/284>
+
+  ***UPDATE***
+
+  BTW after checking `state` is disabled, we get the same error as in Phoenix
+  app:
+
+  ```
+  Started GET "/auth/facebook/callback?code=<code>&state=<state>" for 127.0.0.1 at 2018-05-21 17:53:46 +0300
+  INFO -- omniauth: (facebook) Callback phase initiated.
+  ERROR -- omniauth: (facebook) Authentication failure! invalid_credentials: OAuth2::Error, {"message"=>"This authorization code has been used.", "type"=>"OAuthException", "code"=>100, "fbtrace_id"=>"AYGVd7HbMhI"}:
+  {"error":{"message":"This authorization code has been used.","type":"OAuthException","code":100,"fbtrace_id":"AYGVd7HbMhI"}}
+
+  OAuth2::Error - {"message"=>"This authorization code has been used.", "type"=>"OAuthException", "code"=>100, "fbtrace_id"=>"AYGVd7HbMhI"}:
+  {"error":{"message":"This authorization code has been used.","type":"OAuthException","code":100,"fbtrace_id":"AYGVd7HbMhI"}}:
+  ```
 
 - Ueberauth library (Phoenix)
 

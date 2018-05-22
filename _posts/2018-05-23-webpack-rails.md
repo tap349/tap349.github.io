@@ -17,8 +17,6 @@ categories: [webpack, rails]
 2. <https://github.com/rails/webpacker/tree/master/docs>
 3. <https://www.neontsunami.com/posts/replacing-rails-asset-pipeline-with-webpacker>
 
-pack (Webpacker term) == entry (Webpack term)
-
 notes
 -----
 
@@ -50,6 +48,8 @@ bundle exec rails webpacker:compile
 ### about packs
 
 1. <https://github.com/rails/webpacker/blob/master/docs/assets.md>
+
+pack (Webpacker term) == entry (Webpack term)
 
 > <https://github.com/rails/webpacker/issues/581#issuecomment-316937091>
 >

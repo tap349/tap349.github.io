@@ -441,7 +441,7 @@ browser extensions installed) - try to use another browser (say, Safari).
 ***UPDATE***
 
 error is caused by ad-blocking extensions - try to disable them and reload
-page. or else it's better to whitelist Graph API Explorer page.
+the page. or else it's better to whitelist Graph API Explorer page.
 
 ### You are not logged in
 

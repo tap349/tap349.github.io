@@ -43,6 +43,8 @@ require 'capistrano/rails/assets'
 _public/packs/_ - this is because Capistrano searches for manifest this way:
 
 ```ruby
+# https://github.com/capistrano/rails/blob/master/lib/capistrano/tasks/assets.rake#L104
+
 def detect_manifest_path
   %w(
     .sprockets-manifest*

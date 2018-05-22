@@ -51,7 +51,7 @@ categories: [markdown]
 
   use this format instead of `pry>` or `iex>` prompts where possible.
 
-- use comment line followed by blank line to specify file path
+- use comment line followed by blank line to specify file path inside code block
 
   1. <https://sass-lang.com/guide>
   2. <https://rossta.net/blog/from-sprockets-to-webpack.html>
@@ -65,3 +65,10 @@ categories: [markdown]
 
   use this format instead of specifying file path in front of cobe block
   in italics (_yarn.lock_) where possible.
+
+- insert link or path to the resource followed by blank line inside blockquotes
+
+  > <https://rossta.net/blog/from-sprockets-to-webpack.html#deploying-with-capistrano-and-nginx>
+  >
+  > set public/packs and node_modules as shared directories to ensure Webpack
+  > build output and NPM package installation via Yarn are shared across deploys

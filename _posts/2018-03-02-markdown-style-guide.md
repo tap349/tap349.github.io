@@ -63,8 +63,9 @@ categories: [markdown]
     version "3.5.3"
   ```
 
-  use this format instead of specifying file path in front of cobe block
-  in italics (_yarn.lock_) where possible.
+  use this format instead of specifying file path in front of cobe block in
+  italics (_yarn.lock_) where possible - probably except for logs (there are
+  no comments in logs).
 
 - insert link or path to the resource followed by blank line inside blockquotes
 

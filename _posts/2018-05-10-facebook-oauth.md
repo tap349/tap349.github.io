@@ -438,6 +438,11 @@ when access token obtained from another user is used:
 error occurs in Chrome browser only (I guess because of numerous blocker
 browser extensions installed) - try to use another browser (say, Safari).
 
+***UPDATE***
+
+error is caused by ad-blocking extensions - try to disable them and reload
+page. or else it's better to whitelist Graph API Explorer page.
+
 ### You are not logged in
 
 Facebook response when making request to request URL:

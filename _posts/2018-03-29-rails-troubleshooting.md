@@ -111,3 +111,29 @@ use terminal-based editor instead of my default editor MacVim:
 $ EDITOR=vim rails credentials:edit
 $ rails credentials:show
 ```
+
+basic authentication prompt is not shown
+----------------------------------------
+
+the page keeps loading but no prompt is shown:
+
+```
+# log/production.log
+
+Started GET "/admin/users" for 109.195.187.178 at 2018-05-22 11:06:29 +0000
+Processing by Admin::UsersController#index as HTML
+Filter chain halted as :basic_auth rendered or redirected
+Completed 401 Unauthorized in 0ms
+```
+
+**solution**
+
+I have another application with basic authentication on adjacent subdomain:
+maybe, saved credentials for another subdomain and are automatically applied
+for current subdomain.
+
+so first I tried to remove entry for another subdomain from `Keychain Access`
+application (macOS) but that didn't help.
+
+eventually it turned out the problem was caused by Dashlane Chrome extension -
+I managed to get basic authentication prompt once I disabled the latter.

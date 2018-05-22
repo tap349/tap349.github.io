@@ -2,7 +2,7 @@
 layout: post
 title: Facebook - Bot
 date: 2018-05-07 09:46:40 +0300
-access: private
+access: public
 comments: true
 categories: [facebook]
 ---

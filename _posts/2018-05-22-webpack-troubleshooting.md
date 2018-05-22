@@ -67,8 +67,8 @@ so there are 2 possible solutions to this problem:
 
 - disable `deploy:assets:backup_manifest` task altogether
 
-  1. https://stackoverflow.com/a/48627238
-  2. http://capistranorb.com/documentation/advanced-features/overriding-capistrano-tasks/
+  1. <https://stackoverflow.com/a/48627238>
+  2. <http://capistranorb.com/documentation/advanced-features/overriding-capistrano-tasks/>
 
   ```ruby
   # config/deploy.rb
@@ -78,7 +78,7 @@ so there are 2 possible solutions to this problem:
 
 - *[RECOMMENDED]* set correct assets prefix
 
-  1. https://github.com/capistrano/rails#usage
+  1. <https://github.com/capistrano/rails#usage>
 
   ```ruby
   # config/deploy.rb

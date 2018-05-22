@@ -68,14 +68,7 @@ categories: [markdown]
 
 - insert link or path to the resource followed by blank line inside blockquotes
 
-  > https://rossta.net/blog/from-sprockets-to-webpack.html#deploying-with-capistrano-and-nginx
+  > <https://rossta.net/blog/from-sprockets-to-webpack.html#deploying-with-capistrano-and-nginx>
   >
   > set public/packs and node_modules as shared directories to ensure Webpack
   > build output and NPM package installation via Yarn are shared across deploys
-
-- it's no longer necessary to wrap URLs in angle brackets so that they are clickable
-
-  ```diff
-  - <https://webpack.js.org/concepts/>
-  + https://webpack.js.org/concepts/
-  ```

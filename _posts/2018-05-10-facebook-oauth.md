@@ -13,15 +13,15 @@ categories: [facebook]
 {:toc}
 <hr>
 
-1. <https://paw.cloud/docs/examples/facebook-api>
+1. https://paw.cloud/docs/examples/facebook-api
 
 - FD - Facebook for Developers
 
 whitelist redirect URI
 ----------------------
 
-1. <https://help.sharetribe.com/managing-your-marketplace/social-media/how-to-solve-the-url-blocked-this-redirect-failed-because-facebook-login-error>
-2. <https://stackoverflow.com/questions/2459728/how-to-test-facebook-connect-locally>
+1. https://help.sharetribe.com/managing-your-marketplace/social-media/how-to-solve-the-url-blocked-this-redirect-failed-because-facebook-login-error
+2. https://stackoverflow.com/questions/2459728/how-to-test-facebook-connect-locally
 
 it's necessary to whitelist redirect URI - all other redirect URIs will be
 blocked by Facebook:
@@ -41,14 +41,14 @@ blocked by Facebook:
 or else it's possible to whitelist `localhost` as a valid redirect URI in FD
 without using any custom local domains.
 
-> <https://stackoverflow.com/a/5626979/3632318>
+> https://stackoverflow.com/a/5626979/3632318
 >
 > Facebook does not "connect" back to your server. Their JS does. And the JS
 > runs in the context of your browser. Which knows where "localhost" points to.
 
 ### whitelist local domain in FD
 
-> <https://wp-native-articles.com/blog/news/how-to-fix-facebook-apps-error-cant-load-url-domain-url-isnt-included-apps-domains/>
+> https://wp-native-articles.com/blog/news/how-to-fix-facebook-apps-error-cant-load-url-domain-url-isnt-included-apps-domains/
 >
 > Any new Facebook Login Apps create AFTER the beginning of March 2018 now
 > have Use Strict Mode for Redirect URIs and Enforce HTTPS enabled by default
@@ -73,7 +73,7 @@ valid redirect URI (say, `http://sith.local`) or else you'll get this error:
 request user for permissions
 ----------------------------
 
-1. <https://developers.facebook.com/docs/marketing-api/access#manually-getting-access-tokens>
+1. https://developers.facebook.com/docs/marketing-api/access#manually-getting-access-tokens
 
 NOTE: scopes = permissions.
 
@@ -144,7 +144,7 @@ both OmniAuth and Ueberauth work alike under the hood:
 
 ### server-side authentication flow in Facebook
 
-1. <https://developers.gigya.com/display/GD/Facebook+Login+Permissions#FacebookLoginPermissions-AvailablePermissions>
+1. https://developers.gigya.com/display/GD/Facebook+Login+Permissions#FacebookLoginPermissions-AvailablePermissions
 
 there are 2 possible outcomes when user is prompted by Facebook to give
 permissions - either app or business integration can be added to user's
@@ -216,8 +216,8 @@ troubleshooting
 
 ### callback is called twice
 
-1. <https://stackoverflow.com/questions/37119159>
-2. <https://github.com/mkdynamic/omniauth-facebook/issues/73>
+1. https://stackoverflow.com/questions/37119159
+2. https://github.com/mkdynamic/omniauth-facebook/issues/73
 
 callback is called twice after user either grants or declines extended
 permissions - this doesn't happen when dealing with basic permissions.
@@ -291,8 +291,8 @@ callback URL twice but are still different.
 
 - OmniAuth (Rails)
 
-  1. <https://github.com/ShippingEasy/omniauth-ecwid/issues/2>
-  2. <https://github.com/omniauth/omniauth-oauth2/issues/32>
+  1. https://github.com/ShippingEasy/omniauth-ecwid/issues/2
+  2. https://github.com/omniauth/omniauth-oauth2/issues/32
 
   OmniAuth uses `state` authentication parameter to help mitigate CSRF attacks
   (see [The State Parameter](https://auth0.com/docs/protocols/oauth2/oauth-state)).
@@ -318,7 +318,7 @@ callback URL twice but are still different.
   session variable has been already removed from session storage by the 1st
   request => `state` query param value doesn't match `nil`.
 
-  <https://github.com/omniauth/omniauth-oauth2/blob/ee63077b1c3f677f0042010e393e9fd0bf1d69d2/lib/omniauth/strategies/oauth2.rb#L66>:
+  https://github.com/omniauth/omniauth-oauth2/blob/ee63077b1c3f677f0042010e393e9fd0bf1d69d2/lib/omniauth/strategies/oauth2.rb#L66:
 
   ```ruby
   def callback_phase
@@ -354,9 +354,9 @@ callback URL twice but are still different.
   is 5.0.0) this problem had different origin so solutions proposed in these
   issues no longer work:
 
-  - <https://github.com/mkdynamic/omniauth-facebook/issues/276>
-  - <https://github.com/mkdynamic/omniauth-facebook/issues/278>
-  - <https://github.com/mkdynamic/omniauth-facebook/issues/284>
+  - https://github.com/mkdynamic/omniauth-facebook/issues/276
+  - https://github.com/mkdynamic/omniauth-facebook/issues/278
+  - https://github.com/mkdynamic/omniauth-facebook/issues/284
 
   ***UPDATE***
 

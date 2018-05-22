@@ -72,3 +72,10 @@ categories: [markdown]
   >
   > set public/packs and node_modules as shared directories to ensure Webpack
   > build output and NPM package installation via Yarn are shared across deploys
+
+- it's no longer necessary to wrap URLs in angle brackets so that they are clickable
+
+  ```diff
+  - <https://webpack.js.org/concepts/>
+  + https://webpack.js.org/concepts/
+  ```

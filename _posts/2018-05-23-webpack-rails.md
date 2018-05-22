@@ -51,6 +51,13 @@ bundle exec rails webpacker:compile
 
 pack (Webpacker term) == entry (Webpack term)
 
+> <https://github.com/rails/webpacker/blob/master/docs/folder-structure.md#packs-aka-webpack-entries>
+>
+> Packs a.k.a webpack entries
+>
+> "Packs" is a special directory made only for webpack entry files so don't
+> put anything here that you don't want to link in your views.
+
 > <https://github.com/rails/webpacker/issues/581#issuecomment-316937091>
 >
 > 'packs' is a special directory meant only for entry files i.e. written either
@@ -63,6 +70,21 @@ pack (Webpacker term) == entry (Webpack term)
 => only JS files are allowed to be packs (entries), CSS files imported inside
 packs will be extracted into _\<pack\_name>.css_ file which can be referenced
 in layout with `stylesheet_pack_tag` helper.
+
+### about importing assets
+
+1. <https://webpack.js.org/guides/dependency-management/#require-context>
+
+assets can be imported one by one using `import` statements or recursively
+using `require.context()` function:
+
+```javascript
+// import each image manually
+import './foo.jpg';
+
+// or all images in directory recursively
+require.context('images/', true, /\.(gif|jpeg|jpg|png|svg)$/i);
+```
 
 ### about loaders
 
@@ -152,6 +174,7 @@ configuration
 ### source directory
 
 1. <https://github.com/rails/webpacker#paths>
+2. <https://github.com/rails/webpacker/blob/master/docs/folder-structure.md#source>
 
 change source directory to _app/assets/_:
 
@@ -316,10 +339,6 @@ see below for details on how to import specific assets.
 ```javascript
 // app/assets/images/app.js
 
-// import each image manually
-//import './foo.jpg';
-
-// or all images in directory recursively
 require.context('images/', true, /\.(gif|jpeg|jpg|png|svg)$/i);
 ```
 

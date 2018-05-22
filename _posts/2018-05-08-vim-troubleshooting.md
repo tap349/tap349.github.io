@@ -155,8 +155,8 @@ lines with equal indent don't form a fold - folding stops at blank line.
 
 **solution**
 
-comment to <https://stackoverflow.com/a/14803964/3632318>:
-
+> <https://stackoverflow.com/a/14803964/3632318>
+>
 > If I've reproduced the problem and run :set shiftwidth=2 after the text has
 > already been input, it works as expected but not if i do :set shiftwidth=2
 > before the text has been input. Similarly if the file has been saved and

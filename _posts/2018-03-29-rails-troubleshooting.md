@@ -81,8 +81,8 @@ it's possible to disable CSRF for API requests altogether either in
 skip_before_action :verify_authenticity_token
 ```
 
-<https://security.stackexchange.com/a/166798>:
-
+> <https://security.stackexchange.com/a/166798>
+>
 > Browsers send cookies along with all requests. CSRF attacks depend upon
 > this behavior. If you do not use cookies, and don't rely on cookies for
 > authentication, then there is absolutely no room for CSRF attacks, and

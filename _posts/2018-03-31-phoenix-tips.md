@@ -40,8 +40,8 @@ certificate and specify them in `https` key of endpoint configuration.
 umbrella apps vs. contexts
 --------------------------
 
-<https://www.reddit.com/r/elixir/comments/6bpah8/phoenix_context_vs_elixir_umbrella_apps/dhprpl5/>:
-
+> <https://www.reddit.com/r/elixir/comments/6bpah8/phoenix_context_vs_elixir_umbrella_apps/dhprpl5/>
+>
 > The rule of thumb is to use umbrellas where you can use separate storage
 > and contexts everywhere else. Many quite big apps use only one database.
 > It doesn't make sense to configure them separately in Umbrellas and you

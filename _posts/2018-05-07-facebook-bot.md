@@ -51,8 +51,8 @@ webhook
 2. <https://developers.facebook.com/docs/messenger-platform/introduction/integration-components>
 3. <https://developers.facebook.com/docs/messenger-platform/webhook>
 
-<https://developers.facebook.com/docs/messenger-platform/introduction/integration-components>:
-
+> <https://developers.facebook.com/docs/messenger-platform/introduction/integration-components>
+>
 > The Messenger Platform sends an event to your webhook whenever an action
 > occurs in a conversation with your bot. Your webhook is a single HTTPS
 > endpoint (usually /webhook) exposed by you that accepts POST requests.
@@ -73,8 +73,8 @@ webhook
 notes
 -----
 
-<https://developers.facebook.com/docs/messenger-platform/identity/id-matching>:
-
+> <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
+>
 > When a person uses Facebook Login on a website or a mobile app, an ID
 > is created for the specific Facebook app, which is called app-scoped ID.
 > When a person interacts with a business via Messenger, an ID is created

@@ -41,15 +41,15 @@ blocked by Facebook:
 or else it's possible to whitelist `localhost` as a valid redirect URI in FD
 without using any custom local domains.
 
-<https://stackoverflow.com/a/5626979/3632318>:
-
+> <https://stackoverflow.com/a/5626979/3632318>
+>
 > Facebook does not "connect" back to your server. Their JS does. And the JS
 > runs in the context of your browser. Which knows where "localhost" points to.
 
 ### whitelist local domain in FD
 
-<https://wp-native-articles.com/blog/news/how-to-fix-facebook-apps-error-cant-load-url-domain-url-isnt-included-apps-domains/>:
-
+> <https://wp-native-articles.com/blog/news/how-to-fix-facebook-apps-error-cant-load-url-domain-url-isnt-included-apps-domains/>
+>
 > Any new Facebook Login Apps create AFTER the beginning of March 2018 now
 > have Use Strict Mode for Redirect URIs and Enforce HTTPS enabled by default
 > and can no longer be disabled.

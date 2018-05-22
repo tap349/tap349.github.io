@@ -440,8 +440,9 @@ browser extensions installed) - try to use another browser (say, Safari).
 
 ***UPDATE***
 
-error is caused by ad-blocking extensions - try to disable them and reload
-the page. or else it's better to whitelist Graph API Explorer page.
+error is caused by ad blockers - disable these extensions and reload
+the page. or else it's better to whitelist Graph API Explorer page in
+their settings.
 
 ### You are not logged in
 

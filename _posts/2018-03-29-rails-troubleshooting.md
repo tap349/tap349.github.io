@@ -138,3 +138,25 @@ application (macOS) but that didn't help.
 eventually it turned out the problem was caused by Dashlane Chrome extension -
 I managed to get basic authentication prompt once I temporarily disabled the
 latter.
+
+No route matches [GET] "/admin/images/ui-icons_444444_256x240.png"
+------------------------------------------------------------------
+
+_log/production.log_:
+
+```
+Started GET "/admin/images/ui-icons_444444_256x240.png" for ::1 at 2018-05-22 23:33:20 +0300
+ActionController::RoutingError (No route matches [GET] "/admin/images/ui-icons_444444_256x240.png"):
+```
+
+this error occurs when any Rails or Phoenix application page is opened -
+either in development or production environment.
+
+most likely GET request to fetch `ui-icons_444445_256x240.png` is made when
+ANY page is opened - these requests just don't draw attention unless I see
+them in server logs of my applications.
+
+**solution**
+
+it has turned out that the culprit is `Clouder` Chrome extension => disable
+it so far.

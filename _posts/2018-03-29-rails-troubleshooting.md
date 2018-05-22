@@ -136,4 +136,5 @@ so first I tried to remove entry for another subdomain from `Keychain Access`
 application (macOS) but that didn't help.
 
 eventually it turned out the problem was caused by Dashlane Chrome extension -
-I managed to get basic authentication prompt once I disabled the latter.
+I managed to get basic authentication prompt once I temporarily disabled the
+latter.

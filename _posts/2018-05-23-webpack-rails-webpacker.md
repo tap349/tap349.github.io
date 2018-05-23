@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Webpack - Rails
+title: Webpack - Rails (Webpacker)
 date: 2018-05-23 02:31:57 +0300
 access: public
 comments: true

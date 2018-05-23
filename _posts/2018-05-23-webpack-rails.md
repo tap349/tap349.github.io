@@ -20,7 +20,7 @@ categories: [webpack, rails]
 notes
 -----
 
-### about environments
+### environments
 
 1. <https://github.com/rails/webpacker/blob/master/docs/webpack.md>
 2. <https://github.com/rails/webpacker>
@@ -45,7 +45,7 @@ bundle exec rails assets:precompile
 bundle exec rails webpacker:compile
 ```
 
-### about packs
+### packs
 
 1. <https://github.com/rails/webpacker/blob/master/docs/assets.md>
 
@@ -67,11 +67,15 @@ pack (Webpacker term) == entry (Webpack term)
 > styles will be extracted to [pack_name].css, which you can reference in your
 > views.
 
+> <https://github.com/rails/webpacker/blob/master/docs/assets.md#import-from-node-modules>
+>
+> Please note that your styles will always be extracted into [pack_name].css
+
 => only JS files are allowed to be packs (entries), CSS files imported inside
 packs will be extracted into _\<pack\_name>.css_ file which can be referenced
 in layout with `stylesheet_pack_tag` helper.
 
-### about importing assets
+### assets
 
 1. <https://webpack.js.org/guides/dependency-management/#require-context>
 
@@ -86,7 +90,7 @@ import './foo.jpg';
 require.context('images/', true, /\.(gif|jpeg|jpg|png|svg)$/i);
 ```
 
-### about loaders
+### loaders
 
 > <https://github.com/rails/webpacker/blob/master/docs/webpack.md#loaders>
 >
@@ -191,6 +195,8 @@ change source directory to _app/assets/_:
 
 ### pack
 
+1. <https://github.com/rails/webpacker/blob/master/docs/assets.md#import-from-node-modules>
+
 import all assets in pack file:
 
 ```javascript
@@ -201,7 +207,25 @@ import 'images/app';
 import 'js/app';
 ```
 
-see below for details on how to import specific assets.
+see next sections for details on how to import specific assets.
+
+packs then included in layout file using `javascript_pack_tag` and
+`stylesheet_pack_tag` helpers:
+
+> <https://hype.codes/how-assemble-rails-frontend-using-webpacker>
+>
+> Very similar to the Asset Pipeline. Use new javascript_pack_tag and
+> stylesheet_pack_tag helpers. They will add necessary HTML tags with
+> links to assembled packs.
+
+```slim
+/ app/views/layouts/application.html.slim
+
+/ app.js
+= javascript_pack_tag('app')
+/ app.css
+= stylesheet_pack_tag('app')
+```
 
 ### styles
 

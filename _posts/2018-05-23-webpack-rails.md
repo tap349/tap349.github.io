@@ -414,6 +414,14 @@ rails: rails server -p 3000
 webpack: bin/webpack-dev-server
 ```
 
+BTW when running Webpacker development server (`webpack-dev-server`)
+you don't have to reload page constantly after changing asset files:
+
+> <https://github.com/rails/webpacker#development>
+>
+> This process will watch for changes in the app/javascript/packs/*.js
+> files and automatically reload the browser to match.
+
 ### Yarn integrity check
 
 Yarn integrity check might produce false positives:

@@ -36,4 +36,4 @@ Marketing API
 -------------
 
 1. <https://developers.facebook.com/docs/marketing-apis>
-2. [Business Manager System User](https://developers.facebook.com/docs/marketing-api/businessmanager/systemuser/)
+2. [Business Manager](https://developers.facebook.com/docs/marketing-api/business-manager-api)

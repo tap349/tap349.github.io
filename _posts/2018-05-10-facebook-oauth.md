@@ -17,6 +17,12 @@ categories: [facebook]
 
 - FD - Facebook for Developers
 
+URLs:
+
+- request URL (<http://myapp.com:4000/auth/facebook>)
+- authorize URL (aka authorization URL) (<https://www.facebook.com/dialog/oauth>)
+- redirect URI (aka callback URL) (<http://myapp.com:4000/auth/facebook/callback>)
+
 whitelist redirect URI
 ----------------------
 

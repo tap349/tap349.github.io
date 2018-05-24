@@ -17,6 +17,11 @@ categories: [webpack, rails]
 2. <https://github.com/rails/webpacker/tree/master/docs>
 3. <https://www.neontsunami.com/posts/replacing-rails-asset-pipeline-with-webpacker>
 
+> <https://news.ycombinator.com/item?id=15883425>
+>
+> Webpacker is an anti-pattern: pollute the ruby sphere with JS and pollute
+> the JS sphere with Ruby because you don't wanna read the Webpack tutorial.
+
 notes
 -----
 

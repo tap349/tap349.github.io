@@ -67,6 +67,13 @@ pack (Webpacker term) == entry (Webpack term)
 > styles will be extracted to [pack_name].css, which you can reference in your
 > views.
 
+> <https://github.com/rails/webpacker/issues/471#issuecomment-306115940>
+>
+> by convention one should only put .js packs inside packs directory since they
+> are treated in a special way by webpack. Other types of files like - styles,
+> fonts and images should be placed outside of the packs directory and can be
+> referenced from there.
+
 > <https://github.com/rails/webpacker/blob/master/docs/assets.md#import-from-node-modules>
 >
 > Please note that your styles will always be extracted into [pack_name].css
@@ -131,7 +138,7 @@ for the list of configured loaders:
 configuration
 -------------
 
-### additional plugins
+### plugins
 
 - `babel-plugin-module-resolver`
 

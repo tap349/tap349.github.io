@@ -59,7 +59,7 @@ Graph API
 
 ### get next bill date
 
-1. [Version 3.0](https://developers.facebook.com/docs/graph-api/changelog/version3.0)
+1. <https://developers.facebook.com/docs/graph-api/changelog/version3.0>
 
 you can get `active_billing_date_preference` and `next_bill_date` info only
 if your token is generated for `Ads Manager` App (`App ID` field in ATD).

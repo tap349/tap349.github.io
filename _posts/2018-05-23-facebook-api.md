@@ -13,45 +13,37 @@ categories: [facebook]
 {:toc}
 <hr>
 
-<table>
-  <tr>
-    <td>user IDs:</td>
-    <td>
-      <dl>
-        <dt>UID</dt>
-        <dd>real user ID</dd>
+- user IDs
 
-        <dt>ASID</dt>
-        <dd>app-scoped ID</dd>
+  <dl>
+    <dt>UID</dt>
+    <dd>real user ID</dd>
 
-        <dt>PSID</dt>
-        <dd>page-scoped ID</dd>
-      </dl>
-    </td>
-  </tr>
+    <dt>ASID</dt>
+    <dd>app-scoped ID</dd>
 
-  <tr>
-    <td>access tokens</td>
-    <td>
-      <dl>
-        <dt>AT</dt>
-        <dd>access token</dd>
+    <dt>PSID</dt>
+    <dd>page-scoped ID</dd>
+  </dl>
 
-        <dt>UAT</dt>
-        <dd>user access token</dd>
+- access tokens
 
-        <dt>AAT</dt>
-        <dd>app access token</dd>
+  <dl>
+    <dt>AT</dt>
+    <dd>access token</dd>
 
-        <dt>PAT</dt>
-        <dd>page access token</dd>
+    <dt>UAT</dt>
+    <dd>user access token</dd>
 
-        <dt>ATD</dt>
-        <dd>Access Token Debugger</dd>
-      </dl>
-    </td>
-  </tr>
-</table>
+    <dt>AAT</dt>
+    <dd>app access token</dd>
+
+    <dt>PAT</dt>
+    <dd>page access token</dd>
+
+    <dt>ATD</dt>
+    <dd>Access Token Debugger</dd>
+  </dl>
 
 <hr>
 
@@ -89,7 +81,7 @@ billing events:
 - `ad_account_billing_charge` (ad account billed)
 
 ```
-AT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
+UAT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
 GET v3.0/me/adaccounts?fields=id,account_id,name,activities{event_type,event_time,extra_data}
 ```
 
@@ -190,7 +182,7 @@ sample response:
 > purchase ads. With manual payments, you won't have a billing threshold.
 
 ```
-AT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
+UAT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
 GET v3.0/me/adaccounts?fields=id,account_id,name,is_prepay_account
 ```
 
@@ -214,7 +206,7 @@ sample response:
 1. <https://developers.facebook.com/docs/marketing-api/reference/ad-account/>
 
 ```
-AT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
+UAT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
 GET v3.0/me/adaccounts?fields=id,account_id,name,funding_source_details
 ```
 
@@ -269,8 +261,19 @@ access tokens
 1. <https://developers.facebook.com/docs/facebook-login/access-tokens>
 
 - user access token (UAT)
+
+  > User access tokens are generally obtained via a login dialog and
+  > require a person to permit your app to obtain one.
+
 - app access token (AAT)
+
+  > It is generated using a pre-agreed secret between the app and Facebook
+
 - page access token (PAT)
+
+  > To obtain a page access token you need to start by obtaining a user
+  > access token and asking for the manage_pages permission. Once you have
+  > the user access token you then get the page access token via the Graph API.
 
   obtain PAT:
 

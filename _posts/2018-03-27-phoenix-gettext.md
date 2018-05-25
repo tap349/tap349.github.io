@@ -68,7 +68,7 @@ dynamic translations
 
 ### create default POT file
 
-template file (_priv/gettext/default.pot_) might be missing if you're adding
+POT file (_priv/gettext/default.pot_) might be missing if you're adding
 dynamic translations for the first time:
 
 ```po
@@ -78,8 +78,7 @@ msgid "system_error"
 msgstr ""
 ```
 
-create this file manually only if you're adding dynamic translations
-(that is you're using macros - not functions):
+POT file is created manually iff you're adding dynamic translations:
 
 > <https://hexdocs.pm/gettext/Gettext.html#module-compile-time-features>
 >
@@ -89,7 +88,7 @@ create this file manually only if you're adding dynamic translations
 > having to manually add translations to POT files when they’re added to the
 > source code).
 
-NOTE: only dynamic translations are added to POT file manually:
+and only dynamic translations are added to POT file manually:
 
 > Add new translations manually only if they're dynamic translations that
 > can't be statically extracted.
@@ -104,6 +103,8 @@ $ mix gettext.merge priv/gettext
 ```
 
 ### add translations for all present locales
+
+translations are added to PO files only (not POT files):
 
 ```diff
   ## priv/gettext/en/LC_MESSAGES/default.po

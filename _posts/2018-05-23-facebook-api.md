@@ -279,4 +279,4 @@ access tokens
   GET v3.0/<page_id>?fields=access_token
   ```
 
-  PAT is short-lived (expires is 1 hour).
+  PATs are short-lived (expire is 1 hour).

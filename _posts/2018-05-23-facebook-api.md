@@ -236,21 +236,19 @@ to predict when user is close to running out of money.
 user IDs
 --------
 
+1. <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
+
 - real user ID (UID)
 
   it can be used to open user's Facebook page (`https://facebook.com/<UID>`).
 
 - app-scoped ID (ASID)
 
-  > <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
-  >
   > When a person uses Facebook Login on a website or a mobile app, an ID is
   > created for the specific Facebook app, which is called app-scoped ID.
 
 - page-scoped ID (PSID)
 
-  > <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
-  >
   > When a person interacts with a business via Messenger, an ID is created
   > for the specific Page associated with the bot in Messenger, which is called
   > Page-scoped ID.
@@ -282,4 +280,4 @@ access tokens
   GET v3.0/<page_id>?fields=access_token
   ```
 
-  PATs are short-lived (expire is 1 hour).
+  PATs are short-lived (expire in 1 hour).

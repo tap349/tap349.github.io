@@ -268,5 +268,5 @@ access tokens
 
   ```
   UAT scopes: manage_pages
-  GET v3.0/me/adaccounts?fields=id,account_id,name,activities{event_type,event_time,extra_data}
+  GET v3.0/<page_id>?fields=access_token
   ```

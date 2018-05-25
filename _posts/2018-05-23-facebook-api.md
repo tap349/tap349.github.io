@@ -203,6 +203,6 @@ sample response:
 }
 ```
 
-NOTE: available balance in `funding_source_details` is decreased every day
-      (on every `ad_account_billing_charge` event, I guess) - you can parse
-      this string to predict when user is close to running out of money.
+available balance in `funding_source_details` is decreased every day - on
+every `ad_account_billing_charge` event, I guess. you can parse this string
+to predict when user is close to running out of money.

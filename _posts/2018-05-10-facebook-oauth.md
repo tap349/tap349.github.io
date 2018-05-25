@@ -24,7 +24,7 @@ URLs:
 
 <dl>
   <dt>request URL</dt>
-  <dd><http://myapp.com:4000/auth/facebook></dd>
+  <dd>http://myapp.com:4000/auth/facebook</dd>
 
   <dt>authorize URL (aka authorization URL)</dt>
   <dd><https://www.facebook.com/dialog/oauth></dd>

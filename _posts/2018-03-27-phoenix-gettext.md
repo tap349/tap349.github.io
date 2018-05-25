@@ -121,10 +121,7 @@ translations are added to PO files only (not POT files):
 
   msgid "authentication success"
 - msgstr ""
-+ msgstr """
-+ foo
-+ bar
-+ """
++ msgstr "Congratulations! You're authenticated"
 ```
 
 ```diff
@@ -132,10 +129,7 @@ translations are added to PO files only (not POT files):
 
   msgid "authentication success"
 - msgstr ""
-+ msgstr """
-+ foo
-+ bar
-+ """
++ msgstr "Congratulations! You're authenticated"
 ```
 
 dynamic translations
@@ -219,4 +213,18 @@ say, in a view module helper:
 def human_api_error(api_error_enum) do
   Gettext.gettext(BillingWeb.Gettext, api_error_enum)
 end
+```
+
+tips
+----
+
+### multi-line `msgstr` strings
+
+1. <https://www.gnu.org/software/gettext/manual/html_node/Normalizing.html>
+
+```po
+msgid "authentication success"
+msgstr ""
+"សូមមេត្តាវិលត្រលប់មកសន្ទនាជាមួយ AdLee និងមេត្តាប្រាប់ពួកយើងនៅពេលដែលលោកអ្នកយល់ព្រមផ្តល់សិទ្ធិមកកាន់ពួកយើង។\n"
+"AdLee ស្រលាញ់លោកអ្នក!"
 ```

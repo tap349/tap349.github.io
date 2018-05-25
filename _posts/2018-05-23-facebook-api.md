@@ -42,7 +42,7 @@ categories: [facebook]
     <dd>page access token</dd>
 
     <dt>ATD</dt>
-    <dd>access token debugger</dd>
+    <dd>Access Token Debugger</dd>
   </dl>
 
 <hr>

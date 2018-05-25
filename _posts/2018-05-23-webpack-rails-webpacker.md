@@ -108,7 +108,7 @@ require.context('images/', true, /\.(gif|jpeg|jpg|png|svg)$/i);
 >
 > You can also modify the loaders that Webpacker pre-configures for you.
 
-basic loaders are installed as dependencies of `@rails/webpacker` NPM package:
+basic loaders are installed as dependencies of `@rails/webpacker` npm package:
 
 ```conf
 # yarn.lock

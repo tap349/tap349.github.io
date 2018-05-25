@@ -10,7 +10,8 @@ using non-standard directories in Rails project (_lib/_, _system/_, etc.).
 
 <!-- more -->
 
-## autoload_paths and eager_load_paths
+autoload_paths and eager_load_paths
+-----------------------------------
 
 - <http://urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell>
 - <http://blog.arkency.com/2014/11/dont-forget-about-eager-load-when-extending-autoload>
@@ -41,7 +42,8 @@ source of weird uninitialized constant errors.
 to sum up **always** add non-standard directories to both `autoload_paths`
 and `eager_load_paths` to avoid loading errors in production.
 
-## using modules to namespace classes
+using modules to namespace classes
+----------------------------------
 
 2 ways to organize code in non-standard directories:
 

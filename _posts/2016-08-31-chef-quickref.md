@@ -15,7 +15,12 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 {:toc}
 <hr>
 
-- ws - workstation (local machine)
+<dl>
+  <dt>ws</dt>
+  <dd>workstation (local machine)</dd>
+</dl>
+
+<hr>
 
 install Chef on workstation
 ---------------------------

@@ -12,7 +12,8 @@ notes on using [dry-monads](http://dry-rb.org/gems/dry-monads) and
 
 <!-- more -->
 
-## definition of monad
+definition of monad
+-------------------
 
 - <https://www.youtube.com/watch?v=ZhuHCtR3xq8>
 - <https://vimeo.com/97344498>
@@ -63,7 +64,8 @@ monad is created by defining:
     and return monadic value as well - the latter is used only in case of
     failure otherwise input monadic value is returned.
 
-## monads in dry-monads
+monads in dry-monads
+--------------------
 
 ### monads
 

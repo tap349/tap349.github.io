@@ -15,7 +15,8 @@ CSS recipes.
 {:toc}
 <hr>
 
-## using icons
+using icons
+-----------
 
 ### global classes (text element is next to icon div)
 

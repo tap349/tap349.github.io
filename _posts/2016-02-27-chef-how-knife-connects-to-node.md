@@ -11,9 +11,10 @@ how knife-solo and knife-zero connect to the node when bootstrapping and cooking
 
 <!-- more -->
 
-### knife-solo
+knife-solo
+----------
 
-#### bootstrapping
+### bootstrapping
 
 it's possible to connect to node using:
 
@@ -44,7 +45,7 @@ they depend on what was used when bootstrapping the node:
   - domain (when using domain or host from SSH config)
   - IP address (when using IP address).
 
-#### cooking
+### cooking
 
 when using knife-solo and chef-solo there is no chef server where
 information about nodes might be stored.
@@ -69,15 +70,16 @@ domain or IP address used to connect to the node:
 $ knife solo cook tap349 nodes/tap349-2.json
 ```
 
-### knife-zero
+knife-zero
+----------
 
-#### bootstrapping
+### bootstrapping
 
 same as for knife-solo except that it's possible to specify node name
 explicitly with `--node-name` option when bootstrapping the node -
 node and node file will both have specified name.
 
-#### cooking
+### cooking
 
 after bootstrapping node is added to the list of nodes on chef-zero
 server (use `knife zero show tap349 -z` to view node information).

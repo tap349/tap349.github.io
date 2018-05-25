@@ -16,7 +16,8 @@ categories: [elixir, mix]
 > Mix assumes that we are in the development environment unless we tell it
 > otherwise with MIX_ENV=<another_environment> mix some_task.
 
-## common tasks
+common tasks
+------------
 
 - `mix compile`
 
@@ -51,13 +52,15 @@ tasks can also be batched:
 $ mix do deps.get, compile
 ```
 
-## Phoenix tasks
+Phoenix tasks
+-------------
 
 - `mix phx.server` = `rails server`
 - `mix phx.routes` = `rake routes`
 - `mix phx.gen.secret` = `rake secret`
 
-## mix.exs
+mix.exs
+-------
 
 1. <http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/>
 
@@ -100,7 +103,8 @@ $ mix do deps.get, compile
   end
   ```
 
-## troubleshooting
+troubleshooting
+---------------
 
 ### Mix doesn't allow to run the same task twice in alias
 

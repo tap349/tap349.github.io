@@ -48,6 +48,14 @@ static vs. dynamic translations
 > - using macros from your own gettext module, like MyApp.Gettext
 > - using functions from the Gettext module
 
+> <https://hexdocs.pm/gettext/Gettext.html#module-compile-time-features>
+>
+> using the gettext macros (as opposed to functions) allows gettext to
+> operate on those translations at compile-time. This can be used to extract
+> translations from the source code into POT files automatically (instead of
+> having to manually add translations to POT files when they’re added to the
+> source code).
+
 => use macros for static translations, use functions for dynamic ones.
 
 static translations
@@ -152,17 +160,10 @@ msgid "system_error"
 msgstr ""
 ```
 
-POT file is created manually iff you're adding dynamic translations:
+POT file is created manually iff you're adding dynamic translations
+(otherwise it's created by `getttext.extract` task).
 
-> <https://hexdocs.pm/gettext/Gettext.html#module-compile-time-features>
->
-> using the gettext macros (as opposed to functions) allows gettext to
-> operate on those translations at compile-time. This can be used to extract
-> translations from the source code into POT files automatically (instead of
-> having to manually add translations to POT files when they’re added to the
-> source code).
-
-and only dynamic translations are added to POT file manually:
+only dynamic translations are added to POT file manually:
 
 > _priv/gettext/default.pot_
 >

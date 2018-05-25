@@ -9,6 +9,10 @@ categories: [markdown]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 backticks inside inline code block
 ----------------------------------
 

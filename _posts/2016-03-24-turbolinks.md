@@ -15,13 +15,14 @@ notes about turbolinks.
 {:toc}
 <hr>
 
-- <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
-- <http://railscasts.com/episodes/390-turbolinks?view=asciicast>
-- <https://habrahabr.ru/post/167161/>
+1. <http://guides.rubyonrails.org/working_with_javascript_in_rails.html#turbolinks>
+2. <http://railscasts.com/episodes/390-turbolinks?view=asciicast>
+3. <https://habrahabr.ru/post/167161/>
 
 turbolinks is used to speed up page rendering.
 
-## installation
+installation
+------------
 
 - install as gem
 - require in application js/coffeescript manifest file (_application.coffee_)
@@ -29,7 +30,8 @@ turbolinks is used to speed up page rendering.
 turbolinks can be disabled for certain links by adding `data-no-turbolink`
 data attribute to the link.
 
-## how it works
+how it works
+------------
 
 - intercepts all clicks on `a` links to the same domain
 - changes browser's URL
@@ -44,9 +46,10 @@ see also [visits](#visits).
 CAUTION: you'll have a long-running, persistent session with maintained state -
 pay additional care not leak memory or otherwise bloat that long-running state.
 
-## turbolinks classic
+turbolinks classic
+------------------
 
-- <https://github.com/turbolinks/turbolinks-classic/blob/master/README.md>
+1. <https://github.com/turbolinks/turbolinks-classic/blob/master/README.md>
 
 ### events
 
@@ -100,9 +103,10 @@ $(document).on 'page:change', ->
   alert 'page has loaded!'
 ```
 
-## turbolinks 5
+turbolinks 5
+------------
 
-- <https://github.com/turbolinks/turbolinks>
+1. <https://github.com/turbolinks/turbolinks>
 
 ### visits
 
@@ -168,7 +172,7 @@ ALL functions inside event handler for `turbolinks:load` must be IDEMPOTENT!
 
 ### event listeners
 
-- <http://api.jquery.com/on/#direct-and-delegated-events>
+1. <http://api.jquery.com/on/#direct-and-delegated-events>
 
 still this doesn't concerns event listeners since they are discarded by
 turbolinks when saving a copy of the page to cache (before rendering a new page)

@@ -7,7 +7,7 @@ comments: true
 categories: [rails, cancancan]
 ---
 
-<https://github.com/ryanb/cancan/wiki/authorizing-controller-actions>
+1. <https://github.com/ryanb/cancan/wiki/authorizing-controller-actions>
 
 when using `load_and_authorize_resource` cancancan tries to guess resource
 class based on controller name.

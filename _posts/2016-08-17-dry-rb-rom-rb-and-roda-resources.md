@@ -11,7 +11,8 @@ dry-rb, rom-rb and roda resources.
 
 <!-- more -->
 
-## [dry-rb](http://dry-rb.org/)
+[dry-rb](http://dry-rb.org/)
+----------------------------
 
 **github**: <https://github.com/dry-rb>
 
@@ -28,13 +29,15 @@ dry-rb, rom-rb and roda resources.
   * [A conversational introduction to rom-rb](http://icelab.com.au/articles/a-conversational-introduction-to-rom-rb/)
   * [Conversational rom-rb, part 2: types, associations, and update commands](http://icelab.com.au/articles/conversational-rom-rb-part-2-types-associations-and-update-commands/)
 
-## [rom-rb](http://rom-rb.org/)
+[rom-rb](http://rom-rb.org/)
+----------------------------
 
 **github**: <https://github.com/rom-rb>
 
 - <http://rom-rb.org/learn/>
 
-## [roda](http://roda.jeremyevans.net/)
+[roda](http://roda.jeremyevans.net/)
+------------------------------------
 
 **github**: <https://github.com/jeremyevans/roda>
 
@@ -51,7 +54,8 @@ dry-rb, rom-rb and roda resources.
   * [Pagination with Roda, Sequel and will_paginate](http://mrcook.uk/pagination-roda-sequel-will-paginate)
 - <http://watabelabs.com/blog/view/digging-ruby-from-roda-a-rack-based-web-framework>
 
-## using together
+using together
+--------------
 
 - (!) <https://github.com/dry-rb/dry-web-roda> (dry-rb, roda)
 - (!) <https://github.com/icelab/dry-web-skeleton> (dry-rb, rom-rb, roda, que):
@@ -60,7 +64,8 @@ dry-rb, rom-rb and roda resources.
 - <https://github.com/rom-rb/rom-roda> (rom-rb, roda)
 - <https://github.com/solnic/rom-rails-skeleton> (dry-rb, rom-rb, rails)
 
-## sample projects
+sample projects
+---------------
 
 - <https://github.com/icelab/berg> (dry-rb, rom-rb, roda)
 - <https://github.com/jeremyevans/roda-sequel-stack> (roda, sequel)

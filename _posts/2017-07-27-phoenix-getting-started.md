@@ -9,6 +9,10 @@ categories: [phoenix]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 install Phoenix
 ---------------
 

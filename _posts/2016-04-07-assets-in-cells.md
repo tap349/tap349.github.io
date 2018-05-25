@@ -12,9 +12,10 @@ how to bundle assets in cell's view directory.
 
 <!-- more -->
 
-<http://trailblazer.to/gems/cells/rails.html#asset-pipeline>
+1. <http://trailblazer.to/gems/cells/rails.html#asset-pipeline>
 
-## basics
+basics
+------
 
 - add _app/cells/_ to assets paths
 
@@ -79,7 +80,8 @@ how to bundle assets in cell's view directory.
     Rails.application.config.assets.precompile += %w(cells.css)
     ```
 
-## using asset tag helpers
+using asset tag helpers
+-----------------------
 
 <http://trailblazer.to/gems/cells/helpers.html#asset-helpers>
 

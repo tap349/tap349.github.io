@@ -15,9 +15,10 @@ notes about caching in Rails.
 {:toc}
 <hr>
 
-- <https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>
+1. <https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html>
 
-# general
+general
+-------
 
 caching:
 
@@ -37,7 +38,8 @@ but this includes:
 
 => server response should be below ~300ms
 
-# profiling
+profiling
+---------
 
 applications must be profiled:
 
@@ -50,24 +52,25 @@ applications must be profiled:
 
 **MAART** - maximum acceptable average response time (e.g. 50ms)
 
-## 3rd party tools
+### 3rd party tools
 
 - rack-mini-profiler
 - wrk
 - apache bench
 
-## Rails logs
+### Rails logs
 
 total time is the important one.
 
 `Views` time might include executing queries since AR relations are lazily loaded
 `ActiveRecord` time is actual time spent in DB
 
-# caching techniques
+caching techniques
+------------------
 
 complicated part of caching is knowing when to expire caches.
 
-## key-based cache expiration
+### key-based cache expiration
 
 key-based expiration is a cache expiration strategy that expires entries
 in the cache by making cache key contain information about the value
@@ -92,7 +95,7 @@ changing either object itself or template tree expires cache key
 when array is used as cache key for `cache` final cache key is a
 concatenated version of everything in the array (with `/` as delimiter).
 
-## russian doll caching
+### russian doll caching
 
 **russian doll caching**:
 
@@ -112,9 +115,10 @@ whenever todo is added/removed/changed cache expires.
 
 2. use `touch` option on `belongs_to` associations as described above
 
-# cache digests
+cache digests
+-------------
 
-- <https://github.com/rails/cache_digests>
+1. <https://github.com/rails/cache_digests>
 
 **cache digests** were included in Rails 4 and had been available as a gem before.
 
@@ -123,7 +127,8 @@ when changing template by adding, say, version `v1` to cache key.
 now cache key contains md5 sum of template tree (template file itself and
 all of its dependencies) - whenever template changes cache expires.
 
-# cache backends
+cache backends
+--------------
 
 - ActiveSupport::FileStore
 - ActiveSupport::MemoryStore
@@ -131,7 +136,7 @@ all of its dependencies) - whenever template changes cache expires.
 - Redis and redis-store
 - LRURedux
 
-## ActiveSupport::FileStore
+### ActiveSupport::FileStore
 
 - default cache store in Rails
 - stores all of your cache in _tmp/cache/_ by default
@@ -149,7 +154,7 @@ cons:
 - not an LRU cache (LRU algorithms work much better for key-based cache expiration)
 - doesn't get on with heroku
 
-## ActiveSupport::MemoryStore
+### ActiveSupport::MemoryStore
 
 - stores cache directly in RAM in the form of big hash
 
@@ -163,7 +168,7 @@ cons:
 - cache can't be shared across processes or hosts
 - adds to your RAM usage (might be concern when using hosting)
 
-## Memcache and dalli
+### Memcache and dalli
 
 - in-memory, key-value data store
 
@@ -177,7 +182,7 @@ cons:
 - commercial memcache services are expensive
 - cache values are limited to 1 MB, cache keys - to 250 bytes
 
-## Redis and redis-store
+### Redis and redis-store
 
 - in-memory, key-value data store
 
@@ -194,7 +199,7 @@ cons:
 - redis supports several data types, redis-store supports only strings
   (memcache can store strings only)
 
-## LRURedux
+### LRURedux
 
 - highly optimized version of ActiveSupport::MemoryStore
 - cannot be configured as default cache store in Rails

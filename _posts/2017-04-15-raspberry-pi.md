@@ -13,7 +13,8 @@ categories: [rpi]
 {:toc}
 <hr>
 
-## installation
+installation
+------------
 
 - <https://www.raspberrypi.org/downloads/raspbian/>
 - <https://www.raspberrypi.org/documentation/installation/sdxc_formatting.md>
@@ -26,7 +27,8 @@ categories: [rpi]
 - create empty _ssh_ file in microsd root to enable SSH
   (do it before the very first boot!)
 
-## configuration
+configuration
+-------------
 
 ### keyboard
 

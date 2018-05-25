@@ -11,7 +11,6 @@ categories: [postgresql, rails]
 
 * TOC
 {:toc}
-
 <hr>
 
 psql tips
@@ -352,4 +351,11 @@ run psql in a running Docker container:
 
 ```sh
 $ docker exec -it iceperk_db_1 psql -U 'postgres' -d iceperk_development
+```
+
+(how to) get timezone offset
+----------------------------
+
+```sql
+SELECT * FROM pg_timezone_names WHERE name='Europe/Moscow';
 ```

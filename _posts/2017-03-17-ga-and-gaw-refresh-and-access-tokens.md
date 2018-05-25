@@ -7,7 +7,7 @@ comments: true
 categories: [ga, gaw]
 ---
 
-- <https://developers.google.com/adwords/api/docs/guides/authentication>
+1. <https://developers.google.com/adwords/api/docs/guides/authentication>
 
 GA and GAW use both refresh and access tokens however there are differences in
 how we use them in our apps.

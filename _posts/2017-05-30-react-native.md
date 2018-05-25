@@ -13,7 +13,8 @@ categories: [react-native]
 {:toc}
 <hr>
 
-## networking
+networking
+----------
 
 <https://facebook.github.io/react-native/docs/network.html>
 
@@ -44,7 +45,8 @@ async function getUsers () {
 }
 ```
 
-## linking native libraries
+linking native libraries
+------------------------
 
 <http://facebook.github.io/react-native/docs/linking-libraries-ios.html>
 
@@ -67,7 +69,8 @@ native libraries can be linked:
   this method is for independent static libraries that ship with RN -
   they are not included by default so as not to impact binary size.
 
-## component naming conventions and file structure
+component naming conventions and file structure
+-----------------------------------------------
 
 1. <https://github.com/react-toolbox/react-toolbox/issues/98>
 

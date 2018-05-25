@@ -7,7 +7,7 @@ comments: true
 categories: [rspec]
 ---
 
-<http://rspec.info/blog/2014/05/notable-changes-in-rspec-3/>
+1. <http://rspec.info/blog/2014/05/notable-changes-in-rspec-3/>
 
 RSpec before hooks (usually configured in _spec/rails_helper.rb_):
 

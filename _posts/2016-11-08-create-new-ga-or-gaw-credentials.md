@@ -13,14 +13,16 @@ steps to get new GAW or GA credentials.
 
 <https://github.com/googleads/google-api-ads-ruby/wiki/API-access-using-own-credentials-%28installed-application-flow%29>
 
-### create (or get) OAuth 2.0 credentials in Google API Console
+create (or get) OAuth 2.0 credentials in Google API Console
+-----------------------------------------------------------
 
 - select project in top left menu (say, `adwords-api`)
 - `Credentials` (left sidebar) → `Credentials` → `Credentials` (tab)
 
 here you can find OAuth 2.0 client ID and client secret.
 
-### get developer token in Google AdWords
+get developer token in Google AdWords
+-------------------------------------
 
 we have only one developer token (obtained for manager account) for
 all our projects (including umka).
@@ -30,7 +32,8 @@ all our projects (including umka).
 
 here you can find developer token.
 
-### generate access and refresh tokens
+generate access and refresh tokens
+----------------------------------
 
 - save
   [setup_oauth2.rb](https://github.com/googleads/google-api-ads-ruby/blob/master/adwords_api/examples/v201607/misc/setup_oauth2.rb)

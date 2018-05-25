@@ -15,9 +15,10 @@ information about [Google Analytics](https://analytics.google.com) and its API.
 {:toc}
 <hr>
 
-## Google Analytics (account, tracking and view IDs)
+Google Analytics (account, tracking and view IDs)
+-------------------------------------------------
 
-<https://analytics.google.com/analytics/web/#management/Settings>
+1. <https://analytics.google.com/analytics/web/#management/Settings>
 
 Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
@@ -70,7 +71,8 @@ NOTE: not displayed in UI
 - usage: API (e.g. `analytics.data.ga.get`)
 - pumba: `counter_id` in `Google::Analytics::Counter`
 
-## API Manager (client IDs)
+API Manager (client IDs)
+------------------------
 
 1. <https://console.developers.google.com>
 
@@ -106,7 +108,8 @@ client IDs for Staging and Production are stored in chef.
 
 API keys are not used in pumba.
 
-## APIs Explorer
+APIs Explorer
+-------------
 
 1. <https://developers.google.com/apis-explorer>
 
@@ -214,9 +217,10 @@ consequently it's necessary to log in one of pumba accounts
 - information related to user counters (e.g. goals)
 - and counter statistics itself
 
-## acquiring refresh and access tokens for application
+acquiring refresh and access tokens for application
+---------------------------------------------------
 
-<https://developers.google.com/api-client-library/ruby/start/get_started>
+1. <https://developers.google.com/api-client-library/ruby/start/get_started>
 
 - application requests access to user data (using `omniauth-google-oauth2` gem) -
   request includes one or more scopes

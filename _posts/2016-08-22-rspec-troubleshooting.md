@@ -9,7 +9,8 @@ categories: [rails, rspec, troubleshooting]
 
 <!-- more -->
 
-### RSpec cannot find any project classes
+RSpec cannot find any project classes
+-------------------------------------
 
 ```sh
 NameError: uninitialized constant TestService
@@ -39,7 +40,8 @@ also _spec/rails_helper.rb_ requires _spec/spec_helper.rb_.
 --require rails_helper
 ```
 
-### empty response when rendering views in specs
+empty response when rendering views in specs
+--------------------------------------------
 
 rendering views mysteriously returns empty string even though proper template
 must have been found (if renamed it's not found).
@@ -53,7 +55,8 @@ this line in your spec:
 render_views
 ```
 
-### Guard cannot find `rspec`
+Guard cannot find `rspec`
+-------------------------
 
 ```sh
 bundler: failed to load command: rspec (/Users/tap/.rbenv/versions/2.3.1/bin/rspec)

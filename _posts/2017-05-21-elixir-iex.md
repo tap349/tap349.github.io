@@ -13,16 +13,26 @@ categories: [elixir, iex]
 {:toc}
 <hr>
 
+<dl>
+  <dt>Erlang shell</dt>
+  <dd>Eshell (`erl`)</dd>
+
+  <dt>Elixir shell</dt>
+  <dd>IEx (`iex`)</dd>
+
+  <dt>UNIX shell</dt>
+  <dd>Bash, etc.</dd>
+</dl>
+
+<hr>
+
 1. <https://hexdocs.pm/iex/IEx.html>
 2. <https://hexdocs.pm/iex/IEx.Helpers.html>
 3. <https://stackoverflow.com/documentation/elixir/1283/iex-console-tips-tricks> (closed)
 4. <http://echobind.com/blog/2017-08-31-tips-and-tricks-for-iex/>
 
-- Erlang shell - Eshell (`erl`)
-- Elixir shell - IEx (`iex`)
-- UNIX shell - Bash, etc.
-
-## .iex.exs
+.iex.exs
+--------
 
 IEx loads the 1st file it finds:
 
@@ -44,7 +54,8 @@ alias Neko.{Achievement, UserRate}
 or else try to use [QuickAlias](https://github.com/thoughtbot/quick_alias)
 package (though it wasn't working for me when I tried it).
 
-## quit IEx
+quit IEx
+--------
 
 1. <http://blog.plataformatec.com.br/2016/03/how-to-quit-the-elixir-shell-iex/>
 
@@ -61,7 +72,8 @@ since Erlang/OTP 20 shell history is supported out of the box - if using it
 instead of `erlang-history` patch all ways to quit IEx allow to save shell
 history except for the last one (`<C-\>`).
 
-## shell history
+shell history
+-------------
 
 <http://nithinbekal.com/posts/elixir-shell-history/>:
 
@@ -142,7 +154,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 using `erlang-history` is no longer required
 (though I haven't found an easy way to uninstall it).
 
-## get result of last evaluated expression (same as `_` in pry)
+get result of last evaluated expression (same as `_` in pry)
+------------------------------------------------------------
 
 1. <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
@@ -157,7 +170,8 @@ optional argument can be passed to return `n`th expression in current
 IEx session: positive number indicates absolute position and negative
 number indicates relative one (say, `v()` == `v(-1)`).
 
-## cancel multiline command
+cancel multiline command
+------------------------
 
 1. <https://stackoverflow.com/questions/27591417>
 2. <https://hexdocs.pm/iex/1.0.5/IEx.html>
@@ -167,7 +181,8 @@ iex> foo =
 ...> #iex:break
 ```
 
-## cancel reverse search
+cancel reverse search
+---------------------
 
 1. <http://readline.kablamo.org/emacs.html>
 
@@ -177,7 +192,8 @@ the first `<D-u>` cancels reverse search but leaves found command if
 any (cursor is located at the end of the line), the second `<D-u>` deletes
 the line from current cursor position backwards to the start of the line.
 
-## recompile current Mix application (same as `reload!` in pry)
+recompile current Mix application (same as `reload!` in pry)
+------------------------------------------------------------
 
 1. <http://stackoverflow.com/a/36494891/3632318>
 
@@ -191,7 +207,8 @@ also it's possible to recompile specific module:
 iex> r(Foo.Bar)
 ```
 
-## suppress long output (same as `;` in pry)
+suppress long output (same as `;` in pry)
+-----------------------------------------
 
 1. <http://stackoverflow.com/a/39208906/3632318>
 
@@ -202,7 +219,8 @@ iex> Foo.bar(); 0
 0
 ```
 
-## don't truncate long lists or strings
+don't truncate long lists or strings
+------------------------------------
 
 1. <https://stackoverflow.com/questions/29566248/elixir-io-inspect-to-not-trim-a-long-list>
 2. <https://hexdocs.pm/elixir/Inspect.Opts.html>

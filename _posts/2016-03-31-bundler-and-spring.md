@@ -16,7 +16,8 @@ intricacies of using `bundle exec`, bundler and spring binstubs.
 {:toc}
 <hr>
 
-## bundler
+bundler
+-------
 
 <http://bundler.io/man/bundle-exec.1.html>:
 
@@ -92,7 +93,8 @@ $ rbenv which rspec
 /Users/tap/.rbenv/versions/2.3.0/bin/rspec
 ```
 
-## spring
+spring
+------
 
 <https://github.com/rails/spring>
 
@@ -128,7 +130,8 @@ to use spring preloader:
   don't use bundler and spring binstubs at the same time since they are
   both stored in _bin/_ directory by default and might overwrite each other.
 
-## okay, wtf to do with all this stuff about bundler and spring?
+okay, wtf to do with all this stuff about bundler and spring?
+-------------------------------------------------------------
 
 - generate spring binstubs for `rails`, `rake` and `rspec`
 - use `rspec` spring binstub in _Guardfile_

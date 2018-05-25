@@ -2,7 +2,7 @@
 layout: post
 title: Facebook - OAuth
 date: 2018-05-10 13:06:44 +0300
-access: private
+access: public
 comments: true
 categories: [facebook]
 ---
@@ -20,7 +20,7 @@ categories: [facebook]
   <dd>Facebook for Developers</dd>
 </dl>
 
-URL:
+URLs:
 
 <dl>
   <dt>request URL</dt>
@@ -249,7 +249,7 @@ and Facebook just returns a new access token with the same scopes.
   Started GET "/auth/facebook/callback?code=<code>&state=<state>" for 127.0.0.1 at 2018-05-11 15:07:41 +0300
   INFO -- omniauth: (facebook) Callback phase initiated.
   Processing by AuthController#callback as HTML
-    Parameters: {"code"=>"AQAkrZOPRkXJ...", "state"=>"dfa379a6c9fad3b74429f5fbfaf17087ad808306d655d899", "provider"=>"facebook"}
+    Parameters: {"code"=>"<code>", "state"=>"dfa379a6c9fad3b74429f5fbfaf17087ad808306d655d899", "provider"=>"facebook"}
   ...
   Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.0ms)
 

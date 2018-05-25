@@ -13,37 +13,37 @@ categories: [facebook]
 {:toc}
 <hr>
 
-user IDs:
+- user IDs
 
-<dl>
-  <dt>UID</dt>
-  <dd>real user ID</dd>
+  <dl>
+    <dt>UID</dt>
+    <dd>real user ID</dd>
 
-  <dt>ASID</dt>
-  <dd>app-scoped ID</dd>
+    <dt>ASID</dt>
+    <dd>app-scoped ID</dd>
 
-  <dt>PSID</dt>
-  <dd>page-scoped ID</dd>
-</dl>
+    <dt>PSID</dt>
+    <dd>page-scoped ID</dd>
+  </dl>
 
-access tokens:
+- access tokens
 
-<dl>
-  <dt>AT</dt>
-  <dd>access token</dd>
+  <dl>
+    <dt>AT</dt>
+    <dd>access token</dd>
 
-  <dt>UAT</dt>
-  <dd>user access token</dd>
+    <dt>UAT</dt>
+    <dd>user access token</dd>
 
-  <dt>AAT</dt>
-  <dd>app access token</dd>
+    <dt>AAT</dt>
+    <dd>app access token</dd>
 
-  <dt>PAT</dt>
-  <dd>page access token</dd>
+    <dt>PAT</dt>
+    <dd>page access token</dd>
 
-  <dt>ATD</dt>
-  <dd>Access Token Debugger</dd>
-</dl>
+    <dt>ATD</dt>
+    <dd>Access Token Debugger</dd>
+  </dl>
 
 <hr>
 
@@ -270,3 +270,5 @@ access tokens
   UAT scopes: manage_pages
   GET v3.0/<page_id>?fields=access_token
   ```
+
+  PAT is short-lived (expires is 1 hour).

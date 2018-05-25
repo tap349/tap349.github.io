@@ -13,9 +13,33 @@ categories: [facebook]
 {:toc}
 <hr>
 
+user IDs:
+
+<dl>
+  <dt>UID</dt>
+  <dd>real user ID</dd>
+
+  <dt>ASID</dt>
+  <dd>app-scoped ID</dd>
+
+  <dt>PSID</dt>
+  <dd>page-scoped ID</dd>
+</dl>
+
+access tokens:
+
 <dl>
   <dt>AT</dt>
-  <dd>Access Token</dd>
+  <dd>access token</dd>
+
+  <dt>UAT</dt>
+  <dd>user access token</dd>
+
+  <dt>AAT</dt>
+  <dd>app access token</dd>
+
+  <dt>PAT</dt>
+  <dd>page access token</dd>
 
   <dt>ATD</dt>
   <dd>Access Token Debugger</dd>
@@ -212,15 +236,9 @@ to predict when user is close to running out of money.
 user IDs
 --------
 
-user IDs:
-
 - real user ID (UID)
 
-  you can use it to open user's Facebook page:
-
-  ```
-  https://facebook.com/<UID>
-  ```
+  it can be used to open user's Facebook page (`https://facebook.com/<UID>`).
 
 - app-scoped ID (ASID)
 
@@ -236,3 +254,19 @@ user IDs:
   > When a person interacts with a business via Messenger, an ID is created
   > for the specific Page associated with the bot in Messenger, which is called
   > Page-scoped ID.
+
+access tokens
+-------------
+
+1. <https://developers.facebook.com/docs/facebook-login/access-tokens>
+
+- user access token (UAT)
+- app access token (AAT)
+- page access token (PAT)
+
+  obtain PAT:
+
+  ```
+  UAT scopes: manage_pages
+  GET v3.0/me/adaccounts?fields=id,account_id,name,activities{event_type,event_time,extra_data}
+  ```

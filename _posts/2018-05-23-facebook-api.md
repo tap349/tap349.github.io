@@ -208,3 +208,31 @@ sample response:
 available balance in `funding_source_details` is decreased every day - on
 every `ad_account_billing_charge` event, I guess. you can parse this string
 to predict when user is close to running out of money.
+
+user IDs
+--------
+
+user IDs:
+
+- real user ID (UID)
+
+  you can use it to open user's Facebook page:
+
+  ```
+  https://facebook.com/<UID>
+  ```
+
+- app-scoped ID (ASID)
+
+  > <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
+  >
+  > When a person uses Facebook Login on a website or a mobile app, an ID is
+  > created for the specific Facebook app, which is called app-scoped ID.
+
+- page-scoped ID (PSID)
+
+  > <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
+  >
+  > When a person interacts with a business via Messenger, an ID is created
+  > for the specific Page associated with the bot in Messenger, which is called
+  > Page-scoped ID.

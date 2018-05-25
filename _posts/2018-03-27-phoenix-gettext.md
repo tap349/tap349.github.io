@@ -225,6 +225,6 @@ tips
 ```po
 msgid "authentication success"
 msgstr ""
-"line1\n"
-"line2"
+"Congratulations!\n"
+"You're authenticated"
 ```

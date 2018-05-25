@@ -15,13 +15,25 @@ categories: [facebook]
 
 1. <https://paw.cloud/docs/examples/facebook-api>
 
-- FD - Facebook for Developers
+<dl>
+  <dt>FD</dt>
+  <dd>Facebook for Developers</dd>
+</dl>
 
-URLs:
+URL:
 
-- request URL (<http://myapp.com:4000/auth/facebook>)
-- authorize URL (aka authorization URL) (<https://www.facebook.com/dialog/oauth>)
-- redirect URI (aka callback URL) (<http://myapp.com:4000/auth/facebook/callback>)
+<dl>
+  <dt>request URL</dt>
+  <dd><http://myapp.com:4000/auth/facebook></dd>
+
+  <dt>authorize URL (aka authorization URL)</dt>
+  <dd><https://www.facebook.com/dialog/oauth></dd>
+
+  <dt>redirect URI (aka callback URL)</dt>
+  <dd><http://myapp.com:4000/auth/facebook/callback></dd>
+</dl>
+
+<hr>
 
 whitelist redirect URI
 ----------------------

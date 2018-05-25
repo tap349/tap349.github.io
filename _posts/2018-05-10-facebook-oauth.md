@@ -16,11 +16,7 @@ categories: [facebook]
 <dl>
   <dt>FD</dt>
   <dd>Facebook for Developers</dd>
-</dl>
 
-URLs:
-
-<dl>
   <dt>request URL</dt>
   <dd>http://myapp.com:4000/auth/facebook</dd>
 

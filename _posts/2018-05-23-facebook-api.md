@@ -13,8 +13,13 @@ categories: [facebook]
 {:toc}
 <hr>
 
-- AT - Access Token Debugger
-- ATD - Access Token Debugger
+<dl>
+  <dt>AT</dt>
+  <dd>Access Token</dd>
+
+  <dt>ATD</dt>
+  <dd>Access Token Debugger</dd>
+</dl>
 
 Facebook Login
 --------------

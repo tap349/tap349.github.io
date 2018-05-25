@@ -13,37 +13,45 @@ categories: [facebook]
 {:toc}
 <hr>
 
-- user IDs
+<table>
+  <tr>
+    <td>user IDs:</td>
+    <td>
+      <dl>
+        <dt>UID</dt>
+        <dd>real user ID</dd>
 
-  <dl>
-    <dt>UID</dt>
-    <dd>real user ID</dd>
+        <dt>ASID</dt>
+        <dd>app-scoped ID</dd>
 
-    <dt>ASID</dt>
-    <dd>app-scoped ID</dd>
+        <dt>PSID</dt>
+        <dd>page-scoped ID</dd>
+      </dl>
+    </td>
+  </tr>
 
-    <dt>PSID</dt>
-    <dd>page-scoped ID</dd>
-  </dl>
+  <tr>
+    <td>access tokens</td>
+    <td>
+      <dl>
+        <dt>AT</dt>
+        <dd>access token</dd>
 
-- access tokens
+        <dt>UAT</dt>
+        <dd>user access token</dd>
 
-  <dl>
-    <dt>AT</dt>
-    <dd>access token</dd>
+        <dt>AAT</dt>
+        <dd>app access token</dd>
 
-    <dt>UAT</dt>
-    <dd>user access token</dd>
+        <dt>PAT</dt>
+        <dd>page access token</dd>
 
-    <dt>AAT</dt>
-    <dd>app access token</dd>
-
-    <dt>PAT</dt>
-    <dd>page access token</dd>
-
-    <dt>ATD</dt>
-    <dd>Access Token Debugger</dd>
-  </dl>
+        <dt>ATD</dt>
+        <dd>Access Token Debugger</dd>
+      </dl>
+    </td>
+  </tr>
+</table>
 
 <hr>
 

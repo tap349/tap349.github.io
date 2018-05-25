@@ -13,12 +13,21 @@ categories: [react-native, android]
 {:toc}
 <hr>
 
+<dl>
+  <dt>IAB</dt>
+  <dd>In-app Billing</dd>
+
+  <dt>GP</dt>
+  <dd>Google Play</dd>
+
+  <dt>GPC</dt>
+  <dd>Google Play Console</dd>
+</dl>
+
+<hr>
+
 1. <https://developer.android.com/google/play/billing/index.html>
 2. <https://developer.android.com/google/play/billing/billing_subscriptions.html>
-
-- IAB - In-app Billing
-- GP - Google Play
-- GPC - Google Play Console
 
 implement subscriptions in application
 --------------------------------------

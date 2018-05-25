@@ -13,8 +13,6 @@ categories: [facebook]
 {:toc}
 <hr>
 
-1. <https://paw.cloud/docs/examples/facebook-api>
-
 <dl>
   <dt>FD</dt>
   <dd>Facebook for Developers</dd>
@@ -27,13 +25,15 @@ URLs:
   <dd>http://myapp.com:4000/auth/facebook</dd>
 
   <dt>authorize URL (aka authorization URL)</dt>
-  <dd><https://www.facebook.com/dialog/oauth></dd>
+  <dd>https://www.facebook.com/dialog/oauth</dd>
 
   <dt>redirect URI (aka callback URL)</dt>
-  <dd><http://myapp.com:4000/auth/facebook/callback></dd>
+  <dd>http://myapp.com:4000/auth/facebook/callback</dd>
 </dl>
 
 <hr>
+
+1. <https://paw.cloud/docs/examples/facebook-api>
 
 whitelist redirect URI
 ----------------------

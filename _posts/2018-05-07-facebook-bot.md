@@ -13,10 +13,15 @@ categories: [facebook]
 {:toc}
 <hr>
 
+<dl>
+  <dt>FD</dt>
+  <dd>Facebook for Developers</dd>
+</dl>
+
+<hr>
+
 1. <https://developers.facebook.com/docs/messenger-platform>
 2. <https://www.youtube.com/playlist?list=PLGhhbubwuDyTJJffHoLtIiQZYlv3XbUl->
-
-- FD - Facebook for Developers
 
 change language
 ---------------

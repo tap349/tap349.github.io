@@ -13,13 +13,20 @@ categories: [react-native, ios]
 {:toc}
 <hr>
 
+<dl>
+  <dt>IC</dt>
+  <dd>iTunes Connect</dd>
+
+  <dt>IAP</dt>
+  <dd>in-app purchase</dd>
+</dl>
+
+<hr>
+
 1. [Workflow for configuring in-app purchases](https://help.apple.com/itunes-connect/developer/#/devb57be10e7)
 2. [In-App Purchase Programming Guide](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Introduction.html)
 3. <https://www.raywenderlich.com/154737/app-purchases-auto-renewable-subscriptions-tutorial>
 4. <https://distriqt.github.io/ANE-InAppBilling/s.Apple%20In-App%20Purchases>
-
-- IC - iTunes Connect
-- IAP - in-app purchase
 
 implement subscriptions in application
 --------------------------------------

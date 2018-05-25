@@ -13,8 +13,6 @@ categories: [phoenix, gettext]
 {:toc}
 <hr>
 
-1. <http://blog.plataformatec.com.br/2016/03/using-gettext-to-internationalize-a-phoenix-application/>
-
 <dl>
   <dt>POT file</dt>
   <dd>
@@ -22,6 +20,10 @@ categories: [phoenix, gettext]
     actually contain translated strings.
   </dd>
 </dl>
+
+<hr>
+
+1. <http://blog.plataformatec.com.br/2016/03/using-gettext-to-internationalize-a-phoenix-application/>
 
 configuration
 -------------

@@ -9,7 +9,7 @@ categories: [jekyll]
 
 <!-- more -->
 
-- <http://downtothewire.io/2015/08/15/configuring-jekyll-for-user-and-project-github-pages/>
+1. <http://downtothewire.io/2015/08/15/configuring-jekyll-for-user-and-project-github-pages/>
 
 all styles are gone
 -------------------

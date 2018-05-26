@@ -203,6 +203,7 @@ add Sass loader
 > In the past it was a job for extract-text-webpack-plugin.
 > Unfortunately said plugin does not play well with webpack 4.
 > mini-css-extract-plugin is here to overcome those issues.
+>
 > NOTE: Make sure to update webpack to version 4.2.0. Otherwise
 > mini-css-extract-plugin won’t work!
 
@@ -230,6 +231,13 @@ add Sass loader
   > optimization.minimizer overrides the defaults provided by webpack,
   > so make sure to also specify a JS minimizer
 
+  > <https://github.com/sass/node-sass#includepaths>
+  >
+  > **includePaths**
+  >
+  > An array of paths that LibSass can look in to attempt to resolve
+  > your @import declarations.
+
   ```javascript
   // assets/webpack.config.js
 
@@ -243,8 +251,9 @@ add Sass loader
     module: {
       rules: [
         {
-          test: /\.(css|scss)$/,
+          test: /\.(css|sass|scss)$/,
           use: [
+            // fallback to style-loader in development
             devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
             'sass-loader',
@@ -254,8 +263,9 @@ add Sass loader
     },
     plugins: [
       new MiniCssExtractPlugin({
-        // I guess this filename is relative to output.path
+        // I guess these filenames are relative to output.path
         filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
+        chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
       }),
     ],
     optimization: {
@@ -266,3 +276,7 @@ add Sass loader
     },
   };
   ```
+
+  I haven't enabled CSS source maps in Webpack config - see
+  [Source maps](https://github.com/webpack-contrib/sass-loader#source-maps)
+  on how to do it.

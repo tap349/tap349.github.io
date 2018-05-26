@@ -37,8 +37,26 @@ add Webpack
 
 ```sh
 $ cd assets
-$ yarn add webpack --dev
+$ yarn add webpack webpack-cli --dev
 ```
+
+you'll be prompted to install `webpack-cli` package when running Webpack
+for the first time (unless you do it now).
+
+add license to package.json
+---------------------------
+
+```diff
+  // assets/package.json
+
+  {
++   "license": "MIT",
+    // ...
+  }
+```
+
+or else Webpack will print `warning package.json: No license field`
+on every compilation.
 
 update .gitignore
 -----------------
@@ -84,26 +102,67 @@ create skeleton Webpack config
 
 1. <http://phoenixframework.org/blog/static-assets>
 
+> <https://webpack.js.org/guides/caching/>
+>
+> A simple way to ensure the browser picks up changed files is by using
+> output.filename substitutions. The [hash] substitution can be used to
+> include a build-specific hash in the filename, however it's even better
+> to use the [chunkhash] substitution which includes a chunk-specific hash
+> in the filename.
+
 ```javascript
 // assets/webpack.config.js
 
 const path = require('path');
 
-module.exports = {
-  entry: './js/app.js',
-  output: {
-    path: path.resolve(__dirname, '../priv/static'),
-    filename: 'js/app.js',
-  },
-  module: {
-    rules: [],
-  },
-  resolve: {
-    extensions: [],
-  },
-  plugins: [],
+module.exports = (_env, argv) => {
+  // see notes below
+  const devMode = argv.mode !== 'production';
+
+  return {
+    entry: 'js/app.js',
+    output: {
+      path: path.resolve(__dirname, '../priv/static'),
+      filename: 'js/app-[chunkhash].js',
+    },
+    module: {
+      rules: [],
+    },
+    resolve: {
+      extensions: [],
+    },
+    plugins: [],
+  };
 };
 ```
+
+### NODE_ENV vs. mode
+
+1. <https://github.com/webpack/webpack/issues/6460#issuecomment-386947990>
+2. <https://webpack.js.org/configuration/configuration-types/#exporting-a-function>
+
+in brief: `NODE_ENV` environment variable is not set by Webpack - export
+function from your Webpack config and use `argv.mode` to get current mode:
+
+```javascript
+// webpack.config.js
+
+module.exports = (_env, argv) => {
+  console.log(argv.mode); // => development or production
+  return {
+    // config
+  };
+};
+```
+
+if you want to use `process.env.NODE_ENV`, set it manually on command line:
+
+```sh
+$ NODE_ENV=production webpack --mode=production
+```
+
+so it looks like Webpack 4 tries to deprecate using `process.env.NODE_ENV`
+in favour of `argv.mode` to fetch current environment inside Webpack config.
 
 add Babel loader
 ----------------
@@ -152,19 +211,23 @@ add Babel loader
   ```javascript
   // assets/webpack.config.js
 
-  module.exports = {
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.js'],
-    },
+  module.exports = (_env, argv) => {
+    const devMode = argv.mode !== 'production';
+
+    return {
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+          },
+        ],
+      },
+      resolve: {
+        extensions: ['.js'],
+      },
+    };
   };
   ```
 
@@ -263,8 +326,6 @@ are entry points under the hood):
   const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
   const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-  const devMode = process.env.NODE_ENV !== 'production';
-
   module.exports = {
     module: {
       rules: [
@@ -280,13 +341,15 @@ are entry points under the hood):
       ],
     },
     resolve: {
-      extensions: ['.js', '.css', '.sass', '.scss'],
+      extensions: ['.css', '.sass', '.scss'],
     },
     plugins: [
       new MiniCssExtractPlugin({
-        // I guess these filenames are relative to output.path
-        filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
-        chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
+        // this filename is relative to output.path
+        //
+        // I use [hash] instead of [chunkhash] (like in output.filename)
+        // because it's used in mini-css-extract-plugin example
+        filename: devMode ? 'css/app.css' : 'css/app-[hash].css',
       }),
     ],
     optimization: {
@@ -301,6 +364,8 @@ are entry points under the hood):
   I haven't enabled CSS source maps in Webpack config - see
   [Source maps](https://github.com/webpack-contrib/sass-loader#source-maps)
   on how to do it.
+
+  TODO: check if chunkFilename is required.
 
 - update entry point file
 

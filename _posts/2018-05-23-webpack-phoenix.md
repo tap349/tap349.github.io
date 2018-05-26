@@ -64,12 +64,20 @@ add package scripts
 
   {
 +   "scripts": {
-+     "start": "yarn run watch",
-+     "watch": "webpack --mode development --watch",
-+     "deploy": "webpack --mode production"
++     "deploy": "webpack --mode production",
++     "watch": "webpack --mode development --watch"
 +   },
   }
 ```
+
+there's no `start` script in _assets/package.json_ of newly generated
+Phoenix project (when it's created with Brunch support) though in some
+tutorials they add it as `yarn run watch`.
+
+TODO: check if `start` script is required
+TODO: check if there are orphaned node processes without `--watch-stdin` option
+TODO: check if using `webpack --watch` instead of `webpack-dev-server` is okay
+      (HMR works)
 
 create skeleton Webpack config
 ------------------------------

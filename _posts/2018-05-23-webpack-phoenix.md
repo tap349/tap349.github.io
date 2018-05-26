@@ -288,3 +288,9 @@ add Sass loader
   I haven't enabled CSS source maps in Webpack config - see
   [Source maps](https://github.com/webpack-contrib/sass-loader#source-maps)
   on how to do it.
+
+copy static assets
+------------------
+
+TODO: CopyWebpackPlugin? (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
+TODO: fill js/app.js and css/app.css (see sith)

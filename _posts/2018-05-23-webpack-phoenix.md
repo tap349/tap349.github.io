@@ -350,6 +350,7 @@ are entry points under the hood):
         // I use [hash] instead of [chunkhash] (like in output.filename)
         // because it's used in mini-css-extract-plugin example
         filename: devMode ? 'css/app.css' : 'css/app-[hash].css',
+        // IDK when chunkFilename is used so I don't set it here
       }),
     ],
     optimization: {
@@ -364,8 +365,6 @@ are entry points under the hood):
   I haven't enabled CSS source maps in Webpack config - see
   [Source maps](https://github.com/webpack-contrib/sass-loader#source-maps)
   on how to do it.
-
-  TODO: check if chunkFilename is required.
 
 - update entry point file
 

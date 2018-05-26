@@ -97,8 +97,11 @@ module.exports = {
   },
   module: {
     rules: [],
-    plugins: [],
   },
+  resolve: {
+    extensions: [],
+  },
+  plugins: [],
 };
 ```
 
@@ -159,6 +162,9 @@ add Babel loader
         },
       ],
     },
+    resolve: {
+      extensions: ['.js'],
+    },
   };
   ```
 
@@ -207,13 +213,17 @@ add Sass loader
 
 > <https://www.valentinog.com/blog/webpack-4-tutorial/#webpack_4_extracting_CSS_to_a_file>
 >
-> webpack doesn’t know to extract CSS to a file.
+> webpack doesn’t know how to extract CSS to a file.
 > In the past it was a job for extract-text-webpack-plugin.
 > Unfortunately said plugin does not play well with webpack 4.
 > mini-css-extract-plugin is here to overcome those issues.
 >
 > NOTE: Make sure to update webpack to version 4.2.0. Otherwise
 > mini-css-extract-plugin won’t work!
+
+don't use CSS file (say, _assets/css/app.scss_) as an entry point
+(just like in Webpacker only JS files are allowed to be packs which
+are entry points under the hood):
 
 - add npm packages
 
@@ -269,6 +279,9 @@ add Sass loader
         },
       ],
     },
+    resolve: {
+      extensions: ['.js', '.css', '.sass', '.scss'],
+    },
     plugins: [
       new MiniCssExtractPlugin({
         // I guess these filenames are relative to output.path
@@ -289,8 +302,24 @@ add Sass loader
   [Source maps](https://github.com/webpack-contrib/sass-loader#source-maps)
   on how to do it.
 
+- update entry point file
+
+  > <https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/552#issuecomment-310538191>
+  >
+  > webpack natively only understands 'js-ish' files and using a 'css-ish' file
+  > as an entry point isn't recommended (imho it should even fail), so you will
+  > get a dummy bundle per css entry to 'handle' that. require/import the css
+  > inside an entrypoint instead and let extract-text-webpack-plugin emit the
+  > CSS file. It removes the CSS from the bundle anyways :)
+
+  ```javascript
+  // assets/js/app.js
+
+  import '../css/app.scss';
+  ```
+
 copy static assets
 ------------------
 
 TODO: CopyWebpackPlugin? (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
-TODO: fill js/app.js and css/app.css (see sith)
+      what about adding hashes? file-loader does it?

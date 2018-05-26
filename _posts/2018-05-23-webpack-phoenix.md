@@ -40,7 +40,7 @@ $ cd assets
 $ yarn add webpack webpack-cli --dev
 ```
 
-you'll be prompted to install `webpack-cli` package when running Webpack
+you'll be prompted to add `webpack-cli` package when running Webpack
 for the first time (unless you do it now).
 
 add license to package.json
@@ -96,6 +96,7 @@ TODO: check if `start` script is required
 TODO: check if there are orphaned node processes without `--watch-stdin` option
 TODO: check if using `webpack --watch` instead of `webpack-dev-server` is okay
       (HMR works)
+TODO: where are map files?
 
 create skeleton Webpack config
 ------------------------------
@@ -167,6 +168,8 @@ in favour of `argv.mode` to fetch current environment inside Webpack config.
 add Babel loader
 ----------------
 
+1. <https://github.com/babel/babel-loader>
+
 > <https://www.npmjs.com/package/babel-preset-env>
 >
 > Without any configuration options, babel-preset-env behaves exactly the
@@ -212,8 +215,6 @@ add Babel loader
   // assets/webpack.config.js
 
   module.exports = (_env, argv) => {
-    const devMode = argv.mode !== 'production';
-
     return {
       module: {
         rules: [
@@ -326,39 +327,43 @@ are entry points under the hood):
   const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
   const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-  module.exports = {
-    module: {
-      rules: [
-        {
-          test: /\.(css|sass|scss)$/,
-          use: [
-            // fallback to style-loader in development
-            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
-            'sass-loader',
-          ],
-        },
+  module.exports = (_env, argv) => {
+    const devMode = argv.mode !== 'production';
+
+    return {
+      module: {
+        rules: [
+          {
+            test: /\.(css|sass|scss)$/,
+            use: [
+              // fallback to style-loader in development
+              devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+              'css-loader',
+              'sass-loader',
+            ],
+          },
+        ],
+      },
+      resolve: {
+        extensions: ['.css', '.sass', '.scss'],
+      },
+      plugins: [
+        new MiniCssExtractPlugin({
+          // this filename is relative to output.path
+          //
+          // I use [hash] instead of [chunkhash] (like in output.filename)
+          // because it's used in mini-css-extract-plugin example
+          filename: devMode ? 'css/app.css' : 'css/app-[hash].css',
+          // IDK when chunkFilename is used so I don't set it here
+        }),
       ],
-    },
-    resolve: {
-      extensions: ['.css', '.sass', '.scss'],
-    },
-    plugins: [
-      new MiniCssExtractPlugin({
-        // this filename is relative to output.path
-        //
-        // I use [hash] instead of [chunkhash] (like in output.filename)
-        // because it's used in mini-css-extract-plugin example
-        filename: devMode ? 'css/app.css' : 'css/app-[hash].css',
-        // IDK when chunkFilename is used so I don't set it here
-      }),
-    ],
-    optimization: {
-      minimizer: [
-        new UglifyJsPlugin({cache: true, parallel: true, sourceMap: true}),
-        new OptimizeCSSAssetsPlugin({}),
-      ],
-    },
+      optimization: {
+        minimizer: [
+          new UglifyJsPlugin({cache: true, parallel: true, sourceMap: true}),
+          new OptimizeCSSAssetsPlugin({}),
+        ],
+      },
+    };
   };
   ```
 
@@ -380,6 +385,55 @@ are entry points under the hood):
   // assets/js/app.js
 
   import '../css/app.scss';
+  ```
+
+add manifest
+------------
+
+1. <https://github.com/danethurber/webpack-manifest-plugin>
+
+> <https://webpack.js.org/concepts/manifest/>
+>
+> As the compiler enters, resolves, and maps out your application, it keeps
+> detailed notes on all your modules. This collection of data is called the
+> "Manifest" and it's what the runtime will use to resolve and load modules
+> once they've been bundled and shipped to the browser.
+
+- add npm package
+
+  ```sh
+  $ yarn add webpack-manifest-plugin --dev
+  ```
+
+- update Webpack config
+
+  ```javascript
+  // assets/webpack.config.js
+
+  const ManifestPlugin = require('webpack-manifest-plugin');
+
+  module.exports = (_env, argv) => {
+    return {
+      plugins: [
+        new ManifestPlugin(),
+      ],
+    };
+  };
+  ```
+
+  > <https://github.com/danethurber/webpack-manifest-plugin>
+  >
+  > This will generate a manifest.json file in your root output directory
+  > with a mapping of all source file names to their corresponding output
+  > file.
+
+  sample _manifest.json_:
+
+  ```json
+  {
+    "main.css": "css/app-c21559a82e348ab1c9df.css",
+    "main.js": "js/app-1fa165a45a93fa8fd917.js"
+  }
   ```
 
 copy static assets

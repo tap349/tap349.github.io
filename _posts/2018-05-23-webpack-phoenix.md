@@ -72,7 +72,7 @@ update .gitignore
 add package scripts
 -------------------
 
-> <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0>
+> <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#b198>
 >
 > Phoenix hooks into the scripts to compile assets, so we need to change
 > the commands.
@@ -96,7 +96,6 @@ TODO: check if `start` script is required
 TODO: check if there are orphaned node processes without `--watch-stdin` option
 TODO: check if using `webpack --watch` instead of `webpack-dev-server` is okay
       (HMR works)
-TODO: where are map files?
 
 create skeleton Webpack config
 ------------------------------
@@ -132,10 +131,10 @@ module.exports = (_env, argv) => {
     resolve: {
       extensions: [],
     },
+    plugins: [],
     optimization: {
       minimizer: []
     },
-    plugins: [],
   };
 };
 ```
@@ -149,7 +148,7 @@ in brief: `NODE_ENV` environment variable is not set by Webpack - export
 function from your Webpack config and use `argv.mode` to get current mode:
 
 ```javascript
-// webpack.config.js
+// assets/webpack.config.js
 
 module.exports = (_env, argv) => {
   console.log(argv.mode); // => development or production
@@ -235,7 +234,7 @@ add Babel loader
   };
   ```
 
-  these are equivalent ways to specify loader:
+  these are equivalent ways to configure loader:
 
   ```javascript
   // 1 (single loader, with options)
@@ -271,6 +270,21 @@ add Babel loader
     ]
   }
   ```
+
+### JS source maps
+
+1. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#3a9b>
+
+```diff
+  // assets/webpack.config.js
+
+  resolve: {
+    // ...
+  },
++ devtool: devMode ? 'eval' : 'cheap-module-source-map',
+```
+
+`cheap-module-source-map` variant is used for production by Webpacker.
 
 add Sass loader
 ---------------
@@ -340,9 +354,9 @@ are entry points under the hood):
             test: /\.(css|sass|scss)$/,
             use: [
               // fallback to style-loader in development
-              {loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader},
-              {loader: 'css-loader', options: {sourceMap: true}},
-              {loader: 'sass-loader', options: {sourceMap: true}},
+              devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+              'css-loader',
+              'sass-loader',
             ],
           },
         ],
@@ -350,29 +364,32 @@ are entry points under the hood):
       resolve: {
         extensions: ['.css', '.sass', '.scss'],
       },
-      optimization: {
-        minimizer: [
-          new UglifyJsPlugin({cache: true, parallel: true, sourceMap: true}),
-          new OptimizeCSSAssetsPlugin({}),
-        ],
-      },
       plugins: [
         new MiniCssExtractPlugin({
           // this filename is relative to output.path
           //
           // I use [hash] instead of [chunkhash] (like in output.filename)
-          // because it's used in mini-css-extract-plugin example
+          // because it's used in basic mini-css-extract-plugin example.
+          //
+          // https://github.com/webpack-contrib/mini-css-extract-plugin#long-term-caching:
+          // use [contenthash] for long term caching.
           filename: devMode ? 'css/app.css' : 'css/app-[hash].css',
           // IDK when chunkFilename is used so I don't set it here
         }),
       ],
+      optimization: {
+        minimizer: [
+          new UglifyJsPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: true,
+          }),
+          new OptimizeCSSAssetsPlugin({}),
+        ],
+      },
     };
   };
   ```
-
-  I haven't enabled CSS source maps in Webpack config - see
-  [Source maps](https://github.com/webpack-contrib/sass-loader#source-maps)
-  on how to do it.
 
 - update entry point file
 
@@ -389,6 +406,56 @@ are entry points under the hood):
 
   import '../css/app.scss';
   ```
+
+### CSS source maps
+
+1. <https://github.com/webpack-contrib/mini-css-extract-plugin/issues/141>
+
+- `devtool` Webpack option has no effect on CSS source maps
+
+  most likely it's used to enable JS source maps only.
+
+- `sourceMap` options of Sass and CSS loaders don't work
+
+  > <https://github.com/webpack-contrib/sass-loader#source-maps>
+  >
+  > To enable CSS source maps, you'll need to pass the sourceMap option
+  > to the sass-loader and the css-loader.
+
+  ```javascript
+  // assets/webpack.config.js
+
+  {
+    test: /\.(css|sass|scss)$/,
+    use: [
+      devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+      {loader: 'css-loader', options: {sourceMap: true}},
+      {loader: 'sass-loader', options: {sourceMap: true}},
+    ],
+  },
+  ```
+
+  =\> no CSS source maps are generated.
+
+solution is to add `map: {inline: false}` CSS processor option (`cssnano`
+minifier is used by default) in `OptimizeCSSAssetsPlugin` configuration:
+
+```diff
+  // assets/webpack.config.js
+
+  optimization: {
+    minimizer: [
+      // ...
+-     new OptimizeCSSAssetsPlugin({}),
++     new OptimizeCSSAssetsPlugin({
++       cssProcessorOptions: {
++         discardComments: {removeAll: true},
++         map: {inline: false},
++       },
+      }),
+    ],
+  },
+```
 
 add manifest
 ------------

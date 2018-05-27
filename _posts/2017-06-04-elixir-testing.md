@@ -235,12 +235,11 @@ $ mix test --trace
 to make pry work in tests run `mix test` in IEx session:
 
 ```sh
-$ iex -S mix test
+$ alias iex='iex -S mix'
+$ iex test --trace
 ```
 
-in my case `iex` is aliased to `iex -S mix` so type just `iex test`.
-
-NOTE: test will time out after 60000ms by default:
+test will time out after 60000ms by default unless `--trace` option is used:
 
 ```
 ** (ExUnit.TimeoutError) test timed out after 60000ms. You can change the timeout:

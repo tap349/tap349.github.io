@@ -132,6 +132,9 @@ module.exports = (_env, argv) => {
     resolve: {
       extensions: [],
     },
+    optimization: {
+      minimizer: []
+    },
     plugins: [],
   };
 };
@@ -337,15 +340,21 @@ are entry points under the hood):
             test: /\.(css|sass|scss)$/,
             use: [
               // fallback to style-loader in development
-              devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-              'css-loader',
-              'sass-loader',
+              {loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader},
+              {loader: 'css-loader', options: {sourceMap: true}},
+              {loader: 'sass-loader', options: {sourceMap: true}},
             ],
           },
         ],
       },
       resolve: {
         extensions: ['.css', '.sass', '.scss'],
+      },
+      optimization: {
+        minimizer: [
+          new UglifyJsPlugin({cache: true, parallel: true, sourceMap: true}),
+          new OptimizeCSSAssetsPlugin({}),
+        ],
       },
       plugins: [
         new MiniCssExtractPlugin({
@@ -357,12 +366,6 @@ are entry points under the hood):
           // IDK when chunkFilename is used so I don't set it here
         }),
       ],
-      optimization: {
-        minimizer: [
-          new UglifyJsPlugin({cache: true, parallel: true, sourceMap: true}),
-          new OptimizeCSSAssetsPlugin({}),
-        ],
-      },
     };
   };
   ```

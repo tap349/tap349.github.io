@@ -451,7 +451,8 @@ _.deliver/config_:
 AUTO_VERSION=build-date+git-branch+git-revision
 ```
 
-resulting release version (example): `0.1.0+20171015-master-be9ffde`.
+resulting release version (example): `neko_0.2.0+20180527-master-6bfed7e`
+(`neko` is application name here).
 
 NOTE: application version must be incremented manually in _mix.exs_.
 
@@ -567,6 +568,9 @@ $ mix edeliver deploy release production --version=<previous_release_version>
 $ mix edeliver migrate production down --version=<previous_migration_version>
 $ ssh devops@billing sudo systemctl restart billing_prod
 ```
+
+release version is defined as `AUTO_VERSION` in _.deliver/config_
+(see `auto-versioning` section above).
 
 management
 ----------

@@ -247,6 +247,11 @@ user IDs
   > When a person uses Facebook Login on a website or a mobile app, an ID is
   > created for the specific Facebook app, which is called app-scoped ID.
 
+  > <https://developers.facebook.com/docs/messenger-platform/send-messages#recipient_ids>
+  >
+  > Please note that user ID's from Facebook Login integrations are app-scoped
+  > and will not work with the Messenger platform.
+
 - page-scoped ID (PSID)
 
   > When a person interacts with a business via Messenger, an ID is created

@@ -65,9 +65,9 @@ macros
 macros don't share a common pattern - just memorize how they are expanded:
 (e.g. `filled(:int?)` => `{ filled? & int? }`).
 
-I've mentioned `value` method that looks like a macro - it just applies
-all specified predicates (joined by conjunction) without introducing any
-additional logic (e.g. `value(:int?) => { int? }`).
+I've mentioned `value` method that looks like a macro - it just applies all
+passed predicates (joined by conjunction) without introducing any additional
+logic (e.g. `value(:int?, min_size?: 3) => { int? & min_size?(3)}`).
 
 it's possible to pass any Dry type into macro:
 

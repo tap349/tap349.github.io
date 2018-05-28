@@ -286,6 +286,7 @@ account linking
 ---------------
 
 1. <https://developers.facebook.com/docs/messenger-platform/identity/account-linking>
+2. <http://blog.99array.com/2017/05/28/facebook-account-linking/>
 
 > <https://medium.com/@philippholly/bbe632c578ca>
 >

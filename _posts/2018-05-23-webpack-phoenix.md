@@ -120,7 +120,8 @@ module.exports = (_env, argv) => {
   const devMode = argv.mode !== 'production';
 
   return {
-    entry: 'js/app.js',
+    // entry point chunk name is main by default
+    entry: {app: 'js/app.js'},
     output: {
       path: path.resolve(__dirname, '../priv/static'),
       filename: 'js/[name]-[chunkhash].js',
@@ -502,8 +503,8 @@ add manifest
 
   ```json
   {
-    "main.css": "css/main-b6889e3643d039f89700.css",
-    "main.js": "js/main-14822afe1edfebfb58bb.js"
+    "app.css": "css/app-b6889e3643d039f89700.css",
+    "app.js": "js/app-14822afe1edfebfb58bb.js"
   }
   ```
 
@@ -532,11 +533,11 @@ $ cd assets
 $ yarn run deploy
 ...
                                 Asset       Size  Chunks             Chunk Names
-    css/main-a8792a1a9c04c2709540.css   74 bytes       0  [emitted]  main
-      js/main-ad744cb644e36e0d32b4.js  644 bytes       0  [emitted]  main
-css/main-a8792a1a9c04c2709540.css.map  190 bytes          [emitted]
-  js/main-ad744cb644e36e0d32b4.js.map   2.18 KiB       0  [emitted]  main
-                        manifest.json  241 bytes          [emitted]
+    css/app-a8792a1a9c04c2709540.css   74 bytes       0  [emitted]  app
+      js/app-ad744cb644e36e0d32b4.js  644 bytes       0  [emitted]  app
+css/app-a8792a1a9c04c2709540.css.map  190 bytes          [emitted]
+  js/app-ad744cb644e36e0d32b4.js.map   2.18 KiB       0  [emitted]  app
+                       manifest.json  241 bytes          [emitted]
 ```
 
 that is why CSS source map has a source file name in _manifest.json_ that
@@ -545,10 +546,10 @@ are used):
 
 ```json
 {
-  "main.css": "css/main-b6889e3643d039f89700.css",
-  "main.js": "js/main-14822afe1edfebfb58bb.js",
-  "main.js.map": "js/main-14822afe1edfebfb58bb.js.map",
-  "css/main-b6889e3643d039f89700.css.map": "css/main-b6889e3643d039f89700.css.map"
+  "app.css": "css/app-b6889e3643d039f89700.css",
+  "app.js": "js/app-14822afe1edfebfb58bb.js",
+  "app.js.map": "js/app-14822afe1edfebfb58bb.js.map",
+  "css/app-b6889e3643d039f89700.css.map": "css/app-b6889e3643d039f89700.css.map"
 }
 ```
 

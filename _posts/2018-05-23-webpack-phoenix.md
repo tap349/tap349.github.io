@@ -123,7 +123,7 @@ module.exports = (_env, argv) => {
     entry: 'js/app.js',
     output: {
       path: path.resolve(__dirname, '../priv/static'),
-      filename: 'js/app-[chunkhash].js',
+      filename: 'js/[name]-[chunkhash].js',
     },
     module: {
       rules: [],
@@ -317,10 +317,14 @@ are entry points under the hood):
 
 - update Webpack config
 
-  > <https://medium.com/@ahmedelgabri/a-chunk-is-an-on-demand-loaded-js-file-https-webpack-js-org-configuration-output-output-4145373573fb>
+  > <https://stackoverflow.com/questions/42523436>
   >
-  > A chunk is an on-demand loaded js file.
-  > A bundle is the normal output of your entry point.
+  > If you don't want all of your code be put into a single huge bundle
+  > you will split it into multiple bundles which are called chunks in
+  > webpack terminology.
+  >
+  > Typically, chunks directly correspond with the output bundles however,
+  > there are some configurations that don't yield a one-to-one relationship.
 
   > <https://github.com/webpack-contrib/mini-css-extract-plugin#minimizing-for-production>
   >
@@ -366,15 +370,12 @@ are entry points under the hood):
       },
       plugins: [
         new MiniCssExtractPlugin({
-          // this filename is relative to output.path
-          //
-          // I use [hash] instead of [chunkhash] (like in output.filename)
-          // because it's used in basic mini-css-extract-plugin example.
+          // filename is relative to output.path
           //
           // https://github.com/webpack-contrib/mini-css-extract-plugin#long-term-caching:
-          // use [contenthash] for long term caching.
-          filename: devMode ? 'css/app.css' : 'css/app-[hash].css',
-          // IDK when chunkFilename is used so I don't set it here
+          // use [contenthash] instead of [hash] for long term caching.
+          filename: devMode ? 'css/[name].css' : 'css/[name]-[hash].css',
+          // IDK when and how chunkFilename is used so I don't set it here
         }),
       ],
       optimization: {
@@ -411,11 +412,11 @@ are entry points under the hood):
 
 1. <https://github.com/webpack-contrib/mini-css-extract-plugin/issues/141>
 
-- `devtool` Webpack option has no effect on CSS source maps
+- `devtool` Webpack option has no effect on generating CSS source maps
 
-  most likely it's used to enable JS source maps only.
+  it looks like it's used to enable JS source maps only.
 
-- `sourceMap` options of Sass and CSS loaders don't work
+- `sourceMap` options of Sass and CSS loaders have no effect as well
 
   > <https://github.com/webpack-contrib/sass-loader#source-maps>
   >
@@ -437,8 +438,8 @@ are entry points under the hood):
 
   =\> no CSS source maps are generated.
 
-solution is to add `map: {inline: false}` CSS processor option (`cssnano`
-minifier is used by default) in `OptimizeCSSAssetsPlugin` configuration:
+solution is to add `map: {inline: false}` CSS processor (`cssnano`
+by default) option to `OptimizeCSSAssetsPlugin` configuration:
 
 ```diff
   // assets/webpack.config.js
@@ -501,10 +502,58 @@ add manifest
 
   ```json
   {
-    "main.css": "css/app-c21559a82e348ab1c9df.css",
-    "main.js": "js/app-1fa165a45a93fa8fd917.js"
+    "main.css": "css/main-b6889e3643d039f89700.css",
+    "main.js": "js/main-14822afe1edfebfb58bb.js"
   }
   ```
+
+### source file name of CSS source map
+
+`webpack-manifest-plugin` uses chunk path (filename) as a source file name
+when chunk name is empty:
+
+```javascript
+// https://github.com/danethurber/webpack-manifest-plugin/blob/v2.0.3/lib/plugin.js#L67
+
+var name = chunk.name ? chunk.name : null;
+
+if (name) {
+  name = name + '.' + this.getFileType(path);
+} else {
+  // For nameless chunks, just map the files directly.
+  name = path;
+}
+```
+
+this is the case with CSS source map (note chunk name of CSS source map):
+
+```
+$ yarn run deploy
+...
+                                Asset       Size  Chunks             Chunk Names
+    css/main-a8792a1a9c04c2709540.css   74 bytes       0  [emitted]  main
+      js/main-ad744cb644e36e0d32b4.js  644 bytes       0  [emitted]  main
+css/main-a8792a1a9c04c2709540.css.map  190 bytes          [emitted]
+  js/main-ad744cb644e36e0d32b4.js.map   2.18 KiB       0  [emitted]  main
+                        manifest.json  241 bytes          [emitted]
+```
+
+that is why CSS source map has a source file name in _manifest.json_ that
+looks different compared to other source file names (in which chunk names
+are used):
+
+```json
+{
+  "main.css": "css/main-b6889e3643d039f89700.css",
+  "main.js": "js/main-14822afe1edfebfb58bb.js",
+  "main.js.map": "js/main-14822afe1edfebfb58bb.js.map",
+  "css/main-b6889e3643d039f89700.css.map": "css/main-b6889e3643d039f89700.css.map"
+}
+```
+
+IDK who to blame for this behaviour and how to change it - the only difference
+with Webpacker is that the latter uses `extract-text-webpack-plugin` instead of
+`mini-css-extract-plugin` to extract CSS files.
 
 copy static assets
 ------------------

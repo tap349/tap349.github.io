@@ -496,7 +496,7 @@ add manifest
   >
   > This will generate a manifest.json file in your root output directory
   > with a mapping of all source file names to their corresponding output
-  > file.
+  > files.
 
   sample _manifest.json_:
 
@@ -528,6 +528,7 @@ if (name) {
 this is the case with CSS source map (note chunk name of CSS source map):
 
 ```
+$ cd assets
 $ yarn run deploy
 ...
                                 Asset       Size  Chunks             Chunk Names

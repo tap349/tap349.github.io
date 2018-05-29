@@ -16,6 +16,12 @@ categories: [facebook]
 <dl>
   <dt>FD</dt>
   <dd>Facebook for Developers</dd>
+
+  <dt>PAT</dt>
+  <dd>page access token</dd>
+
+  <dt>ATD</dt>
+  <dd>Access Token Debugger</dd>
 </dl>
 
 <hr>
@@ -119,3 +125,30 @@ add `messaging_account_linking` page subscription field in Messenger settings:
 > Edit Page Subscription Fields
 
 - [x] `messaging_account_linking`
+
+### Error validating access token: The user has not authorized application
+
+I got this error when I tried to send login button to user on behalf of
+Messenger application (chat bot which sends and receives messages using
+Facebook Page) using PAT => this access token appears to be invalid.
+
+**solution**
+
+1. <https://developers.facebook.com/docs/facebook-login/access-tokens/debugging-and-error-handling#deauthorizedapp>
+
+the point is that I have de-authorized Messenger application (by removing
+business integration in Facebook account settings) making token generated
+for this page invalid.
+
+ATD shows error for this PAT now:
+
+```
+Error validating access token: The user has not authorized application <app_id>
+```
+
+solution is to authorize application once again by generating new PAT:
+
+| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
+| `Token Generation` (section) → `Page` (combobox)
+
+select required page and copy generated PAT into Messenger application.

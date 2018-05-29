@@ -437,7 +437,7 @@ are entry points under the hood):
   },
   ```
 
-  =\> no CSS source maps are generated.
+  => no CSS source maps are generated.
 
 solution is to add `map: {inline: false}` CSS processor (`cssnano`
 by default) option to `OptimizeCSSAssetsPlugin` configuration:

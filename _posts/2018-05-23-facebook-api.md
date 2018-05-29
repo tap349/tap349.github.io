@@ -286,16 +286,3 @@ access tokens
   ```
 
   PATs are short-lived (expire in 1 hour).
-
-account linking
----------------
-
-1. <https://developers.facebook.com/docs/messenger-platform/identity/account-linking>
-2. <http://blog.99array.com/2017/05/28/facebook-account-linking/>
-
-> <https://medium.com/@philippholly/bbe632c578ca>
->
-> AFAIK yes, you can open a webview with your own hosted website where you grab
-> the messenger user id, and tell the user to click on “login with facebook”.
-> Then you get the APP ID and can save a relation in your database with the
-> messenger user id.

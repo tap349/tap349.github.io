@@ -85,3 +85,37 @@ notes
 > When a person interacts with a business via Messenger, an ID is created
 > for the specific Page associated with the bot in Messenger, which is
 > called Page-scoped ID.
+
+account linking
+---------------
+
+1. <https://developers.facebook.com/docs/messenger-platform/identity/account-linking>
+2. <http://blog.99array.com/2017/05/28/facebook-account-linking/>
+
+> <https://medium.com/@philippholly/bbe632c578ca>
+>
+> AFAIK yes, you can open a webview with your own hosted website where you grab
+> the messenger user id, and tell the user to click on “login with facebook”.
+> Then you get the APP ID and can save a relation in your database with the
+> messenger user id.
+
+troubleshooting
+---------------
+
+### Account Linking Failed
+
+I see the error in browser when trying to complete account linking flow.
+
+**solution**
+
+1. <https://developers.facebook.com/docs/messenger-platform/reference/webhook-events/messaging_account_linking>
+
+I haven't subscribed my webhook to `messaging_account_linking` page event =>
+add `messaging_account_linking` page subscription field in Messenger settings:
+
+| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
+| `Webhooks` (section) → `Edit events` (button)
+
+> Edit Page Subscription Fields
+
+- [x] `messaging_account_linking`

@@ -81,7 +81,7 @@ billing events:
 - `ad_account_billing_charge` (ad account billed)
 
 ```
-UAT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
+UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
 GET v3.0/me/adaccounts?fields=id,account_id,name,activities{event_type,event_time,extra_data}
 ```
 
@@ -182,7 +182,7 @@ sample response:
 > purchase ads. With manual payments, you won't have a billing threshold.
 
 ```
-UAT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
+UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
 GET v3.0/me/adaccounts?fields=id,account_id,name,is_prepay_account
 ```
 
@@ -206,7 +206,7 @@ sample response:
 1. <https://developers.facebook.com/docs/marketing-api/reference/ad-account/>
 
 ```
-UAT scopes: email,public_profile,ads_management,ads_read,manage_pages,read_insights
+UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
 GET v3.0/me/adaccounts?fields=id,account_id,name,funding_source_details
 ```
 
@@ -232,6 +232,69 @@ sample response:
 available balance in `funding_source_details` is decreased every day - on
 every `ad_account_billing_charge` event, I guess. you can parse this string
 to predict when user is close to running out of money.
+
+### get campaign insights
+
+1. <https://developers.facebook.com/docs/marketing-api/reference/ad-account/>
+
+```
+UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
+GET v3.0/me/adaccounts?fields=campaigns{insights{ctr,cpc,cpm,cpp}}
+```
+
+sample response:
+
+```json
+{
+  "data": [
+    {
+      "campaigns": {
+        "data": [
+          {
+            "insights": {
+              "data": [
+                {
+                  "ctr": "1.201805",
+                  "cpc": "19.106109",
+                  "cpm": "229.61825",
+                  "cpp": "326.688588",
+                  "date_start": "2018-04-30",
+                  "date_stop": "2018-05-29"
+                }
+              ]
+            },
+            "id": "<campaign_id_1>"
+          },
+          {
+            "insights": {
+              "data": [
+                {
+                  "ctr": "1.025733",
+                  "cpc": "34.70614",
+                  "cpm": "355.992442",
+                  "cpp": "361.126323",
+                  "date_start": "2018-04-30",
+                  "date_stop": "2018-05-29"
+                }
+              ]
+            },
+            "id": "<campaign_id_2>"
+          },
+          {
+            "id": "<campaign_id_3>"
+          }
+        ]
+      },
+      "id": "act_<account_id>"
+    }
+  ]
+}
+```
+
+it turns out that `read_insights` permission is not required to read
+insights - it must be sufficient to have `ads_read` permission only.
+
+NOTE: insights are shown/available not for all campaigns - IDK why yet.
 
 user IDs
 --------

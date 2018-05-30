@@ -92,6 +92,20 @@ notes
 > for the specific Page associated with the bot in Messenger, which is
 > called Page-scoped ID.
 
+testing
+-------
+
+you must be application administrator (not page admin) to receive webhooks
+events when user sends a message to page associated with your Messenger app
+(bot):
+
+| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
+| `Token Generation` (section)
+
+> Page token is required to start using the APIs. This page token will have
+> all messenger permissions even if your app is not approved to use them yet,
+> though in this case you will be able to message only app admins.
+
 account linking
 ---------------
 
@@ -129,16 +143,16 @@ add `messaging_account_linking` page subscription field in Messenger settings:
 ### Error validating access token: The user has not authorized application
 
 I got this error when I tried to send login button to user on behalf of
-Messenger application (chat bot which sends and receives messages using
-Facebook Page) using PAT => this access token appears to be invalid.
+Messenger app (chat bot which sends and receives messages using Facebook
+Page) using PAT => this access token appears to be invalid.
 
 **solution**
 
 1. <https://developers.facebook.com/docs/facebook-login/access-tokens/debugging-and-error-handling#deauthorizedapp>
 
-the point is that I have de-authorized Messenger application (by removing
-business integration in Facebook account settings) making token generated
-for this page invalid.
+the point is that I have de-authorized Messenger app (by removing business
+integration in Facebook account settings) making token generated for this
+page invalid.
 
 ATD shows error for this PAT now:
 
@@ -151,4 +165,4 @@ solution is to authorize application once again by generating new PAT:
 | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
 | `Token Generation` (section) → `Page` (combobox)
 
-select required page and copy generated PAT into Messenger application.
+select required page and copy generated PAT into Messenger app.

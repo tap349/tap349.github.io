@@ -120,7 +120,7 @@ module.exports = (_env, argv) => {
   const devMode = argv.mode !== 'production';
 
   return {
-    // entry point chunk name is main by default
+    // entry point chunk name is 'main' by default
     entry: {app: 'js/app.js'},
     output: {
       path: path.resolve(__dirname, '../priv/static'),
@@ -139,6 +139,12 @@ module.exports = (_env, argv) => {
   };
 };
 ```
+
+> <https://webpack.js.org/configuration/entry-context/#naming>
+>
+> If a string or array of strings is passed, the chunk is named main.
+> If an object is passed, each key is the name of a chunk, and the value
+> describes the entrypoint for the chunk.
 
 ### NODE_ENV vs. mode
 

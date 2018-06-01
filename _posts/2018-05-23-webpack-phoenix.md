@@ -55,8 +55,8 @@ add license to package.json
   }
 ```
 
-or else Webpack will print `warning package.json: No license field`
-on every compilation.
+or else Webpack will print `warning package.json: No license field` on every
+compilation.
 
 update .gitignore
 -----------------
@@ -74,8 +74,8 @@ add package scripts
 
 > <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#b198>
 >
-> Phoenix hooks into the scripts to compile assets, so we need to change
-> the commands.
+> Phoenix hooks into the scripts to compile assets, so we need to change the
+> commands.
 
 ```diff
   // assets/package.json
@@ -83,19 +83,28 @@ add package scripts
   {
 +   "scripts": {
 +     "deploy": "webpack --mode production",
-+     "watch": "webpack --mode development --watch"
++     "watch": "webpack --mode development --watch-stdin --color"
 +   },
   }
 ```
 
-there's no `start` script in _assets/package.json_ of newly generated
-Phoenix project (when it's created with Brunch support) though in some
-tutorials they add it as `yarn run watch`.
+there's no `start` script in _assets/package.json_ of newly generated Phoenix
+project (when it's created with Brunch support) though in some tutorials they
+add it as `yarn run watch`.
 
-TODO: check if `start` script is required
-TODO: check if there are orphaned node processes without `--watch-stdin` option
-TODO: check if using `webpack --watch` instead of `webpack-dev-server` is okay
-      (HMR works)
+TODO: check if `start` script is required (`mix phx.digest`?)
+
+### `--watch-stdin` option
+
+```
+$ assets/node_modules/webpack/bin/webpack.js --help
+...
+--watch-stdin, --stdin     Stop watching when stdin stream has ended [boolean]
+```
+
+use `--watch-stdin` option instead of `--watch` one - or else Webpack process
+(watcher running `watch` script from _assets/package.json_) is not killed when
+Phoenix server shuts down and you'll end up with an orphaned Node.js process.
 
 create skeleton Webpack config
 ------------------------------
@@ -516,8 +525,8 @@ add manifest
 
 ### source file name of CSS source map
 
-`webpack-manifest-plugin` uses chunk path (filename) as a source file name
-when chunk name is empty:
+`webpack-manifest-plugin` uses chunk path (filename) as a source file name when
+chunk name is empty:
 
 ```javascript
 // https://github.com/danethurber/webpack-manifest-plugin/blob/v2.0.3/lib/plugin.js#L67
@@ -569,11 +578,32 @@ copy static assets
 TODO: CopyWebpackPlugin? (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
       what about adding hashes? file-loader does it?
 
-add watcher
------------
+add Bootstrap
+-------------
+
+TODO
+
+add links to output bundles in layout
+-------------------------------------
+
+1. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
+
+TODO
+TODO: always use webpack-dev-server because there are no helpers like
+      javascript_pack_tag or stylesheet_pack_tag (like in Webpacker)?
+      that is Phoenix cannot find /css/app.css and /js/app.js because
+      these filenames are with hashes.
+
+add watcher and HMR
+-------------------
+
+TODO: write about the difference between watching and HMR
+
+### watcher
 
 1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
-2. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
+2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#bace>
+3. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
 
 ```
 $ assets/node_modules/webpack/bin/webpack.js --help
@@ -594,3 +624,10 @@ watcher is added in development environment only:
 -   watchers: [],
 +   watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
 ```
+
+### HMR (hot module reloading)
+
+1. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#ec1e>
+
+TODO
+TODO: helpers (see the link above or find other tutorials)

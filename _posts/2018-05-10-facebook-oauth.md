@@ -392,7 +392,7 @@ callback URL twice but are still different.
 - Ueberauth library (Phoenix)
 
   Ueberauth doesn't use `state` authentication parameter to prevent CSRF
-  attacks like Omniauth does (that is Ueberauth doesn't add `state` query
+  attacks like OmniAuth does (that is Ueberauth doesn't add `state` query
   param to authorize URL) but when Ueberauth makes the 2nd request to get
   access token using the same code, Facebook returns `This authorization
   code has been used` error as might be expected.
@@ -454,9 +454,9 @@ browser extensions installed) - try to use another browser (say, Safari).
 
 ***UPDATE***
 
-error is caused by ad blockers - disable these extensions and reload
-the page. or else it's better to whitelist Graph API Explorer page in
-their settings.
+error is caused by ad blockers - disable these extensions and reload the
+page. or else it's better to whitelist Graph API Explorer page in their
+settings.
 
 ### You are not logged in
 
@@ -467,3 +467,44 @@ Facebook response when making request to request URL:
 **solution**
 
 this means that passed redirect URI is not whitelisted (see above).
+
+### [OmniAuth] OmniAuth::Strategies::Facebook::NoAuthorizationCodeError
+
+this erorr occurs when user presses `Cancel` on the first
+
+```
+Started GET "/auth/facebook/callback?error=access_denied&error_code=200&error_description=Permissions%20error&error_reason=user_denied&state=<state>" for 127.0.0.1 at 2018-06-01 14:29:37 +0300
+INFO -- omniauth: (facebook) Callback phase initiated.
+ERROR -- omniauth: (facebook) Authentication failure! no_authorization_code: OmniAuth::Strategies::Facebook::NoAuthorizationCodeError, must pass either a `code` (via URL or by an `fbsr_XXX` signed request cookie)
+```
+
+**solution**
+
+1. <https://github.com/omniauth/omniauth/wiki/FAQ#omniauthfailureendpoint-does-not-redirect-in-development-mode>
+
+> By default, OmniAuth 1.1.0 and later raises an exception in development mode
+> when authentication fails.
+
+=> in case of authentication failure OmniAuth raises exception in development
+mode and redirets to failure page in production mode.
+
+sample failure page URL:
+
+```
+https://myapp.com/auth/failure?message=no_authorization_code&strategy=facebook#_=_
+```
+
+configure OmniAuth `on_failure` behaviour to redirect to failure page in
+development mode as well:
+
+```ruby
+# config/initializers/omniauth.rb
+
+OmniAuth.config.on_failure = proc do |env|
+  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+end
+```
+
+BTW Ueberauth doesn't raise error in both environments but returns
+`Ueberauth.Failure` response instead (adds `ueberauth_failure` key
+with populated `%Ueberauth.Failure{}` struct to `assigns` map).

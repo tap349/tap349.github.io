@@ -583,13 +583,14 @@ $ assets/node_modules/webpack/bin/webpack.js --help
 
 watcher is added in development environment only:
 
-```elixir
-# config/dev.exs
+```diff
+  # config/dev.exs
 
-config :sithex, SithexWeb.Endpoint,
-  http: [port: 4000],
-  debug_errors: true,
-  code_reloader: true,
-  check_origin: false,
-  watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
+  config :my_app, MyAppWeb.Endpoint,
+    http: [port: 4000],
+    debug_errors: true,
+    code_reloader: true,
+    check_origin: false,
+-   watchers: [],
++   watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
 ```

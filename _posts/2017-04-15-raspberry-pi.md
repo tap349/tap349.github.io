@@ -295,7 +295,7 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   ```sh
   $ sudo su
   # iwlist wlan0 scan | less
-  # wpa_passphrase <myssid> <mypassphrase> >> /etc/network/interfaces
+  # wpa_passphrase <MY_SSID> <MY_PASSPHRASE> >> /etc/network/interfaces
   ```
 
 - configure `wlan0` interface
@@ -306,8 +306,8 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   allow-hotplug wlan0
   auto wlan0
   iface wlan0 inet dhcp
-      wpa-ssid <myssid>
-      wpa-psk <mypsk>
+      wpa-ssid <MY_SSID>
+      wpa-psk <MY_PSK>
 
   # don't forget to remove output from wpa_passphrase
   ```
@@ -333,8 +333,8 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
   update_config=1
   network={
-          ssid="<myssid>"
-          psk=<mypsk>
+          ssid="<MY_SSID>"
+          psk=<MY_PSK>
   }
   ```
 
@@ -346,10 +346,10 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   network section above can be generated using `wpa_passphrase` command:
 
   ```sh
-  $ wpa_passphrase myssid mypassphrase
+  $ wpa_passphrase MY_SSID MY_PASSPHRASE
   network={
-          ssid="myssid"
-          #psk="mypassphrase"
+          ssid="MY_SSID"
+          #psk="MY_PASSPHRASE"
           psk=af3492c3f8040dd43589d2700bbeacc7d6aa60e91f2225fe29898769fa139965
   }
   ```
@@ -362,12 +362,12 @@ NOTE: pay attention to using double quotes around PSK (pre-shared key) in
   update_config=1
 
   network={
-          ssid="<myssid_1>"
-          psk=<mypsk_1>
+          ssid="<MY_SSID_1>"
+          psk=<MY_PSK_1>
   }
   network={
-          ssid="<myssid_2>"
-          psk="<mypassphrase_2>"
+          ssid="<MY_SSID_2>"
+          psk="<MY_PASSPHRASE_2>"
   }
   ```
 

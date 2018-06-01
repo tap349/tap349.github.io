@@ -63,7 +63,7 @@ GPC:
 1. <https://support.google.com/googleplay/android-developer/answer/186113?hl=en>
 2. <https://developer.android.com/google/play/billing/billing_admin.html#license_key>
 
-| GPC: `All applications` → `<my_app>`
+| GPC: `All applications` → `<MY_APP>`
 | `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
 
 _android/app/src/main/res/values/strings.xml_:
@@ -125,7 +125,7 @@ at the same time it's not required to publish (rollout) application - you
 can both set up subscription and test it on real device without publishing
 (see `test with a test subscription` section).
 
-| GPC: `All applications` → `<my_app>`
+| GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) → `CREATE RELEASE` (button)
 
 > New release to alpha
@@ -166,7 +166,7 @@ about `Add applicable tax on top of price` tax option:
 NOTE: you can't set up subscription until you upload APK with IAB permission
       (see `upload APK to alpha` section).
 
-| GPC: `All applications` → `<my_app>`
+| GPC: `All applications` → `<MY_APP>`
 | `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button)
 
 - `Product ID` (input): `com.iceperk.iceperkapp.sub.noads.monthly`
@@ -507,7 +507,7 @@ so make sure to add payment info for this account before trying to make a purcha
 - `Add email addresses` (input): `*.tap349@gmail.com`
 - `CREATE LIST` (button)
 
-| GPC: `All applications` → `<my_app>`
+| GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) → `Manage testers` (section)
 
 - `Choose a testing method` (combobox): `Closed Alpha Testing`
@@ -522,7 +522,7 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
       (either open or closed) - don't publish if you will test application by
       installing and running it on real device with `adb`.
 
-| GPC: `All applications` → `<my_app>`
+| GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) → `EDIT RELEASE` (button)
 
 > New release to alpha
@@ -536,12 +536,12 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
 
 #### open opt-in URL in browser
 
-| GPC: `All applications` → `<my_app>`
+| GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `MANAGE ALPHA` (button) → `Manage testers` (section) → `Opt-in URL` (input)
 
 - open link in browser
 - `BECOME A TESTER` (button)
-- `Download the <my_app> app on Google Play` (link)
+- `Download the <MY_APP> app on Google Play` (link)
 - install application from Google Play Store
 - try to make a purchase
 
@@ -597,7 +597,7 @@ test account email each time subscription is renewed or cancelled).
 
 ### real subscriptions
 
-| GPC: `All applications` → `<my_app>`
+| GPC: `All applications` → `<MY_APP>`
 | `Financial reports` (left menu) → `Subscriptions`
 
 statistics are collected with 2 days delay (there're no data for the last 2 days).

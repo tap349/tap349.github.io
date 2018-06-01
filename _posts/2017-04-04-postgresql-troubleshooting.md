@@ -89,7 +89,7 @@ psql: could not connect to server: Connection refused
 -----------------------------------------------------
 
 ```
-$ psql -d <my_database>
+$ psql -d <MY_DATABASE>
 psql: could not connect to server: Connection refused
   Is the server running locally and accepting
   connections on Unix domain socket "/tmp/.s.PGSQL.5432"?

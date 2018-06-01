@@ -21,7 +21,7 @@ categories: [markdown]
 
 - use table row to specify path (location within a web page, program, etc.):
 
-  | iTunes Connect: `My Apps` → `<my_app>` → `Features` (tab)
+  | iTunes Connect: `My Apps` → `<MY_APP>` → `Features` (tab)
 
   environment (web page, program, etc.) can be specified before the path.
 

@@ -39,7 +39,7 @@ implement subscriptions in application
 
 ### obtain a shared secret
 
-| IC: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
 
 shared secret is used to validate receipts with `iap-receipt-validator`
@@ -50,7 +50,7 @@ add subscription in IC
 
 ### create IAP
 
-| IC: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `In-App Purchases` (section) → `⨁` (link)
 
 > Select the in-app purchase you want to create.
@@ -77,7 +77,7 @@ add subscription in IC
 
 ### configure IAP
 
-| IC: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `<subscription>` (link)
 
 - [x] `Cleared for Sale`
@@ -98,7 +98,7 @@ add subscription in IC
 
 ### configure subscription group
 
-| IC: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
 | `<subscription_group>` (link)
 
 it's required to add localization for subscription group as well:
@@ -343,7 +343,7 @@ below for details).
 
 ### beta testing
 
-| IC: `My Apps` → `<my_app>` → `TestFlight` (tab)
+| IC: `My Apps` → `<MY_APP>` → `TestFlight` (tab)
 | `All Testers` (left menu)
 
 beta testers (or just testers) are IC users who are invited to test
@@ -369,7 +369,7 @@ publish release with subscription
 2. <https://developer.apple.com/app-store/review/guidelines/>
 3. <https://help.apple.com/itunes-connect/developer/#/dev84b80958f>
 
-| IC: `My Apps` → `<my_app>` → `Features` (tab)
+| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `<subscription>` (link) → `Review Information` (section)
 
 - `Screenshot`: screenshot of your app with subscription popup
@@ -385,7 +385,7 @@ changed from `Missing Metadata` to `Ready to Submit`.
 
 ### create new app version
 
-| IC: `My Apps` → `<my_app>` → `App Store` (tab)
+| IC: `My Apps` → `<MY_APP>` → `App Store` (tab)
 | `⨁ VERSION OR PLATFORM` (link in left menu) → `iOS` (popup menu)
 
 - `Store Version Number`: new version number (say, `3.14`)
@@ -406,7 +406,7 @@ new app version has `Prepare for Submission` status now.
 
 1. <https://stackoverflow.com/a/42191936/3632318>
 
-| IC: `My Apps` → `<my_app>` → `App Store` (tab)
+| IC: `My Apps` → `<MY_APP>` → `App Store` (tab)
 | `3.14 Prepare for Submission` (left menu) → `In-App Purchases` (section) → `⨁` (link)
 
 NOTE: `In-App Purchases` section is available only if you've created IAP before.
@@ -446,7 +446,7 @@ in fact it took about 30 minutes for new app version to appear in App Store.
 
   > The Mobile Ads SDK for iOS utilizes Apple's advertising identifier (IDFA).
 
-  | IC: `My Apps` → `<my_app>` → `App Store` (tab)
+  | IC: `My Apps` → `<MY_APP>` → `App Store` (tab)
   | `3.14 Prepare for Submission` (left menu) → `Submit for Review` (button)
 
   - `Does this app use the Advertising Identifier (IDFA)?`: [x] `Yes`
@@ -454,12 +454,12 @@ in fact it took about 30 minutes for new app version to appear in App Store.
     - [x] `Serve advertisements within the app`
     - [ ] `Attribute this app installation to a previously served advertisement`
     - [ ] `Attribute an action taken within this app to a previously served advertisement`
-  - [x] `I, <my_name>, confirm that this app...`
+  - [x] `I, <MY_NAME>, confirm that this app...`
   - `Submit` (button)
 
 - binary rejected (release didn't pass a review because of IAP)
 
-  | IC: `My Apps` → `<my_app>` → `Activity` (tab)
+  | IC: `My Apps` → `<MY_APP>` → `Activity` (tab)
   | `App Store Versions` (left menu) → `Resolution Center` (link)
 
   > **2.** 1 Performance: App Completeness
@@ -580,7 +580,7 @@ in fact it took about 30 minutes for new app version to appear in App Store.
 
     1. <https://stackoverflow.com/a/7764496/3632318>
 
-    | IC: `My Apps` → `<my_app>` → `Features` (tab)
+    | IC: `My Apps` → `<MY_APP>` → `Features` (tab)
     | `In-App Purchases` (left menu) → `<subscription>` (link)
 
     find the section that has a red circle mark - it's necessary to update

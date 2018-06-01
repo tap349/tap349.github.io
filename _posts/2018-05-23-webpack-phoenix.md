@@ -589,6 +589,8 @@ add links to output bundles in layout
 1. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
 
 TODO
+TODO: static_path helper in layout
+TODO: read the link above
 TODO: always use webpack-dev-server because there are no helpers like
       javascript_pack_tag or stylesheet_pack_tag (like in Webpacker)?
       that is Phoenix cannot find /css/app.css and /js/app.js because

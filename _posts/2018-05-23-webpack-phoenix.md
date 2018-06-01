@@ -583,19 +583,6 @@ add Bootstrap
 
 TODO
 
-add links to output bundles in layout
--------------------------------------
-
-1. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
-
-TODO
-TODO: static_path helper in layout
-TODO: read the link above
-TODO: always use webpack-dev-server because there are no helpers like
-      javascript_pack_tag or stylesheet_pack_tag (like in Webpacker)?
-      that is Phoenix cannot find /css/app.css and /js/app.js because
-      these filenames are with hashes.
-
 add watcher and HMR
 -------------------
 
@@ -627,9 +614,30 @@ watcher is added in development environment only:
 +   watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
 ```
 
+TODO: running `watch` doesn't compile CSS assets and doesn't create source
+      maps (it outputs JS bundle and manifest only)
+
 ### HMR (hot module reloading)
 
 1. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#ec1e>
 
 TODO
-TODO: helpers (see the link above or find other tutorials)
+TODO: helpers (see the link above or find other tutorials) - I guess it's
+      easier to use webpack-dev-server all the time (not for the sake of HMR
+      but because otherwise we've got to create some helper to extract actual
+      output bundles from manifest to include them in layout file).
+
+add links to output bundles in layout
+-------------------------------------
+
+1. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
+
+TODO
+TODO: static_path helper in layout
+TODO: read the link above
+TODO: always use webpack-dev-server because there are no helpers like
+      javascript_pack_tag or stylesheet_pack_tag (like in Webpacker)?
+      that is Phoenix cannot find /css/app.css and /js/app.js because
+      these filenames are with hashes. in webpacker they are implemented
+      by looking up actual file names in manifest - use webpack-dev-server
+      in phoenix instead (see the link)

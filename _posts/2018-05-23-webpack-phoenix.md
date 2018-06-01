@@ -568,3 +568,28 @@ copy static assets
 
 TODO: CopyWebpackPlugin? (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
       what about adding hashes? file-loader does it?
+
+add watcher
+-----------
+
+1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
+2. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
+
+```
+$ assets/node_modules/webpack/bin/webpack.js --help
+...
+--watch, -w  Enter watch mode, which rebuilds on file change.        [boolean]
+```
+
+watcher is added in development environment only:
+
+```elixir
+# config/dev.exs
+
+config :sithex, SithexWeb.Endpoint,
+  http: [port: 4000],
+  debug_errors: true,
+  code_reloader: true,
+  check_origin: false,
+  watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
+```

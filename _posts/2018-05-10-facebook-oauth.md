@@ -470,7 +470,7 @@ this means that passed redirect URI is not whitelisted (see above).
 
 ### [OmniAuth] OmniAuth::Strategies::Facebook::NoAuthorizationCodeError
 
-this erorr occurs when user presses `Cancel` on the first
+this error occurs when user presses `Cancel` on Facebook Login screen:
 
 ```
 Started GET "/auth/facebook/callback?error=access_denied&error_code=200&error_description=Permissions%20error&error_reason=user_denied&state=<state>" for 127.0.0.1 at 2018-06-01 14:29:37 +0300
@@ -505,6 +505,32 @@ OmniAuth.config.on_failure = proc do |env|
 end
 ```
 
-BTW Ueberauth doesn't raise error in both environments but returns
-`Ueberauth.Failure` response instead (adds `ueberauth_failure` key
-with populated `%Ueberauth.Failure{}` struct to `assigns` map).
+make sure to add `/auth/failure` prior to other auth routes:
+
+```ruby
+# config/routes.rb
+
+get '/auth/failure', to: 'auth#failure', as: 'auth_failure'
+get '/auth/:provider', to: 'auth#request', as: 'auth_request'
+get '/auth/:provider/callback', to: 'auth#callback', as: 'auth_callback'
+```
+
+if OmniAuth is already configured to redirect to failure page in development
+mode and `/auth/failure` route is placed after other auth routes or missing
+at all, you'll get some weird error about non-existing `request` controller
+action:
+
+```
+Started GET "/auth/facebook/callback?error=access_denied&error_code=200&error_description=Permissions%20error&error_reason=user_denied&state=<state>" for 127.0.0.1 at 2018-06-01 15:27:37 +0300
+INFO -- omniauth: (facebook) Callback phase initiated.
+ERROR -- omniauth: (facebook) Authentication failure! no_authorization_code: OmniAuth::Strategies::Facebook::NoAuthorizationCodeError, must pass either a `code` (via URL or by an `fbsr_XXX` signed request cookie)
+Started GET "/auth/failure?message=no_authorization_code&strategy=facebook" for 127.0.0.1 at 2018-06-01 15:27:37 +0300
+
+AbstractController::ActionNotFound - The action 'request' could not be found for AuthController:
+  appsignal (2.6.1) lib/appsignal/rack/rails_instrumentation.rb:19:in `call'
+```
+
+BTW Ueberauth doesn't raise error in both environments at all but adds
+`ueberauth_failure` key with populated `%Ueberauth.Failure{}` struct to
+`assigns` map - this key can be pattern matched in controller action to
+detect authentication failure.

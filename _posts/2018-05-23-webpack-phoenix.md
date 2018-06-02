@@ -82,17 +82,12 @@ add package scripts
 
   {
 +   "scripts": {
-+     "deploy": "webpack --mode production",
-+     "watch": "webpack --mode development --watch-stdin --color"
++     "deploy": "webpack --mode production"
 +   },
   }
 ```
 
-there's no `start` script in _assets/package.json_ of newly generated Phoenix
-project (when it's created with Brunch support) though in some tutorials they
-add it as `yarn run watch`.
-
-TODO: check if `start` script is required (`mix phx.digest`?)
+NOTE: `watch` script will be added later.
 
 ### `--watch-stdin` option
 
@@ -583,16 +578,13 @@ add Bootstrap
 
 TODO
 
-add watcher and HMR
--------------------
+watch mode vs. development server
+---------------------------------
 
-TODO: write about the difference between watching and HMR
+### Webpack running in watch mode
 
-### watcher
-
-1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
-2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#bace>
-3. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
+TODO: running `watch` doesn't compile CSS assets and doesn't create source
+      maps (it outputs JS bundle and manifest only)
 
 ```
 $ assets/node_modules/webpack/bin/webpack.js --help
@@ -600,7 +592,48 @@ $ assets/node_modules/webpack/bin/webpack.js --help
 --watch, -w  Enter watch mode, which rebuilds on file change.        [boolean]
 ```
 
-watcher is added in development environment only:
+- rebuilds output bundles on file changes
+- doesn't reload the page
+
+### Webpack development server
+
+TODO: helpers (see the link above or find other tutorials) - I guess it's
+      easier to use webpack-dev-server all the time (not for the sake of HMR
+      but because otherwise we've got to create some helper to extract actual
+      output bundles from manifest to include them in layout file).
+
+Webpack development servers:
+
+- `webpack-dev-server`
+- `webpack-serve` (more modern alternative to `webpack-dev-server`)
+
+- rebuilds output bundles on file changes
+- reloads the whole page (using Live Reload) or updated module only
+  (using Hot Module Replacement aka HMR)
+
+add watcher
+-----------
+
+1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
+2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#bace>
+3. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
+
+add `watch` script in _package.json_ (say, we're using `webpack-serve`
+development server to watch for file changes):
+
+```diff
+  // assets/package.json
+
+  {
+    "scripts": {
+-     "deploy": "webpack --mode production"
++     "deploy": "webpack --mode production",
++     "watch": "webpack-serve --config ./webpack.config.js"
+    },
+  }
+```
+
+watcher itself is added for development environment only:
 
 ```diff
   # config/dev.exs
@@ -613,19 +646,6 @@ watcher is added in development environment only:
 -   watchers: [],
 +   watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
 ```
-
-TODO: running `watch` doesn't compile CSS assets and doesn't create source
-      maps (it outputs JS bundle and manifest only)
-
-### HMR (hot module reloading)
-
-1. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#ec1e>
-
-TODO
-TODO: helpers (see the link above or find other tutorials) - I guess it's
-      easier to use webpack-dev-server all the time (not for the sake of HMR
-      but because otherwise we've got to create some helper to extract actual
-      output bundles from manifest to include them in layout file).
 
 add links to output bundles in layout
 -------------------------------------

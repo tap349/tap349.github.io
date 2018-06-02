@@ -570,7 +570,8 @@ with Webpacker is that the latter uses `extract-text-webpack-plugin` instead of
 copy static assets
 ------------------
 
-TODO: CopyWebpackPlugin? (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
+TODO: CopyWebpackPlugin?
+      (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
       what about adding hashes? file-loader does it?
 
 add Bootstrap
@@ -578,13 +579,17 @@ add Bootstrap
 
 TODO
 
-watch mode vs. development server
----------------------------------
+Webpack in watch mode vs. Webpack development server
+----------------------------------------------------
 
-### Webpack running in watch mode
+both are meant to be used in development environment only - output bundles
+for production environment are compiled using `deploy` script.
+
+### Webpack in watch mode
 
 TODO: running `watch` doesn't compile CSS assets and doesn't create source
-      maps (it outputs JS bundle and manifest only)
+      maps (it outputs JS bundle and manifest only) - it doesn't create when
+      webpack is run in `development` mode only.
 
 ```
 $ assets/node_modules/webpack/bin/webpack.js --help
@@ -592,8 +597,10 @@ $ assets/node_modules/webpack/bin/webpack.js --help
 --watch, -w  Enter watch mode, which rebuilds on file change.        [boolean]
 ```
 
+Webpack running in watch mode:
+
 - rebuilds output bundles on file changes
-- doesn't reload the page
+- doesn't reload anything
 
 ### Webpack development server
 
@@ -602,14 +609,18 @@ TODO: helpers (see the link above or find other tutorials) - I guess it's
       but because otherwise we've got to create some helper to extract actual
       output bundles from manifest to include them in layout file).
 
-Webpack development servers:
-
-- `webpack-dev-server`
-- `webpack-serve` (more modern alternative to `webpack-dev-server`)
+Webpack development server:
 
 - rebuilds output bundles on file changes
+- serves output bundles
 - reloads the whole page (using Live Reload) or updated module only
   (using Hot Module Replacement aka HMR)
+
+there are 2 major development servers for Webpack (both are available as
+separate npm packages):
+
+- `webpack-dev-server`
+- `webpack-serve` (more modern and faster alternative to `webpack-dev-server`)
 
 add watcher
 -----------

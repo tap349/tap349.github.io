@@ -40,8 +40,8 @@ $ cd assets
 $ yarn add webpack webpack-cli --dev
 ```
 
-you'll be prompted to add `webpack-cli` package when running Webpack
-for the first time (unless you do it now).
+you'll be prompted to add `webpack-cli` package when running Webpack for the
+first time (unless you do it now).
 
 add license to package.json
 ---------------------------
@@ -380,14 +380,16 @@ are entry points under the hood):
         extensions: ['.css', '.sass', '.scss'],
       },
       plugins: [
-        new MiniCssExtractPlugin({
-          // filename is relative to output.path
-          //
-          // https://github.com/webpack-contrib/mini-css-extract-plugin#long-term-caching:
-          // use [contenthash] instead of [hash] for long term caching.
-          filename: devMode ? 'css/[name].css' : 'css/[name]-[hash].css',
-          // IDK when and how chunkFilename is used so I don't set it here
-        }),
+        // MiniCssExtractPlugin is not used in dev mode
+        // (no need to specify filename without hash for dev mode)
+        //
+        // filename is relative to output.path
+        // IDK when and how chunkFilename is used so I don't set it here
+        //
+        // https://github.com/webpack-contrib/mini-css-extract-plugin#long-term-caching:
+        // use [contenthash] instead of [hash] for long term caching.
+        //
+        new MiniCssExtractPlugin({filename: 'css/[name]-[hash].css'}),
       ],
       optimization: {
         minimizer: [
@@ -423,11 +425,24 @@ are entry points under the hood):
 
 1. <https://github.com/webpack-contrib/mini-css-extract-plugin/issues/141>
 
-- `devtool` Webpack option has no effect on generating CSS source maps
+- `style-loader`
 
-  it looks like it's used to enable JS source maps only.
+  `style-loader` doesn't support generating CSS source map at all -
+  use `MiniCssExtractPlugin` instead.
 
-- `sourceMap` options of Sass and CSS loaders have no effect as well
+- `devtool` Webpack option
+
+  `devtool` option has effect on generating CSS source map in development
+  mode only - set it to any `source-map`-like value to generate CSS source
+  map in development mode.
+
+  CSS source map is always generated in production mode (provided
+  `map: {inline: false}` CSS processor option is passed - see below).
+
+- `sourceMap` options of Sass and CSS loaders
+
+  `sourceMap` options of both loaders seem to have no effect on generating
+  CSS source map.
 
   > <https://github.com/webpack-contrib/sass-loader#source-maps>
   >
@@ -447,27 +462,40 @@ are entry points under the hood):
   },
   ```
 
-  => no CSS source maps are generated.
+  => nothing changes if `sourceMap` option is set to `false` or not set at all.
 
-solution is to add `map: {inline: false}` CSS processor (`cssnano`
-by default) option to `OptimizeCSSAssetsPlugin` configuration:
+- `map: {inline: false}` CSS processor option
 
-```diff
-  // assets/webpack.config.js
+  CSS source maps are never generated unless `map: {inline: false}` CSS
+  processor (`cssnano` by default) option is added to configuration of
+  `OptimizeCSSAssetsPlugin`:
 
-  optimization: {
-    minimizer: [
-      // ...
--     new OptimizeCSSAssetsPlugin({}),
-+     new OptimizeCSSAssetsPlugin({
-+       cssProcessorOptions: {
-+         discardComments: {removeAll: true},
-+         map: {inline: false},
-+       },
-      }),
-    ],
-  },
-```
+  ```diff
+    // assets/webpack.config.js
+
+    optimization: {
+      minimizer: [
+        // ...
+  -     new OptimizeCSSAssetsPlugin({}),
+  +     new OptimizeCSSAssetsPlugin({
+  +       cssProcessorOptions: {
+  +         discardComments: {removeAll: true},
+  +         map: {inline: false},
+  +       },
+        }),
+      ],
+    },
+  ```
+
+**summary**
+
+to generate CSS source maps:
+
+- use `MiniCssExtractPlugin` (not `style-loader`)
+- add `map: {inline: false}` CSS processor option to configuration of
+  `OptimizeCSSAssetsPlugin`
+- set `devtool` to `source-map`-like value to generate CSS source maps
+  in development mode
 
 add manifest
 ------------
@@ -519,6 +547,9 @@ add manifest
   ```
 
 ### source file name of CSS source map
+
+TODO: for some reason CSS source map has chunk name when running
+      webpack in development mode (and using MiniCssExtractPlugin).
 
 `webpack-manifest-plugin` uses chunk path (filename) as a source file name when
 chunk name is empty:
@@ -589,7 +620,9 @@ for production environment are compiled using `deploy` script.
 
 TODO: running `watch` doesn't compile CSS assets and doesn't create source
       maps (it outputs JS bundle and manifest only) - it doesn't create when
-      webpack is run in `development` mode only.
+      webpack is run in `development` mode only (this is because style-loader
+      is used, source maps are probably never created in dev mode - something
+      like `eval` must be used for devtool in dev mode).
 
 ```
 $ assets/node_modules/webpack/bin/webpack.js --help
@@ -663,7 +696,6 @@ add links to output bundles in layout
 
 1. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
 
-TODO
 TODO: static_path helper in layout
 TODO: read the link above
 TODO: always use webpack-dev-server because there are no helpers like

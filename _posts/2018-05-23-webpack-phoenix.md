@@ -427,7 +427,7 @@ are entry points under the hood):
 
 - `style-loader`
 
-  `style-loader` doesn't support generating CSS source map at all -
+  `style-loader` doesn't support generating CSS source maps at all -
   use `MiniCssExtractPlugin` instead.
 
   still `MiniCssExtractPlugin` doesn't support HMR yet - so use `style-loader`
@@ -435,17 +435,17 @@ are entry points under the hood):
 
 - `devtool` Webpack option
 
-  `devtool` option has effect on generating CSS source map in development
+  `devtool` option has effect on generating CSS source maps in development
   mode only - set it to any `source-map`-like value to generate CSS source
   map in development mode.
 
-  CSS source map is always generated in production mode (provided
+  CSS source maps are always generated in production mode (provided
   `map: {inline: false}` CSS processor option is passed - see below).
 
 - `sourceMap` options of Sass and CSS loaders
 
   `sourceMap` options of both loaders seem to have no effect on generating
-  CSS source map.
+  CSS source maps.
 
   > <https://github.com/webpack-contrib/sass-loader#source-maps>
   >
@@ -554,9 +554,6 @@ add manifest
 
 ### source file name of CSS source map
 
-TODO: for some reason CSS source map has chunk name when running
-      webpack in development mode (and using MiniCssExtractPlugin).
-
 `webpack-manifest-plugin` uses chunk path (filename) as a source file name when
 chunk name is empty:
 
@@ -600,9 +597,21 @@ are used):
 }
 ```
 
-IDK who to blame for this behaviour and how to change it - the only difference
-with Webpacker is that the latter uses `extract-text-webpack-plugin` instead of
-`mini-css-extract-plugin` to extract CSS files.
+for some reason CSS source map chunk has a name when Webpack is run
+in development mode (requirements for generating CSS source maps in
+development mode must be met of course):
+
+```
+$ cd assets
+$ yarn run deploy
+...
+                               Asset       Size  Chunks             Chunk Names
+    css/app-b11624419d532ffa8ee3.css   81 bytes     app  [emitted]  app
+      js/app-275943b67b97d5ad0a35.js    3.4 KiB     app  [emitted]  app
+css/app-b11624419d532ffa8ee3.css.map  184 bytes     app  [emitted]  app
+  js/app-275943b67b97d5ad0a35.js.map   2.69 KiB     app  [emitted]  app
+                       manifest.json  208 bytes          [emitted]
+```
 
 copy static assets
 ------------------

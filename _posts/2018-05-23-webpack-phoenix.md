@@ -597,9 +597,9 @@ are used):
 }
 ```
 
-for some reason CSS source map chunk has a name when Webpack is run
-in development mode (requirements for generating CSS source maps in
-development mode must be met of course):
+however CSS source map chunk has a name when Webpack is run in development mode
+(requirements for generating CSS source maps in development mode must be met of
+course):
 
 ```
 $ cd assets
@@ -612,6 +612,11 @@ css/app-b11624419d532ffa8ee3.css.map  184 bytes     app  [emitted]  app
   js/app-275943b67b97d5ad0a35.js.map   2.69 KiB     app  [emitted]  app
                        manifest.json  208 bytes          [emitted]
 ```
+
+it looks like `MiniCssExtractPlugin` is responsible for generating CSS
+source maps - it makes sense to search for the answer in its source code.
+
+TODO: why does CSS source map chunk have no name in production mode?
 
 copy static assets
 ------------------

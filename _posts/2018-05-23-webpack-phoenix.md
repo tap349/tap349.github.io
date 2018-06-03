@@ -448,9 +448,9 @@ are entry points under the hood):
   CSS from all CSS modules inside this tag (we get so called internal CSS
   as a result).
 
-  this JS code will be run in browser when JS output bundle is loaded.
+  this JS code is evaluated in browser when JS output bundle is loaded.
 
-=> no separate CSS output bundles are generated during asset compilation
+=> separate CSS output bundles are never generated during asset compilation
 when using `style-loader`.
 
 ### CSS source maps
@@ -670,12 +670,6 @@ both are meant to be used in development environment only - output bundles
 for production environment are compiled using `deploy` script.
 
 ### Webpack in watch mode
-
-TODO: running `watch` doesn't compile CSS assets and doesn't create source
-      maps (it outputs JS bundle and manifest only) - it doesn't create when
-      webpack is run in `development` mode only (this is because style-loader
-      is used, source maps are probably never created in dev mode - something
-      like `eval` must be used for devtool in dev mode).
 
 ```
 $ assets/node_modules/webpack/bin/webpack.js --help

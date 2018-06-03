@@ -430,6 +430,9 @@ are entry points under the hood):
   `style-loader` doesn't support generating CSS source map at all -
   use `MiniCssExtractPlugin` instead.
 
+  still `MiniCssExtractPlugin` doesn't support HMR yet - so use `style-loader`
+  in development mode.
+
 - `devtool` Webpack option
 
   `devtool` option has effect on generating CSS source map in development
@@ -489,13 +492,16 @@ are entry points under the hood):
 
 **summary**
 
-to generate CSS source maps:
+to generate CSS source maps in production mode:
 
 - use `MiniCssExtractPlugin` (not `style-loader`)
 - add `map: {inline: false}` CSS processor option to configuration of
   `OptimizeCSSAssetsPlugin`
-- set `devtool` to `source-map`-like value to generate CSS source maps
-  in development mode
+
+to generate CSS source maps in development mode:
+
+- same requirements as for production mode
+- set `devtool` to `source-map`-like value
 
 add manifest
 ------------

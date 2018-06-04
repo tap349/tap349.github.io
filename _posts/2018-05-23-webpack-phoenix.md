@@ -657,6 +657,7 @@ copy static assets
 TODO: CopyWebpackPlugin?
       (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
       what about adding hashes? file-loader does it?
+      https://github.com/webpack/webpack/issues/86#issuecomment-350365453
 
 add Bootstrap
 -------------
@@ -742,9 +743,36 @@ add links to output bundles in layout
 -------------------------------------
 
 1. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
+2. <https://github.com/webpack/webpack/issues/86>
+3. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
 
-TODO: static_path helper in layout
-TODO: read the link above
+you cannot reference hardcoded paths like _/js/app.js_ or _/css/app.css_
+inside layout file because output bundle names will most likely contain
+some kind of hashes or the like.
+
+for example Webpacker provides special helpers (`javascript_pack_tag` and
+`stylesheet_pack_tag`) to link output bundles in layout file and another
+`asset_pack_path` helper to link static assets in views (output bundle is
+a static asset too) - under the hood these helpers parse manifest file to
+find actual file paths.
+
+should we not use Phoenix, we could use `webpack-file-changer` plugin
+to change file path dynamically right in layout file during compilation.
+
+since we deal with pure Webpack in Phoenix, the latter doesn't provide
+any helpers but we need neither these helpers nor third-party packages
+to reference output bundles:
+
+- in development environment we can get away with using development server
+  like `webpack-dev-server` or `webpack-serve`
+- in production environment this problem is solved by `phx.digest` Mix task
+  which both digests and compresses static files from _priv/static/_
+  (this is where assets are precompiled to in Phoenix by default).
+
+TODO: maybe we don't need manifest because `phx.digest` mix task already
+generates JS files with hashes and manifest file (so don't use [hash] for
+production enviroment at all).
+
 TODO: always use webpack-dev-server because there are no helpers like
       javascript_pack_tag or stylesheet_pack_tag (like in Webpacker)?
       that is Phoenix cannot find /css/app.css and /js/app.js because

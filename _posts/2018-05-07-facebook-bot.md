@@ -119,6 +119,17 @@ account linking
 > Then you get the APP ID and can save a relation in your database with the
 > messenger user id.
 
+get started button
+------------------
+
+1. <https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/get-started-button>
+2. <https://www.techiediaries.com/messenger-bot-get-started-button/>
+
+make sure you Messenger app is subscribed to `messaging_postbacks` event:
+
+| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
+| `Webhooks` (section) → `Edit events` (button)
+
 troubleshooting
 ---------------
 

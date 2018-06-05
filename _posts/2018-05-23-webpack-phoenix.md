@@ -761,8 +761,8 @@ add links to output bundles in layout
 3. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
 
 you cannot reference hardcoded paths like _/js/app.js_ or _/css/app.css_
-inside layout file because output bundle names will most likely contain
-some kind of hashes or the like.
+inside layout file directly because output bundle names will most likely
+contain some kind of hashes or the like.
 
 for example Webpacker provides special helpers (`javascript_pack_tag` and
 `stylesheet_pack_tag`) to link output bundles in layout file and another
@@ -770,8 +770,8 @@ for example Webpacker provides special helpers (`javascript_pack_tag` and
 a static asset too) - under the hood these helpers parse manifest file to
 find actual file paths.
 
-should we not use Phoenix, we could use `webpack-file-changer` plugin
-to change file path dynamically right in layout file during compilation.
+should we not use Phoenix, we could use `webpack-file-changer` plugin to
+change file path dynamically right in layout file during asset compilation.
 
 since we deal with pure Webpack in Phoenix, the latter doesn't provide
 any helpers but we need neither these helpers nor third-party packages
@@ -783,9 +783,12 @@ to reference output bundles:
   which both digests and compresses static files from _priv/static/_
   (this is where assets are precompiled to in Phoenix by default).
 
+TODO: remove hashes for all bundle names (this is Phoenix-specific because
+      of `phx.digest` task).
+
 TODO: maybe we don't need manifest because `phx.digest` mix task already
-generates JS files with hashes and manifest file (so don't use [hash] for
-production enviroment at all).
+      generates JS files with hashes and manifest file (so don't use [hash]
+      for production enviroment at all).
 
 TODO: always use webpack-dev-server because there are no helpers like
       javascript_pack_tag or stylesheet_pack_tag (like in Webpacker)?

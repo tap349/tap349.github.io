@@ -89,18 +89,6 @@ add package scripts
 
 NOTE: `watch` script will be added later.
 
-### `--watch-stdin` option
-
-```
-$ assets/node_modules/webpack/bin/webpack.js --help
-...
---watch-stdin, --stdin     Stop watching when stdin stream has ended [boolean]
-```
-
-use `--watch-stdin` option instead of `--watch` one - or else Webpack process
-(watcher running `watch` script from _assets/package.json_) is not killed when
-Phoenix server shuts down and you'll end up with an orphaned Node.js process.
-
 create skeleton Webpack config
 ------------------------------
 
@@ -664,54 +652,73 @@ add Bootstrap
 
 TODO
 
-Webpack in watch mode vs. Webpack development server
-----------------------------------------------------
+add Webpack development server
+------------------------------
 
-both are meant to be used in development environment only - output bundles
-for production environment are compiled using `deploy` script.
+1. <https://github.com/webpack-contrib/webpack-serve>
+
+there are 2 major development servers for Webpack (npm packages):
+
+- `webpack-dev-server`
+- `webpack-serve`
+
+use `wepack-serve` since it's a faster alternative to `webpack-dev-server`
+(and the latter is in a maintenance-only mode now):
+
+```sh
+$ cd assets
+$ yarn add webpack-serve --dev
+```
+
+```diff
+  // assets/webpack.config.js
+
+  optimization: {
+    // ...
+  },
++ // webpack-serve options
++ serve: {},
+```
 
 ### Webpack in watch mode
+
+pass these options to run Webpack in `watch` mode:
 
 ```
 $ assets/node_modules/webpack/bin/webpack.js --help
 ...
 --watch, -w  Enter watch mode, which rebuilds on file change.        [boolean]
+--watch-stdin, --stdin     Stop watching when stdin stream has ended [boolean]
 ```
 
-Webpack running in watch mode:
+`--watch-stdin` option must be used instead of `--watch` - or else Webpack
+process (watcher running `watch` script from _assets/package.json_ - see
+below) is not killed when Phoenix server shuts down and you'll end up with
+an orphaned Node.js process.
 
-- rebuilds output bundles on file changes
-- doesn't reload anything
+### Webpack development server vs. Webpack in watch mode
 
-### Webpack development server
+both are meant to be used in development environment only - output bundles
+for production environment are compiled using `deploy` script.
 
-TODO: helpers (see the link above or find other tutorials) - I guess it's
-      easier to use webpack-dev-server all the time (not for the sake of HMR
-      but because otherwise we've got to create some helper to extract actual
-      output bundles from manifest to include them in layout file).
+both rebuild output bundles on file changes - this is the only function of
+the latter.
 
-Webpack development server:
+in addition Webpack development server:
 
-- rebuilds output bundles on file changes
 - serves output bundles
-- reloads the whole page (using Live Reload) or updated module only
-  (using Hot Module Replacement aka HMR)
+- reloads the whole page (when using Live Reload) or updated module only
+  (when using Hot Module Replacement aka HMR)
 
-there are 2 major development servers for Webpack (both are available as
-separate npm packages):
+also:
 
-- `webpack-dev-server`
-- `webpack-serve` (more modern and faster alternative to `webpack-dev-server`)
+> <https://github.com/webpack/webpack-dev-server/issues/438>
+>
+> There is no need to use hash (bundle names with [hash] in file name) in
+> webpack dev server, there are no cache problems.
 
-add watcher
------------
-
-1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
-2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#bace>
-3. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
-
-add `watch` script in _package.json_ (say, we're using `webpack-serve`
-development server to watch for file changes):
+add `watch` script
+------------------
 
 ```diff
   // assets/package.json
@@ -725,7 +732,14 @@ development server to watch for file changes):
   }
 ```
 
-watcher itself is added for development environment only:
+add watcher
+-----------
+
+1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
+2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#bace>
+3. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
+
+watcher is added for development environment only:
 
 ```diff
   # config/dev.exs

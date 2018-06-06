@@ -132,7 +132,7 @@ module.exports = (_env, argv) => {
 > If an object is passed, each key is the name of a chunk, and the value
 > describes the entrypoint for the chunk.
 
-### hash substitutions in filenames
+### `[hash]` substitutions in filenames
 
 > <https://webpack.js.org/guides/caching/>
 >
@@ -723,7 +723,7 @@ in addition Webpack development server:
 - serves output bundles
 - reloads the whole page (when using Live Reload) or updated module only
   (when using Hot Module Replacement aka HMR)
-- allows not to include hash substitutions in filenames (moreover -
+- allows not to include `[hash]` substitutions in filenames (moreover -
   they are prohibited)
 
   NOTE: it's not relevant when using Phoenix - hashes are not used anyway.
@@ -827,16 +827,17 @@ config :my_app, MyAppWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
-all in all don't use hash substitutions in filenames in both environments:
+=> don't use `[hash]` substitutions in filenames in both environments:
 
 - in development use Webpack development server
 
-  hash substitutions are prohibited when using development server.
+  `[hash]` substitutions are prohibited when using development server.
 
 - in production use `phx.digest` Mix task and `static_path/1` helper
 
-  hash substitutions are unnecessary because `phx.digest` Mix task will
-  digest static files in _priv/static/_ by itself.
+  `[hash]` substitutions are unnecessary because `phx.digest` Mix task will
+  digest static files in _priv/static/_ by itself (or else digested static
+  files will have 2 hash suffixes).
 
 TODO: _lib/my_app_web/templates/layout/app.html.slime_
 TODO: _assets/webpack.config.js_ (add different outputs - see

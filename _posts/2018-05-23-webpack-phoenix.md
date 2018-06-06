@@ -94,14 +94,6 @@ create skeleton Webpack config
 
 1. <http://phoenixframework.org/blog/static-assets>
 
-> <https://webpack.js.org/guides/caching/>
->
-> A simple way to ensure the browser picks up changed files is by using
-> output.filename substitutions. The [hash] substitution can be used to
-> include a build-specific hash in the filename, however it's even better
-> to use the [chunkhash] substitution which includes a chunk-specific hash
-> in the filename.
-
 ```javascript
 // assets/webpack.config.js
 
@@ -116,7 +108,9 @@ module.exports = (_env, argv) => {
     entry: {app: 'js/app.js'},
     output: {
       path: path.resolve(__dirname, '../priv/static'),
-      filename: 'js/[name]-[chunkhash].js',
+      // include [chunkhash] when not using Phoenix:
+      // filename: 'js/[name]-[chunkhash].js'
+      filename: 'js/[name].js',
     },
     module: {
       rules: [],
@@ -137,6 +131,21 @@ module.exports = (_env, argv) => {
 > If a string or array of strings is passed, the chunk is named `main`.
 > If an object is passed, each key is the name of a chunk, and the value
 > describes the entrypoint for the chunk.
+
+### hash substitutions in filenames
+
+> <https://webpack.js.org/guides/caching/>
+>
+> A simple way to ensure the browser picks up changed files is by using
+> output.filename substitutions. The [hash] substitution can be used to
+> include a build-specific hash in the filename, however it's even better
+> to use the [chunkhash] substitution which includes a chunk-specific hash
+> in the filename.
+
+but when using Phoenix there is no need to include build-specific hash in
+filenames - `phx.digest` Mix task creates digested and compressed versions
+of all static files in _priv/static/_ (this is where Phoenix searches for
+precompiled assets by default) along with a cache static manifest.
 
 ### NODE_ENV vs. mode
 
@@ -368,16 +377,17 @@ are entry points under the hood):
         extensions: ['.css', '.sass', '.scss'],
       },
       plugins: [
-        // MiniCssExtractPlugin is not used in dev mode
-        // (no need to specify filename without hash for dev mode)
+        // MiniCssExtractPlugin is not used in dev mode =>
+        // no need to set different filename for dev mode though
+        // it's not required when not including hash in filename
         //
         // filename is relative to output.path
         // IDK when and how chunkFilename is used so I don't set it here
         //
-        // https://github.com/webpack-contrib/mini-css-extract-plugin#long-term-caching:
-        // use [contenthash] instead of [hash] for long term caching.
-        //
-        new MiniCssExtractPlugin({filename: 'css/[name]-[hash].css'}),
+        // include [hash] when not using Phoenix
+        // (use [contenthash] instead of [hash] for long term caching):
+        // new MiniCssExtractPlugin({filename: 'css/[name]-[hash].css'})
+        new MiniCssExtractPlugin({filename: 'css/[name].css'}),
       ],
       optimization: {
         minimizer: [
@@ -526,6 +536,10 @@ to generate CSS source maps in development mode:
 
 add manifest
 ------------
+
+TODO: maybe we don't need manifest because `phx.digest` mix task already
+      generates JS files with hashes and manifest file (so don't use [hash]
+      for production enviroment at all).
 
 1. <https://github.com/danethurber/webpack-manifest-plugin>
 
@@ -709,13 +723,21 @@ in addition Webpack development server:
 - serves output bundles
 - reloads the whole page (when using Live Reload) or updated module only
   (when using Hot Module Replacement aka HMR)
+- allows not to include hash substitutions in filenames (moreover -
+  they are prohibited)
 
-also:
+  NOTE: it's not relevant when using Phoenix - hashes are not used anyway.
 
-> <https://github.com/webpack/webpack-dev-server/issues/438>
->
-> There is no need to use hash (bundle names with [hash] in file name) in
-> webpack dev server, there are no cache problems.
+  > <https://github.com/webpack/webpack-dev-server/issues/438>
+  >
+  > There is no need to use hash (bundle names with [hash] in file name) in
+  > webpack dev server, there are no cache problems.
+
+  > <https://github.com/webpack/webpack-dev-server/issues/377#issuecomment-241258405>
+  >
+  > You should not use [chunkhash] or [hash] for development. This will
+  > cause many other issues, like a memory leak, because the dev server
+  > does not know when to clean up the old files.
 
 add `watch` script
 ------------------
@@ -745,54 +767,77 @@ watcher is added for development environment only:
   # config/dev.exs
 
   config :my_app, MyAppWeb.Endpoint,
-    http: [port: 4000],
-    debug_errors: true,
-    code_reloader: true,
-    check_origin: false,
+    # ...
 -   watchers: [],
 +   watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
 ```
 
-add links to output bundles in layout
--------------------------------------
-
-1. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
-2. <https://github.com/webpack/webpack/issues/86>
-3. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
+link output bundles in layout file
+----------------------------------
 
 you cannot reference hardcoded paths like _/js/app.js_ or _/css/app.css_
 inside layout file directly because output bundle names will most likely
-contain some kind of hashes or the like.
+contain some kind of hashes in production environment.
 
-for example Webpacker provides special helpers (`javascript_pack_tag` and
-`stylesheet_pack_tag`) to link output bundles in layout file and another
-`asset_pack_path` helper to link static assets in views (output bundle is
-a static asset too) - under the hood these helpers parse manifest file to
-find actual file paths.
+### without Phoenix
 
-should we not use Phoenix, we could use `webpack-file-changer` plugin to
-change file path dynamically right in layout file during asset compilation.
+1. <https://github.com/webpack/webpack/issues/86>
 
-since we deal with pure Webpack in Phoenix, the latter doesn't provide
-any helpers but we need neither these helpers nor third-party packages
-to reference output bundles:
+without Phoenix you would use something like `webpack-file-changer` plugin
+that changes file path dynamically in layout file during asset compilation.
 
-- in development environment we can get away with using development server
-  like `webpack-dev-server` or `webpack-serve`
-- in production environment this problem is solved by `phx.digest` Mix task
-  which both digests and compresses static files from _priv/static/_
-  (this is where assets are precompiled to in Phoenix by default).
+Webpacker, for instance, provides special helpers:
 
-TODO: remove hashes for all bundle names (this is Phoenix-specific because
-      of `phx.digest` task).
+- `javascript_pack_tag` and `stylesheet_pack_tag`
 
-TODO: maybe we don't need manifest because `phx.digest` mix task already
-      generates JS files with hashes and manifest file (so don't use [hash]
-      for production enviroment at all).
+  they are used to link output bundles (packs) in layout file.
 
-TODO: always use webpack-dev-server because there are no helpers like
-      javascript_pack_tag or stylesheet_pack_tag (like in Webpacker)?
-      that is Phoenix cannot find /css/app.css and /js/app.js because
-      these filenames are with hashes. in webpacker they are implemented
-      by looking up actual file names in manifest - use webpack-dev-server
-      in phoenix instead (see the link)
+- `asset_pack_path`
+
+  it's used to link static assets in views.
+
+under the hood all these helpers parse manifest file to find actual file paths.
+
+### with Phoenix
+
+1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:static_path/1>
+2. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
+3. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
+
+just like Webpacker, Phoenix provides `static_path/1` helper which generates
+routes to static files in _priv/static/_. this helper is not aware of Webpack
+but uses cache static manifest to find actual file paths (much like Webpacker
+helpers do).
+
+cache static manifest is generated by `phx.digest` Mix task and is saved to
+_priv/static/cache_manifest.json_ by default:
+
+> <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
+>
+> `:cache_static_manifest` - a path to a json manifest file that
+> contains static files and their digested versions. This is
+> typically set to “priv/static/cache_manifest.json” which is the
+> file automatically generated by `mix phx.digest`.
+
+location of cache static manifest can be configured in _config/prod.exs_:
+
+```elixir
+config :my_app, MyAppWeb.Endpoint,
+  # ...
+  cache_static_manifest: "priv/static/cache_manifest.json"
+```
+
+all in all don't use hash substitutions in filenames in both environments:
+
+- in development use Webpack development server
+
+  hash substitutions are prohibited when using development server.
+
+- in production use `phx.digest` Mix task and `static_path/1` helper
+
+  hash substitutions are unnecessary because `phx.digest` Mix task will
+  digest static files in _priv/static/_ by itself.
+
+TODO: _lib/my_app_web/templates/layout/app.html.slime_
+TODO: _assets/webpack.config.js_ (add different outputs - see
+      https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3)

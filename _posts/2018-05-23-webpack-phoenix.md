@@ -701,6 +701,10 @@ it's possible to configure `webpack-dev-server` in Webpack config:
 + },
 ```
 
+BTW it's possible to see what assets are served by `webpack-dev-server`
+right in browser by opening configured URL (`http://localhost:3035` in
+this case).
+
 ### Webpack development server vs. Webpack in watch mode
 
 both are meant to be used in development environment only - output bundles
@@ -885,10 +889,5 @@ html lang="en"
 // assets/webpack.config.js
 ```
 
-TODO: determine mode based on process.env.WEBPACK_SERVE because webpack-serve
-      has no `mode` option (argv is undefined when using webpack-serve)
-TODO: add mode configuration option (or else webpack will complain about missing
-      mode and will default to production)
 TODO: _assets/webpack.config.js_ (add different outputs - see
       https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3)
-TODO: assets are not served by webpack-serve

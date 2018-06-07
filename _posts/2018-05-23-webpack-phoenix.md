@@ -697,13 +697,16 @@ it's possible to configure `webpack-dev-server` in Webpack config:
 + // webpack-dev-server options
 + devServer: {
 +   host: 'localhost',
++   // used by Webpacker by default
 +   port: 3035,
++   // https://webpack.js.org/configuration/watch/#watchoptions-ignored
++   watchOptions: { ignored: /node_modules/ },
 + },
 ```
 
 BTW it's possible to see what assets are served by `webpack-dev-server`
-right in browser by opening configured URL (`http://localhost:3035` in
-this case).
+(and to make sure it's working) right in browser by opening configured
+URL (`http://localhost:3035` in this case).
 
 ### Webpack development server vs. Webpack in watch mode
 
@@ -873,6 +876,8 @@ config :my_app, MyAppWeb.Endpoint,
   files will have 2 hash suffixes).
 
 ```slim
+/ lib/my_app_web/templates/layout/app.html.slime
+
 doctype html
 html lang="en"
   head
@@ -889,5 +894,7 @@ html lang="en"
 // assets/webpack.config.js
 ```
 
-TODO: _assets/webpack.config.js_ (add different outputs - see
-      https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3)
+TODO: helpers to link output bundles and access static files
+      (to get "http://localhost:3035/js/app.js")
+TODO: update layout file above using those helpers
+TODO: add _assets/webpack.config.js_.

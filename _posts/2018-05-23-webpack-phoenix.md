@@ -671,18 +671,21 @@ add Webpack development server
 
 1. <https://github.com/webpack-contrib/webpack-serve>
 
-there are 2 major development servers for Webpack (npm packages):
+there are 2 major development servers for Webpack (avalable as npm packages):
 
 - `webpack-dev-server`
 - `webpack-serve`
 
-use `wepack-serve` since it's a faster alternative to `webpack-dev-server`
-(and the latter is in a maintenance-only mode now):
+though `webpack-serve` should be a faster alternative to `webpack-dev-server`
+(and the latter is in a maintenance-only mode now) I haven't managed to make
+it work - so use `webpack-dev-server` for now:
 
 ```sh
 $ cd assets
-$ yarn add webpack-serve --dev
+$ yarn add webpack-dev-server --dev
 ```
+
+it's possible to configure `webpack-dev-server` in Webpack config:
 
 ```diff
   // assets/webpack.config.js
@@ -690,25 +693,13 @@ $ yarn add webpack-serve --dev
   optimization: {
     // ...
   },
-+ // webpack-serve options
-+ serve: {},
++ // https://webpack.js.org/configuration/dev-server/#devserver
++ // webpack-dev-server options
++ devServer: {
++   host: 'localhost',
++   port: 3035,
++ },
 ```
-
-### Webpack in watch mode
-
-pass these options to run Webpack in `watch` mode:
-
-```
-$ assets/node_modules/webpack/bin/webpack.js --help
-...
---watch, -w  Enter watch mode, which rebuilds on file change.        [boolean]
---watch-stdin, --stdin     Stop watching when stdin stream has ended [boolean]
-```
-
-`--watch-stdin` option must be used instead of `--watch` - or else Webpack
-process (watcher running `watch` script from _assets/package.json_ - see
-below) is not killed when Phoenix server shuts down and you'll end up with
-an orphaned Node.js process.
 
 ### Webpack development server vs. Webpack in watch mode
 
@@ -739,8 +730,37 @@ in addition Webpack development server:
   > cause many other issues, like a memory leak, because the dev server
   > does not know when to clean up the old files.
 
+**summary**
+
+use Webpack development server instead of Webpack in watch mode.
+
+### Webpack in watch mode (for reference only)
+
+Webpack is run in watch mode when passed these options:
+
+```
+$ cd assets
+$ node_modules/.bin/webpack --help
+...
+--watch, -w         Enter watch mode, which rebuilds on file change. [boolean]
+--watch-stdin, --stdin     Stop watching when stdin stream has ended [boolean]
+```
+
+`--watch-stdin` option must be used instead of `--watch` - or else Webpack
+process (when run as watcher) is not killed when Phoenix server shuts down
+and you'll end up with an orphaned Node.js process.
+
 add `watch` script
 ------------------
+
+```
+$ cd assets
+$ node_modules/.bin/webpack-dev-server --help
+...
+--mode                   Enable production optimizations or development hints.
+--hot                    Enables Hot Module Replacement            [boolean]
+--watch-stdin, --stdin   close when stdin ends                     [boolean]
+```
 
 ```diff
   // assets/package.json
@@ -749,10 +769,14 @@ add `watch` script
     "scripts": {
 -     "deploy": "webpack --mode production"
 +     "deploy": "webpack --mode production",
-+     "watch": "webpack-serve --config ./webpack.config.js"
++     "watch": "webpack-dev-server --mode development --hot --watch-stdin"
     },
   }
 ```
+
+pass `--watch-stdin` option for the same reason that it's passed to Webpack
+in watch mode - to kill a watcher running `webpack-dev-server` when Phoenix
+server shuts down.
 
 add watcher
 -----------
@@ -761,7 +785,12 @@ add watcher
 2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#bace>
 3. <https://til.hashrocket.com/posts/frbeappww3-phoenix-will-watch-your-js-for-you-just-watch>
 
-watcher is added for development environment only:
+> <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
+>
+> :watchers - a set of watchers to run alongside your server.
+
+watcher is added for development environment only (it's possible to specify
+`watch` script or `webpack-dev-server` executable with options directly):
 
 ```diff
   # config/dev.exs
@@ -839,6 +868,27 @@ config :my_app, MyAppWeb.Endpoint,
   digest static files in _priv/static/_ by itself (or else digested static
   files will have 2 hash suffixes).
 
-TODO: _lib/my_app_web/templates/layout/app.html.slime_
+```slim
+doctype html
+html lang="en"
+  head
+    / ...
+    title MyApp
+    link rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}"
+
+  body
+    / ...
+    script src="#{static_path(@conn, "/js/app.js")}"
+```
+
+```javascript
+// assets/webpack.config.js
+```
+
+TODO: determine mode based on process.env.WEBPACK_SERVE because webpack-serve
+      has no `mode` option (argv is undefined when using webpack-serve)
+TODO: add mode configuration option (or else webpack will complain about missing
+      mode and will default to production)
 TODO: _assets/webpack.config.js_ (add different outputs - see
       https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3)
+TODO: assets are not served by webpack-serve

@@ -894,5 +894,5 @@ TODO: helpers to link output bundles and access static files
       (to get "http://localhost:3035/js/app.js")
 TODO: update layout file above using those helpers
 TODO: add _assets/webpack.config.js_ (are there any changes there)?
-TODO: cache_manifest: css/app-84e3af549a7513e2b456.css-873cfc170b11a25cf1daadfa5572d86e.map
+TODO: cache_manifest.json: css/app-84e3af549a7513e2b456.css-873cfc170b11a25cf1daadfa5572d86e.map
       (does it work?)

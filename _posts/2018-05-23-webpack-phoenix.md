@@ -701,7 +701,7 @@ TODO Bootstrap
 add Webpack development server
 ------------------------------
 
-1. <https://github.com/webpack-contrib/webpack-serve>
+1. <https://github.com/webpack/docs/wiki/webpack-dev-server>
 
 there are 2 major development servers for Webpack (avalable as npm packages):
 
@@ -754,6 +754,13 @@ in addition Webpack development server:
 - serves output bundles
 - reloads the whole page (when using Live Reload) or updated module only
   (when using Hot Module Replacement aka HMR)
+
+  > <https://github.com/webpack/docs/wiki/webpack-dev-server#automatic-refresh>
+  >
+  > In Hot Module Replacement, the bundle is notified that a change happened.
+  > Rather than a full page reload, a Hot Module Replacement runtime could
+  > then load the updated modules and inject them into a running app.
+
 - allows not to include `[hash]` substitutions in filenames (moreover -
   they are prohibited)
 
@@ -848,7 +855,7 @@ link output bundles in layout file
 2. <https://medium.com/@kimlindholm/adding-webpack-3-to-phoenix-e6633dbc2bc4#68ec>
 3. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:static_path/1>
 
-TODO: some phrase here (serve assets from dev server in development):
+serve output bundles with `webpack-dev-server` in development:
 
 ```elixir
 # lib/my_app_web/views/layout_view.ex
@@ -884,11 +891,13 @@ html lang="en"
   head
     / ...
     title MyApp
-    = {:safe, css_link_tag(@conn)}
+    / => {:safe, css_link_tag(@conn)}
+    = raw(css_link_tag(@conn))
 
   body
     / ...
-    = {:safe, js_script_tag(@conn)}
+    / => {:safe, js_script_tag(@conn)}
+    = raw(js_script_tag(@conn))
 ```
 
 TODO: maybe additional helpers for static files (images) will be required

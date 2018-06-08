@@ -844,10 +844,9 @@ watcher is added for development environment only (it's possible to specify
 link output bundles in layout file
 ----------------------------------
 
-1. <https://github.com/webpack/webpack/issues/86>
-2. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:static_path/1>
-3. <https://elixirforum.com/t/getting-the-features-of-webpack-to-work-with-phoenix-webpack-dev-server-sass-and/13615/3>
-4. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
+1. <https://medium.com/@roaltay/how-to-use-phoenix-react-webpack-5383fa556b62>
+2. <https://medium.com/@kimlindholm/adding-webpack-3-to-phoenix-e6633dbc2bc4#68ec>
+3. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:static_path/1>
 
 ```elixir
 # lib/my_app_web/views/layout_view.ex
@@ -868,7 +867,7 @@ defmodule MyAppWeb.LayoutView do
     if Mix.env == :prod do
       ~s(link rel="stylesheet" href="#{static_path(conn, "/css/app.css")}")
     else
-      # CSS is not extracted into output bundles in development
+      # CSS is not extracted into separate files in development
       ""
     end
   end
@@ -890,11 +889,14 @@ html lang="en"
     = {:safe, js_script_tag(@conn)}
 ```
 
-### in production
+### static_path/1 helper
+
+1. <https://github.com/webpack/webpack/issues/86>
 
 you cannot reference hardcoded paths like _/js/app.js_ or _/css/app.css_ inside
 layout file directly because output bundle names will most likely contain some
-kind of hashes in production environment.
+kind of hashes in production environment - in Phoenix these hashes are appended
+to static files by `phx.digest` Mix task.
 
 without Phoenix you would use something like `webpack-file-changer` plugin that
 changes file path dynamically in layout file during asset compilation.
@@ -915,6 +917,3 @@ just like Webpacker, Phoenix provides `static_path/1` helper which generates
 routes to static files in _priv/static/_. this helper is not aware of Webpack
 but uses cache static manifest to find actual file paths (much like Webpacker
 helpers do).
-
-TODO: structure this section
-TODO: add _assets/webpack.config.js_ (are there any changes there)?

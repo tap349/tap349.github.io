@@ -883,11 +883,11 @@ html lang="en"
   head
     / ...
     title MyApp
-    link rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}"
+    = {:safe, css_link_tag(@conn)}
 
   body
     / ...
-    script src="#{static_path(@conn, "/js/app.js")}"
+    = {:safe, js_script_tag(@conn)}
 ```
 
 ### in production
@@ -916,7 +916,5 @@ routes to static files in _priv/static/_. this helper is not aware of Webpack
 but uses cache static manifest to find actual file paths (much like Webpacker
 helpers do).
 
-TODO: helpers to link output bundles and access static files
-      (to get "http://localhost:3045/js/app.js")
-TODO: update layout file above using those helpers
+TODO: structure this section
 TODO: add _assets/webpack.config.js_ (are there any changes there)?

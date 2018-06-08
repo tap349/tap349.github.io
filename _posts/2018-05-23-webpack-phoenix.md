@@ -932,3 +932,6 @@ just like Webpacker, Phoenix provides `static_path/1` helper which generates
 routes to static files in _priv/static/_. this helper is not aware of Webpack
 but uses cache static manifest to find actual file paths (much like Webpacker
 helpers do).
+
+TODO: 02:14:19.855 [info] GET /4b269920cb5197d56a20.hot-update.json
+      02:14:19.864 [debug] ** (Phoenix.Router.NoRouteError) no route found for GET /4b269920cb5197d56a20.hot-update.json (SithexWeb.Router)

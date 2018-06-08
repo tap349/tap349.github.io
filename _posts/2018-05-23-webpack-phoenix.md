@@ -732,7 +732,7 @@ it's possible to configure `webpack-dev-server` in Webpack config:
 +   // port 3035 is used by Webpacker by default
 +   port: 3045,
 +   // https://webpack.js.org/configuration/watch/#watchoptions-ignored
-+   watchOptions: { ignored: /node_modules/ },
++   watchOptions: {ignored: /node_modules/},
 + },
 ```
 
@@ -848,6 +848,8 @@ link output bundles in layout file
 2. <https://medium.com/@kimlindholm/adding-webpack-3-to-phoenix-e6633dbc2bc4#68ec>
 3. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:static_path/1>
 
+TODO: some phrase here (serve assets from dev server in development):
+
 ```elixir
 # lib/my_app_web/views/layout_view.ex
 
@@ -889,9 +891,13 @@ html lang="en"
     = {:safe, js_script_tag(@conn)}
 ```
 
+TODO: maybe additional helpers for static files (images) will be required
+      along with publicPath in Webpack config.
+
 ### static_path/1 helper
 
 1. <https://github.com/webpack/webpack/issues/86>
+2. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
 
 you cannot reference hardcoded paths like _/js/app.js_ or _/css/app.css_ inside
 layout file directly because output bundle names will most likely contain some

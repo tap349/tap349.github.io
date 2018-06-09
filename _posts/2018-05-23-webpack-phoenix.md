@@ -708,9 +708,9 @@ there are 2 major development servers for Webpack (avalable as npm packages):
 - `webpack-dev-server`
 - `webpack-serve`
 
-though `webpack-serve` should be a faster alternative to `webpack-dev-server`
-(and the latter is in a maintenance-only mode now) I haven't managed to make
-it work - so use `webpack-dev-server` for now:
+though `webpack-serve` seems to be a successor of `webpack-dev-server` and
+its faster alternative (and the latter is in a maintenance-only mode now)
+I haven't managed to make it work - so use `webpack-dev-server` for now:
 
 ```sh
 $ cd assets
@@ -933,5 +933,6 @@ routes to static files in _priv/static/_. this helper is not aware of Webpack
 but uses cache static manifest to find actual file paths (much like Webpacker
 helpers do).
 
-TODO: 02:14:19.855 [info] GET /4b269920cb5197d56a20.hot-update.json
+TODO: fix HMR
+      02:14:19.855 [info] GET /4b269920cb5197d56a20.hot-update.json
       02:14:19.864 [debug] ** (Phoenix.Router.NoRouteError) no route found for GET /4b269920cb5197d56a20.hot-update.json (SithexWeb.Router)

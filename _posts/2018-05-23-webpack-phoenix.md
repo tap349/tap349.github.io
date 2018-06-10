@@ -910,7 +910,12 @@ html lang="en"
     = raw(js_script_tag(@conn))
 ```
 
-it's necessary to configure output in Webpack config for HMR to work:
+TODO: maybe additional helpers for static files (images) will be required.
+
+### HMR
+
+configure output in Webpack config for HMR to work (Live Reload would work
+without these changes):
 
 ```diff
   // assets/webpack.config.js
@@ -935,6 +940,7 @@ it's necessary to configure output in Webpack config for HMR to work:
     devServer: {
       host: 'localhost',
       port: 3045,
++     // this header is also required for HMR to work
 +     headers: {
 +       'Access-Control-Allow-Origin': '*',
 +     },
@@ -942,8 +948,8 @@ it's necessary to configure output in Webpack config for HMR to work:
     },
 ```
 
-unless configured this way, you'll get this error in server log
-(or no errors at all but HMR still wouldn't work):
+unless configured this way, you'll get this error in server log (or no errors
+at all but HMR still wouldn't work):
 
 ```
 GET /710cab78ba975de05092.hot-update.json
@@ -951,8 +957,6 @@ GET /710cab78ba975de05092.hot-update.json
 ```
 
 NOTE: this file can be found at <http://localhost:3045/webpack-dev-server>.
-
-TODO: maybe additional helpers for static files (images) will be required.
 
 ### static_path/1 helper
 

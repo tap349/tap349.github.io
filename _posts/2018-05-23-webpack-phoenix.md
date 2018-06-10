@@ -737,9 +737,20 @@ it's possible to configure `webpack-dev-server` in Webpack config:
 ```
 
 BTW it's possible to see what assets are served by `webpack-dev-server`
-(and to make sure it's working) right in browser by opening configured
-URL (`http://localhost:3045` or `http://localhost:3045/webpack-dev-server`
-in this case).
+(and to make sure it's working) right in browser by opening configured URL:
+
+- <http://localhost:3045>
+
+  FTP-like page that lists all files in _assets/_ directory - say,
+  _js/app.js_ is replaced with corresponding output bundle while
+  _css/app.scss_ is left untouched (since CSS is not extracted into
+  output bundles in development).
+
+- <http://localhost:3045/webpack-dev-server>
+
+  page lists all assets served by `webpack-dev-server` including
+  _*.hot-update.json_ files used for HMR (which are not visible
+  when `http://localhost:3045` is opened).
 
 ### Webpack development server vs. Webpack in watch mode
 
@@ -851,9 +862,8 @@ watcher is added for development environment only (it's possible to specify
 link output bundles in layout file
 ----------------------------------
 
-1. <https://medium.com/@roaltay/how-to-use-phoenix-react-webpack-5383fa556b62>
-2. <https://medium.com/@kimlindholm/adding-webpack-3-to-phoenix-e6633dbc2bc4#68ec>
-3. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:static_path/1>
+1. <https://medium.com/@kimlindholm/adding-webpack-3-to-phoenix-e6633dbc2bc4#68ec>
+2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#ec1e>
 
 serve output bundles with `webpack-dev-server` in development:
 
@@ -900,13 +910,55 @@ html lang="en"
     = raw(js_script_tag(@conn))
 ```
 
-TODO: maybe additional helpers for static files (images) will be required
-      along with publicPath in Webpack config.
+it's necessary to configure output in Webpack config for HMR to work:
+
+```diff
+  // assets/webpack.config.js
+
+-   output: {
+-     path: path.resolve(__dirname, '../priv/static'),
+-     filename: 'js/[name].js',
+-   },
++   output: devMode
++     ? {
++       // IDK why `public` - it's the only path that works
++       path: path.resolve(__dirname, 'public'),
++       filename: 'js/[name].js',
++       // trailing slash is required
++       publicPath: 'http://localhost:3045/',
++     }
++     : {
++       path: path.resolve(__dirname, '../priv/static'),
++       filename: 'js/[name].js',
++     },
+    // ...
+    devServer: {
+      host: 'localhost',
+      port: 3045,
++     headers: {
++       'Access-Control-Allow-Origin': '*',
++     },
+      watchOptions: {ignored: /node_modules/},
+    },
+```
+
+unless configured this way, you'll get this error in server log
+(or no errors at all but HMR still wouldn't work):
+
+```
+GET /710cab78ba975de05092.hot-update.json
+** (Phoenix.Router.NoRouteError) no route found for GET /710cab78ba975de05092.hot-update.json (MyAppWeb.Router)
+```
+
+NOTE: this file can be found at <http://localhost:3045/webpack-dev-server>.
+
+TODO: maybe additional helpers for static files (images) will be required.
 
 ### static_path/1 helper
 
-1. <https://github.com/webpack/webpack/issues/86>
-2. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
+1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:static_path/1>
+2. <https://github.com/webpack/webpack/issues/86>
+3. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Digest.html>
 
 you cannot reference hardcoded paths like _/js/app.js_ or _/css/app.css_ inside
 layout file directly because output bundle names will most likely contain some
@@ -932,7 +984,3 @@ just like Webpacker, Phoenix provides `static_path/1` helper which generates
 routes to static files in _priv/static/_. this helper is not aware of Webpack
 but uses cache static manifest to find actual file paths (much like Webpacker
 helpers do).
-
-TODO: fix HMR
-      02:14:19.855 [info] GET /4b269920cb5197d56a20.hot-update.json
-      02:14:19.864 [debug] ** (Phoenix.Router.NoRouteError) no route found for GET /4b269920cb5197d56a20.hot-update.json (SithexWeb.Router)

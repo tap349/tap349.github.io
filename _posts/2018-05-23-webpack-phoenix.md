@@ -567,8 +567,8 @@ config :my_app, MyAppWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
-TODO: cache_manifest.json: css/app-84e3af549a7513e2b456.css-873cfc170b11a25cf1daadfa5572d86e.map
-      (does it work?)
+TODO: css/app-84e3af549a7513e2b456.css-873cfc170b11a25cf1daadfa5572d86e.map
+      (does it work? check when deployed)
 
 ### webpack-manifest-plugin (for reference only)
 
@@ -696,7 +696,19 @@ TODO: CopyWebpackPlugin?
 add Bootstrap
 -------------
 
-TODO Bootstrap
+1. [Webpack - Rails (Webpacker)]({% post_url 2018-05-23-webpack-rails-webpacker %})
+
+```sh
+$ cd assets
+$ yarn add bootstrap
+```
+
+```diff
+  // assets/css/app.scss
+
+  + // resolves to node_modules/bootstrap/dist/css/bootstrap
+  + @import '~bootstrap/dist/css/bootstrap';
+```
 
 add Webpack development server
 ------------------------------

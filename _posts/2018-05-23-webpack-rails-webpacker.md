@@ -334,17 +334,13 @@ packs then included in layout file using `javascript_pack_tag` and
   ```diff
     // app/assets/css/app.scss
 
+  + // resolves to node_modules/bootstrap/dist/css/bootstrap
   + @import '~bootstrap/dist/css/bootstrap';
   ```
 
   when importing Sass files, `~` prefix in front of imported file is used to
-  tell that this is not a relative import: it's relative in fact but relative
+  tell that this is not a relative import - it's relative in fact but relative
   to _node\_modules/_ rather than current directory:
-
-  ```scss
-  // resolves to node_modules/bootstrap/dist/css/bootstrap
-  @import '~bootstrap/dist/css/bootstrap';
-  ```
 
   > <https://github.com/rails/webpacker/issues/454#issuecomment-305764527>
   >

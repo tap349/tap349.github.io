@@ -567,9 +567,6 @@ config :my_app, MyAppWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
-TODO: css/app-84e3af549a7513e2b456.css-873cfc170b11a25cf1daadfa5572d86e.map
-      (does it work? check when deployed)
-
 ### webpack-manifest-plugin (for reference only)
 
 1. <https://github.com/danethurber/webpack-manifest-plugin>
@@ -688,10 +685,7 @@ TODO: why does CSS source map chunk have no name in production mode?
 copy static assets
 ------------------
 
-TODO: CopyWebpackPlugin?
-      (http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html)
-      what about adding hashes? file-loader does it?
-      https://github.com/webpack/webpack/issues/86#issuecomment-350365453
+TODO
 
 add Bootstrap
 -------------
@@ -753,16 +747,14 @@ BTW it's possible to see what assets are served by `webpack-dev-server`
 
 - <http://localhost:3045>
 
-  FTP-like page that lists all files in _assets/_ directory - say,
-  _js/app.js_ is replaced with corresponding output bundle while
-  _css/app.scss_ is left untouched (since CSS is not extracted into
-  output bundles in development).
+  lists all files in _assets/_ directory - say, _js/app.js_ is replaced with
+  corresponding output bundle while _css/app.scss_ is left untouched (as CSS
+  is not extracted into output bundles in development).
 
 - <http://localhost:3045/webpack-dev-server>
 
-  page lists all assets served by `webpack-dev-server` including
-  _*.hot-update.json_ files used for HMR (which are not visible
-  when `http://localhost:3045` is opened).
+  lists all assets served by `webpack-dev-server` including _*.hot-update.json_
+  files used for HMR which aren't shown when `http://localhost:3045` is opened.
 
 ### Webpack development server vs. Webpack in watch mode
 

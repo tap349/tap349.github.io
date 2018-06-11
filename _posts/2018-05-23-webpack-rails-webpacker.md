@@ -96,7 +96,7 @@ using `require.context()` function:
 
 ```javascript
 // import each image manually
-import './foo.jpg';
+import './images/foo.jpg';
 
 // or all images in directory recursively
 require.context('images/', true, /\.(gif|jpeg|jpg|png|svg)$/i);

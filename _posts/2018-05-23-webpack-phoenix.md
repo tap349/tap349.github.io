@@ -680,8 +680,6 @@ css/app-b11624419d532ffa8ee3.css.map  184 bytes     app  [emitted]  app
 it looks like `MiniCssExtractPlugin` is responsible for generating CSS
 source maps - it makes sense to search for the answer in its source code.
 
-TODO: why does CSS source map chunk have no name in production mode?
-
 copy static assets
 ------------------
 
@@ -914,7 +912,7 @@ html lang="en"
     = raw(js_script_tag(@conn))
 ```
 
-TODO: maybe additional helpers for static files (images) will be required.
+TODO: helpers for static files (images).
 
 ### HMR
 

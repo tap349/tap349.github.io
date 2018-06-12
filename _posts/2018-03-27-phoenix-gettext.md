@@ -83,8 +83,8 @@ p = gettext("authentication success")
 - `dgettext/3` - for domain-based translations
 - `ngettext/4` - for plural translations
 
-NOTE: these templates MUST be rendered in controllers for `gettext.extract`
-      task to work (otherwise translations won't be extracted).
+NOTE: templates containing Gettext helpers MUST be rendered in controllers for
+      `gettext.extract` task to work (or else translations won't be extracted).
 
 ### update POT file and PO files
 

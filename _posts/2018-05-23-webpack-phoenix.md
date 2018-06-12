@@ -727,6 +727,21 @@ $ mkdir -p static/images/
 > Or, in case of just a `from` with the default destination, you can
 > also use a {String} as shorthand instead of an {Object}: 'source'
 
+just like in case of CSS, don't include `[hash]` substitutions in filenames
+of static assets.
+
+also it's possible to add image extensions to `resolve.extensions` array if
+you're going to reference image files without specifying their extensions:
+
+```diff
+  // assets/webpack.config.js
+
+  resolve: {
+-   extensions: ['.js', '.css', '.sass', '.scss'],
++   extensions: ['.js', '.css', '.sass', '.scss', '.jpg', '.jpeg', '.png'],
+  },
+```
+
 add Bootstrap
 -------------
 
@@ -903,19 +918,20 @@ watcher is added for development environment only (it's possible to specify
 +   watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
 ```
 
-link output bundles in layout file
-----------------------------------
+link output bundles and static assets
+-------------------------------------
 
 1. <https://medium.com/@kimlindholm/adding-webpack-3-to-phoenix-e6633dbc2bc4#68ec>
 2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#ec1e>
 
-serve output bundles with `webpack-dev-server` in development:
+create a separate module for Webpack helpers:
 
 ```elixir
-# lib/my_app_web/views/layout_view.ex
+# lib/my_app_web/views/webpack_helpers.ex
 
-defmodule MyAppWeb.LayoutView do
-  # ...
+defmodule MyAppWeb.WebpackHelpers do
+  # for static_pach/2
+  import SithexWeb.Router.Helpers
 
   def js_script_tag(conn) do
     ~s(<script src=#{webpack_path(conn, "/js/app.js")}></script>)
@@ -934,12 +950,33 @@ defmodule MyAppWeb.LayoutView do
     if Mix.env == :prod do
       static_path(conn, path)
     else
-      # Webpack development server is used in development
+      # all assets (including output bundles) are served with
+      # `webpack-dev-server` in development
       "http://localhost:3045#{path}"
     end
   end
 end
 ```
+
+import Webpack helpers for all views:
+
+```diff
+  # lib/my_app_web.ex
+
+  def view do
+    quote do
+      # ...
+
+      import SithexWeb.Router.Helpers
+      import SithexWeb.ErrorHelpers
+      import SithexWeb.Gettext
++     import SithexWeb.WebpackHelpers
+    end
+  end
+```
+
+use `css_link_tag/1` and `js_script_tag/1` helpers to include output bundles
+in layout:
 
 ```slim
 / lib/my_app_web/templates/layout/app.html.slime
@@ -958,17 +995,16 @@ html lang="en"
     = raw(js_script_tag(@conn))
 ```
 
-static assets (images, etc.) should be accessed using custom `webpack_path/2`
-helper directly:
+use `webpack_path/2` helper to reference static assets (images, etc.):
 
 ```slim
 / => img src=webpack_path(@conn, "/images/foo.jpg")
-= img_tag(webpack_path(@conn, "images/foo.jpg"))
+= img_tag(webpack_path(@conn, "/images/foo.jpg"))
 ```
 
-it's not necessary to require all images in _assets/static/images/app.js_
-recursively like in Webpacker (because we copy all of them manually using
-`CopyWebpackPlugin`) and import this file later in _assets/js/app.js_.
+also it's NOT necessary to require all images in _assets/static/images/app.js_
+recursively and import this file later in _assets/js/app.js_ like in Webpacker
+(since we copy all of them manually using `CopyWebpackPlugin`).
 
 ### HMR
 
@@ -1038,7 +1074,7 @@ Webpacker, for instance, provides special helpers:
 
 - `asset_pack_path`
 
-  it's used to link static assets in views.
+  it's used to reference assets in views.
 
 under the hood all these helpers parse manifest file to find actual file paths.
 

@@ -683,7 +683,49 @@ source maps - it makes sense to search for the answer in its source code.
 copy static assets
 ------------------
 
-TODO
+1. <http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html>
+2. <https://github.com/webpack/webpack/issues/86#issuecomment-350365453>
+
+```sh
+$ cd assets
+$ yarn add copy-webpack-plugin --dev
+$ mkdir -p static/images/
+```
+
+```diff
+  // assets/webpack.config.js
+
+  const MiniCssExtractPlugin = require('mini-css-extract-plugin');
++ const CopyWebpackPlugin = require('copy-webpack-plugin');
+  const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+  const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+  module.exports = (_env, argv) => {
+    const devMode = argv.mode !== 'production';
+
+    return {
+    // ...
+      plugins: [
+        new MiniCssExtractPlugin({filename: 'css/[name].css'}),
++       // contents of assets/static/ is copied to output.path
++       // (priv/static/) by default
++       new CopyWebpackPlugin(['static/']),
+      ],
+    };
+  };
+```
+
+`'static/'` is a shorthand for `{from: 'static/'}` when default destination
+(`output.path`) is used:
+
+> <https://github.com/webpack-contrib/copy-webpack-plugin>
+>
+> A simple pattern looks like this
+>
+> { from: 'source', to: 'dest' }
+>
+> Or, in case of just a `from` with the default destination, you can
+> also use a {String} as shorthand instead of an {Object}: 'source'
 
 add Bootstrap
 -------------
@@ -698,8 +740,8 @@ $ yarn add bootstrap
 ```diff
   // assets/css/app.scss
 
-  + // resolves to node_modules/bootstrap/dist/css/bootstrap
-  + @import '~bootstrap/dist/css/bootstrap';
++ // resolves to node_modules/bootstrap/dist/css/bootstrap
++ @import '~bootstrap/dist/css/bootstrap';
 ```
 
 add Webpack development server
@@ -811,7 +853,7 @@ process (when run as watcher) is not killed when Phoenix server shuts down
 and you'll end up with an orphaned Node.js process.
 
 add watch script
-------------------
+----------------
 
 ```
 $ cd assets
@@ -876,12 +918,7 @@ defmodule MyAppWeb.LayoutView do
   # ...
 
   def js_script_tag(conn) do
-    if Mix.env == :prod do
-      ~s(<script src=#{static_path(conn, "/js/app.js")}></script>)
-    else
-      # webpack-dev-server is used in development
-      ~s(<script src="http://localhost:3045/js/app.js"></script>)
-    end
+    ~s(<script src=#{webpack_path(conn, "/js/app.js")}></script>)
   end
 
   def css_link_tag(conn) do
@@ -890,6 +927,15 @@ defmodule MyAppWeb.LayoutView do
     else
       # CSS is not extracted into separate files in development
       ""
+    end
+  end
+
+  def webpack_path(conn, path) do
+    if Mix.env == :prod do
+      static_path(conn, path)
+    else
+      # Webpack development server is used in development
+      "http://localhost:3045#{path}"
     end
   end
 end
@@ -912,7 +958,17 @@ html lang="en"
     = raw(js_script_tag(@conn))
 ```
 
-TODO: helpers for static files (images).
+static assets (images, etc.) should be accessed using custom `webpack_path/2`
+helper directly:
+
+```slim
+/ => img src=webpack_path(@conn, "/images/foo.jpg")
+= img_tag(webpack_path(@conn, "images/foo.jpg"))
+```
+
+it's not necessary to require all images in _assets/static/images/app.js_
+recursively like in Webpacker (because we copy all of them manually using
+`CopyWebpackPlugin`) and import this file later in _assets/js/app.js_.
 
 ### HMR
 

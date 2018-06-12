@@ -137,6 +137,36 @@ translations are added to PO files only (not POT files):
 + msgstr "Congratulations! You're authenticated"
 ```
 
+if you leave `msgstr` empty (`""`), corresponding `msgid` will be used for
+translation - this way yon can use normal phrases in your default language
+right in your templates instead of artificial translation keys and provide
+translations for other locales only:
+
+```slim
+= gettext("Congratulations! You're authenticated")
+```
+
+```po
+## priv/gettext/default.pot
+
+msgid "Congratulations! You're authenticated"
+msgstr ""
+```
+
+```po
+## priv/gettext/en/LC_MESSAGES/default.po
+
+msgid "Congratulations! You're authenticated"
+msgstr ""
+```
+
+```po
+## priv/gettext/ru/LC_MESSAGES/default.po
+
+msgid "Congratulations! You're authenticated"
+msgstr "Поздравляем! Вы аутентифицированы"
+```
+
 dynamic translations
 --------------------
 

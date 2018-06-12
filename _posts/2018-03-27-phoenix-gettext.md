@@ -112,6 +112,11 @@ both actions in one go:
 $ mix gettext.extract --merge
 ```
 
+***UPDATE***
+
+`--merge` option doesn't work: POT files are updated but not merged
+into PO files.
+
 ### add translations for all locales
 
 translations are added to PO files only (not POT files):

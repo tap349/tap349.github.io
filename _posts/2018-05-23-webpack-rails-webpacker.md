@@ -317,40 +317,78 @@ packs then included in layout file using `javascript_pack_tag` and
   rather than relative to _node\_modules/bootstrap/dist/css/_.
 
   error is gone when `resolve-url-loader` package is removed => so don't
-  use it so far.
+  use it so far - it works without it and doesn't work when it's added.
 
-- add Bootstrap
+### NPM package
 
-  1. <https://github.com/rails/webpacker/blob/master/docs/css.md#add-bootstrap>
-  2. <https://github.com/rails/webpacker/issues/1267>
+1. <https://github.com/rails/webpacker/blob/master/docs/assets.md#import-from-node-modules>
+2. <https://gist.github.com/MFry/41fd51e8057152b9b914ecd1379a53d2>
 
-  don't add `resolve-url-loader` package so far - it works without it and
-  doesn't work when it's added (see above).
+say, we want to use `toastr` JS library which consists of CSS and JS files.
+
+- install NPM package
 
   ```sh
-  $ yarn add bootstrap
+  $ yarn install toastr
   ```
 
-  ```diff
-    // app/assets/css/app.scss
+- import CSS
 
-  + // resolves to node_modules/bootstrap/dist/css/bootstrap
-  + @import '~bootstrap/dist/css/bootstrap';
+  ```scss
+  // app/assets/css/app.scss
+
+  // resolves to node_modules/toastr/build/toastr.min.js
+  @import '~toastr/build/toastr.min';
   ```
 
-  when importing Sass files, `~` prefix in front of imported file is used to
-  tell that this is not a relative import - it's relative in fact but relative
-  to _node\_modules/_ rather than current directory:
+- import JS
 
-  > <https://github.com/rails/webpacker/issues/454#issuecomment-305764527>
+  > <https://stackoverflow.com/a/34830919>
   >
-  > You see, sass-loader needs a ~ in the beginning to understand that a
-  > particular file is using a node_modules import.
+  > It should work with import 'foo/module' - it will resolve file
+  > ./node_modules/foo/module.js or ./node_modules/foo/module/index.js.
 
-  > <https://www.neontsunami.com/posts/replacing-rails-asset-pipeline-with-webpacker>
-  >
-  > it's worth learning about the ~ character when using imports as it will
-  > start a lookup from the node_modules directory.
+  ```javascript
+  // app/assets/js/app.js
+
+  // resolves to node_modules/toastr/build/toastr.min.js
+  import Toastr from 'toastr/build/toastr.min.js';
+  // works (resolves to node_modules/toastr/toastr.js)
+  //import Toastr from 'toastr';
+  // works (resolves to node_modules/toastr/toastr.js)
+  //import Toastr from 'toastr/toastr';
+  // doesn't work
+  //import Toastr from 'toastr/build/toastr.min';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    Toastr.info('Hello world!');
+  });
+  ```
+
+  `js` extension is listed in `extensions` section of Webpacker config so it
+  must be not necessary to specify it when importing JS files.
+
+  still when filename already contains any extension (_toastr.min_), the file
+  is not found - it looks like Webpacker doesn't try to append `js` extension
+  in this case.
+
+  there is no such error when using pure Webpack (say, in Phoenix project) -
+  so it must be Webpacker issue.
+
+#### Bootstrap
+
+1. <https://github.com/rails/webpacker/blob/master/docs/css.md#add-bootstrap>
+2. <https://github.com/rails/webpacker/issues/1267>
+
+```sh
+$ yarn add bootstrap
+```
+
+```scss
+// app/assets/css/app.scss
+
+@import '~bootstrap/dist/css/bootstrap.min';
+```
 
 ### images
 

@@ -742,21 +742,69 @@ you're going to reference image files without specifying their extensions:
   },
 ```
 
-add Bootstrap
--------------
+add NPM package
+---------------
 
 1. [Webpack - Rails (Webpacker)]({% post_url 2018-05-23-webpack-rails-webpacker %})
+
+say, we want to use `toastr` JS library which consists of CSS and JS files.
+
+- install NPM package
+
+  ```sh
+  $ cd assets
+  $ yarn install toastr
+  ```
+
+- import CSS
+
+  ```scss
+  // assets/css/app.scss
+
+  // resolves to assets/node_modules/toastr/build/toastr.min.js
+  @import '~toastr/build/toastr.min';
+  ```
+
+  when importing Sass files, `~` prefix in front of imported file is used to
+  tell Sass loader that this is not a relative import - it's relative in fact
+  but relative to _node\_modules/_ rather than current directory:
+
+  > <https://github.com/webpack-contrib/sass-loader#imports>
+  >
+  > You can import your Sass modules from node_modules. Just prepend them
+  > with a ~ to tell webpack that this is not a relative import:
+  >
+  > @import "~bootstrap/dist/css/bootstrap";
+  >
+  > It's important to only prepend it with ~, because ~/ resolves to the home
+  > directory. webpack needs to distinguish between bootstrap and ~bootstrap
+  > because CSS and Sass files have no special syntax for importing relative
+  > files. Writing `@import "file"` is the same as `@import "./file"`.
+
+- import JS
+
+  ```javascript
+  // assets/js/app.js
+
+  // resolves to assets/node_modules/toastr/build/toastr.min.js
+  import Toastr from 'toastr/build/toastr.min';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    Toastr.info('Hello world!');
+  });
+  ```
+
+### add Bootstrap
 
 ```sh
 $ cd assets
 $ yarn add bootstrap
 ```
 
-```diff
-  // assets/css/app.scss
+```scss
+// assets/css/app.scss
 
-+ // resolves to node_modules/bootstrap/dist/css/bootstrap
-+ @import '~bootstrap/dist/css/bootstrap';
+@import '~bootstrap/dist/css/bootstrap.min';
 ```
 
 add Webpack development server

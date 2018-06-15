@@ -67,3 +67,16 @@ optional and default values
   # (final value can't be nil => `default(nil)` is not allowed)
   Types::Strict::String.default('bar')
   ```
+
+  ***UPDATE***
+
+  > <https://github.com/dry-rb/dry-types/releases/tag/v0.13.0>
+  >
+  > Default types are not evaluated on nil. Default values are
+  > evaluated only if no value was given.
+
+  ```ruby
+  type = Types::Strict::String.default('hello')
+  type[nil] # => constraint error
+  type[] # => 'hello'
+  ```

@@ -34,7 +34,7 @@ Remote Redux DevTools
 
 | Chrome: `Redux DevTools` (extension icon menu) → `Open Remote DevTools`
 
-[RECOMMENDED] React Native Debugger (RND)
+*[RECOMMENDED]* React Native Debugger (RND)
 -----------------------------------------
 
 1. <https://github.com/jhen0409/react-native-debugger>

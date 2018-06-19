@@ -13,10 +13,14 @@ categories: [dns]
 {:toc}
 <hr>
 
-1. <https://help.github.com/articles/quick-start-setting-up-a-custom-domain/>
+1. <https://help.github.com/articles/using-a-custom-domain-with-github-pages/>
+2. <https://help.github.com/articles/quick-start-setting-up-a-custom-domain/>
 
 - `DNS provider` = `domain registrar` = `DNS host` (say, `Namecheap`)
 - `root domain` = `apex domain` (say, `example.com`)
+
+- `A` DNS records are for IPv4 only
+- `AAAA` DNS records are for IPv6 only
 
 > <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 >
@@ -26,25 +30,30 @@ categories: [dns]
 register root domain with your DNS provider
 -------------------------------------------
 
-I want to use subdomain `blog.tap349.com` of my root domain `tap349.com` as
-a custom domain for my GitHub Pages site (<http://tap349.github.io>).
+I want to use subdomain `blog.tap349.com` of my root domain `tap349.com` as a
+custom domain for my blog on GitHub Pages (<http://tap349.github.io>) - I will
+refer to it as a custom blog domain hereafter to avoid ambiguity.
 
-add custom domain in repo settings on GitHub
---------------------------------------------
+add custom blog domain in repo settings on GitHub
+-------------------------------------------------
 
 1. <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 
-this will create _CNAME_ file with a custom domain in the root of your repo:
+this will create _CNAME_ file with a custom blog domain in the root of
+blog repo (in a separate commit):
 
 ```
 blog.tap349.com
 ```
 
-add CNAME record for custom domain on DigitalOcean
---------------------------------------------------
+add CNAME record for custom blog domain on DigitalOcean
+-------------------------------------------------------
 
 1. <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 2. <https://www.digitalocean.com/community/tutorials/an-introduction-to-digitalocean-dns#cname-records>
+
+| DigitalOcean: `Create ▼` (top right menu) → `Domains/DNS`
+| `<YOUR_DOMAIN>` → `CNAME` (tab)
 
 - `HOSTNAME`: `blog.tap349.com`
 - `IS AN ALIAS OF`: `tap349.github.io`
@@ -67,11 +76,12 @@ enter DigitalOcean nameservers in DNS settings of your DNS provider
 - `ns2.digitalocean.com`
 - `ns3.digitalocean.com`
 
-check custom domain is set up correctly
----------------------------------------
+check custom blog domain is set up correctly
+--------------------------------------------
 
 1. <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 
+{% raw %}
 ```
 $ dig blog.tap349.com +nostats +nocomments +nocmd
 ; <<>> DiG 9.10.6 <<>> blog.tap349.com +nostats +nocomments +nocmd
@@ -81,3 +91,13 @@ blog.tap349.com.	43200	IN	CNAME	tap349.github.io.
 tap349.github.io.	3600	IN	CNAME	sni.github.map.fastly.net.
 ...
 ```
+{% endraw %}
+
+*[OPTIONAL]* redirect root domain to custom blog domain
+-------------------------------------------------------
+
+| DigitalOcean: `Create ▼` (top right menu) → `Domains/DNS`
+| `<YOUR_DOMAIN>` → `A` (tab)
+
+- `HOSTNAME`: `@` (`tap349.com`)
+- `WILL REDIRECT TO`: `185.199.111.153` (IP address of GitHub Pages site)

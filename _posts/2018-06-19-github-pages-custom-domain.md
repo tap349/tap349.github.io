@@ -76,6 +76,13 @@ enter DigitalOcean nameservers in DNS settings of your DNS provider
 - `ns2.digitalocean.com`
 - `ns3.digitalocean.com`
 
+> It will take some time for the name server changes to propagate after you've
+> saved them. During this time, the domain registrar communicates the changes
+> you've made with your ISP (Internet Service Provider). In turn, your ISP
+> caches the new nameservers to ensure quick site connections. This process
+> usually takes about 30 minutes, but could take up to a few hours depending
+> on your registrar and your ISP's communication methods.
+
 check custom blog domain is set up correctly
 --------------------------------------------
 

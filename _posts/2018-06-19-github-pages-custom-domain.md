@@ -2,7 +2,7 @@
 layout: post
 title: GitHub Pages - Custom domain
 date: 2018-06-19 12:28:25 +0300
-access: private
+access: public
 comments: true
 categories: [dns]
 ---
@@ -108,4 +108,4 @@ tap349.github.io.	3600	IN	CNAME	sni.github.map.fastly.net.
 
 1. <https://help.github.com/articles/setting-up-an-apex-domain/>
 
-NOTE: you cannot use multiple custom blog domains.
+NOTE: you cannot have multiple custom blog domains.

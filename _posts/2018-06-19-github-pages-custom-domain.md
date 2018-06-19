@@ -61,6 +61,9 @@ add CNAME record for custom blog domain on DigitalOcean
 this will make DNS lookups for <http://blog.tap349.com> to redirect to
 <http://tap349.github.io>.
 
+at the same time if you open <http://tap349.github.io> in browser it will
+substitute URL for <http://blog.tap349.com>.
+
 update your DNS provider nameservers
 ------------------------------------
 

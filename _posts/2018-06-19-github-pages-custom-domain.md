@@ -103,11 +103,9 @@ tap349.github.io.	3600	IN	CNAME	sni.github.map.fastly.net.
 ```
 {% endraw %}
 
-*[OPTIONAL]* redirect root domain to custom blog domain
--------------------------------------------------------
+*[OPTIONAL]* use root domain as a custom blog domain
+----------------------------------------------------
 
-| DigitalOcean: `Create ▼` (top right menu) → `Domains/DNS`
-| `<YOUR_DOMAIN>` → `A` (tab)
+1. <https://help.github.com/articles/setting-up-an-apex-domain/>
 
-- `HOSTNAME`: `@` (`tap349.com`)
-- `WILL REDIRECT TO`: `185.199.111.153` (IP address of GitHub Pages site)
+NOTE: you cannot use multiple custom blog domains.

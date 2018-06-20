@@ -319,14 +319,14 @@ packs then included in layout file using `javascript_pack_tag` and
   error is gone when `resolve-url-loader` package is removed => so don't
   use it so far - it works without it and doesn't work when it's added.
 
-### NPM package
+### npm package
 
 1. <https://github.com/rails/webpacker/blob/master/docs/assets.md#import-from-node-modules>
 2. <https://gist.github.com/MFry/41fd51e8057152b9b914ecd1379a53d2>
 
 say, we want to use `toastr` JS library which consists of CSS and JS files.
 
-- install NPM package
+- install npm package
 
   ```sh
   $ yarn install toastr
@@ -343,20 +343,25 @@ say, we want to use `toastr` JS library which consists of CSS and JS files.
 
 - import JS
 
-  > <https://stackoverflow.com/a/34830919>
+  it's possible to use a standalone module name (say, `toastr`) in `import`
+  statement without specifying the full path to the file => this name will
+  be resolved to the value of `main` field in _package.json_ of corresponding
+  npm package:
+
+  > <https://webpack.js.org/concepts/module-resolution/#module-paths>
   >
-  > It should work with import 'foo/module' - it will resolve file
-  > ./node_modules/foo/module.js or ./node_modules/foo/module/index.js.
+  > If the path points to a folder, then the following steps are taken to
+  > find the right file with the right extension:
+  >
+  > If the folder contains a package.json file, then fields specified in
+  > resolve.mainFields configuration option are looked up in order, and the
+  > first such field in package.json determines the file path.
 
   ```javascript
   // app/assets/js/app.js
 
   // resolves to node_modules/toastr/build/toastr.min.js
   import Toastr from 'toastr/build/toastr.min.js';
-  // works (resolves to node_modules/toastr/toastr.js)
-  //import Toastr from 'toastr';
-  // works (resolves to node_modules/toastr/toastr.js)
-  //import Toastr from 'toastr/toastr';
   // doesn't work
   //import Toastr from 'toastr/build/toastr.min';
 
@@ -374,6 +379,60 @@ say, we want to use `toastr` JS library which consists of CSS and JS files.
 
   there is no such error when using pure Webpack (say, in Phoenix project) -
   so it must be Webpacker issue.
+
+#### jQuery
+
+```sh
+$ yarn add jquery
+```
+
+there are 2 ways to use jQuery:
+
+- use `ProvidePlugin` to load jQuery automatically
+
+  1. <https://webpack.js.org/plugins/provide-plugin/#usage-jquery>
+  2. <https://github.com/rails/webpacker/issues/1389#issuecomment-376991936>
+  3. <https://toster.ru/q/281654>
+
+  > <https://stackoverflow.com/a/28989476>
+  >
+  > Use the ProvidePlugin to inject implicit globals
+  >
+  > Most legacy modules rely on the presence of specific globals, like jQuery
+  > plugins do on $ or jQuery. In this scenario you can configure webpack, to
+  > prepend `var $ = require("jquery")` everytime it encounters the global $
+  > identifier.
+
+  > <https://webpack.js.org/guides/shimming/>
+  >
+  > We don't recommend using globals! The whole concept behind webpack is to
+  > allow more modular front-end development. This means writing isolated
+  > modules that are well contained and do not rely on hidden dependencies
+  > (e.g. globals). Please use these features only when necessary.
+
+  ```javascript
+  // config/webpack/environment.js
+
+  const webpack = require('webpack');
+  const {environment} = require('@rails/webpacker');
+
+  environment.plugins.append(
+    'Provide',
+    new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
+  );
+
+  module.exports = environment;
+  ```
+
+- *[RECOMMENDED]* import jQuery manually in each module where it's used
+
+  1. <https://www.npmjs.com/package/jquery#babel>
+
+  ```javascript
+  // app/assets/js/app.js
+
+  import $ from 'jquery';
+  ```
 
 #### Bootstrap
 

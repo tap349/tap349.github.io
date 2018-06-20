@@ -742,14 +742,14 @@ you're going to reference image files without specifying their extensions:
   },
 ```
 
-add NPM package
+add npm package
 ---------------
 
 1. [Webpack - Rails (Webpacker)]({% post_url 2018-05-23-webpack-rails-webpacker %})
 
 say, we want to use `toastr` JS library which consists of CSS and JS files.
 
-- install NPM package
+- install npm package
 
   ```sh
   $ cd assets
@@ -792,6 +792,41 @@ say, we want to use `toastr` JS library which consists of CSS and JS files.
   document.addEventListener('DOMContentLoaded', () => {
     Toastr.info('Hello world!');
   });
+  ```
+
+### add jQuery
+
+```sh
+$ cd assets
+$ yarn install jquery
+```
+
+just like for Webpacker, there are 2 ways to use jQuery
+(see the post about Webpacker for details and links):
+
+- use `ProvidePlugin` to load jQuery automatically
+
+  ```diff
+    // assets/webpack.config.js
+
+    const path = require('path');
+  + const webpack = require('webpack');
+
+    // ...
+
+    plugins: [
+      new MiniCssExtractPlugin({filename: 'css/[name].css'}),
+      new CopyWebpackPlugin(['static/']),
+  +   new ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
+    ],
+  ```
+
+- *[RECOMMENDED]* import jQuery manually in each module where it's used
+
+  ```javascript
+  // assets/js/app.js
+
+  import $ from 'jquery';
   ```
 
 ### add Bootstrap

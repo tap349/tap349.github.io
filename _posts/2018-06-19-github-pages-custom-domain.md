@@ -16,8 +16,15 @@ categories: [dns]
 1. <https://help.github.com/articles/using-a-custom-domain-with-github-pages/>
 2. <https://help.github.com/articles/quick-start-setting-up-a-custom-domain/>
 
-- `DNS provider` = `domain registrar` = `DNS host` (say, `Namecheap`)
-- `root domain` = `apex domain` (say, `example.com`)
+<dl>
+  <dt>DNS provider</dt>
+  <dd>= domain registrar, DNS host (say, `Namecheap`)</dd>
+
+  <dt>root domain</dt>
+  <dd>= apex domain (say, `example.com`)</dd>
+</dl>
+
+<hr>
 
 - `A` DNS records are for IPv4 only
 - `AAAA` DNS records are for IPv6 only

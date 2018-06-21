@@ -15,10 +15,10 @@ categories: [elixir, iex]
 
 <dl>
   <dt>Erlang shell</dt>
-  <dd>Eshell (`erl`)</dd>
+  <dd>Eshell (erl)</dd>
 
   <dt>Elixir shell</dt>
-  <dd>IEx (`iex`)</dd>
+  <dd>IEx (iex)</dd>
 
   <dt>UNIX shell</dt>
   <dd>Bash, etc.</dd>

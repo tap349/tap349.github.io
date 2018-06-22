@@ -847,14 +847,12 @@ $ yarn add babel-preset-react --dev
 ```
 
 ```diff
-  // .babelrc
+  // assets/.babelrc
 
-  {
-    "presets": [
-      // ...
-+     "react"
-    ]
-  }
+  "presets": [
+    // ...
++   "react"
+  ]
 ```
 
 ```diff

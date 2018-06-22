@@ -143,6 +143,39 @@ for the list of configured loaders:
 configuration
 -------------
 
+### Babel
+
+create Babel config:
+
+```javascript
+// .babelrc
+
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": "> 1%",
+          "uglify": true
+        },
+        "useBuiltIns": true
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    [
+      "transform-class-properties",
+      {
+        "spec": true
+      }
+    ]
+  ]
+}
+```
+
 ### plugins
 
 - `babel-plugin-module-resolver`
@@ -167,28 +200,17 @@ configuration
   ```diff
     // .babelrc
 
-    {
+    "plugins": [
       // ...
-      "plugins": [
-        "syntax-dynamic-import",
-  -     "transform-object-rest-spread"
-  +     "transform-object-rest-spread",
-  +     [
-  +       "transform-class-properties",
-  +       {
-  +         "spec": true
-  +       }
-  +     ],
-  +     [
-  +       "module-resolver",
-  +       {
-  +         "root": [
-  +           "./app/assets"
-  +         ]
-  +       }
-  +     ]
-      ]
-    }
+  +   [
+  +     "module-resolver",
+  +     {
+  +       "root": [
+  +         "./app/assets"
+  +       ]
+  +     }
+  +   ]
+    ]
   ```
 
   maybe using this plugin is not required since I can reference _css/app.js_
@@ -477,12 +499,10 @@ depends on Babel 6.
 ```diff
   // .babelrc
 
-  {
-    "presets": [
-      // ...
-+     "react"
-    ]
-  }
+  "presets": [
+    // ...
++   "react"
+  ],
 ```
 
 ```yaml

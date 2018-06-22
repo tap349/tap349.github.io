@@ -171,12 +171,22 @@ configuration
       // ...
       "plugins": [
         "syntax-dynamic-import",
-        "transform-object-rest-spread",
-  -     ["transform-class-properties", { "spec": true }]
-  +     ["transform-class-properties", { "spec": true }],
-  +     ["module-resolver", {
-  +       "root": ["./app/assets"]
-  +     }]
+  -     "transform-object-rest-spread"
+  +     "transform-object-rest-spread",
+  +     [
+  +       "transform-class-properties",
+  +       {
+  +         "spec": true
+  +       }
+  +     ],
+  +     [
+  +       "module-resolver",
+  +       {
+  +         "root": [
+  +           "./app/assets"
+  +         ]
+  +       }
+  +     ]
       ]
     }
   ```
@@ -447,6 +457,41 @@ $ yarn add bootstrap
 // app/assets/css/app.scss
 
 @import '~bootstrap/dist/css/bootstrap.min';
+```
+
+#### React
+
+```sh
+$ yarn add react react-dom
+$ yarn add babel-preset-react --dev
+```
+
+don't add `@babel/preset-react` package - it requires Babel 7 while Webpacker
+depends on Babel 6.
+
+```diff
+  // .babelrc
+
+  {
+    "presets": [
+      // ...
++     "react"
+    ]
+  }
+```
+
+steps to add required npm packages and add `react` preset to Babel config can
+be accomplished by running `webpacker:install:react` Webpacker generator - it
+will also create sample React component _app/assets/packs/hello_react.jsx_.
+
+```yaml
+# config/webpacker.yml
+
+default: &default
+  # ...
+  extensions:
+    # ...
+    - .jsx
 ```
 
 ### images

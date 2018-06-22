@@ -61,12 +61,12 @@ compilation.
 update .gitignore
 -----------------
 
-```diff
-  # .gitignore
+```conf
+# .gitignore
 
-+ /assets/node_modules
-+ yarn-debug.log
-+ yarn-error.log
+/assets/node_modules
+yarn-debug.log
+yarn-error.log
 ```
 
 add package scripts
@@ -216,16 +216,16 @@ add Babel loader
 
   it's possible to specify Babel options right inside Webpack config:
 
-  ```diff
-    // assets/webpack.config.js
+  ```javascript
+  // assets/webpack.config.js
 
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-  +   options: {
-  +     presets: ['env', {'modules': false}],
-  +   },
+  {
+    test: /\.js$/,
+    loader: 'babel-loader',
+    options: {
+      presets: ['env', {'modules': false}],
     },
+  },
   ```
 
 - update Webpack config
@@ -292,13 +292,11 @@ add Babel loader
 
 1. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0#3a9b>
 
-```diff
-  // assets/webpack.config.js
+```javascript
+// assets/webpack.config.js
 
-  resolve: {
-    // ...
-  },
-+ devtool: devMode ? 'eval' : 'cheap-module-source-map',
+resolve: { /* ... */ },
+devtool: devMode ? 'eval' : 'cheap-module-source-map',
 ```
 
 `cheap-module-source-map` variant is used for production by Webpacker.
@@ -513,21 +511,20 @@ when using `style-loader`.
   processor (`cssnano` by default) option is added to configuration of
   `OptimizeCSSAssetsPlugin`:
 
-  ```diff
-    // assets/webpack.config.js
+  ```javascript
+  // assets/webpack.config.js
 
-    optimization: {
-      minimizer: [
-        // ...
-  -     new OptimizeCSSAssetsPlugin({}),
-  +     new OptimizeCSSAssetsPlugin({
-  +       cssProcessorOptions: {
-  +         discardComments: {removeAll: true},
-  +         map: {inline: false},
-  +       },
-        }),
-      ],
-    },
+  optimization: {
+    minimizer: [
+      // ...
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          discardComments: {removeAll: true},
+          map: {inline: false},
+        },
+      }),
+    ],
+  },
   ```
 
 **summary**
@@ -733,13 +730,12 @@ of static assets.
 also it's possible to add image extensions to `resolve.extensions` array if
 you're going to reference image files without specifying their extensions:
 
-```diff
-  // assets/webpack.config.js
+```javascript
+// assets/webpack.config.js
 
-  resolve: {
--   extensions: ['.js', '.css', '.sass', '.scss'],
-+   extensions: ['.js', '.css', '.sass', '.scss', '.jpg', '.jpeg', '.png'],
-  },
+resolve: {
+  extensions: [/* ... */, '.jpg', '.jpeg', '.png'],
+},
 ```
 
 add npm package
@@ -842,6 +838,34 @@ $ yarn add bootstrap
 @import '~bootstrap/dist/css/bootstrap.min';
 ```
 
+### React
+
+```sh
+$ cd assets
+$ yarn add react react-dom
+$ yarn add babel-preset-react --dev
+```
+
+```diff
+  // .babelrc
+
+  {
+    "presets": [
+      // ...
++     "react"
+    ]
+  }
+```
+
+```diff
+  // assets/webpack.config.js
+
+  resolve: {
+-   extensions: ['.js', '.css', '.sass', '.scss'],
++   extensions: ['.js', '.jsx', '.css', '.sass', '.scss'],
+  },
+```
+
 add Webpack development server
 ------------------------------
 
@@ -863,21 +887,19 @@ $ yarn add webpack-dev-server --dev
 
 it's possible to configure `webpack-dev-server` in Webpack config:
 
-```diff
-  // assets/webpack.config.js
+```javascript
+// assets/webpack.config.js
 
-  optimization: {
-    // ...
-  },
-+ // https://webpack.js.org/configuration/dev-server/#devserver
-+ // webpack-dev-server options
-+ devServer: {
-+   host: 'localhost',
-+   // port 3035 is used by Webpacker by default
-+   port: 3045,
-+   // https://webpack.js.org/configuration/watch/#watchoptions-ignored
-+   watchOptions: {ignored: /node_modules/},
-+ },
+optimization: { /* ... */ },
+// https://webpack.js.org/configuration/dev-server/#devserver
+// webpack-dev-server options
+devServer: {
+  host: 'localhost',
+  // port 3035 is used by Webpacker by default
+  port: 3045,
+  // https://webpack.js.org/configuration/watch/#watchoptions-ignored
+  watchOptions: {ignored: /node_modules/},
+},
 ```
 
 BTW it's possible to see what assets are served by `webpack-dev-server`
@@ -992,13 +1014,12 @@ add watcher
 watcher is added for development environment only (it's possible to specify
 `watch` script or `webpack-dev-server` executable with options directly):
 
-```diff
-  # config/dev.exs
+```elixir
+# config/dev.exs
 
-  config :my_app, MyAppWeb.Endpoint,
-    # ...
--   watchers: [],
-+   watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
+config :my_app, MyAppWeb.Endpoint,
+  # ...
+  watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
 ```
 
 link output bundles and static assets
@@ -1043,19 +1064,19 @@ end
 
 import Webpack helpers for all views:
 
-```diff
-  # lib/my_app_web.ex
+```elixir
+# lib/my_app_web.ex
 
-  def view do
-    quote do
-      # ...
+def view do
+  quote do
+    # ...
 
-      import SithexWeb.Router.Helpers
-      import SithexWeb.ErrorHelpers
-      import SithexWeb.Gettext
-+     import SithexWeb.WebpackHelpers
-    end
+    import SithexWeb.Router.Helpers
+    import SithexWeb.ErrorHelpers
+    import SithexWeb.Gettext
+    import SithexWeb.WebpackHelpers
   end
+end
 ```
 
 use `css_link_tag/1` and `js_script_tag/1` helpers to include output bundles

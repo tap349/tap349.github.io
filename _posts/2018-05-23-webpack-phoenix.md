@@ -842,7 +842,7 @@ $ yarn add bootstrap
 
 ```sh
 $ cd assets
-$ yarn add react react-dom
+$ yarn add react react-dom prop-types
 $ yarn add babel-preset-react --dev
 ```
 

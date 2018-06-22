@@ -461,8 +461,13 @@ $ yarn add bootstrap
 
 #### React
 
+NOTE: it's possible to run `webpacker:install:react` Webpacker generator to
+      install required npm packages, add `react` preset to Babel config and
+      create a sample React component _app/assets/packs/hello_react.jsx_ but
+      generally it's better to do everything manually.
+
 ```sh
-$ yarn add react react-dom
+$ yarn add react react-dom prop-types
 $ yarn add babel-preset-react --dev
 ```
 
@@ -479,10 +484,6 @@ depends on Babel 6.
     ]
   }
 ```
-
-steps to add required npm packages and add `react` preset to Babel config can
-be accomplished by running `webpacker:install:react` Webpacker generator - it
-will also create sample React component _app/assets/packs/hello_react.jsx_.
 
 ```yaml
 # config/webpacker.yml

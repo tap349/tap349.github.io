@@ -313,8 +313,8 @@ add Babel loader
 
 ### resolving modules
 
-> <https://webpack.js.org/configuration/resolve/#resolve-modules>
->
+1. <https://webpack.js.org/configuration/resolve/#resolve-modules>
+
 > `resolve.modules`
 >
 > Tell webpack what directories should be searched when resolving modules.

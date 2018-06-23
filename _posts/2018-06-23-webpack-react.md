@@ -11,6 +11,9 @@ this post describes how to set up React in a project using Webpack -
 instructions are geared towards Phoenix project but it must be fairly
 easy to adapt them to Rails project using Webpacker.
 
+it's assumed that it's not React-only project - React is integrated
+into existing application with traditional HTML templates.
+
 <!-- more -->
 
 * TOC

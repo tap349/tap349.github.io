@@ -224,6 +224,8 @@ create Babel config:
   this plugin is not required and can be safely removed: modules are resolved
   relative to `source_path` (see Webpacker config) by default.
 
+  I guess Webpacker adds `source_path` to `resolve.modules` under the hood.
+
 ### source directory
 
 1. <https://github.com/rails/webpacker#paths>

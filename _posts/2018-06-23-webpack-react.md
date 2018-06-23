@@ -63,7 +63,7 @@ resolve: {
 
 ### Webpacker
 
-add `jsx` extension in Webpacker config.
+`jsx` extension is added in Webpacker config.
 
 update app.js to load page-specific JS files recursively
 --------------------------------------------------------

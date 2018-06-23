@@ -4,7 +4,7 @@ title: Webpack - Rails (Webpacker)
 date: 2018-05-23 02:31:57 +0300
 access: public
 comments: true
-categories: [webpack, rails, react]
+categories: [webpack, rails]
 ---
 
 <!-- more -->
@@ -484,40 +484,6 @@ $ yarn add bootstrap
 // app/assets/css/app.scss
 
 @import '~bootstrap/dist/css/bootstrap.min';
-```
-
-#### React
-
-NOTE: it's possible to run `webpacker:install:react` Webpacker generator to
-      install required npm packages, add `react` preset to Babel config and
-      create a sample React component _app/assets/packs/hello_react.jsx_ but
-      generally it's better to do everything manually.
-
-```sh
-$ yarn add react react-dom prop-types
-$ yarn add babel-preset-react --dev
-```
-
-don't add `@babel/preset-react` package - it requires Babel 7 while Webpacker
-depends on Babel 6.
-
-```diff
-  // .babelrc
-
-  "presets": [
-    // ...
-+   "react"
-  ],
-```
-
-```yaml
-# config/webpacker.yml
-
-default: &default
-  # ...
-  extensions:
-    # ...
-    - .jsx
 ```
 
 ### images

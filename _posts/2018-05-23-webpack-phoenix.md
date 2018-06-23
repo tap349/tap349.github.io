@@ -4,7 +4,7 @@ title: Webpack - Phoenix
 date: 2018-05-23 02:31:59 +0300
 access: private
 comments: true
-categories: [webpack, phoenix, react]
+categories: [webpack, phoenix]
 ---
 
 <!-- more -->
@@ -116,8 +116,9 @@ module.exports = (_env, argv) => {
       rules: [],
     },
     resolve: {
-      // see notes on `resolving modules` below
-      modules: [path.resolve(__dirname), 'node_modules'],
+      // directories to be searched when resolving modules
+      modules: [],
+      // extensions to be resolved automatically
       extensions: [],
     },
     plugins: [],
@@ -185,32 +186,6 @@ $ NODE_ENV=production webpack --mode=production
 
 so it looks like Webpack 4 tries to deprecate using `process.env.NODE_ENV`
 in favour of `argv.mode` to fetch current environment inside Webpack config.
-
-### resolving modules
-
-> <https://webpack.js.org/configuration/resolve/#resolve-modules>
->
-> `resolve.modules`
->
-> Tell webpack what directories should be searched when resolving modules.
-> `resolve.modules` defaults to:
->
-> ```
-> resolve: {
->   modules: ['node_modules']
-> }
-> ```
-
-add either _assets/_ or _assets/js/_ directory to `resolve.modules` to be able
-to use absolute imports instead of relative ones:
-
-```javascript
-// assets/webpack.config.js
-
-resolve: {
-  modules: [path.resolve(__dirname), 'node_modules'],
-},
-```
 
 add Babel loader
 ----------------
@@ -335,6 +310,34 @@ add Babel loader
     ]
   }
   ```
+
+### resolving modules
+
+> <https://webpack.js.org/configuration/resolve/#resolve-modules>
+>
+> `resolve.modules`
+>
+> Tell webpack what directories should be searched when resolving modules.
+> `resolve.modules` defaults to:
+>
+> ```
+> resolve: {
+>   modules: ['node_modules']
+> }
+> ```
+
+add either _assets/_ or _assets/js/_ directory to `resolve.modules` to tell
+Webpack to look for JS files relative to this directory (that is to be able
+to use absolute imports instead of relative ones):
+
+```javascript
+// assets/webpack.config.js
+
+resolve: {
+  modules: [path.resolve(__dirname), 'node_modules'],
+  // ...
+},
+```
 
 ### JS source maps
 
@@ -886,34 +889,6 @@ $ yarn add bootstrap
 // assets/css/app.scss
 
 @import '~bootstrap/dist/css/bootstrap.min';
-```
-
-### React
-
-1. <http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html#configure-react>
-
-```sh
-$ cd assets
-$ yarn add react react-dom prop-types
-$ yarn add babel-preset-react --dev
-```
-
-```diff
-  // assets/.babelrc
-
-  "presets": [
-    // ...
-+   "react"
-  ],
-```
-
-```javascript
-// assets/webpack.config.js
-
-resolve: {
-  // ...
-  extensions: ['.js', '.jsx', /* ... */],
-},
 ```
 
 add Webpack development server

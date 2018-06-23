@@ -73,3 +73,7 @@ categories: [markdown]
   >
   > set public/packs and node_modules as shared directories to ensure Webpack
   > build output and NPM package installation via Yarn are shared across deploys
+
+  in some cases when all quotes within section have the same source (and its
+  link is given at the beginning of the section) the link inside blockquotes
+  can be omitted.

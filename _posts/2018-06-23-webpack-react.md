@@ -7,8 +7,9 @@ comments: true
 categories: [webpack, react]
 ---
 
-this instruction to add support for React is geared towards Phoenix project
-but it must be fairly easy to adapt it to Rails project with Webpacker.
+this post describes how to add support for React to a project with Webpack.
+instructions are geared towards Phoenix project but it must be fairly easy
+to adapt them to Rails project with Webpacker.
 
 <!-- more -->
 

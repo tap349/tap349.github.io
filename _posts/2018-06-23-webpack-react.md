@@ -65,8 +65,8 @@ resolve: {
 
 `jsx` extension is added in Webpacker config.
 
-update app.js to load page-specific JS files recursively
---------------------------------------------------------
+update _app.js_ to load page-specific JS files recursively
+----------------------------------------------------------
 
 1. <https://webpack.js.org/guides/dependency-management/#context-module-api>
 

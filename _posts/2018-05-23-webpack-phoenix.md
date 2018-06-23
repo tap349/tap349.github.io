@@ -325,6 +325,15 @@ add Babel loader
 >   modules: ['node_modules']
 > }
 > ```
+>
+> If you want to add a directory to search in that takes precedence over
+> node_modules/:
+>
+> ```
+> resolve: {
+>   modules: [path.resolve(__dirname, 'src'), 'node_modules']
+> }
+> ```
 
 add either _assets/_ or _assets/js/_ directory to `resolve.modules` to tell
 Webpack to look for JS files relative to this directory (that is to be able

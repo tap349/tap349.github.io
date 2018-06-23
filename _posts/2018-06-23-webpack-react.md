@@ -93,6 +93,7 @@ element wherever you want inside the template:
 ```slim
 // lib/myapp_web/templates/user/new.html.slime
 
+// it's better to serialize user in view helper
 #react data-user=Poison.encode!(@user)
 ```
 

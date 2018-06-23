@@ -4,7 +4,7 @@ title: Webpack - Rails (Webpacker)
 date: 2018-05-23 02:31:57 +0300
 access: public
 comments: true
-categories: [webpack, rails]
+categories: [webpack, rails, react]
 ---
 
 <!-- more -->
@@ -178,7 +178,7 @@ create Babel config:
 
 ### plugins
 
-- `babel-plugin-module-resolver`
+- *[SKIP]* `babel-plugin-module-resolver`
 
   1. <https://github.com/rails/webpacker/blob/master/docs/assets.md#using-babel-module-resolver>
 
@@ -218,6 +218,11 @@ create Babel config:
   Webpacker understands that these paths are relative to `source_entry_path`
   (_app/assets/_ - see _config/webpacker.yml_) rather than relative to pack
   file.
+
+  ***UPDATE***
+
+  this plugin is not required and can be safely removed: modules are resolved
+  relative to `source_path` (see Webpacker config) by default.
 
 ### source directory
 

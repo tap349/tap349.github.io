@@ -4,7 +4,7 @@ title: Webpack - Phoenix
 date: 2018-05-23 02:31:59 +0300
 access: private
 comments: true
-categories: [webpack, phoenix]
+categories: [webpack, phoenix, react]
 ---
 
 <!-- more -->
@@ -100,7 +100,7 @@ create skeleton Webpack config
 const path = require('path');
 
 module.exports = (_env, argv) => {
-  // see notes below
+  // see notes on `NODE_ENV vs. mode` below
   const devMode = argv.mode !== 'production';
 
   return {
@@ -116,6 +116,8 @@ module.exports = (_env, argv) => {
       rules: [],
     },
     resolve: {
+      // see notes on `resolving modules` below
+      modules: [path.resolve(__dirname), 'node_modules'],
       extensions: [],
     },
     plugins: [],
@@ -184,6 +186,32 @@ $ NODE_ENV=production webpack --mode=production
 so it looks like Webpack 4 tries to deprecate using `process.env.NODE_ENV`
 in favour of `argv.mode` to fetch current environment inside Webpack config.
 
+### resolving modules
+
+> <https://webpack.js.org/configuration/resolve/#resolve-modules>
+>
+> `resolve.modules`
+>
+> Tell webpack what directories should be searched when resolving modules.
+> `resolve.modules` defaults to:
+>
+> ```
+> resolve: {
+>   modules: ['node_modules']
+> }
+> ```
+
+add either _assets/_ or _assets/js/_ directory to `resolve.modules` to be able
+to use absolute imports instead of relative ones:
+
+```javascript
+// assets/webpack.config.js
+
+resolve: {
+  modules: [path.resolve(__dirname), 'node_modules'],
+},
+```
+
 add Babel loader
 ----------------
 
@@ -208,9 +236,28 @@ add Babel loader
   // assets/.babelrc
 
   {
-    'presets': [
-      ['env', {'modules': false}],
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false,
+          "targets": {
+            "browsers": "> 1%",
+            "uglify": true
+          },
+          "useBuiltIns": true
+        }
+      ],
     ],
+    "plugins": [
+      "transform-object-rest-spread",
+      [
+        "transform-class-properties",
+        {
+          "spec": true
+        }
+      ]
+    ]
   }
   ```
 
@@ -245,6 +292,7 @@ add Babel loader
         ],
       },
       resolve: {
+        // ...
         extensions: ['.js'],
       },
     };
@@ -381,6 +429,7 @@ points under the hood):
         ],
       },
       resolve: {
+        // ...
         extensions: ['.css', '.sass', '.scss'],
       },
       plugins: [
@@ -734,6 +783,7 @@ you're going to reference image files without specifying their extensions:
 // assets/webpack.config.js
 
 resolve: {
+  // ...
   extensions: [/* ... */, '.jpg', '.jpeg', '.png'],
 },
 ```
@@ -840,6 +890,8 @@ $ yarn add bootstrap
 
 ### React
 
+1. <http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html#configure-react>
+
 ```sh
 $ cd assets
 $ yarn add react react-dom prop-types
@@ -852,16 +904,16 @@ $ yarn add babel-preset-react --dev
   "presets": [
     // ...
 +   "react"
-  ]
+  ],
 ```
 
-```diff
-  // assets/webpack.config.js
+```javascript
+// assets/webpack.config.js
 
-  resolve: {
--   extensions: ['.js', '.css', '.sass', '.scss'],
-+   extensions: ['.js', '.jsx', '.css', '.sass', '.scss'],
-  },
+resolve: {
+  // ...
+  extensions: ['.js', '.jsx', /* ... */],
+},
 ```
 
 add Webpack development server

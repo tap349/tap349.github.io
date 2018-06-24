@@ -27,7 +27,12 @@ $ which semistandard
 /usr/local/bin/semistandard
 ```
 
-global packages are stored in _/usr/local/lib/node_modules/_.
+effective _node\_modules/_ global directory:
+
+```sh
+$ npm root -g
+/usr/local/lib/node_modules/
+```
 
 ### Yarn
 

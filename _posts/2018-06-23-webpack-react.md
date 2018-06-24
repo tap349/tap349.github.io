@@ -50,8 +50,8 @@ add `react` preset to Babel config
   ],
 ```
 
-don't add `@babel/preset-react` package - it requires Babel 7 which is still
-in beta (and Webpacker, say, depends on Babel 6).
+don't add `@babel/preset-react` package - it requires Babel 7
+(while Babel 6 is currently used in my project).
 
 add `jsx` extension to be resolved automatically
 ------------------------------------------------

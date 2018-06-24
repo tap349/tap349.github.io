@@ -200,6 +200,20 @@ add Babel loader
 
 - add npm packages
 
+  > <https://github.com/babel/babel-loader>
+  >
+  > webpack 3.x | babel-loader 8.x | babel 7.x
+  >
+  > ```
+  > npm install "babel-loader@^8.0.0-beta" @babel/core @babel/preset-env webpack
+  > ```
+  >
+  > webpack 3.x | babel-loader 7.x | babel 6.x
+  >
+  > ```
+  > npm install babel-loader babel-core babel-preset-env webpack
+  > ```
+
   ```sh
   $ cd assets
   $ yarn add babel-core babel-loader babel-preset-env --dev

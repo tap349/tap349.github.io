@@ -88,8 +88,8 @@ const r = require.context('./pages', true, /\.js$/);
 r.keys().forEach(r);
 ```
 
-add element with `react` ID to corresponding template
------------------------------------------------------
+add HTML element with `react` ID to existing page template
+----------------------------------------------------------
 
 of course you can choose any other ID name and insert this
 element wherever you want inside the template:
@@ -97,7 +97,8 @@ element wherever you want inside the template:
 ```slim
 // lib/myapp_web/templates/user/new.html.slime
 
-// it's better to serialize user in view helper
+// it's better to serialize user outside the template
+// (say, in a view helper)
 #react data-user=Poison.encode!(@user)
 ```
 

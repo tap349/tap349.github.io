@@ -27,9 +27,12 @@ install npm packages
 
 ```sh
 $ cd assets
-$ yarn add react react-dom prop-types
-$ yarn add babel-preset-react --dev
+$ yarn add react react-dom prop-types babel-preset-react
 ```
+
+NOTE: add `babel-preset-react` package as normal (not development) dependency or
+      else it may be not installed in production if installing npm packages with
+      `yarn install --production` command.
 
 ### Webpacker
 

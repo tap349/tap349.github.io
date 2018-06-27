@@ -158,3 +158,92 @@ class NewPage extends React.Component {
 
 export default NewPage;
 ```
+
+troubleshooting
+---------------
+
+### [Rails] ReferenceError: Unknown option: ...react/index.js.Children
+
+```
+$ cap production deploy
+...
+01 ERROR in ./app/assets/packs/app.js
+01 Module build failed: ReferenceError: [BABEL]
+  /home/sith/production/releases/20180626151539/app/assets/packs/app.js:
+  Unknown option: /home/sith/production/releases/20180626151539/node_modules/react/index.js.Children.
+  Check out http://babeljs.io/docs/usage/options/ for more information about options.
+```
+
+**solution**
+
+1. <https://github.com/rails/webpacker/issues/1330>
+2. <https://github.com/rails/webpacker/issues/1460>
+3. <https://github.com/rails/webpacker/issues/1441#issuecomment-383328538>
+4. <https://github.com/rails/webpacker/issues/1037#issuecomment-347610374>
+
+> <https://stackoverflow.com/a/50659957>
+>
+> The error is unhelpful, but the issue is that your config has react in
+> the preset list, but it can't find the babel-preset-react module in your
+> node_modules, so instead it is loading the react module itself as if it
+> were a preset. But since the "react" module isn't a preset, Babel throws.
+
+`babel-preset-react` npm package is added as development dependency to
+_package.json_ - it's removed by `webpacker:yarn_install` task which is
+run as depedency of `webpacker:compile` task:
+
+> <https://github.com/rails/webpacker/blob/master/docs/deployment.md>
+>
+> Webpacker hooks up a new webpacker:compile task to assets:precompile,
+> which gets run whenever you run assets:precompile.
+
+`webpacker:yarn_install` runs this command:
+
+```sh
+yarn install --no-progress --frozen-lockfile --production
+```
+
+`--production` flag means that development dependencies won't be installed.
+
+surprisingly `babel-preset-react` package is not installed even when it's
+added as normal depedency - maybe it's some caching problem or bug in Yarn
+itself.
+
+my current solution (workraround to be precise) is to run `yarn install`
+manually (without `--production` flag) and skip `webpacker:yarn_install`
+task at all:
+
+```ruby
+# lib/tasks/webpacker.rake
+
+Rake::Task['webpacker:yarn_install'].clear
+
+namespace :webpacker do
+  desc 'Skip default webpacker yarn install'
+  task :yarn_install do
+    puts 'Skipping webpacker yarn install'
+  end
+end
+```
+
+```diff
+  # config/deploy.rb
+
+  namespace :deploy do
++   task :yarn_install do
++     on roles(:app) do
++       within release_path do
++         execute "cd #{release_path} && yarn install"
++       end
++     end
++   end
+
+    # ...
+  end
+
++ before 'deploy:assets:precompile', 'deploy:yarn_install'
+```
+
+or else it's possible to compile assets locally and copy them to production
+server with rsync ([link](https://stackoverflow.com/a/45236293)) - this way
+you don't have to install Node.js and Yarn on production server at all.

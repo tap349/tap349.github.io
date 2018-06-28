@@ -216,8 +216,11 @@ add Babel loader
 
   ```sh
   $ cd assets
-  $ yarn add babel-core babel-loader babel-preset-env --dev
+  $ yarn add babel-core babel-loader babel-preset-env babel-plugin-transform-runtime --dev
   ```
+
+  `babel-plugin-transform-runtime` is used for `async`/`await` support
+  (see the post about Webpacker for details and links).
 
 - create Babel config
 
@@ -244,6 +247,13 @@ add Babel loader
         "transform-class-properties",
         {
           "spec": true
+        }
+      ],
+      [
+        "transform-runtime",
+        {
+          "polyfill": false,
+          "regenerator": true
         }
       ]
     ]

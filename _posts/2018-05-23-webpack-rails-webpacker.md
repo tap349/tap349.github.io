@@ -178,6 +178,31 @@ create Babel config:
 
 ### plugins
 
+- `babel-plugin-transform-runtime`
+
+  1. <https://github.com/babel/babel/issues/5085#issuecomment-374903233>
+
+  `babel-plugin-transform-runtime` is used for `async`/`await` support.
+
+  ```sh
+  $ yarn add babel-plugin-transform-runtime --dev
+  ```
+
+  ```diff
+    // .babelrc
+
+    "plugins": [
+      // ...
+  +   [
+  +     "transform-runtime",
+  +     {
+  +       "polyfill": false,
+  +       "regenerator": true
+  +     }
+  +   ]
+    ]
+  ```
+
 - *[SKIP]* `babel-plugin-module-resolver`
 
   1. <https://github.com/rails/webpacker/blob/master/docs/assets.md#using-babel-module-resolver>
@@ -622,7 +647,7 @@ require 'capistrano/rails/assets'
 ```
 
 set correct assets prefix so that `deploy:assets:backup_manifest` task doesn't
-fail when performing deployment (see `Webpack - Troubleshooting` page):
+fail when performing deployment (see `Webpack - Troubleshooting` post):
 
 ```ruby
 # config/deploy.rb

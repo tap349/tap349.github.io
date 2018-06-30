@@ -771,36 +771,51 @@ fix CircleCI config to install Yarn and rsync in deploy job:
 ```diff
   # .circleci/config.yml
 
-  deploy:
-    # ...
-
-    docker:
--     - image: circleci/ruby:2.5.1
--       environment:
--         RAILS_ENV: test
-+     # use ruby:2.5.1-node instead of ruby:2.5.1 since now assets
-+     # are precompiled locally and `yarn install` command is run
-+     # right before asset compilation => Yarn must be installed
-+     - image: circleci/ruby:2.5.1-node
-+       environment:
-+         # RAILS_ENV is set to `production` inside capistrano tasks
-+         #
-+         # when it was set to `test` here, assets were compiled to
-+         # public/packs-test/ directory for some reason
-
-    steps:
-      - checkout
-
-+     - run:
-+         name: Install rsync
-+         command: sudo apt install rsync
-
+  version: 2
+  jobs:
+    build:
       # ...
 
-      - run:
-          name: Bundle install
-          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      steps:
+        # ...
 
-+     - restore_cache:
-+         <<: *restore_yarn_cache
+        - restore_cache: &restore_yarn_cache
+            keys:
+              - v3-yarn-{{ checksum "yarn.lock" }}
+              - v3-yarn-
+
+        # ...
+
+    deploy:
+      # ...
+
+      docker:
+-       - image: circleci/ruby:2.5.1
+-         environment:
+-           RAILS_ENV: test
++       # use ruby:2.5.1-node instead of ruby:2.5.1 since now assets
++       # are precompiled locally and `yarn install` command is run
++       # right before asset compilation => Yarn must be installed
++       - image: circleci/ruby:2.5.1-node
++         environment:
++           # RAILS_ENV is set to `production` inside capistrano tasks
++           #
++           # when it was set to `test` here, assets were compiled to
++           # public/packs-test/ directory for some reason
+
+      steps:
+        - checkout
+
++       - run:
++           name: Install rsync
++           command: sudo apt install rsync
+
+        # ...
+
+        - run:
+            name: Bundle install
+            command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+
++       - restore_cache:
++           <<: *restore_yarn_cache
 ```

@@ -768,6 +768,7 @@ end
 
 fix CircleCI config to install Yarn and rsync in deploy job:
 
+{% raw %}
 ```diff
   # .circleci/config.yml
 
@@ -819,3 +820,4 @@ fix CircleCI config to install Yarn and rsync in deploy job:
 +       - restore_cache:
 +           <<: *restore_yarn_cache
 ```
+{% endraw %}

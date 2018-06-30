@@ -247,3 +247,7 @@ end
 or else it's possible to compile assets locally and copy them to production
 server with rsync ([link](https://stackoverflow.com/a/45236293)) - this way
 you don't have to install Node.js and Yarn on production server at all.
+
+***UPDATE***
+
+In the end I reverted changes above and started to precompile assets locally.

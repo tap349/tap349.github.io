@@ -637,6 +637,8 @@ section above) - no need to set `NODE_ENV=production` manually when running
 
 ### Capistrano
 
+#### precompile assets on production server
+
 1. [Webpack - Troubleshooting]({% post_url 2018-05-22-webpack-troubleshooting %})
 2. <https://rossta.net/blog/from-sprockets-to-webpack.html#deploying-with-capistrano-and-nginx>
 
@@ -655,16 +657,150 @@ fail when performing deployment (see `Webpack - Troubleshooting` post):
 set :assets_prefix, 'packs'
 ```
 
-link _public/packs/_ and _node\_modules/_ directories:
+don't link _public/packs/_ and _node\_modules/_ directories - this might
+cause problems in the long term.
 
-> <https://rossta.net/blog/from-sprockets-to-webpack.html#deploying-with-capistrano-and-nginx>
->
-> set public/packs and node_modules as shared directories to ensure Webpack
-> build output and NPM package installation via Yarn are shared across deploys
+#### precompile assets locally
+
+1. <https://github.com/stve/capistrano-local-precompile>
+2. <https://github.com/capistrano/rails/blob/master/lib/capistrano/tasks/assets.rake>
+3. <https://github.com/rails/webpacker/blob/master/lib/tasks/webpacker/compile.rake>
+
+currently I precompile assets locally (on development machine or CI server).
+also I don't rely on `deploy:assets:precompile` task (which is redefined by
+Webpacker) and call `webpacker:compile` task itself.
+
+remove all asset tasks provided by `capistrano-rails` gem:
+
+```diff
+  # Capfile
+
+- require 'capistrano/rails/assets'
+```
+
+remove `assets_prefix` variable - it's used in `deploy:assets:backup_manifest`
+task which is removed now (see above):
 
 ```diff
   # config/deploy.rb
 
-- append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
-+ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/packs', 'node_modules'
+- set :assets_prefix, 'packs'
+```
+
+add custom asset tasks for capistrano (they are configured to run
+sequentially after `bundler:install` task right in this file):
+
+```ruby
+# lib/capistrano/tasks/local_precompile.rake
+
+# invoke local task:
+#   invoke 'deploy:my_assets:local_precompile'
+# invoke external task (with rbenv_prefix):
+#   execute :rake, 'assets:clean'
+# invoke external task (without rbenv_prefix):
+#   execute 'bundle exec rake assets:clean'
+namespace :deploy do
+  namespace :my_assets do
+    desc 'Precompile assets locally'
+    task :local_precompile do
+      run_locally do
+        with rails_env: fetch(:stage) do
+          # run yarn manually since webpacker:yarn_install runs yarn
+          # with `--production` flag which doesn't install development
+          # dependencies while they are required for asset compilation
+          #
+          # yarn cache is saved to this folder on CI server
+          execute 'yarn install --cache-folder ~/.cache/yarn'
+
+          # don't run rake with rbenv_prefix -
+          # rbenv is not installed on CI server
+          #
+          # run webpacker:compile instead of assets:precompile
+          # to skip webpacker:yarn_install task at all:
+          #
+          # Rake::Task.define_task(
+          #   "assets:precompile" => [
+          #     "webpacker:yarn_install",
+          #     "webpacker:compile"
+          #   ]
+          # )
+          execute 'bundle exec rake webpacker:compile'
+        end
+      end
+    end
+
+    desc 'Copy precompiled assets to remote server'
+    task :rsync do
+      on release_roles(:app) do |server|
+        local_path = "#{fetch(:packs_dir)}/"
+        remote_path = "#{server.user}@#{server.hostname}:#{release_path}/#{fetch(:packs_dir)}/"
+
+        run_locally do
+          execute "#{fetch(:rsync_cmd)} #{local_path} #{remote_path}"
+        end
+      end
+    end
+
+    desc 'Remove all precompiled assets locally'
+    task :local_cleanup do
+      run_locally do
+        with rails_env: fetch(:stage) do
+          # public/packs is not a symlink any more - each
+          # release has its own public/packs/ directory
+          execute "rm -rf #{fetch(:packs_dir)}"
+        end
+      end
+    end
+  end
+end
+
+namespace :load do
+  task :defaults do
+    set :packs_dir, 'public/packs'
+    set :rsync_cmd, 'rsync -av --delete'
+
+    after 'bundler:install', 'deploy:my_assets:local_precompile'
+    after 'bundler:install', 'deploy:my_assets:rsync'
+    after 'bundler:install', 'deploy:my_assets:local_cleanup'
+  end
+end
+```
+
+fix CircleCI config to install Yarn and rsync in deploy job:
+
+```diff
+  # .circleci/config.yml
+
+  deploy:
+    # ...
+
+    docker:
+-     - image: circleci/ruby:2.5.1
+-       environment:
+-         RAILS_ENV: test
++     # use ruby:2.5.1-node instead of ruby:2.5.1 since now assets
++     # are precompiled locally and `yarn install` command is run
++     # right before asset compilation => Yarn must be installed
++     - image: circleci/ruby:2.5.1-node
++       environment:
++         # RAILS_ENV is set to `production` inside capistrano tasks
++         #
++         # when it was set to `test` here, assets were compiled to
++         # public/packs-test/ directory for some reason
+
+    steps:
+      - checkout
+
++     - run:
++         name: Install rsync
++         command: sudo apt install rsync
+
+      # ...
+
+      - run:
+          name: Bundle install
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+
++     - restore_cache:
++         <<: *restore_yarn_cache
 ```

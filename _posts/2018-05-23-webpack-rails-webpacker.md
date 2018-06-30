@@ -687,7 +687,7 @@ task which is removed now (see above):
 - set :assets_prefix, 'packs'
 ```
 
-add custom asset tasks for capistrano (they are configured to run
+add custom asset tasks for Capistrano (they are configured to run
 sequentially after `bundler:install` task right in this file):
 
 ```ruby
@@ -799,7 +799,7 @@ fix CircleCI config to install Yarn and rsync in deploy job:
 +       # right before asset compilation => Yarn must be installed
 +       - image: circleci/ruby:2.5.1-node
 +         environment:
-+           # RAILS_ENV is set to `production` inside capistrano tasks
++           # RAILS_ENV is set to `production` inside Capistrano tasks
 +           #
 +           # when it was set to `test` here, assets were compiled to
 +           # public/packs-test/ directory for some reason

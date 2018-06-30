@@ -637,6 +637,9 @@ section above) - no need to set `NODE_ENV=production` manually when running
 
 ### Capistrano
 
+NOTE: don't link _public/packs/_ and _node\_modules/_ directories - this might
+      cause problems in the long term.
+
 #### precompile assets on production server
 
 1. [Webpack - Troubleshooting]({% post_url 2018-05-22-webpack-troubleshooting %})
@@ -656,9 +659,6 @@ fail when performing deployment (see `Webpack - Troubleshooting` post):
 
 set :assets_prefix, 'packs'
 ```
-
-don't link _public/packs/_ and _node\_modules/_ directories - this might
-cause problems in the long term.
 
 #### precompile assets locally
 

@@ -821,3 +821,12 @@ fix CircleCI config to install Yarn and rsync in deploy job:
 +           <<: *restore_yarn_cache
 ```
 {% endraw %}
+
+if assets might be precompiled on macOS machine and rbenv is used, it's
+necessary to create _~/.rbenv/bin/rbenv_ symlink - this path is used in
+`rbenv_prefix` option in _config/deploy.rb_ because this is where rbenv
+executable is located in Linux distributions (unlike macOS):
+
+```sh
+$ ln -s /usr/local/bin/rbenv ~/.rbenv/bin/rbenv
+```

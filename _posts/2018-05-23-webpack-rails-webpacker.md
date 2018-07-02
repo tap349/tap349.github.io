@@ -712,8 +712,9 @@ namespace :deploy do
           # yarn cache is saved to this folder on CI server
           execute 'yarn install --cache-folder ~/.cache/yarn'
 
-          # don't run rake with rbenv_prefix -
-          # rbenv is not installed on CI server
+          # don't run rake with rbenv_prefix - rbenv is not installed
+          # on CI server and it's necessary to symlink its executable
+          # to ~/.rbenv/bin/rbenv on macOS locally
           #
           # run webpacker:compile instead of assets:precompile
           # to skip webpacker:yarn_install task at all:
@@ -821,12 +822,3 @@ fix CircleCI config to install Yarn and rsync in deploy job:
 +           <<: *restore_yarn_cache
 ```
 {% endraw %}
-
-if assets might be precompiled on macOS machine and rbenv is used, it's
-necessary to create _~/.rbenv/bin/rbenv_ symlink - this path is used in
-`rbenv_prefix` option in _config/deploy.rb_ because this is where rbenv
-executable is located in Linux distributions (unlike macOS):
-
-```sh
-$ ln -s /usr/local/bin/rbenv ~/.rbenv/bin/rbenv
-```

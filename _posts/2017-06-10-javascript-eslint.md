@@ -27,32 +27,7 @@ installation
 $ yarn add eslint --dev
 ```
 
-configuration
--------------
-
-### generate ESLint config
-
-```sh
-$ $(npm bin)/eslint --init
-...
-Successfully created .eslintrc.yml file in <project-directory>
-```
-
-also ESLint config is required for syntastic to work (see below).
-
-this will also install any additional plugins (based on your answers)
-locally as development dependencies in _package.json_:
-
-```javascript
-"devDependencies": {
-  ...
-  "eslint": "^3.19.0",
-  "eslint-plugin-react": "^7.0.1",
-  ...
-}
-```
-
-### set babel-eslint parser as default ESLint parser
+### install `babel-eslint`
 
 1. <https://github.com/babel/babel-eslint/>
 
@@ -60,9 +35,11 @@ locally as development dependencies in _package.json_:
 $ yarn add babel-eslint --dev
 ```
 
-_.eslintrc.yml_:
+use `babel-eslint` as default ESLint parser:
 
 ```yaml
+# .eslintrc.yml
+
 parser: 'babel-eslint'
 ```
 
@@ -75,6 +52,31 @@ class Counter extends HTMLElement {
 }
 ```
 
+configuration
+-------------
+
+### generate ESLint config
+
+```sh
+$ yarn run eslint --init
+...
+Successfully created .eslintrc.yml file in <project-directory>
+```
+
+also ESLint config is required for syntastic to work (see below).
+
+this will also install any additional plugins (based on your answers)
+locally as development dependencies in _package.json_:
+
+```javascript
+"devDependencies": {
+  // ...
+  "eslint": "^3.19.0",
+  "eslint-plugin-react": "^7.0.1",
+  // ...
+}
+```
+
 ### configure ESLint rules
 
 1. <http://eslint.org/docs/user-guide/configuring>
@@ -83,6 +85,8 @@ extending `eslint:recommended` configuration enables subset of core rules
 having a check mark on the [rules page](http://eslint.org/docs/rules/):
 
 ```yaml
+# .eslintrc.yml
+
 extends:
   - 'eslint:recommended'
 ```
@@ -103,6 +107,8 @@ some rules worth mentioning are listed below:
   1. <https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md>
 
   ```yaml
+  # .eslintrc.yml
+
   react/jsx-handler-names:
     - warn
     - eventHandlerPrefix: _handle
@@ -123,6 +129,8 @@ some rules worth mentioning are listed below:
   > Since 0.17.0 the ESLint no-unused-vars rule does not detect variables used in JSX
 
   ```yaml
+  # .eslintrc.yml
+
   react/jsx-uses-vars: error
   ```
 
@@ -138,6 +146,8 @@ some rules worth mentioning are listed below:
   1. <http://eslint.org/docs/rules/space-before-function-paren>
 
   ```yaml
+  # .eslintrc.yml
+
   space-before-function-paren:
     - warn
     - always
@@ -156,27 +166,6 @@ usage
 const foo = 123;
 const foo = 123; // eslint-disable-line
 ```
-
-### add ESLint script
-
-_package.json_:
-
-```json
-"scripts": {
-  "eslint": "eslint"
-},
-```
-
-now ESLint can be run using any of these commands:
-
-```sh
-$ $(npm bin)/eslint file.js
-$ yarn run eslint file.js
-```
-
-***UPDATE***
-
-it's not required to add `eslint` script - everything works as is.
 
 ### run ESLint
 
@@ -206,9 +195,9 @@ CacheErrors: Checker javascript/eslint is not available
 $ yarn global add eslint
 ```
 
-_~/.vim/vimrc_:
-
 ```vim
+" ~/.vim/vimrc
+
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 let g:syntastic_javascript_checkers=['eslint']
 ```
@@ -218,9 +207,9 @@ let g:syntastic_javascript_checkers=['eslint']
 unlike syntastic, ALE doesn't require ESLint to be installed globally -
 it finds ESLint script (`$(npm bin)/eslint`) somehow.
 
-_~/.vim/vimrc_:
-
 ```vim
+" ~/.vim/vimrc
+
 let g:ale_linters = {
       \   'javascript': ['eslint']
       \ }

@@ -28,15 +28,15 @@ installation
 $ yarn add flow-bin --dev
 ```
 
-### install Babel preset for Flow plugins
+### install `babel-preset-flow`
 
 ```sh
 $ yarn add babel-preset-flow --dev
 ```
 
-add preset to _.babelrc_:
+```javascript
+// .babelrc
 
-```
 {
   "presets": ["flow"]
 }
@@ -45,15 +45,15 @@ add preset to _.babelrc_:
 > Now, Babel will always strip away Flow source and your JS runtime can
 > interpret the code. This is especially important for feeding into ESlint.
 
-### install `eslint-plugin-flowtype` ESLint plugin
+### install `eslint-plugin-flowtype`
 
 ```sh
 $ yarn add eslint-plugin-flowtype --dev
 ```
 
-_.eslintrc.yml_:
-
 ```yaml
+# .eslintrc.yml
+
 extends:
   - 'plugin:flowtype/recommended'
 plugins:
@@ -62,28 +62,26 @@ plugins:
 
 <https://github.com/ryyppy/flow-guide#eslint-configuration>:
 
-> there will be some warnings about unused variables whenever you
-> write type declarations. The eslint plugin eslint-plugin-flowtype
-> will mute those warnings.
+> there will be some warnings about unused variables whenever you write type
+> declarations. The eslint plugin eslint-plugin-flowtype will mute those warnings.
 
-I don't see any warnings mentioned above but this plugin is
-still useful: say, it adds ESLint rule to check for presence
-of Flow declaration (`// @flow`) if type annotation is added
-to the file - ESLint will complain if declaration is missing:
+I don't see any warnings mentioned above but this plugin is still useful: say,
+it adds ESLint rule to check for presence of Flow declaration (`// @flow`) if
+type annotation is added to the file - ESLint will complain if declaration is
+missing:
 
 ```
 Type annotations require valid Flow declaration.
 (flowtype/no-types-missing-file-annotation)
 ```
 
-this rule `flowtype/no-types-missing-file-annotation` must be a
-part of recommended configuration (`plugin:flowtype/recommended`).
+this rule `flowtype/no-types-missing-file-annotation` must be a part of
+recommended configuration (`plugin:flowtype/recommended`).
 
-NOTE: `eslint-plugin-flowtype` plugin is ESLint plugin - it's
-      not meant to check for Flow type errors or to show them!
-      checking for type errors is performed by `flow` binary
-      (use either `flow status` in terminal or `flow` syntastic
-      JS checker in Vim).
+`eslint-plugin-flowtype` plugin is ESLint plugin - it's not meant to check
+for Flow type errors or to show them! checking for type errors is performed
+by `flow` binary (use either `flow status` in terminal or `flow` syntastic
+JS checker in Vim).
 
 configuration
 -------------
@@ -91,7 +89,7 @@ configuration
 ### generate Flow config
 
 ```sh
-$ $(npm bin)/flow init
+$ yarn run flow init
 ```
 
 this will create empty _.flowconfig_ in the project root.
@@ -122,9 +120,9 @@ say, it allows not to specify types for all parameters.
 
 ### add Flow script
 
-_package.json_:
+```javascript
+// package.json
 
-```json
 "scripts": {
   "flow": "flow"
 },
@@ -133,7 +131,6 @@ _package.json_:
 now Flow can be run using any of these commands:
 
 ```sh
-$ $(npm bin)/flow
 $ yarn run flow
 ```
 
@@ -165,9 +162,9 @@ NOTE: Flow must be installed globally for syntastic
 $ yarn global add flow-bin
 ```
 
-_~/.vim/vimrc_:
-
 ```vim
+" ~/.vim/vimrc
+
 let g:syntastic_aggregate_errors = 1
 
 let g:syntastic_javascript_flow_exe = '$(npm bin)/flow focus-check'
@@ -194,9 +191,9 @@ just make sure to disable automatic checks on save.
 unlike syntastic, ALE doesn't require Flow to be installed globally -
 it finds Flow script (`$(npm bin)/flow`) somehow.
 
-_~/.vim/vimrc_:
-
 ```vim
+" ~/.vim/vimrc
+
 let g:ale_linters = {
       \   'javascript': ['flow']
       \ }
@@ -559,9 +556,9 @@ Flow cannot find some modules like `react-native` or `react-redux`.
   export default {};
   ```
 
-  _.flowconfig_:
+  ```conf
+  # .flowconfig
 
-  ```
   [options]
   ; modules
   module.name_mapper='^moment$' -> '<PROJECT_ROOT>/ModuleStub'
@@ -579,9 +576,9 @@ Flow cannot find some modules like `react-native` or `react-redux`.
 
   1. <https://github.com/facebook/flow/issues/1548#issuecomment-318085946>
 
-  _.flowconfig_:
+  ```conf
+  # .flowconfig
 
-  ```
   [libs]
   <PROJECT_ROOT>/flow-typed
   ```
@@ -592,16 +589,16 @@ Flow cannot find some modules like `react-native` or `react-redux`.
 
   this is like manually creating `flow-typed` repository.
 
-  _.flowconfig_:
+  ```conf
+  # .flowconfig
 
-  ```
   [libs]
   flow/
   ```
 
-  _flow/lodash.js_:
-
   ```javascript
+  // flow/lodash.js
+
   declare module lodash {
     declare var exports: any;
   }
@@ -611,9 +608,9 @@ Flow cannot find some modules like `react-native` or `react-redux`.
 
 1. <https://github.com/facebook/flow/issues/606#issuecomment-213667957>
 
-_.flowconfig_:
+```conf
+# .flowconfig
 
-```
 [options]
 esproposal.decorators=ignore
 ```
@@ -675,14 +672,14 @@ and other cryptic errors that seem to be Flow-related.
 
 remove `react-flow-props-to-prop-types` package.
 
-_.babelrc_:
-
 ```diff
- {
-   "plugins": [
--    "react-flow-props-to-prop-types"
-   ]
- }
+  // .babelrc
+
+  {
+    "plugins": [
+-     "react-flow-props-to-prop-types"
+    ]
+  }
 ```
 
 ```sh

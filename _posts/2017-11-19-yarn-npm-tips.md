@@ -89,14 +89,20 @@ or by transpilers).
 (how to) run script or locally installed executable
 ---------------------------------------------------
 
-- scripts are defined in `scripts` section of _package.json_
+`$(npm bin)` resolves to _node\_modules/.bin/_ - it can be used to run
+executables from this directory directly.
+
 - locally installed executables are stored in _node\_modules/.bin/_
-  (`$(npm bin)`) - say, `eslint` or `jest`
+  (= symlinks to JS executable files provided by npm packages)
+- scripts are defined in `scripts` section of _package.json_
+  (= usually invocations of these executables with custom arguments)
+
+`yarn run` runs both of them:
 
 ```sh
-$ yarn run <script>
-$ npm run <script>
-$ npm run-script <script>
+$ yarn run <bin_or_script>
+$ npm run <bin_or_script>
+$ npm run-script <bin_or_script>
 ```
 
 (how to) reset all (and clean cache)

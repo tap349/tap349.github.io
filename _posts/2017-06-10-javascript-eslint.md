@@ -52,6 +52,31 @@ class Counter extends HTMLElement {
 }
 ```
 
+### install `eslint-plugin-react`
+
+NOTE: this plugin will be installed automatically if generate ESLint
+      config from anew and opt for React support.
+
+install this plugin if you use `react` plugin in ESLint config:
+
+```sh
+$ yarn add eslint-plugin-react --dev
+```
+
+### install `eslint-plugin-flowtype`
+
+NOTE: this plugin will be installed automatically if generate ESLint
+      config from anew and opt for Flow type support.
+
+install this plugin if you use `flowtype` plugin in ESLint config:
+
+```sh
+$ yarn add eslint-plugin-flowtype --dev
+```
+
+see [JavaScript - Flow]({% post_url 2018-01-02-javascript-flow %}) on how
+to configure this plugin.
+
 configuration
 -------------
 
@@ -182,8 +207,8 @@ Vim integration
 2. <http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/>
 3. <https://github.com/vim-syntastic/syntastic/issues/1692>
 
-NOTE: ESLint must be installed globally for syntastic
-      `eslint` checker to be available (like for Flow).
+NOTE: ESLint must be installed globally for syntastic `eslint` checker
+      to be available (like for Flow).
 
 syntastic error message when ESLint is not installed globally:
 

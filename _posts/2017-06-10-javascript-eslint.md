@@ -186,6 +186,8 @@ usage
 
 ### ignore ESLint errors on a one-off basis
 
+1. <https://github.com/eslint/eslint/issues/6903#issuecomment-239646089>
+
 ```javascript
 // eslint-disable-next-line
 const foo = 123;

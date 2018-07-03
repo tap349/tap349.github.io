@@ -200,6 +200,7 @@ render () {
       handleDelete={this.props.onRemove}
     />
   );
+  /* eslint-enable react/jsx-handler-names */
 }
 ```
 

@@ -190,6 +190,17 @@ usage
 // eslint-disable-next-line
 const foo = 123;
 const foo = 123; // eslint-disable-line
+
+render () {
+  /* eslint-disable react/jsx-handler-names */
+  return (
+    <ReactTags
+      tags={this.props.tags}
+      handleAddition={this.props.onAdd}
+      handleDelete={this.props.onRemove}
+    />
+  );
+}
 ```
 
 ### run ESLint

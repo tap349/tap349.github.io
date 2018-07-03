@@ -54,7 +54,7 @@ class Counter extends HTMLElement {
 
 ### install `eslint-plugin-react`
 
-NOTE: this plugin will be installed automatically if generate ESLint
+NOTE: this plugin will be installed automatically if you generate ESLint
       config from anew and opt for React support.
 
 install this plugin if you use `react` plugin in ESLint config:
@@ -65,7 +65,7 @@ $ yarn add eslint-plugin-react --dev
 
 ### install `eslint-plugin-flowtype`
 
-NOTE: this plugin will be installed automatically if generate ESLint
+NOTE: this plugin will be installed automatically if you generate ESLint
       config from anew and opt for Flow type support.
 
 install this plugin if you use `flowtype` plugin in ESLint config:

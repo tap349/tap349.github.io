@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir - EPMD
+title: Elixir - epmd
 date: 2017-09-02 13:00:52 +0300
 access: public
 comments: true
@@ -13,11 +13,11 @@ categories: [elixir]
 {:toc}
 <hr>
 
-EPMD is like a DNS server for Erlang nodes.
+epmd is like a DNS server for Erlang nodes.
 
 <https://chazsconi.github.io/2017/04/22/observing-remote-elixir-docker-nodes.html>:
 
-> EPMD (Erlang Port Mapper Daemon), is a part of the Erlang runtime system,
+> epmd (Erlang Port Mapper Daemon), is a part of the Erlang runtime system,
 > written in C, that acts as a name server for distributed Erlang. When an
 > Erlang node starts in distributed mode (by setting the -name parameter on
 > startup) it checks to see if there is already an EPMD instance running bound
@@ -30,50 +30,50 @@ EPMD is like a DNS server for Erlang nodes.
 
 <http://erlang.org/doc/reference_manual/distributed.html>:
 
-> EPMD is responsible for mapping the symbolic node names to machine addresses.
+> epmd is responsible for mapping the symbolic node names to machine addresses.
 
 1. <http://erlang.org/doc/man/epmd.html>
 2. <http://erlang.org/doc/reference_manual/distributed.html>
 
 NOTE: Elixir application (Erlang node) can respond to application
-      commands (ping/start/stop) iff its name is registered in EPMD.
+      commands (ping/start/stop) iff its name is registered in epmd.
 
 starting
 --------
 
-EPMD can be started:
+epmd can be started:
 
 - detached (as a daemon)
 
-  normally EPMD is to be started automatically as a daemon
-  when distributed Erlang node is started and no running
-  instance of EPMD is present (otherwise it's used).
+  normally epmd is to be started automatically as a daemon when
+  distributed Erlang node is started and no running instance of
+  epmd is present (otherwise it's used).
 
   <http://erlang.org/doc/man/erl.html#start_epmd>:
 
   it's possible to instruct distributed Erlang node not to start
-  EPMD on startup by passing `-start_epmd false` EVM flag - in
-  that case node will fail to start if EPMD is not running.
+  epmd on startup by passing `-start_epmd false` EVM flag - in
+  that case node will fail to start if epmd is not running.
 
   but in my experience it had no effect - application still started
-  EPMD unless it was already running.
+  epmd unless it was already running.
 
 - in the foreground
 
-  EPMD is usually started in the foreground either in systemd
+  epmd is usually started in the foreground either in systemd
   service unit or manually in the shell for debugging purposes.
 
-debugging using EPMD
+debugging using epmd
 --------------------
 
-- kill running EPMD process and start in the foreground for debugging
+- kill running epmd process and start in the foreground for debugging
 
   ```sh
   $ sudo killall epmd
   $ epmd -d
   ```
 
-- list names registered with currently running EPMD
+- list names registered with currently running epmd
 
   ```sh
   $ epmd -names
@@ -93,7 +93,7 @@ file or try to start application in the foreground to find out the error.
 ### successfully running node is not registered
 
 situation when application is successfully running but not
-registered in EPMD can be caused by this sequence of events:
+registered in epmd can be caused by this sequence of events:
 
 - application that is started via systemd service first
   (say, `billing_prod`) spawns `epmd` process
@@ -118,18 +118,18 @@ in theory `epmd` process shouldn't actually exit when application
 that started it automatically is stopped. but for some reason this
 is the case when application is started via systemd service.
 
-so it seems safer to make running EPMD independent of running applications -
-this can be done by creating a dedicated systemd service for EPMD and
+so it seems safer to make running epmd independent of running applications -
+this can be done by creating a dedicated systemd service for epmd and
 configuring it as a requirement dependency for all application services:
 
 ```
 Requires=epmd.service
 ```
 
-quick and dirty fix to register not responding application in EPMD:
+quick and dirty fix to register not responding application in epmd:
 
-the only way to make EPMD aware of running but not responding
+the only way to make epmd aware of running but not responding
 application is to restart its service - I guess systemd sends SIGTERM
 signal to running process when it fails to stop it using `ExecStop=`
 command. when application is started it will discover already running
-EPMD instance and register itself as usual.
+epmd instance and register itself as usual.

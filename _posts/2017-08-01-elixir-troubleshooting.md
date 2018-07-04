@@ -64,8 +64,8 @@ Node billing_prod@127.0.0.1 is not running!
 **solution**
 
 application is not responding because its Erlang node is no
-longer registered in EPMD - see `troubleshooting` section of
-[Elixir - EPMD]({% post_url 2017-09-02-elixir-epmd %})
+longer registered in epmd - see `troubleshooting` section of
+[Elixir - epmd]({% post_url 2017-09-02-elixir-epmd %})
 for explanation of how this could happen and how to fix it.
 
 [Phoenix] The task "phx.new" could not be found

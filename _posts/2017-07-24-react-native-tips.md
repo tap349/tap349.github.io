@@ -100,12 +100,12 @@ first find out application IDs in App Store and Play Store:
 examples of application IDs:
 
 - iOS: `id1111111111`
-- Android: `com.myapp`
+- Android: `com.my-app`
 
 examples of final URLs:
 
 - iOS: `itms://itunes.apple.com/ru/app/id1111111111?mt=8`
-- Android: `market://details?id=com.myapp`
+- Android: `market://details?id=com.my-app`
 
 <http://facebook.github.io/react-native/docs/linking.html#canopenurl>:
 

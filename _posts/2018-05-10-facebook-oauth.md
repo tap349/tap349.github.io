@@ -18,13 +18,13 @@ categories: [facebook]
   <dd>Facebook for Developers</dd>
 
   <dt>request URL</dt>
-  <dd>http://myapp.com:4000/auth/facebook</dd>
+  <dd>http://my-app.com:4000/auth/facebook</dd>
 
   <dt>authorize URL (aka authorization URL)</dt>
   <dd>https://www.facebook.com/dialog/oauth</dd>
 
   <dt>redirect URI (aka callback URL)</dt>
-  <dd>http://myapp.com:4000/auth/facebook/callback</dd>
+  <dd>http://my-app.com:4000/auth/facebook/callback</dd>
 </dl>
 
 <hr>
@@ -98,7 +98,7 @@ both OmniAuth and Ueberauth work alike under the hood:
 - user clicks request URL
 
   ```
-  http://myapp.com:4000/auth/facebook
+  http://my-app.com:4000/auth/facebook
   ```
 
   this link might already contain requested scopes:
@@ -491,7 +491,7 @@ mode and redirets to failure page in production mode.
 sample failure page URL:
 
 ```
-https://myapp.com/auth/failure?message=no_authorization_code&strategy=facebook#_=_
+https://my-app.com/auth/failure?message=no_authorization_code&strategy=facebook#_=_
 ```
 
 configure OmniAuth `on_failure` behaviour to redirect to failure page in

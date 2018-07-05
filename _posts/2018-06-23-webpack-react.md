@@ -98,7 +98,7 @@ of course you can choose any other ID name and insert this
 element wherever you want inside the template:
 
 ```slim
-// lib/myapp_web/templates/user/new.html.slime
+// lib/my_app_web/templates/user/new.html.slime
 
 // it's better to serialize user outside the template
 // (say, in a view helper)

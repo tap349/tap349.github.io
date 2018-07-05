@@ -193,7 +193,7 @@ what would happen if I use `react-native` of unsupported version:
 
   ```sh
   $ npm install
-  npm WARN myapp@0.0.1 requires a peer of react-native@0.30.0 but none was installed.
+  npm WARN my_app@0.0.1 requires a peer of react-native@0.30.0 but none was installed.
   npm WARN react-native-push-notification@3.0.1 requires a peer of react-native@>=0.33 but none was installed.
   ```
 

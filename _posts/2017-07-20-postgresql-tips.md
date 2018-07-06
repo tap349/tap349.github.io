@@ -18,6 +18,13 @@ psql tips
 
 1. <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>
 
+### login
+
+```sh
+$ psql -U sith_prod -d sith_prod -h localhost
+/ enter password for database user sith_prod
+```
+
 ### users
 
 - list roles (= users) and their attributes
@@ -80,7 +87,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 - install extension
 
   ```sh
-  $ psql -d iceperk_development
+  $ psql -d sith_prod
   > CREATE EXTENSION pg_trgm;
   ```
 
@@ -225,7 +232,7 @@ $ RAILS_ENV=test rails db:structure:load
 say, to restore our database running in Docker:
 
 ```sh
-$ psql -U postgres -h localhost -p 5433 -f ./PostgreSQL.sql iceperk_development
+$ psql -U postgres -h localhost -p 5433 -f ./PostgreSQL.sql sith_dev
 ```
 
 (how to) remove all versions of PostgreSQL on Ubuntu
@@ -251,7 +258,7 @@ _docker-compose.yml_:
 +   db:
 +     image: postgres:9.4
 +     environment:
-+       POSTGRES_PASSWORD: iceperk
++       POSTGRES_PASSWORD: sith_dev
 +     ports:
 +       - 5433:5432
 ```
@@ -272,11 +279,11 @@ _docker-compose.yml_:
 +   port: 5433
 
   development:
--   username: iceperk_development
+-   username: sith_dev
 +   username: postgres
 
   test:
--   username: iceperk_test
+-   username: sith_test
 +   username: postgres
 ```
 
@@ -287,8 +294,8 @@ by setting `POSTGRES_USER` environment variable in _docker-compose.yml_.
 
 ```sh
 $ rails db:create
-Created database 'iceperk_development'
-Created database 'iceperk_test'
+Created database 'sith_dev'
+Created database 'sith_test'
 ```
 
 ### import local database into Docker container
@@ -298,7 +305,7 @@ Created database 'iceperk_test'
   ```sh
   $ DOCKER_DB_NAME=`docker-compose ps -q db`
   $ DB_USER=postgres
-  $ DB_NAME=iceperk_development
+  $ DB_NAME=sith_dev
   $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
   ```
 
@@ -316,7 +323,7 @@ Created database 'iceperk_test'
   ```sh
   $ DOCKER_DB_NAME=`docker-compose ps -q db`
   $ DB_USER=postgres
-  $ DB_NAME=iceperk_development
+  $ DB_NAME=sith_dev
   $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -v ON_ERROR_STOP=1 -U "${DB_USER}" -d "${DB_NAME}"
   ```
 
@@ -344,13 +351,13 @@ list Docker containers:
 $ docker-compose ps
           Name                        Command               State                           Ports
 --------------------------------------------------------------------------------------------------------------------------
-iceperk_db_1               docker-entrypoint.sh postgres    Up      0.0.0.0:5433->5432/tcp
+sith_db_1                  docker-entrypoint.sh postgres    Up      0.0.0.0:5433->5432/tcp
 ```
 
 run psql in a running Docker container:
 
 ```sh
-$ docker exec -it iceperk_db_1 psql -U 'postgres' -d iceperk_development
+$ docker exec -it sith_db_1 psql -U 'postgres' -d sith_dev
 ```
 
 (how to) get timezone offset

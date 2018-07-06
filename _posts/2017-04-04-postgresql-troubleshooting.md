@@ -89,7 +89,7 @@ psql: could not connect to server: Connection refused
 -----------------------------------------------------
 
 ```
-$ psql -d <MY_DATABASE>
+$ psql -d <DB_NAME>
 psql: could not connect to server: Connection refused
   Is the server running locally and accepting
   connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
@@ -244,7 +244,7 @@ Error: Invalid data directory for cluster 10 main
 -------------------------------------------------
 
 ```sh
-$ psql sith_production -d sith_production
+$ psql -U sith_production -d sith_production
 Error: Invalid data directory for cluster 10 main
 ```
 
@@ -252,8 +252,10 @@ Error: Invalid data directory for cluster 10 main
 
 1. <https://stackoverflow.com/a/26183931/3632318>
 
+add `-h localhost` option:
+
 ```sh
-$ psql sith_production -d sith_production -h localhost
+$ psql -U sith_production -d sith_production -h localhost
 / enter password for database user sith_production
 ```
 

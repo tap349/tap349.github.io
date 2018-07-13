@@ -37,6 +37,13 @@ wrap code block with `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}` tags:
     ```
     {% endraw %}{{ "{% endraw " }}%}
 
+also it's possible to wrap arbitrary text with `{{ "{% raw " }}%}` and
+`{{ "{% endraw " }}%}` tags:
+
+    {{ "{% raw " }}%}{% raw %}
+    both `{% if ... %}` and `{% endif %}` statements indent the next line
+    {% endraw %}{{ "{% endraw " }}%}
+
 escape left angle bracket only
 ------------------------------
 

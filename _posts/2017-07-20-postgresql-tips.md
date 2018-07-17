@@ -199,8 +199,8 @@ create:
 restore:
 
 ```sh
-(ws)$ scp ssh_host:~/tmp/dump.sql.tar.gz ~/tmp/dump.sql.tar.gz
 (ws)$ cd ~/tmp
+(ws)$ scp ssh_host:~/tmp/dump.sql.tar.gz dump.sql.tar.gz
 (ws)$ tar xvzf dump.sql.tar.gz
 (ws)$ psql -U sith_prod -f dump.sql sith_prod
 ```

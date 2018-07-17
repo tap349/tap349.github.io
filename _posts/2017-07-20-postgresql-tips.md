@@ -191,14 +191,18 @@ backup
 create:
 
 ```sh
-$ pg_dump -aOf ~/tmp/dump.sql database
+(remote)$ mkdir ~/tmp && cd ~/tmp
+(remote)$ pg_dump -aOf dump.sql -U sith_prod -d sith_prod -h localhost
+(remote)$ tar cvzf dump.sql.tar.gz dump.sql
 ```
 
 restore:
 
 ```sh
-$ scp ssh_host:~/tmp/dump.sql ./dump.sql
-$ psql -U username -f ./dump.sql database
+(ws)$ scp ssh_host:~/tmp/dump.sql.tar.gz ~/tmp/dump.sql.tar.gz
+(ws)$ cd ~/tmp
+(ws)$ tar xvzf dump.sql.tar.gz
+(ws)$ psql -U sith_prod -f dump.sql sith_prod
 ```
 
 this dump doesn't create tables so make sure schema is the same -

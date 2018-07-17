@@ -15,13 +15,6 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 {:toc}
 <hr>
 
-<dl>
-  <dt>ws</dt>
-  <dd>workstation (local machine)</dd>
-</dl>
-
-<hr>
-
 install Chef on workstation
 ---------------------------
 
@@ -32,9 +25,9 @@ use one of 2 options:
   ChefDK includes all required gems except for `knife-zero`:
 
   ```sh
-  (ws)$ brew update
-  (ws)$ brew cask reinstall chefdk
-  (ws)$ chef gem install knife-zero
+  (local)$ brew update
+  (local)$ brew cask reinstall chefdk
+  (local)$ chef gem install knife-zero
   ```
 
   if you haven't used ChefDK for a while it's better to reinstall it -
@@ -60,7 +53,7 @@ create `devops` user on remote node
 -----------------------------------
 
 ```sh
-(ws)$ ssh root@<remote-ip>
+(local)$ ssh root@<remote-ip>
 (remote)# useradd devops -m -s /bin/bash -G sudo
 (remote)# passwd devops
 (remote)# exit
@@ -110,7 +103,7 @@ bootstrap remote node
 ---------------------
 
 ```sh
-(ws)$ knife zero bootstrap billing --node-name billing
+(local)$ knife zero bootstrap billing --node-name billing
 / enter devops password twice (for login and sudo command)
 ```
 
@@ -136,7 +129,7 @@ create production environment
 -----------------------------
 
 ```sh
-(ws)$ knife environment create production
+(local)$ knife environment create production
 ```
 
 _environments/production.json_ file will be created with the following
@@ -164,16 +157,16 @@ add application cookbook default recipe to node run list
 --------------------------------------------------------
 
 ```sh
-(ws)$ knife node run_list add billing 'recipe[app_billing]'
+(local)$ knife node run_list add billing 'recipe[app_billing]'
 ```
 
 converge remote node
 --------------------
 
 ```sh
-(ws)$ knife node environment_set billing prod
-(ws)$ berks vendor
-(ws)$ knife zero converge 'name:billing'
+(local)$ knife node environment_set billing prod
+(local)$ berks vendor
+(local)$ knife zero converge 'name:billing'
 / enter devops password twice (on first converge only)
 ```
 
@@ -194,7 +187,7 @@ update attribute whitelist (if necessary)
 - update changes to _/etc/chef/client.rb_ on remote node:
 
   ```sh
-  (ws)$ knife zero bootstrap billing --node-name billing --no-converge
+  (local)$ knife zero bootstrap billing --node-name billing --no-converge
   ```
 
   command would overwrite node file without `--no-converge` option.

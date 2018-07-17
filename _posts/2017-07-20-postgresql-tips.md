@@ -199,10 +199,10 @@ create:
 restore:
 
 ```sh
-(ws)$ cd ~/tmp
-(ws)$ scp ssh_host:~/tmp/dump.sql.tar.gz dump.sql.tar.gz
-(ws)$ tar xvzf dump.sql.tar.gz
-(ws)$ psql -U sith_prod -f dump.sql sith_prod
+(local)$ cd ~/tmp
+(local)$ scp ssh_host:~/tmp/dump.sql.tar.gz dump.sql.tar.gz
+(local)$ tar xvzf dump.sql.tar.gz
+(local)$ psql -U sith_prod -f dump.sql sith_prod
 ```
 
 this dump doesn't create tables so make sure schema is the same -

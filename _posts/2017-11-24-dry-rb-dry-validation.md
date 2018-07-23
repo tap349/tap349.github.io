@@ -190,3 +190,20 @@ end
 NOTE: `Dry::Validation.Schema` doesn't try to convert string keys
       into atoms and vice versa while `Dry::Validation.Form` performs
       conversion in one direction only: string -> atom.
+
+whitelist keys (like strong parameters)
+---------------------------------------
+
+1. <https://github.com/dry-rb/dry-validation/issues/66#issuecomment-195341373>
+
+```ruby
+ParamsSchema = Dry::Validation.Schema do
+  configure { config.input_processor = :sanitizer }
+
+  required(:foo).maybe
+  required(:bar).filled
+end
+
+ParamsSchema.call({ foo: 1, bar: 2, baz: 3 })
+# => { :foo => 1, :bar => 2 }
+```

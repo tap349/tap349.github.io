@@ -217,14 +217,28 @@ NOTE: don't use `...!!foo && {foo}` because RN JS server might
 1. <https://stackoverflow.com/a/41364433/3632318>
 
 ```javascript
-> Array.from(new Set([1, 2, 3, 2, 2, 3, 1]))
-< [1, 2, 3]
+Array.from(new Set([1, 2, 3, 2, 2, 3, 1]))
+// => [1, 2, 3]
+
+// or
+[...new Set([1, 2, 3, 2, 2, 3, 1])]
+// => [1, 2, 3]
 ```
 
 NOTE:
 
 - insertion order is preserved
 - all duplicate values but the 1st one are removed
+
+
+(how to) flatten array
+----------------------
+
+```javascript
+const array = [1, [2, 3], 4];
+[].concat(...array);
+// => [1, 2, 3, 4]
+```
 
 (how to) wrap a long template literal to multiline
 --------------------------------------------------

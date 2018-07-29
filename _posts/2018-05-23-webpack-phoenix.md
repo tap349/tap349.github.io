@@ -1196,7 +1196,7 @@ without these changes):
     devServer: {
       host: 'localhost',
       port: 3045,
-+     // this header is also required for HMR to work
++     // CORS header is also required for HMR to work
 +     headers: {
 +       'Access-Control-Allow-Origin': '*',
 +     },

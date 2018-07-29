@@ -378,10 +378,17 @@ packs then included in layout file using `javascript_pack_tag` and
 
   that is _bootstrap.css.map_ is getting resolved relative to current
   directory (Bootstrap styles are imported in _app/assets/css/app.scss_)
-  rather than relative to _node\_modules/bootstrap/dist/css/_.
+  rather than relative to original CSS file (_bootstrap.css_).
 
   error is gone when `resolve-url-loader` package is removed => so don't
   use it so far - it works without it and doesn't work when it's added.
+
+  **UPDATE**
+
+  in spite of the error above, `resolve-url-loader` might be required
+  when using some npm packages like `tabler-ui` - its main CSS file
+  contains lots of `url()` statements which are not resolved correctly
+  without this loader.
 
 ### npm package
 

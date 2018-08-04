@@ -25,6 +25,12 @@ $ psql -h localhost -U sith_prod sith_prod
 / enter password for database user sith_prod
 ```
 
+as `postgres` user:
+
+```sh
+$ sudo -u postgres psql -U postgres sith_prod
+```
+
 ### users
 
 - list roles (= users) and their attributes

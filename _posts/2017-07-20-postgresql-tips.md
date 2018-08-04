@@ -21,7 +21,7 @@ psql tips
 ### login
 
 ```sh
-$ psql -U sith_prod -d sith_prod -h localhost
+$ psql -h localhost -U sith_prod sith_prod
 / enter password for database user sith_prod
 ```
 
@@ -192,7 +192,7 @@ create:
 
 ```sh
 (remote)$ mkdir ~/tmp && cd ~/tmp
-(remote)$ pg_dump -aOf dump.sql -U sith_prod -d sith_prod -h localhost
+(remote)$ pg_dump -h localhost -U sith_prod -aOf dump.sql sith_prod
 (remote)$ tar cvzf dump.sql.tar.gz dump.sql
 ```
 
@@ -236,7 +236,7 @@ $ RAILS_ENV=test rails db:structure:load
 say, to restore our database running in Docker:
 
 ```sh
-$ psql -U postgres -h localhost -p 5433 -f ./PostgreSQL.sql sith_dev
+$ psql -h localhost -p 5433 -U postgres -f ./PostgreSQL.sql sith_dev
 ```
 
 (how to) remove all versions of PostgreSQL on Ubuntu

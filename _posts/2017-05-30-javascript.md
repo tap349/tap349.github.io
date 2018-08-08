@@ -48,6 +48,30 @@ to be function object and then use parentheses to call that function object.
 
 1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#Description>
 
+### functions inside object
+
+1. <https://stackoverflow.com/a/48645842/3632318>
+
+ES5:
+
+```javascript
+var myObj = {
+  myMethod: function myMethod (params) {
+    // ...do something here
+  },
+};
+```
+
+ES6 (the same as above):
+
+```javascript
+var myObj = {
+  myMethod (params) {
+    // ...do something here
+  },
+};
+```
+
 properties
 ----------
 

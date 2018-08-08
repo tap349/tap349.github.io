@@ -139,7 +139,7 @@ System Preferences
 
 - General (tab):
   - [x] Require password 5 seconds after sleep or screen saver begins
-  - Allow apps downloaded from: Anywhere (for additional software)
+  - Allow apps downloaded from: App Store and identified developers
 
 ### Spotlight
 

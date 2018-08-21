@@ -13,6 +13,14 @@ categories: [facebook]
 {:toc}
 <hr>
 
+<dl>
+  <dt>FD</dt>
+  <dd>Facebook for Developers</dd>
+
+  <dt>GAE</dt>
+  <dd>Graph API Explorer</dd>
+</dl>
+
 - user IDs
 
   <dl>
@@ -50,7 +58,7 @@ categories: [facebook]
 Facebook Login
 --------------
 
-1. [Permissions Reference - Facebook Login](https://developers.facebook.com/docs/facebook-login/permissions/v3.0)
+1. [Permissions Reference - Facebook Login](https://developers.facebook.com/docs/facebook-login/permissions/v3.1)
 
 Graph API
 ---------
@@ -63,6 +71,20 @@ Graph API
 
 you can get `active_billing_date_preference` and `next_bill_date` info only
 if your token is generated for `Ads Manager` App (`App ID` field in ATD).
+
+### get page conversations
+
+1. <https://developers.facebook.com/docs/graph-api/reference/v3.1/conversation>
+
+first generate long-lived PAT with `read_page_mailboxes` permission - see
+`PAT` section below.
+
+this PAT can be now used to fetch page conversations:
+
+```
+UAT scopes: manage_pages,read_page_mailboxes
+GET v3.1/me/conversations
+```
 
 Marketing API
 -------------
@@ -82,7 +104,7 @@ billing events:
 
 ```
 UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
-GET v3.0/me/adaccounts?fields=id,account_id,name,activities{event_type,event_time,extra_data}
+GET v3.1/me/adaccounts?fields=id,account_id,name,activities{event_type,event_time,extra_data}
 ```
 
 sample response:
@@ -183,7 +205,7 @@ sample response:
 
 ```
 UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
-GET v3.0/me/adaccounts?fields=id,account_id,name,is_prepay_account
+GET v3.1/me/adaccounts?fields=id,account_id,name,is_prepay_account
 ```
 
 sample response:
@@ -207,7 +229,7 @@ sample response:
 
 ```
 UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
-GET v3.0/me/adaccounts?fields=id,account_id,name,funding_source_details
+GET v3.1/me/adaccounts?fields=id,account_id,name,funding_source_details
 ```
 
 sample response:
@@ -239,7 +261,7 @@ to predict when user is close to running out of money.
 
 ```
 UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
-GET v3.0/me/adaccounts?fields=campaigns{insights{ctr,cpc,cpm,cpp}}
+GET v3.1/me/adaccounts?fields=campaigns{insights{ctr,cpc,cpm,cpp}}
 ```
 
 sample response:
@@ -326,26 +348,62 @@ access tokens
 
 1. <https://developers.facebook.com/docs/facebook-login/access-tokens>
 
-- user access token (UAT)
+- temporary token is called short-lived one
+- permanent token is called long-lived one
 
-  > User access tokens are generally obtained via a login dialog and
-  > require a person to permit your app to obtain one.
+short-lived token can be extended in ATD - this means it will be turned
+into long-lived token (in fact it will be a brand new token then).
 
-- app access token (AAT)
+### UAT
 
-  > It is generated using a pre-agreed secret between the app and Facebook
+> User access tokens are generally obtained via a login dialog and
+> require a person to permit your app to obtain one.
 
-- page access token (PAT)
+### AAT
 
-  > To obtain a page access token you need to start by obtaining a user
-  > access token and asking for the manage_pages permission. Once you have
-  > the user access token you then get the page access token via the Graph API.
+> It is generated using a pre-agreed secret between the app and Facebook
 
-  obtain PAT:
+### PAT
+
+- generate long-lived PAT with messenger permissions in FD
+
+  1. [Facebook - Bot]({% post_url 2018-05-07-facebook-bot %})
+
+  | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
+  | `Token Generation` (section) → `Select a Page` (combobox)
+
+  this PAT is long-lived and has only messenger permissions for selected
+  page.
+
+- generate long-lived PAT with `read_page_mailboxes` permission in GAE
+
+  1. <https://stackoverflow.com/questions/17197970>
+
+  | GAE: `Get Token` (dropdown menu) → `Get User Access Token`
+
+  > Select Permissions
+
+  - [x] `read_page_mailboxes`
+  - `Get Access Token` (button)
+
+  | GAE
+
+  - `Application` (combobox): `<MY_APP>`
 
   ```
-  UAT scopes: manage_pages
-  GET v3.0/<page_id>?fields=access_token
+  UAT scopes: manage_pages,read_page_mailboxes
+  GET v3.1/<PAGE_ID>?fields=access_token
   ```
 
-  PATs are short-lived (expire in 1 hour).
+  see [Facebook - Tips]({% post_url 2018-06-01-facebook-tips %}) on how to
+  find page ID.
+
+  => short-lived PAT is generated (expires in 1 hour) - now it's necessary
+  to extend it and get a new long-lived PAT in ATD.
+
+  | ATD
+
+  paste short-lived PAT into ATD and click `Extend Access Token` button at the
+  bottom of the page (you will be prompted to type your FB account password to
+  confirm this action) - a new long-lived PAT will be generated that will never
+  expire.

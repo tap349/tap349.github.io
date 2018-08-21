@@ -17,6 +17,9 @@ categories: [facebook]
   <dt>FD</dt>
   <dd>Facebook for Developers</dd>
 
+  <dt>GAE</dt>
+  <dd>Graph API Explorer</dd>
+
   <dt>request URL</dt>
   <dd>http://my-app.com:4000/auth/facebook</dd>
 
@@ -430,10 +433,10 @@ as a result `client_id` query param had no value:
 ...?client_id&redirect_uri=...
 ```
 
-### unknown error in Graph API Explorer
+### unknown error in GAE
 
-response to sample request (`me?fields=id,name`) in Graph API Explorer
-when access token obtained from another user is used:
+response to sample request (`me?fields=id,name`) in GAE when access token
+obtained from another user is used:
 
 ```json
 {
@@ -455,8 +458,7 @@ browser extensions installed) - try to use another browser (say, Safari).
 ***UPDATE***
 
 error is caused by ad blockers - disable these extensions and reload the
-page. or else it's better to whitelist Graph API Explorer page in their
-settings.
+page. or else it's better to whitelist GAE page in their settings.
 
 ### You are not logged in
 

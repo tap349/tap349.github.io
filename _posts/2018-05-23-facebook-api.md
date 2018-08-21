@@ -74,7 +74,8 @@ if your token is generated for `Ads Manager` App (`App ID` field in ATD).
 
 ### get page conversations
 
-1. <https://developers.facebook.com/docs/graph-api/reference/v3.1/conversation>
+1. <https://developers.facebook.com/docs/graph-api/reference/page/conversations/>
+2. <https://developers.facebook.com/docs/graph-api/reference/v3.1/conversation>
 
 first generate long-lived PAT with `read_page_mailboxes` permission - see
 `PAT` section below.

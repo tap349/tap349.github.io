@@ -87,6 +87,18 @@ UAT scopes: manage_pages,read_page_mailboxes
 GET v3.1/me/conversations
 ```
 
+### filter page conversations by date
+
+1. <https://developers.facebook.com/support/bugs/420363721670492>
+
+filtering conversations by date is removed by Facebook:
+
+> it appears as if we would have to delete conversations in order to
+> prevent retrieving all conversations all the time.
+>
+> So if I want to get a message from January I have to paginate all
+> over the object until January?
+
 Marketing API
 -------------
 

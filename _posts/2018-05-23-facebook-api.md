@@ -89,7 +89,8 @@ GET v3.1/me/conversations
 
 ### filter page conversations by date
 
-1. <https://developers.facebook.com/support/bugs/420363721670492>
+1. <https://developers.facebook.com/docs/graph-api/reference/v3.1/conversation>
+2. <https://developers.facebook.com/support/bugs/420363721670492>
 
 filtering conversations by date is removed by Facebook:
 
@@ -98,6 +99,9 @@ filtering conversations by date is removed by Facebook:
 >
 > So if I want to get a message from January I have to paginate all
 > over the object until January?
+
+it's only possible to limit the number of conversations to fetch using
+`limit` modifier.
 
 Marketing API
 -------------

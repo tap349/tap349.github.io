@@ -89,11 +89,14 @@ GET v3.1/me/conversations
 
 ### filter page conversations by date
 
-1. <https://developers.facebook.com/docs/graph-api/reference/v3.1/conversation>
-2. <https://developers.facebook.com/support/bugs/420363721670492>
+> <https://developers.facebook.com/docs/graph-api/reference/v3.1/page/conversations>
+>
+> Time-based pagination is not available for the conversations endpoint.
 
 filtering conversations by date is removed by Facebook:
 
+> <https://developers.facebook.com/support/bugs/420363721670492>
+>
 > it appears as if we would have to delete conversations in order to
 > prevent retrieving all conversations all the time.
 >

@@ -109,8 +109,8 @@ generate page access token
 
 PAT is required to send messages on behalf of application.
 
-see [Facebook - API]({% post_url 2018-05-23-facebook-api %}) on how
-to generate PATs.
+see [Facebook - API]({% post_url 2018-05-23-facebook-api %}) on how to generate
+PATs.
 
 testing
 -------

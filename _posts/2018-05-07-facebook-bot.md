@@ -78,6 +78,14 @@ configure webhook
 | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
 | `Webhooks` (section) → `Select a Page` (combobox) → `Subscribe` (button)
 
+generate page access token
+--------------------------
+
+PAT is required to send messages on behalf of selected page.
+
+see [Facebook - API]({% post_url 2018-05-23-facebook-api %}) on how to
+generate PATs in either FD or GAE.
+
 configure messenger
 -------------------
 
@@ -103,14 +111,6 @@ setup account linking
 > the messenger user id, and tell the user to click on “login with facebook”.
 > Then you get the APP ID and can save a relation in your database with the
 > messenger user id.
-
-generate page access token
---------------------------
-
-PAT is required to send messages on behalf of application.
-
-see [Facebook - API]({% post_url 2018-05-23-facebook-api %}) on how to generate
-PATs.
 
 testing
 -------

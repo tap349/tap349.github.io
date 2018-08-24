@@ -138,6 +138,8 @@ notes
 > for the specific Page associated with the bot in Messenger, which is
 > called Page-scoped ID.
 
+NOTE: PSID is the same for all applications subscribed to this page messages.
+
 troubleshooting
 ---------------
 

@@ -13,6 +13,14 @@ categories: [facebook]
 {:toc}
 <hr>
 
+change language
+---------------
+
+1. <https://developers.facebook.com/help/translations/>
+
+- go to main page (<https://developers.facebook.com/>)
+- scroll to footer and click required language there in `LANGUAGES` section
+
 get my UID
 ----------
 

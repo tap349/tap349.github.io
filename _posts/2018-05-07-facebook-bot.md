@@ -29,14 +29,6 @@ categories: [facebook]
 1. <https://developers.facebook.com/docs/messenger-platform>
 2. <https://www.youtube.com/playlist?list=PLGhhbubwuDyTJJffHoLtIiQZYlv3XbUl->
 
-change language
----------------
-
-1. <https://developers.facebook.com/help/translations/>
-
-- go to main page (<https://developers.facebook.com/>)
-- scroll to footer and click required language there in `LANGUAGES` section
-
 best practices
 --------------
 
@@ -55,8 +47,8 @@ best practices
 > encourage people to respond in ways you do not support. If you do pose questions,
 > add buttons with specific answers to the message for people to choose from.
 
-webhook
--------
+configure webhook
+-----------------
 
 1. <https://www.youtube.com/watch?v=ZlysN-027Q4&index=2&list=PLGhhbubwuDyTJJffHoLtIiQZYlv3XbUl->
 2. <https://developers.facebook.com/docs/messenger-platform/introduction/integration-components>
@@ -81,33 +73,26 @@ webhook
 | FD: `PRODUCTS` (section in left menu) → `Webhooks`
 | `Edit Subscription` (button)
 
-notes
------
-
-> <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
->
-> When a person uses Facebook Login on a website or a mobile app, an ID
-> is created for the specific Facebook app, which is called app-scoped ID.
-> When a person interacts with a business via Messenger, an ID is created
-> for the specific Page associated with the bot in Messenger, which is
-> called Page-scoped ID.
-
-testing
--------
-
-you must be application administrator (not page admin) to receive webhooks
-events when user sends a message to page associated with your Messenger app
-(bot):
+### subscribe webhook to page events
 
 | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Token Generation` (section)
+| `Webhooks` (section) → `Select a Page` (combobox) → `Subscribe` (button)
 
-> Page token is required to start using the APIs. This page token will have
-> all messenger permissions even if your app is not approved to use them yet,
-> though in this case you will be able to message only app admins.
+configure messenger
+-------------------
 
-account linking
----------------
+### get started button
+
+1. <https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/get-started-button>
+2. <https://www.techiediaries.com/messenger-bot-get-started-button/>
+
+make sure you Messenger app is subscribed to `messaging_postbacks` event:
+
+| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
+| `Webhooks` (section) → `Edit events` (button)
+
+setup account linking
+---------------------
 
 1. <https://developers.facebook.com/docs/messenger-platform/identity/account-linking>
 2. <http://blog.99array.com/2017/05/28/facebook-account-linking/>
@@ -119,16 +104,31 @@ account linking
 > Then you get the APP ID and can save a relation in your database with the
 > messenger user id.
 
-get started button
-------------------
+testing
+-------
 
-1. <https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/get-started-button>
-2. <https://www.techiediaries.com/messenger-bot-get-started-button/>
-
-make sure you Messenger app is subscribed to `messaging_postbacks` event:
+you must be app admin (not page admin) to receive webhooks events when
+user sends a message to a page associated with your Messenger app (bot):
 
 | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Webhooks` (section) → `Edit events` (button)
+| `Token Generation` (section)
+
+> Page token is required to start using the APIs. This page token will have
+> all messenger permissions even if your app is not approved to use them yet,
+> though in this case you will be able to message only app admins.
+
+notes
+-----
+
+### about ASID vs. PSID
+
+> <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
+>
+> When a person uses Facebook Login on a website or a mobile app, an ID
+> is created for the specific Facebook app, which is called app-scoped ID.
+> When a person interacts with a business via Messenger, an ID is created
+> for the specific Page associated with the bot in Messenger, which is
+> called Page-scoped ID.
 
 troubleshooting
 ---------------

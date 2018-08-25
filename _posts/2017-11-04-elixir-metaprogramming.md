@@ -77,3 +77,18 @@ quote vs. Macro.escape/2
 
 that is `Macro.escape/2` first evaluates passed expression and returns
 AST of the result while `quote` returns AST of passed expression as is.
+
+bind_quoted option of quote/2
+-----------------------------
+
+> <https://hexdocs.pm/elixir/Kernel.SpecialForms.html>
+>
+> :bind_quoted - passes a binding to the macro. Whenever a binding is given,
+> `unquote/1` is automatically disabled.
+
+> <https://dockyard.com/blog/2016/08/16/the-minumum-knowledge-you-need-to-start-metaprogramming-in-elixir>
+>
+> bind_quoted does two things:
+>
+> 1) prevent accidental reevaluation of bindings
+> 2) defer the execution of `unquote` via `unquote: false`

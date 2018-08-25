@@ -93,5 +93,20 @@ bind_quoted option of quote/2
 > 1) prevent accidental reevaluation of bindings
 > 2) defer the execution of `unquote` via `unquote: false`
 
-AFAIK with `unquote: false` unquoting still takes place but not at compilation
-time but at runtime in the caller's context.
+=> with `unquote: false` unquoting still takes place but not at compilation
+time but at runtime in the caller's context (that is it's deferred).
+
+NOTE: binding is available directly in `quote` block only - you still have to
+      unquote expressions explicitly inside dynamically generated functions:
+
+```elixir
+defmacro my_macro(name) do
+  quote bind_quoted: [name: name] do
+    IO.puts(name) # name is properly unquoted due to bind_quoted
+
+    def foo do
+      IO.puts(unquote(name)) # name must be unquoted explicitly
+    end
+  end
+end
+```

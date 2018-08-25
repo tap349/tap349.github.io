@@ -53,7 +53,7 @@ $ cd billing
 $ git init
 $ git add -A .
 $ git commit -m 'initial commit'
-$ get remote add origin <remote_repo_url>
+$ get remote add origin <REMOTE_REPO_URL>
 $ git push
 ```
 

@@ -125,6 +125,9 @@ user sends a message to a page associated with your Messenger app (bot):
 > all messenger permissions even if your app is not approved to use them yet,
 > though in this case you will be able to message only app admins.
 
+you'll be able to message users having ANY app role (admin, developer, tester)
+- not necessarily admin role.
+
 notes
 -----
 

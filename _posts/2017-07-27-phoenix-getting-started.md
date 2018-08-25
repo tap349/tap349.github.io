@@ -197,3 +197,8 @@ and `ChangesetView`).
 
 see templates of corresponding `gen` tasks in the source code to get the
 list of modules that should be generated.
+
+```sh
+$ mix phx.gen.json Page Conversation conversations external_id:string \
+  labels:array:string created_time:utc_datetime updated_time:utc_datetime
+```

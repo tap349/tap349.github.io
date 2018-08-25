@@ -201,4 +201,5 @@ list of modules that should be generated.
 ```sh
 $ mix phx.gen.json Page Conversation conversations external_id:string \
   labels:array:string created_time:utc_datetime updated_time:utc_datetime
+$ mix ecto.migrate && MIX_ENV=test mix ecto.migrate
 ```

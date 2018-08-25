@@ -87,7 +87,7 @@ bind_quoted option of quote/2
 > :bind_quoted - passes a binding to the macro. Whenever a binding is given,
 > `unquote/1` is automatically disabled.
 
-=> unquoting is prohibited when using `bind_quoted` option:
+=> moreover unquoting is prohibited when using `bind_quoted` option:
 
 ```
 iex> defmodule Foo do

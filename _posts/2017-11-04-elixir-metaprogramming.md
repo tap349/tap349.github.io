@@ -93,5 +93,5 @@ bind_quoted option of quote/2
 > 1) prevent accidental reevaluation of bindings
 > 2) defer the execution of `unquote` via `unquote: false`
 
-AFAIK with `unquote: false` unquoting still happens but not at compilation
+AFAIK with `unquote: false` unquoting still takes place but not at compilation
 time but at runtime in the caller's context.

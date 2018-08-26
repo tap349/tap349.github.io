@@ -174,32 +174,41 @@ _mix.exs_:
 
 ### generate schemas
 
-generate schemas (add all required columns in generated migrations -
-IDK how to pass `precision` and `scale` options for decimal column to
-generator so don't specify any columns altogether to be consistent):
+1. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Schema.html>
+2. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Html.html>
+3. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Json.html>
+4. <https://github.com/phoenixframework/phoenix/tree/master/priv/templates>
+
+schemas only:
 
 ```sh
 $ mix phx.gen.schema User users
 $ mix phx.gen.schema Card cards
 $ mix phx.gen.schema Transfer transfers
-$ mix ecto.migrate && MIX_ENV=test mix ecto.migrate
+$ mix ecto.migrate
 ```
 
-### generate schemas with context and supplementary modules
-
-1. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Html.html>
-2. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Json.html>
-3. <https://github.com/phoenixframework/phoenix/tree/master/priv/templates>
-
-using `phx.gen.html` or `phx.gen.json` tasks allows to generate not only
-schemas but some supplementary modules as well (including context module
-and `ChangesetView`).
-
-see templates of corresponding `gen` tasks in the source code to get the
-list of modules that should be generated.
+schemas with context and supplementary modules (including `ChangesetView`):
 
 ```sh
 $ mix phx.gen.json Page Conversation conversations external_id:string \
   labels:array:string created_time:utc_datetime updated_time:utc_datetime
-$ mix ecto.migrate && MIX_ENV=test mix ecto.migrate
+$ mix ecto.migrate
+```
+
+it's not necessary to run `MIX_ENV=test mix ecto.migrate` since this alias
+is added by default in a newly generated Phoenix project:
+
+```elixir
+# mix.exs
+
+defmodule Lain.Mixfile do
+  # ...
+  defp aliases do
+    [
+      # ...
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+    ]
+  end
+end
 ```

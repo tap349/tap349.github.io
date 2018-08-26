@@ -214,3 +214,8 @@ iex> Code.eval_quoted(quote do: "123" == unquote(%{a: 1}))
 iex> Code.eval_quoted(quote do: "123" == unquote(Macro.escape(%{a: 1})))
 {false, []}
 ```
+
+`use` macro
+-----------
+
+1. <https://dockyard.com/blog/2017/12/07/macro-madness-how-to-use-use-well>

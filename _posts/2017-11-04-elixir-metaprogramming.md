@@ -73,7 +73,7 @@ quoting
 => all macro arguments are quoted before being passed to macro
    (except for AST literals - see `AST literals` section above).
 
-> <https://elixirforum.com/t/pass-module-to-a-macro/978/2?u=tap349>
+> <https://elixirforum.com/t/pass-module-to-a-macro/978/2>
 >
 > You don’t get values into a macro but ASTs.
 >

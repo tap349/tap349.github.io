@@ -69,15 +69,21 @@ that is most likely macro arguments are quoted with `quote` before being
 passed to macro itself.
 
 quote vs. Macro.escape/2
-----------------------------
+------------------------
 
 1. <https://elixirforum.com/t/understand-macro-escape/405/2>
+2. <https://hexdocs.pm/elixir/Macro.html#escape/2-comparison-to-kernel-quote-2>
 
 - `quote` returns AST of passed in code
 - `Macro.escape/2` returns AST of passed in value
 
 that is `Macro.escape/2` first evaluates passed expression and returns
 AST of the result while `quote` returns AST of passed expression as is.
+
+> <https://hexdocs.pm/elixir/Macro.html#escape/2-comparison-to-kernel-quote-2>
+>
+> Macro.escape/2 is used to escape values (either directly passed or variable
+> bound), while Kernel.SpecialForms.quote/2 produces syntax trees for expressions.
 
 bind_quoted option of quote/2
 -----------------------------

@@ -129,12 +129,19 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 - `Addressable::URI.escape`
 
+  it doesn't escape reserved characters such as `:` and `/`:
+
   ```ruby
   Addressable::URI.escape('http://test.com?q1=foo,bar&q2=http://foo.com')
   # => "http://test.com?q1=foo,bar&q2=http://foo.com"
   ```
 
+  it's equivalent to `URI.encode/2` in Phoenix.
+
 - `CGI.escape`
+
+  it escapes all characters that can be escaped (that is includes reserved
+  characters unlike `Addressable::URI.escape`):
 
   ```ruby
   CGI.escape('http://test.com?q1=foo,bar&q2=http://foo.com')
@@ -143,12 +150,17 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 - `ERB::Util.url_encode`
 
+  it does the same as `CGI.escape`:
+
   ```ruby
   ERB::Util.url_encode('http://test.com?q1=foo,bar&q2=http://foo.com')
   # => "http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
 - `#to_query` (aliased to `#to_param`)
+
+  it converts hash into a query string and escapes all characters
+  like `CGI.escape` or `ERB::Util.url_encode`:
 
   ```ruby
   { redirect_uri: 'http://test.com?q1=foo,bar&q2=http://foo.com' }.to_query
@@ -157,12 +169,17 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 - `URI.encode_www_form`
 
+  it does the same as `#to_query` but accepts array of arrays instead of hash:
+
   ```ruby
   URI.encode_www_form([['redirect_uri', 'http://test.com?q1=foo,bar&q2=http://foo.com']])
   # => "redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
 - `Addressable::URI.form_encode`
+
+  it's like a combination of `#to_query` and `URI.encode_www_form` (in that
+  it accepts both hash and array of arrays):
 
   ```ruby
   Addressable::URI.form_encode({ 'redirect_uri' => 'http://test.com?q1=foo,bar&q2=http://foo.com' })
@@ -194,7 +211,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   except for reserved and unreserved ones - that's all it does as far
   as I can judge.
 
-  it looks like it's equivalent to `Addressable::URI.escape` in Rails.
+  => it's equivalent to `Addressable::URI.escape` in Rails.
 
 - `URI.encode_www_form/1`
 
@@ -204,6 +221,8 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   # => "http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
+  => it's equivalent to `CGI.escape` or `ERB::Util.url_encode` in Rails.
+
 - `URI.encode_query/1`
 
   ```elixir
@@ -212,7 +231,12 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   # => "redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com"
   ```
 
+  => it's equivalent to `#to_query` or `Addressable::URI.form_encode` in Rails.
+
 ### decode (percent-decode, unescape, percent-unscape)
+
+all decode functions in both Rails and Phoenix decode ALL escaped characters -
+they differ only in how they return the result (string, hash or array of arrays).
 
 #### Rails
 
@@ -228,11 +252,11 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   ```ruby
   URI.decode_www_form('redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
   # => [
-  #     [0] [
-  #         [0] "redirect_uri",
-  #         [1] "http://test.com?q1=foo,bar&q2=http://foo.com"
-  #     ]
-  # ]
+  #      [
+  #        "redirect_uri",
+  #        "http://test.com?q1=foo,bar&q2=http://foo.com"
+  #      ]
+  #    ]
   ```
 
 - `Addressable::URI.form_unencode`
@@ -240,11 +264,11 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   ```ruby
   Addressable::URI.form_unencode('redirect_uri=http%3A%2F%2Ftest.com%3Fq1%3Dfoo%2Cbar%26q2%3Dhttp%3A%2F%2Ffoo.com')
   # => [
-  #     [0] [
-  #         [0] "redirect_uri",
-  #         [1] "http://test.com?q1=foo,bar&q2=http://foo.com"
-  #     ]
-  # ]
+  #      [
+  #        "redirect_uri",
+  #        "http://test.com?q1=foo,bar&q2=http://foo.com"
+  #      ]
+  #    ]
   ```
 
 #### Phoenix

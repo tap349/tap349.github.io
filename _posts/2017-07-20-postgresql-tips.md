@@ -41,6 +41,12 @@ $ sudo -u postgres psql -U postgres sith_prod
 
 ### databases
 
+- connect to database
+
+  ```
+  \c sith_dev
+  ```
+
 - list databases and their owners
 
   ```

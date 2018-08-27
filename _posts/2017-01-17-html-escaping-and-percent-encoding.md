@@ -127,6 +127,13 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 #### Rails
 
+- `Addressable::URI.escape`
+
+  ```ruby
+  Addressable::URI.escape('http://test.com?q1=foo,bar&q2=http://foo.com')
+  # => "http://test.com?q1=foo,bar&q2=http://foo.com"
+  ```
+
 - `CGI.escape`
 
   ```ruby
@@ -169,6 +176,14 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
 
 - `URI.encode/2`
 
+  <https://hexdocs.pm/elixir/URI.html#encode/2>:
+
+  > Percent-escapes all characters that require escaping in a string.
+  >
+  > reserved characters, such as : and /, and the so-called unreserved
+  > characters, which have the same meaning both escaped and unescaped,
+  > won’t be escaped by default.
+
   ```elixir
   "http://test.com?q1=foo,bar&q2=http://foo.com"
   |> URI.encode()
@@ -179,17 +194,7 @@ test URL: `http://test.com?q1=foo,bar&q2=http://foo.com`.
   except for reserved and unreserved ones - that's all it does as far
   as I can judge.
 
-  there is no equivalent of this behaviour in Rails: all functions
-  dealing with strings percent-encode all reserved characters there
-  (that is behave like `URI.encode_www_form/1` - see below).
-
-  <https://hexdocs.pm/elixir/URI.html#encode/2>:
-
-  > Percent-escapes all characters that require escaping in a string.
-  >
-  > reserved characters, such as : and /, and the so-called unreserved
-  > characters, which have the same meaning both escaped and unescaped,
-  > won’t be escaped by default
+  it looks like it's equivalent to `Addressable::URI.escape` in Rails.
 
 - `URI.encode_www_form/1`
 

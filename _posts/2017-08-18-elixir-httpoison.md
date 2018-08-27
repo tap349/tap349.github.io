@@ -41,10 +41,10 @@ timeout vs. recv_timeout
 > to hackney :connect_timeout) returns a :connect_timeout error, whereas the
 > HTTPoison :recv_timeout returns the :timeout hackney error.
 
-| HTTPoison      | hackney         | hackney error   |
-|----------------|-----------------|-----------------|
-| timeout        | connect_timeout | connect_timeout |
-| recv_timeout   | recv_timeout    | timeout         |
+| HTTPoison option | hackney option  | hackney error   |
+|------------------|-----------------|-----------------|
+| timeout          | connect_timeout | connect_timeout |
+| recv_timeout     | recv_timeout    | timeout         |
 
 ```elixir
 HTTPoison.get("http://google.com", [], [{:timeout, 1}])

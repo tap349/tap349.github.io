@@ -821,3 +821,23 @@ provide this file via `vm_args` option in _rel/config.exs_:
 -   set cookie: :"my_cookie"
   end
 ```
+
+Could not compile "src/gettext_po_parser.yrl" because the application "parsetools" could not be found
+-----------------------------------------------------------------------------------------------------
+
+this error occurred when compiling project on build host:
+
+```sh
+$ mix bootleg.build
+...
+** (Mix) Could not compile "src/gettext_po_parser.yrl" because the application
+  "parsetools" could not be found. This may happen if your package manager
+  broke Erlang into multiple packages and may be fixed by installing the
+  missing "erlang-dev" and "erlang-parsetools" packages
+```
+
+**solution**
+
+1. <https://stackoverflow.com/questions/36512519>
+
+Erlang wasn't installed (I thought it would be installed as Elixir dependency).

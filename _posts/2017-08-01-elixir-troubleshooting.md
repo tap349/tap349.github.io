@@ -71,7 +71,7 @@ for explanation of how this could happen and how to fix it.
 [Phoenix] The task "phx.new" could not be found
 -----------------------------------------------
 
-```sh
+```
 $ mix phx.new billing --no-brunch
 ** (Mix) The task "phx.new" could not be found
 ```
@@ -81,7 +81,7 @@ $ mix phx.new billing --no-brunch
 I guess this problem is related to using `asdf` to manage Elixir versions -
 Phoenix has not been installed yet into new Elixir directory:
 
-```sh
+```
 $ mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez
 Are you sure you want to install "https://github.com/phoenixframework/archives/raw/master/phx_new.ez"? [Yn]
 * creating /Users/tap/.asdf/installs/elixir/1.5.1/.mix/archives/phx_new
@@ -102,7 +102,7 @@ $ mix phx.new hello --no-brunch
 [edeliver] Host key verification failed
 ---------------------------------------
 
-```sh
+```
 $ mix deploy.stage
 EDELIVER BILLING WITH UPDATE COMMAND
 -----> Updating to revision dec86cd from branch master
@@ -704,7 +704,7 @@ try to increase connect timeout (`timeout` request option in HTTPoison).
 could not compile dependency :appsignal, "mix compile" failed
 -------------------------------------------------------------
 
-```sh
+```
 $ mix test
 ...
 ==> appsignal
@@ -827,7 +827,7 @@ Could not compile "src/gettext_po_parser.yrl" because the application "parsetool
 
 this error occurred when compiling project on build host:
 
-```sh
+```
 $ mix bootleg.build
 ...
 ** (Mix) Could not compile "src/gettext_po_parser.yrl" because the application

@@ -825,7 +825,7 @@ provide this file via `vm_args` option in _rel/config.exs_:
 Could not compile "src/gettext_po_parser.yrl" because the application "parsetools" could not be found
 -----------------------------------------------------------------------------------------------------
 
-this error occurred when compiling project on build host:
+this error occurred when during compilation on build host:
 
 ```
 $ mix bootleg.build

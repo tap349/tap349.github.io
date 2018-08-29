@@ -569,8 +569,9 @@ pipe vs. keyword syntax
 ```elixir
 defmodule Sample.App do
   import Ecto.Query
-  alias Sample.Weather
+
   alias Sample.Repo
+  alias Sample.Weather
 
   def pipe_query do
     Weather

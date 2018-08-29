@@ -44,3 +44,6 @@ deploy release:
 ```sh
 $ mix bootleg.deploy
 ```
+
+TODO: it's also necessary to rollback migrations to specific version -
+      create corresponding release task.

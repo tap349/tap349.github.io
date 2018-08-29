@@ -23,7 +23,7 @@ Timex package
 
 1. <https://hexdocs.pm/timex/basic-usage.html>
 
-### parse string as date
+### parse string in arbitrary format as date
 
 ```elixir
 "201909"
@@ -32,7 +32,30 @@ Timex package
 # => ~D[2019-09-01]
 ```
 
+### parse ISO 8601 string as datetime
+
+1. <https://hexdocs.pm/timex/Timex.html#parse!/2>
+2. <https://hexdocs.pm/elixir/DateTime.html#from_iso8601/2>
+3. <https://hexdocs.pm/elixir/DateTime.html#from_naive!/2>
+4. <https://hexdocs.pm/elixir/NaiveDateTime.html#from_iso8601!/2>
+
+```elixir
+Timex.parse!("2018-08-28T08:42:29+0000", "{ISO:Extended}")
+# => #DateTime<2018-08-28 08:42:29Z>
+
+DateTime.from_iso8601("2018-08-28T08:42:29+0000")
+# => {:ok, #DateTime<2018-08-28 08:42:29Z>, 0}
+
+DateTime.from_naive!(
+  NaiveDateTime.from_iso8601!("2018-08-28T08:42:29+0000"),
+  "Etc/UTC"
+)
+# => #DateTime<2018-08-28 08:42:29Z>
+```
+
 ### format naive datetime as ISO 8601 date
+
+1. <https://hexdocs.pm/elixir/Date.html#to_iso8601/2>
 
 ```elixir
 ~N[2019-09-01 03:00:00]
@@ -82,34 +105,3 @@ timezones
 ---------
 
 1. <https://www.amberbit.com/blog/2017/8/3/time-zones-in-postgresql-elixir-and-phoenix/>
-
-migration:
-
-```elixir
-defmodule MyApp.Repo.Migrations.CreateUsers do
-  use Ecto.Migration
-
-  def change do
-    create table("users") do
-      # ...
-
-      timestamps(type: :utc_datetime)
-    end
-  end
-end
-```
-
-schema:
-
-```elixir
-defmodule MyApp.User do
-  use Ecto.Schema
-  import Ecto.Changeset
-
-  schema "users" do
-    # ...
-
-    timestamps(type: :utc_datetime)
-  end
-end
-```

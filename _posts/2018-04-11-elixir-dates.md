@@ -13,15 +13,11 @@ categories: [elixir]
 {:toc}
 <hr>
 
-Elixir dates
-------------
-
 1. <https://hexdocs.pm/elixir/Date.html>
+2. <https://hexdocs.pm/timex/basic-usage.html>
 
-Timex package
--------------
-
-1. <https://hexdocs.pm/timex/basic-usage.html>
+tips
+----
 
 ### parse string in arbitrary format as date
 
@@ -82,6 +78,30 @@ DateTime.from_naive!(
 |> Timex.shift(months: 1)
 # => ~N[2019-10-01 03:00:00]
 ```
+
+### compare dates
+
+```elixir
+datetime_1 = Timex.parse!("2018-08-30 01:00:00.000000Z", "{ISO:Extended}")
+datetime_2 = Timex.parse!("2018-08-30 01:00:01.000000Z", "{ISO:Extended}")
+
+Timex.before?(datetime_1, datetime_2)
+# => true
+```
+
+don't use comparison operators (`>`, `>=`, etc.) when comparing dates:
+
+> <https://elixirforum.com/t/elixirs-datetime-values-dont-seem-to-compare-correctly/3243>
+>
+> Basic Erlang ordering often produces confusing results when you apply
+> it to complicated data structures such as a map with Tuples.
+>
+> Maps are ordered by size, two maps with the same size are compared by
+> keys in ascending term order and then by values in key order. In maps
+> key order integers types are considered less than floats types.
+>
+> So since DateTime is a map, it will sort the keys in term order, and
+> microsecond is before minute.
 
 Ecto dates
 ----------

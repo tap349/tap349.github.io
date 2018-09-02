@@ -15,6 +15,14 @@ categories: [elixir, otp, ets]
 
 NOTE: `Neko` is a sample application name in all examples below.
 
+workers
+-------
+
+> <https://freecontent.manning.com/little-elixir-and-otp-implementing-a-supervisor/>
+>
+> What are worker processes? They are usually processes that have implemented
+> the GenServer, GenFSM or GenEvent behaviors.
+
 GenServer
 ---------
 

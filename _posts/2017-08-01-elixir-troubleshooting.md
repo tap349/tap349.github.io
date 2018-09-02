@@ -656,7 +656,7 @@ the error is back after 16 days of silence - I have run out of ideas.
 (HTTPoison.Error) :connect_timeout
 ----------------------------------
 
-[appsignal](https://appsignal.com/neko/sites/59f22b2a6a21db47fddd50be/incidents/142):
+<https://appsignal.com/neko/sites/59f22b2a6a21db47fddd50be/incidents/142>:
 
 ```
 HTTP request error: {
@@ -728,7 +728,7 @@ $ mix test
 system_limit
 ------------
 
-[appsignal](https://appsignal.com/neko/sites/59f22b2a6a21db47fddd50be/incidents/287):
+<https://appsignal.com/neko/sites/59f22b2a6a21db47fddd50be/incidents/287>:
 
 ```
 HTTP request error: {

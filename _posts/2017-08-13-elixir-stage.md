@@ -50,12 +50,10 @@ _config/appsignal.exs_:
 
 - use separate working directory for AppSignal agent
 
-  1. <https://docs.appsignal.com/elixir/configuration/options.html#appsignal_working_dir_path-working_dir_path>
-
   ```diff
     config :appsignal, :config,
       # ...
-  +   working_dir_path: "/home/billing/#{Mix.env()}",
+  +   working_directory_path: "/home/billing/#{Mix.env()}/",
       # ...
   ```
 

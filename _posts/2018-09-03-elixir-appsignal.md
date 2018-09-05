@@ -45,7 +45,7 @@ if AppSignal transaction is not started (say, in GenServer):
 
   performance data is sent inside AppSignal transaction only.
 
-- unhandled errors are sent
+- unhandled errors are still sent
 
   e.g. when error is raised manually with `raise/1`.
 

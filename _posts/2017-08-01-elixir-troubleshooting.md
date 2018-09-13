@@ -836,6 +836,22 @@ $ mix bootleg.build
   missing "erlang-dev" and "erlang-parsetools" packages
 ```
 
+or else when using edeliver:
+
+```
+$ APP='billing' MIX_ENV='prod' mix phx.digest
+==> gettext
+Compiling 1 file (.yrl)
+could not compile dependency :gettext, "mix compile" failed. You can recompile
+this dependency with "mix deps.compile gettext", update it with "mix deps.update
+gettext" or clean it with "mix deps.clean gettext"
+==> billing
+** (Mix) Could not compile "src/gettext_po_parser.yrl" because the application
+"parsetools" could not be found. This may happen if your package manager broke
+Erlang into multiple packages and may be fixed by installing the missing
+"erlang-dev" and "erlang-parsetools" packages
+```
+
 **solution**
 
 1. <https://stackoverflow.com/questions/36512519>

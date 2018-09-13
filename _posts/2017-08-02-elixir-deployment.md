@@ -127,7 +127,10 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
   +     # generate digest and cache manifest
   +     cd ..
   +     mkdir -p priv/static
-  +     APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
+  +     # remove &> /dev/null at the end - or else we
+  +     # don't see actual errors if phx.digest task fails
+  +     #APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
+  +     APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest
   +   "
   + }
   ```

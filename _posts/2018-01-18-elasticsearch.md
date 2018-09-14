@@ -40,15 +40,6 @@ troubleshooting
 
 ```
 pry> Api::Elastic::Index.call({ id: 1, extra_data: { 'goal' => 'reach' } })
-< {"error":{"root_cause":[{"type":"mapper_parsing_exception","reason":"failed
-to parse [extra_data.goal]"}],"type":"mapper_parsing_exception","reason":"failed
-to parse [extra_data.goal]","caused_by":{"type":"illegal_argument_exception",
-"reason":"For input string: \"likes\""}},"status":400}
-
-[400] {"error":{"root_cause":[{"type":"mapper_parsing_exception","reason":
-"failed to parse [extra_data.goal]"}],"type":"mapper_parsing_exception","reason":
-"failed to parse [extra_data.goal]","caused_by":{"type":"illegal_argument_exception",
-"reason":"For input string: \"likes\""}},"status":400}
 
 Elasticsearch::Transport::Transport::Errors::BadRequest: [400] {"error":{
 "root_cause":[{"type":"mapper_parsing_exception","reason":"failed to parse

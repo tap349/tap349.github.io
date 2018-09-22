@@ -82,3 +82,24 @@ and because it introduces significant and annoying delay when pasting):
   ```zsh
   unset zle_bracketed_paste
   ```
+
+tab navigation doesn't work
+---------------------------
+
+OS-wide tab navigation shorcuts (\<D-S-[>, \<D-S-[>) no longer work
+after upgrading:
+
+- Google Chrome: → 69.0.3497.100
+- macOS: 10.13.5 → 10.13.6
+
+**solution**
+
+1. <https://superuser.com/a/1260437/326775>
+
+| Preferences: Keyboard → Shortcuts (tab) → App Shorcuts
+(see [macOS - Troubleshooting]({% post_url 2017-10-29-macos-troubleshooting %})):
+add these shortcuts:
+
+- Google Chrome:
+  - Select Previous Tab: \<D-S-[>
+  - Select Next Tab: \<D-S-[>

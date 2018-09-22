@@ -180,6 +180,10 @@ System Preferences
     - [x] Select the previous input source: Command-Space
   - Spotlight:
     - [x] Show Spotlight search: Control-Space
+  - App Shortcuts:
+    - Google Chrome (<https://superuser.com/a/1260437/326775>):
+      - Select Previous Tab: \<D-S-[>
+      - Select Next Tab: \<D-S-[>
 - Input Sources (tab):
   - Dvorak
   - Russian - PC

@@ -97,7 +97,7 @@ after upgrading:
 1. <https://superuser.com/a/1260437/326775>
 
 | Preferences: Keyboard → Shortcuts (tab) → App Shorcuts
-(see [macOS - Troubleshooting]({% post_url 2017-10-29-macos-troubleshooting %})):
+
 add these shortcuts:
 
 - Google Chrome:

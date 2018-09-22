@@ -86,7 +86,7 @@ and because it introduces significant and annoying delay when pasting):
 tab navigation doesn't work
 ---------------------------
 
-OS-wide tab navigation shorcuts (\<D-S-[>, \<D-S-[>) no longer work
+OS-wide tab navigation shorcuts (`<D-S-[>`, `<D-S-[>`) no longer work
 after upgrading:
 
 - Google Chrome: → 69.0.3497.100
@@ -101,5 +101,5 @@ after upgrading:
 add these shortcuts:
 
 - Google Chrome:
-  - Select Previous Tab: \<D-S-[>
-  - Select Next Tab: \<D-S-[>
+  - Select Previous Tab: `<D-S-[>`
+  - Select Next Tab: `<D-S-[>`

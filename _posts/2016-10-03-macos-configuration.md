@@ -182,8 +182,8 @@ System Preferences
     - [x] Show Spotlight search: Control-Space
   - App Shortcuts:
     - Google Chrome (see [macOS - Troubleshooting]({% post_url 2017-10-29-macos-troubleshooting %})):
-      - Select Previous Tab: \<D-S-[>
-      - Select Next Tab: \<D-S-[>
+      - Select Previous Tab: `<D-S-[>`
+      - Select Next Tab: `<D-S-[>`
 - Input Sources (tab):
   - Dvorak
   - Russian - PC

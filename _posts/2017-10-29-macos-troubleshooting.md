@@ -103,3 +103,5 @@ add these shortcuts:
 - Google Chrome:
   - Select Previous Tab: `<D-S-[>`
   - Select Next Tab: `<D-S-[>`
+
+or else use some Chrome extension like Vimium or cVim.

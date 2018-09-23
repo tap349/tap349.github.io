@@ -34,6 +34,15 @@ $('div.phone')[0]
 
 <chrome://flags/#enable-md-bookmarks> -> `Disabled`
 
+**UPDATE**
+
+this flag is no longer available in Chrome 69 (or maybe even 68).
+
+(how to) return old-style tabs
+------------------------------
+
+<chrome://flags/#top-chrome-md> -> `Normal`
+
 (how to) copy percent-encoded URL
 ---------------------------------
 

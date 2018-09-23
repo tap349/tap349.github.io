@@ -34,7 +34,7 @@ $('div.phone')[0]
 
 <chrome://flags/#enable-md-bookmarks> -> `Disabled`
 
-**UPDATE**
+***UPDATE***
 
 this flag is no longer available in Chrome 69 (or maybe even 68).
 

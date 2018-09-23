@@ -16,6 +16,7 @@ categories: [webpack, phoenix]
 1. <https://webpack.js.org/configuration/>
 2. <https://medium.com/@waffleau/using-webpack-4-with-phoenix-1-3-8245b45179c0>
 3. <http://whatdidilearn.info/2018/05/20/how-to-use-webpack-and-react-with-phoenix-1-3.html>
+4. <https://blog.danivovich.com/2017/08/30/webpack-phoenix> (not read)
 
 prepare file structure
 ----------------------

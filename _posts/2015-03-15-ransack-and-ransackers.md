@@ -140,11 +140,11 @@ filter :seo_specialist_eq,
   collection: [['Не назначен', :not_assigned]].concat(User.seo_specialists.pluck(:email))
 ```
 
-### UPDATE (2015-02-05):
+***UPDATE (2015-02-05)***
 
 we might override `scoped_collection` method and select a small set of attributes or create our own ones (using "select as" in SQL query). still when manually supplying additional search conditions (e.g. inserting them into `params[:q]` in `included` callback of some module that is meant to be included into AA page) it's necessary to specify original model attribute (plus search predicate) - not any one of SQL aliases defined inside SQL query! AA (or ransack) doesn't search on SQL aliases in scoped collection! also remember that if filtering on association attribute it's necessary to prefix search key in `params[:q]` with association name and underscore (as discussed above). we had such kind of bug when we prefixed search key with association name (using klass_with_date method) while filtering on model attributes directly.
 
-### UPDATE (2015-03-02):
+***UPDATE (2015-03-02)***
 
 this is how we can make default AA date range filter inclusive on upper bound:
 
@@ -173,7 +173,7 @@ end
 
 pay attention that this time date is not a string but TimeWithZone object - we don't need to parse anymore. after this change date range filter is filled correctly after page refresh.
 
-### UPDATE (2015-03-06):
+***UPDATE (2015-03-06)***
 
 ```ruby
 ransacker :l_date_at, type: :datetime do |parent|

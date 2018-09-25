@@ -134,6 +134,7 @@ System Preferences
 - Position on screen: Right
 - [x] Minimize windows into application icon
 - [x] Automatically hide and show the Dock
+- [ ] Show recent applications in Dock
 
 ### Security & Privacy
 

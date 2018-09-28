@@ -399,7 +399,7 @@ page.
 
 1. <https://stackoverflow.com/questions/17197970>
 
-- get UAT with required permissions in GAE
+- get UAT with required permissions
 
   | GAE
 
@@ -412,7 +412,7 @@ page.
   - [x] `read_page_mailboxes`
   - `Get Access Token` (button)
 
-- get short-lived PAT in GAE
+- get short-lived PAT
 
   | GAE
 
@@ -427,7 +427,7 @@ page.
   => short-lived PAT is generated (expires in 1 hour) - now it's necessary
   to extend it and get a new long-lived PAT in ATD.
 
-- get long-lived PAT in ATD
+- get long-lived PAT
 
   | ATD
 

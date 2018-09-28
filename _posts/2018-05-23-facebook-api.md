@@ -392,8 +392,14 @@ into long-lived token (in fact it will be a brand new token then).
 | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
 | `Token Generation` (section) → `Select a Page` (combobox)
 
-this PAT is long-lived and has only messenger permissions for selected
-page.
+this PAT is long-lived and has only messenger permissions for selected page
+(that is `pages_messaging_*` permissions).
+
+***UPDATE***
+
+new `KhLead` PAT generated this way now has not only messenger permissions
+but `read_page_mailboxes` permission as well (as though it was saved after
+generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 #### generate long-lived PAT with `read_page_mailboxes` permission in GAE
 

@@ -416,6 +416,8 @@ page.
 
   | GAE
 
+  use UAT generated above to perform the query:
+
   ```
   UAT scopes: manage_pages,read_page_mailboxes
   GET v3.1/<PAGE_ID>?fields=access_token

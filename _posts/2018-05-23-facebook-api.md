@@ -385,19 +385,25 @@ into long-lived token (in fact it will be a brand new token then).
 
 ### PAT
 
-- generate long-lived PAT with messenger permissions in FD
+#### generate long-lived PAT with messenger permissions in FD
 
-  1. [Facebook - Bot]({% post_url 2018-05-07-facebook-bot %})
+1. [Facebook - Bot]({% post_url 2018-05-07-facebook-bot %})
 
-  | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-  | `Token Generation` (section) → `Select a Page` (combobox)
+| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
+| `Token Generation` (section) → `Select a Page` (combobox)
 
-  this PAT is long-lived and has only messenger permissions for selected
-  page.
+this PAT is long-lived and has only messenger permissions for selected
+page.
 
-- generate long-lived PAT with `read_page_mailboxes` permission in GAE
+#### generate long-lived PAT with `read_page_mailboxes` permission in GAE
 
-  1. <https://stackoverflow.com/questions/17197970>
+1. <https://stackoverflow.com/questions/17197970>
+
+- get UAT with required permissions in GAE
+
+  | GAE
+
+  - `Application` (combobox): `<MY_APP>`
 
   | GAE: `Get Token` (dropdown menu) → `Get User Access Token`
 
@@ -406,9 +412,9 @@ into long-lived token (in fact it will be a brand new token then).
   - [x] `read_page_mailboxes`
   - `Get Access Token` (button)
 
-  | GAE
+- get short-lived PAT in GAE
 
-  - `Application` (combobox): `<MY_APP>`
+  | GAE
 
   ```
   UAT scopes: manage_pages,read_page_mailboxes
@@ -420,6 +426,8 @@ into long-lived token (in fact it will be a brand new token then).
 
   => short-lived PAT is generated (expires in 1 hour) - now it's necessary
   to extend it and get a new long-lived PAT in ATD.
+
+- get long-lived PAT in ATD
 
   | ATD
 

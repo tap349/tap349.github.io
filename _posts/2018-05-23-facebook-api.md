@@ -416,7 +416,7 @@ page.
 
   | GAE
 
-  use UAT generated above to perform the query:
+  use UAT generated above to get short-lived PAT:
 
   ```
   UAT scopes: manage_pages,read_page_mailboxes

@@ -63,6 +63,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - add PureVPN service:
 
   <https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>
+
 - application icons in Dock:
   - Finder
   - App Store

@@ -130,6 +130,10 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 System Preferences
 ------------------
 
+### General
+
+- [x] Automatically hide and show the menu bar
+
 ### Dock
 
 - Position on screen: Right

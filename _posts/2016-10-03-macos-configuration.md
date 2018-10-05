@@ -131,7 +131,7 @@ System Preferences
 
 ### General
 
-- [x] Automatically hide and show the menu bar
+- [ ] Automatically hide and show the menu bar
 
 ### Dock
 

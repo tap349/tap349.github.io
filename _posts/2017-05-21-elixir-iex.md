@@ -39,8 +39,11 @@ IEx loads the 1st file it finds:
 - _$PWD/.iex.exs_
 - _$HOME/.iex.exs_
 
-=> each project can have its own _.iex.exs_ with local
-   aliases that don't pollute global namespace.
+=> each project can have its own _.iex.exs_ with local aliases
+that don't pollute global namespace.
+
+=> IEx configs are not merged: if current project has its own
+_.iex.exs_, user-wide config _~/.iex.exs_ is not read.
 
 ### aliases
 
@@ -235,4 +238,35 @@ for strings and char lists (defaults to 4096 bytes):
 
 ```elixir
 iex> IO.inspect(list, printable_limit: :infinity)
+```
+
+force display a list of integers
+--------------------------------
+
+1. <https://github.com/elixir-lang/elixir/wiki/FAQ#4-why-is-my-list-of-integers-printed-as-a-string>
+2. <https://www.theguild.nl/print-list-of-integers-as-integers-in-iex/>
+
+```elixir
+# in fact any value passed to `charlists` option
+# except for `as_charlists` acts as `as_lists`
+inspect [27, 35, 51], charlists: :as_lists
+# => "[27, 35, 51]" (string)
+inspect [27, 35, 51], charlists: :as_charlists
+# => "'\\e#3'" (string)
+
+# add any non-printable character - 0 is usually added
+[27, 35, 51] ++ [0]
+# => [27, 35, 51, 0] (list)
+
+IEx.configure(inspect: [charlists: :as_lists])
+[27, 35, 51]
+# => [27, 35, 51] (list)
+```
+
+or else it's possible to configure IEx in its config file:
+
+```elixir
+# ~/.iex.exs
+
+IEx.configure(inspect: [charlists: :as_lists])
 ```

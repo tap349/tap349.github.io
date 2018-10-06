@@ -162,7 +162,7 @@ get result of last evaluated expression (same as `_` in pry)
 
 1. <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
-```
+```elixir
 iex> 123
 123
 iex> v()
@@ -179,7 +179,7 @@ cancel multiline command
 1. <https://stackoverflow.com/questions/27591417>
 2. <https://hexdocs.pm/iex/1.0.5/IEx.html>
 
-```
+```elixir
 iex> foo =
 ...> #iex:break
 ```
@@ -200,13 +200,13 @@ recompile current Mix application (same as `reload!` in pry)
 
 1. <http://stackoverflow.com/a/36494891/3632318>
 
-```
+```elixir
 iex> recompile()
 ```
 
 also it's possible to recompile specific module:
 
-```
+```elixir
 iex> r(Foo.Bar)
 ```
 
@@ -217,7 +217,7 @@ suppress long output (same as `;` in pry)
 
 add another expression at the end of the line after semicolon:
 
-```
+```elixir
 iex> Foo.bar(); 0
 0
 ```
@@ -246,24 +246,44 @@ force display a list of integers
 1. <https://github.com/elixir-lang/elixir/wiki/FAQ#4-why-is-my-list-of-integers-printed-as-a-string>
 2. <https://www.theguild.nl/print-list-of-integers-as-integers-in-iex/>
 
+see also [Elixir]({% post_url 2016-12-31-elixir %}) post (`character lists`
+section) for ways to print charlist as a collection of codepoints.
+
+### set `charlists` inspect option
+
+1. <https://hexdocs.pm/elixir/Inspect.Opts.html>
+
+NOTE: `Kernel.inspect/2` always returns a string.
+
 ```elixir
-# in fact any value passed to `charlists` option
-# except for `as_charlists` acts as `as_lists`
-inspect [27, 35, 51], charlists: :as_lists
-# => "[27, 35, 51]" (string)
-inspect [27, 35, 51], charlists: :as_charlists
-# => "'\\e#3'" (string)
-
-# add any non-printable character - 0 is usually added
-[27, 35, 51] ++ [0]
-# => [27, 35, 51, 0] (list)
-
-IEx.configure(inspect: [charlists: :as_lists])
-[27, 35, 51]
-# => [27, 35, 51] (list)
+# in fact any value passed to `charlists` option except
+# for `as_charlists` acts as `as_lists`:
+iex> inspect [27, 35, 51], charlists: :as_lists
+"[27, 35, 51]"
+iex> inspect [27, 35, 51], charlists: :as_charlists
+"'\\e#3'"
 ```
 
-or else it's possible to configure IEx in its config file:
+### add any non-printable character
+
+`0` is usually added:
+
+```elixir
+iex> [27, 35, 51] ++ [0]
+[27, 35, 51, 0]
+```
+
+### configure `inspect` option provided by IEx
+
+1. <https://hexdocs.pm/iex/IEx.html#configure/1-inspect>
+
+```elixir
+iex> IEx.configure(inspect: [charlists: :as_lists])
+iex> [27, 35, 51]
+[27, 35, 51]
+```
+
+or else it can be set in IEx config file:
 
 ```elixir
 # ~/.iex.exs
@@ -271,5 +291,5 @@ or else it's possible to configure IEx in its config file:
 IEx.configure(inspect: [charlists: :as_lists])
 ```
 
-see also [Elixir]({% post_url 2016-12-31-elixir %}) post (`character lists`
-section) for ways to print charlist as a collection of codepoints.
+this option will be respected by `IO.inspect/2` and by the shell when
+printing results of expression evaluation - but not by `Kernel.inspect/2`.

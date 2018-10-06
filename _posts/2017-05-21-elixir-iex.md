@@ -234,7 +234,7 @@ for collections (defaults to 50 items):
 iex> IO.inspect(list, limit: :infinity)
 ```
 
-for strings and char lists (defaults to 4096 bytes):
+for strings and charlists (defaults to 4096 bytes):
 
 ```elixir
 iex> IO.inspect(list, printable_limit: :infinity)
@@ -270,3 +270,6 @@ or else it's possible to configure IEx in its config file:
 
 IEx.configure(inspect: [charlists: :as_lists])
 ```
+
+see also [Elixir]({% post_url 2016-12-31-elixir %}) post (`character lists`
+section) for ways to print charlist as a collection of codepoints.

@@ -16,13 +16,13 @@ categories: [safari]
 can't access ~/Library/Safari/
 ------------------------------
 
-I can neither cd to this directory nor list its files even though I'm the owner
-and permissions seem to be okay (755). using `sudo` doesn't help.
+I can neither cd to this directory nor list its files even though I am the
+owner and permissions seem to be okay (755) - I keep on getting `Operation
+not permitted` error even when using `sudo`.
 
 **solution**
 
-for some strange reason this directory can be accessed with Finder application
-only.
+for some strange reason this directory can be accessed with Finder app only.
 
 history entry can't be deleted
 ------------------------------

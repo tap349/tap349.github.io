@@ -68,8 +68,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Finder
   - App Store
   - System Preferences
-  - Opera
-  - Google Chrome
+  - Safari
   - MacVim
   - iTerm2
   - Telegram Desktop

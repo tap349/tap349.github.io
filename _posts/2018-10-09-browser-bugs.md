@@ -25,7 +25,7 @@ Yandex (18.9.0)
 - huge memory footprint compared to Opera or Vivaldi
 - `Find on current page` search works with a delay - not instantaneously
   like in most other browsers (Google Chrome or Opera)
-- background changes color to gray when address bar is focused - I know
+- background color is changed to gray when address bar is focused - I know
   it's by design but still it seems to me very distracting
 
 Vivaldi (2.0.1309.37)

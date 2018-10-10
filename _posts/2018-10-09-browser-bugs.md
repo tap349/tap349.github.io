@@ -36,4 +36,4 @@ but still:
 
 - when you start typing in address bar, you are presented with a list of
   suggestions but it's impossible to navigate between them with familiar
-  `<C-p>`/`<C-n>` Emacs shortcuts - only with arrows
+  `<C-p>`/`<C-n>` Emacs shortcuts - only with arrows (just like in FF)

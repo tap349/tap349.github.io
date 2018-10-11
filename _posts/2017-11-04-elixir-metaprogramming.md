@@ -22,6 +22,7 @@ categories: [elixir]
 
 1. <https://medium.com/@andreichernykh/elixir-a-bit-about-macros-behaviours-84fd3de1595d>
 2. <https://dockyard.com/blog/2017/12/07/macro-madness-how-to-use-use-well>
+3. <http://tech.honestbee.com/articles/elixir/2017-04/enums-in-elixir-ecto>
 
 quoted expressions
 ------------------

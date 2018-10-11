@@ -87,6 +87,13 @@ style guide
 
 ### (how to) name tests
 
+comparison with RSpec:
+
+- `describe` (ExUnit) == `describe` or `context` (RSpec)
+- `test` (ExUnit) == `context` + `it` (RSpec)
+
+`test` messages:
+
 - `test doing smth` → `do smth`
 
   it's like you continue the phrase starting with `test` and
@@ -98,7 +105,7 @@ style guide
   end
   ```
 
-- `test that smb/smth is/does` → `smb/smth is/does`
+- `test that smb/smth is/does smb/smth` → `smb/smth is/does smb/smth`
 
   ```elixir
   # test that user is admin now =>
@@ -110,7 +117,7 @@ style guide
   end
   ```
 
-- `it does smth` → `does smth`
+- `test that function does smth` → `does smth`
 
   this naming convention is adopted in RSpec since tests are starting
   with `it` there.

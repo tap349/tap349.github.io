@@ -288,3 +288,29 @@ conn = get(conn, webhook_path(conn, :show), %{"hub.mode" => "subscribe"})
 # or
 conn = get(conn, webhook_path(conn, :show), ["hub.mode": "subscribe"])
 ```
+
+### (how to) mock environment in tests
+
+first it's necessary to store environment in config if you are going
+to use it in your code since Mix is not available in production - see
+[Elixir - Tips]({% post_url 2017-07-14-elixir-tips %}).
+
+```elixir
+# lib/lain/foo.ex
+
+# don't store this value in module attribute if it's necessary
+# to mock env in tests - it must be calculated at runtime then
+if Application.get_env(:lain, :env) == :prod do
+  # production expression
+else
+  # non-production expression
+end
+```
+
+```elixir
+# test/lain/foo_test.exs
+
+setup do
+  Application.put_env(:lain, :env, :prod)
+end
+```

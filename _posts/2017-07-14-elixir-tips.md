@@ -142,6 +142,8 @@ iex> """
 > compiled releases (built using Exrm/Distillery) or when Mix just isn't
 > available.
 
+=> store environment in config since Mix is not available in production:
+
 ```elixir
 # config/config.exs
 

@@ -138,9 +138,9 @@ iex> """
 
 > <https://stackoverflow.com/a/44747870>
 >
-> Mix.env doesn't work in production or other environments where you
-> use compiled releases (built using Exrm / Distillery) or when Mix
-> just isn't available.
+> Mix.env doesn't work in production or other environments where you use
+> compiled releases (built using Exrm/Distillery) or when Mix just isn't
+> available.
 
 ```elixir
 # config/config.exs

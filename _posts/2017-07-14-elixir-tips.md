@@ -132,3 +132,27 @@ iex> """
 ...> """
 "foo bar"
 ```
+
+(how to) get current environment in production
+----------------------------------------------
+
+> <https://stackoverflow.com/a/44747870>
+>
+> Mix.env doesn't work in production or other environments where you
+> use compiled releases (built using Exrm / Distillery) or when Mix
+> just isn't available.
+
+```elixir
+# config/config.exs
+
+# General application configuration
+config :lain,
+  env: Mix.env(),
+  ecto_repos: [Lain.Repo]
+```
+
+```elixir
+defmodule Lain.Foo do
+  @env Application.get_env(:lain, :env)
+end
+```

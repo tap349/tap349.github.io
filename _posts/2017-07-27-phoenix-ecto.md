@@ -591,3 +591,37 @@ defmodule Sample.App do
   end
 end
 ```
+
+jsonb
+-----
+
+### default value
+
+default value can be set in either migration or schema or both -
+I prefer to set default value in migration only.
+
+- migration
+
+  it's necessary to use a string "{}" as default value - this default
+  value must be passed as is to PostgreSQL (it treats `%{}` as NULL).
+
+  ```elixir
+  # priv/repo/migrations/20181012131944_create_events.exs
+
+  create table(:events) do
+    # https://elixirforum.com/t/5899/4
+    add :data, :map, null: false, default: "{}"
+  end
+  ```
+
+- schema
+
+  note that it's necessary to use a map `%{}` unlike in migration:
+
+  ```elixir
+  # lib/lain/log/event/event.ex
+
+  schema "events" do
+    field :data, :map, default: %{}
+  end
+  ```

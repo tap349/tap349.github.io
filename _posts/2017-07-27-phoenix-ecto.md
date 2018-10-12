@@ -595,9 +595,8 @@ end
 jsonb
 -----
 
-1. <https://hexdocs.pm/ecto/Ecto.Schema.html#module-primitive-types>
-
-use `map` Ecto type for jsonb fields.
+use `map` Ecto type for jsonb fields (see links in `primitive column types`
+section above).
 
 ### default value
 

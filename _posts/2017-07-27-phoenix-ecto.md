@@ -595,6 +595,10 @@ end
 jsonb
 -----
 
+1. <https://hexdocs.pm/ecto/Ecto.Schema.html#module-primitive-types>
+
+use `map` Ecto type for jsonb fields.
+
 ### default value
 
 default value can be set in either migration or schema or both -

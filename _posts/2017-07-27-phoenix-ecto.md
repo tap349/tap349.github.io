@@ -43,8 +43,10 @@ $ mix ecto.rollback
 NOTE: there is nothing like _schema.rb_ file in Phoenix project -
       database schema is not dumped to file after running migrations.
 
-primitive column types that can be used in migrations:
-[Types and casting](https://hexdocs.pm/ecto/Ecto.Schema.html#module-types-and-casting).
+### primitive column types
+
+1. <https://hexdocs.pm/ecto/Ecto.Schema.html#module-types-and-casting>
+2. <https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Schema.html#module-attributes>
 
 repositories
 ------------
@@ -76,7 +78,7 @@ def changeset(%User{} = user, attrs) do
 end
 ```
 
-`cast/3` also casts parameters to types defined in schema.
+`cast/3` permits and casts parameters to types defined in schema.
 
 if you communicate with `Repo` directly by passing `User` struct instead
 of changeset all validations defined in changeset are bypassed of course -
@@ -89,8 +91,8 @@ associations
 
 1. <http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/>
 
-prefer defining associations to specifying FK columns in schema
-definitions (or else you won't be able to use them in queries):
+prefer defining associations to specifying FK columns in schema definitions
+(or else you won't be able to use them in queries):
 
 ```elixir
 schema "cards" do
@@ -113,7 +115,7 @@ associations can be preloaded in:
 - in query when loading parent struct:
 
   ```elixir
-  Repo.all from p in Post, preload: [:comments]
+  Repo.all(from p in Post, preload: [:comments])
   ```
 
 - a posteriori after loading parent struct:
@@ -153,10 +155,10 @@ associations can be loaded in:
 - when using `cast_assoc`:
 
   you specify the name of association that is expected to be created alongside
-  its parent (this name is also used to retrieve association params from supplied
+  its parent - this name is also used to fetch association params from supplied
   `params`) - like when using `accepts_nested_attributes_for` in Rails.
 
-though in both cases corresponding association must be preloaded so that
+however in both cases corresponding association must be preloaded so that
 Ecto knows what to do in case it already exists (of course it only makes
 sense when parent has `id` field - but it doesn't raise error otherwise).
 

@@ -17,9 +17,9 @@ categories: [elixir]
 2. <http://nsomar.com/elixir-enumerated-types/>
 
 ```elixir
-# lib/lain/enumerated_type.ex
+# lib/lain/enum_type.ex
 
-defmodule EnumeratedType do
+defmodule EnumType do
   defmacro __using__(values) do
     quote do
       def get(value) when value in unquote(values) do
@@ -35,15 +35,24 @@ end
 ```
 
 ```elixir
-# lib/lain/api/jira/enum/project_key.ex
+# lib/lain/enums.ex
 
-defmodule Lain.API.Jira.Enum.ProjectKey do
-  use EnumeratedType, ["CC", "AC", "DEV", "PROD"]
+defmodule Lain.Enums do
+  defmodule API.Jira do
+    defmodule ProjectKey do
+      use EnumType, ~w(
+        CC
+        AC
+        DEV
+        PROD
+      )
+    end
+  end
 end
 ```
 
 usage:
 
 ```elixir
-Lain.API.Jira.Enum.ProjectKey.get("DEV")
+Lain.Enums.API.Jira.ProjectKey.get("DEV")
 ```

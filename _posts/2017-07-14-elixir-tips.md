@@ -32,8 +32,8 @@ such function (modules are stateless).
 
 if some functions inside `User` module can be grouped further it's possible to
 create another module (= namespace) that is nested inside `User` (but usually
-stored in a separate file in _user/_ directory) - say, `User.Authorization` module.
-and so on and on...
+stored in a separate file in _user/_ directory) - `User.Authorization` module
+for example. and so on and on...
 
 that is why IMO Elixir modules tend to be bigger than Ruby classes.
 
@@ -72,10 +72,21 @@ still it makes sense to extract complex operations (which might have private
 helper functions) into their own modules (services, operations) within schema
 namespace - just like when not using CQRS approach. these operations can use
 different schema loaders and mutators and can be added to context interface.
-for example, these operations can be placed inside `ops` namespace.
+for example, these operations can be placed inside `operations` namespace.
 
 alternatively complex operations might be implemented as context functions
 if they are just a sequence of calls to corresponding loaders and mutators.
+
+### singular vs. plural namespace names
+
+> <https://softwareengineering.stackexchange.com/a/75929>
+>
+> Use the plural for packages with homogeneous contents and the singular for
+> packages with heterogeneous contents.
+
+I tend to use plural names when namespace is used to group related modules by
+function (`operations`, `serializers`, `workers`, etc.) and singular names when
+it's used to group modules by their domain (say, schema or context namespace).
 
 (how to) convert struct <-> map
 -------------------------------

@@ -90,9 +90,9 @@ style guide
 comparison with RSpec:
 
 - `describe` (ExUnit) == `describe` or `context` (RSpec)
-- `test` (ExUnit) == `context` + `it` (RSpec)
+- `test` (ExUnit) == `it` + `context` (RSpec)
 
-`test` messages:
+`test` message variants (`human message` → `test message`):
 
 - `test doing smth` → `do smth`
 
@@ -127,6 +127,17 @@ comparison with RSpec:
   test "converts string to integer" do
   end
   ```
+
+  this variant is commonly used when test is wrapped in `describe` block:
+
+  ```elixir
+  describe "to_integer/2" do
+    # to_integer/2 converts string to integer
+    test "converts string to integer" do
+    end
+  end
+  ```
+
 
 tips
 ----

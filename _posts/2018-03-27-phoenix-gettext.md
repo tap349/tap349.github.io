@@ -55,7 +55,8 @@ static vs. dynamic translations
 > having to manually add translations to POT files when they’re added to the
 > source code).
 
-=> use macros for static translations, use functions for dynamic ones.
+=> use macros for static translations in templates, use functions for dynamic
+translations or outside templates.
 
 static translations
 -------------------

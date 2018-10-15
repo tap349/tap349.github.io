@@ -34,8 +34,7 @@ configuration
 ```elixir
 # config/config.exs
 
-config :billing, BillingWeb.Gettext,
-  default_locale: "ru"
+config :billing, Billing.Gettext, default_locale: "ru"
 ```
 
 static vs. dynamic translations

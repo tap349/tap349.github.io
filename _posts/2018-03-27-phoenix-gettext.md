@@ -250,6 +250,30 @@ def human_api_error(api_error_enum) do
 end
 ```
 
+interpolation
+-------------
+
+1. <https://hexdocs.pm/gettext/Gettext.html#module-interpolation>
+
+```po
+# priv/gettext/default.pot
+
+msgid "jira.need_chat.summary"
+msgstr ""
+```
+
+```po
+# priv/gettext/en/LC_MESSAGES/default.po
+
+msgid "jira.need_chat.summary"
+msgstr "Continue chat with %{user_name}"
+```
+
+```elixir
+Gettext.gettext(LainWeb.Gettext, "jira.need_chat.summary", user_name: "John")
+# => "Continue chat with John"
+```
+
 tips
 ----
 

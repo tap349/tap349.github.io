@@ -24,3 +24,41 @@ with attributes - say, when you create a map of attributes by yourself or in
 changeset functions inside schema modules.
 
 NOTE: in Phoenix and Ecto docs they now use `params` everywhere.
+
+***UPDATE***
+
+<https://hexdocs.pm/phoenix/ecto.html#the-schema>:
+
+```elixir
+def changeset(%User{} = user, attrs) do
+  user
+  |> cast(attrs, [:name, :email, :bio, :number_of_pets])
+  |> validate_required([:name, :email, :bio, :number_of_pets])
+end
+```
+
+<https://hexdocs.pm/ecto/Ecto.Schema.html#many_to_many/3-join-schema-example>:
+
+```elixir
+def changeset(struct, params \\ %{}) do
+  struct
+  |> Ecto.Changeset.cast(params, [:user_id, :organization_id])
+  |> Ecto.Changeset.validate_required([:user_id, :organization_id])
+  # Maybe do some counter caching here!
+end
+```
+
+<https://hexdocs.pm/ecto/Ecto.Changeset.html>:
+
+```elixir
+def changeset(user, params \\ %{}) do
+  user
+  |> cast(params, [:name, :email, :age])
+  |> validate_required([:name, :email])
+  |> validate_format(:email, ~r/@/)
+  |> validate_inclusion(:age, 18..100)
+  |> unique_constraint(:email)
+end
+```
+
+=> in most cases `params` are used.

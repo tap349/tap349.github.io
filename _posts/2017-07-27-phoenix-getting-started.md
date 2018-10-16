@@ -133,6 +133,12 @@ setup database
 $ mix ecto.create && MIX_ENV=test mix ecto.create
 ```
 
+### drop database
+
+```sh
+$ mix ecto.drop && MIX_ENV=test mix ecto.drop
+```
+
 start app
 ---------
 

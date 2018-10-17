@@ -131,6 +131,7 @@ System Preferences
 ### General
 
 - [ ] Automatically hide and show the menu bar
+- Default web browser: Google Chrome
 
 ### Dock
 

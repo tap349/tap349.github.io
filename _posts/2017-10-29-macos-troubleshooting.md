@@ -86,11 +86,9 @@ and because it introduces significant and annoying delay when pasting):
 tab navigation doesn't work
 ---------------------------
 
-OS-wide tab navigation shorcuts (`<D-S-[>`, `<D-S-[>`) no longer work
-after upgrading:
-
-- Google Chrome: → 69.0.3497.100
-- macOS: 10.13.5 → 10.13.6
+OS-wide tab navigation shorcuts (`<D-S-[>`, `<D-S-[>`) no longer work after
+upgrading Google Chrome to 69.0.3497.100 and only when using Dvorak keyboard
+layout - it's like okay again after switching to Qwerty.
 
 **solution**
 
@@ -104,4 +102,7 @@ add these shortcuts:
   - Select Previous Tab: `<D-S-[>`
   - Select Next Tab: `<D-S-[>`
 
-or else use some Chrome extension like Vimium or cVim.
+***UPDATE***
+
+this issue is fixed in Google Chrome 70.0.3538.67 - it's possible to remove
+custom shortcuts now.

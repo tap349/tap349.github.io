@@ -628,3 +628,16 @@ I prefer to set default value in migration only.
     field :data, :map, default: %{}
   end
   ```
+
+upsert
+------
+
+1. <https://hexdocs.pm/ecto/Ecto.Repo.html#c:insert/2-upserts>
+2. <https://github.com/elixir-ecto/ecto/issues/2181>
+
+> Upsert will not change ID primary key of already existing rows, just
+> update other fields.
+>
+> We should replace all except the primary key.
+
+=> upsert replaces all fields except for ID (including inserted_at)!

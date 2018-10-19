@@ -69,6 +69,22 @@ Task
 1. <https://hexdocs.pm/elixir/Task.html>
 2. <https://gist.github.com/moklett/d30fc2dbaf71f3b978da115f8a5f8387>
 
+in general it's always better to start supervised tasks:
+
+> <https://elixirforum.com/t/when-are-agent-and-task-supervisor-useful/896/4>
+>
+> A frequently overlooked but important role of supervisors is proper cleanup
+> of processes. When a supervisor terminates, all of it’s descendants will be
+> taken down as well.
+>
+> Therefore every process in your system should reside in the supervision
+> tree, even if you don’t want to restart them. In such cases you can use
+> the temporary restart strategy which is the default for Task.Supervisor.
+>
+> Except for some temporary experiments I wouldn’t advise using Task.start
+> (or GenServer.start) in production as that may lead to dangling processes
+> which may in turn cause some strange behaviour of the system.
+
 - with linking caller to the task
 
   <https://hexdocs.pm/elixir/Task.html#module-async-and-await>:

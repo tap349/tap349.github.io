@@ -326,14 +326,18 @@ setup do
 end
 ```
 
-### (how to) test without starting application and specific deps
+### (how to) test without starting your application and certain deps
 
-1. <https://virviil.github.io/2016/10/26/elixir-testing-without-starting-supervision-tree/>
+1. <https://virviil.github.io/2016/10/26/elixir-testing-without-starting-supervision-tree>
 2. <https://elixirforum.com/t/ecto-starting-in-test-environment/1205/6>
 3. <https://hexdocs.pm/ecto/Ecto.Repo.html#c:start_link/1>
 4. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:start_link/0>
 
-don't start application when running tests:
+it's meant to make `mix test` run faster thanks to not starting certain
+deps which take a lot of time to start (say, `quantum`).
+
+don't start your application and deps (which are applications too) when
+running tests:
 
 ```sh
 $ mix help test
@@ -353,8 +357,7 @@ $ mix help test
   end
 ```
 
-start specific applications along with `Repo` and `Endpoint` supervisors
-manually in _test_helper.exs_:
+start certain deps along with `Repo` and `Endpoint` supervisors manually:
 
 ```elixir
 # test/test_helper.exs

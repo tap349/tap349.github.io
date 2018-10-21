@@ -325,3 +325,68 @@ setup do
   Application.put_env(:lain, :env, :prod)
 end
 ```
+
+### (how to) test without starting application and specific deps
+
+1. <https://virviil.github.io/2016/10/26/elixir-testing-without-starting-supervision-tree/>
+2. <https://elixirforum.com/t/ecto-starting-in-test-environment/1205/6>
+3. <https://hexdocs.pm/ecto/Ecto.Repo.html#c:start_link/1>
+4. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#c:start_link/0>
+
+don't start application when running tests:
+
+```sh
+$ mix help test
+...
+--no-start - does not start applications after compilation
+```
+
+```diff
+# mix.exs
+  defp aliases do
+    [
+      # ...
+-     test: ["ecto.create --quiet", "ecto.migrate", "test"],
++     test: ["ecto.create --quiet", "ecto.migrate", "test --no-start"],
+      # ...
+    ]
+  end
+```
+
+start specific applications along with `Repo` and `Endpoint` supervisors
+manually in _test_helper.exs_:
+
+```elixir
+# test/test_helper.exs
+
+# load application first to get access to its spec:
+#
+# > https://hexdocs.pm/elixir/Application.html#spec/1
+# >
+# > Returns nil if the application is not loaded.
+Application.load(:lain)
+
+not_started_apps = ~w(
+  distillery
+  observer_cli
+  phoenix_live_reload
+  quantum
+)a
+
+for app <- Application.spec(:lain, :applications),
+    app not in not_started_apps do
+  Application.ensure_all_started(app)
+end
+
+# for Phoenix application only
+#
+# > https://elixirforum.com/t/ecto-starting-in-test-environment/1205/6
+# >
+# > Calling Repo.start_link in test_helper.exs is the correct approach.
+Lain.Repo.start_link()
+LainWeb.Endpoint.start_link()
+
+ExUnit.start()
+
+Ecto.Adapters.SQL.Sandbox.mode(Lain.Repo, :manual)
+```

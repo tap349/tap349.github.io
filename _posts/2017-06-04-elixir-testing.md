@@ -399,7 +399,7 @@ Ecto.Adapters.SQL.Sandbox.mode(Lain.Repo, :manual)
 
 1. <https://stackoverflow.com/questions/42236123>
 
-log level to `debug` in test environment:
+set log level to `debug` in test environment:
 
 ```diff
   # config/test.exs

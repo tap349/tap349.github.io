@@ -394,3 +394,16 @@ ExUnit.start()
 
 Ecto.Adapters.SQL.Sandbox.mode(Lain.Repo, :manual)
 ```
+
+### (how to) print query SQL in logs
+
+1. <https://stackoverflow.com/questions/42236123>
+
+log level to `debug` in test environment:
+
+```diff
+  # config/test.exs
+
+- config :logger, level: :warn
++ config :logger, level: :debug
+```

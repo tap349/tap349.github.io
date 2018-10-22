@@ -371,7 +371,6 @@ Application.load(:lain)
 
 not_started_apps = ~w(
   distillery
-  elixir_google_spreadsheets
   observer_cli
   phoenix_live_reload
   quantum

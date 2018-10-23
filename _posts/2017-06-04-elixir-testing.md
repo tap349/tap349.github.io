@@ -388,6 +388,8 @@ end
 # > Calling Repo.start_link in test_helper.exs is the correct approach.
 Lain.Repo.start_link()
 LainWeb.Endpoint.start_link()
+# https://hexdocs.pm/elixir/Task.Supervisor.html#start_link/1
+Task.Supervisor.start_link(name: Lain.TaskSupervisor)
 
 ExUnit.start()
 

@@ -38,12 +38,6 @@ notes
 > and by definition it cannot be the SomeDependency module because
 > it already exists.
 
-<https://github.com/plataformatec/mox/>:
-
-when using `Mox.stub` it's almost the same as just defining mock module
-except that we don't do it in our codebase polluting it with mock modules
-(usually Mox mocks are stubbed inside tests or in _test_helper.exs_).
-
 ### setup vs. setup_all
 
 `context` variable in `setup_all` doesn't have `test` key:
@@ -54,6 +48,18 @@ except that we don't do it in our codebase polluting it with mock modules
 
 this makes sense since `setup_all` is run before the whole suite -
 not before each test.
+
+### about `async: true`
+
+> <https://github.com/elixir-lang/elixir/issues/3580#issuecomment-130860923>
+>
+> Tests inside a test case are always run serially but whole cases can
+> run in parallel with other cases with `async: true`.
+
+=> test cases without `async: true` cannot be run in parallel with test
+cases with `async: true`.
+
+=> it's safe to use `set_mox_global/0` in cases without `async: true`.
 
 style guide
 -----------
@@ -85,7 +91,7 @@ style guide
 > same way you are not going to test how users with different attributes are
 > rendered. That's in the view test.
 
-### (how to) name tests
+### test names
 
 comparison with RSpec:
 
@@ -177,7 +183,7 @@ compilation paths by default.
 > basically wraps every test within a transaction in order to rollback
 > it after a test is finished. That helps to keep the test database clean.
 >
-> "Testing Schemas" guide does not recommend us to use async: true option
+> "Testing Schemas" guide does not recommend us to use `async: true` option
 > if we are going to interact with the database:
 >
 > > Note: We should not tag any schema case that interacts with a database

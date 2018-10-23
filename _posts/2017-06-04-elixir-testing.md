@@ -59,7 +59,7 @@ not before each test.
 => test cases without `async: true` cannot be run in parallel with test
 cases with `async: true`.
 
-=> it's safe to use `set_mox_global/0` in cases without `async: true`.
+=> it's safe to use `set_mox_global/1` in cases without `async: true`.
 
 style guide
 -----------

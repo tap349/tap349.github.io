@@ -38,30 +38,7 @@ notes
 > and by definition it cannot be the SomeDependency module because
 > it already exists.
 
-### setup vs. setup_all
-
-`context` variable in `setup_all` doesn't have `test` key:
-
-```elixir
-%{case: MyApp.FooTest, module: MyApp.FooTest}
-```
-
-this makes sense since `setup_all` is run before the whole suite -
-not before each test.
-
-### about `async: true`
-
-> <https://github.com/elixir-lang/elixir/issues/3580#issuecomment-130860923>
->
-> Tests inside a test case are always run serially but whole cases can
-> run in parallel with other cases with `async: true`.
-
-=> test cases without `async: true` cannot be run in parallel with test
-cases with `async: true`.
-
-=> it's safe to use `set_mox_global/1` in cases without `async: true`.
-
-### mocking HTTP APIs
+### external APIs
 
 > <https://github.com/plataformatec/mox/issues/9#issuecomment-423607089>
 >
@@ -69,12 +46,13 @@ cases with `async: true`.
 > domain. You are going to mock something like MyApp.TwitterClient.get_tweets
 > which internally calls HTTPoison.get! (or whatever else).
 
-=> mock API client - not HTTP client. say, `Lain.API.Google.Drive` instead of
-low-level `Lain.API.HTTPClient` which is used under the hood of the former.
+so it's necessary to mock application boundaries in tests (if they reach these
+boundaries of course), API clients are your application boundaries => mock API
+clients (not HTTP client) - say, `Lain.API.Google.Drive` rather than low-level
+`Lain.API.HTTPClient` which is used under the hood of the former.
 
-### testing HTTP APIs
-
-there are several options how to test API clients itself:
+at the same time it might be necessary to test API clients themselves - there
+are several ways to do it:
 
 - *[RECOMMENDED]* hit real endpoint
 
@@ -118,9 +96,34 @@ there are several options how to test API clients itself:
   use [Mox](https://github.com/plataformatec/mox), for example.
 
   HTTP client mock must be used for testing API clients only - use API client
-  mocks in all other tests (treat API clients as application boundaries).
+  mocks everywhere else.
 
-- `ExVCR`
+- record and replay HTTP interactions
+
+  use [ExVCR](https://github.com/parroty/exvcr) - it's the only option AFAIK.
+
+### setup vs. setup_all
+
+`context` variable in `setup_all` doesn't have `test` key:
+
+```elixir
+%{case: MyApp.FooTest, module: MyApp.FooTest}
+```
+
+this makes sense since `setup_all` is run before the whole suite -
+not before each test.
+
+### about `async: true`
+
+> <https://github.com/elixir-lang/elixir/issues/3580#issuecomment-130860923>
+>
+> Tests inside a test case are always run serially but whole cases can
+> run in parallel with other cases with `async: true`.
+
+=> test cases without `async: true` cannot be run in parallel with test
+cases with `async: true`.
+
+=> it's safe to use `set_mox_global/1` in cases without `async: true`.
 
 style guide
 -----------

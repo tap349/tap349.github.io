@@ -61,6 +61,67 @@ cases with `async: true`.
 
 => it's safe to use `set_mox_global/1` in cases without `async: true`.
 
+### mocking HTTP APIs
+
+> <https://github.com/plataformatec/mox/issues/9#issuecomment-423607089>
+>
+> The API you are going to mock is not HTTPoison.get! because that's not your
+> domain. You are going to mock something like MyApp.TwitterClient.get_tweets
+> which internally calls HTTPoison.get! (or whatever else).
+
+=> mock API client - not HTTP client. say, `Lain.API.Google.Drive` instead of
+low-level `Lain.API.HTTPClient` which is used under the hood of the former.
+
+### testing HTTP APIs
+
+there are several options how to test API clients itself:
+
+- *[RECOMMENDED]* hit real endpoint
+
+  > <http://blog.plataformatec.com.br/2015/10/mocks-and-explicit-contracts>
+  >
+  > Personally, I would test MyApp.Twitter.HTTP by directly reaching the
+  > Twitter API. We would run those tests only when needed in development
+  > and configure them as necessary in our build system. The @tag system
+  > in ExUnit provides conveniences to help us with that.
+
+  ```elixir
+  defmodule Lain.API.Google.DriveTest do
+    use ExUnit.Case, async: true
+
+    @moduletag :api
+  end
+  ```
+
+  don't run tests tagged `api` by default:
+
+  ```elixir
+  # test/test_helper.exs
+
+  ExUnit.configure(exclude: [:api])
+  ```
+
+  to include tests tagged `api`:
+
+  ```sh
+  $ mix test --include api
+  ```
+
+- emulate external API with dummy webserver
+
+  1. <https://pspdfkit.com/blog/2016/testing-http-apis-in-elixir>
+
+  use [bypass](https://github.com/pspdfkit-labs/bypass), for example.
+
+- use HTTP client mock
+
+  use [Mox](https://github.com/plataformatec/mox), for example.
+
+  HTTP client mock must be used for testing API clients only - use API client
+  mocks in all other tests (treat API clients as application boundaries).
+
+- `ExVCR`
+
 style guide
 -----------
 

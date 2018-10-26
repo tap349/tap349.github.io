@@ -46,12 +46,6 @@ common tasks
 
   updates dependency and writes updated version to _mix.lock_.
 
-tasks can also be batched:
-
-```sh
-$ mix do deps.get, compile
-```
-
 Phoenix tasks
 -------------
 
@@ -102,6 +96,21 @@ mix.exs
     ]
   end
   ```
+
+tips
+----
+
+### (how to) run multiple tasks at once
+
+```sh
+$ mix do deps.get, compile
+```
+
+which is equivalent to:
+
+```sh
+$ mix deps.get && mix compile
+```
 
 troubleshooting
 ---------------

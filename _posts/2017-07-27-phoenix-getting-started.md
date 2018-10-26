@@ -172,7 +172,7 @@ _mix.exs_:
 +     {:exconstructor, "~> 1.1.0"},
 +     {:httpoison, "~> 1.0"},
 +     {:jason, "~> 1.0"},
-+     {:phoenix_expug, "~> 0.1.1"},
++     {:phoenix_slime, "~> 0.10.0"},
 +     {:timex, "~> 3.1"}
     ]
   end

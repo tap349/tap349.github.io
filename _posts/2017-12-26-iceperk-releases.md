@@ -15,7 +15,7 @@ categories: [react-native]
 
 say, new release branch name is `release_3_16`.
 
-Github (part 1): merge into iceperk master branch
+GitHub (part 1): merge into iceperk master branch
 -------------------------------------------------
 
 NOTE: branches can be merged manually or via PR.
@@ -66,7 +66,7 @@ this is to make sure nothing is broken for old releases.
 or else it's possible to run sanity checks on real device using test
 build and production server.
 
-Github (part 2): merge into iceperkapp develop branch
+GitHub (part 2): merge into iceperkapp develop branch
 -----------------------------------------------------
 
 - [`iceperkapp`] merge `release_3_16` branch into `develop` branch
@@ -174,7 +174,7 @@ before building releases.
   - `Rollout percentage` (input): `100%` (it's `50%` by default)
   - `START ROLLOUT TO PRODUCTION` (button)
 
-Github (part 3): create iceperkapp release on Github
+GitHub (part 3): create iceperkapp release on GitHub
 ----------------------------------------------------
 
 this is done AFTER release is published in both stores and all seems
@@ -182,9 +182,9 @@ to be working okay:
 
 - [`iceperkapp`] merge `develop` branch into `master` branch
   - PR name: `Master (Release 3.16)`
-- [`iceperkapp`] create new release on Github
+- [`iceperkapp`] create new release on GitHub
 
-  | Github: `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab)
+  | GitHub: `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab)
 
   - `Tag version` (input + combobox): `3.16`
   - `Target` (combobox): `master`
@@ -300,7 +300,7 @@ it might also help to validate archive before uploading it to App Store
 (`Validate...` button) - this gives more meaningful error messages when
 archive is not valid.
 
-### Github release is created with a wrong target (branch)
+### GitHub release is created with a wrong target (branch)
 
 if you have accidentally published release with a wrong target (branch), you
 can't edit target afterwards (though you can edit, say, tag or release title).
@@ -310,16 +310,16 @@ but different target:
 
 - delete release
 
-  | Github: `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button)
+  | GitHub: `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button)
 
 - delete current tag
 
   1. <https://gist.github.com/mobilemind/7883996>
 
   you won't be able to create new release with this tag but different target
-  unless you remove this tag from Github.
+  unless you remove this tag from GitHub.
 
-  fetch changes (including new tag) from Github:
+  fetch changes (including new tag) from GitHub:
 
   ```sh
   $ git up

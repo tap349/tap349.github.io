@@ -24,9 +24,9 @@ be overriden in Bootleg config:
 config :version, "0.0.1"
 ```
 
-NOTE: version is used in both `build` and `deploy` tasks!
+NOTE: version is used in both `bootleg.build` and `bootleg.deploy` tasks!
 
-=> `deploy` task uses version to determine which release to deploy.
+=> `bootleg.deploy` task uses version to determine which release to deploy.
 
 ### rollback release
 

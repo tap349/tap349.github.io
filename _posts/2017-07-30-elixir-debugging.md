@@ -39,8 +39,31 @@ using `IEx.pry` (= `binding.pry` in Ruby)
 
 - finish pry session by calling `respawn()`
 
-NOTE: there are peculiarities when using pry in tests
-      (see [Elixir - Testing]({% post_url 2017-06-04-elixir-testing %})).
+### using `IEx.pry` in tests
+
+1. [Elixir - Testing]({% post_url 2017-06-04-elixir-testing %})
+
+### using `IEx.pry` in deps
+
+- add `IEx.pry` breakpoint
+
+  for example:
+
+  ```sh
+  $ vi deps/bootleg/lib/bootleg/ssh.ex
+  ```
+
+- compile dependency
+
+  ```sh
+  $ mix deps.compile bootleg
+  ```
+
+- run your application or relevant Mix task inside IEx
+
+  ```sh
+  $ \iex -S mix bootleg.build
+  ```
 
 debugging dependencies
 ----------------------

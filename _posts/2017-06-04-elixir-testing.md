@@ -318,9 +318,10 @@ $ mix test --trace
 
 ### (how to) use IEx.pry in tests
 
-1. <https://stackoverflow.com/a/34863997/3632318>
+1. [Elixir - Debugging]({% post_url 2017-07-30-elixir-debugging %})
+2. <https://stackoverflow.com/a/34863997/3632318>
 
-to make pry work in tests run `mix test` in IEx session:
+to make pry work in tests run `mix test` inside `iex` session:
 
 ```sh
 $ alias iex='iex -S mix'

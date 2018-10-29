@@ -13,28 +13,33 @@ categories: [elixir]
 {:toc}
 <hr>
 
+1. <https://elixir-lang.org/getting-started/debugging.html>
+
 using `IEx.pry` (= `binding.pry` in Ruby)
------------------------------------------
+-------------------------------------------
 
 1. <http://blog.plataformatec.com.br/2016/04/debugging-techniques-in-elixir-lang/>
 
-- add `IEx.pry` breakpoint
+- add `IEx.pry`
 
   ```elixir
   defmodule Foo do
     def bar do
       require IEx; IEx.pry
+      # rest of code
     end
   end
   ```
 
-- run your application inside IEx
+- run your application inside `iex` session
 
-  say, for Elixir app
-  (see [Elixir - Application]({% post_url 2017-09-24-elixir-application %})):
+  1. [Elixir - Application]({% post_url 2017-09-24-elixir-application %})
 
-  ```elixir
-  $ \iex -S mix run --no-halt
+  `IEx.pry` will be ignored if running outside `iex` session.
+
+  ```sh
+  $ \iex -S mix run --no-halt # Elixir application
+  $ \iex -S mix phx.server # Phoenix application
   ```
 
 - finish pry session by calling `respawn()`
@@ -45,7 +50,15 @@ using `IEx.pry` (= `binding.pry` in Ruby)
 
 ### using `IEx.pry` in deps
 
-- add `IEx.pry` breakpoint
+see the next section.
+
+debugging dependencies
+----------------------
+
+sometimes it might be necessary to debug external dependencies stored in
+_deps/_ directory.
+
+- modify source code or add `IEx.pry`
 
   for example:
 
@@ -59,23 +72,11 @@ using `IEx.pry` (= `binding.pry` in Ruby)
   $ mix deps.compile bootleg
   ```
 
-- run your application or relevant Mix task inside IEx
+- run your application or relevant Mix task inside `iex` session
 
   ```sh
   $ \iex -S mix bootleg.build
   ```
-
-debugging dependencies
-----------------------
-
-sometimes it might be necessary to debug or temporarily change external
-dependencies stored in _deps/_ directory:
-
-```sh
-$ mvim deps/detergentex/lib/detergentex.ex
-$ mix deps.compile detergentex
-$ mix -S iex
-```
 
 information about endpoint
 --------------------------

@@ -124,6 +124,29 @@ path or corresponding public key (both are shown in `ssh-add -L` output).
   2048 SHA256:iCeg1... /Users/tap/.ssh/id_rsa (RSA)
   ```
 
+- set up agent forwarding
+
+  > <https://www.ssh.com/ssh/agent#sec-SSH-Agent-Forwarding>
+  >
+  > Furthermore, the SSH protocol implements agent forwarding, a mechanism
+  > whereby an SSH client allows an SSH server to use the local ssh-agent on
+  > the server the user logs into, as if it was local there.
+  >
+  > When the user uses an SSH client on the server, the client will try to
+  > contact the agent implemented by the server, and the server then forwards
+  > the request to the client that originally contacted the server, which
+  > further forwards it to the local agent.
+
+  ```diff
+    # ~/.ssh/config
+
+    Host lain
+      User lain
+      Hostname 172.104.X.X
+      IdentityFile ~/.ssh/id_rsa
+  +   ForwardAgent yes
+  ```
+
 ### automatic setup
 
 1. <https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/ssh-agent>

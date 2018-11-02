@@ -555,7 +555,7 @@ ERROR:  While executing gem ... (TypeError)
 
 ### SSH
 
-- add RPI host record to _~/.ssh/config_ on local machine
+- add RPI host entry to _~/.ssh/config_ on local machine
 - login to RPI with login/password first
 - add your public RSA key to _~/.ssh/authorized_keys_ on RPI
 

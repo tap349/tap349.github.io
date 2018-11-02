@@ -14,9 +14,6 @@ categories: [ssh]
 <hr>
 
 <dl>
-  <dt>PKA</dt>
-  <dd>public key authentication</dd>
-
   <dt>authorized key</dt>
   <dd>public key permitted for logging in</dd>
 
@@ -30,18 +27,15 @@ categories: [ssh]
 2. <https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.foto100/pkauth.htm>
 3. <https://wiki.archlinux.org/index.php/SSH_keys>
 
-description
------------
+flow
+----
 
 > <https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.foto100/pkauth.htm>
 >
-> When the user logs in, ssh tells the server which key pair it would like
-> to use for authentication. The client proves that it has access to the
-> private key and the server checks that the corresponding public key is
-> authorized to accept the account.
-
-SSH agent
----------
+> When the user logs in, ssh tells the server which key pair it would like to
+> use for authentication. The client proves that it has access to the private
+> key and the server checks that the corresponding public key is authorized to
+> accept the account.
 
 > man 1 ssh-agent
 >
@@ -60,7 +54,8 @@ SSH client then asks SSH agent to provide this identity to authenticate
 login to remote server - AFAIU identity is identified either by its file
 path or corresponding public key (both are shown in `ssh-add -L` output).
 
-### manual setup
+manual setup
+------------
 
 - start SSH agent
 
@@ -110,18 +105,18 @@ path or corresponding public key (both are shown in `ssh-add -L` output).
 
 - list loaded identities
 
-  list public keys of all loaded identities:
-
-  ```sh
-  $ ssh-add -L
-  ssh-rsa AAAAB... /Users/tap/.ssh/id_rsa
-  ```
-
   list fingerprints of all loaded identities:
 
   ```sh
   $ ssh-add -l
   2048 SHA256:iCeg1... /Users/tap/.ssh/id_rsa (RSA)
+  ```
+
+  list public keys of all loaded identities:
+
+  ```sh
+  $ ssh-add -L
+  ssh-rsa AAAAB... /Users/tap/.ssh/id_rsa
   ```
 
 - set up agent forwarding
@@ -147,7 +142,8 @@ path or corresponding public key (both are shown in `ssh-add -L` output).
   +   ForwardAgent yes
   ```
 
-### automatic setup
+automatic setup
+---------------
 
 1. <https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/ssh-agent>
 

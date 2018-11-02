@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Chrome - Tips
+title: Google Chrome - Tips
 date: 2017-01-18 14:47:40 +0300
 access: public
 comments: true
@@ -36,7 +36,7 @@ $('div.phone')[0]
 
 ***UPDATE***
 
-this flag is no longer available in Chrome 69 (or maybe even 68).
+this flag is no longer available in Google Chrome 69 (or maybe even 68).
 
 (how to) return old-style tabs
 ------------------------------

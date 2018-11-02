@@ -83,8 +83,8 @@ and because it introduces significant and annoying delay when pasting):
   unset zle_bracketed_paste
   ```
 
-tab navigation doesn't work
----------------------------
+tab navigation doesn't work in Google Chrome
+--------------------------------------------
 
 OS-wide tab navigation shorcuts (`<D-S-[>`, `<D-S-[>`) no longer work after
 upgrading Google Chrome to 69.0.3497.100 and only when using Dvorak keyboard
@@ -106,3 +106,22 @@ add these shortcuts:
 
 this issue is fixed in Google Chrome 70.0.3538.67 - it's possible to remove
 custom shortcuts now.
+
+macOS won't display Wi-Fi login screen
+--------------------------------------
+
+I have the same problem on iPad too.
+
+**solution**
+
+1. <https://apple.stackexchange.com/questions/211430>
+
+the culprit is Google DNS servers: by default Wi-Fi network tries to use its
+own DNS servers to load login screen (which are accessible a priori). instead
+it's forced to use Google DNS servers (1.1.1.1 and 8.8.8.8) which are not yet
+available.
+
+solution is to remove Google DNS servers altogether (so that Wi-Fi network's
+default DNS servers are used). alternatively you might try to browse directly
+to login screen by <http://captive.apple.com/hotspot-detect.html> (it's said
+to work but I haven't tested).

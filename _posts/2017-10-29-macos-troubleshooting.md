@@ -118,10 +118,16 @@ I have the same problem on iPad too.
 
 the culprit is Google DNS servers: by default Wi-Fi network tries to use its
 own DNS servers to load login screen (which are accessible a priori). instead
-it's forced to use Google DNS servers (1.1.1.1 and 8.8.8.8) which are not yet
-available.
+in my case it's forced to use Google DNS servers (1.1.1.1 and 8.8.8.8) which
+are not yet available.
 
-solution is to remove Google DNS servers altogether (so that Wi-Fi network's
-default DNS servers are used). alternatively you might try to browse directly
-to login screen by <http://captive.apple.com/hotspot-detect.html> (it's said
-to work but I haven't tested).
+solution is to remove Google DNS servers altogether so that Wi-Fi network's
+default DNS servers are used.
+
+if it's all okay with DNS servers try to open:
+
+- magic URL <http://captive.apple.com/hotspot-detect.html>
+- Wi-Fi router admin panel (192.168.0.1, 192.168.1.1, etc.)
+- any site URL
+
+in all cases you should be redirected to Wi-Fi login screen.

@@ -636,8 +636,8 @@ upsert
 2. <https://github.com/elixir-ecto/ecto/issues/2181#issuecomment-324325516>
 3. <https://github.com/elixir-ecto/ecto/issues/2382>
 
-> Upsert will not change ID primary key of already existing rows, just
-> update other fields.
+> Upsert will not change ID primary key of already existing rows, just update
+> other fields.
 >
 > We should replace all except the primary key.
 
@@ -652,3 +652,6 @@ it's now possible to replace only certain fields in Ecto 3:
 ```elixir
 on_conflict: {:replace, [:foo, :bar, :baz]}
 ```
+
+when using this option `inserted_at` field is not updated. it's also necessary
+to list `updated_at` field explicitly for it to be updated.

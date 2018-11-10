@@ -157,8 +157,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 using `erlang-history` is no longer required
 (though I haven't found an easy way to uninstall it).
 
-get result of last evaluated expression (same as `_` in pry)
-------------------------------------------------------------
+get result of last evaluated expression (= `_` in pry)
+------------------------------------------------------
 
 1. <https://hexdocs.pm/iex/IEx.Helpers.html#v/1>
 
@@ -189,14 +189,20 @@ cancel reverse search
 
 1. <http://readline.kablamo.org/emacs.html>
 
-`<D-u><D-u>`
+- `<C-u><C-u>`
 
-the first `<D-u>` cancels reverse search but leaves found command if
-any (cursor is located at the end of the line), the second `<D-u>` deletes
-the line from current cursor position backwards to the start of the line.
+  the first `<C-u>` cancels reverse search but leaves found command if
+  any (cursor is located at the end of the line), the second `<C-u>` deletes
+  the line from current cursor position backwards to the start of the line.
 
-recompile current Mix application (same as `reload!` in pry)
-------------------------------------------------------------
+- `<M-Backspace>`
+
+  this a standard hotkey to delete previous word: the first `<M-Backspace>`
+  cancels reverse search but leaves found command if any (just like `<C-u>`),
+  subsequent presses delete previous words one by one.
+
+recompile current Mix application (= `reload!` in pry)
+------------------------------------------------------
 
 1. <http://stackoverflow.com/a/36494891/3632318>
 
@@ -210,8 +216,8 @@ also it's possible to recompile specific module:
 iex> r(Foo.Bar)
 ```
 
-suppress long output (same as `;` in pry)
------------------------------------------
+suppress long output (= `;` in pry)
+-----------------------------------
 
 1. <http://stackoverflow.com/a/39208906/3632318>
 

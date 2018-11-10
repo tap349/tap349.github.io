@@ -14,7 +14,7 @@ categories: [elixir]
 <hr>
 
 1. <http://tech.honestbee.com/articles/elixir/2017-04/enums-in-elixir-ecto>
-2. <http://nsomar.com/elixir-enumerated-types/>
+2. <http://nsomar.com/elixir-enumerated-types>
 
 ```elixir
 # lib/lain/enum_type.ex

@@ -13,6 +13,17 @@ categories: [gtd]
 {:toc}
 <hr>
 
+notes
+-----
+
+currently task description size is limited to 158 characters:
+
+```
+$ task
+...
+The report has a minimum width of 196 and does not fit in the available width of 158.
+```
+
 tips
 ----
 

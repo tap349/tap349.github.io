@@ -16,13 +16,24 @@ categories: [gtd]
 notes
 -----
 
-currently task description size is limited to 158 characters:
+### description field width
+
+description field width is about 90% of terminal width: say, terminal width
+is 158 characters, then description field width is 140 characters.
+
+taskwarrior calculates description field width using this formula (roughly):
 
 ```
-$ task
-...
-The report has a minimum width of 196 and does not fit in the available width of 158.
+max(MAX_LINE_LENGTH, 0.9 * TERMINAL_WIDTH)
 ```
+
+here `MAX_LINE_LENGTH` is calculated by splitting the whole description into
+words and finding the longest word. the point here is that only whitespaces
+are used as delimiters - not newlines. in this case if you have several long
+URLs each on its own line they are treated as a single very long word.
+
+and if `MAX_LINE_LENGTH` turns out to be greater than `0.9 * TERMINAL_WIDTH`
+report formatting is getting broken.
 
 tips
 ----

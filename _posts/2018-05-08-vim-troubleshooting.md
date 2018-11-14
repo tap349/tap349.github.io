@@ -167,7 +167,7 @@ all in all if folding is somehow broken, just reload file with `:e` command.
 poor performance of Vim in the terminal on macOS
 ------------------------------------------------
 
-scrolling, moving cursor around - everything seems to be very sluggish.
+scrolling, moving cursor around - everything feels very slow.
 
 **solution**
 
@@ -184,4 +184,4 @@ scrolling, moving cursor around - everything seems to be very sluggish.
 > SSH, this issue disappears. Actual throughput and rendering performance
 > are still better in Alacritty.
 
-P.S. MacVim's version of Vim (`mvim -v`) is a little bit faster.
+P.S. MacVim's version of Vim (`mvim -v`) runs a little bit faster.

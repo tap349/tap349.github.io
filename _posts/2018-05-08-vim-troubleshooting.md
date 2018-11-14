@@ -164,10 +164,10 @@ lines with equal indent don't form a fold - folding stops at blank line.
 
 all in all if folding is somehow broken, just reload file with `:e` command.
 
-performance issue with Vim in the terminal on macOS
----------------------------------------------------
+poor performance of Vim in the terminal on macOS
+------------------------------------------------
 
-inter alia, scrolling performance is very poor.
+scrolling, moving cursor around - everything seems to be very sluggish.
 
 **solution**
 

@@ -163,3 +163,25 @@ lines with equal indent don't form a fold - folding stops at blank line.
 > reopened, the shiftwidth=2 in .vimrc works and the fold works as expected.
 
 all in all if folding is somehow broken, just reload file with `:e` command.
+
+performance issue with Vim in the terminal on macOS
+---------------------------------------------------
+
+inter alia, scrolling performance is very poor.
+
+**solution**
+
+1. <https://superuser.com/questions/402448>
+
+> <https://github.com/jwilm/alacritty>
+>
+> macOS + tmux + vim is slow! I thought this was supposed to be fast!
+>
+> This appears to be an issue outside of terminal emulators; either macOS
+> has an IPC performance issue, or either tmux or vim (or both) have a bug.
+> This same issue can be seen in iTerm2 and Terminal.app. I've found that
+> if tmux is running on another machine which is connected to Alacritty via
+> SSH, this issue disappears. Actual throughput and rendering performance
+> are still better in Alacritty.
+
+P.S. MacVim's version of Vim (`mvim -v`) is a little bit faster.

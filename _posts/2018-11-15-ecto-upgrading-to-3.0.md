@@ -88,7 +88,7 @@ NOTE: setting `pool_size` in `MyApp.Repo` module has no effect.
   # config/dev.secret.exs
   # config/test.secret.exs
 
-  config :lain, Lain.Repo,
+  config :my_app, MyApp.Repo,
     # ...
     pool_size: 10
   ```
@@ -96,7 +96,7 @@ NOTE: setting `pool_size` in `MyApp.Repo` module has no effect.
   ```elixir
   # config/prod.secret.exs
 
-  config :lain, Lain.Repo,
+  config :my_app, MyApp.Repo,
     # ...
     pool_size: 15
   ```
@@ -111,7 +111,7 @@ NOTE: setting `pool_size` in `MyApp.Repo` module has no effect.
   this module is used to run migrations during deployment.
 
   ```diff
-    # lib/lain/release_tasks.ex
+    # lib/my_app/release_tasks.ex
 
     defp start_services do
       # ...
@@ -125,7 +125,21 @@ remove loggers from Repo config
 
 1. <https://github.com/elixir-ecto/ecto/issues/2793>
 
-`Ecto.Repo` has no `loggers` option any more.
+`loggers` option for `Ecto.Repo` is deprecated:
+
+```
+$ iex
+...
+warning: the :loggers configuration for MyApp.Repo is deprecated.
+
+  * To customize the log level, set log: :debug | :info | :warn | :error instead
+  * To disable logging, set log: false instead
+  * To hook into logging events, see the "Telemetry Events" section in Ecto.Repo docs
+
+  lib/ecto/repo/supervisor.ex:76: Ecto.Repo.Supervisor.compile_config/2
+  lib/my_app/repo.ex:2: (module)
+  ...
+```
 
 > <https://hexdocs.pm/ecto/Ecto.Repo.html#module-telemetry-events>
 >
@@ -149,7 +163,7 @@ to enable query logging in AppSignal back again:
 > in your application's start/2 function.
 
 ```diff
-  # lib/lain/application.ex
+  # lib/my_app/application.ex
 
   def start(_type, _args) do
     import Supervisor.Spec

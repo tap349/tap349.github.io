@@ -25,8 +25,7 @@ retrieving adapter from config files is deprecated.
 
   defmodule MyApp.Repo do
     use Ecto.Repo,
--     otp_app: :my_app
-+     otp_app: :my_app,
+      # ...
 +     adapter: Ecto.Adapters.Postgres
 ```
 

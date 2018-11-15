@@ -20,13 +20,13 @@ retrieving adapter from config files is deprecated.
 
 **solution**
 
-```diff
-  # lib/my_app/repo.ex
+```elixir
+# lib/my_app/repo.ex
 
-  defmodule MyApp.Repo do
-    use Ecto.Repo,
-      # ...
-+     adapter: Ecto.Adapters.Postgres
+defmodule MyApp.Repo do
+  use Ecto.Repo,
+    otp_app: :my_app,
+    adapter: Ecto.Adapters.Postgres
 ```
 
 increase connection pool size to at least 2

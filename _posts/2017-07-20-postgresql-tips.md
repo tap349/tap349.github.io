@@ -208,6 +208,12 @@ create:
 (remote)$ tar cvzf dump.sql.tar.gz dump.sql
 ```
 
+use `postgres` user when creating backup on macOS:
+
+```sh
+(local)$ pg_dump -h localhost -U postgres -aOf dump.sql sith_dev
+```
+
 restore:
 
 ```sh

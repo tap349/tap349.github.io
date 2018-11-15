@@ -125,6 +125,8 @@ remove loggers from Repo config
 
 1. <https://github.com/elixir-ecto/ecto/issues/2793>
 
+`Ecto.Repo` has no `loggers` option any more.
+
 > <https://hexdocs.pm/ecto/Ecto.Repo.html#module-telemetry-events>
 >
 > We recommend adapters to publish certain Telemetry events listed below.
@@ -160,6 +162,6 @@ to enable query logging in AppSignal back again:
 +     nil
 +   )
 
-    # ...
+    # start supervision tree
   end
 ```

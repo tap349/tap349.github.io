@@ -198,9 +198,9 @@ query optimization
 backup
 ------
 
-### using `pg_dump` (data only)
+### using `pg_dump`
 
-create:
+create backup with data only:
 
 ```sh
 (remote)$ mkdir ~/tmp && cd ~/tmp
@@ -208,7 +208,15 @@ create:
 (remote)$ tar cvzf dump.sql.tar.gz dump.sql
 ```
 
-use `postgres` user when creating backup on macOS:
+create backup with structure and data:
+
+```sh
+(remote)$ mkdir ~/tmp && cd ~/tmp
+(remote)$ pg_dump sith_prod > dump.sql
+(remote)$ tar cvzf dump.sql.tar.gz dump.sql
+```
+
+NOTE: use `postgres` user when creating backup on macOS:
 
 ```sh
 (local)$ pg_dump -h localhost -U postgres -aOf dump.sql sith_dev

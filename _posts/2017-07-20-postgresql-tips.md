@@ -337,13 +337,7 @@ Created database 'sith_test'
   $ DB_USER=postgres
   $ DB_NAME=sith_dev
   $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
-  ```
-
-  or else using `docker-compose`:
-
-  ```sh
-  $ DB_USER=postgres
-  $ DB_NAME=sith_dev
+  / or
   $ pg_dump -h localhost "${DB_NAME}" | docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}"
   ```
 
@@ -363,6 +357,8 @@ Created database 'sith_test'
   $ DB_USER=postgres
   $ DB_NAME=sith_dev
   $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -v ON_ERROR_STOP=1 -U "${DB_USER}" -d "${DB_NAME}"
+  / or
+  $ cat db/structure.sql | docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}"
   ```
 
   in case there are errors executing previous command:

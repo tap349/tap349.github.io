@@ -339,6 +339,14 @@ Created database 'sith_test'
   $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
   ```
 
+  or else using `docker-compose`:
+
+  ```sh
+  $ DB_USER=postgres
+  $ DB_NAME=sith_dev
+  $ pg_dump -h localhost "${DB_NAME}" | docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}"
+  ```
+
   load test database:
 
   ```sh

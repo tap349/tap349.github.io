@@ -486,3 +486,27 @@ set log level to `debug` in test environment:
 - config :logger, level: :warn
 + config :logger, level: :debug
 ```
+
+### (how to) test GenServer
+
+1. <https://blog.eq8.eu/til/exunit-wait-for-genserver-cast.html>
+
+the problem with testing GenServers is that we need to make sure some
+asynchronous message is processed - such message might be sent either
+from inside GenServer itself (for example, via `Process.send_after/3`
+when performing periodic work) or from outside via `GenServer.cast/2`.
+
+solution is to send this message and wait for it to be processed using
+`:sys.get_state/1` - in fact it's possible to use any synchronous call
+to this GenServer since all messages are processed sequentially one by
+one and once synchronous call returns all previous messages must have
+been already processed as well:
+
+```elixir
+{:ok, sync_worker_pid} = Lain.Chat.Label.Workers.Sync.start_link([])
+# send :work message to sync worker manually
+send(sync_worker_pid, :work)
+# wait till :work message is processed
+:synced = :sys.get_state(sync_worker_pid)
+# => worker is synced now
+```

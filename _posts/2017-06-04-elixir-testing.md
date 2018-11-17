@@ -13,6 +13,13 @@ categories: [elixir, testing]
 {:toc}
 <hr>
 
+<dl>
+  <dt>test case</dt>
+  <dd>test module</dd>
+</dl>
+
+<hr>
+
 ```sh
 $ mix test
 ```

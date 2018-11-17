@@ -452,6 +452,8 @@ for app <- Application.spec(:lain, :applications),
   Application.ensure_all_started(app)
 end
 
+# GenServer
+Lain.Chat.Label.Workers.Sync.start_link([])
 # for Phoenix application only
 #
 # > https://elixirforum.com/t/ecto-starting-in-test-environment/1205/6

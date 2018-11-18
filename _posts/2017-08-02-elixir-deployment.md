@@ -432,8 +432,8 @@ inter alia, generate config (_rel/config.exs_):
 $ mix release.init
 ```
 
-default generated config will do in most cases
-(unless you need to setup stage environment, for example).
+default generated config will do in most cases (unless you need to set up
+stage environment, for example).
 
 ### install and configure edeliver
 

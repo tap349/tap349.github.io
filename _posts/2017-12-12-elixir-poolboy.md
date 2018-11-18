@@ -7,7 +7,7 @@ comments: true
 categories: [elixir]
 ---
 
-sample steps to setup Poolboy worker pool.
+sample steps to set up Poolboy worker pool.
 
 <!-- more -->
 

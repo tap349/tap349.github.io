@@ -127,21 +127,8 @@ not before each test.
 > Tests inside a test case are always run serially but whole cases can
 > run in parallel with other cases with `async: true`.
 
-=> test cases without `async: true` cannot be run in parallel with test
+=> test cases without `async: true` are not run in parallel with test
 cases with `async: true`.
-
-it's safe to use `set_mox_global/1` in cases without `async: true`.
-it's always safe to use explicit allowances:
-
-```elixir
-# allow child process (GenServer process) to use expectations and
-# stubs defined in parent process (test process)
-setup do
-  MyApp.APIMock
-  |> stub(...)
-  |> allow(self(), gen_server_pid)
-end
-```
 
 style guide
 -----------
@@ -510,7 +497,7 @@ set log level to `debug` in test environment:
 + config :logger, level: :debug
 ```
 
-### (how to) test GenServer
+### (how to) test GenServers and modules using them
 
 1. <https://blog.eq8.eu/til/exunit-wait-for-genserver-cast.html>
 
@@ -521,28 +508,102 @@ when performing periodic work) or from outside via `GenServer.cast/2`.
 
 solution is to send this message and wait for it to be processed using
 `:sys.get_state/1` - in fact it's possible to use any synchronous call
-to this GenServer since all messages are processed sequentially one by
-one and once synchronous call returns all previous messages must have
-been already processed as well:
+to this GenServer since all messages are processed serially one by one
+and once synchronous call returns all previous messages must have been
+already processed as well:
 
 ```elixir
+setup do
+  {:ok, sync_worker_pid} = Lain.Chat.Label.Workers.Sync.start_link([])
+  # send :work message to sync worker manually
+  send(sync_worker_pid, :work)
+  # wait till :work message is processed
+  :synced = :sys.get_state(sync_worker_pid)
+  # => worker is synced now
+
+  :ok
+end
+```
+
+in case of internal messages used to initialize GenServer state (say,
+the first periodic message), it's possible to extract this setup into
+_test/test_helper.exs_:
+
+```elixir
+# -------------------------------------------------------------------
+# - start required workers from Lain.Application manually
+# - wait till they are ready
+# -------------------------------------------------------------------
+
+# also make sure `async: true` is not set in corresponding test
+# case since the same name (module name) would be used for all
+# workers (workers are named GenServers and their names must be
+# unique - attempt to start GenServer with the same name will
+# just return {:error, {:already_started, pid}})
 {:ok, sync_worker_pid} = Lain.Chat.Label.Workers.Sync.start_link([])
 # send :work message to sync worker manually
 send(sync_worker_pid, :work)
 # wait till :work message is processed
 :synced = :sys.get_state(sync_worker_pid)
-# => worker is synced now
 ```
 
-### Mox.expect/4 vs. Mox.stub/3
+### [Mox] Mox.expect/4 vs. Mox.stub/3
 
 `Mox.expect/4` sets expectations and allows to verify them (that some
-function in mock is called exactly n times).
+function in a mock is called exactly n times).
 
-`Mox.stub/3` doesn't set expectations - stubs are never verified (stub
-can be never invoked at all).
+`Mox.stub/3` doesn't set expectations - stubs are never verified (that
+is stub can be never invoked).
 
 as a rule of thumb I use:
 
 - `Mox.expect/4` when mock is injected into tested module directly
-- `Mox.stub/3` when mock is used by tested module indirectly via other modules
+- `Mox.stub/3` when mock is used by tested module via other modules
+
+in the latter case it's possible to stub all functions in mock at once
+by defining a separate test module and passing it to `Mox.stub_with/2`:
+
+```elixir
+# test/support/mocks/lain/api/test_api.ex
+
+defmodule Lain.TestAPI do
+  @behaviour Lain.API.Behaviour
+
+  @impl true
+  def list_page_conversations(_cursor) do
+    # return test data
+  end
+end
+```
+
+```elixir
+# test/test_helper.exs
+
+Mox.stub_with(Lain.APIMock, Lain.TestAPI)
+```
+
+> <https://hexdocs.pm/mox/Mox.html#stub/3>
+>
+> stub is invoked only after all expectations are fulfilled
+
+=> this test module will be used as a fallback when no expectations are set.
+
+### [Mox] allow child processes to use expectaitons and stubs defined in test process
+
+1. <https://hexdocs.pm/mox/Mox.html#module-multi-process-collaboration>
+
+- it's always safe to use explicit allowances
+
+  say, in _test/test_helper.exs_:
+
+  ```elixir
+  # test/test_helper.exs
+
+  Lain.APIMock
+  |> Mox.stub_with(Lain.TestAPI)
+  # allow child process (GenServer process) to use expectations
+  # and stubs defined for mock in parent process (test process)
+  |> Mox.allow(self(), gen_server_pid)
+  ```
+
+- it's safe to use `Mox.set_mox_global/1` in test cases without `async: true`

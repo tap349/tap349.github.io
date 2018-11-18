@@ -451,6 +451,10 @@ start certain deps along with `Repo` and `Endpoint` supervisors manually:
 ```elixir
 # test/test_helper.exs
 
+# -------------------------------------------------------------------
+# start seleted applications only
+# -------------------------------------------------------------------
+
 # load application first to get access to its spec:
 #
 # > https://hexdocs.pm/elixir/Application.html#spec/1
@@ -470,6 +474,10 @@ for app <- Application.spec(:lain, :applications),
   Application.ensure_all_started(app)
 end
 
+# -------------------------------------------------------------------
+# start required supervisors from Lain.Application manually
+# -------------------------------------------------------------------
+
 # for Phoenix application only
 #
 # > https://elixirforum.com/t/ecto-starting-in-test-environment/1205/6
@@ -479,6 +487,10 @@ Lain.Repo.start_link()
 LainWeb.Endpoint.start_link()
 # https://hexdocs.pm/elixir/Task.Supervisor.html#start_link/1
 Task.Supervisor.start_link(name: Lain.TaskSupervisor)
+
+# -------------------------------------------------------------------
+# standard configuration
+# -------------------------------------------------------------------
 
 ExUnit.start()
 

@@ -599,6 +599,8 @@ Mox.stub_with(Lain.APIMock, Lain.TestAPI)
   ```elixir
   # test/test_helper.exs
 
+  # start GenServer and save its PID into gen_server_pid
+
   Lain.APIMock
   |> Mox.stub_with(Lain.TestAPI)
   # allow child process (GenServer process) to use expectations

@@ -130,7 +130,18 @@ not before each test.
 => test cases without `async: true` cannot be run in parallel with test
 cases with `async: true`.
 
-=> it's safe to use `set_mox_global/1` in cases without `async: true`.
+it's safe to use `set_mox_global/1` in cases without `async: true`.
+it's always safe to use explicit allowances:
+
+```elixir
+# allow child process (GenServer process) to use expectations and
+# stubs defined in parent process (test process)
+setup do
+  MyApp.APIMock
+  |> stub(...)
+  |> allow(self(), gen_server_pid)
+end
+```
 
 style guide
 -----------
@@ -510,3 +521,16 @@ send(sync_worker_pid, :work)
 :synced = :sys.get_state(sync_worker_pid)
 # => worker is synced now
 ```
+
+### Mox.expect/4 vs. Mox.stub/3
+
+`Mox.expect/4` sets expectations and allows to verify them (that some
+function in mock is called exactly n times).
+
+`Mox.stub/3` doesn't set expectations - stubs are never verified (stub
+can be never invoked at all).
+
+as a rule of thumb I use:
+
+- `Mox.expect/4` when mock is injected into tested module directly
+- `Mox.stub/3` when mock is used by tested module indirectly via other modules

@@ -57,3 +57,10 @@ categories: [elixir]
 >
 > In my opinion, if you want to vary Heap implementations, I think protocols
 > are the initial way to go here, since you're doing a data based polymorphism.
+
+protocol is `a behaviour with dispatching logic`, `data based polymorphism`.
+
+behaviour is more appropriate when `generic logic doesn't care about the data`
+and `doesn't perform any operations with that data` but `invokes the callback
+module when some concrete decisions need to be made`.
+

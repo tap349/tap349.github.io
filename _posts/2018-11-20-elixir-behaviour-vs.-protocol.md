@@ -55,5 +55,5 @@ categories: [elixir]
 > exactly what GenServer does), but it doesn't perform any operations itself
 > with that data.
 >
-> ...I think protocols are the initial way to go here, since you're doing a
-> data based polymorphism.
+> In my opinion, if you want to vary Heap implementations, I think protocols
+> are the initial way to go here, since you're doing a data based polymorphism.

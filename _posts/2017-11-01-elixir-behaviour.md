@@ -13,6 +13,19 @@ categories: [elixir]
 {:toc}
 <hr>
 
+<dl>
+  <dt>BM</dt>
+  <dd>behaviour module</dd>
+
+  <dt>CM</dt>
+  <dd>callback module</dd>
+
+  <dt>FCM</dt>
+  <dd>facade callback module</dd>
+</dl>
+
+<hr>
+
 1. <https://hexdocs.pm/elixir/behaviours.html>
 2. <https://hexdocs.pm/elixir/Application.html>
 
@@ -21,8 +34,8 @@ NOTE: the classification below is purely mine.
 usage
 -----
 
-in all cases specific CM is usually fetched from environment
-at compile time (using `Application.get_env/3`):
+in all cases specific CM is usually fetched from environment at compile time
+(using `Application.get_env/3`):
 
 - in a single place (see FCM for details)
 - in an arbitrary application module on demand

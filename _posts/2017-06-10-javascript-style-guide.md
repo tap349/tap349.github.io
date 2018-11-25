@@ -91,7 +91,7 @@ parentheses around parameters of arrow functions
 
 1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions>
 
-don't wrap single parameter of arrow function in parentheses:
+don't wrap a single parameter of arrow function in parentheses:
 
 ```javascript
 () => 1

@@ -36,7 +36,8 @@ $('div.phone')[0]
 (how to) disable material design bookmarks
 ------------------------------------------
 
-[chrome://flags/#enable-md-bookmarks]() -> `Disabled`
+[chrome://flags/#enable-md-bookmarks](chrome://flags/#enable-md-bookmarks) →
+`Disabled`
 
 ***UPDATE***
 
@@ -45,7 +46,7 @@ this flag is no longer available in Google Chrome 69 (or maybe even 68).
 (how to) return old-style tabs
 ------------------------------
 
-<chrome://flags/#top-chrome-md> -> `Normal`
+[chrome://flags/#top-chrome-md](chrome://flags/#top-chrome-md) -> `Normal`
 
 (how to) copy percent-encoded URL
 ---------------------------------

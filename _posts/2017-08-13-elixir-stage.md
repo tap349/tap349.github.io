@@ -214,6 +214,6 @@ so if you access top-level domain, HTTPS connection will be enforced for all
 subdomains as well - even though they might be configured not to use HTTPS.
 
 a workaround is to delete domain security policies for top-level domain
-in Chrome on <chrome://net-internals/#hsts> page (`Delete domain security
-policies` section) - it's not required to delete entries for all affected
-subdomains.
+in Chrome on [chrome://net-internals/#hsts](chrome://net-internals/#hsts)
+page (`Delete domain security policies` section) - it's not required to
+delete entries for all affected subdomains.

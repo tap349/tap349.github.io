@@ -9,6 +9,10 @@ categories: [chrome]
 
 <!-- more -->
 
+* TOC
+{:toc}
+<hr>
+
 (how to) delete autosuggested URL
 ---------------------------------
 

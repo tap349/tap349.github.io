@@ -36,7 +36,7 @@ $('div.phone')[0]
 (how to) disable material design bookmarks
 ------------------------------------------
 
-<chrome://flags/#enable-md-bookmarks> -> `Disabled`
+[chrome://flags/#enable-md-bookmarks]() -> `Disabled`
 
 ***UPDATE***
 

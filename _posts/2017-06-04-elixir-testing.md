@@ -562,7 +562,7 @@ set log level to `debug` in test environment:
     # workers (workers are named GenServers and their names must be
     # unique - attempt to start GenServer with the same name will
     # just return {:error, {:already_started, pid}})
-    {:ok, child_pid} = Lain.Chat.Label.Workers.Sync.start_link([])
+    {:ok, child_pid} = Lain.FB.Label.Sync.start_link([])
     # send :work message to sync worker manually
     send(child_pid, :work)
     # wait till :work message is processed
@@ -604,12 +604,16 @@ GenServer state it's possible to set up everything in _test/test_helper.exs_:
 # - wait till they are ready
 # -------------------------------------------------------------------
 
-{:ok, child_pid} = Lain.Chat.Label.Workers.Sync.start_link([])
-send(child_pid, :work)
+{:ok, child_pid} = Lain.FB.Label.Sync.start_link([])
 
 Lain.APIMock
 |> Mox.stub_with(Lain.TestAPI)
 |> Mox.allow(self(), child_pid)
 
+# sync manually by sending a message
+send(child_pid, :work)
 :synced = :sys.get_state(child_pid)
+
+# or else by making a synchronous call
+:ok = GenServer.call(Lain.FB.Label.Sync, :sync_now)
 ```

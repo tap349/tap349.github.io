@@ -610,10 +610,11 @@ Lain.APIMock
 |> Mox.stub_with(Lain.TestAPI)
 |> Mox.allow(self(), child_pid)
 
-# sync manually by sending a message
+# initialize state manually by sending the first periodic message
 send(child_pid, :work)
 :synced = :sys.get_state(child_pid)
 
-# or else by making a synchronous call
+# or else by making a synchronous call - if specified message is
+# handled by handle_call/3 callback of course
 :ok = GenServer.call(Lain.FB.Label.Sync, :sync_now)
 ```

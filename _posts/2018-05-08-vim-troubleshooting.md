@@ -68,6 +68,10 @@ the whole screen went blank when starting to move a cursor around.
 defaults write org.vim.MacVim MMUseCGLayerAlways 1
 ```
 
+***UPDATE (2018-11-29)***
+
+this fix is no longer required on macOS Mojave and MacVim 8.1-151_2.
+
 iTerm2 and MacVim hang when running ALE
 ---------------------------------------
 

@@ -70,8 +70,8 @@ defaults write org.vim.MacVim MMUseCGLayerAlways 1
 
 ***UPDATE (2018-11-29)***
 
-this fix is no longer required on macOS Mojave and MacVim 8.1-151_2
-(maybe some previous MacVim versions work as well).
+this fix seems to be no longer required on macOS Mojave and MacVim 8.1-151_2
+(maybe previous MacVim versions work too or maybe it's all about new macOS).
 
 iTerm2 and MacVim hang when running ALE
 ---------------------------------------

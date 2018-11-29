@@ -73,6 +73,10 @@ defaults write org.vim.MacVim MMUseCGLayerAlways 1
 this fix seems to be no longer required on macOS Mojave and MacVim 8.1-151_2
 (maybe previous MacVim versions work too or maybe it's all about new macOS).
 
+> <https://github.com/macvim-dev/macvim/issues/751#issuecomment-424203078>
+>
+> ...Mojave change that made all NSView automatically become layer-backed
+
 iTerm2 and MacVim hang when running ALE
 ---------------------------------------
 

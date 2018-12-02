@@ -75,3 +75,15 @@ Enum.reduce(achievements, %{}, fn x, acc ->
   Map.put(acc, comparison_key(x), x)
 end)
 ```
+
+singular vs. plural namespace names
+-----------------------------------
+
+> <https://softwareengineering.stackexchange.com/a/75929>
+>
+> Use the plural for packages with homogeneous contents and the singular for
+> packages with heterogeneous contents.
+
+I tend to use plural names when namespace is used to group related modules by
+function (`operations`, `serializers`, `workers`, etc.) and singular names when
+it's used to group modules by their domain (say, schema or context namespace).

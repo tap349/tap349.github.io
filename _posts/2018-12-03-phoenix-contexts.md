@@ -90,6 +90,9 @@ using umbrella apps as bounded contexts
 
 1. <https://blog.usejournal.com/implementing-bounded-contexts-in-elixir-25bb8a80bbca>
 
+it's possible to create a separate app for each bounded context inside umbrella
+project:
+
 > - Create an umbrella project;
 >
 > - One app for each bounded context;
@@ -101,3 +104,6 @@ using umbrella apps as bounded contexts
 >
 > - An app should never return its internal data structures on public apis,
 >   it should return only raw data like maps and lists;
+
+these rules can be further applied to ordinary Phoenix contexts inside separate
+apps within umbrella project or contexts inside non-umbrella project.

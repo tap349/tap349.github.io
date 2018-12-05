@@ -666,7 +666,7 @@ SyntaxError: <app_dir>/node_modules/react-native/Libraries/Network/XMLHttpReques
 Unexpected super class type: CallExpression
 ```
 
-and other cryptic errors that seem to be Flow-related.
+and other cryptic errors that seem to be Flow related.
 
 **solution**
 

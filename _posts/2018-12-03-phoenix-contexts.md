@@ -107,3 +107,26 @@ project:
 
 these rules can be further applied to ordinary Phoenix contexts inside separate
 apps within umbrella project or contexts inside non-umbrella project.
+
+seconday contexts
+-----------------
+
+1. <http://devonestes.herokuapp.com/a-proposal-for-context-rules>
+
+currently all modules within context (primary context in terms of this article)
+can be accessed directly, contexts interact with each other via context modules
+which act as facades.
+
+Devon Estes suggests isolating not only contexts but resources within contexts
+as well by introducing secondary contexts which are named after resources in
+plural form and contain both loader and mutator functions. I guess all resource
+related operations should be proxied via these secondary contexts as well.
+
+this way it becomes very easy, say, to move a resource to another primary
+context but at the same time it increases complexity (IMO) because it makes
+you create facades within facades (secondary contexts within primary ones)
+instead of using resource related modules directly within primary contexts.
+
+all in all this idea is worth paying attention to but for the time being I'll
+stick to my current scheme with separate loaders and mutators for each resource
+(basically loader + mutator = secondary context).

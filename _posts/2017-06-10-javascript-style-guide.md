@@ -91,7 +91,19 @@ parentheses around parameters of arrow functions
 
 1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions>
 
-don't wrap a single parameter of arrow function in parentheses:
+I use `arrow-parens` ESLint rule:
+
+```yaml
+# .eslintrc.yml
+
+arrow-parens:
+  - error
+  - as-needed
+  - requireForBlockBody: true
+```
+
+=> parameter is not wrapped only if it's single and if function body is an
+instructions block (surrounded by braces).
 
 ```javascript
 () => 1

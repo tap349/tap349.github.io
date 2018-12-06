@@ -246,6 +246,11 @@ System Preferences
 
 - Computer Name: MacBook Pro Personal
 
+### Date & Time
+
+- Clock (tab):
+  - [ ] Show date and time in menu bar
+
 ### Accessibility
 
 NOTE: currently disabled because of a significant delay

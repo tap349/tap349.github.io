@@ -108,8 +108,8 @@ project:
 these rules can be further applied to ordinary Phoenix contexts inside separate
 apps within umbrella project or contexts inside non-umbrella project.
 
-seconday contexts
------------------
+secondary contexts
+------------------
 
 1. <http://devonestes.herokuapp.com/a-proposal-for-context-rules>
 

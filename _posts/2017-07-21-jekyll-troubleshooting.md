@@ -60,5 +60,5 @@ build Jekyll site manually to find out the reason:
 
 ```sh
 $ blog
-$ jekyll build
+$ bundle exec jekyll build
 ```

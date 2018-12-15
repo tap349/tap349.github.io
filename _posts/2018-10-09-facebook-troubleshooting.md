@@ -326,3 +326,17 @@ browser extensions installed) - try to use another browser (say, Safari).
 
 error is caused by ad blockers - disable these extensions and reload the
 page. or else it's better to whitelist GAE page in their settings.
+
+### Ads creative post was created by an app that is in development mode
+
+full error message:
+
+```
+[Invalid parameter] Ads creative post was created by an app that
+is in development mode. It must be in public to create this ad.
+```
+
+**solution**
+
+make sure a proper application with status `Live` is selected in GAE
+when generating access token.

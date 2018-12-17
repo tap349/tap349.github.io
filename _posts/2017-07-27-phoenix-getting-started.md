@@ -156,9 +156,11 @@ customize app
 
 ### add useful packages
 
-_mix.exs_:
+for example:
 
 ```diff
+  _mix.exs_
+
   defp deps do
     [
       # ...

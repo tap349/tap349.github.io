@@ -40,6 +40,12 @@ create new project
 $ mix phx.new billing
 ```
 
+for API-only projects:
+
+```sh
+$ mix phx.new billing --no-html --no-webpack
+```
+
 setup Git repo
 ---------------
 

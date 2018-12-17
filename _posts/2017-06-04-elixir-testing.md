@@ -254,6 +254,21 @@ comparison with RSpec:
   end
   ```
 
+### assertions
+
+place result of actual call (result of calling the function under test)
+on the LHS when comparing it with expected expression:
+
+```elixir
+assert actual == expected
+```
+
+except for the cases when it's necessary to use pattern matching instead
+of strict comparison:
+
+```elixir
+assert %{name: "foo"} = MyModule.call()
+```
 
 tips
 ----

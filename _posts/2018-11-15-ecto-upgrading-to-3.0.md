@@ -88,13 +88,6 @@ make sure `pool_size` is at least 2 in all environments.
   ```elixir
   # config/dev.secret.exs
   # config/test.secret.exs
-
-  config :my_app, MyApp.Repo,
-    # ...
-    pool_size: 10
-  ```
-
-  ```elixir
   # config/prod.secret.exs
 
   config :my_app, MyApp.Repo,

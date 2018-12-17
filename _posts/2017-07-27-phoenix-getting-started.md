@@ -36,11 +36,8 @@ create new project
 
 1. <https://hexdocs.pm/phoenix/up_and_running.html>
 
-create new project without Brunch:
-
 ```sh
-$ cd ~/dev
-$ mix phx.new billing --no-brunch
+$ mix phx.new billing
 ```
 
 setup Git repo

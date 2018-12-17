@@ -79,9 +79,10 @@ setup database
     username: "billing_dev",
     password: "billing_dev",
     database: "billing_dev",
-    hostname: "localhost",
     pool_size: 10
   ```
+
+  NOTE: `hostname: 'localhost'` is used by default.
 
 - variant 2: use postgres user for all environments
 
@@ -120,7 +121,6 @@ setup database
     username: "postgres",
     password: "postgres",
     database: "billing_dev",
-    hostname: "localhost",
     pool_size: 10
   ```
 

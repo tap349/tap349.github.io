@@ -241,8 +241,9 @@ trying to send any request to application.
 
 - static configuration (when Nginx is used as proxy server)
 
-  1. <https://hexdocs.pm/phoenix/phoenix_behind_proxy.html>
-  2. <https://medium.com/@a4word/setting-up-phoenix-elixir-with-nginx-and-letsencrypt-ada9398a9b2c>
+  1. <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
+  2. <https://hexdocs.pm/phoenix/phoenix_behind_proxy.html>
+  3. <https://medium.com/@a4word/setting-up-phoenix-elixir-with-nginx-and-letsencrypt-ada9398a9b2c>
 
   > There are many ways to configure your Phoenix app for production use,
   > but here just make sure that you bind yourself to 127.0.0.1.
@@ -257,40 +258,39 @@ trying to send any request to application.
     (and not available from outside accordingly)
   - specify port manually since it's no longer loaded from `PORT` environment
     variable
+  - start web server when endpoint supervision tree starts
 
   _config/prod.exs_:
 
   ```diff
-    config :billing, BillingWeb.Endpoint,
+    config :reika, BillingWeb.Endpoint,
   -   load_from_system_env: true,
+  -   http: [:inet6, port: System.get_env("PORT") || 4000],
+  -   url: [host: "example.com", port: 80],
   +   load_from_system_env: false,
   +   http: [ip: {127, 0, 0, 1}, port: 4000],
-      url: [host: "billing.***.com", port: 80],
-      server: true
+  +   url: [host: "billing.***.com", port: 80],
+  +   server: true
   ```
 
   it's possible to omit `ip: {127, 0, 0, 1}` (it must be used by default):
 
   _config/prod.exs_:
 
-  ```diff
-    config :billing, BillingWeb.Endpoint,
-  -   load_from_system_env: true,
-  +   load_from_system_env: false,
-  +   http: [port: 4000],
-      url: [host: "billing.***.com", port: 80],
-      server: true
+  ```elixir
+  config :billing, BillingWeb.Endpoint,
+    # ...
+    http: [port: 4000],
+    # ...
   ```
 
-  if it's necessary to listen on IPv6 as well:
+  add `:inet6` option if it's necessary to listen on IPv6 as well:
 
-  ```diff
-    config :billing, BillingWeb.Endpoint,
-  -   load_from_system_env: true,
-  +   load_from_system_env: false,
-  +   http: [:inet6, port: 4000],
-      url: [host: "billing.***.com", port: 80],
-      server: true
+  ```elixir
+  config :billing, BillingWeb.Endpoint,
+    # ...
+    http: [:inet6, port: 4000],
+    # ...
   ```
 
 ### Erlang VM (EVM/BEAM) flags

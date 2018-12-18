@@ -857,3 +857,40 @@ Erlang into multiple packages and may be fixed by installing the missing
 1. <https://stackoverflow.com/questions/36512519>
 
 Erlang wasn't installed (I thought it would be installed as Elixir dependency).
+
+[Phoenix] connect() failed (111: Connection refused) while connecting to upstream
+---------------------------------------------------------------------------------
+
+_/home/reika/prod/nginx/log/error.log_:
+
+```
+2018/12/18 11:17:27 [error] 4829#4829: *14 connect() failed (111: Connection refused)
+  while connecting to upstream, client: 109.195.XXX.XXX, server: 139.162.XXX.XXX,
+  request: "GET /hello HTTP/1.1", upstream: "http://127.0.0.1:4000/hello", host:
+  "139.162.XXX.XXX"
+```
+
+**solution**
+
+1. [Elixir - Deployment]({% post_url 2017-08-02-elixir-deployment %})
+
+most likely Cowboy is not started:
+
+> <https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration>
+>
+> :server - when true, starts the web server when the endpoint supervision tree
+>   starts. Defaults to false. The mix phx.server task automatically sets this
+>   to true
+
+```diff
+  # config/prod.exs
+
+  config :reika, ReikaWeb.Endpoint,
+-   load_from_system_env: true,
+-   http: [:inet6, port: System.get_env("PORT") || 4000],
+-   url: [host: "example.com", port: 80],
++   load_from_system_env: false,
++   http: [port: 4000],
++   url: [host: "139.162.XXX.XXX", port: 80],
++   server: true
+```

@@ -50,6 +50,8 @@ this flag is no longer available in Google Chrome 69 (or maybe even 68).
 
 ***UPDATE***
 
+1. <https://superuser.com/questions/1360171>
+
 this flag is no longer available in Google Chrome 71.
 
 (how to) copy percent-encoded URL

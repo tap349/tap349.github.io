@@ -894,3 +894,12 @@ most likely Cowboy is not started:
 +   url: [host: "139.162.XXX.XXX", port: 80],
 +   server: true
 ```
+
+corresponding line will appear in systemd journal once Cowboy is started
+(it will be missing if enpdoint is not configured as described above):
+
+```
+reika[15112]: 11:36:06.017 [info] [swarm on reika@127.0.0.1] [tracker:init] started
+reika[15112]: 11:36:06.320 [info] Running ReikaWeb.Endpoint with cowboy 2.6.1 at http://139.162.XXX.XXX
+reika[15112]: 11:36:11.022 [info] [swarm on reika@127.0.0.1] [tracker:cluster_wait] joining cluster..
+```

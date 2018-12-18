@@ -269,6 +269,30 @@ trying to send any request to application.
       server: true
   ```
 
+  it's possible to omit `ip: {127, 0, 0, 1}` (it must be used by default):
+
+  _config/prod.exs_:
+
+  ```diff
+    config :billing, BillingWeb.Endpoint,
+  -   load_from_system_env: true,
+  +   load_from_system_env: false,
+  +   http: [port: 4000],
+      url: [host: "billing.***.com", port: 80],
+      server: true
+  ```
+
+  if it's necessary to listen on IPv6 as well:
+
+  ```diff
+    config :billing, BillingWeb.Endpoint,
+  -   load_from_system_env: true,
+  +   load_from_system_env: false,
+  +   http: [:inet6, port: 4000],
+      url: [host: "billing.***.com", port: 80],
+      server: true
+  ```
+
 ### Erlang VM (EVM/BEAM) flags
 
 NOTE: distillery must have been installed to make this configuration.

@@ -48,6 +48,10 @@ this flag is no longer available in Google Chrome 69 (or maybe even 68).
 
 [chrome://flags/#top-chrome-md](chrome://flags/#top-chrome-md) -> `Normal`
 
+***UPDATE***
+
+this flag is no longer available in Google Chrome 71.
+
 (how to) copy percent-encoded URL
 ---------------------------------
 

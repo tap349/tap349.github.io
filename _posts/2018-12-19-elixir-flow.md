@@ -40,4 +40,31 @@ number of stages
 >    |    |
 >  [M1]  [M2]    # Flow.flat_map/2 + Flow.reduce/3 (consumer)
 
-=> number of stages = number of CPU cores by default?
+=> number of stages = number of CPU cores by default
+
+say, on my MacBook with 4 cores:
+
+```elixir
+1..10
+|> Flow.from_enumerable(max_demand: 1)
+|> Flow.map(fn x -> IO.inspect(x); Process.sleep(2000); x + 100 end)
+|> Enum.into([])
+```
+
+prints
+
+```elixir
+1
+2
+3
+4
+# sleep
+5
+6
+7
+8
+# sleep
+9
+10
+[101, 102, 103, 104, 105, 106, 107, 108, 109, 110]
+```

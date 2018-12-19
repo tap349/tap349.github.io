@@ -14,6 +14,13 @@ categories: [elixir, flow]
 <hr>
 
 1. <https://www.youtube.com/watch?v=srtMWzyqdp8>
+2. <https://10consulting.com/2017/01/20/building-product-recommendations-using-elixir-gen-stage-flow>
+3. <https://nickstalter.com/elixir-flow.html>
+4. <http://www.elixirfbp.org/2016/11/genstage-and-bioinformatics.html>
+
+example projects using Flow:
+
+1. <https://github.com/nietaki/crawlie>
 
 max_demand vs. min_demand
 -------------------------

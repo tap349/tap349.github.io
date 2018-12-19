@@ -13,6 +13,8 @@ categories: [elixir]
 {:toc}
 <hr>
 
+1. <https://michal.muskala.eu/2017/05/16/putting-contexts-in-context.html>
+
 ramblings about module naming in Elixir and code organization
 -------------------------------------------------------------
 

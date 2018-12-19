@@ -21,8 +21,6 @@ max_demand vs. min_demand
 > max_demand: the maximum amount of events to ask (default 1000)
 > min_demand: when reached, ask for more events (default 500)
 
-=> batch size = max_demand - min_demand
-
 > <https://hexdocs.pm/flow/Flow.html#from_enumerable/2>
 >
 > The enumerable is consumed in batches, retrieving max_demand items

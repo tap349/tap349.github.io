@@ -595,8 +595,17 @@ end
 jsonb
 -----
 
-use `map` Ecto type for jsonb fields (see links in `primitive column types`
-section above).
+1. <https://hexdocs.pm/ecto/Ecto.Schema.html#module-types-and-casting>
+
+use `map` Ecto type for jsonb fields.
+
+> <https://elixirforum.com/t/how-do-i-use-the-postgres-jsonb-postgrex-json-extension/3214/7>
+>
+> ...my question is about “map” vs “jsonb”
+>
+> They are equivalent when using postgres. map is an abstract type and each
+> database adapter can choose the actual representation - for postgres it’s
+> jsonb.
 
 ### default value
 

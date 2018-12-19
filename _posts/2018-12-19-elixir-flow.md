@@ -13,6 +13,8 @@ categories: [elixir, flow]
 {:toc}
 <hr>
 
+1. <https://www.youtube.com/watch?v=srtMWzyqdp8>
+
 max_demand vs. min_demand
 -------------------------
 

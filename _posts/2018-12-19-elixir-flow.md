@@ -22,7 +22,7 @@ example projects using Flow:
 
 1. <https://github.com/nietaki/crawlie>
 
-eager (`Enum`) → lazy (`Stream`) → concurrent (`Flow`) → distributed (Spark)
+eager (`Enum`) → lazy (`Stream`) → concurrent (`Flow`) → distributed (Apache Spark)
 
 so `Flow` brings computations on collections to the next level as it allows
 to process collections not only lazily but concurrently as well - the level

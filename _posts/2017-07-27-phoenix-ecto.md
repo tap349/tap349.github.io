@@ -80,11 +80,30 @@ end
 
 `cast/3` permits and casts parameters to types defined in schema.
 
-if you communicate with `Repo` directly by passing `User` struct instead of
-changeset all validations defined in changeset are bypassed of course - error
-will be raised only if underlying data store returns error. `User` struct is
-still converted to changeset in this case but using `Ecto.Changeset.change/2`
-function instead of custom schema changeset function.
+### changeset vs. schema struct
+
+1. <https://hexdocs.pm/ecto/Ecto.Repo.html#c:insert/2>
+
+> "Improved associations and factories" chapter, "Less changesets"
+> section of "What's new in Ecto 2.1" book
+>
+> You can now also pass structs to the repository and Ecto will
+> take care of building the changesets for you behind the scenes.
+
+> https://github.com/elixir-ecto/ecto/issues/2197#issuecomment-326336374
+>
+> The struct is converted to a Changeset using Ecto.Changeset.change/2,
+> not your own function.
+
+it's possible to pass both changeset and schema, say, to `Repo.insert/2`.
+
+in case of changeset, this changeset can be either custom schema changeset
+or default changeset created by `Ecto.Changeset.change/2`.
+
+in case of struct, this struct is still converted to changeset but always
+with `Ecto.Changeset.change/2` - all validations defined in custom schema
+changeset become unavailable and error will be raised only if underlying
+data store returns error.
 
 associations
 ------------

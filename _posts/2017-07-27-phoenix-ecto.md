@@ -80,9 +80,11 @@ end
 
 `cast/3` permits and casts parameters to types defined in schema.
 
-if you communicate with `Repo` directly by passing `User` struct instead
-of changeset all validations defined in changeset are bypassed of course -
-error will be raised only if underlying data store returns error.
+if you communicate with `Repo` directly by passing `User` struct instead of
+changeset all validations defined in changeset are bypassed of course - error
+will be raised only if underlying data store returns error. `User` struct is
+still converted to changeset in this case but using `Ecto.Changeset.change/2`
+function instead of custom schema changeset function.
 
 associations
 ------------

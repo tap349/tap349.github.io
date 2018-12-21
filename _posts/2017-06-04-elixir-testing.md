@@ -625,6 +625,8 @@ set log level to `debug` in test environment:
     # start GenServer and save its PID into child_pid
 
     Lain.APIMock
+    # use Lain.APIStub in Lain.FB.Label.Sync.sync_now() - mock is not
+    # stubbed in the tests as each test is run in a separate process
     |> Mox.stub_with(Lain.APIStub)
     # allow child process (GenServer process) to use expectations
     # and stubs defined for mock in parent process (test process)

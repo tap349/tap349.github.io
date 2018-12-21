@@ -150,6 +150,7 @@ as a rule of thumb I use:
 
 - `Mox.expect/4` when mock is injected into tested module directly
 - `Mox.stub/3` when mock is used by tested module via other modules
+  (say, in controller or integration tests)
 
 ### [Mox] Mox.stub_with/2
 

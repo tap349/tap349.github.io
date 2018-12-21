@@ -132,24 +132,34 @@ with `async: true`.
 
 ### [Mox] Mox.expect/4 vs. Mox.stub/3
 
-`Mox.expect/4` sets expectations and allows to verify them (that some
-function in a mock is called exactly n times).
+1. <https://martinfowler.com/articles/mocksArentStubs.html>
+2. <https://blog.carbonfive.com/2018/01/16/functional-mocks-with-mox-in-elixir>
 
-`Mox.stub/3` doesn't set expectations - stubs are never verified (that
-is stub can be never invoked at all).
+> <https://stackoverflow.com/a/3459407/3632318>
+>
+> A Mock is just testing behaviour, making sure certain methods are called.
+> A Stub is a testable version (per se) of a particular object.
+
+`Mox.expect/4` sets expectations and allows to verify them (that some function
+in a mock is called exactly n times).
+
+`Mox.stub/3` doesn't set expectations - stubs are never verified (that is it's
+possible that stub will never be invoked at all).
 
 as a rule of thumb I use:
 
 - `Mox.expect/4` when mock is injected into tested module directly
 - `Mox.stub/3` when mock is used by tested module via other modules
 
-in the latter case it's possible to stub all functions in mock at once
-by defining a separate test module and passing it to `Mox.stub_with/2`:
+### [Mox] Mox.stub_with/2
+
+it's possible to stub all functions in a mock at once by defining a separate
+stub module and passing it to `Mox.stub_with/2`:
 
 ```elixir
-# test/support/mocks/lain/api/test_api.ex
+# test/support/stubs/lain/api/api_stub.ex
 
-defmodule Lain.TestAPI do
+defmodule Lain.APIStub do
   @behaviour Lain.API.Behaviour
 
   @impl true
@@ -160,16 +170,31 @@ end
 ```
 
 ```elixir
-# test/test_helper.exs
+# lib/lain/chat/conversation/operations/import.ex
 
-Mox.stub_with(Lain.APIMock, Lain.TestAPI)
+setup do
+  Mox.stub_with(Lain.APIMock, Lain.APIStub)
+  :ok
+end
 ```
+
+> <https://github.com/plataformatec/mox/issues/41#issuecomment-412998957>
+>
+> It (stub_with/2) needs to be inside setup, since setup_all runs in a separate
+> process.
+
+=> you cannot place this line in _test/test\_helper.exs_ and rest assured that
+all calls to mock are now stubbed by default. the problem is that all tests are
+run in separate processes (regardless of `async` option value) while mock is
+stubbed only in the process in which Mix loads _test/test\_helper.exs_ before
+executing the tests (for some reason this process always has `#PID<0.91.0>` on
+my machine).
 
 > <https://hexdocs.pm/mox/Mox.html#stub/3>
 >
 > stub is invoked only after all expectations are fulfilled
 
-=> this test module will be used as a fallback when no expectations are set.
+=> stub module will be used as a fallback when no expectations are set.
 
 style guide
 -----------
@@ -600,7 +625,7 @@ set log level to `debug` in test environment:
     # start GenServer and save its PID into child_pid
 
     Lain.APIMock
-    |> Mox.stub_with(Lain.TestAPI)
+    |> Mox.stub_with(Lain.APIStub)
     # allow child process (GenServer process) to use expectations
     # and stubs defined for mock in parent process (test process)
     |> Mox.allow(self(), child_pid)
@@ -622,7 +647,7 @@ GenServer state it's possible to set up everything in _test/test_helper.exs_:
 {:ok, child_pid} = Lain.FB.Label.Sync.start_link([])
 
 Lain.APIMock
-|> Mox.stub_with(Lain.TestAPI)
+|> Mox.stub_with(Lain.APIStub)
 |> Mox.allow(self(), child_pid)
 
 # initialize state manually by sending the first periodic message

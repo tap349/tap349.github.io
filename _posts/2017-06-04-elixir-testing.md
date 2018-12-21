@@ -195,7 +195,8 @@ my machine).
 >
 > stub is invoked only after all expectations are fulfilled
 
-=> stub module will be used as a fallback when no expectations are set.
+=> expectations have precedence over stubs: when no expectations are set stub
+module will be used as a fallback.
 
 style guide
 -----------

@@ -152,6 +152,13 @@ as a rule of thumb I use:
 - `Mox.stub/3` when mock is used by tested module via other modules
   (say, in controller or integration tests)
 
+> <https://hexdocs.pm/mox/Mox.html#stub/3>
+>
+> stub is invoked only after all expectations are fulfilled
+
+=> expectations have precedence over stubs: the latter will be used as a
+fallback when no expectations are set.
+
 ### [Mox] Mox.stub_with/2
 
 it's possible to stub all functions in a mock at once by defining a separate
@@ -190,13 +197,6 @@ run in separate processes (regardless of `async` option value) while mock is
 stubbed only in the process in which Mix loads _test/test\_helper.exs_ before
 executing the tests (for some reason this process always has `#PID<0.91.0>` on
 my machine).
-
-> <https://hexdocs.pm/mox/Mox.html#stub/3>
->
-> stub is invoked only after all expectations are fulfilled
-
-=> expectations have precedence over stubs: when no expectations are set stub
-module will be used as a fallback.
 
 style guide
 -----------

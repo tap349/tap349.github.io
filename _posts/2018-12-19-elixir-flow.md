@@ -28,6 +28,9 @@ so `Flow` brings computations on collections to the next level as it allows
 to process collections not only lazily but concurrently as well - the level
 of concurrency is determined by the number of mapper and reducer stages.
 
+=> `Stream` allows to limit memory usage, `Flow` allows to reduce processing
+time.
+
 max_demand vs. min_demand
 -------------------------
 

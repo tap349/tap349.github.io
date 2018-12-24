@@ -587,14 +587,25 @@ end
 pipe vs. keyword syntax
 -----------------------
 
-<https://github.com/elixir-ecto/ecto>:
+1. <https://hexdocs.pm/ecto/Ecto.Query.html>
+
+<dl>
+  <dt>pipe syntax</dt>
+  <dd>
+    pipe-based syntax, macro-based syntax, expression syntax,
+    pipe expression syntax
+  </dd>
+
+  <dt>keyword syntax</dt>
+  <dd>keyword-based syntax, keyword query syntax</dd>
+</dl>
 
 ```elixir
+# https://github.com/elixir-ecto/ecto
+
 defmodule Sample.App do
   import Ecto.Query
-
-  alias Sample.Repo
-  alias Sample.Weather
+  alias Sample.{Weather, Repo}
 
   def pipe_query do
     Weather

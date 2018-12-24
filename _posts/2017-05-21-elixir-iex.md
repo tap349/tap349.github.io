@@ -255,7 +255,7 @@ force display a list of integers
 see also [Elixir]({% post_url 2016-12-31-elixir %}) post (`character lists`
 section) for ways to print charlist as a collection of codepoints.
 
-### set `charlists` inspect option
+### set `charlists` option of `Kernel.inspect/2`
 
 1. <https://hexdocs.pm/elixir/Inspect.Opts.html>
 

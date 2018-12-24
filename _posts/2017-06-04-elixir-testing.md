@@ -191,12 +191,12 @@ end
 > It (stub_with/2) needs to be inside setup, since setup_all runs in a separate
 > process.
 
-=> you cannot place this line in _test/test\_helper.exs_ and rest assured that
-all calls to mock are now stubbed by default. the problem is that all tests are
-run in separate processes (regardless of `async` option value) while mock is
-stubbed only in the process in which Mix loads _test/test\_helper.exs_ before
-executing the tests (for some reason this process always has `#PID<0.91.0>` on
-my machine).
+=> you can't place this line in _test/test\_helper.exs_ and rest assured that
+all calls to mock are now stubbed by default. the problem is that all tests
+are run in separate processes (regardless of `async` option value) while mock
+is stubbed in current process only - in this case in the process in which Mix
+loads _test/test\_helper.exs_ before executing tests (for some unknown reason
+this process always has `#PID<0.91.0>` on my machine).
 
 style guide
 -----------

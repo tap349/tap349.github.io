@@ -624,6 +624,16 @@ defmodule Sample.App do
 end
 ```
 
+IMO pipe syntax looks better for simple queries:
+
+```elixir
+User |> order_by(desc: :inserted_at)
+# is more readable than
+from u in User, order_by: [desc: u.inserted_at]
+```
+
+and vice versa - keyword syntax is geared towards complex queries.
+
 jsonb
 -----
 

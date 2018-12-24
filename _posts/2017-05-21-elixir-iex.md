@@ -264,9 +264,9 @@ NOTE: `Kernel.inspect/2` always returns a string.
 ```elixir
 # in fact any value passed to `charlists` option except
 # for `as_charlists` acts as `as_lists`:
-iex> inspect [27, 35, 51], charlists: :as_lists
+iex> inspect([27, 35, 51], charlists: :as_lists)
 "[27, 35, 51]"
-iex> inspect [27, 35, 51], charlists: :as_charlists
+iex> inspect([27, 35, 51], charlists: :as_charlists)
 "'\\e#3'"
 ```
 

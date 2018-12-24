@@ -270,16 +270,7 @@ iex> inspect([27, 35, 51], charlists: :as_charlists)
 "'\\e#3'"
 ```
 
-### add any non-printable character
-
-`0` is usually added:
-
-```elixir
-iex> [27, 35, 51] ++ [0]
-[27, 35, 51, 0]
-```
-
-### configure `inspect` option provided by IEx
+### set `charlists` inspect option used by IEx
 
 1. <https://hexdocs.pm/iex/IEx.html#configure/1-inspect>
 
@@ -299,3 +290,12 @@ IEx.configure(inspect: [charlists: :as_lists])
 
 this option will be respected by `IO.inspect/2` and by the shell when
 printing results of expression evaluation - but not by `Kernel.inspect/2`.
+
+### add any non-printable character
+
+`0` is usually added:
+
+```elixir
+iex> [27, 35, 51] ++ [0]
+[27, 35, 51, 0]
+```

@@ -624,15 +624,15 @@ defmodule Sample.App do
 end
 ```
 
-IMO pipe syntax looks better for simple queries:
+IMO pipe syntax is more suitable for simple queries:
 
 ```elixir
 User |> order_by(desc: :inserted_at)
-# is more readable than
+# reads better than
 from u in User, order_by: [desc: u.inserted_at]
 ```
 
-and vice versa - keyword syntax is geared towards complex queries.
+while keyword syntax is geared towards complex queries.
 
 jsonb
 -----

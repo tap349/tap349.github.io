@@ -484,3 +484,31 @@ override['ruby_build']['install_pkgs_cruby'] = %w[
 
 this is fixed in 2.x.x branch of `ruby_rbenv` cookbook itself but I'm not
 going to use that branch (see comments above) so this is the only solution.
+
+`rbenv install --list` does not include new Ruby version
+--------------------------------------------------------
+
+new Ruby version is listed when logged in as application user but not when
+logged in as `devops` user.
+
+both `rbenv` and `ruby-build` appear to be upgraded to their latest versions:
+
+```sh
+$ rbenv -v
+rbenv 1.1.1
+$ ruby-build --version
+ruby-build 20181225
+```
+
+**solution**
+
+1. <https://github.com/rbenv/ruby-build/issues/676#issuecomment-282483822>
+
+upgrade `ruby-build` plugin manually for `devops` user:
+
+```sh
+$ cd ~/.rbenv/plugins/ruby-build/
+$ git pull origin master
+$ cd -
+$ rbenv install --list
+```

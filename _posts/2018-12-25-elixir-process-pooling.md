@@ -24,8 +24,9 @@ and to keep a constant amount of processes (pool) running at any given time.
 
   each process is called a task (implemented as `Task`).
 
-  this is the simplest and built-in solution which however must be sufficient
-  for most cases.
+  this is the simplest solution which however must be sufficient for most
+  use cases. what is important is that it's built into the language - you
+  don't need to add another dependency.
 
   > <http://www.akitaonrails.com/2017/06/13/ex-manga-downloadr-part-6-the-rise-of-flow#comment-3360301947>
   >
@@ -49,4 +50,4 @@ and to keep a constant amount of processes (pool) running at any given time.
   each process is called a stage (implemented as `GenStage`).
 
   `Flow` is geared towards large-scale data processing on par with, say,
-  `Apache Spark` though being not distributed per se.
+  `Apache Spark` though being not distributed per se unlike the latter.

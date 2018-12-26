@@ -651,8 +651,10 @@ use `map` Ecto type for jsonb fields.
 
 ### default value
 
-default value can be set in either migration or schema or both -
-it's recommended to set default value in migration only.
+default value can be set in either migration or schema or both but in
+general it's recommended to set default value in migration only unless
+it's very application specific (not just `false` or `0`) or you need
+different default values in different schemas for the same table in DB.
 
 - migration
 

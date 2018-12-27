@@ -85,59 +85,30 @@ in general it's always better to start supervised tasks:
 > (or GenServer.start) in production as that may lead to dangling processes
 > which may in turn cause some strange behaviour of the system.
 
-- with linking caller to the task
+spawned tasks are linked to the caller:
 
-  <https://hexdocs.pm/elixir/Task.html#module-async-and-await>:
+- `Task.Supervisor.async`
+- `Task.Supervisor.async_stream`
 
-  > async tasks link the caller and the spawned process
+spawned tasks are not linked to the caller:
 
-  ```elixir
-  [Neko.Task1, Neko.Task2]
-  |> Enum.map(&Task.async(&1, :run, [user_id]))
-  |> Enum.map(&Task.await(&1, 10_000))
-  ```
+- `Task.Supervisor.async_nolink`
+- `Task.Supervisor.async_stream_nolink`
+- `Task.Supervisor.start_child`
 
-- without linking caller to the task
+`Task.Supervisor.start_child`:
 
-  <https://hexdocs.pm/elixir/Task.html#module-async-and-await>:
+- crashed tasks can be restarted
 
-  > use Task.start/1 or consider starting the task under
-  > a Task.Supervisor using async_nolink or start_child
+  task is linked to the supervisor (though not linked to the caller) =>
+  it's possible to change restart strategy of task supervisor - when using
+  other functions task supervisor must have `restart: :temporary` option.
 
-  _lib/my_app/application.ex_:
+- task cannot be awaited
 
-  ```elixir
-  def start(_type, _args) do
-    import Supervisor.Spec, warn: false
-
-    children = [
-      # ...
-      # default value of :restart option is :temporary
-      # (required when Task.Supervisor.async_nolink/2 is used)
-      supervisor(Task.Supervisor, [[name: Neko.TaskSupervisor]])
-    ]
-
-    opts = [strategy: :rest_for_one, name: Neko.Supervisor]
-    Supervisor.start_link(children, opts)
-  end
-  ```
-
-  ```elixir
-  [Neko.Task1, Neko.Task2]
-  |> Enum.map(fn(task) ->
-    Neko.TaskSupervisor
-    |> TaskSupervisor.async_nolink(task, :run, [user_id])
-  end)
-  |> Enum.map(&Task.yield/1)
-  |> Enum.each(fn
-    {:ok, _result} -> :ok
-    {:exit, {error, _stack}} -> raise(error)
-    nil -> raise("timeout running task")
-  end)
-  ```
-
-  the task doesn't crash the caller iff `Task.yield/2` is used
-  to capture results (task crashes when `Task.await/2` is used).
+  when using other functions it's possible either to await on the task or
+  get result by triggering enumeration on a stream => this function should
+  be used for side-effects only.
 
 Supervisor
 ----------

@@ -16,7 +16,7 @@ categories: [poolboy, flow]
 there are several solutions which allow to process collections concurrently
 and to keep a constant amount of processes (pool) running at any given time.
 
-- `Task.async_stream/5` and friends
+- `Task.async_stream` and `Task.async_stream_nolink`
 
   1. <https://hexdocs.pm/elixir/Task.html#async_stream/5>
   2. <https://hexdocs.pm/elixir/Task.Supervisor.html#async_stream/6>

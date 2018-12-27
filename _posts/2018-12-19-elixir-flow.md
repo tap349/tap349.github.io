@@ -57,6 +57,11 @@ a single stage.
 number of stages
 ----------------
 
+> <http://www.akitaonrails.com/2017/06/13/ex-manga-downloadr-part-6-the-rise-of-flow#comment-3360301947>
+>
+> Another parameter you usually tune is the `stages: ...` option, you should
+> set that to the amount of connections you had in poolboy in the past.
+
 > <https://hexdocs.pm/flow/Flow.html#module-partitioning>
 >
 > This will execute the flat_map and reduce operations in parallel

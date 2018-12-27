@@ -153,3 +153,19 @@ iex> 1..10
 9
 [110, 104, 105, 101, 102, 107, 108, 106, 103, 109]
 ```
+
+Flow.partition/2
+----------------
+
+1. <https://hexdocs.pm/flow/Flow.html#partition/2>
+2. <https://10consulting.com/2017/01/20/building-product-recommendations-using-elixir-gen-stage-flow>
+
+see the full article for complete example of using Flow to count words and
+using `Flow.partition/2` in particular:
+
+> <http://blog.plataformatec.com.br/2018/07/whats-new-in-flow-v0-14>
+>
+> The key operation in the example above is precisely the partition/2 call.
+> Since we want to count words, we need to make sure that we will always
+> route the same word to the same partition, so all occurrences belong to
+> a single place and not scattered around.

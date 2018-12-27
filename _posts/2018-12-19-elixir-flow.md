@@ -62,6 +62,13 @@ number of stages
 > Another parameter you usually tune is the `stages: ...` option, you should
 > set that to the amount of connections you had in poolboy in the past.
 
+> <https://hexdocs.pm/flow/Flow.html#module-configuration-demand-and-the-number-of-stages>
+>
+> If stages perform IO, it may also be worth increasing the number of stages.
+> The default value is System.schedulers_online/0, which is a good default if
+> the stages are CPU bound, but if stages are waiting on external resources or
+> other processes, increasing the number of stages may be helpful.
+
 > <https://hexdocs.pm/flow/Flow.html#module-partitioning>
 >
 > This will execute the flat_map and reduce operations in parallel

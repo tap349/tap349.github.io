@@ -69,14 +69,12 @@ number of stages
 > the stages are CPU bound, but if stages are waiting on external resources or
 > other processes, increasing the number of stages may be helpful.
 
-> <https://hexdocs.pm/flow/Flow.html#module-partitioning>
+> <https://hexdocs.pm/flow/Flow.html#module-configuration-demand-and-the-number-of-stages>
 >
-> This will execute the flat_map and reduce operations in parallel
-> inside multiple stages. When running on a machine with two cores:
->
-> [file stream]  # Flow.from_enumerable/1 (producer)
->    |    |
->  [M1]  [M2]    # Flow.flat_map/2 + Flow.reduce/3 (consumer)
+> If stages perform IO, it may also be worth increasing the number of stages.
+> The default value is System.schedulers_online/0, which is a good default if
+> the stages are CPU bound, but if stages are waiting on external resources or
+> other processes, increasing the number of stages may be helpful.
 
 => number of stages = number of CPU cores by default.
 
@@ -104,6 +102,63 @@ say, on my MacBook with 4 cores:
 10
 [101, 102, 103, 104, 105, 106, 107, 108, 109, 110]
 ```
+
+### number of stages with and without partitioning
+
+without partitioning the same stages are reused for all Flow calls:
+
+```elixir
+["foo", "bar"]
+|> Flow.from_enumerable()
+|> Flow.flat_map(...)
+|> Flow.reduce(...)
+```
+
+=>
+
+```
+[file stream]  # Flow.from_enumerable/1 (producer)
+   |    |
+ [M1]  [M2]    # Flow.flat_map/2 + Flow.reduce/3 (consumer)
+```
+
+partitioning always creates new stages:
+
+```elixir
+["foo", "bar"]
+|> Flow.from_enumerable()
+|> Flow.flat_map(...)
+|> Flow.partition()
+|> Flow.reduce(...)
+```
+
+=>
+
+```
+[file stream]  # Flow.from_enumerable/1 (producer)
+   |    |
+ [M1]  [M2]    # Flow.flat_map/2 (producer-consumer)
+   |\  /|
+   | \/ |
+   |/ \ |
+ [R1]  [R2]    # Flow.reduce/3 (consumer)
+```
+
+number of stages can be changed after partitioning:
+
+```elixir
+["foo", "bar", "baz", "foo"]
+|> Flow.from_enumerable(stages: 4, max_demand: 1)
+|> Flow.partition()
+|> Flow.uniq()
+|> Enum.to_list()
+```
+
+in this case there are 4 stages before partitioning and 3 stages after it:
+default hashing function routes both `foo` words to the same partition so
+Flow concludes it can make do with 3 stages only (this is how it works IMO).
+still it's possible to set the number of stages manually by passing `stages`
+option to `Flow.partition/2`.
 
 max_demand vs. number of stages
 -------------------------------
@@ -154,11 +209,12 @@ iex> 1..10
 [110, 104, 105, 101, 102, 107, 108, 106, 103, 109]
 ```
 
-Flow.partition/2
-----------------
+partitioning with Flow.partition/2
+----------------------------------
 
 1. <https://hexdocs.pm/flow/Flow.html#partition/2>
-2. <https://10consulting.com/2017/01/20/building-product-recommendations-using-elixir-gen-stage-flow>
+2. <http://blog.plataformatec.com.br/2018/07/whats-new-in-flow-v0-14>
+3. <https://10consulting.com/2017/01/20/building-product-recommendations-using-elixir-gen-stage-flow>
 
 see the full article for complete example of using Flow to count words and
 using `Flow.partition/2` in particular:
@@ -169,3 +225,6 @@ using `Flow.partition/2` in particular:
 > Since we want to count words, we need to make sure that we will always
 > route the same word to the same partition, so all occurrences belong to
 > a single place and not scattered around.
+
+the number of partitions created with `Flow.partition/2` is determined by
+`stages` option (`System.schedulers_online/0` by default).

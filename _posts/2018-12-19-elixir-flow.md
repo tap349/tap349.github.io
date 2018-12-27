@@ -51,8 +51,8 @@ say, if `max_demand` = 100 and there remains 90 unprocessed events, consumer
 will ask producer for the next (100 - 90) = 10 events. so high `min_demand`
 results in small batches which is perfectly fine for slow consumers as this
 allows more stages to consume remaining events concurrently while in case of
-of small collections and large batches these events might have been reserved
-for a single stage.
+small collections and large batches these events might have been reserved for
+a single stage.
 
 number of stages
 ----------------

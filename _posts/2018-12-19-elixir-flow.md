@@ -228,3 +228,8 @@ using `Flow.partition/2` in particular:
 
 the number of partitions created with `Flow.partition/2` is determined by
 `stages` option (`System.schedulers_online/0` by default).
+
+error handling
+--------------
+
+1. <https://elixirforum.com/t/flow-error-handling/7473/3>

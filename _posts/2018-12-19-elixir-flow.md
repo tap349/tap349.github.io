@@ -31,8 +31,12 @@ of concurrency is determined by the number of mapper and reducer stages.
 => `Stream` allows to limit memory usage, `Flow` allows to reduce processing
 time.
 
-`max_demand` vs. `min_demand` options
--------------------------------------
+max_demand vs. min_demand
+-------------------------
+
+> <https://hexdocs.pm/flow/Flow.html>
+>
+> By default, Flow will work with batches of 500 items.
 
 > <https://www.youtube.com/watch?v=srtMWzyqdp8>
 >
@@ -98,11 +102,12 @@ say, on my MacBook with 4 cores:
 
 ### number of stages with and without partitioning
 
-without partitioning the same stages are reused for all Flow calls. I want to
-stress it once again: subsequent Flow calls are made in the same stages.
+without partitioning the same stages are reused for all Flow operations.
+I want to stress it once again: all Flow operations in the pipe are made
+in the same stages (= the same processes).
 
-in example below `Flow.flat_map/2` and `Flow.reduce/3` operations are executed
-sequentially in the same stage for each item of collection.
+for each collection item `Flow.flat_map/2` and `Flow.reduce/3` operations
+are executed sequentially and in the same stage:
 
 ```elixir
 ["foo", "bar"]
@@ -141,7 +146,7 @@ partitioning always creates new stages:
  [R1]  [R2]    # Flow.reduce/3 (consumer)
 ```
 
-number of stages can be changed after partitioning:
+partitioning doesn't have to keep the same number of stages as before:
 
 ```elixir
 ["foo", "bar", "baz", "foo"]
@@ -165,8 +170,8 @@ fetch_sitemap_shop_urls()
 |> Flow.run()
 ```
 
-=> collection items are processed using 57 stages concurrently
-(each stage receives one collection item because of `max_demand: 1`).
+=> collection items are processed using 57 stages concurrently (each
+stage receives only one collection item because of `max_demand: 1`).
 
 ```elixir
 fetch_sitemap_shop_urls()
@@ -184,9 +189,10 @@ will be created (+1 process for `Flow.from_enumerable/1`).
 max_demand vs. number of stages
 -------------------------------
 
-it's important to note that `max_demand` items constitute a single batch and
-are sent to the same stage: producer sends the first `max_demand` events to
-the 1st stage, the next `max_demand` events - to the 2nd stage and so on.
+it's important to note that `max_demand` items constitute a single batch,
+batch items are always sent to the same stage one by one. that is producer
+sends the first `max_demand` events to the 1st stage, the next `max_demand`
+events - to the 2nd stage and so on.
 
 if there remains less than `max_demand` events in enumerable, they are sent
 to the next stage. if there are any unused stages left, they remain idle for
@@ -230,8 +236,24 @@ iex> 1..10
 [110, 104, 105, 101, 102, 107, 108, 106, 103, 109]
 ```
 
-partitioning with `Flow.partition/2`
-------------------------------------
+it's important to note that there can be max `max_demand` items in the pipe
+at any given moment. say, there are 2 Flow operations in the pipe:
+
+- `max_demand` is 1
+
+  the 2nd item can be processed by the 1st operation only after the 1st item
+  is processed by both operations => there is only 1 item in the pipe at any
+  given moment.
+
+- `max_demand` is 2
+
+  the 2nd item can be processed by the 1st operation only after the 1st item
+  is processed by the 1st operation but the the 3rd item cannot be processed
+  by the 1st operation until the 1st item is processed by both operations =>
+  there are only 2 items in the pipe at any given moment.
+
+partitioning with Flow.partition/2
+----------------------------------
 
 1. <https://hexdocs.pm/flow/Flow.html#partition/2>
 2. <http://blog.plataformatec.com.br/2018/07/whats-new-in-flow-v0-14>
@@ -247,20 +269,16 @@ using `Flow.partition/2` in particular:
 > route the same word to the same partition, so all occurrences belong to
 > a single place and not scattered around.
 
-### `stages` option
+### stages and max_demand
 
-the number of partitions created with `Flow.partition/2` is determined by
-the value of `stages` option (`System.schedulers_online/0` by default):
+`Flow.partition/2` doesn't respect previous values of `stages` and
+`max_demand` options:
 
 ```elixir
 list
 |> Flow.from_enumerable(stages: 10) # 10 stages
 |> Flow.partition() # System.schedulers_online() stages
 ```
-
-=> `Flow.partition/2` doesn't reuse previous value of `stages` option.
-
-### `max_demand` option
 
 ```elixir
 list

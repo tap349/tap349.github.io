@@ -237,7 +237,10 @@ iex> 1..10
 ```
 
 it's important to note that there can be max `max_demand` items in the pipe
-at any given moment. say, there are 2 Flow operations in the pipe:
+at any given moment - that is in one stage because each item is processed by
+multiple operations in the same stage (if there is no partitioning).
+
+say, there are 2 Flow operations in the pipe:
 
 - `max_demand` is 1
 
@@ -251,6 +254,12 @@ at any given moment. say, there are 2 Flow operations in the pipe:
   is processed by the 1st operation but the the 3rd item cannot be processed
   by the 1st operation until the 1st item is processed by both operations =>
   there are only 2 items in the pipe at any given moment.
+
+most likely partitioning breaks the pipe into 2 parts - before and after it.
+so 2 Flow operations are executed in different stages which have their own
+`max_demand`. I guess new parts act as standalone pipes and the rule above
+applies to each of them independently => even if `max_demand` is 1, new item
+can be consumed by the 1st stage when the 1st item reaches a reducer stage.
 
 partitioning with Flow.partition/2
 ----------------------------------

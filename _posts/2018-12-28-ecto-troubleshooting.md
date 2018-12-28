@@ -58,8 +58,45 @@ with `Ecto.Repo.insert_all/3`:
 -     adapter: Ecto.Adapters.Postgres
 +     adapter: Ecto.Adapters.Postgres,
 +     # 50ms by default
-+     queue_target: 500,
++     queue_target: 5_000,
 +     # 1_000ms by default
-+     queue_interval: 10_000
++     queue_interval: 100_000
+  end
+```
+
+(DBConnection.ConnectionError) client timed out because it queued and checked out the connection for longer than 15000ms
+------------------------------------------------------------------------------------------------------------------------
+
+```
+iex> Reika.Shopee.Shop.Mutator.delete_all()
+[error] Postgrex.Protocol (#PID<0.439.0>) disconnected: ** (DBConnection.ConnectionError)
+  client #PID<0.478.0> timed out because it queued and checked out the connection for longer than 15000ms
+** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed by the pool,
+  possibly due to a timeout or because the pool has been terminated)
+    (ecto_sql) lib/ecto/adapters/sql.ex:604: Ecto.Adapters.SQL.raise_sql_call_error/1
+    (ecto_sql) lib/ecto/adapters/sql.ex:537: Ecto.Adapters.SQL.execute/5
+```
+
+**solution**
+
+> <https://hexdocs.pm/ecto/Ecto.Repo.html#module-shared-options>
+>
+> :timeout - The time in milliseconds to wait for the query call to finish,
+>   :infinity will wait indefinitely (default: 15000);
+
+```diff
+  # lib/reika/repo.ex
+
+  defmodule Reika.Repo do
+    use Ecto.Repo,
+      otp_app: :reika,
+      adapter: Ecto.Adapters.Postgres,
+      # 50ms by default
+      queue_target: 5_000,
+      # 1_000ms by default
+-     queue_interval: 100_000
++     queue_interval: 100_000,
++     # 15_000ms by default
++     timeout: 30_000
   end
 ```

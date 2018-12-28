@@ -31,8 +31,8 @@ of concurrency is determined by the number of mapper and reducer stages.
 => `Stream` allows to limit memory usage, `Flow` allows to reduce processing
 time.
 
-max_demand vs. min_demand
--------------------------
+`max_demand` vs. `min_demand` options
+-------------------------------------
 
 > <https://www.youtube.com/watch?v=srtMWzyqdp8>
 >
@@ -51,8 +51,8 @@ say, if `max_demand` = 100 and there remains 90 unprocessed events, consumer
 will ask producer for the next (100 - 90) = 10 events. so high `min_demand`
 results in small batches which is perfectly fine for slow consumers as this
 allows more stages to consume remaining events concurrently while in case of
-small collections and large batches these events might have been reserved for
-a single stage.
+large batches there's a risk that all these events would be sent to the same
+stage or a small number of stages.
 
 number of stages
 ----------------
@@ -61,13 +61,6 @@ number of stages
 >
 > Another parameter you usually tune is the `stages: ...` option, you should
 > set that to the amount of connections you had in poolboy in the past.
-
-> <https://hexdocs.pm/flow/Flow.html#module-configuration-demand-and-the-number-of-stages>
->
-> If stages perform IO, it may also be worth increasing the number of stages.
-> The default value is System.schedulers_online/0, which is a good default if
-> the stages are CPU bound, but if stages are waiting on external resources or
-> other processes, increasing the number of stages may be helpful.
 
 > <https://hexdocs.pm/flow/Flow.html#module-configuration-demand-and-the-number-of-stages>
 >
@@ -105,7 +98,11 @@ say, on my MacBook with 4 cores:
 
 ### number of stages with and without partitioning
 
-without partitioning the same stages are reused for all Flow calls:
+without partitioning the same stages are reused for all Flow calls. I want to
+stress it once again: subsequent Flow calls are made in the same stages.
+
+in example below `Flow.flat_map/2` and `Flow.reduce/3` operations are executed
+sequentially in the same stage for each item of collection.
 
 ```elixir
 ["foo", "bar"]
@@ -149,16 +146,40 @@ number of stages can be changed after partitioning:
 ```elixir
 ["foo", "bar", "baz", "foo"]
 |> Flow.from_enumerable(stages: 4, max_demand: 1)
-|> Flow.partition()
+|> Flow.partition(5)
 |> Flow.uniq()
 |> Enum.to_list()
 ```
 
-in this case there are 4 stages before partitioning and 3 stages after it:
+in this case there are 4 stages before partitioning and 5 stages after it.
 default hashing function routes both `foo` words to the same partition so
-Flow concludes it can make do with 3 stages only (this is how it works IMO).
-still it's possible to set the number of stages manually by passing `stages`
-option to `Flow.partition/2`.
+in fact only 3 stages will be used and 2 stages will remain idle.
+
+### another example with and without partitioning
+
+```elixir
+fetch_sitemap_shop_urls()
+|> Flow.from_enumerable(stages: 57, max_demand: 1)
+|> Flow.flat_map(&fetch_shop_urls/1)
+|> Flow.each(&import_shops/1)
+|> Flow.run()
+```
+
+=> collection items are processed using 57 stages concurrently
+(each stage receives one collection item because of `max_demand: 1`).
+
+```elixir
+fetch_sitemap_shop_urls()
+|> Flow.from_enumerable(stages: 57, max_demand: 1)
+|> Flow.flat_map(&fetch_shop_urls/1)
+|> Flow.partition()
+|> Flow.each(&import_shops/1)
+|> Flow.run()
+```
+
+=> collection items are processed using 57 stages before `Flow.partition/2`
+and using 4 stages after `Flow.partition/2`. by and large 57 + 4 processes
+will be created (+1 process for `Flow.from_enumerable/1`).
 
 max_demand vs. number of stages
 -------------------------------
@@ -209,8 +230,8 @@ iex> 1..10
 [110, 104, 105, 101, 102, 107, 108, 106, 103, 109]
 ```
 
-partitioning with Flow.partition/2
-----------------------------------
+partitioning with `Flow.partition/2`
+------------------------------------
 
 1. <https://hexdocs.pm/flow/Flow.html#partition/2>
 2. <http://blog.plataformatec.com.br/2018/07/whats-new-in-flow-v0-14>
@@ -226,8 +247,29 @@ using `Flow.partition/2` in particular:
 > route the same word to the same partition, so all occurrences belong to
 > a single place and not scattered around.
 
+### `stages` option
+
 the number of partitions created with `Flow.partition/2` is determined by
-`stages` option (`System.schedulers_online/0` by default).
+the value of `stages` option (`System.schedulers_online/0` by default):
+
+```elixir
+list
+|> Flow.from_enumerable(stages: 10) # 10 stages
+|> Flow.partition() # System.schedulers_online() stages
+```
+
+=> `Flow.partition/2` doesn't reuse previous value of `stages` option.
+
+### `max_demand` option
+
+```elixir
+list
+|> Flow.from_enumerable(max_demand: 10) # max_demand = 10
+|> Flow.partition() # max_demand = 1 (?)
+```
+
+it looks like `Flow.partition/2` sets `max_demand` to 1 unless specified
+explicitly even though `max_demand` defaults to 1000 according to Flow docs.
 
 error handling
 --------------

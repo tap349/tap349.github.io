@@ -100,3 +100,11 @@ iex> Reika.Shopee.Shop.Mutator.delete_all()
 +     timeout: 30_000
   end
 ```
+
+***UPDATE***
+
+this timeout doesn't work unless passed to `Ecto.Repo` functions manually:
+
+```elixir
+Reika.Repo.delete_all(Reika.Shopee.Shop, timeout: 30_000)
+```

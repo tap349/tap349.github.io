@@ -165,11 +165,10 @@ to enable query logging in AppSignal back again:
   def start(_type, _args) do
     import Supervisor.Spec
 
-+   Telemetry.attach(
++   :telemetry.attach(
 +     "appsignal-ecto",
 +     [:my_app, :repo, :query],
-+     Appsignal.Ecto,
-+     :handle_event,
++     &Appsignal.Ecto.handle_event/4,
 +     nil
 +   )
 

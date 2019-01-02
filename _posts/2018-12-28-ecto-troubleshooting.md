@@ -76,7 +76,8 @@ iex> MyApp.User.Mutator.delete_all()
 
 **solution**
 
-increase the value of `timeout` option (time to wait for query call to finish):
+increase the value of `timeout` option (time to wait for query call to finish)
+which defaults to 15000 ms:
 
 > <https://github.com/elixir-ecto/ecto/issues/1838#issuecomment-265692336>
 >
@@ -94,7 +95,7 @@ increase the value of `timeout` option (time to wait for query call to finish):
   >   :infinity will wait indefinitely (default: 15000);
 
   ```elixir
-  MyApp.Repo.delete_all(MyApp.User, timeout: 30_000)
+  MyApp.Repo.delete_all(MyApp.User, timeout: 60_000)
   ```
 
 - for all repository operations via repository configuration
@@ -113,7 +114,7 @@ increase the value of `timeout` option (time to wait for query call to finish):
     password: "my_app_prod",
     database: "my_app_prod",
     pool_size: 30,
-    timeout: 30_000
+    timeout: 60_000
   ```
 
   NOTE: setting `timeout` option in `MyApp.Repo` module has no effect:
@@ -125,7 +126,7 @@ increase the value of `timeout` option (time to wait for query call to finish):
     use Ecto.Repo,
       otp_app: :my_app,
       adapter: Ecto.Adapters.Postgres,
-      timeout: 120_000
+      timeout: 60_000
   end
   ```
 

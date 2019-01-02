@@ -85,16 +85,26 @@ in general it's always better to start supervised tasks:
 > (or GenServer.start) in production as that may lead to dangling processes
 > which may in turn cause some strange behaviour of the system.
 
-spawned tasks are linked to the caller:
+tasks are linked to the caller:
 
 - `Task.Supervisor.async`
 - `Task.Supervisor.async_stream`
 
-spawned tasks are not linked to the caller:
+tasks are not linked to the caller:
 
 - `Task.Supervisor.async_nolink`
 - `Task.Supervisor.async_stream_nolink`
 - `Task.Supervisor.start_child`
+
+tasks can be awaited:
+
+- `Task.Supervisor.async`
+- `Task.Supervisor.async_nolink`
+
+tasks are always awaited:
+
+- `Task.Supervisor.async_stream`
+- `Task.Supervisor.async_stream_nolink`
 
 `Task.Supervisor.start_child`:
 
@@ -107,7 +117,7 @@ spawned tasks are not linked to the caller:
 - task cannot be awaited
 
   when using other functions it's possible either to await on the task or
-  get result by triggering enumeration on a stream => this function should
+  get result by triggering enumeration on a stream - this function should
   be used for side-effects only.
 
 Supervisor

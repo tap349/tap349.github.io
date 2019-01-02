@@ -76,7 +76,13 @@ iex> MyApp.User.Mutator.delete_all()
 
 **solution**
 
-`timeout` option can be set:
+increase the value of `timeout` option (time to wait for query call to finish):
+
+> <https://github.com/elixir-ecto/ecto/issues/1838#issuecomment-265692336>
+>
+> You can either Ecto.Adapters.SQL.query(Repo, query, params, timeout: 30_000)
+> or by setting the timeout: 30_000 in your Repo configuration in your config/*
+> files.
 
 - on per a repository operation basis
 
@@ -123,8 +129,8 @@ iex> MyApp.User.Mutator.delete_all()
   end
   ```
 
-set breakpoint in `Ecto.Adapters.SQL.execute/5` to see actual options used
-when performing repository operation:
+set breakpoint in `Ecto.Adapters.SQL.execute/5` to see actual options being
+used when performing repository operation:
 
 ```elixir
 # deps/ecto_sql/lib/ecto/adapters/sql.ex

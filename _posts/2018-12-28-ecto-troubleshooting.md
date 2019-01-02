@@ -29,12 +29,9 @@ with `Ecto.Repo.insert_all/3`:
             (ecto_sql) lib/ecto/adapters/sql.ex:604: Ecto.Adapters.SQL.raise_sql_call_error/1
             (ecto_sql) lib/ecto/adapters/sql.ex:513: Ecto.Adapters.SQL.insert_all/8
             (ecto) lib/ecto/repo/schema.ex:56: Ecto.Repo.Schema.do_insert_all/6
-            (reika) lib/reika/shopee/shop/operations/sync.ex:57: Reika.Shopee.Shop.Workers.Sync.import_shops/1
 ```
 
 **solution**
-
-1. <https://github.com/elixir-ecto/ecto/issues/2833>
 
 > <https://github.com/elixir-ecto/ecto/issues/2833#issuecomment-440400022>
 >
@@ -50,11 +47,11 @@ with `Ecto.Repo.insert_all/3`:
 > then we start dropping messages.
 
 ```diff
-  # lib/reika/repo.ex
+  # lib/my_app/repo.ex
 
-  defmodule Reika.Repo do
+  defmodule MyApp.Repo do
     use Ecto.Repo,
-      otp_app: :reika,
+      otp_app: :my_app,
 -     adapter: Ecto.Adapters.Postgres
 +     adapter: Ecto.Adapters.Postgres,
 +     # 50ms by default
@@ -68,7 +65,7 @@ with `Ecto.Repo.insert_all/3`:
 ------------------------------------------------------------------------------------------------------------------------
 
 ```
-iex> Reika.Shopee.Shop.Mutator.delete_all()
+iex> MyApp.User.Mutator.delete_all()
 [error] Postgrex.Protocol (#PID<0.439.0>) disconnected: ** (DBConnection.ConnectionError)
   client #PID<0.478.0> timed out because it queued and checked out the connection for longer than 15000ms
 ** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed by the pool,
@@ -79,32 +76,65 @@ iex> Reika.Shopee.Shop.Mutator.delete_all()
 
 **solution**
 
-> <https://hexdocs.pm/ecto/Ecto.Repo.html#module-shared-options>
->
-> :timeout - The time in milliseconds to wait for the query call to finish,
->   :infinity will wait indefinitely (default: 15000);
+`timeout` option can be set:
 
-```diff
-  # lib/reika/repo.ex
+- on per a repository operation basis
 
-  defmodule Reika.Repo do
+  > <https://hexdocs.pm/ecto/Ecto.Repo.html#module-shared-options>
+  >
+  > Almost all of the repository operations below accept the following options:
+  >
+  > :timeout - The time in milliseconds to wait for the query call to finish,
+  >   :infinity will wait indefinitely (default: 15000);
+
+  ```elixir
+  MyApp.Repo.delete_all(MyApp.User, timeout: 30_000)
+  ```
+
+- for all repository operations via repository configuration
+
+  > <https://hexdocs.pm/ecto/2.0.0/Ecto.Adapters.Postgres.html>
+  >
+  > Compile time options
+  >
+  > :timeout - The default timeout to use on queries, defaults to 15000
+
+  ```elixir
+  # config/prod.secret.exs
+
+  config :my_app, MyApp.Repo,
+    username: "my_app_prod",
+    password: "my_app_prod",
+    database: "my_app_prod",
+    pool_size: 30,
+    timeout: 30_000
+  ```
+
+  NOTE: setting `timeout` option in `MyApp.Repo` module has no effect:
+
+  ```elixir
+  # lib/my_app/repo.ex
+
+  defmodule MyApp.Repo do
     use Ecto.Repo,
-      otp_app: :reika,
+      otp_app: :my_app,
       adapter: Ecto.Adapters.Postgres,
-      # 50ms by default
-      queue_target: 5_000,
-      # 1_000ms by default
--     queue_interval: 100_000
-+     queue_interval: 100_000,
-+     # 15_000ms by default
-+     timeout: 30_000
+      timeout: 120_000
   end
-```
+  ```
 
-***UPDATE***
-
-this timeout doesn't work unless passed to `Ecto.Repo` functions manually:
+set breakpoint in `Ecto.Adapters.SQL.execute/5` to see actual options used
+when performing repository operation:
 
 ```elixir
-Reika.Repo.delete_all(Reika.Shopee.Shop, timeout: 30_000)
+# deps/ecto_sql/lib/ecto/adapters/sql.ex
+
+def execute(adapter_meta, query_meta, prepared, params, opts) do
+  require IEx; IEx.pry
+  # print `adapter_meta`
+  %{num_rows: num, rows: rows} =
+    execute!(adapter_meta, prepared, params, put_source(opts, query_meta))
+
+  {num, rows}
+end
 ```

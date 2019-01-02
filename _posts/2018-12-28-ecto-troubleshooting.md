@@ -77,7 +77,7 @@ iex> MyApp.User.Mutator.delete_all()
 **solution**
 
 increase the value of `timeout` option (time to wait for query call to finish)
-which defaults to 15000 ms:
+which defaults to 15_000 ms:
 
 > <https://github.com/elixir-ecto/ecto/issues/1838#issuecomment-265692336>
 >

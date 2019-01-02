@@ -416,7 +416,7 @@ $ alias iex='iex -S mix'
 $ iex test --trace
 ```
 
-test will time out after 60000ms by default unless `--trace` option is used:
+test will time out after 60000 ms by default unless `--trace` option is used:
 
 ```
 ** (ExUnit.TimeoutError) test timed out after 60000ms. You can change the timeout:

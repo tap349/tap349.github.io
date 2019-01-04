@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Docker (legacy)
+title: Docker (Legacy)
 date: 2017-04-06 17:58:18 +0300
 access: public
 comments: true

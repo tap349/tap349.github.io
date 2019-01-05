@@ -131,3 +131,14 @@ if it's all okay with DNS servers try to open:
 - any site URL
 
 in all cases you should be redirected to Wi-Fi login screen.
+
+Dashlane window is not visible
+------------------------------
+
+**solution**
+
+most likely Dashlane has already logged me out but login pop-up window is not
+shown - it doesn't matter how many times I open and close application itself.
+
+solution is to kill `DashlaneAgent` process - say, using `htop` or `Activity
+Monitor`. login pop-up window must appear the next time Dashlane is launched.

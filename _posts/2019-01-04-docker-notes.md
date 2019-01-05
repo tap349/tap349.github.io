@@ -43,7 +43,7 @@ NOTE: it's not necessary to initialize a swarm to use `docker-compose`.
 > <https://docs.docker.com/get-started/part3/#about-services>
 >
 > Services are really just “containers in production.” A service only runs
-> one image, but it codifies the way that image runs—what ports it should
+> one image, but it codifies the way that image runs — what ports it should
 > use, how many replicas of the container should run so the service has the
 > capacity it needs, and so on.
 
@@ -52,3 +52,16 @@ NOTE: it's not necessary to initialize a swarm to use `docker-compose`.
 > A single container running in a service is called a task. Tasks are given
 > unique IDs that numerically increment, up to the number of replicas you
 > defined in docker-compose.yml.
+
+volumes
+-------
+
+container state is persisted in `container's writable layer` even if no volume
+is defined and mounted for the service:
+
+> <https://docs.docker.com/storage/volumes>
+>
+> Volumes are often a better choice than persisting data in a container’s
+> writable layer, because a volume does not increase the size of the
+> containers using it, and the volume’s contents exist outside the lifecycle
+> of a given container.

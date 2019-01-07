@@ -108,17 +108,20 @@ tasks are always awaited:
 
 `Task.Supervisor.start_child`:
 
+- tasks are linked to the supervisor but not to the caller
+
 - crashed tasks can be restarted
 
-  task is linked to the supervisor (though not linked to the caller) =>
-  it's possible to change restart strategy of task supervisor - when using
-  other functions task supervisor must have `restart: :temporary` option.
+  it's made possible by the fact that tasks are linked to the supervisor, not
+  the caller. when using other functions (not `start_child`) task supervisor
+  must have `:temporary` restart strategy while in case of `start_child` this
+  strategy may be `:temporary` (the default), `:transient` or `:permanent`.
 
 - task cannot be awaited
 
-  when using other functions it's possible either to await on the task or
-  get result by triggering enumeration on a stream - this function should
-  be used for side-effects only.
+  when using other functions it's possible either to await on the task or get
+  result by triggering enumeration on a stream - this function should be used
+  for side-effects only.
 
 Supervisor
 ----------

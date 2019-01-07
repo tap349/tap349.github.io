@@ -19,19 +19,31 @@ categories: [elasticsearch, rails]
 - models inside Elasticsearch are called documents
 - documents in Elasticsearch are identified by model ids
 
-import all `ProductEvent` models into Elasticsearch
-(previous imported models will be replaced):
+import all `ProductEvent` models into Elasticsearch (previous imported models
+will be replaced):
 
 ```sh
 $ ProductEvent.__elasticsearch__.import
 ```
 
-sync specific model (`POST` request will be issued
-if model has been indexed, `PUT` request otherwise):
+sync specific model (`POST` request will be issued if model has been indexed,
+`PUT` request otherwise):
 
 ```sh
 $ ProductEvent.last.__elasticsearch__.index_document
 ```
+
+notes
+-----
+
+### type
+
+> <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/removal-of-types.html#_schedule_for_removal_of_mapping_types>
+>
+> Indices created in 6.x only allow a single-type per index. Any name can
+> be used for the type, but there can be only one. The preferred type name
+> is _doc, so that index APIs have the same path as they will have in 7.0:
+> PUT {index}/_doc/{id} and POST {index}/_doc
 
 troubleshooting
 ---------------

@@ -43,10 +43,23 @@ notes
 > Indices created in 6.x only allow a single-type per index. Any name can
 > be used for the type, but there can be only one. The preferred type name
 > is _doc, so that index APIs have the same path as they will have in 7.0:
-> PUT {index}/_doc/{id} and POST {index}/_doc
+> PUT {index}/_doc/{id} and POST {index}/_doc.
 
 troubleshooting
 ---------------
+
+### Document mapping type name can't start with '_'
+
+1. <https://discuss.elastic.co/t/cant-use-doc-as-type-despite-it-being-declared-the-preferred-method/113837>
+
+**solution**
+
+even though `_doc` type is recommended as a default type in Elasticsearch 6.x,
+leading underscore in type names can be used since Elasticsearch 6.2.0 only:
+
+> <https://discuss.elastic.co/t/cant-use-doc-as-type-despite-it-being-declared-the-preferred-method/113837/9>
+>
+> Sorry for the confusion, we addressed this in 6.2.0.
 
 ### "type":"mapper_parsing_exception","reason":"failed to parse [extra_data.goal]"
 

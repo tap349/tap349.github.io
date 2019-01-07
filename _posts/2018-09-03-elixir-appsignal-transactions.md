@@ -187,7 +187,7 @@ tips
 
   ```elixir
   case Appsignal.TransactionRegistry.lookup(self()) do
-    nil -> Appsignal.send_error(%RuntimeError{}, message, [])
+    nil -> Appsignal.send_error(%RuntimeError{message: message})
     _ -> Appsignal.Transaction.set_error("RuntimeError", message, [])
   end
   ```

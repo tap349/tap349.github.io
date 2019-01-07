@@ -62,3 +62,15 @@ end
 ```
 
 => in most cases `params` are used.
+
+config
+------
+
+common sensible configuration should take place in _config/config.exs_ -
+it can be amended with environment-specific details in environment config
+files (_config/dev.exs_, etc.).
+
+when in doubt place production configuration in _config/config.exs_ but
+without production secrets and details (say, production URLs) that would
+prevent application from running in development in case _config/dev.exs_
+is removed at all.

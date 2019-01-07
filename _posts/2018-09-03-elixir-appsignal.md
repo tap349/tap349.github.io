@@ -73,22 +73,20 @@ if AppSignal transaction is not started (say, in GenServer):
 information about current transaction is lost in child processes!
 
 ```elixir
-@decorate transaction(:background_job)
-def perform do
-  IO.inspect(Appsignal.TransactionRegistry.lookup(self()))
-  # => AppSignal.Transaction{o1m4adl8kaao0}
-  task = Task.async(fn ->
+defmodule Worker do
+  @decorate transaction(:background_job)
+  def perform do
     IO.inspect(Appsignal.TransactionRegistry.lookup(self()))
-    # => nil
-  end)
+    # => AppSignal.Transaction{o1m4adl8kaao0}
+    task = Task.async(fn ->
+      IO.inspect(Appsignal.TransactionRegistry.lookup(self()))
+      # => nil
+    end)
 
-  Task.await(task)
+    Task.await(task)
+  end
 end
 ```
-
-so it's necessary either to start transaction manually in a child process
-(say, using `transaction` decorator) or use instrumentation helpers which
-allow to pass parent PID explicitly:
 
 > <https://docs.appsignal.com/elixir/instrumentation/instrumentation.html#adding-asynchronous-events-to-a-transaction>
 >
@@ -97,21 +95,55 @@ allow to pass parent PID explicitly:
 > process, the event will be registered on that transaction, otherwise it's
 > ignored.
 
+so it's necessary either to start transaction manually in a child process
+(say, using `transaction` decorator):
+
 ```elixir
-import Appsignal.Instrumentation.Helpers, only: [instrument: 4]
+defmodule Worker do
+  use Appsignal.Instrumentation.Decorators
 
-@decorate transaction(:background_job)
-def perform do
-  parent = self()
+  @decorate transaction(:background_job)
+  def perform do
+    task = Task.async(fn -> Operation.call() end)
+    Task.await(task)
+  end
+end
 
-  task = Task.async(fn ->
-    # = @decorate transaction_event("fb_api")
-    instrument(parent, "fb_api", "Fetching FB data", fn ->
-      Backend.get_result()
+defmodule Operation do
+  use Appsignal.Instrumentation.Decorators
+
+  @decorate transaction(:operation)
+  def call do
+    fetch_data()
+  end
+
+  @decorate transaction_event("fb_api")
+  defp fetch_data do
+    FB.API.fetch_data()
+  end
+end
+```
+
+or use instrumentation helpers which allow to pass parent PID explicitly:
+
+```elixir
+defmodule Worker do
+  use Appsignal.Instrumentation.Decorators
+  import Appsignal.Instrumentation.Helpers, only: [instrument: 4]
+
+  @decorate transaction(:background_job)
+  def perform do
+    parent = self()
+
+    task = Task.async(fn ->
+      # = @decorate transaction_event("fb_api")
+      instrument(parent, "fb_api", "Fetching FB data", fn ->
+        FB.API.fetch_data()
+      end)
     end)
-  end)
 
-  Task.await(task)
+    Task.await(task)
+  end
 end
 ```
 

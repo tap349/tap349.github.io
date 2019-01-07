@@ -43,7 +43,8 @@ if AppSignal transaction is not started (say, in GenServer):
   > In order to track transaction_event decorators we will need to start
   > an AppSignal transaction beforehand.
 
-  performance data is sent inside AppSignal transaction only.
+  => `transaction_event` decorator doesn't work - performance data is sent
+  inside AppSignal transaction only.
 
 - unhandled errors are still sent
 
@@ -66,3 +67,68 @@ if AppSignal transaction is not started (say, in GenServer):
   1. <https://docs.appsignal.com/elixir/instrumentation/exception-handling.html#appsignal-send_error-6>
 
   it always sends errors irrespective of AppSignal transaction.
+
+### transactions and new processes
+
+information about current transaction is lost in child processes!
+
+```elixir
+@decorate transaction(:background_job)
+def perform do
+  IO.inspect(Appsignal.TransactionRegistry.lookup(self()))
+  # => AppSignal.Transaction{o1m4adl8kaao0}
+  task = Task.async(fn ->
+    IO.inspect(Appsignal.TransactionRegistry.lookup(self()))
+    # => nil
+  end)
+
+  Task.await(task)
+end
+```
+
+so it's necessary either to start transaction manually in a child process
+(say, using `transaction` decorator) or use instrumentation helpers which
+allow to pass parent PID explicitly:
+
+> <https://docs.appsignal.com/elixir/instrumentation/instrumentation.html#adding-asynchronous-events-to-a-transaction>
+>
+> To add events to another process' transaction you can pass along the PID of
+> a process to the instrument/4 function. If a transaction exists for that
+> process, the event will be registered on that transaction, otherwise it's
+> ignored.
+
+```elixir
+import Appsignal.Instrumentation.Helpers, only: [instrument: 4]
+
+@decorate transaction(:background_job)
+def perform do
+  parent = self()
+
+  task = Task.async(fn ->
+    # = @decorate transaction_event("fb_api")
+    instrument(parent, "fb_api", "Fetching FB data", fn ->
+      Backend.get_result()
+    end)
+  end)
+
+  Task.await(task)
+end
+```
+
+### tips
+
+- get current transaction
+
+  ```elixir
+  Appsignal.TransactionRegistry.lookup(self())
+  # => AppSignal.Transaction{o1m4adl8kaao0}
+  ```
+
+  this is how to choose between using `set_error` and `send_error`:
+
+  ```elixir
+  case Appsignal.TransactionRegistry.lookup(self()) do
+    nil -> Appsignal.send_error(%RuntimeError{}, message, [])
+    _ -> Appsignal.Transaction.set_error("RuntimeError", message, [])
+  end
+  ```

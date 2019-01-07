@@ -95,7 +95,7 @@ which defaults to 15_000 ms:
   >   :infinity will wait indefinitely (default: 15000);
 
   ```elixir
-  MyApp.Repo.delete_all(MyApp.User, timeout: 60_000)
+  MyApp.Repo.delete_all(MyApp.User, timeout: 120_000)
   ```
 
 - for all repository operations via repository configuration
@@ -114,7 +114,7 @@ which defaults to 15_000 ms:
     password: "my_app_prod",
     database: "my_app_prod",
     pool_size: 30,
-    timeout: 60_000
+    timeout: 120_000
   ```
 
   NOTE: setting `timeout` option in `MyApp.Repo` module has no effect:
@@ -126,7 +126,7 @@ which defaults to 15_000 ms:
     use Ecto.Repo,
       otp_app: :my_app,
       adapter: Ecto.Adapters.Postgres,
-      timeout: 60_000
+      timeout: 120_000
   end
   ```
 

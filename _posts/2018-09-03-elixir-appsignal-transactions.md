@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir - AppSignal
+title: Elixir - AppSignal Transactions
 date: 2018-09-03 02:10:40 +0300
 access: public
 comments: true
@@ -13,15 +13,12 @@ categories: [elixir, appsignal]
 {:toc}
 <hr>
 
-AppSignal transaction
----------------------
-
 1. <https://docs.appsignal.com/elixir/instrumentation/instrumentation.html>
 2. <https://github.com/appsignal/appsignal-elixir/issues/299>
 
 transaction is created automatically for HTTP requests only (when Phoenix
-integration is set up) - all workers must start transaction manually, say,
-using AppSignal decorators:
+integration is set up) - all workers must start transaction manually using
+function decorators or corresponding helper functions:
 
 ```elixir
 defmodule MyApp.Worker
@@ -62,13 +59,14 @@ if AppSignal transaction is not started (say, in GenServer):
 
   it sends errors inside AppSignal transaction only.
 
-- `Appsignal.send_error/6` works
+- `Appsignal.send_error/7` works
 
-  1. <https://docs.appsignal.com/elixir/instrumentation/exception-handling.html#appsignal-send_error-6>
+  1. <https://docs.appsignal.com/elixir/instrumentation/exception-handling.html#appsignal-send_error-7>
 
   it always sends errors irrespective of AppSignal transaction.
 
-### transactions and new processes
+transactions and child processes
+--------------------------------
 
 information about current transaction is lost in child processes!
 
@@ -88,66 +86,95 @@ defmodule Worker do
 end
 ```
 
-> <https://docs.appsignal.com/elixir/instrumentation/instrumentation.html#adding-asynchronous-events-to-a-transaction>
->
-> To add events to another process' transaction you can pass along the PID of
-> a process to the instrument/4 function. If a transaction exists for that
-> process, the event will be registered on that transaction, otherwise it's
-> ignored.
+there are 2 solutions to use AppSignal in child processes (to add custom
+instrumentation and set errors):
 
-so it's necessary either to start transaction manually in a child process
-(say, using `transaction` decorator):
+- start a new transaction within a child process
 
-```elixir
-defmodule Worker do
-  use Appsignal.Instrumentation.Decorators
+  ```elixir
+  defmodule Worker do
+    use Appsignal.Instrumentation.Decorators
 
-  @decorate transaction(:background_job)
-  def perform do
-    task = Task.async(fn -> Operation.call() end)
-    Task.await(task)
-  end
-end
-
-defmodule Operation do
-  use Appsignal.Instrumentation.Decorators
-
-  @decorate transaction(:operation)
-  def call do
-    fetch_data()
+    @decorate transaction(:background_job)
+    def perform do
+      task = Task.async(fn -> Operation.call() end)
+      Task.await(task)
+    end
   end
 
-  @decorate transaction_event("fb_api")
-  defp fetch_data do
-    FB.API.fetch_data()
+  defmodule Operation do
+    use Appsignal.Instrumentation.Decorators
+
+    @decorate transaction(:operation)
+    def call do
+      fetch_data()
+      set_error()
+    end
+
+    @decorate transaction_event("fb_api")
+    defp fetch_data do
+      FB.API.fetch_data()
+    end
+
+    defp set_error do
+      Appsignal.Transaction.set_error("RuntimeError", "foo", [])
+    end
   end
-end
-```
+  ```
 
-or use instrumentation helpers which allow to pass parent PID explicitly:
+- pass parent PID or parent transaction PID explicitly
 
-```elixir
-defmodule Worker do
-  use Appsignal.Instrumentation.Decorators
-  import Appsignal.Instrumentation.Helpers, only: [instrument: 4]
+  pass parent PID to add custom instrumentation:
 
-  @decorate transaction(:background_job)
-  def perform do
-    parent = self()
+  > <https://docs.appsignal.com/elixir/instrumentation/instrumentation.html#adding-asynchronous-events-to-a-transaction>
+  >
+  > To add events to another process' transaction you can pass along the PID of
+  > a process to the instrument/4 function. If a transaction exists for that
+  > process, the event will be registered on that transaction, otherwise it's
+  > ignored.
 
-    task = Task.async(fn ->
-      # = @decorate transaction_event("fb_api")
-      instrument(parent, "fb_api", "Fetching FB data", fn ->
-        FB.API.fetch_data()
+  ```elixir
+  defmodule Worker do
+    use Appsignal.Instrumentation.Decorators
+    import Appsignal.Instrumentation.Helpers, only: [instrument: 4]
+
+    @decorate transaction(:background_job)
+    def perform do
+      parent = self()
+
+      task = Task.async(fn ->
+        # = @decorate transaction_event("fb_api")
+        instrument(parent, "fb_api", "Fetching FB data", fn ->
+          FB.API.fetch_data()
+        end)
       end)
-    end)
 
-    Task.await(task)
+      Task.await(task)
+    end
   end
-end
-```
+  ```
 
-### tips
+  pass parent transaction PID to set errors:
+
+  ```elixir
+  defmodule Worker do
+    def perform do
+      transaction = Appsignal.Transaction.start(
+        Appsignal.Transaction.generate_id(),
+        :background_job
+      )
+
+      task = Task.async(fn ->
+        set_error(transaction, "RuntimeError", "foo", [])
+      end)
+
+      Task.await(task)
+    end
+  end
+  ```
+
+tips
+----
 
 - get current transaction
 

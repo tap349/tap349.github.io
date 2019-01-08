@@ -36,6 +36,34 @@ $ ProductEvent.last.__elasticsearch__.index_document
 notes
 -----
 
+### index
+
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html>
+>
+> You do not have to explicitly specify index section inside the settings section.
+
+```json
+{
+  "settings" : {
+    "number_of_shards" : 3,
+    "number_of_replicas" : 2
+  }
+}
+```
+
+is equivalent to:
+
+```json
+{
+  "settings" : {
+    "index" : {
+      "number_of_shards" : 3,
+      "number_of_replicas" : 2
+    }
+  }
+}
+```
+
 ### type
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/removal-of-types.html#_schedule_for_removal_of_mapping_types>

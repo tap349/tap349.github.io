@@ -79,4 +79,4 @@ _config/config.exs_:
 environment config (say, _config/dev.exs_):
 
 - endpoint configuration (this is how config files are generated)
-- very specific environment configuration (mostly development configuratino)
+- very specific environment configuration (mostly development configuration)

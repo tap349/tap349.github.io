@@ -69,12 +69,17 @@ config
 _config/config.exs_:
 
 - configuration common for all environments
-- configuration used in most environments (say, logging configuration)
-- important production settings that may affect application behaviour
+- production configuration if it's also meant to be used in test environment
+  or when it's important for application behaviour
 
-  these settings must be used in development as well to avoid situations
-  when everything is okay in development but falls apart in production.
+  production settings may affect application behaviour (say, rate limits)
+  so these settings must be used in development to avoid situations when
+  everything is okay in development but falls apart in production.
 
 environment config (say, _config/dev.exs_):
 
-- settings which are very specific to environment (say, URLs)
+- endpoint configuration (this is how config files are generated)
+- very specific environment configuration
+
+  mostly development configuration since production configuration goes into
+  _config/config.exs_ in most cases.

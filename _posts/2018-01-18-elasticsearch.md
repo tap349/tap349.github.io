@@ -71,6 +71,20 @@ is equivalent to:
 }
 ```
 
+#### mapping
+
+1. <https://www.elastic.co/blog/found-elasticsearch-mapping-introduction>
+
+> If you do not specify a mapping, Elasticsearch will by default generate one
+> dynamically when detecting new fields in documents during indexing. However,
+> this dynamic mapping generation comes with a few caveats.
+>
+> 1. Detected types might not be correct.
+> 2. May lead to unnecessary duplication. (The _source field and _all field especially)
+> 3. Uses default analyzers and settings for indexing and searching.
+
+=> specify mapping explicitly.
+
 ### type
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/removal-of-types.html#_schedule_for_removal_of_mapping_types>

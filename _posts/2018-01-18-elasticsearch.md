@@ -38,6 +38,13 @@ notes
 
 ### index
 
+1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html>
+
+it's not necessary to create index separately - it's created automatically
+when the first document is added to this index.
+
+#### settings
+
 > <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html>
 >
 > You do not have to explicitly specify index section inside the settings section.

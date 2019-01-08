@@ -310,3 +310,30 @@ error handling
 --------------
 
 1. <https://elixirforum.com/t/flow-error-handling/7473/3>
+
+it looks like if error is raised in one of stages, all other stages complete
+processing of their current events (max `max_demand` events in each stage) -
+still current events in the stage where error is raised are left unprocessed.
+
+at the same time no new events are accepted for processing - that is further
+processing of input collection is immediately blocked but Flow waits till all
+current events are processed and exits only after that:
+
+```
+22:31:43.192 [error] Task #PID<0.821.0> started from #PID<0.786.0> terminating
+** (stop) exited in: GenStage.close_stream(%{
+      #Reference<0.1001417396.713031682.201732> => {:subscribed, #PID<0.826.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201733> => {:subscribed, #PID<0.827.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201734> => {:subscribed, #PID<0.828.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201735> => {:subscribed, #PID<0.829.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201736> => {:subscribed, #PID<0.830.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201737> => {:subscribed, #PID<0.831.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201738> => {:subscribed, #PID<0.832.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201739> => {:subscribed, #PID<0.833.0>, :transient, 500, 1000, 1000},
+      #Reference<0.1001417396.713031682.201740> => {:subscribed, #PID<0.834.0>, :transient, 500, 1000, 1000}
+    })
+    ** (EXIT) an exception was raised:
+        ** (RuntimeError) Error fetching http://example.com/sitemap.xml: closed
+```
+
+as a result input collection is processed only partially.

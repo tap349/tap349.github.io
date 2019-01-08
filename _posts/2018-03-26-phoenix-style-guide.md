@@ -72,5 +72,5 @@ files (_config/dev.exs_, etc.).
 
 when in doubt place production configuration in _config/config.exs_ but
 without production secrets and details (say, production URLs) that would
-prevent application from running in development in case _config/dev.exs_
-is removed at all.
+prevent application from running in development without overriding them
+in _config/dev.exs_.

@@ -63,4 +63,3 @@ protocol is `a behaviour with dispatching logic`, `data based polymorphism`.
 behaviour is more appropriate when `generic logic doesn't care about the data`
 and `doesn't perform any operations with that data` but `invokes the callback
 module when some concrete decisions need to be made`.
-

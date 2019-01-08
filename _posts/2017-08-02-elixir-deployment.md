@@ -139,10 +139,12 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:
 
-> The traditional place to put non-code resources that are needed at runtime is the
-> priv folder. All the tools are aware of this convention and preserve proper paths.
+> The traditional place to put non-code resources that are needed at runtime
+> is the priv folder. All the tools are aware of this convention and preserve
+> proper paths.
 >
-> You can access the files at runtime using Application.app_dir(app_name, "priv/path/to/file")
+> You can access the files at runtime using Application.app_dir(app_name,
+> "priv/path/to/file")
 
 <https://elixirforum.com/t/is-it-possible-to-include-resource-files-when-packaging-my-project-using-mix-escript/730/4>:
 

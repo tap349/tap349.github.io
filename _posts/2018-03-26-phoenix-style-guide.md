@@ -66,11 +66,15 @@ end
 config
 ------
 
-common sensible configuration should take place in _config/config.exs_ -
+common sensible configuration should be placed in _config/config.exs_ -
 it can be amended with environment-specific details in environment config
 files (_config/dev.exs_, etc.).
 
-when in doubt place production configuration in _config/config.exs_ but
-without production secrets and details (say, production URLs) that would
-prevent application from running in development without overriding them
-in _config/dev.exs_.
+configuration used in most environments (say, logging configuration) should
+go to _config/config.exs_, production settings that may affect application
+behaviour should go to _config/config.exs_ and must be used in development
+as well to avoid situations when everything is ok in development but falls
+apart in production.
+
+configuration that is always environment-specific (say, URLs) must be always
+placed to environment configs.

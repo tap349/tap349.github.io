@@ -77,4 +77,4 @@ _config/config.exs_:
 
 environment config (say, _config/dev.exs_):
 
-- settings which are very specific to environment (URLs)
+- settings which are very specific to environment (say, URLs)

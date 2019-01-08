@@ -87,3 +87,20 @@ singular vs. plural namespace names
 I tend to use plural names when namespace is used to group related modules by
 function (`operations`, `serializers`, `workers`, etc.) and singular names when
 it's used to group modules by their domain (say, schema or context namespace).
+
+protocols
+---------
+
+> <https://github.com/christopheradams/elixir_style_guide/issues/84#issuecomment-264245982>
+>
+> The rule I usually follow:
+>
+> 1. Define protocol in its own file.
+> 2. For stdlib types or types from dependencies define the implementations
+>    in the same file.
+> 3. For custom types define the implementation in the same file that defines
+>    the struct.
+> 4. When both protocol and type are external, all bets are off. I never had
+>    to do this, but if I did, I would probably go with file named like the
+>    protocol, that hosts the implementations for external types - trying to
+>    make it similar to the situation from 2.

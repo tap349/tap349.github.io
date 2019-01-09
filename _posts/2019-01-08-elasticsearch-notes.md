@@ -81,3 +81,9 @@ type
 > be used for the type, but there can be only one. The preferred type name
 > is _doc, so that index APIs have the same path as they will have in 7.0:
 > PUT {index}/_doc/{id} and POST {index}/_doc.
+
+language analyzers
+------------------
+
+1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/language-intro.html>
+2. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb>

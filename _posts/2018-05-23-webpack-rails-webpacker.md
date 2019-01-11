@@ -97,18 +97,20 @@ using `require.context()` function:
 ```javascript
 // app/assets/images/application.js
 
-// import each image manually
+// import specific image
 import './images/foo.jpg';
 
-// or all images in directory recursively
+// all images in directory recursively
 require.context('images/', true, /\.(gif|jpeg|jpg|png|svg)$/i);
 ```
 
 ```javascript
 // app/assets/javascripts/application.js
 
+// import specific npm module
 import Toastr from 'toastr';
 
+// import all JS files in directory recursively
 const r = require.context('./pages', true, /\.js$/);
 r.keys().forEach(r);
 ```

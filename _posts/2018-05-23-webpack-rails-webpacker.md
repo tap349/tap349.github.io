@@ -787,6 +787,15 @@ namespace :load do
 end
 ```
 
+these custom asset tasks are loaded in _Capfile_:
+
+```ruby
+# Capfile
+
+# Load custom tasks from `lib/capistrano/tasks` if you have any defined
+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
+```
+
 fix CircleCI config to install Yarn and rsync in deploy job:
 
 {% raw %}

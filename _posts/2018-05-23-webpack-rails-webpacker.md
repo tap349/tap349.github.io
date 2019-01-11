@@ -688,7 +688,7 @@ set :assets_prefix, 'packs'
 
 currently I precompile assets locally (on development machine or CI server).
 also I don't rely on `deploy:assets:precompile` task (which is redefined by
-Webpacker) and call `webpacker:compile` task itself.
+Webpacker) and call `webpacker:compile` task directly.
 
 remove all asset tasks provided by `capistrano-rails` gem:
 

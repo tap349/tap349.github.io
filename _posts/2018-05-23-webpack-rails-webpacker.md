@@ -711,7 +711,7 @@ add custom asset tasks for Capistrano (they are configured to run
 sequentially after `bundler:install` task right in this file):
 
 ```ruby
-# lib/capistrano/tasks/local_precompile.rake
+# lib/capistrano/tasks/my_assets.rake
 
 # invoke local task:
 #   invoke 'deploy:my_assets:local_precompile'

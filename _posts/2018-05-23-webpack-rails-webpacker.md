@@ -45,7 +45,7 @@ assets are compiled in `NODE_ENV` mode but use/load `RAILS_ENV` configuration
 ./bin/webpack
 ./bin/webpack-dev-server
 
-# compiles in production mode by default unless NODE_ENV is specified
+# compiles in production mode unless NODE_ENV is specified
 bundle exec rails assets:precompile
 bundle exec rails webpacker:compile
 ```

@@ -725,9 +725,9 @@ Webpacker) and call `webpacker:compile` task directly.
   - set :copy_files, %w[node_modules]
   ```
 
-  _node\_modules/_ directory is just not used in production - Webpack includes
-  imported npm packages into output bundle (precompiled pack from _public/packs/_
-  in Webpacker terminology).
+  _node\_modules/_ directory is just not used in production - imported npm
+  packages are included into output bundles by Webpack (Webpacker compiles
+  packs to _public/packs/_).
 
 - add custom asset tasks for Capistrano
 

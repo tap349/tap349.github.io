@@ -95,11 +95,22 @@ assets can be imported one by one using `import` statements or recursively
 using `require.context()` function:
 
 ```javascript
+// app/assets/images/application.js
+
 // import each image manually
 import './images/foo.jpg';
 
 // or all images in directory recursively
 require.context('images/', true, /\.(gif|jpeg|jpg|png|svg)$/i);
+```
+
+```javascript
+// app/assets/javascripts/application.js
+
+import Toastr from 'toastr';
+
+const r = require.context('./pages', true, /\.js$/);
+r.keys().forEach(r);
 ```
 
 ### loaders

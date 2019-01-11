@@ -296,7 +296,7 @@ import 'js/app';
 
 see next sections for details on how to import specific assets.
 
-packs then included in layout file using `javascript_pack_tag` and
+packs are then included in layout file using `javascript_pack_tag` and
 `stylesheet_pack_tag` helpers:
 
 > <https://hype.codes/how-assemble-rails-frontend-using-webpacker>

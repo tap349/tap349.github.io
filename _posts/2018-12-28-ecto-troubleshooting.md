@@ -39,26 +39,31 @@ with `Ecto.Repo.insert_all/3`:
 
 > <https://hexdocs.pm/db_connection/DBConnection.html#start_link/2-queue-config>
 >
+> Handling requests is done through a queue.
+>
 > :queue_target in milliseconds, defaults to 50
 > :queue_interval in milliseconds, defaults to 1000
 >
 > Our goal is to stay under :queue_target for :queue_interval. In case we
 > can’t reach that, then we double the :queue_target. If we go above that,
 > then we start dropping messages.
+>
+> For example, by default our queue time is 50ms. If we stay above 50ms
+> for a whole second, we double the target to 100ms and we start dropping
+> messages once it goes above the new limit.
 
 ```diff
-  # lib/my_app/repo.ex
+  # config/prod.secret.exs
 
-  defmodule MyApp.Repo do
-    use Ecto.Repo,
-      otp_app: :my_app,
--     adapter: Ecto.Adapters.Postgres
-+     adapter: Ecto.Adapters.Postgres,
-+     # 50ms by default
-+     queue_target: 5_000,
-+     # 1_000ms by default
-+     queue_interval: 100_000
-  end
+  config :my_app, MyApp.Repo,
+    username: "my_app_dev",
+    password: "my_app_dev",
+    database: "my_app_dev",
+    pool_size: 30,
+-   timeout: 120_000
++   timeout: 120_000,
++   queue_target: 5000,
++   queue_interval: 100_000
 ```
 
 (DBConnection.ConnectionError) client timed out because it queued and checked out the connection for longer than 15000ms

@@ -1,11 +1,14 @@
 ---
 layout: post
-title: AppSignal - Transactions in Elixir
+title: AppSignal - Transactions
 date: 2018-09-03 02:10:40 +0300
 access: public
 comments: true
-categories: [elixir, appsignal]
+categories: [appsignal, elixir]
 ---
+
+the post is about using AppSignal transactions in Elixir project but most
+basic ideas stay the same in Ruby/Rails project.
 
 <!-- more -->
 

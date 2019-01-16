@@ -4,7 +4,7 @@ title: AppSignal - Tips
 date: 2019-01-16 11:50:55 +0300
 access: public
 comments: true
-categories: [appsignal]
+categories: [appsignal, elixir]
 ---
 
 <!-- more -->

@@ -27,7 +27,12 @@ add `revision` config option:
     active: true,
 -   name: "MyApp"
 +   name: "MyApp",
-+   revision: Mix.Project.config()[:version],
++   revision: Mix.Project.config()[:version]
 ```
 
 NOTE: don't forget to update project version in _mix.exs_.
+
+deploying release with the same version has no effect:
+
+- new deploy marker is not created
+- the last deploy is not modified (its deploy date stays the same)

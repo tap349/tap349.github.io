@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir - AppSignal Transactions
+title: AppSignal - Transactions in Elixir
 date: 2018-09-03 02:10:40 +0300
 access: public
 comments: true

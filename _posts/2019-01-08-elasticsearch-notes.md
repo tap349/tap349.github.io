@@ -88,7 +88,7 @@ language analyzers
 ------------------
 
 1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/language-intro.html>
-2. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb>
+2. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb> (private repo)
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
 >

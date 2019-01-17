@@ -73,6 +73,8 @@ Analyze (Indices APIs)
 > [Analyze] Can be used without specifying an index against one of the many
 > built in analyzers.
 
+say, using cURL:
+
 ```sh
 $ curl \
   -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
@@ -116,11 +118,12 @@ datatype and once with `text` field datatype:
 now it's possible to use both fields in the samy query:
 
 ```
+GET /_search
 {
   "query": {
     "multi_match": {
       "type": "most_fields",
-      "query": "lima apel",
+      "query": "barang",
       "fields": ["description", "description.text"]
     }
   }

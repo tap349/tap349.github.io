@@ -97,3 +97,15 @@ iex> Supervisor.stop(MyApp.Superrvisor)
 iex> MyApp.Repo.start_link()
 {:ok, #PID<0.486.0>}
 ```
+
+***UPDATE***
+
+unfortunately this method doesn't work in production:
+
+```
+iex(my_app@127.0.0.1)2> Supervisor.stop(MyApp.Supervisor)
+:ok
+iex(my_app@127.0.0.1)3> *** ERROR: Shell process terminated! (^G to start new job) ***
+```
+
+=> I cannot start a new shell like in development.

@@ -93,7 +93,26 @@ language analyzers
 >
 > The default standard analyzer drops most punctuation, breaks up text into
 > individual words, and lower cases them. For instance, the standard analyzer
-> would turn the string “Quick Brown Fox!” into the terms [quick, brown, fox].
+> would turn the string "Quick Brown Fox!" into the terms [quick, brown, fox].
+
+### Analyze API
+
+1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
+
+Analyze API can be used without specifying an index which is very useful when
+testing different analyzers:
+
+```sh
+$ curl \
+  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
+  -H "Content-Type: application/json" \
+  -d '{"analyzer":"standard","text":"apel"}'
+
+$ curl \
+  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
+  -H "Content-Type: application/json" \
+  -d '{"analyzer":"indonesian","text":"apel"}'
+```
 
 ### `most_fields` query type
 
@@ -105,8 +124,8 @@ it's used to combine the scores from all matching fields.
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
 >
-> The term query looks for the exact term in the field’s inverted index — it
-> doesn’t know anything about the field’s analyzer. This makes it useful for
+> The term query looks for the exact term in the field's inverted index — it
+> doesn’t know anything about the field's analyzer. This makes it useful for
 > looking up values in keyword fields, or in numeric or date fields. When
 > querying full text fields, use the match query instead, which understands
 > how the field has been analyzed.

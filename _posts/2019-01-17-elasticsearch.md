@@ -77,12 +77,12 @@ say, using cURL:
 
 ```sh
 $ curl \
-  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
+  -X GET "http://username:password@localhost:9200/_analyze?pretty" \
   -H "Content-Type: application/json" \
   -d '{"analyzer":"standard","text":"apel"}'
 
 $ curl \
-  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
+  -X GET "http://username:password@localhost:9200/_analyze?pretty" \
   -H "Content-Type: application/json" \
   -d '{"analyzer":"indonesian","text":"apel"}'
 ```

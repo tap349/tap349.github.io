@@ -13,8 +13,6 @@ categories: [elasticsearch]
 {:toc}
 <hr>
 
-1. <https://habr.com/ru/post/280488> (in Russian)
-
 GET vs. POST
 ------------
 

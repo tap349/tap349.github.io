@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elasticsearch - API
+title: Elasticsearch
 date: 2019-01-17 15:04:17 +0300
 access: public
 comments: true
@@ -15,11 +15,13 @@ categories: [elasticsearch]
 
 1. <https://habr.com/ru/post/280488> (in Russian)
 
-Search
-------
+Search (Search APIs)
+--------------------
 
-1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html>
+1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/language-intro.html>
 
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html>
+>
 > The search API allows you to execute a search query and get back search hits
 > that match the query.
 
@@ -41,11 +43,19 @@ Search
 
 it's used to combine the scores from all matching fields.
 
-Analyze
--------
+Analyze (Indices APIs)
+----------------------
+
+1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
+
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
+>
+> Performs the analysis process on a text and return the tokens breakdown of the text.
+
+### language analyzers
 
 1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/language-intro.html>
-2. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb> (private repo)
+2. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb>
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
 >
@@ -53,12 +63,15 @@ Analyze
 > individual words, and lower cases them. For instance, the standard analyzer
 > would turn the string "Quick Brown Fox!" into the terms [quick, brown, fox].
 
-### `_analyze` endpoint
+### testing analyzers
 
+1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/_testing_analyzers.html>
 1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
 
-Analyze API can be used without specifying an index which is very useful when
-testing different analyzers:
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
+>
+> [Analyze] Can be used without specifying an index against one of the many
+> built in analyzers.
 
 ```sh
 $ curl \

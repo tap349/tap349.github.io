@@ -57,15 +57,11 @@ stop application supervisor and start required supervisors manually.
 
 ### example
 
-sometimes it might be necessary to put application into maintenance mode when
-the whole application is stopped but you still need access to DB.
+sometimes it might be necessary to put application into maintenance mode
+when the whole application is stopped but you still need access to DB.
 
-in my case I needed to stop Quantum scheduler and bulk update all rows in a
-database table - the former kept on running different jobs which locked the
-rows I tried to update.
-
-the point is that you cannot stop `MyApp.Scheduler` - it will be restarted by
-application supervisor immediately:
+the point is that you cannot stop child supervisor or worker - it will be
+restarted by application supervisor immediately:
 
 ```
 iex> Supervisor.which_children(MyApp.Supervisor)
@@ -86,9 +82,9 @@ iex> Supervisor.which_children(MyApp.Supervisor)
 ]
 ```
 
-instead stop application supervisor and start `MyApp.Repo` supervisor manually
-(this is what I do in _test/test_helper.exs_ - start required supervisors only
-without starting the whole application):
+=> stop application supervisor instead and start `MyApp.Repo` supervisor
+manually afterwards (this is what I do in _test/test_helper.exs_ - start
+required supervisors only without starting the whole application):
 
 ```
 iex> Supervisor.stop(MyApp.Superrvisor)
@@ -108,4 +104,4 @@ iex(my_app@127.0.0.1)2> Supervisor.stop(MyApp.Supervisor)
 iex(my_app@127.0.0.1)3> *** ERROR: Shell process terminated! (^G to start new job) ***
 ```
 
-=> I cannot start a new shell like in development.
+=> I cannot start a new shell in production like in development.

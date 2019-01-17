@@ -60,6 +60,12 @@ $ bin/my_app remote_console
 iex> Reika.ReleaseTasks.migrate()
 ```
 
+or if _rel/commands/migrate.sh_ is created:
+
+```
+$ bin/my_app migrate
+```
+
 the gotcha is that Phoenix application stops (IDK why) after running migrations
 this way so make sure to start/restart it afterwards:
 

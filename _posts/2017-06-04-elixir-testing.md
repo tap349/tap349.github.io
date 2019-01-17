@@ -498,7 +498,7 @@ deps which take a lot of time to start (say, `quantum`).
 don't start your application and deps (which are applications too) when
 running tests:
 
-```sh
+```
 $ mix help test
 ...
 --no-start - does not start applications after compilation

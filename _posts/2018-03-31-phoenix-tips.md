@@ -13,11 +13,11 @@ categories: [phoenix]
 {:toc}
 <hr>
 
-make application available from outside
----------------------------------------
+(how to) make application available from outside
+------------------------------------------------
 
-say, it might be useful to make application available on local network
-in development so that it can be tested by others.
+say, it might be useful to make application available on local network in
+development so that it can be tested by others.
 
 ```diff
   # config/config.exs
@@ -48,3 +48,52 @@ umbrella apps vs. contexts
 > can't stop one part without bringing entire system down. It doesn't make
 > sense to extract them to umbrellas, but you still don't want to tangle
 > stuff too much.
+
+(how to) stop children of application supervisor
+------------------------------------------------
+
+children will be automatically restarted by application supervisor =>
+stop application supervisor and start required supervisors manually.
+
+### example
+
+sometimes it might be necessary to put application into maintenance mode when
+the whole application is stopped but you still need access to DB.
+
+in my case I needed to stop Quantum scheduler and bulk update all rows in a
+database table - the former kept on running different jobs which locked the
+rows I tried to update.
+
+the point is that you cannot stop `MyApp.Scheduler` - it will be restarted by
+application supervisor immediately:
+
+```
+iex> Supervisor.which_children(MyApp.Supervisor)
+[
+  {MyApp.TaskSupervisor, #PID<0.482.0>, :supervisor, [Task.Supervisor]},
+  {MyAppWeb.Endpoint, #PID<0.468.0>, :supervisor, [MyAppWeb.Endpoint]},
+  {MyApp.Repo, #PID<0.435.0>, :supervisor, [MyApp.Repo]},
+  {MyApp.Scheduler, #PID<0.428.0>, :worker, [MyApp.Scheduler]}
+]
+iex> Supervisor.stop(:c.pid(0,428,0))
+:ok
+iex> Supervisor.which_children(MyApp.Supervisor)
+[
+  {MyApp.TaskSupervisor, #PID<0.482.0>, :supervisor, [Task.Supervisor]},
+  {MyAppWeb.Endpoint, #PID<0.468.0>, :supervisor, [MyAppWeb.Endpoint]},
+  {MyApp.Repo, #PID<0.435.0>, :supervisor, [MyApp.Repo]},
+  {MyApp.Scheduler, #PID<0.1854.0>, :worker, [MyApp.Scheduler]}
+]
+```
+
+instead stop application supervisor and start `MyApp.Repo` supervisor manually
+(this is what I do in _test/test_helper.exs_ - start required supervisors only
+without starting the whole application):
+
+```
+iex> Supervisor.stop(MyApp.Superrvisor)
+:ok
+[info] Application my_app exited: normal
+iex> MyApp.Repo.start_link()
+{:ok, #PID<0.486.0>}
+```

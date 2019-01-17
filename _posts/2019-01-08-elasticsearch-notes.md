@@ -15,6 +15,29 @@ categories: [elasticsearch]
 
 1. <https://habr.com/ru/post/280488> (in Russian)
 
+GET vs. POST
+------------
+
+1. <https://www.elastic.co/guide/en/elasticsearch/guide/current/_empty_search.html>
+
+> <https://stackoverflow.com/questions/978061/983458#comment53906725_983458>
+>
+> Elasticsearch is a fairly major product that utilises HTTP request bodies
+> in GET. According to their manual whether a HTTP request should support
+> having a body or not is undefined. I'm personally not comfortable with
+> populating a GET request body, but they seem to have a different opinion
+> and they must know what they're doing.
+
+> <https://stackoverflow.com/a/36940185>
+>
+> Although the RFC does not mention that you can't have a body with GET.
+> So Elasticsearch supports also POST.
+
+- it's possible to use both GET and POST requests for queries which must be
+  GET requests semantically (say, search requests)
+- it's possible to pass all parameters in JSON request body in both GET and
+  POST requests
+
 index
 -----
 
@@ -95,6 +118,48 @@ language analyzers
 > The default standard analyzer drops most punctuation, breaks up text into
 > individual words, and lower cases them. For instance, the standard analyzer
 > would turn the string "Quick Brown Fox!" into the terms [quick, brown, fox].
+
+### multifields (multifield mapping)
+
+1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/multi-fields.html>
+2. <https://www.elastic.co/guide/en/elasticsearch/guide/master/most-fields.html>
+
+use multifields to index a field multiple times: say, once with `keyword` field
+datatype and once with `text` field datatype:
+
+```
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "description": {
+          "type": "keyword",
+          "fields": {
+            "text": {
+              "type": "text",
+              "analyzer": "indonesian"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+now it's possible to use both fields in the samy query:
+
+```
+{
+  "query": {
+    "multi_match": {
+      "type": "most_fields",
+      "query": "lima apel",
+      "fields": ["description", "description.text"]
+    }
+  }
+}
+```
 
 ### `_analyze` endpoint
 

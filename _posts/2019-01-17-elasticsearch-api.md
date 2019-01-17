@@ -18,6 +18,11 @@ categories: [elasticsearch]
 Search
 ------
 
+1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html>
+
+> The search API allows you to execute a search query and get back search hits
+> that match the query.
+
 ### `term` query vs. `match` query
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
@@ -47,6 +52,25 @@ Analyze
 > The default standard analyzer drops most punctuation, breaks up text into
 > individual words, and lower cases them. For instance, the standard analyzer
 > would turn the string "Quick Brown Fox!" into the terms [quick, brown, fox].
+
+### `_analyze` endpoint
+
+1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
+
+Analyze API can be used without specifying an index which is very useful when
+testing different analyzers:
+
+```sh
+$ curl \
+  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
+  -H "Content-Type: application/json" \
+  -d '{"analyzer":"standard","text":"apel"}'
+
+$ curl \
+  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
+  -H "Content-Type: application/json" \
+  -d '{"analyzer":"indonesian","text":"apel"}'
+```
 
 ### multifields (multifield mapping)
 
@@ -88,23 +112,4 @@ now it's possible to use both fields in the samy query:
     }
   }
 }
-```
-
-### `_analyze` endpoint
-
-1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
-
-Analyze API can be used without specifying an index which is very useful when
-testing different analyzers:
-
-```sh
-$ curl \
-  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
-  -H "Content-Type: application/json" \
-  -d '{"analyzer":"standard","text":"apel"}'
-
-$ curl \
-  -X GET "http://elastic:theforce@localhost:9200/_analyze?pretty" \
-  -H "Content-Type: application/json" \
-  -d '{"analyzer":"indonesian","text":"apel"}'
 ```

@@ -94,3 +94,13 @@ language analyzers
 > The default standard analyzer drops most punctuation, breaks up text into
 > individual words, and lower cases them. For instance, the standard analyzer
 > would turn the string “Quick Brown Fox!” into the terms [quick, brown, fox].
+
+### `term` query vs. `match` query
+
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
+>
+> The term query looks for the exact term in the field’s inverted index — it
+> doesn’t know anything about the field’s analyzer. This makes it useful for
+> looking up values in keyword fields, or in numeric or date fields. When
+> querying full text fields, use the match query instead, which understands
+> how the field has been analyzed.

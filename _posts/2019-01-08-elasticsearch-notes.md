@@ -95,6 +95,12 @@ language analyzers
 > individual words, and lower cases them. For instance, the standard analyzer
 > would turn the string “Quick Brown Fox!” into the terms [quick, brown, fox].
 
+### `most_fields` query type
+
+1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/most-fields.html>
+
+it's used to combine the scores from all matching fields.
+
 ### `term` query vs. `match` query
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
@@ -104,3 +110,5 @@ language analyzers
 > looking up values in keyword fields, or in numeric or date fields. When
 > querying full text fields, use the match query instead, which understands
 > how the field has been analyzed.
+
+=> `term` for queries is like `keyword` for string field datatypes.

@@ -88,3 +88,9 @@ language analyzers
 1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/language-intro.html>
 2. <https://habr.com/ru/post/280488/> (in Russian)
 3. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb>
+
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
+>
+> The default standard analyzer drops most punctuation, breaks up text into
+> individual words, and lower cases them. For instance, the standard analyzer
+> would turn the string “Quick Brown Fox!” into the terms [quick, brown, fox].

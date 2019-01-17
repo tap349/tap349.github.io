@@ -95,7 +95,7 @@ language analyzers
 > individual words, and lower cases them. For instance, the standard analyzer
 > would turn the string "Quick Brown Fox!" into the terms [quick, brown, fox].
 
-### Analyze API
+### `_analyze` endpoint
 
 1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html>
 

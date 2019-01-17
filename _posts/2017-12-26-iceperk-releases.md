@@ -138,7 +138,7 @@ build and publish new release
 ### Android
 
 copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
-from `Complead/iceperkapp_certificates/android` GitHub repo (see _README.md_)
+from `C******d/iceperkapp_certificates/android` GitHub repo (see _README.md_)
 before building releases.
 
 - assemble release

@@ -57,8 +57,8 @@ fatal: Could not read from remote repository.
 $ cap production deploy
 ...
 00:05 git:check
-      01 git ls-remote git@github.com:Complead/sith.git HEAD
-      01 Warning: Permanently added the RSA host key for IP address '52.74.223.119' to the list of known hosts.
+      01 git ls-remote git@github.com:C******d/sith.git HEAD
+      01 Warning: Permanently added the RSA host key for IP address '52.74.XXX.XXX' to the list of known hosts.
       01 git@github.com: Permission denied (publickey).
       01 fatal: Could not read from remote repository.
       01

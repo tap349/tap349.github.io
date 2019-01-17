@@ -13,6 +13,8 @@ categories: [elasticsearch]
 {:toc}
 <hr>
 
+1. <https://habr.com/ru/post/280488> (in Russian)
+
 index
 -----
 
@@ -86,8 +88,7 @@ language analyzers
 ------------------
 
 1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/language-intro.html>
-2. <https://habr.com/ru/post/280488> (in Russian)
-3. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb>
+2. <https://github.com/C******d/erebor/blob/master/app/chewy/products_index.rb>
 
 > <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html>
 >

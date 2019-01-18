@@ -87,13 +87,22 @@ $ curl \
   -d '{"analyzer":"indonesian","text":"apel"}'
 ```
 
-### multifields (multifield mapping)
+### multi-fields
 
-1. <https://www.elastic.co/guide/en/elasticsearch/guide/master/multi-fields.html>
-2. <https://www.elastic.co/guide/en/elasticsearch/guide/master/most-fields.html>
+1. <https://www.elastic.co/guide/en/elasticsearch/reference/current/multi-fields.html>
+2. <https://www.elastic.co/guide/en/elasticsearch/guide/master/multi-fields.html>
+3. <https://www.elastic.co/guide/en/elasticsearch/guide/master/most-fields.html>
 
-use multifields to index a field multiple times: say, once with `keyword` field
-datatype and once with `text` field datatype:
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html#_multi_fields>
+>
+> It is often useful to index the same field in different ways for different
+> purposes. This is the purpose of multi-fields. For instance, a string field
+> could be mapped as a text field for full-text search, and as a keyword field
+> for sorting or aggregations. Alternatively, you could index a text field with
+> the standard analyzer, the english analyzer, and the french analyzer.
+>
+> This is the purpose of multi-fields. Most datatypes support multi-fields via
+> the fields parameter.
 
 ```
 {
@@ -126,6 +135,51 @@ GET /_search
       "query": "barang",
       "fields": ["description", "description.text"]
     }
+  }
+}
+```
+
+> <https://www.elastic.co/guide/en/elasticsearch/reference/current/multi-fields.html>
+>
+> Multi-fields do not change the original _source field.
+
+=> `_source` field contains only original indexed fields - there are no
+multi-fields and `text` values (if any) are not analyzed:
+
+```
+GET /_search
+{
+  "size": 100,
+  "_source": ["description", "description.text"]
+}
+```
+
+=>
+
+```json
+{
+  "took": 18,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 38999,
+    "max_score": 1.0,
+    "hits": [
+      {
+        "_index": "reika_shops-1547776421298845",
+        "_type": "_doc",
+        "_id": "37137675",
+        "_score": 1.0,
+        "_source": {
+          "description": "Online M"
+        }
+      }
+    ]
   }
 }
 ```

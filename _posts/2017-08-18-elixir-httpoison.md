@@ -32,6 +32,8 @@ NOTE: `Content-Type` header is optional because we have
 timeout vs. recv_timeout
 ------------------------
 
+1. <https://hexdocs.pm/httpoison/HTTPoison.Request.html#content>
+
 > <https://github.com/edgurgel/httpoison/issues/215>
 >
 > hackney returns {:error, :connect_timeout} when the connect_timeout is

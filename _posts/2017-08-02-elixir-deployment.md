@@ -135,16 +135,13 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
   + }
   ```
 
-### artifacts (say, YAML or JSON files)
+### artifacts (resources, resource files - say, YAML or JSON files)
 
 <https://elixirforum.com/t/including-data-files-in-a-distillery-release/2813>:
 
 > The traditional place to put non-code resources that are needed at runtime
 > is the priv folder. All the tools are aware of this convention and preserve
 > proper paths.
->
-> You can access the files at runtime using Application.app_dir(app_name,
-> "priv/path/to/file")
 
 <https://elixirforum.com/t/is-it-possible-to-include-resource-files-when-packaging-my-project-using-mix-escript/730/4>:
 
@@ -160,13 +157,42 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
 > in any of those directories, things can break when running in production or
 > building releases.
 
-in some Elixir module:
+2 ways to get _priv/_ directory itself (or the file inside it) at runtime:
+
+- `Application.app_dir(:my_app, "priv/foo.txt")`
+- `Path.join(:code.priv_dir(:my_app), "foo.txt")`
+
+for example:
 
 ```elixir
 defmodule Neko.Reader do
   @rules_path Application.app_dir(:neko, "priv/rules.yml")
   # ...
 end
+```
+
+however both ways don't work in _config/config.exs_ because application is
+not started yet (and hence unknown) when the former is being compiled - in
+this case just reference _priv/_ directory directly using relative path:
+
+```elixir
+# config/config.exs
+
+config :neko, :rules, dir: "priv/rules"
+```
+
+this should work in most cases. _priv/_ directory wasn't found when specified
+using relative path only once - when I tried to access it from inside release
+task (see <https://hexdocs.pm/distillery/guides/running_migrations.html>). I
+had to update application environment value in the task itself:
+
+```elixir
+new_rules_config =
+  :neko
+  |> Application.get_env(:rules)
+  |> update_in([:dir], &Application.app_dir(:neko, &1))
+
+Application.put_env(:neko, :rules, new_rules_config)
 ```
 
 ### endpoint

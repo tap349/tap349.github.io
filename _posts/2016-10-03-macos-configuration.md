@@ -249,7 +249,14 @@ System Preferences
 ### Date & Time
 
 - Clock (tab):
-  - [ ] Show date and time in menu bar
+  - [x] Show date and time in menu bar:
+    - Time options:
+      - [x] Digital
+      - [ ] Use a 24-hour clock
+      - [x] Show AM/PM
+    - Date options:
+      - [ ] Show the day of the week
+      - [x] Show date
 
 ### Accessibility
 

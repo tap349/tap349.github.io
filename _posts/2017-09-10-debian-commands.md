@@ -21,6 +21,12 @@ of course these commands should work on Ubuntu as well.
   $ sudo apt-get update
   ```
 
+- upgrade (upgrade all packages)
+
+  ```sh
+  $ sudo apt-get upgrade
+  ```
+
 - locate any file:
 
   ```sh

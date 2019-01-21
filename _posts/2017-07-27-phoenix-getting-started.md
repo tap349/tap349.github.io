@@ -63,83 +63,94 @@ $ git push
 setup database
 ---------------
 
-### create users (roles)
+### with Docker
 
-- variant 1: create separate users for each environment
+```yaml
+# docker-compose.yml
 
-  ```sh
-  $ psql -d postgres
-  =# CREATE USER billing_dev WITH PASSWORD 'billing_dev';
-  =# ALTER USER billing_dev CREATEDB;
-  =# CREATE USER billing_test WITH PASSWORD 'billing_test';
-  =# ALTER USER billing_test CREATEDB;
-  ```
+version: '2'
+services:
+  db:
+    image: postgres:11.1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: eva_dev
+    ports:
+      - 5434:5432
+```
 
-  edit _config/dev.exs_ and _config/test.exs_ to use created users.
+```elixir
+# config/dev.secret.exs
 
-  _config/dev.exs_ (for example):
+config :eva, Eva.Repo,
+  username: "postgres",
+  password: "postgres",
+  database: "eva_dev",
+  hostname: "localhost",
+  port: 5434,
+  pool_size: 10
+```
 
-  ```elixir
-  config :billing, Billing.Repo,
-    adapter: Ecto.Adapters.Postgres,
-    username: "billing_dev",
-    password: "billing_dev",
-    database: "billing_dev",
-    pool_size: 10
-  ```
+```elixir
+# config/dev.secret.exs
 
-  NOTE: `hostname: 'localhost'` is used by default.
-
-- variant 2: use postgres user for all environments
-
-  1. <https://stackoverflow.com/a/15309551/3632318>
-
-  macOS PostgreSQL installation doesn't create `postgres` user by default
-  (even though `postgres` database is created):
-
-  ```
-  $ psql -d postgres
-  ...
-  postgres=# \du
-                                    List of roles
-  Role name |                         Attributes                         | Member of
-  -----------+------------------------------------------------------------+-----------
-  tap       | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
-  ```
-
-  create him manually:
-
-  ```
-  $ psql -d postgres
-  ...
-  postgres=# CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';
-  CREATE ROLE
-  ```
-
-  `postgres` user is used by default in generated _config/dev.exs_ and
-  _config/test.exs_ files so just leave these defaults.
-
-  _config/dev.exs_ (for example):
-
-  ```elixir
-  config :billing, Billing.Repo,
-    adapter: Ecto.Adapters.Postgres,
-    username: "postgres",
-    password: "postgres",
-    database: "billing_dev",
-    pool_size: 10
-  ```
-
-### create database
+config :eva, Eva.Repo,
+  username: "postgres",
+  password: "postgres",
+  database: "eva_test",
+  hostname: "localhost",
+  port: 5434,
+  pool: Ecto.Adapters.SQL.Sandbox
+```
 
 ```sh
+$ docker-compose up
 $ mix ecto.create && MIX_ENV=test mix ecto.create
 ```
 
-### drop database
+### without Docker
+
+1. <https://stackoverflow.com/a/15309551/3632318>
+
+macOS PostgreSQL installation doesn't create `postgres` user by default
+(even though `postgres` database is created):
+
+```
+$ psql -d postgres
+...
+postgres=# \du
+                                  List of roles
+Role name |                         Attributes                         | Member of
+-----------+------------------------------------------------------------+-----------
+tap       | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+```
+
+create him manually:
+
+```
+$ psql -d postgres
+...
+postgres=# CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';
+CREATE ROLE
+```
+
+`postgres` user is used by default in generated _config/dev.exs_ and
+_config/test.exs_ files so just leave these defaults.
+
+_config/dev.exs_ (for example):
+
+```elixir
+config :billing, Billing.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "billing_dev",
+  pool_size: 10
+```
 
 ```sh
-$ mix ecto.drop && MIX_ENV=test mix ecto.drop
+$ mix ecto.create && MIX_ENV=test mix ecto.create
 ```
 
 start app

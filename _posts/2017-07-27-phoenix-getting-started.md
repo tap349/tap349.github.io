@@ -75,10 +75,16 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: eva_dev
     ports:
       - 5434:5432
 ```
+
+> <https://hub.docker.com/_/postgres?tab=description>
+>
+> POSTGRES_USER
+>
+> This variable will create the specified user with superuser power and
+> a database with the same name.
 
 ```elixir
 # config/dev.secret.exs

@@ -925,8 +925,10 @@ $ sudo ln -s $PWD/config/prod.secret.exs /var/prod.secret.exs
 
 ### build production release
 
-<https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>:
+1. <https://hexdocs.pm/distillery/introduction/installation.html#your-first-release>
 
+> <https://hexdocs.pm/distillery/walkthrough.html#deploying-your-release>
+>
 > The artifact you will want to deploy is the release tarball, which is
 > located at `_build/prod/rel/<name>/releases/<version>/<name>.tar.gz`.
 
@@ -941,28 +943,36 @@ $ MIX_ENV=prod mix compile
 $ MIX_ENV=prod mix release
 ```
 
-`MIX_ENV=prod`, inter alia, sets working directory to _\_build/prod/_
-for both `compile` and `release` tasks.
+by default Distillery uses release environment which matches the value of
+`MIX_ENV` (that is `Mix.env()`):
 
-in all examples I've seen `MIX_ENV=prod` and `--env=prod` are used
-together like this:
+```elixir
+# rel/config.exs
 
-```sh
-$ MIX_ENV=prod mix release --env=prod
+use Mix.Releases.Config,
+  # ...
+  # This sets the default environment used by `mix release`
+  default_environment: Mix.env()
 ```
 
-using `MIX_ENV=prod` only:
+but it's possible to use another release environment with `--env` flag:
+in this case release will be compiled and built using specified release
+environment and current Mix environment simultaneously:
 
-- sets working directory to _\_build/prod/_
-- applies production configuration from _rel/config.exs_
+```sh
+# both configurations are used:
+#
+# - `staging` release environment configuration from rel/config.ex
+# - `prod` Mix environment configuration from config/prod.ex
+$ MIX_ENV=prod mix release --env=staging
+```
 
-using `--env=prod` only:
+Mix environment also determines the location where project is compiled and
+built - say, it will be _\_build/prod/_ directory in case `MIX_ENV=prod`.
 
-- doesn't change working directory (_\_build/dev/_ directory is used)
-- applies production configuration from _rel/config.exs_
-- includes extra _\_build/dev/rel/billing/var/_ directory
-
-TL;DR: for `release` Mix task it's safe to use `MIX_ENV=prod` only.
+in all examples I've seen `MIX_ENV=prod` and `--env=prod` are used together
+but it's sufficient to use `MIX_ENV=prod` only because in this case release
+environment is automatically set to `prod` in _rel/config.exs_.
 
 ### run production release
 

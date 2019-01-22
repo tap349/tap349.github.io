@@ -56,14 +56,6 @@ TODO: it's also necessary to rollback migrations to specific version -
 1. <https://hexdocs.pm/phoenix/deployment.html>
 2. <https://hexdocs.pm/bootleg/reference/phoenix.html>
 
-> <https://www.reddit.com/r/node/comments/83omh4/best_approaches_to_setting_up_environment/dvm2zo7>
->
-> Even for packages that you use in multiple places, you can install them
-> separately in each project's local node_modules. To easily run them, you can
-> use npx if you're using the npm client: `$ npx webpack`. I believe npx comes
-> bundled with more recent versions of npm. If you're using Yarn instead, you
-> can do `$ yarn webpack`, which should find Webpack in the local node_modules.
-
 ```diff
   # config/deploy/production.exs
 
@@ -97,6 +89,8 @@ TODO: it's also necessary to rollback migrations to specific version -
 }
 ```
 
+#### Bootleg 0.10.0
+
 make sure the version of Bootleg is > 0.10.0 because there is no dedicated
 `remote_generate_release` step in Bootleg 0.10.0 - currently it's available
 in master only:
@@ -121,16 +115,28 @@ been already built => compiled assets are not included into release.
 
 #### Yarn vs. npm
 
-NOTE: Yarn is not natively supported by Phoenix:
+> <https://www.reddit.com/r/node/comments/83omh4/best_approaches_to_setting_up_environment/dvm2zo7>
+>
+> Even for packages that you use in multiple places, you can install them
+> separately in each project's local node_modules. To easily run them, you can
+> use npx if you're using the npm client: `$ npx webpack`. I believe npx comes
+> bundled with more recent versions of npm. If you're using Yarn instead, you
+> can do `$ yarn webpack`, which should find Webpack in the local node_modules.
+
+so you can use either npm or Yarn to install npm packages and run Webpack but
+Yarn is not natively supported by Phoenix:
 
 > <https://github.com/phoenixframework/phoenix/pull/1963#issuecomment-396079993>
 >
 > npm has had improvements as well since yarn's release, and users are free
 > as always to use yarn on their new projects themselves.
 
-Mix tasks use npm under the hood => stick to npm in Bootleg tasks as well
-since _assets/package-lock.json_ is not used by Yarn when installing npm
-packages during deployment - it looks for _assets/yarn.lock_.
+Mix tasks use npm under the hood => stick to npm in Bootleg tasks as well.
+
+another important reason to choose npm is that _assets/package-lock.json_
+is not used by Yarn when installing npm packages during deployment - it
+looks for _assets/yarn.lock_ (which is missing for obvious reasons since
+Mix tasks don't use Yarn).
 
 ### run migrations
 

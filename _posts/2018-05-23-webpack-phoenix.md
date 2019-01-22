@@ -2,7 +2,7 @@
 layout: post
 title: Webpack - Phoenix
 date: 2018-05-23 02:31:59 +0300
-access: private
+access: public
 comments: true
 categories: [webpack, phoenix]
 ---
@@ -162,8 +162,9 @@ don't use `[hash]` substitutions in both environments:
 
 ### NODE_ENV vs. mode
 
-1. <https://github.com/webpack/webpack/issues/6460#issuecomment-386947990>
-2. <https://webpack.js.org/configuration/configuration-types/#exporting-a-function>
+1. <https://webpack.js.org/concepts/mode/>
+2. <https://github.com/webpack/webpack/issues/6460#issuecomment-386947990>
+3. <https://webpack.js.org/configuration/configuration-types/#exporting-a-function>
 
 in brief: `NODE_ENV` environment variable is not set by Webpack - export
 function from your Webpack config and use `argv.mode` to get current mode:
@@ -187,6 +188,47 @@ $ NODE_ENV=production webpack --mode=production
 
 so it looks like Webpack 4 tries to deprecate using `process.env.NODE_ENV`
 in favour of `argv.mode` to fetch current environment inside Webpack config.
+
+### `-p` vs. `--mode`
+
+```
+$ webpack --help
+  -p           shortcut for --optimize-minimize --define
+               process.env.NODE_ENV="production"
+```
+
+> <https://webpack.js.org/guides/production>
+>
+> Some of what has been described above is also achievable via the command
+> line. For example, the --optimize-minimize flag will include the TerserPlugin
+> behind the scenes. The --define process.env.NODE_ENV="'production'" will do
+> the same for the DefinePlugin instance described above. And, webpack -p will
+> automatically invoke both those flags and thus the plugins to be included.
+
+> <https://webpack.js.org/concepts/mode/>
+>
+> production
+>
+> Sets process.env.NODE_ENV on DefinePlugin to value production. Enables
+> FlagDependencyUsagePlugin ... and TerserPlugin.
+>
+> If not set, webpack sets production as the default value for mode.
+> The supported values for mode are:
+>
+> Please remember that setting NODE_ENV doesn't automatically set mode.
+
+so it looks like `--mode production` does everything that `-p` does =>
+always use `--mode production` to compile assets for production.
+
+all in all it's recommended to set all required options in Webpack config -
+not via CLI (conditionally by checking current mode?):
+
+> <https://webpack.js.org/guides/production>
+>
+> While these short hand methods are nice, we usually recommend just using the
+> configuration as it's better to understand exactly what is being done for you
+> in both cases. The configuration also gives you more control on fine tuning
+> other options within both plugins.
 
 add Babel loader
 ----------------

@@ -127,7 +127,7 @@ user (this is how it's done in my Ansible tasks):
 
 config :eva, Eva.Repo,
   username: "eva_prod",
-  password: "secret",
+  password: "password",
   database: "eva_prod",
   pool_size: 15
 ```

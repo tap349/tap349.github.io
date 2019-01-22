@@ -67,11 +67,11 @@ TODO: it's also necessary to rollback migrations to specific version - create
 + task :phx_digest do
 +   remote :build, cd: "assets" do
 +     "yarn install"
-+     "yarn webpack --mode production"
++     "yarn deploy"
 +   end
 +
 +   remote :build do
-+     "mix phx.digest"
++     "MIX_ENV=prod mix phx.digest"
 +   end
 + end
 
@@ -84,6 +84,15 @@ TODO: it's also necessary to rollback migrations to specific version - create
   before_task(:compile, :symlink_secret_file)
 + after_task(:compile, :phx_digest)
   after_task(:deploy, :migrate)
+```
+
+`deploy` is a script from _assets/package.json_:
+
+```json
+  "scripts": {
+    "deploy": "webpack --mode production"
+  }
+}
 ```
 
 ### run migrations

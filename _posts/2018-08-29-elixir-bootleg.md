@@ -69,8 +69,8 @@ TODO: it's also necessary to rollback migrations to specific version -
 
 + task :phx_digest do
 +   remote :build, cd: "assets" do
-+     "yarn install"
-+     "yarn deploy"
++     "npm install"
++     "npm run deploy"
 +   end
 +
 +   remote :build do
@@ -89,7 +89,7 @@ TODO: it's also necessary to rollback migrations to specific version -
   after_task(:deploy, :migrate)
 ```
 
-`yarn deploy` runs `deploy` script from _assets/package.json_:
+`npm run deploy` runs `deploy` script from _assets/package.json_:
 
 ```json
 "scripts": {
@@ -118,6 +118,19 @@ in master only:
 that is in Bootleg 0.10.0 `compile` task both compiles project and builds
 release using Distillery => `phx_digest` hook is executed when release has
 been already built => compiled assets are not included into release.
+
+#### Yarn vs. npm
+
+NOTE: Yarn is not natively supported by Phoenix:
+
+> <https://github.com/phoenixframework/phoenix/pull/1963#issuecomment-396079993>
+>
+> npm has had improvements as well since yarn's release, and users are free
+> as always to use yarn on their new projects themselves.
+
+Mix tasks use npm under the hood => stick to npm in Bootleg tasks as well
+since _assets/package-lock.json_ is not used by Yarn when installing npm
+packages during deployment - it looks for _assets/yarn.lock_.
 
 ### run migrations
 

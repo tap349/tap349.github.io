@@ -18,13 +18,13 @@ of course these commands should work on Ubuntu as well.
 - update (synchronize package index files)
 
   ```sh
-  $ sudo apt-get update
+  $ sudo apt update
   ```
 
 - upgrade (upgrade all packages)
 
   ```sh
-  $ sudo apt-get upgrade
+  $ sudo apt upgrade
   ```
 
 - locate any file:

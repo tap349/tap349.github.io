@@ -48,7 +48,37 @@ $ mix bootleg.deploy
 TODO: it's also necessary to rollback migrations to specific version - create
       corresponding release task.
 
-### run migrations in production
+### compile assets
+
+1. <https://hexdocs.pm/phoenix/deployment.html>
+2. <https://hexdocs.pm/bootleg/reference/phoenix.html>
+
+```diff
+  # config/deploy/production.exs
+
++ task :phx_digest do
++   remote :build, cd: "assets" do
++     "yarn install"
++     "webpack --mode production"
++   end
++
++   remote :build do
++     "mix phx.digest"
++   end
++ end
+
+  task :migrate do
+    remote :db do
+      "bin/eva migrate"
+    end
+  end
+
+  before_task(:compile, :symlink_secret_file)
++ after_task(:compile, :phx_digest)
+  after_task(:deploy, :migrate)
+```
+
+### run migrations
 
 I did it once when I accidentally modified old migration and wanted to run all
 migrations starting from that one again. in fact it was the first migration so

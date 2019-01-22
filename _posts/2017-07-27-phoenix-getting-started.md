@@ -86,6 +86,10 @@ services:
 > This variable will create the specified user with superuser power and
 > a database with the same name.
 
+it's possible not to specify `POSTGRES_USER` and `POSTGRES_PASSWORD` variables
+in _docker-compose.yml_ at all because they default to `postgres` but IMO it's
+still better to make it explicit.
+
 ```elixir
 # config/dev.secret.exs
 

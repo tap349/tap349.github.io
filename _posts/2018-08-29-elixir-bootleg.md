@@ -89,9 +89,8 @@ TODO: it's also necessary to rollback migrations to specific version - create
 `deploy` is a script from _assets/package.json_:
 
 ```json
-  "scripts": {
-    "deploy": "webpack --mode production"
-  }
+"scripts": {
+  "deploy": "webpack --mode production"
 }
 ```
 

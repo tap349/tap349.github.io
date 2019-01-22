@@ -86,7 +86,7 @@ TODO: it's also necessary to rollback migrations to specific version - create
   after_task(:deploy, :migrate)
 ```
 
-`deploy` is a script from _assets/package.json_:
+`yarn deploy` runs `deploy` script from _assets/package.json_:
 
 ```json
 "scripts": {

@@ -13,6 +13,9 @@ categories: [elixir]
 {:toc}
 <hr>
 
+tips
+----
+
 ### change release version
 
 by default project version from _mix.exs_ is used - or else it can be overriden
@@ -45,8 +48,8 @@ deploy release:
 $ mix bootleg.deploy
 ```
 
-TODO: it's also necessary to rollback migrations to specific version - create
-      corresponding release task.
+TODO: it's also necessary to rollback migrations to specific version -
+      create corresponding release task.
 
 ### compile assets
 
@@ -93,6 +96,28 @@ TODO: it's also necessary to rollback migrations to specific version - create
   "deploy": "webpack --mode production"
 }
 ```
+
+make sure the version of Bootleg is > 0.10.0 because there is no dedicated
+`remote_generate_release` step in Bootleg 0.10.0 - currently it's available
+in master only:
+
+```diff
+  # https://github.com/labzero/bootleg/blob/master/docs/reference/workflow.md
+
+  Remote Builds
+
+  - compile
++ - remote_generate_release
+  - release_workspace set?
+    - yes
+      - copy_build_release
+    - no
+      - download_release
+```
+
+that is in Bootleg 0.10.0 `compile` task both compiles project and builds
+release using Distillery => `phx_digest` hook is executed when release has
+been already built => compiled assets are not included into release.
 
 ### run migrations
 

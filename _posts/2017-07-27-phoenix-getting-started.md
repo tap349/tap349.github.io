@@ -99,7 +99,7 @@ config :eva, Eva.Repo,
 ```
 
 ```elixir
-# config/dev.secret.exs
+# config/test.secret.exs
 
 config :eva, Eva.Repo,
   username: "postgres",
@@ -113,6 +113,19 @@ config :eva, Eva.Repo,
 ```sh
 $ docker-compose up
 $ mix ecto.create && MIX_ENV=test mix ecto.create
+```
+
+NOTE: don't use `postgres` user in production - create a separate application
+user (this is how it's done in my Ansible tasks):
+
+```elixir
+# config/prod.secret.exs
+
+config :eva, Eva.Repo,
+  username: "eva_prod",
+  password: "secret",
+  database: "eva_prod",
+  pool_size: 15
 ```
 
 ### without Docker

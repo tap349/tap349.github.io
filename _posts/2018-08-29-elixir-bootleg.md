@@ -53,13 +53,21 @@ TODO: it's also necessary to rollback migrations to specific version - create
 1. <https://hexdocs.pm/phoenix/deployment.html>
 2. <https://hexdocs.pm/bootleg/reference/phoenix.html>
 
+> <https://www.reddit.com/r/node/comments/83omh4/best_approaches_to_setting_up_environment/dvm2zo7>
+>
+> Even for packages that you use in multiple places, you can install them
+> separately in each project's local node_modules. To easily run them, you can
+> use npx if you're using the npm client: `$ npx webpack`. I believe npx comes
+> bundled with more recent versions of npm. If you're using Yarn instead, you
+> can do `$ yarn webpack`, which should find Webpack in the local node_modules.
+
 ```diff
   # config/deploy/production.exs
 
 + task :phx_digest do
 +   remote :build, cd: "assets" do
 +     "yarn install"
-+     "webpack --mode production"
++     "yarn webpack --mode production"
 +   end
 +
 +   remote :build do

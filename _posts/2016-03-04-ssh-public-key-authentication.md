@@ -21,7 +21,7 @@ categories: [ssh]
   <dd>private key</dd>
 
   <dt>default identities</dt>
-  <dd>_~/.ssh/id_rsa_, _~/.ssh/id_dsa_, etc.</dd>
+  <dd>~/.ssh/id_rsa, ~/.ssh/id_dsa, etc.</dd>
 </dl>
 
 <hr>

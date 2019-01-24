@@ -55,7 +55,7 @@ npm packages
 ------------
 
 IMO there is no need to import minimized versions (_*.min.css_) in
-_assets/css/app.scss_ - CSS files will be minimized by Webpack using
+_assets/css/app.scss_ - CSS files will be minimized by Webpack with
 `optimize-css-assets-webpack-plugin`.
 
 ### milligram
@@ -68,7 +68,7 @@ $ npm install milligram
 ```scss
 // assets/css/app.scss
 
-@import '~milligram/dist/milligram.min.css';
+@import '~milligram/dist/milligram.css';
 ```
 
 ### toastr

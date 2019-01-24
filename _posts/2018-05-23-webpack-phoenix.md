@@ -457,6 +457,28 @@ points under the hood):
   $ yarn add optimize-css-assets-webpack-plugin uglifyjs-webpack-plugin --dev
   ```
 
+- rename _app.css_
+
+  ```sh
+  $ mv assets/css/app.css assets/css/app.scss
+  ```
+
+- update entry point file
+
+  > <https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/552#issuecomment-310538191>
+  >
+  > webpack natively only understands 'js-ish' files and using a 'css-ish' file
+  > as an entry point isn't recommended (imho it should even fail), so you will
+  > get a dummy bundle per css entry to 'handle' that. require/import the css
+  > inside an entrypoint instead and let extract-text-webpack-plugin emit the
+  > CSS file. It removes the CSS from the bundle anyways :)
+
+  ```javascript
+  // assets/js/app.js
+
+  import '../css/app.scss';
+  ```
+
 - update Webpack config
 
   > <https://stackoverflow.com/questions/42523436>
@@ -536,22 +558,6 @@ points under the hood):
       },
     };
   };
-  ```
-
-- update entry point file
-
-  > <https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/552#issuecomment-310538191>
-  >
-  > webpack natively only understands 'js-ish' files and using a 'css-ish' file
-  > as an entry point isn't recommended (imho it should even fail), so you will
-  > get a dummy bundle per css entry to 'handle' that. require/import the css
-  > inside an entrypoint instead and let extract-text-webpack-plugin emit the
-  > CSS file. It removes the CSS from the bundle anyways :)
-
-  ```javascript
-  // assets/js/app.js
-
-  import '../css/app.scss';
   ```
 
 ### style-loader

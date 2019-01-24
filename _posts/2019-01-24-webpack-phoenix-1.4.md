@@ -51,8 +51,14 @@ $ mv assets/css/app.css assets/css/app.scss
   });
 ```
 
-milligram
----------
+npm packages
+------------
+
+IMO there is no need to import minimized versions (_*.min.css_) in
+_assets/css/app.scss_ - CSS files will be minimized by Webpack using
+`optimize-css-assets-webpack-plugin`.
+
+### milligram
 
 ```sh
 $ cd assets
@@ -63,4 +69,25 @@ $ npm install milligram
 // assets/css/app.scss
 
 @import '~milligram/dist/milligram.min.css';
+```
+
+### toastr
+
+```sh
+$ cd assets
+$ npm install toastr
+```
+
+```javascript
+// assets/js/app.js
+
+import Toastr from "toastr";
+
+Toastr.success("Hello World!");
+```
+
+```scss
+// assets/css/app.scss
+
+@import '~toastr/build/toastr.css';
 ```

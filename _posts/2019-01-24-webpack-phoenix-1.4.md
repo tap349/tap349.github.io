@@ -13,8 +13,8 @@ categories: [webpack, phoenix]
 {:toc}
 <hr>
 
-add Sass loader
----------------
+SCSS
+----
 
 ```sh
 $ cd assets
@@ -49,4 +49,18 @@ $ mv assets/css/app.css assets/css/app.scss
       ]
     }
   });
+```
+
+milligram
+---------
+
+```sh
+$ cd assets
+$ npm install milligram
+```
+
+```scss
+// assets/css/app.scss
+
+@import '~milligram/dist/milligram.min.css';
 ```

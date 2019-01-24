@@ -457,7 +457,7 @@ points under the hood):
   $ yarn add optimize-css-assets-webpack-plugin uglifyjs-webpack-plugin --dev
   ```
 
-- rename _app.css_
+- rename _app.css_ to _app.scss_
 
   ```sh
   $ mv assets/css/app.css assets/css/app.scss

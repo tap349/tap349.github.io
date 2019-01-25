@@ -13,23 +13,32 @@ categories: [asdf]
 {:toc}
 <hr>
 
-don't install it via brew since brew formula places asdf files into
-_/usr/local/opt/asdf/_ - this operation requires sudo privileges.
+1. <https://github.com/asdf-vm/asdf>
 
-also after installing Elixir plugin and setting current version
-`elixir` executable wasn't found - that is asdf just didn't work.
+don't install it via brew because:
 
-<https://github.com/asdf-vm/asdf>:
+- brew formula places asdf files into _/usr/local/opt/asdf/_
+
+  it would be necessary to source _/usr/local/opt/asdf/asdf.sh_ instead of
+  _~/.asdf/asdf.sh_ while according to official asdf docs it's required to
+  source the latter.
+
+- asdf just doesn't work
+
+  after installing Elixir plugin and setting current version, `elixir`
+  executable is not found when asdf is installed via brew.
 
 ```sh
 $ brew uninstall --force elixir
 $ rm -rf ~/.mix/
-$ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.3.0
-$ asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir
+$ rm -rf ~/.asdf/
+$ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.3
+$ asdf plugin-add elixir
 $ asdf list-all elixir
-$ asdf install elixir 1.5.1
-$ asdf global elixir 1.5.1
+$ asdf install elixir 1.8.0
+$ asdf global elixir 1.8.0
 $ asdf current elixir
+$ echo 'source $HOME/.asdf/asdf.sh' >> ~/.zshenv
 $ elixir -v
 $ cd <project>
 $ mix compile
@@ -43,9 +52,3 @@ $ mix compile
 `asdf global` command writes specified tool version to _$HOME/.tool-versions_.
 
 all Elixir versions managed by asdf are stored in _~/.asdf/installs/elixir/_.
-
-_~/.zshenv_:
-
-```zsh
-source $HOME/.asdf/asdf.sh
-```

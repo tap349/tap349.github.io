@@ -22,3 +22,11 @@ $ brew list --versions macvim
 macvim 8.1-151 8.1-149_1 8.1-150 8.1-151_1 8.0-146_1 8.1-149 8.1-147 8.1-148
 $ brew switch macvim 8.1-151
 ```
+
+### remove old versions
+
+1. <https://docs.brew.sh/FAQ#how-do-i-uninstall-old-versions-of-a-formula>
+
+```sh
+$ brew cleanup
+```

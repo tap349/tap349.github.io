@@ -183,7 +183,7 @@ is specified with `schema` macro:
 
 ```ruby
 required(:quiz).schema do
-  required(:question1).filled(:str?)
+  required(:question_1).filled(:str?)
 end
 ```
 

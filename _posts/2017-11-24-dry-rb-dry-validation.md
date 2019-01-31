@@ -95,8 +95,8 @@ NOTE: when using macro syntax, unary predicate is specified as
 `int?` vs. `type?(Integer)`
 ---------------------------
 
-<http://dry-rb.org/gems/dry-validation/basics/built-in-predicates>:
-
+> <http://dry-rb.org/gems/dry-validation/basics/built-in-predicates>
+>
 > `int?` is a shorthand for `type?(Integer)`
 
 NOTE: the predicates have different arity.

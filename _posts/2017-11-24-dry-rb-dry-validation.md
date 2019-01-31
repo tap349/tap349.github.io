@@ -153,7 +153,7 @@ required(:ids).each(:int?)
 # array cannot be nil or empty
 required(:ids).filled { each(:int?) }
 
-# NOTE: this doesn't apply `each` predicates
+# NOTE: this doesn't apply `each` predicate
 required(:ids).filled.each(:int?)
 
 # all array element types are allowed but

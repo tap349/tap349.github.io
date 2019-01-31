@@ -148,7 +148,7 @@ SSH agent
 
     Host lain
       User lain
-      Hostname 172.104.X.X
+      Hostname 172.104.XXX.XXX
       IdentityFile ~/.ssh/id_rsa
   +   ForwardAgent yes
   ```

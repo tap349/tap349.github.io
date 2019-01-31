@@ -265,8 +265,8 @@ say, we have 2 services - `app` and `db`:
 ```sh
 $ docker-compose exec app sh
 # ping db
-PING db (172.18.0.3): 56 data bytes
-64 bytes from 172.18.0.3: icmp_seq=0 ttl=64 time=0.359 ms
+PING db (172.18.XXX.XXX): 56 data bytes
+64 bytes from 172.18.XXX.XXX: icmp_seq=0 ttl=64 time=0.359 ms
 ```
 
 troubleshooting

@@ -160,7 +160,7 @@ required(:ids).filled.each(:int?)
 # integers must be positive
 required(:ids).each { int? > gt?(0) }
 
-# array elements can nils or positive integers
+# array elements can be nils or positive integers
 required(:ids).each { none? | (int? & gt?(0)) }
 
 # multiple predicates for each array value

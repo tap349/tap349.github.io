@@ -60,7 +60,7 @@ one of 2 equivalent ways:
 macros
 ------
 
-1. <http://dry-rb.org/gems/dry-validation/basics/macros/>
+1. <http://dry-rb.org/gems/dry-validation/basics/macros>
 
 macros don't share a common pattern - just memorize how they are expanded:
 (e.g. `filled(:int?)` => `{ filled? & int? }`).
@@ -95,7 +95,7 @@ NOTE: when using macro syntax, unary predicate is specified as
 `int?` vs. `type?(Integer)`
 ---------------------------
 
-<http://dry-rb.org/gems/dry-validation/basics/built-in-predicates/>:
+<http://dry-rb.org/gems/dry-validation/basics/built-in-predicates>:
 
 > `int?` is a shorthand for `type?(Integer)`
 
@@ -143,7 +143,7 @@ end
 nested arrays
 -------------
 
-1. <http://dry-rb.org/gems/dry-validation/nested-data/>
+1. <http://dry-rb.org/gems/dry-validation/nested-data>
 2. <https://github.com/dry-rb/dry-validation/issues/175>
 
 ```ruby
@@ -170,7 +170,7 @@ required(:ids).each(:int?, gteq?: 0)
 Dry::Validation.Form
 --------------------
 
-1. <http://dry-rb.org/gems/dry-validation/forms/>
+1. <http://dry-rb.org/gems/dry-validation/forms>
 
 unlike `Dry::Validation.Schema`, `Dry::Validation.Form`:
 

@@ -224,6 +224,7 @@ example
 -------
 
 ```elixir
+# https://github.com/elixir-lang/elixir/blob/master/lib/elixir/lib/gen_server.ex
 defmodule MyApp.CQRS.Loader do
   defmacro __using__(opts) do
     # https://elixirforum.com/t/pass-module-to-a-macro/978

@@ -219,3 +219,28 @@ iex> Code.eval_quoted(quote do: "123" == unquote(Macro.escape(%{a: 1})))
 -----------
 
 1. <https://dockyard.com/blog/2017/12/07/macro-madness-how-to-use-use-well>
+
+example
+-------
+
+```elixir
+defmodule MyApp.CQRS.Loader do
+  defmacro __using__(opts) do
+    # https://elixirforum.com/t/pass-module-to-a-macro/978
+    # opts are quoted (converted to AST) when passed to macro
+    schema = Macro.expand(opts[:schema], __ENV__)
+
+    quote do
+      alias MyApp.Repo
+      alias unquote(schema)
+      alias unquote(:"#{schema}.Query")
+
+      @schema unquote(opts[:schema])
+
+      def all(clauses) do
+        Repo.all(@schema)
+      end
+    end
+  end
+end
+```

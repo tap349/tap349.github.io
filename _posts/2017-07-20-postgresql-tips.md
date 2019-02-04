@@ -333,12 +333,16 @@ Created database 'sith_test'
 - using `pg_dump` (structure + data)
 
   ```sh
-  $ DOCKER_DB_NAME=`docker-compose ps -q db`
+  $ DB_CONTAINER_ID=`docker-compose ps -q db`
   $ DB_USER=postgres
   $ DB_NAME=sith_dev
-  $ pg_dump -h localhost "${DB_NAME}" | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+  $ pg_dump -h localhost "${DB_NAME}" -p 5432 | \
+      docker exec -i "${DB_CONTAINER_ID}" \
+      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
   / or
-  $ pg_dump -h localhost "${DB_NAME}" | docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}"
+  $ pg_dump -h localhost "${DB_NAME}" -p 5432 | \
+      docker-compose exec -T db \
+      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
   ```
 
   load test database:
@@ -353,12 +357,14 @@ Created database 'sith_test'
   inside Docker container but still it's possible to load _db/structure.sql_:
 
   ```sh
-  $ DOCKER_DB_NAME=`docker-compose ps -q db`
+  $ DB_CONTAINER_ID=`docker-compose ps -q db`
   $ DB_USER=postgres
   $ DB_NAME=sith_dev
-  $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -v ON_ERROR_STOP=1 -U "${DB_USER}" -d "${DB_NAME}"
+  $ cat db/structure.sql | docker exec -i "${DB_CONTAINER_ID}" \
+      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
   / or
-  $ cat db/structure.sql | docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}"
+  $ cat db/structure.sql | docker-compose exec -T db \
+      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
   ```
 
   in case there are errors executing previous command:
@@ -367,6 +373,8 @@ Created database 'sith_test'
 
     ```sh
     $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+    / or
+    $ cat db/structure.sql | docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}"
     ```
 
   - drop and create test database if skipping errors doesn't help

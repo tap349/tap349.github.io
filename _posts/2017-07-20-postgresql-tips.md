@@ -372,9 +372,11 @@ Created database 'sith_test'
   - remove `-v ON_ERROR_STOP=1` psql option to skip errors
 
     ```sh
-    $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" psql -U "${DB_USER}" -d "${DB_NAME}"
+    $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" \
+        psql -U "${DB_USER}" -d "${DB_NAME}"
     / or
-    $ cat db/structure.sql | docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}"
+    $ cat db/structure.sql | docker-compose exec -T db \
+        psql -U "${DB_USER}" -d "${DB_NAME}"
     ```
 
   - drop and create test database if skipping errors doesn't help

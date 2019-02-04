@@ -301,7 +301,7 @@ $ docker-compose up db
 
 ### configure application to use databases in Docker container
 
-_docker-compose.yml_:
+_config/database.yml_:
 
 ```diff
   default: &default

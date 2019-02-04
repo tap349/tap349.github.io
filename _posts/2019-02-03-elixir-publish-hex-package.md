@@ -84,7 +84,7 @@ Docs published to https://hexdocs.pm/ecto_cqrs/0.1.0
 
 ### retire package
 
-you might need it when, say, you want to rename published package.
+you might need it, say, when you want to rename published package.
 
 ```sh
 $ mix hex.retire ecto_cqrs 0.1.0 renamed --message "renamed to ecto_cqs"

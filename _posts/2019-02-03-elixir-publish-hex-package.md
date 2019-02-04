@@ -81,3 +81,18 @@ Publishing docs...
 [#########################] 100%
 Docs published to https://hexdocs.pm/ecto_cqrs/0.1.0
 ```
+
+### retire package
+
+you might need it when, say, you want to rename published package.
+
+```sh
+$ mix hex.retire ecto_cqrs 0.1.0 renamed --message "renamed to ecto_cqs"
+Local password:
+ecto_cqrs 0.1.0 has been retired
+
+Retiring a version does not affect if the version will still be resolved.
+We recommend that you publish a new version of this package, unless there
+is already a more recent patch version of this package, because this version
+may still be picked by dependency resolution.
+```

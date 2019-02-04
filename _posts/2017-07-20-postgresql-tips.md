@@ -262,13 +262,13 @@ $ RAILS_ENV=test rails db:structure:load
 say, to restore our database running in Docker:
 
 ```sh
-$ psql -h localhost -p 5433 -U postgres -f ./PostgreSQL.sql sith_dev
+$ psql -h localhost -p 5434 -U postgres -f ./PostgreSQL.sql sith_dev
 ```
 
 (how to) remove all versions of PostgreSQL on Ubuntu
 ----------------------------------------------------
 
-<https://askubuntu.com/a/32735>:
+1. <https://askubuntu.com/a/32735>
 
 ```sh
 $ sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
@@ -286,122 +286,80 @@ _docker-compose.yml_:
 ```diff
   services:
 +   db:
-+     image: postgres:9.4
++     image: postgres:11.1
 +     environment:
-+       POSTGRES_PASSWORD: sith_dev
++       POSTGRES_USER: postgres
++       POSTGRES_PASSWORD: postgres
 +     ports:
-+       - 5433:5432
++       - 5434:5432
 ```
 
-### run `db` service
+### create databases in Docker container
 
-```sh
-$ docker-compose up db
-```
-
-### configure application to use databases in Docker container
-
-_config/database.yml_:
-
-```diff
-  default: &default
--   port: 5432
-+   port: 5433
-
-  development:
--   username: sith_dev
-+   username: postgres
-
-  test:
--   username: sith_test
-+   username: postgres
-```
-
-`postgres` is a default superuser in PostgreSQL image - it can be changed
-by setting `POSTGRES_USER` environment variable in _docker-compose.yml_.
-
-### create new databases in Docker container
+Rails:
 
 ```sh
 $ rails db:create
-Created database 'sith_dev'
-Created database 'sith_test'
+$ RAILS_ENV=test rails db:create
+```
+
+Phoenix:
+
+```sh
+$ mix ecto.create
+$ MIX_ENV=test mix ecto.create
 ```
 
 ### import local database into Docker container
 
-- using `pg_dump` (structure + data)
+```sh
+$ DB_USER=postgres
+$ DB_NAME=reika_dev
+$ DOCKER_PSQL_CMD='docker-compose exec -T db psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1'
+```
+
+NOTE: remove `-v ON_ERROR_STOP=1` to skip errors (say, you'll get errors if
+structure has been already loaded).
+
+- using `pg_dump` (structure and data)
 
   ```sh
-  $ DB_CONTAINER_ID=`docker-compose ps -q db`
-  $ DB_USER=postgres
-  $ DB_NAME=sith_dev
-  $ pg_dump -h localhost "${DB_NAME}" -p 5432 | \
-      docker exec -i "${DB_CONTAINER_ID}" \
-      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
-  / or
-  $ pg_dump -h localhost "${DB_NAME}" -p 5432 | \
-      docker-compose exec -T db \
-      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
+  $ pg_dump -h localhost "${DB_NAME}" -p 5432 | eval "${DOCKER_PSQL_CMD}"
   ```
 
-  load test database:
+- using structure file (structure only)
+
+  Rails:
+
+  ```sh
+  $ cat db/structure.sql | eval "${DOCKER_PSQL_CMD}"
+  ```
+
+  Phoenix (dump structure when local database is used):
+
+  ```sh
+  $ cat priv/repo/structure.sql | eval "${DOCKER_PSQL_CMD}"
+  ```
+
+- load structure for test database
+
+  Rails:
 
   ```sh
   $ RAILS_ENV=test rails db:structure:load
   ```
 
-- using _db/structure.sql_ (structure only)
-
-  command `rails db:structure:load` doesn't work (some error) when database is
-  inside Docker container but still it's possible to load _db/structure.sql_:
+  Phoenix:
 
   ```sh
-  $ DB_CONTAINER_ID=`docker-compose ps -q db`
-  $ DB_USER=postgres
-  $ DB_NAME=sith_dev
-  $ cat db/structure.sql | docker exec -i "${DB_CONTAINER_ID}" \
-      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
-  / or
-  $ cat db/structure.sql | docker-compose exec -T db \
-      psql -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1
+  $ mix ecto.dump
+  $ MIX_ENV=test mix ecto.load
   ```
-
-  in case there are errors executing previous command:
-
-  - remove `-v ON_ERROR_STOP=1` psql option to skip errors
-
-    ```sh
-    $ cat db/structure.sql | docker exec -i "${DOCKER_DB_NAME}" \
-        psql -U "${DB_USER}" -d "${DB_NAME}"
-    / or
-    $ cat db/structure.sql | docker-compose exec -T db \
-        psql -U "${DB_USER}" -d "${DB_NAME}"
-    ```
-
-  - drop and create test database if skipping errors doesn't help
-
-    ```sh
-    $ RAILS_ENV=test rails db:drop
-    $ RAILS_ENV=test rails db:create
-    / run command to load structure.sql
-    ```
 
 ### run psql
 
-list Docker containers:
-
 ```sh
-$ docker-compose ps
-          Name                        Command               State                           Ports
---------------------------------------------------------------------------------------------------------------------------
-sith_db_1                  docker-entrypoint.sh postgres    Up      0.0.0.0:5433->5432/tcp
-```
-
-run psql in a running Docker container:
-
-```sh
-$ docker exec -it sith_db_1 psql -U 'postgres' -d sith_dev
+$ psql -h localhost -p 5434 -U postgres -d reika_dev
 ```
 
 (how to) get timezone offset

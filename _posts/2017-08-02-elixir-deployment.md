@@ -181,10 +181,10 @@ this case just reference _priv/_ directory directly using relative path:
 config :neko, :rules, dir: "priv/rules"
 ```
 
-this should work in most cases. _priv/_ directory wasn't found when specified
-using relative path only once - when I tried to access it from inside release
-task (see <https://hexdocs.pm/distillery/guides/running_migrations.html>). I
-had to update application environment value in the task itself:
+this should work in most cases. however _priv/_ directory wasn't found
+using relative path when I tried to access it from inside release task
+(see <https://hexdocs.pm/distillery/guides/running_migrations.html>).
+I had to update application environment value in the task itself:
 
 ```elixir
 new_rules_config =

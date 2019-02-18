@@ -62,12 +62,12 @@ behaviour module (BM)
 
 - BM combined with CM
 
-  BM can be embedded inside CM directly or as a nested module
-  (in the latter case the boundary between the two is more explicit).
+  BM can be embedded inside CM directly or as a nested module (in the latter
+  case the boundary between the two is more explicit).
 
-  this pattern is useful when there are only 2 CMs (real and mock ones)
-  and it's tiresome to create a separate CM for real implementation
-  each time (or you cannot come up with a proper name for this module).
+  this pattern is useful when there are only 2 CMs (real and mock ones) and
+  it's tiresome to create a separate CM for real implementation each time
+  (or you cannot come up with a proper name for this module).
 
   embedding BM directly:
 
@@ -119,11 +119,11 @@ callback module (CM)
 
   FCM is often combined with BM.
 
-  => FCM acts as a facade or proxy forwarding calls to dynamically
-  fetched adapter so that clients are not even aware that they are
-  dealing with switchable adapter under the hood (since they don't
-  have to fetch it from environment by themselves like in all other
-  cases) - FCM looks just like an ordinary module from outside:
+  => FCM acts as a facade or proxy forwarding calls to dynamically fetched
+  adapter so that clients are not even aware that they are dealing with
+  switchable adapter under the hood (since they don't have to fetch it from
+  environment by themselves like in all other cases) - FCM looks just like
+  an ordinary module from outside:
 
   ```elixir
   # FCM
@@ -145,5 +145,7 @@ callback module (CM)
   end
   ```
 
-  also FCM gives an opportunity to do some housekeeping
-  (say, logging) before or after delegating to actual CM.
+  also FCM gives an opportunity to do some housekeeping (say, logging) before
+  or after delegating to actual CM.
+
+  NOTE: both FCM and actual CM must implement `Behaviour` behaviour!

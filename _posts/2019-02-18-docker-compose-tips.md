@@ -65,6 +65,10 @@ db_1  | 2019-02-18 09:19:23.315 UTC [1] DETAIL:  The data directory was
   version 11.1 (Debian 11.1-1.pgdg90+1).
 ```
 
+> <https://github.com/docker/compose/issues/1487#issuecomment-107048571>
+>
+> `docker-compose up` never rebuilds an image
+
 ```sh
 $ docker-compose stop db
 $ docker-compose build db

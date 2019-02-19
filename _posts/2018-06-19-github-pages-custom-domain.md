@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GitHub Pages - Custom domain
+title: GitHub Pages - Custom Domain
 date: 2018-06-19 12:28:25 +0300
 access: public
 comments: true

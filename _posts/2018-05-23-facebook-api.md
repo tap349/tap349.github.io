@@ -401,7 +401,7 @@ new `KhLead` PAT generated this way now has not only messenger permissions
 but `read_page_mailboxes` permission as well (as though it was saved after
 generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
-#### generate long-lived PAT with `read_page_mailboxes` permission in GAE
+#### generate long-lived PAT with arbitrary permissions in GAE
 
 1. <https://stackoverflow.com/questions/17197970>
 

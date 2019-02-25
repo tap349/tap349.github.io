@@ -28,7 +28,7 @@ $ mix local.hex
 install latest Phoenix version:
 
 ```sh
-$ mix archive.install hex phx_new 1.4.0
+$ mix archive.install hex phx_new 1.4.1
 ```
 
 create new project
@@ -40,10 +40,10 @@ create new project
 $ mix phx.new billing
 ```
 
-for API-only projects:
+for API-only projects (see `mix help phx.new`):
 
 ```sh
-$ mix phx.new billing --no-html --no-webpack
+$ mix phx.new billing --no-webpack --no-html
 ```
 
 setup Git repo

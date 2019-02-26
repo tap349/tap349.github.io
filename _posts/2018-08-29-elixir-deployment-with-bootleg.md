@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Elixir - Bootleg
+title: Elixir - Deployment with Bootleg
 date: 2018-08-29 12:06:25 +0300
 access: public
 comments: true
-categories: [elixir]
+categories: [elixir, phoenix, deployment]
 ---
 
 <!-- more -->
@@ -12,6 +12,47 @@ categories: [elixir]
 * TOC
 {:toc}
 <hr>
+
+configuration
+-------------
+
+1. <https://hexdocs.pm/bootleg/reference/role_host_options.html>
+
+```sh
+$ mix bootleg.init
+```
+
+```elixir
+# config/deploy.exs
+
+use Bootleg.DSL
+
+config :host, Application.get_env(:lucy, LucyWeb.Endpoint)[:url][:host]
+config :user, "lucy"
+config :build_path, "/tmp/bootleg/build"
+# release archive is unpacked right inside this directory
+# (subdirectory with application name is not created)
+config :deploy_path, "/home/lucy/prod/app"
+config :release_path, "/home/lucy/prod/releases"
+config :silently_accept_hosts, true
+
+# `build` role defines what remote server release should be built on
+role(
+  :build,
+  config(:host),
+  # SSH username
+  user: config(:user),
+  # Path of the remote build workspace (:build role) or application
+  # workspace (:app role)
+  workspace: config(:build_path),
+  # For :build roles, this is the path where the newly-built release
+  # should be copied.
+  # For :app roles, this is the path where the release should
+  # be found.  You probably want to use the same value for both!
+  release_workspace: config(:release_path),
+  silently_accept_hosts: config(:silently_accept_hosts)
+)
+```
 
 tips
 ----
@@ -51,6 +92,57 @@ $ mix bootleg.deploy
 TODO: it's also necessary to rollback migrations to specific version -
       create corresponding release task.
 
+### run migrations
+
+1. <https://hexdocs.pm/distillery/guides/running_migrations.html>
+2. <https://dockyard.com/blog/2018/08/23/announcing-distillery-2-0>
+
+```sh
+# rel/commands/migrate.sh
+
+#!/bin/sh
+
+release_ctl eval --mfa "Lucy.ReleaseTasks.migrate/0"
+```
+
+```diff
+  # config/deploy/production.exs
+
++ task :migrate do
++   remote :db do
++     "bin/lucy migrate"
++   end
++ end
+
+  before_task(:compile, :symlink_secret_file)
++ after_task(:deploy, :migrate)
+```
+
+### run migrations manually
+
+I did it once when I accidentally modified old migration and wanted to run all
+migrations starting from that one again. in fact it was the first migration so
+I just dropped all tables including `schema_migrations` one in `psql` and run
+`Reika.ReleaseTasks.migrate()` in IEx:
+
+```
+$ bin/my_app remote_console
+iex> Reika.ReleaseTasks.migrate()
+```
+
+or else run custom `migrate` command:
+
+```
+$ bin/my_app migrate
+```
+
+the gotcha is that Phoenix application stops (IDK why) after running migrations
+this way so make sure to start/restart it afterwards:
+
+```sh
+$ sudo systemctl restart my_app_prod
+```
+
 ### compile assets
 
 1. <https://hexdocs.pm/phoenix/deployment.html>
@@ -72,7 +164,7 @@ TODO: it's also necessary to rollback migrations to specific version -
 
   task :migrate do
     remote :db do
-      "bin/eva migrate"
+      "bin/lucy migrate"
     end
   end
 
@@ -137,28 +229,3 @@ another important reason to choose npm is that _assets/package-lock.json_
 is not used by Yarn when installing npm packages during deployment - it
 looks for _assets/yarn.lock_ (which is missing for obvious reasons since
 Mix tasks don't use Yarn).
-
-### run migrations
-
-I did it once when I accidentally modified old migration and wanted to run all
-migrations starting from that one again. in fact it was the first migration so
-I just dropped all tables including `schema_migrations` one in `psql` and run
-`Reika.ReleaseTasks.migrate()` in IEx:
-
-```
-$ bin/my_app remote_console
-iex> Reika.ReleaseTasks.migrate()
-```
-
-or if _rel/commands/migrate.sh_ is created:
-
-```
-$ bin/my_app migrate
-```
-
-the gotcha is that Phoenix application stops (IDK why) after running migrations
-this way so make sure to start/restart it afterwards:
-
-```sh
-$ sudo systemctl restart my_app_prod
-```

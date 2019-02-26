@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Elixir - Deployment
+title: Elixir - Deployment with Edeliver
 date: 2017-08-02 21:38:18 +0300
 access: public
 comments: true
-categories: [elixir, phoenix, deployment, edeliver]
+categories: [elixir, phoenix, deployment]
 ---
 
 <!-- more -->

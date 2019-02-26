@@ -27,13 +27,13 @@ $ mix bootleg.init
 
 use Bootleg.DSL
 
-config :host, Application.get_env(:lucy, LucyWeb.Endpoint)[:url][:host]
-config :user, "lucy"
+config :host, Application.get_env(:my_app, MyAppWeb.Endpoint)[:url][:host]
+config :user, "my_app"
 config :build_path, "/tmp/bootleg/build"
 # release archive is unpacked right inside this directory
 # (subdirectory with application name is not created)
-config :deploy_path, "/home/lucy/prod/app"
-config :release_path, "/home/lucy/prod/releases"
+config :deploy_path, "/home/my_app/prod/app"
+config :release_path, "/home/my_app/prod/releases"
 config :silently_accept_hosts, true
 
 # `build` role defines what remote server release should be built on
@@ -54,43 +54,39 @@ role(
 )
 ```
 
-tips
-----
-
-### change release version
-
-by default project version from _mix.exs_ is used - or else it can be overriden
-in Bootleg config:
-
 ```elixir
-# config/deploy.exs
+# config/deploy/production.exs
 
-config :version, "0.0.1"
+use Bootleg.DSL
+
+# `app` role defines what remote servers release should be deployed to
+role(
+  :app,
+  config(:host),
+  user: config(:user),
+  workspace: config(:deploy_path),
+  release_workspace: config(:release_path),
+  silently_accept_hosts: config(:silently_accept_hosts)
+)
+
+role(
+  :db,
+  config(:host),
+  user: config(:user),
+  workspace: config(:deploy_path)
+)
+
+task :symlink_secret_file do
+  target = "/var/my_app/config/prod.secret.exs"
+  link = "#{config(:build_path)}/config/prod.secret.exs"
+
+  remote :build do
+    "ln -sfn #{target} #{link}"
+  end
+end
+
+before_task(:compile, :symlink_secret_file)
 ```
-
-NOTE: version is used in both `bootleg.build` and `bootleg.deploy` tasks!
-
-=> `bootleg.deploy` task uses version to determine which release to deploy.
-
-### rollback release
-
-set previous release version:
-
-```diff
-  # config/deploy.exs
-
-- config :version, "0.0.2"
-+ config :version, "0.0.1"
-```
-
-deploy release:
-
-```sh
-$ mix bootleg.deploy
-```
-
-TODO: it's also necessary to rollback migrations to specific version -
-      create corresponding release task.
 
 ### run migrations
 
@@ -102,7 +98,7 @@ TODO: it's also necessary to rollback migrations to specific version -
 
 #!/bin/sh
 
-release_ctl eval --mfa "Lucy.ReleaseTasks.migrate/0"
+release_ctl eval --mfa "MyApp.ReleaseTasks.migrate/0"
 ```
 
 ```diff
@@ -110,37 +106,12 @@ release_ctl eval --mfa "Lucy.ReleaseTasks.migrate/0"
 
 + task :migrate do
 +   remote :db do
-+     "bin/lucy migrate"
++     "bin/my_app migrate"
 +   end
 + end
 
   before_task(:compile, :symlink_secret_file)
 + after_task(:deploy, :migrate)
-```
-
-### run migrations manually
-
-I did it once when I accidentally modified old migration and wanted to run all
-migrations starting from that one again. in fact it was the first migration so
-I just dropped all tables including `schema_migrations` one in `psql` and run
-`Reika.ReleaseTasks.migrate()` in IEx:
-
-```
-$ bin/my_app remote_console
-iex> Reika.ReleaseTasks.migrate()
-```
-
-or else run custom `migrate` command:
-
-```
-$ bin/my_app migrate
-```
-
-the gotcha is that Phoenix application stops (IDK why) after running migrations
-this way so make sure to start/restart it afterwards:
-
-```sh
-$ sudo systemctl restart my_app_prod
 ```
 
 ### compile assets
@@ -164,7 +135,7 @@ $ sudo systemctl restart my_app_prod
 
   task :migrate do
     remote :db do
-      "bin/lucy migrate"
+      "bin/my_app migrate"
     end
   end
 
@@ -229,3 +200,66 @@ another important reason to choose npm is that _assets/package-lock.json_
 is not used by Yarn when installing npm packages during deployment - it
 looks for _assets/yarn.lock_ (which is missing for obvious reasons since
 Mix tasks don't use Yarn).
+
+tips
+----
+
+### change release version
+
+by default project version from _mix.exs_ is used - or else it can be overriden
+in Bootleg config:
+
+```elixir
+# config/deploy.exs
+
+config :version, "0.0.1"
+```
+
+NOTE: version is used in both `bootleg.build` and `bootleg.deploy` tasks!
+
+=> `bootleg.deploy` task uses version to determine which release to deploy.
+
+### rollback release
+
+set previous release version:
+
+```diff
+  # config/deploy.exs
+
+- config :version, "0.0.2"
++ config :version, "0.0.1"
+```
+
+deploy release:
+
+```sh
+$ mix bootleg.deploy
+```
+
+TODO: it's also necessary to rollback migrations to specific version -
+      create corresponding release task.
+
+### rerun all migrations in production
+
+I did it once when I accidentally modified old migration and wanted to run all
+migrations starting from that one again. in fact it was the first migration so
+I just dropped all tables including `schema_migrations` one in `psql` and run
+`Reika.ReleaseTasks.migrate()` in IEx:
+
+```
+$ bin/my_app remote_console
+iex> Reika.ReleaseTasks.migrate()
+```
+
+or else run custom `migrate` command:
+
+```
+$ bin/my_app migrate
+```
+
+the gotcha is that Phoenix application stops (IDK why) after running migrations
+this way so make sure to start/restart it afterwards:
+
+```sh
+$ sudo systemctl restart my_app_prod
+```

@@ -47,8 +47,8 @@ role(
   workspace: config(:build_path),
   # For :build roles, this is the path where the newly-built release
   # should be copied.
-  # For :app roles, this is the path where the release should
-  # be found.  You probably want to use the same value for both!
+  # For :app roles, this is the path where the release should be found.
+  # You probably want to use the same value for both!
   release_workspace: config(:release_path),
   silently_accept_hosts: config(:silently_accept_hosts)
 )

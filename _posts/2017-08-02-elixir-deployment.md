@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir - Deployment with Edeliver
+title: Elixir - Deployment
 date: 2017-08-02 21:38:18 +0300
 access: public
 comments: true
@@ -159,8 +159,8 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
 
 2 ways to get _priv/_ directory itself (or the file inside it) at runtime:
 
-- `Application.app_dir(:my_app, "priv/foo.txt")`
-- `Path.join(:code.priv_dir(:my_app), "foo.txt")`
+- `Application.app_dir(:billing, "priv/foo.txt")`
+- `Path.join(:code.priv_dir(:billing), "foo.txt")`
 
 for example:
 
@@ -291,7 +291,7 @@ trying to send any request to application.
   _config/prod.exs_:
 
   ```diff
-    config :reika, BillingWeb.Endpoint,
+    config :billing, BillingWeb.Endpoint,
   -   load_from_system_env: true,
   -   http: [:inet6, port: System.get_env("PORT") || 4000],
   -   url: [host: "example.com", port: 80],
@@ -627,91 +627,169 @@ $ ssh devops@billing sudo systemctl restart billing_prod
 release version is defined as `AUTO_VERSION` in _.deliver/config_
 (see `auto-versioning` section above).
 
-management
-----------
+tasks and commands
+------------------
 
-### tasks and commands
+### [local] edeliver tasks
 
-- [local] edeliver tasks
+1. <https://hexdocs.pm/edeliver/Mix.Tasks.Edeliver.html>
 
-  on tasks vs. commands: in wiki and `mix edeliver --help` tasks and
-  commands are used interchangeably but to be precise `edeliver` is
-  a Mix task itself so `edeliver build release` is a edeliver build
-  task as well while `build release` is a specific edeliver command
-  (edeliver `build release` command vs. `edeliver build release` task).
+on tasks vs. commands: in wiki and `mix edeliver --help` tasks and
+commands are used interchangeably but to be precise `edeliver` is
+a Mix task itself so `edeliver build release` is a edeliver build
+task as well while `build release` is a specific edeliver command
+(edeliver `build release` command vs. `edeliver build release` task).
 
-  but for simplicity I might refer to edeliver commands as tasks as well.
+but for simplicity I might refer to edeliver commands as tasks as well.
 
-  1. <https://hexdocs.pm/edeliver/Mix.Tasks.Edeliver.html>
+### [remote] application commands
 
-- [remote] application commands
+`console`, `foreground`, `start` - application boot commands.
 
-  `console`, `foreground`, `start` - application boot commands.
+- `$ bin/billing pid` - get pid of running application
+- `$ bin/billing ping` - check if application is running
+- `$ bin/billing start` - start as daemon
+- `$ bin/billing foreground` - start in the foreground
+- `$ bin/billing console` - start with console attached
+- `$ bin/billing stop`
+- `$ bin/billing restart` - restart application daemon without shutting down VM
+- `$ bin/billing reboot` - restart application daemon with shutting down VM
+- `$ bin/billing remote_console` - remote shell to running application console
 
-  - `$ bin/billing pid` - get pid of running application
-  - `$ bin/billing ping` - check if application is running
-  - `$ bin/billing start` - start as daemon
-  - `$ bin/billing foreground` - start in the foreground
-  - `$ bin/billing console` - start with console attached
-  - `$ bin/billing stop`
-  - `$ bin/billing restart` - restart application daemon without shutting down VM
-  - `$ bin/billing reboot` - restart application daemon with shutting down VM
-  - `$ bin/billing remote_console` - remote shell to running application console
+### [remote] systemd commands
 
-- [remote] systemd commands
+- `$ sudo systemctl start billing_prod`
+- `$ sudo systemctl stop billing_prod`
+- `$ sudo systemctl restart billing_prod`
+- `$ sudo systemctl status billing_prod`
 
-  - `$ sudo systemctl start billing_prod`
-  - `$ sudo systemctl stop billing_prod`
-  - `$ sudo systemctl restart billing_prod`
-  - `$ sudo systemctl status billing_prod`
+### [remote] custom commands
 
-### custom commands
+1. <https://hexdocs.pm/distillery/guides/running_migrations.html>
+2. <https://dockyard.com/blog/2018/08/23/announcing-distillery-2-0>
+3. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
 
-1. <https://github.com/bitwalker/distillery/issues/2>
-2. <http://blog.plataformatec.com.br/2016/04/running-migration-in-an-exrm-release/>
-3. <http://blog.firstiwaslike.com/elixir-deployments-with-distillery-running-ecto-migrations/>
-4. <https://github.com/bitwalker/distillery/blob/master/docs/Running%20Migrations.md>
-
-custom commands allow, say, to run migrations directly on production host
-or perform other tasks.
-
-_lib/release/tasks.ex_:
+custom commands allow, say, to run migrations or build ES indexes directly on
+production host:
 
 ```elixir
-defmodule Release.Tasks do
-  @app :billing
-  @repo Billing.Repo
+# lib/reika/release_tasks.ex
 
+defmodule Reika.ReleaseTasks do
+  @start_apps [
+    :crypto,
+    :ssl,
+    :postgrex,
+    :ecto_sql,
+    :elasticsearch
+  ]
+
+  @app :reika
+  @repos Application.get_env(@app, :ecto_repos, [])
+  @es_cluster Reika.ES.Cluster
+  @es_indexes [:reika_shops]
+
+  # https://hexdocs.pm/distillery/guides/running_migrations.html
   def migrate do
-    start_application()
-    Ecto.Migrator.run(@repo, path(), :up, all: true)
-    stop_application()
+    start_apps()
+    start_repos()
+
+    IO.puts("Running migrations...")
+    Enum.each(@repos, &run_migrations_for/1)
+
+    stop_apps()
   end
 
-  def rollback do
-    start_application()
-    Ecto.Migrator.run(@repo, path(), :down, step: 1)
-    stop_application()
+  # https://hexdocs.pm/elasticsearch/distillery.html
+  def build_es_indexes do
+    start_apps()
+    start_repos()
+    start_es_cluster()
+
+    IO.puts("Building ES indexes...")
+
+    Enum.each(@es_indexes, fn es_index ->
+      new_es_config =
+        @app
+        |> Application.get_env(@es_cluster)
+        |> update_in(
+          [:indexes, es_index, :settings],
+          &Application.app_dir(@app, &1)
+        )
+
+      Application.put_env(@app, @es_cluster, new_es_config)
+
+      # restart ES Cluster so that configuration is re-read
+      GenServer.stop(@es_cluster)
+      start_es_cluster()
+
+      Elasticsearch.Index.hot_swap(@es_cluster, es_index)
+    end)
+
+    stop_apps()
   end
 
-  def start_application do
-    {:ok, _} = Application.ensure_all_started(@app)
+  # -----------------------------------------------------------------
+  # migrations
+  # -----------------------------------------------------------------
+
+  defp run_migrations_for(repo) do
+    migrations_path = priv_path_for(repo, "migrations")
+    Ecto.Migrator.run(repo, migrations_path, :up, all: true)
   end
 
-  def stop_application do
+  defp priv_path_for(repo, filename) do
+    app = Keyword.get(repo.config, :otp_app)
+
+    repo_underscore =
+      repo
+      |> Module.split()
+      |> List.last()
+      |> Macro.underscore()
+
+    priv_dir = "#{:code.priv_dir(app)}"
+    Path.join([priv_dir, repo_underscore, filename])
+  end
+
+  # -----------------------------------------------------------------
+  # start/stop helpers
+  # -----------------------------------------------------------------
+
+  defp start_apps do
+    IO.puts("Loading #{@app}..")
+    # Load the code for @app, but don't start it
+    Application.load(@app)
+
+    IO.puts("Starting apps..")
+    Enum.each(@start_apps, &Application.ensure_all_started/1)
+  end
+
+  defp start_repos do
+    IO.puts("Starting repos..")
+    # > Ecto requires a pool size of at least 2 to support
+    # > concurrent migrators.
+    # > When migrations run, Ecto uses one connection to
+    # > maintain a lock and another to run migrations.
+    Enum.each(@repos, & &1.start_link(pool_size: 2))
+  end
+
+  defp start_es_cluster do
+    IO.puts("Starting ES cluster..")
+    @es_cluster.start_link()
+  end
+
+  defp stop_apps do
+    IO.puts("Success!")
     :init.stop()
   end
-
-  defp path do
-    Application.app_dir(@app, "priv/repo/migrations")
-  end
+end
 ```
 
 on production host:
 
 ```sh
-$ bin/billing stop
-$ bin/billing command Elixir.Release.Tasks migrate
+$ bin/reika stop
+$ bin/reika command Elixir.Reika.ReleaseTasks migrate
 ```
 
 locations on production host
@@ -967,8 +1045,9 @@ environment and current Mix environment simultaneously:
 $ MIX_ENV=prod mix release --env=staging
 ```
 
-Mix environment also determines the location where project is compiled and
-built - say, it will be _\_build/prod/_ directory in case `MIX_ENV=prod`.
+Mix environment also uses release environment to determine the location
+where project should be compiled and built - say, it's _\_build/prod/_ in
+case of `MIX_ENV=prod`.
 
 in all examples I've seen `MIX_ENV=prod` and `--env=prod` are used together
 but it's sufficient to use `MIX_ENV=prod` only because in this case release
@@ -987,6 +1066,34 @@ in another terminal:
 $ curl -X POST -d '{"user":{"name":"Jane"}}' -H "Content-Type: application/json" http://localhost:4000/v1/users
 ```
 {% endraw %}
+
+tips
+----
+
+### rerun all migrations in production
+
+I did it once when I accidentally modified old migration and wanted to run all
+migrations starting from that one again. in fact it was the first migration so
+I just dropped all tables including `schema_migrations` one in `psql` and run
+`Reika.ReleaseTasks.migrate()` in IEx:
+
+```
+$ bin/billing remote_console
+iex> Reika.ReleaseTasks.migrate()
+```
+
+or else run custom `migrate` command:
+
+```
+$ bin/billing migrate
+```
+
+the gotcha is that Phoenix application stops (IDK why) after running migrations
+this way so make sure to start/restart it afterwards:
+
+```sh
+$ sudo systemctl restart billing_prod
+```
 
 troubleshooting
 ---------------

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Elixir - Deployment with Bootleg
+title: Elixir - Bootleg
 date: 2018-08-29 12:06:25 +0300
 access: public
 comments: true
@@ -238,28 +238,3 @@ $ mix bootleg.deploy
 
 TODO: it's also necessary to rollback migrations to specific version -
       create corresponding release task.
-
-### rerun all migrations in production
-
-I did it once when I accidentally modified old migration and wanted to run all
-migrations starting from that one again. in fact it was the first migration so
-I just dropped all tables including `schema_migrations` one in `psql` and run
-`Reika.ReleaseTasks.migrate()` in IEx:
-
-```
-$ bin/my_app remote_console
-iex> Reika.ReleaseTasks.migrate()
-```
-
-or else run custom `migrate` command:
-
-```
-$ bin/my_app migrate
-```
-
-the gotcha is that Phoenix application stops (IDK why) after running migrations
-this way so make sure to start/restart it afterwards:
-
-```sh
-$ sudo systemctl restart my_app_prod
-```

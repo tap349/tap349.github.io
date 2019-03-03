@@ -89,3 +89,70 @@ reika[15112]: 11:36:06.017 [info] [swarm on reika@127.0.0.1] [tracker:init] star
 reika[15112]: 11:36:06.320 [info] Running ReikaWeb.Endpoint with cowboy 2.6.1 at http://139.162.XXX.XXX
 reika[15112]: 11:36:11.022 [info] [swarm on reika@127.0.0.1] [tracker:cluster_wait] joining cluster..
 ```
+
+request body is empty
+---------------------
+
+1. <https://github.com/phoenixframework/phoenix/issues/459>
+2. <https://github.com/elixir-plug/plug/issues/691>
+
+the problem is that request body is discarded after it's read and parsed in
+`Plug.Parsers` plug so it's empty in all subsequent plugs:
+
+> <https://github.com/phoenixframework/phoenix/issues/459#issue-47825763>
+>
+> I need to a way to access the body of a request as a raw string. Plug
+> supports this functionality but as the docs say this can only be done
+> once. Once the body is consumed, trying to read the body will result
+> in an empty string.
+
+but request body is usually required, say, to perform signature verification.
+
+**solution**
+
+1. <https://hexdocs.pm/plug/Plug.Parsers.html#module-custom-body-reader>
+
+solution added in Plug 1.5.1 is to use custom body reader in `Plug.Parsers`
+plug - that reader will cache raw body so that it can be used in subsequent
+plugs:
+
+```elixir
+# lib/my_app_web/cache_body_reader.ex
+
+defmodule MyAppWeb.CacheBodyReader do
+  def read_body(conn, opts) do
+    {:ok, body, conn} = Plug.Conn.read_body(conn, opts)
+    conn = update_in(conn.assigns[:raw_body], &[body | (&1 || [])])
+    {:ok, body, conn}
+  end
+
+  def read_cached_body(conn) do
+    conn.assigns[:raw_body]
+  end
+end
+```
+
+```diff
+  # lib/my_app_web/endpoint.ex
+
+  plug Plug.Parsers,
+    parsers: [:urlencoded, :multipart, :json],
+    pass: ["*/*"],
++   body_reader: {MyAppWeb.CacheBodyReader, :read_body, []},
+    json_decoder: Phoenix.json_library()
+```
+
+custom plug to perform signature verification:
+
+```diff
+  # lib/my_app_web/plugs/line/signature_verification.ex
+
+  defmodule MyAppWeb.Plugs.Line.SignatureVerification do
+    defp signature(conn) do
+-     {:ok, body, conn} = Plug.Conn.read_body(conn)
++     body = MyAppWeb.CacheBodyReader.read_cached_body(conn)
+
+      # ...
+    end
+  end
+```

@@ -109,7 +109,6 @@ tasks are always awaited:
 `Task.Supervisor.start_child`:
 
 - tasks are linked to the supervisor but not to the caller
-
 - crashed tasks can be restarted
 
   it's made possible by the fact that tasks are linked to the supervisor, not

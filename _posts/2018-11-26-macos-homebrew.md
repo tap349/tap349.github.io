@@ -30,3 +30,23 @@ $ brew switch macvim 8.1-151
 ```sh
 $ brew cleanup
 ```
+
+### add head-only formula to Brewfile
+
+1. <https://github.com/Homebrew/homebrew-bundle/issues/98>
+
+head-only formula must be installed with `--HEAD` option, say:
+
+```sh
+$ brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+```
+
+```conf
+# Brewfile
+
+brew 'universal-ctags', args: ['HEAD']
+```
+
+```sh
+$ brew bundle
+```

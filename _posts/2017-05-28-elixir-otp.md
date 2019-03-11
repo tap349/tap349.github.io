@@ -90,6 +90,10 @@ tasks are linked to the caller:
 - `Task.Supervisor.async`
 - `Task.Supervisor.async_stream`
 
+NOTE: in case of `Task.Supervisor.async_stream` it's possible to kill a task
+      when it times out by using `on_timeout: :kill_task` option so that the
+      caller process doesn't exit and other tasks are able to finish.
+
 tasks are not linked to the caller:
 
 - `Task.Supervisor.async_nolink`

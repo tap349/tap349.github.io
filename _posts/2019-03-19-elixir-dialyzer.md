@@ -82,3 +82,10 @@ recognize them) so I've opted just to ignore them:
     ]
   end
 ```
+
+### integration with ALE
+
+adding `dialyxir` linter to the list of Elixir linters has no effect -
+linter is run when file is saved but no issues are shown. I don't want
+to investigate it any further because running Dialyzer on each save is
+quite costly IMO.

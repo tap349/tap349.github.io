@@ -37,9 +37,9 @@ suggestions + style guide on a per file basis:
 $ mix credo list --strict
 ```
 
-by default low priority issues are not shown - `--all-priorities`
-switch (aliased as `--strict`) allows to include them in the output
-=> there are no special style guide checks enabled by this option.
+by default low priority issues are not shown - `--all-priorities` switch
+(aliased as `--strict`) allows to include them in the output => there are
+no special style guide checks enabled by this option.
 
 explain specific issue (`explain` is a default command when
 `filename:line_number:column` string is passed):
@@ -82,15 +82,34 @@ let g:ale_linters = {
 ALE runs this command for `credo` linter:
 `mix credo suggest --format=flycheck --read-from-stdin %s`.
 
-the main point is that `--strict` option is missing which
-means that low priority issues are not displayed by ALE.
+the main point is that `--strict` option is missing so low priority issues
+won't displayed by ALE.
 
-this can be circumvented, if required, by changing check of
-interest priority in _.credo.exs_:
+this can be circumvented, if required, globally by switching to strict mode
+(= show issues of all priorities):
 
 ```diff
--{Credo.Check.Readability.MaxLineLength, priority: :low, max_length: 80},
-+{Credo.Check.Readability.MaxLineLength, priority: :normal, max_length: 80},
+  # .credo.exs
+
+  %{
+    configs: [
+      %{
+        # ...
+-       strict: false,
++       strict: true,
+        # ...
+      }
+    ]
+  }
+```
+
+or by changing priority of check of interest:
+
+```diff
+  # .credo.exs
+
+- {Credo.Check.Readability.MaxLineLength, priority: :low, max_length: 80},
++ {Credo.Check.Readability.MaxLineLength, priority: :normal, max_length: 80},
 ```
 
 notes
@@ -102,8 +121,8 @@ _.credo.exs_:
 
 > Priority values are: `low, normal, high, higher`
 
-each Credo check has its own default priority, priority of any
-check can be customized with `priority` parameter in _.credo.exs_:
+each Credo check has its own default priority, priority of any check can be
+customized with `priority` parameter in _.credo.exs_:
 
 ```elixir
 {Credo.Check.Design.AliasUsage, priority: :low},

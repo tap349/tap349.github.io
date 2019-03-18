@@ -83,7 +83,7 @@ recognize them) so I've opted just to ignore them:
   end
 ```
 
-### integration with ALE
+### integration with ALE (Vim plugin)
 
 adding `dialyxir` linter to the list of Elixir linters has no effect -
 linter is run when file is saved but no issues are shown. I don't want

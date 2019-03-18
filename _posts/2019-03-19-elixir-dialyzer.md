@@ -30,8 +30,13 @@ when `MIX_HOME` environment variable is not set Mix home defaults to _~/.mix/_
 but when using asdf it's _~/.asdf/installs/elixir/1.8.1/.mix/_ - this is where
 core Erlang and Elixir PLT files are built.
 
-Erlang and Elixir PLT files are built the first time `mix dialyzer` task is run
-for each new version of Erlang or Elixir.
+when `mix dialyzer` task is run for the first time:
+
+- core Erlang and Elixir PLT files are built
+- project environment specific PLT file is copied from core Elixir PLT file and
+  then augmented with project modules
+
+PLT files are rebuilt for each new version of Erlang or Elixir.
 
 configuration
 -------------

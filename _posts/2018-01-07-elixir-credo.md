@@ -49,6 +49,15 @@ $ mix credo lib/neko/user_handler.ex:66:5
 $ mix credo explain lib/neko/user_handler.ex:66:5
 ```
 
+### disable check
+
+```diff
+  # .credo.exs
+
+- {Credo.Check.Refactor.PipeChainStart, []},
++ {Credo.Check.Refactor.PipeChainStart, false},
+```
+
 ### ignore Credo errors on a one-off basis
 
 ```elixir

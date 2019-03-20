@@ -103,8 +103,8 @@ $ sudo apt remove <packagename>
 $ sudo apt remove <packagename>=<version>
 ```
 
-it's possible to use glob pattern in version name (say, if you don't know exact
-version currently installed):
+it's possible to use glob pattern instead of exact version (say, if you don't
+know exact version currently installed):
 
 ```sh
 $ sudo apt remove postgresql=10*

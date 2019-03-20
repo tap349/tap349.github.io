@@ -15,92 +15,115 @@ of course these commands should work on Ubuntu as well.
 {:toc}
 <hr>
 
-- update (synchronize package index files)
+show/list
+---------
 
-  ```sh
-  $ sudo apt update
-  ```
+### show package info
 
-- upgrade (upgrade all packages)
+```sh
+$ apt-cache show <packagename>
+```
 
-  ```sh
-  $ sudo apt upgrade
-  ```
+### list all files of specified package
 
-- locate any file:
+```sh
+$ sudo dpkg-query -L <packagename>
+```
 
-  ```sh
-  $ sudo updatedb
-  $ sudo locate <filename>
-  ```
+### list package versions
 
-- search for package
+1. <https://www.cyberciti.biz/faq/debian-ubuntu-linux-apt-get-aptitude-show-package-version-command/>
 
-  ```sh
-  $ apt-cache search <packagename>
-  ```
+```sh
+$ apt-cache policy elixir
+elixir:
+  Installed: 1.5.1-1
+  Candidate: 1.5.1-1
+  Version table:
+  *** 1.5.1-1 500
+        500 http://packages.erlang-solutions.com/ubuntu xenial/contrib amd64 Packages
+        100 /var/lib/dpkg/status
+      1.5.1-1 500
+        500 http://packages.erlang-solutions.com/ubuntu xenial/contrib i386 Packages
+      1.5.0-1 500
+        500 http://packages.erlang-solutions.com/ubuntu xenial/contrib amd64 Packages
+      1.5.0-1 500
+        500 http://packages.erlang-solutions.com/ubuntu xenial/contrib i386 Packages
+```
 
-- show package info
+find
+----
 
-  ```sh
-  $ apt-cache show <packagename>
-  ```
+### find any file
 
-- list all files of specified package
+```sh
+$ sudo updatedb
+$ sudo locate <filename>
+```
 
-  ```sh
-  $ sudo dpkg-query -L <packagename>
-  ```
+### find package by name
 
-- find package containing specified file
+```sh
+$ apt-cache search <packagename>
+```
 
-  ```sh
-  $ sudo dpkg-query -S <filename>
-  ```
+### find package containing specified file
 
-- remove package
+```sh
+$ sudo dpkg-query -S <filename>
+```
 
-  remove only binaries:
+update/upgrade
+--------------
 
-  ```sh
-  $ sudo apt remove <packagename>
-  ```
+### update (synchronize package index files)
 
-  remove everything regarding package but without dependencies:
+```sh
+$ sudo apt update
+```
 
-  ```sh
-  $ sudo apt [purge|remove --purge] <packagename>
-  ```
+### upgrade (upgrade all packages)
 
-  remove all orphaned packages:
+```sh
+$ sudo apt upgrade
+```
 
-  ```sh
-  $ sudo apt autoremove
-  ```
+remove
+------
 
-  remove everything regarding package with dependencies:
+### remove package (only binaries)
 
-  ```sh
-  $ sudo aptitude [remove|purge] <packagename>
-  ```
+```sh
+$ sudo apt remove <packagename>
+```
 
-- list package versions
+### remove specific version of package
 
-  1. <https://www.cyberciti.biz/faq/debian-ubuntu-linux-apt-get-aptitude-show-package-version-command/>
+```sh
+$ sudo apt remove <packagename>=<version>
+```
 
-  ```sh
-  $ apt-cache policy elixir
-  elixir:
-    Installed: 1.5.1-1
-    Candidate: 1.5.1-1
-    Version table:
-   *** 1.5.1-1 500
-         500 http://packages.erlang-solutions.com/ubuntu xenial/contrib amd64 Packages
-         100 /var/lib/dpkg/status
-       1.5.1-1 500
-         500 http://packages.erlang-solutions.com/ubuntu xenial/contrib i386 Packages
-       1.5.0-1 500
-         500 http://packages.erlang-solutions.com/ubuntu xenial/contrib amd64 Packages
-       1.5.0-1 500
-         500 http://packages.erlang-solutions.com/ubuntu xenial/contrib i386 Packages
-  ```
+it's possible to use glob pattern in version name (say, if you don't know exact
+version currently installed):
+
+```sh
+$ sudo apt remove postgresql=10*
+```
+
+### remove everything regarding package but without dependencies
+
+```sh
+$ sudo apt [purge|remove --purge] <packagename>
+```
+
+### remove everything regarding package with dependencies
+
+```sh
+$ sudo aptitude [remove|purge] <packagename>
+```
+
+### remove all orphaned packages
+
+```sh
+$ sudo apt autoremove
+```

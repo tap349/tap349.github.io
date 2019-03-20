@@ -383,6 +383,6 @@ connect to `postgres` database as superuser instead:
 
 ```
 $ psql -U devops -d postgres -h localhost
-postgres=# drop database if exists eva_prod;
+postgres=# DROP DATABASE IF EXISTS eva_prod;
 DROP DATABASE
 ```

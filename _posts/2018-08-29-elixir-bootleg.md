@@ -204,6 +204,18 @@ Mix tasks don't use Yarn).
 tips
 ----
 
+### change Git branch
+
+1. <https://hexdocs.pm/bootleg/reference/options.html>
+
+```elixir
+# config/deploy.exs
+
+config :refspec, "feature/2-refactor-eva-for-anna"
+```
+
+`refspec` option is set to `master` by default.
+
 ### change release version
 
 by default project version from _mix.exs_ is used - or else it can be overriden

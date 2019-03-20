@@ -368,3 +368,21 @@ $ psql -h localhost -p 5434 -U postgres -d reika_dev
 ```sql
 SELECT * FROM pg_timezone_names WHERE name='Europe/Moscow';
 ```
+
+(how to) drop database
+----------------------
+
+the point is that you can't connect to the database you're going to drop -
+you'll get the error then:
+
+```
+ERROR:  cannot drop the currently open database
+```
+
+connect to `postgres` database as superuser instead:
+
+```
+$ psql -U devops -d postgres -h localhost
+postgres=# drop database if exists eva_prod;
+DROP DATABASE
+```

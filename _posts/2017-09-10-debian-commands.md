@@ -18,19 +18,19 @@ of course these commands should work on Ubuntu as well.
 show/list
 ---------
 
-### show package info
+#### show package info
 
 ```sh
 $ apt-cache show <packagename>
 ```
 
-### list all files of specified package
+#### list all files of specified package
 
 ```sh
 $ sudo dpkg-query -L <packagename>
 ```
 
-### list package versions
+#### list package versions
 
 1. <https://www.cyberciti.biz/faq/debian-ubuntu-linux-apt-get-aptitude-show-package-version-command/>
 
@@ -54,20 +54,20 @@ elixir:
 find
 ----
 
-### find any file
+#### find any file
 
 ```sh
 $ sudo updatedb
 $ sudo locate <filename>
 ```
 
-### find package by name
+#### find package by name
 
 ```sh
 $ apt-cache search <packagename>
 ```
 
-### find package containing specified file
+#### find package containing specified file
 
 ```sh
 $ sudo dpkg-query -S <filename>
@@ -76,13 +76,13 @@ $ sudo dpkg-query -S <filename>
 update/upgrade
 --------------
 
-### update (synchronize package index files)
+#### update (synchronize package index files)
 
 ```sh
 $ sudo apt update
 ```
 
-### upgrade (upgrade all packages)
+#### upgrade (upgrade all packages)
 
 ```sh
 $ sudo apt upgrade
@@ -91,13 +91,13 @@ $ sudo apt upgrade
 remove
 ------
 
-### remove package (only binaries)
+#### remove package (only binaries)
 
 ```sh
 $ sudo apt remove <packagename>
 ```
 
-### remove specific version of package
+#### remove specific version of package
 
 ```sh
 $ sudo apt remove <packagename>=<version>
@@ -110,19 +110,19 @@ know exact version currently installed):
 $ sudo apt remove postgresql=10*
 ```
 
-### remove everything regarding package but without dependencies
+#### remove everything regarding package but without dependencies
 
 ```sh
 $ sudo apt [purge|remove --purge] <packagename>
 ```
 
-### remove everything regarding package with dependencies
+#### remove everything regarding package with dependencies
 
 ```sh
 $ sudo aptitude [remove|purge] <packagename>
 ```
 
-### remove all orphaned packages
+#### remove all orphaned packages
 
 ```sh
 $ sudo apt autoremove

@@ -826,3 +826,24 @@ Erlang into multiple packages and may be fixed by installing the missing
 1. <https://stackoverflow.com/questions/36512519>
 
 Erlang wasn't installed (I thought it would be installed as Elixir dependency).
+
+Erlang error: {:bad_action_from_state_function, {:reply, :undefined, {:error, :timeout}}}
+-----------------------------------------------------------------------------------------
+
+error occurs sometime after running Quantum jobs:
+
+```
+13:28:17.730 module=gen_statem [error] GenStateMachine #PID<0.924.0> terminating
+** (ErlangError) Erlang error: {:bad_action_from_state_function, {:reply, :undefined, {:error, :timeout}}}
+    (stdlib) gen_statem.erl:1290: :gen_statem.parse_actions_reply/7
+    (stdlib) gen_statem.erl:1206: :gen_statem.loop_event_actions_list/10
+    (ssl) tls_connection.erl:133: :tls_connection.init/1
+    (stdlib) proc_lib.erl:249: :proc_lib.init_p_do_apply/3
+```
+
+**solution**
+
+1. <https://elixirforum.com/t/why-am-i-getting-bad-action-from-state-function-error/20965>
+2. <https://bugs.erlang.org/browse/ERL-883>
+
+it looks like it's a bug in OTP 21.3 - so upgrade to 21.3.1 or a newer version.

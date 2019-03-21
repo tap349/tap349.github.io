@@ -68,5 +68,10 @@ using operator aliases (say, `>>>/2` instead of `chain/2`) has a few drawbacks:
 
   maybe it's because Elixir has built-in `Bitwise.>>>/2` operator.
 
-as a result I see no other way but to refrain from using operator aliases -
-probably except for using them with anonymous functions in some cases.
+as a result I see no other way but to refrain from using operator aliases at
+all except for few cases:
+
+- some operators still can be used with anonymous functions (when they don't
+  break formatting)
+- all operators still can be used without pipe or when statement doesn't spread
+  across multiple lines

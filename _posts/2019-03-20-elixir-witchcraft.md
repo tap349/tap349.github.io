@@ -22,7 +22,7 @@ using operator aliases (say, `>>>/2` instead of `chain/2`) has a few drawbacks:
 
   ```elixir
   %Algae.Either.Right{right: 5}
-  ~> (&foo()) # <--- it's required to wrap in parens here
+  ~> (&foo()) # <--- it's required to wrap it in parens
   |> bar()
   ```
 
@@ -35,7 +35,7 @@ using operator aliases (say, `>>>/2` instead of `chain/2`) has a few drawbacks:
 
   ```elixir
   %Algae.Either.Right{right: 5}
-  ~> fn x -> x + 1 end # <--- no need to wrap in parens here
+  ~> fn x -> x + 1 end # <--- no need to wrap it in parens
   |> bar()
   ```
 

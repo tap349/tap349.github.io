@@ -83,6 +83,27 @@ and because it introduces significant and annoying delay when pasting):
   unset zle_bracketed_paste
   ```
 
+  ***UPDATE (2019-03-29)***
+
+  1. <https://github.com/zsh-users/zsh-autosuggestions/issues/238>
+
+  even though there is no delay before pasting text now, the text is still pasted
+  very slowly - character by character (as if I'm just typing it very fast).
+
+  this is how it looks like:
+
+  ![gif](https://user-images.githubusercontent.com/8588/30973542-38b472d2-a422-11e7-8d39-4aa98c1d1ac4.gif)
+
+  it has turned out it's caused by `zsh-autosuggestions` plugin - this problem
+  is now fixed so just update the plugin:
+
+  {% raw %}
+  ```sh
+  $ cd ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  $ git up
+  ```
+  {% endraw %}
+
 tab navigation doesn't work in Google Chrome
 --------------------------------------------
 

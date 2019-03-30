@@ -662,3 +662,18 @@ send(child_pid, :work)
 # handled by handle_call/3 callback of course
 :ok = GenServer.call(Lain.FB.Label.Sync, :sync_now)
 ```
+
+### (how to) suppress logs in tests
+
+1. <https://minhajuddin.com/2019/02/01/pearls-of-elixir-interesting-patterns-from-popular-elixir-packages/>
+
+```diff
+  defmodule Francesca.FB.Ad.Operations.CollectDailyAdStatsTest do
+    use Francesca.DataCase
+    import Mox
+
++   @moduletag :capture_log
+
+    # ...
+  end
+```

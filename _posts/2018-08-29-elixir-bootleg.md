@@ -250,3 +250,33 @@ $ mix bootleg.deploy
 
 TODO: it's also necessary to rollback migrations to specific version -
       create corresponding release task.
+
+troubleshooting
+---------------
+
+```
+$ MIX_ENV=prod mix bootleg.deploy
+...
+Copying release archive from release workspace
+[172.104.236.23] (export BOOTLEG_ENV="production" REPLACE_OS_VARS="true" && /usr/bin/env mkdir -p /home/gertruda/prod/app)
+** (SSHError) SSHKit returned an internal error on 172.104.236.23: {:badmatch, {:error, :badarg}}
+    lib/bootleg/ssh.ex:99: anonymous fn/2 in Bootleg.SSH.run/2
+    (elixir) lib/enum.ex:1327: Enum."-map/2-lists^map/1-0-"/2
+    lib/bootleg/ssh.ex:118: Bootleg.SSH.run!/2
+    lib/bootleg/ssh.ex:141: Bootleg.SSH.validate_workspace/3
+    lib/bootleg/ssh.ex:58: Bootleg.SSH.init/2
+    deps/bootleg/lib/bootleg/tasks/deploy.exs:25: anonymous fn/3 in Bootleg.DynamicTasks.CopyDeployRelease.execute/0
+    (elixir) lib/enum.ex:1940: Enum."-reduce/3-lists^foldl/2-0-"/3
+    lib/bootleg/dsl.ex:339: Bootleg.DSL.invoke/1
+```
+
+**solution**
+
+always specify user name as a string in Bootleg config:
+
+```diff
+  # config/deploy.exs
+
+- config :user, :gertruda
++ config :user, "gertruda"
+```

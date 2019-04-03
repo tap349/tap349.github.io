@@ -78,13 +78,10 @@ number of stages
 say, on my MacBook with 4 cores:
 
 ```elixir
-1..10
+iex> 1..10
 |> Flow.from_enumerable(max_demand: 1)
 |> Flow.map(fn x -> IO.inspect(x); Process.sleep(2000); x + 100 end)
 |> Enum.into([])
-
-# =>
-
 1
 2
 3
@@ -218,9 +215,6 @@ iex> 1..10
 |> Flow.from_enumerable(max_demand: 3)
 |> Flow.map(fn x -> IO.inspect(x); Process.sleep(2000); x + 100 end)
 |> Enum.into([])
-
-# =>
-
 1
 4
 7

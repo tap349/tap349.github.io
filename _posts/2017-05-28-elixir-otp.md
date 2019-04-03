@@ -90,9 +90,31 @@ tasks are linked to the caller:
 - `Task.Supervisor.async`
 - `Task.Supervisor.async_stream`
 
-NOTE: in case of `Task.Supervisor.async_stream` it's possible to kill a task
-      when it times out by using `on_timeout: :kill_task` option so that the
-      caller process doesn't exit and other tasks are able to finish.
+  it's possible to kill a task when it times out by setting `:on_timeout`
+  option to `:kill_task` so that the caller process doesn't exit and other
+  tasks are able to finish.
+
+  `:timeout` option sets the maximum amount of time to wait for a single
+  task to reply - not for the whole collection to be processed. that is
+  why it's possible to run millions of tasks provided they are complete
+  within the time specified in `:timeout` option:
+
+  ```elixir
+  iex> MyApp.TaskSupervisor
+  |> Task.Supervisor.async_stream(
+    [1, 2, 3, 4, 5],
+    fn x -> IO.puts(x); :timer.sleep(1000) end,
+    max_concurrency: 1,
+    timeout: 1500
+    )
+  |> Enum.to_list()
+  1
+  2
+  3
+  4
+  5
+  [ok: :ok, ok: :ok, ok: :ok, ok: :ok, ok: :ok]
+  ```
 
 tasks are not linked to the caller:
 

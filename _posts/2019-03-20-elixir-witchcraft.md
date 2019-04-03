@@ -16,13 +16,14 @@ categories: [elixir]
 style guide
 -----------
 
-using operator aliases (say, `>>>/2` instead of `chain/2`) has a few drawbacks:
+using Witchcraft operator aliases (say, `>>>/2` instead of `chain/2`) has a few
+drawbacks:
 
 - you've got to wrap captured named functions in parentheses
 
   ```elixir
   %Algae.Either.Right{right: 5}
-  ~> (&foo()) # <--- it's required to wrap it in parens
+  ~> (&foo/1) # <--- it's required to wrap it in parens
   |> bar()
   ```
 
@@ -44,9 +45,17 @@ using operator aliases (say, `>>>/2` instead of `chain/2`) has a few drawbacks:
 
   ```elixir
   %Algae.Either.Right{right: 5}
-  ~> (&foo())
+  ~> (&foo/1)
   |> bar() # <--- Credo reports issue for this line
   ```
+
+  however Credo doesn't complain if pipe operator is not used after Witchcraft
+  operator aliases:
+
+  ```elixir
+  %Algae.Either.Right{right: 5}
+  ~> (&foo/1)
+  ~> (&bar/1)
 
 - Elixir formatter doesn't play well with some operators
 
@@ -54,7 +63,7 @@ using operator aliases (say, `>>>/2` instead of `chain/2`) has a few drawbacks:
 
   ```elixir
   %Algae.Either.Right{right: 5}
-  >>> (&foo())
+  >>> (&foo/1)
   ~> bar()
   ```
 
@@ -62,16 +71,15 @@ using operator aliases (say, `>>>/2` instead of `chain/2`) has a few drawbacks:
 
   ```elixir
   %Algae.Either.Right{right: 5} >>>
-    (&foo())
+    (&foo/1)
   ~> bar()
   ```
 
   maybe it's because Elixir has built-in `Bitwise.>>>/2` operator.
 
-as a result I see no other way but to refrain from using operator aliases at
-all except for few cases:
+as a result I see no other way but to refrain from using Witchcraft operator
+aliases at all except for few cases:
 
-- some operators still can be used with anonymous functions (when they don't
-  break formatting)
-- all operators still can be used without pipe or when statement doesn't spread
+- `~>` operator alias can be used with anonymous functions at the end of the pipe
+- all operator aliases can be used without pipe or when statement doesn't spread
   across multiple lines

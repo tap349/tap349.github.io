@@ -25,7 +25,7 @@ notes
 tips
 ----
 
-### don't configure umbrella app
+### don't configure umbrella application
 
 you cannot add any options to `umbrella_app` configuration:
 

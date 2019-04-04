@@ -44,3 +44,10 @@ deployment
 > your rel/config.exs and thus specify multiple Release profiles. This can be
 > useful if you want to have Releases that only include certain child
 > applications from your umbrella project.
+
+sample projects
+---------------
+
+1. <https://github.com/smt116/elixir-umbrella-sample-application>
+2. <https://github.com/shanesveller/kube-native-phoenix>
+3. <https://github.com/joaquimadraz/opensubs.io>

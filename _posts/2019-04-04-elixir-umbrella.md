@@ -22,6 +22,38 @@ notes
 > actually have a good way to share dependencies if needed) and at deploy time
 > you could choose to deploy all of them, or just the ones you want.
 
+tips
+----
+
+### don't configure umbrella app
+
+you cannot add any options to `umbrella_app` configuration:
+
+```elixir
+# umbrella_app/config/config.exs
+
+config :umbrella_app, foo: 123
+```
+
+you'll this warning during compilation as a result:
+
+```
+You have configured application :umbrella_app in your configuration file,
+but the application is not available.
+
+This usually means one of:
+
+  1. You have not added the application as a dependency in a mix.exs file.
+
+  2. You are configuring an application that does not really exist.
+
+Please ensure :alice exists or remove the configuration.
+```
+
+I guess this is because umbrella application is just a container of other
+applications but not a proper application itself - it has no `app` key in
+its project configuration as well (`project/0` function inside _mix.exs_).
+
 deployment
 ----------
 

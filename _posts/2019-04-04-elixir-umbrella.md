@@ -16,18 +16,25 @@ categories: [elixir]
 notes
 -----
 
+### rationale
+
+1. <https://elixirforum.com/t/how-do-you-use-umbrella-apps-and-why/14850>
+
+> <https://elixirforum.com/t/how-do-you-use-umbrella-apps-and-why/14850/8>
+>
+> My team is using it as monorepo. Some apps are pretty independent so they
+> might be in different repo - but for easier workflow we merge then into one
+> umbrella project.
+
 > <https://news.ycombinator.com/item?id=17117155>
 >
 > Basically you could split up your apps and hack on them independently (but
 > actually have a good way to share dependencies if needed) and at deploy time
 > you could choose to deploy all of them, or just the ones you want.
 
-tips
-----
-
 ### you can't configure umbrella application
 
-that is you can't add any options to `umbrella_app` configuration:
+that is you cannot add any options to umbrella application configuration:
 
 ```elixir
 # config/config.exs
@@ -35,7 +42,7 @@ that is you can't add any options to `umbrella_app` configuration:
 config :umbrella_app, foo: 123
 ```
 
-or else you'll this warning when compiling the project:
+or else you'll get this warning when compiling the project:
 
 ```
 You have configured application :umbrella_app in your configuration file,
@@ -52,19 +59,66 @@ Please ensure :alice exists or remove the configuration.
 
 I guess this is because umbrella application is just a container of other
 applications but not a proper application itself - it has no `app` key in
-its project configuration as well (`project/0` function inside _mix.exs_).
+its project configuration unlike child applications (`project/0` function
+inside _mix.exs_).
+
+tips
+----
+
+### add version to umbrella project configuration
+
+it's not added by default since umbrella application is not a normal Elixir
+application (as discussed above):
+
+```elixir
+# mix.exs
+
+def project do
+  [
+    version: "0.1.0",
+    # ...
+  ]
+end
+```
+
+still once added it can be used in AppSignal, Distillery and Bootleg configs
+(which is very handy):
+
+```elixir
+# config/appsignal.exs
+
+config :appsignal, :config,
+  active: true,
+  name: "UmbrellaApp",
+  revision: Mix.Project.config()[:version],
+  # ...
+```
+
+```elixir
+# rel/config.exs
+
+release :umbrella_app do
+  set(version: Mix.Project.config()[:version])
+  # ...
+end
+```
+
+```elixir
+# config/deploy.exs
+
+config :app, :alice
+config :version, Mix.Project.config()[:version]
+# ...
+```
 
 deployment
 ----------
 
-1. <https://hexdocs.pm/distillery/introduction/umbrella_projects.html>
-
 ### Distillery
 
+1. <https://hexdocs.pm/distillery/introduction/umbrella_projects.html>
+
 > <https://hackernoon.com/mastering-elixir-releases-with-distillery-a-pretty-complete-guide-497546f298bc#4eae>
->
-> Distillery is also great when working with Umbrella apps! There are really
-> only two things you need to pay attention to:
 >
 > 1. Include the names of your child applications in the applications list
 > of the Release configuration.
@@ -79,13 +133,14 @@ deployment
 
 ### Bootleg
 
-set version manually:
+it's necessary to set version manually when deploying umbrella application -
+it can be fetched from umbrella project configuration (see the tip above):
 
 ```elixir
 # config/deploy.exs
 
-config :app, :umbrella_app
-config :version, "0.0.1"
+config :app, :alice
+config :version, Mix.Project.config()[:version]
 ```
 
 or else you'll get this error:
@@ -107,3 +162,4 @@ sample projects
 1. <https://github.com/smt116/elixir-umbrella-sample-application>
 2. <https://github.com/shanesveller/kube-native-phoenix>
 3. <https://github.com/joaquimadraz/opensubs.io>
+4. <https://github.com/prasadtalasila/TransportScheduler/wiki/Umbrella-Application-Structure>

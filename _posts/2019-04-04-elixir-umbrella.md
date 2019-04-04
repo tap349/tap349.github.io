@@ -25,9 +25,9 @@ notes
 tips
 ----
 
-### don't configure umbrella application
+### you can't configure umbrella application
 
-you cannot add any options to `umbrella_app` configuration:
+that is you can't add any options to `umbrella_app` configuration:
 
 ```elixir
 # umbrella_app/config/config.exs
@@ -35,7 +35,7 @@ you cannot add any options to `umbrella_app` configuration:
 config :umbrella_app, foo: 123
 ```
 
-you'll this warning during compilation as a result:
+or else you'll this warning when compiling the project:
 
 ```
 You have configured application :umbrella_app in your configuration file,

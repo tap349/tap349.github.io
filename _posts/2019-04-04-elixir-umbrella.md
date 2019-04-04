@@ -30,7 +30,7 @@ tips
 that is you can't add any options to `umbrella_app` configuration:
 
 ```elixir
-# umbrella_app/config/config.exs
+# config/config.exs
 
 config :umbrella_app, foo: 123
 ```
@@ -76,6 +76,30 @@ deployment
 > your rel/config.exs and thus specify multiple Release profiles. This can be
 > useful if you want to have Releases that only include certain child
 > applications from your umbrella project.
+
+### Bootleg
+
+set version manually:
+
+```elixir
+# config/deploy.exs
+
+config :app, :umbrella_app
+config :version, "0.0.1"
+```
+
+or else you'll get this error:
+
+```
+$ mix bootleg.build
+** (RuntimeError) Error: app or version to deploy is not set.
+Usually these are automatically picked up from Mix.Project.
+If this is an umbrella app, you must set these in your deploy.exs, e.g.:
+# config(:app, :myapp)
+# config(:version, "0.0.1")
+    deps/bootleg/lib/bootleg/tasks/build.exs:6: Bootleg.DynamicTasks.VerifyConfig.execute/0
+    ...
+```
 
 sample projects
 ---------------

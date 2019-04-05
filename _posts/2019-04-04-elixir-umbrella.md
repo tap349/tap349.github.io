@@ -175,3 +175,16 @@ sample projects
 2. <https://github.com/shanesveller/kube-native-phoenix>
 3. <https://github.com/joaquimadraz/opensubs.io>
 4. <https://github.com/prasadtalasila/TransportScheduler/wiki/Umbrella-Application-Structure>
+
+troubleshooting
+---------------
+
+### file navigation doesn't work in vim
+
+that is you cannot "goto file" with `gf` command and cannot jump to alternate
+file when using `vim-projectionist` plugin (or the like).
+
+**solution**
+
+change CWD to directory of child application - for example, use `cd` mapping
+from inside NERDTree window.

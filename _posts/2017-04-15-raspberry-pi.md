@@ -627,4 +627,4 @@ $ sudo halt
 
 ### useful commands
 
-see [Ubuntu - Commands]({% post_url 2017-09-10-ubuntu-commands %}).
+see [Linux - APT Commands]({% post_url 2017-09-10-linux-apt-commands %}).

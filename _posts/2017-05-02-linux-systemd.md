@@ -1,6 +1,6 @@
 ---
 layout: post
-title: systemd
+title: Linux - systemd
 date: 2017-05-02 02:41:19 +0300
 access: public
 comments: true

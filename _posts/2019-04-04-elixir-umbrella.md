@@ -111,6 +111,11 @@ config :version, Mix.Project.config()[:version]
 # ...
 ```
 
+still it makes sense to bump versions of child applications as usual to
+communitace changes to them with semantic versioning (especially if you
+have changelogs): if version of child application is incremented version
+of umbrella application should be incremented as well but not vice versa.
+
 configuration
 -------------
 

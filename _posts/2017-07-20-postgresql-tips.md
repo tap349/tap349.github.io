@@ -59,6 +59,12 @@ $ sudo -u postgres psql -U postgres sith_prod
   \l
   ```
 
+- rename database
+
+  ```sql
+  ALTER DATABASE old_name RENAME TO new_name;
+  ```
+
 ### tables
 
 - show all tables

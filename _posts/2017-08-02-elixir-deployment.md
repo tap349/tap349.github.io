@@ -1178,3 +1178,74 @@ is when argument is a string):
 
 NOTE: long request parameter values are still truncated by Phoenix -
       IDK how to change this behaviour.
+
+### systemd service is restarted twice
+
+I restart application systemd service after each deploy:
+
+```elixir
+# mix.exs
+
+defp deploy(_) do
+  Mix.Task.run("bootleg.build")
+  Mix.Task.run("bootleg.deploy")
+
+  Mix.Task.run(
+    :cmd,
+    ["ssh devops@XXX.XXX.XXX.XX sudo systemctl restart my_app_prod"]
+  )
+end
+```
+
+the problem is that the service is restarted twice: right after it's stopped
+and started for the first time it's getting stopped again for some reason.
+
+systemd journal:
+
+```
+21:46:26 systemd[1]: Stopping my_app service (prod)...
+21:46:28 my_app[23151]: ok
+21:46:38 systemd[1]: Stopped my_app service (prod).
+21:46:38 systemd[1]: Started my_app service (prod).
+21:46:40 systemd[1]: Stopping my_app service (prod)...
+21:46:43 my_app[23623]: Node my_app@127.0.0.1 is not running!
+21:46:43 systemd[1]: my_app_prod.service: Control process exited, code=exited status=1
+21:46:44 my_app[23391]: module=Swarm.Logger [info] [swarm on my_app@127.0.0.1] [tracker:init] started
+21:46:44 my_app[23391]: module=Phoenix.Endpoint.Cowboy2Adapter [info] Running MyAppWeb.Endpoint with cowboy 2.6.3 at 0.0.0.0:4000 (http)
+21:46:44 my_app[23391]: module=Phoenix.Endpoint.Supervisor [info] Access MyAppWeb.Endpoint at http://XXX.XXX.XXX.XX
+21:46:49 my_app[23391]: module=Swarm.Logger [info] [swarm on my_app@127.0.0.1] [tracker:cluster_wait] joining cluster..
+21:46:49 my_app[23391]: module=Swarm.Logger [info] [swarm on my_app@127.0.0.1] [tracker:cluster_wait] no connected nodes, proceeding without sync
+21:48:13 systemd[1]: my_app_prod.service: State 'stop-sigterm' timed out. Killing.
+21:48:13 systemd[1]: my_app_prod.service: Killing process 23391 (beam.smp) with signal SIGKILL.
+21:48:13 systemd[1]: my_app_prod.service: Killing process 23543 (erl_child_setup) with signal SIGKILL.
+21:48:13 systemd[1]: my_app_prod.service: Killing process 23773 (inet_gethost) with signal SIGKILL.
+21:48:13 systemd[1]: my_app_prod.service: Killing process 23774 (inet_gethost) with signal SIGKILL.
+21:48:13 systemd[1]: my_app_prod.service: Killing process 23807 (appsignal-agent) with signal SIGKILL.
+21:48:13 systemd[1]: my_app_prod.service: Main process exited, code=killed, status=9/KILL
+21:48:13 systemd[1]: my_app_prod.service: Failed with result 'exit-code'.
+21:48:13 systemd[1]: Stopped my_app service (prod).
+21:48:13 systemd[1]: Started my_app service (prod).
+21:48:17 my_app[23823]: module=Swarm.Logger [info] [swarm on my_app@127.0.0.1] [tracker:init] started
+21:48:17 my_app[23823]: module=Phoenix.Endpoint.Cowboy2Adapter [info] Running MyAppWeb.Endpoint with cowboy 2.6.3 at 0.0.0.0:4000 (http)
+21:48:17 my_app[23823]: module=Phoenix.Endpoint.Supervisor [info] Access MyAppWeb.Endpoint at http://XXX.XXX.XXX.XX
+21:48:22 my_app[23823]: module=Swarm.Logger [info] [swarm on my_app@127.0.0.1] [tracker:cluster_wait] joining cluster..
+21:48:22 my_app[23823]: module=Swarm.Logger [info] [swarm on my_app@127.0.0.1] [tracker:cluster_wait] no connected nodes, proceeding without sync
+```
+
+it looks like `Mix.Task.run/2` tries to rerun specified task if the latter
+times out - that is if no response is received within a set amount of time.
+
+**solution**
+
+use `:os.cmd/1` to execute a shell command instead:
+
+```elixir
+# mix.exs
+
+defp deploy(_) do
+  Mix.Task.run("bootleg.build")
+  Mix.Task.run("bootleg.deploy")
+
+  :os.cmd('ssh devops@XXX.XXX.XXX.XX sudo systemctl restart my_app_prod')
+end
+```

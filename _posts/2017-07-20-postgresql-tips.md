@@ -65,6 +65,12 @@ $ sudo -u postgres psql -U postgres sith_prod
   ALTER DATABASE old_name RENAME TO new_name;
   ```
 
+  it's also necessary to alter the owner of all non-system tables:
+
+  ```sql
+  ALTER TABLE old_name OWNER TO new_name;
+  ```
+
 ### tables
 
 - show all tables

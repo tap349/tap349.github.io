@@ -33,10 +33,16 @@ $ sudo -u postgres psql -U postgres sith_prod
 
 ### users
 
-- list roles (= users) and their attributes
+> <http://www.postgresqltutorial.com/postgresql-roles>
+>
+> A role can be a user or a group, depending on how you setup the role.
+> A role that has login right is called user.
+> A role may be a member of other roles, which are known as groups.
+
+- list users (roles) and their attributes
 
   ```
-  \u
+  \du
   ```
 
 ### databases
@@ -98,9 +104,8 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
 
 - install extension
 
-  ```sh
-  $ psql -d sith_prod
-  > CREATE EXTENSION pg_trgm;
+  ```sql
+  CREATE EXTENSION pg_trgm;
   ```
 
 query optimization

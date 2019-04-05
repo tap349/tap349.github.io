@@ -627,4 +627,4 @@ $ sudo halt
 
 ### useful commands
 
-see [Debian - Commands]({% post_url 2017-09-10-debian-commands %}).
+see [Ubuntu - Commands]({% post_url 2017-09-10-ubuntu-commands %}).

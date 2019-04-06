@@ -330,6 +330,8 @@ stage environment, for example).
 
 - `include_erts` environment setting
 
+  1. <https://github.com/bitwalker/distillery/blob/master/docs/introduction/walkthrough.md#configuring-your-release>
+
   > <https://github.com/bitwalker/distillery/blob/master/docs/config/distillery.md#environmentrelease-settings>
   >
   > include_erts - whether to include the system ERTS or not

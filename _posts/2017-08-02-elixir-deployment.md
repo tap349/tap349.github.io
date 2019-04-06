@@ -354,13 +354,13 @@ NOTE: application must be restarted after changing EVM flags.
 
 - `-name` vs. `-sname`
 
-  makes ERTS (Erlang node) into a distributed node.
+  turns Erlang node into a distributed node.
 
   1. <https://github.com/elixir-lang/elixir/issues/3955#issuecomment-156035367>
   2. <https://github.com/bitwalker/distillery/issues/159>
 
-  it's allowed to omit hostname when using short name (`-sname`) -
-  in general both variants are acceptable:
+  omit hostname when using short name (`-sname`) - in general both variants are
+  acceptable:
 
   ```sh
   -name billing_prod@127.0.0.1
@@ -372,8 +372,8 @@ NOTE: application must be restarted after changing EVM flags.
   -sname billing_prod
   ```
 
-  still at least one of these flags must be specified when using a
-  separate _vm.args_ file - otherwise application will refuse to start:
+  still at least one of these flags must be specified when using a separate
+  _vm.args_ file - otherwise application will refuse to start:
 
   ```sh
   $ bin/billing foreground

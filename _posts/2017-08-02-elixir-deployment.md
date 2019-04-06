@@ -71,7 +71,7 @@ there are 2 alternative approaches to deal with secrets:
   + import_config "/var/prod.secret.exs"
   ```
 
-  and remove the hook so that distillery could generate _sys.config_
+  and remove the hook so that Distillery could generate _sys.config_
   using _/var/prod.secret.exs_ file itself instead of its symlink.
 
   IMO the whole idea of using a symlink in edeliver is to remove the knowledge
@@ -321,9 +321,36 @@ trying to send any request to application.
     # ...
   ```
 
-### Erlang VM (EVM/BEAM) flags
+### Distillery
 
-NOTE: distillery must have been installed to make this configuration.
+default generated config will do in most cases (unless you need to set up
+stage environment, for example).
+
+#### Distillery config (rel/config.exs)
+
+- `include_erts` environment setting
+
+  > <https://github.com/bitwalker/distillery/blob/master/docs/config/distillery.md#environmentrelease-settings>
+  >
+  > include_erts - whether to include the system ERTS or not
+
+  in general it's recommended to bundle ERTS so that "the target system does
+  not need to have Erlang or Elixir installed". in my case though release is
+  built on and deployed to the same host so it makes sense to use system-wide
+  ERTS and not include it into release - it helps to reduce its final size by
+  almost 10 MB:
+
+  ```
+  $ ls -l releases
+  28551477 Apr  5 19:45 0.1.0.tar.gz
+  19013521 Apr  6 00:21 0.2.0.tar.gz
+  ```
+
+#### EVM config (rel/vm.args)
+
+1. <http://erlang.org/doc/man/erl.html>
+
+EVM = Erlang VM (aka BEAM).
 
 <http://ds.cs.ut.ee/courses/course-files/To303nis%20Pool%20.pdf>:
 
@@ -331,9 +358,7 @@ NOTE: distillery must have been installed to make this configuration.
 > handling is called the Erlang Runtime System (ERTS), but the virtual machine
 > is often referred to also as the BEAM.
 
-1. <http://erlang.org/doc/man/erl.html>
-
-when using distillery EVM flags are set in _rel/vm.args_ (or any other file
+when using Distillery EVM flags are set in _rel/vm.args_ (or any other file
 set with `vm_args` setting for specific environment in _rel/config.exs_).
 
 options set there are passed as is to EVM process:
@@ -415,7 +440,7 @@ NOTE: application must be restarted after changing EVM flags.
   when `HOME` environment variable is set to application directory
   in application service units - don't set it at all.
 
-  when building release with distillery cookie is set in _vm.args_
+  when building release with Distillery cookie is set in _vm.args_
   file so _.erlang.cookie_ file is effectively ignored (even though
   it's still created if missing).
 
@@ -473,19 +498,6 @@ NOTE: application must be restarted after changing EVM flags.
 
 deployment
 ----------
-
-### install and configure distillery
-
-1. <https://hexdocs.pm/distillery/getting-started.html>
-
-inter alia, generate config (_rel/config.exs_):
-
-```sh
-$ mix release.init
-```
-
-default generated config will do in most cases (unless you need to set up
-stage environment, for example).
 
 ### install and configure edeliver
 
@@ -966,16 +978,16 @@ config :logger, :console, format: "$metadata[$level] $message\n"
 hot upgrades
 ------------
 
-<https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>:
-
+> <https://hackernoon.com/state-of-the-art-in-deploying-elixir-phoenix-applications-fe72a4563cd8>
+>
 > The downside is that you need to migrate data structures in your application.
 > Deployment is no longer a no-brainer (as it should be in the continuous
 > deployment world).
 >
 > Simply restart.
 
-<https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>:
-
+> <https://hexdocs.pm/distillery/walkthrough.html#building-an-upgrade-release>
+>
 > You do not have to use hot upgrades, you can simply do rolling restarts by
 > running stop, extracting the new release tarball over the top of the old,
 > and running start to boot the release.

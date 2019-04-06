@@ -172,11 +172,11 @@ alternative solutions
 
 <https://stackoverflow.com/questions/38818446>:
 
-> :prod is in fact a build mode and should be used for any cases where one intends
-> to deploy. So in other words, my staging deployment should be set to MIX_ENV=prod
-> and then either use environment variables for dynamic configuration settings in
-> the prod.exs file or, as I have done in this case, dynamically load a deployment
-> specific configuration in prod.exs like so:
+> :prod is in fact a build mode and should be used for any cases where one
+> intends to deploy. So in other words, my staging deployment should be set
+> to MIX_ENV=prod and then either use environment variables for dynamic
+> configuration settings in the prod.exs file or, as I have done in this case,
+> dynamically load a deployment specific configuration in prod.exs like so:
 
 > deployment_config=System.get_env("DEPLOYMENT_CONFIG")
 > import_config "./deployment_config/#{deployment_config}.exs"

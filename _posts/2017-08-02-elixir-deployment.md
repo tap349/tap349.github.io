@@ -348,6 +348,18 @@ stage environment, for example).
   19013521 Apr  6 00:21 0.2.0.tar.gz
   ```
 
+  ***UPDATE (2019-04-07)***
+
+  if ERTS is not bundled, `MyApp.ReleaseTasks` module used by Distillery to
+  run migration doesn't see Ecto repos:
+
+  ```elixir
+  Application.get_env(:my_app, :ecto_repos, [])
+  # => []
+  ```
+
+  => still set `include_erts` setting to `true` as recommended.
+
 #### EVM config (rel/vm.args)
 
 1. <http://erlang.org/doc/man/erl.html>

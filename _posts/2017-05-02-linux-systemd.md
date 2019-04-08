@@ -4,7 +4,7 @@ title: Linux - systemd
 date: 2017-05-02 02:41:19 +0300
 access: public
 comments: true
-categories: [systemd]
+categories: [linux, systemd]
 ---
 
 <!-- more -->

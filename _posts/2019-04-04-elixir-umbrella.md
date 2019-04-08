@@ -122,6 +122,7 @@ configuration
 ### AppSignal
 
 1. <https://docs.appsignal.com/elixir/installation.html#installing-the-package>
+2. <https://github.com/jeffkreeftmeijer/appsignal-umbrella-example>
 
 deployment
 ----------

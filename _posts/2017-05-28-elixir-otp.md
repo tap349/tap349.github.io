@@ -144,8 +144,9 @@ tasks are always awaited:
 
 - task cannot be awaited
 
-  when using other functions it's possible either to await on the task or get
-  result by triggering enumeration on a stream - this function should be used
+  when using other functions it's possible either to await on the task or task
+  is always awaited (like in case of `Task.Supervisor.async_stream` - we get
+  result by triggering enumeration on a stream) - this function should be used
   for side-effects only.
 
 Supervisor

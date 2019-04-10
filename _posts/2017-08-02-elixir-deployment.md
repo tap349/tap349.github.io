@@ -358,7 +358,24 @@ stage environment, for example).
   # => []
   ```
 
-  => still set `include_erts` setting to `true` as recommended.
+  => set `include_erts` setting to `true` as recommended.
+
+  ***UPDATE (2019-04-10)***
+
+  moreover if ERTS is not bundled, old versions of dependencies are loaded in
+  production for some reason: each release archive contains _releases/RELEASES_
+  file where all dependencies are listed with their paths and versions.
+
+  release archive is extracted to the same location every time - chances are
+  this location already has _lib/_ directory created by previous releases and
+  contains old (older) versions of dependencies. so with time _lib/_ directory
+  accumulates many different versions of dependencies.
+
+  long story short, with `include_erts: false` setting the oldest version of
+  each dependency from _lib/_ is used which causes weird errors with undefined
+  functions, etc.
+
+  => set `include_erts` setting to `true` as recommended. again.
 
 #### EVM config (rel/vm.args)
 

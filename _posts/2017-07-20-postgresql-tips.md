@@ -45,6 +45,66 @@ $ sudo -u postgres psql -U postgres sith_prod
   \du
   ```
 
+- create user
+
+  ```sql
+  CREATE ROLE reporter WITH LOGIN PASSWORD 'password';
+  ```
+
+  > <https://www.postgresql.org/docs/current/sql-createuser.html>
+  >
+  > CREATE USER is now an alias for CREATE ROLE. The only difference is that
+  > when the command is spelled CREATE USER, LOGIN is assumed by default,
+  > whereas NOLOGIN is assumed when the command is spelled CREATE ROLE.
+
+- drop user
+
+  first remove objects owned by user (say, granted privileges):
+
+  ```sql
+  DROP OWNED BY reporter RESTRICT;
+  ```
+
+  then drop user himself:
+
+  ```sql
+  DROP USER reporter;
+  ```
+
+  > <https://www.postgresql.org/docs/current/sql-dropuser.html>
+  >
+  > DROP USER is simply an alternate spelling of DROP ROLE.
+
+- grant privileges to user
+
+  1. <https://stackoverflow.com/questions/760210>
+
+  grant all privileges:
+
+  ```sql
+  GRANT ALL ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  ```
+
+  grant read-only access:
+
+  ```sql
+  GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  ```
+
+- revoke privileges from user
+
+  revoke all privileges:
+
+  ```sql
+  REVOKE ALL ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  ```
+
+  revoke read-only access:
+
+  ```sql
+  REVOKE SELECT ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  ```
+
 ### databases
 
 - connect to database

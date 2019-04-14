@@ -37,7 +37,7 @@ wrap code block with `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}` tags:
     ```
     {% endraw %}{{ "{% endraw " }}%}
 
-also it's possible to wrap arbitrary text with `{{ "{% raw " }}%}` and
+it's also possible to wrap arbitrary text with `{{ "{% raw " }}%}` and
 `{{ "{% endraw " }}%}` tags:
 
     {{ "{% raw " }}%}{% raw %}

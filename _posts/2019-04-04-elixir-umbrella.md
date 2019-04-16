@@ -116,6 +116,14 @@ communicate changes to them with semantic versioning (especially if you
 have changelogs). if version of child application is incremented version
 of umbrella application should be incremented as well but not vice versa.
 
+### todo list when adding new child application
+
+- Ansible: create _prod.secret.exs_ (umbrella application role)
+- Distillery: add to release (_rel/config.exs_)
+- Distillery: add repo (`ReleaseTasks` module)
+- Bootleg: symlink _prod.secret.exs_ (_config/deploy/production.exs_)
+- CircleCI: create _test.secret.exs_ for both stages (_.circleci/config.yml_)
+
 configuration
 -------------
 

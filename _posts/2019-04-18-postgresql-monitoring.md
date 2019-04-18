@@ -46,6 +46,12 @@ open sessions (connections)
   SELECT * FROM PG_STAT_ACTIVITY WHERE DATNAME = 'MY_DATABASE';
   ```
 
+  the number of connections currently used:
+
+  ```sql
+  SELECT COUNT(*) FROM PG_STAT_ACTIVITY WHERE DATNAME = 'MY_DATABASE';
+  ```
+
 - pgAdmin
 
   | pgAdmin: `Servers` (browser) → `<MY_SERVER>` → `Databases` → `<MY_DATABASE>`

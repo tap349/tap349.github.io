@@ -133,13 +133,13 @@ $ sudo -u postgres psql -U postgres sith_prod
 
 ### tables
 
-- show all tables
+- list all tables
 
   ```
   \d
   ```
 
-  this commands also lists sequences. to show tables only:
+  this commands also lists sequences. to list tables only:
 
   ```
   \dt

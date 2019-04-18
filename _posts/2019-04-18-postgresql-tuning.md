@@ -20,15 +20,26 @@ max_connections
 
 1. <https://wiki.postgresql.org/wiki/Number_Of_Database_Connections>
 
-the maximum number of client connections allowed is set by `max_connections`
-setting in _postgresql.conf_ - its value defaults to 100.
+the maximum number of client connections (sessions) allowed is set by
+`max_connections` setting in _postgresql.conf_ - its value defaults to 100.
+
+show current value of `max_connections` setting in `psql`:
+
+```sql
+SHOW max_connections;
+```
+
+### max_connections vs. pool_size of Ecto repository
 
 each Ecto repository has a `pool_size` option - the number of connections to
 keep in the pool. say, my umbrella application has 3 child applications each
 one having repository with a pool size 15 => so there are always 15 * 3 = 45
-open connections and there remains 100 - 45 = 55 available connection slots.
+open connections and there remains 100 - 45 = 55 available connection slots
+(provided `max_connections` setting has default value of 100).
 
-so to increase the maximum number of connections from 100 to 200:
+### increase max_connections
+
+say, to increase `max_connections` from 100 to 200:
 
 ```diff
   # /etc/postgresql/11/main/postgresql.conf
@@ -37,4 +48,8 @@ so to increase the maximum number of connections from 100 to 200:
 + max_connections = 200
 ```
 
-it's necessary to restart PostgreSQL service for the changes to take effect.
+it's necessary to restart PostgreSQL service for the changes to take effect:
+
+```sh
+$ sudo systemctl restart postgresql
+```

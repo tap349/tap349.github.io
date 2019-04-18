@@ -273,3 +273,9 @@ to increase the maximum number of allowed connections.
 
 see [PostgreSQL - Monitoring]({% post_url 2019-04-18-postgresql-monitoring %})
 on how to monitor open connections.
+
+FATAL: sorry, too many clients already
+--------------------------------------
+
+most likely this error is also caused by a low number of allowed connections -
+see solution for the error above.

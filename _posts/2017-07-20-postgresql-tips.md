@@ -13,8 +13,8 @@ categories: [postgresql, rails]
 {:toc}
 <hr>
 
-psql tips
----------
+psql
+----
 
 1. <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>
 
@@ -200,10 +200,10 @@ query optimization
 
 - using extensions
 
-  there is no need to enable extension in migration itself using
-  `enable_extension :pg_trgm` statement if it has already been created
-  manually in psql - `enable_extension "btree_gin"` line will be added
-  to _schema.rb_ anyway after running migration.
+  it's not necessary to enable extension in migration itself (by adding
+  `enable_extension :pg_trgm` statement) if it has already been created
+  manually in `psql` - `enable_extension "btree_gin"` line will be added
+  to _schema.rb_ after running migration anyway.
 
 ### LIKE operator
 

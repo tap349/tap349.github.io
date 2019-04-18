@@ -13,20 +13,6 @@ categories: [postgresql]
 {:toc}
 <hr>
 
-common ways to diagnose and fix the problem:
-
-- list running services
-
-  ```sh
-  $ brew services list
-  ```
-
-- restart the service
-
-  ```sh
-  $ brew services restart postgresql@9.5
-  ```
-
 problems with new homebrew versioning scheme
 --------------------------------------------
 
@@ -43,7 +29,7 @@ but this migration was not smooth and resulted in many errors, to name a few:
 
 - `command not found: psql`
 
-  psql must have a symlink in _/usr/local/bin/_ (it has been added to `PATH`
+  `psql` must have a symlink in _/usr/local/bin/_ (it has been added to `PATH`
   in _~/.zshenv_ in my case) - it's gone now for some mysterious reason.
 
 - `psql: FATAL:  database "db_name" does not exist`
@@ -140,7 +126,7 @@ zsh: command not found: psql
 **solution**
 
 in my case only versioned formula of PostgreSQL (`postgresql@9.5`) was
-installed but it didn't create a symlink to psql in _/usr/local/bin/_.
+installed but it didn't create a symlink to `psql` in _/usr/local/bin/_.
 
 to solve this problem either:
 
@@ -274,3 +260,16 @@ restart `postgresql` service for changes to take effect.
 > trust - anyone who can connect to the server is authorized to access the database
 > peer - use client's operating system user name as database user name to access it.
 > md5 - password-base authentication
+
+FATAL: remaining connection slots are reserved for non-replication superuser connections
+----------------------------------------------------------------------------------------
+
+this error indicates you have run out of connections.
+
+**solution**
+
+see [PostgreSQL - Tuning]({% post_url 2019-04-18-postgresql-tuning %}) on how
+to increase the maximum number of allowed connections.
+
+see [PostgreSQL - Monitoring]({% post_url 2019-04-18-postgresql-monitoring %})
+on how to monitor open connections.

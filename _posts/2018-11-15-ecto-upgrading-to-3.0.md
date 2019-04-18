@@ -72,15 +72,15 @@ make sure `pool_size` is at least 2 in all environments.
 
 - set `pool_size` for all environments explicitly
 
-  NOTE: setting `pool_size` in `MyApp.Repo` module has no effect -
-        it must be configured in environment config files.
+  setting `pool_size` in `MyApp.Repo` module has no effect - it must be
+  configured in environment config files.
 
   `pool_size` is 10 by default (if not set for some environment at all):
 
   ```elixir
   # https://github.com/elixir-ecto/ecto/blob/master/lib/ecto/repo/supervisor.ex
 
-  @defaults [timeout: 15000, pool_timeout: 5000, pool_size: 10]
+  @defaults [timeout: 15_000, pool_timeout: 5000, pool_size: 10]
   ```
 
   still IMO it's better to set it expilictly just in case:

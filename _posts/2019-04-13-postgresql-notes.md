@@ -13,6 +13,13 @@ categories: [postgresql]
 {:toc}
 <hr>
 
+session vs. connection
+----------------------
+
+> <https://stackoverflow.com/a/46323144/3632318>
+>
+> a session is "synonymous with a TCP connection"
+
 custom configuration
 --------------------
 

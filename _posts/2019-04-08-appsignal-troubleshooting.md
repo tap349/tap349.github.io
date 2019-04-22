@@ -22,3 +22,8 @@ deploys and new incoming data is not tagged to that deploy accordingly.
 **solution**
 
 deploy marker is created the first time error is reported to AppSignal only.
+
+***UPDATE (2019-04-22)***
+
+it looks like this behaviour is fixed and now deploy marker is created right
+after application is deployed.

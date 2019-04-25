@@ -54,9 +54,7 @@ defmodule MyAppWeb.Plugs.AppsignalAbsinthePlug do
     conn
   end
 
-  def call(conn, _) do
-    conn
-  end
+  def call(conn, _), do: conn
 end
 ```
 

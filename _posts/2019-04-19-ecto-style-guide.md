@@ -42,3 +42,5 @@ integer fields:
   fields with unique index on them
 
 use the same default values in API stubs.
+
+in tests though it's allowed to use any values including notorious `foo`/etc.

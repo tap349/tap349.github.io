@@ -41,4 +41,4 @@ integer fields:
 - automatically generated integer (`System.unique_integer([:positive])`) for
   fields with unique index on them
 
-
+use the same default values in API stubs.

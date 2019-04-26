@@ -24,3 +24,21 @@ specifying `null: true` option explicitly is required when modifying column
 to drop existing not-null constraint (or else it won't be dropped).
 
 so always add `null: true` in migrations for the sake of consistency.
+
+default values in test factories
+--------------------------------
+
+string fields:
+
+- `John Doe`/`Jane Doe` for name fields
+- `example.com` for domain fields
+- common value for enum fields (`currency: "USD"`)
+- field name as its default value (`login: "login"`)
+
+integer fields:
+
+- sequence of integer values starting from 1
+- automatically generated integer (`System.unique_integer([:positive])`) for
+  fields with unique index on them
+
+

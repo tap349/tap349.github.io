@@ -30,7 +30,7 @@ default values in test factories
 
 string fields:
 
-- `John Doe`/`Jane Doe` for name fields
+- `John Doe`/`Jane Doe` (or just `John`/`Jane`) for name fields
 - `example.com` for domain fields
 - common value for enum fields (`currency: "USD"`)
 - field name as its default value (`login: "login"`)

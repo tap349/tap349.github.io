@@ -44,3 +44,16 @@ integer fields:
 use the same default values in API stubs.
 
 in tests though it's allowed to use any values including notorious `foo`/etc.
+
+naming conventions
+------------------
+
+### in operations
+
+- `create_*` functions call `Ecto.Repo.insert` inside
+- `import_*` functions call `Ecto.Repo.insert_all` inside
+
+### in schemas
+
+- `@create_permitted_params`
+- `@update_permitted_params`

@@ -22,36 +22,73 @@ configuration
 $ mix bootleg.init
 ```
 
+full listing of _config/deploy.exs_ and _config/deploy/production.exs_
+with comments:
+
 ```elixir
 # config/deploy.exs
 
 use Bootleg.DSL
 
-config :host, Application.get_env(:my_app, MyAppWeb.Endpoint)[:url][:host]
-config :user, "my_app"
+# https://hexdocs.pm/bootleg/reference/role_host_options.html
+# https://hexdocs.pm/bootleg/reference/options.html
+config :app, :my_app
+config :version, Mix.Project.config()[:version]
+# SSH username
+config :user, "#{config(:app)}"
 config :build_path, "/tmp/bootleg/build"
 # release archive is unpacked right inside this directory
 # (subdirectory with application name is not created)
-config :deploy_path, "/home/my_app/prod/app"
-config :release_path, "/home/my_app/prod/releases"
+config :deploy_path, "/home/#{config(:app)}/#{config(:mix_env)}/app"
+config :release_path, "/home/#{config(:app)}/#{config(:mix_env)}/releases"
 config :silently_accept_hosts, true
 
-# `build` role defines what remote server release should be built on
-role(
-  :build,
-  config(:host),
-  # SSH username
-  user: config(:user),
-  # Path of the remote build workspace (:build role) or application
-  # workspace (:app role)
-  workspace: config(:build_path),
-  # For :build roles, this is the path where the newly-built release
-  # should be copied.
-  # For :app roles, this is the path where the release should be found.
-  # You probably want to use the same value for both!
-  release_workspace: config(:release_path),
-  silently_accept_hosts: config(:silently_accept_hosts)
-)
+task :symlink_secret_file do
+  remote :build do
+    """
+    ln -sfn \
+      /var/#{config(:app)}/config/#{config(:mix_env)}.secret.exs \
+      #{config(:build_path)}/config/#{config(:mix_env)}.secret.exs
+    """
+  end
+end
+
+# https://hexdocs.pm/phoenix/deployment.html
+# https://hexdocs.pm/bootleg/reference/phoenix.html
+task :phx_digest do
+  remote :build, cd: "assets" do
+    "npm install"
+    # runs `deploy` script from assets/package.json
+    "npm run deploy"
+  end
+
+  remote :build do
+    "MIX_ENV=prod mix phx.digest"
+  end
+end
+
+# https://hexdocs.pm/distillery/guides/running_migrations.html
+# https://dockyard.com/blog/2018/08/23/announcing-distillery-2-0
+task :migrate do
+  remote :db do
+    # runs rel/commands/migrate.sh script
+    "bin/#{config(:app)} migrate"
+  end
+end
+
+task :restart_service do
+  service_name = "#{config(:app)}_#{config(:mix_env)}"
+
+  remote :system do
+    "sudo systemctl restart #{service_name}"
+  end
+end
+
+# https://hexdocs.pm/bootleg/reference/workflow.html
+before_task(:compile, :symlink_secret_file)
+after_task(:compile, :phx_digest)
+after_task(:deploy, :migrate)
+after_task(:migrate, :restart_service)
 ```
 
 ```elixir
@@ -59,98 +96,51 @@ role(
 
 use Bootleg.DSL
 
+config :host, "172.XXX.XXX.XX"
+# https://hexdocs.pm/bootleg/reference/options.html
+#
+# overrides Mix environment inside Bootleg - it doesn't change
+# MIX_ENV environment outside so other services (like CircleCI)
+# continue to work as usual. according to docs default value of
+# this option is "prod" but in fact it's not set at all
+config :mix_env, "prod"
+
+# `build` role defines what remote server release should be built on
+role(
+  :build,
+  config(:host),
+  user: config(:user),
+  # path of the remote build workspace
+  workspace: config(:build_path),
+  # path where the newly-built release should be copied
+  release_workspace: config(:release_path),
+  silently_accept_hosts: config(:silently_accept_hosts)
+)
+
 # `app` role defines what remote servers release should be deployed to
 role(
   :app,
   config(:host),
   user: config(:user),
+  # path of application workspace
   workspace: config(:deploy_path),
+  # path where the release should be found
+  # (use the same value for build and app roles)
   release_workspace: config(:release_path),
   silently_accept_hosts: config(:silently_accept_hosts)
 )
 
-role(
-  :db,
-  config(:host),
-  user: config(:user),
-  workspace: config(:deploy_path)
-)
-
-task :symlink_secret_file do
-  target = "/var/my_app/config/prod.secret.exs"
-  link = "#{config(:build_path)}/config/prod.secret.exs"
-
-  remote :build do
-    "ln -sfn #{target} #{link}"
-  end
-end
-
-before_task(:compile, :symlink_secret_file)
+# https://hexdocs.pm/bootleg/config/roles.html
+#
+# custom roles
+role(:db, config(:host), user: config(:user), workspace: config(:deploy_path))
+role(:system, config(:host), user: "devops")
 ```
 
-### run migrations
+notes
+-----
 
-1. <https://hexdocs.pm/distillery/guides/running_migrations.html>
-2. <https://dockyard.com/blog/2018/08/23/announcing-distillery-2-0>
-
-```sh
-# rel/commands/migrate.sh
-
-#!/bin/sh
-
-release_ctl eval --mfa "MyApp.ReleaseTasks.migrate/0"
-```
-
-```diff
-  # config/deploy/production.exs
-
-+ task :migrate do
-+   remote :db do
-+     "bin/my_app migrate"
-+   end
-+ end
-
-  before_task(:compile, :symlink_secret_file)
-+ after_task(:deploy, :migrate)
-```
-
-### compile assets
-
-1. <https://hexdocs.pm/phoenix/deployment.html>
-2. <https://hexdocs.pm/bootleg/reference/phoenix.html>
-
-```diff
-  # config/deploy/production.exs
-
-+ task :phx_digest do
-+   remote :build, cd: "assets" do
-+     "npm install"
-+     "npm run deploy"
-+   end
-+
-+   remote :build do
-+     "MIX_ENV=prod mix phx.digest"
-+   end
-+ end
-
-  task :migrate do
-    remote :db do
-      "bin/my_app migrate"
-    end
-  end
-
-  before_task(:compile, :symlink_secret_file)
-+ after_task(:compile, :phx_digest)
-  after_task(:deploy, :migrate)
-```
-
-`npm run deploy` runs `deploy` script from _assets/package.json_:
-
-```json
-"scripts": {
-  "deploy": "webpack --mode production"
-}
-```
+### compiling assets
 
 #### Bootleg 0.10.0
 
@@ -218,8 +208,8 @@ config :refspec, "feature/2-refactor-eva-for-anna"
 
 ### change release version
 
-by default project version from _mix.exs_ is used - or else it can be overriden
-in Bootleg config:
+by default project version from _mix.exs_ is used - it can be overriden in
+Bootleg config:
 
 ```elixir
 # config/deploy.exs
@@ -253,6 +243,8 @@ TODO: it's also necessary to rollback migrations to specific version -
 
 troubleshooting
 ---------------
+
+### SSHKit returned an internal error
 
 ```
 $ MIX_ENV=prod mix bootleg.deploy

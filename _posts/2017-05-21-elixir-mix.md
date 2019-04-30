@@ -198,7 +198,7 @@ defp aliases do
 end
 
 defp deploy_stage(_) do
-  Mix.shell.info("[billing staging]")
+  Mix.shell().info("[billing staging]")
   Mix.Task.run(:edeliver, ["update", "staging", "--mix-env=stage"])
   Mix.Task.rerun(:edeliver, ["migrate", "staging"])
 end

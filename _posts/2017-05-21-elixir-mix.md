@@ -112,6 +112,30 @@ which is equivalent to:
 $ mix deps.get && mix compile
 ```
 
+### (how to) set default environment for any task
+
+1. <https://hexdocs.pm/mix/Mix.Task.html#preferred_cli_env/1>
+2. <https://elixirforum.com/t/how-do-i-set-the-env-at-alias/16304>
+
+> <https://hexdocs.pm/mix/Mix.Task.html#module-attributes>
+>
+> @preferred_cli_env - recommends environment to run task. It is used
+> in absence of a Mix project recommendation, or explicit MIX_ENV, and
+> it only works for tasks in the current project.
+
+```elixir
+# mix.exs
+
+def project do
+  [
+    # ...
+    preferred_cli_env: [
+      deploy: :prod
+    ]
+  ]
+end
+```
+
 troubleshooting
 ---------------
 

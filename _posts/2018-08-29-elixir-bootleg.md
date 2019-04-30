@@ -137,6 +137,25 @@ role(:db, config(:host), user: config(:user), workspace: config(:deploy_path))
 role(:system, config(:host), user: "devops")
 ```
 
+running
+-------
+
+```elixir
+# mix.exs
+
+defp aliases do
+  [
+    # ...
+    deploy: &deploy/1
+  ]
+end
+
+defp deploy(_) do
+  Mix.Task.run("bootleg.build", ["production"])
+  Mix.Task.run("bootleg.deploy", ["production"])
+end
+```
+
 notes
 -----
 

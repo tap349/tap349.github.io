@@ -25,8 +25,8 @@ to drop existing not-null constraint (or else it won't be dropped).
 
 so always add `null: true` in migrations for the sake of consistency.
 
-default values
---------------
+default values in tests
+-----------------------
 
 - test factories
 

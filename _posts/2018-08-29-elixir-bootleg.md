@@ -16,8 +16,6 @@ categories: [elixir, phoenix, deployment]
 configuration
 -------------
 
-1. <https://hexdocs.pm/bootleg/reference/role_host_options.html>
-
 ```sh
 $ mix bootleg.init
 ```

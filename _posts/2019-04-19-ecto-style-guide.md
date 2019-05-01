@@ -25,25 +25,31 @@ to drop existing not-null constraint (or else it won't be dropped).
 
 so always add `null: true` in migrations for the sake of consistency.
 
-default values in test factories
---------------------------------
+default values
+--------------
 
-string fields:
+- test factories
 
-- `John Doe`/`Jane Doe` (or just `John`/`Jane`) for name fields
-- `example.com` for domain fields
-- some common value for enum fields (`currency: "USD"`)
-- field name as its default value (`login: "login"`)
+  string fields:
 
-integer fields:
+  - `John Doe`/`Jane Doe` (or just `John`/`Jane`) for name fields
+  - `example.com` for domain fields
+  - some common value for enum fields (`currency: "USD"`)
+  - field name as its default value (`login: "login"`)
 
-- sequence of integer values starting from 1
-- automatically generated integer (`System.unique_integer([:positive])`) for
-  fields with unique index on them
+  integer fields:
 
-use the same default values in API stubs.
+  - sequence of integer values starting from 1
+  - automatically generated integer (`System.unique_integer([:positive])`) for
+    fields with unique index on them
 
-in tests though it's allowed to use any values including notorious `foo`/etc.
+- API stubs
+
+  use the same default values as in test factories.
+
+- tests
+
+  it's allowed to use any values including notorious `foo`/etc.
 
 naming conventions
 ------------------

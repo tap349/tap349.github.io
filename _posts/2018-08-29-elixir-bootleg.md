@@ -28,6 +28,34 @@ with comments:
 
 use Bootleg.DSL
 
+mix_env =
+  case config(:env) do
+    # by default when not specified at all
+    :production -> "prod"
+    # when specified explicitly as a string
+    # in mix.exs or passed on command line
+    "production" -> "prod"
+    "staging" -> "stage"
+    env -> "Unknown environment: #{inspect(env)}"
+  end
+
+# https://hexdocs.pm/bootleg/config/environments.html
+# https://hexdocs.pm/bootleg/reference/options.html
+#
+# overrides Mix environment inside Bootleg - it doesn't change MIX_ENV
+# so other services (like CircleCI) continue to work as usual.
+#
+# according to docs default value is "prod" but it's not set anywhere -
+# this option is always read as `config({:mix_env, "prod"})` effectively
+# using "prod" by default when the value is nil.
+#
+# still I need to know current Mix environment to build different paths
+# so I use current Bootleg environment to set `mix_env` option which is
+# then used to build paths.
+#
+# NOTE: when configured this way Bootleg is fully agnostic about MIX_ENV.
+config :mix_env, mix_env
+
 # https://hexdocs.pm/bootleg/reference/role_host_options.html
 # https://hexdocs.pm/bootleg/reference/options.html
 config :app, :my_app
@@ -95,13 +123,6 @@ after_task(:migrate, :restart_service)
 use Bootleg.DSL
 
 config :host, "172.XXX.XXX.XX"
-# https://hexdocs.pm/bootleg/reference/options.html
-#
-# overrides Mix environment inside Bootleg - it doesn't change
-# MIX_ENV environment outside so other services (like CircleCI)
-# continue to work as usual. according to docs default value of
-# this option is "prod" but in fact it's not set at all
-config :mix_env, "prod"
 
 # `build` role defines what remote server release should be built on
 role(

@@ -28,6 +28,7 @@ with comments:
 
 use Bootleg.DSL
 
+# map Bootleg environment to Mix environment
 mix_env =
   case config(:env) do
     # by default when not specified at all

@@ -55,6 +55,9 @@ quoted expressions
 {key, value} #=> Tuples with two elements
 ```
 
+NOTE: say, keyword list (list of tuples) turns out to be AST literal as well
+      (though second elements of tuples can be not AST literals already).
+
 => quoted AST literals are AST literals themselves so they are:
 
 - passed as is to macros (all other expressions are quoted - see

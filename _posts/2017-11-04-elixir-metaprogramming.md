@@ -144,13 +144,40 @@ quote do: Lain.Page.Conversation
 
 ### bind_quoted option of quote/2
 
+1. <https://dockyard.com/blog/2016/08/16/the-minumum-knowledge-you-need-to-start-metaprogramming-in-elixir>
+
+```elixir
+# <https://hexdocs.pm/elixir/Kernel.SpecialForms.html#quote/2-quote-and-macros>
+
+defmacro squared(x) do
+  quote do
+    x = unquote(x)
+    x * x
+  end
+end
+
+# is equal to
+
+defmacro squared(x) do
+  quote bind_quoted: [x: x] do
+    x * x
+  end
+end
+```
+
+so `bind_quoted` option does 2 things:
+
+- unquotes specified variable (and does it only once preventing accidental
+  reevaluation of bindings)
+- adds `unquote: false` option so explicit unquoting is no longer avaialable
+
 > <https://hexdocs.pm/elixir/Kernel.SpecialForms.html>
 >
 > :bind_quoted - passes a binding to the macro. Whenever a binding is given,
 > `unquote/1` is automatically disabled.
 
 => moreover unquoting is prohibited when using `bind_quoted` option
-(that is with `unquote: false` option):
+(because `unquote: false` option is added automatically in this case):
 
 ```
 iex> defmodule Foo do
@@ -166,13 +193,6 @@ iex> Foo.my_macro("foo")
     expanding macro: Foo.my_macro/1
     iex:6: (file)
 ```
-
-> <https://dockyard.com/blog/2016/08/16/the-minumum-knowledge-you-need-to-start-metaprogramming-in-elixir>
->
-> bind_quoted does two things:
->
-> 1) prevent accidental reevaluation of bindings
-> 2) defer the execution of `unquote` via `unquote: false`
 
 all these rules (about `bind_quoted` and unquoting) don't apply to the
 functions dynamically generated inside macros - you always can and must

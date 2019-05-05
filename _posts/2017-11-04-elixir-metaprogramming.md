@@ -23,13 +23,6 @@ categories: [elixir]
 1. <https://medium.com/@andreichernykh/elixir-a-bit-about-macros-behaviours-84fd3de1595d>
 2. <https://dockyard.com/blog/2017/12/07/macro-madness-how-to-use-use-well>
 
-macros
-------
-
-> <https://dockyard.com/blog/2016/08/16/the-minumum-knowledge-you-need-to-start-metaprogramming-in-elixir>
->
-> Macros receive AST as arguments and provide AST as return values.
-
 quoted expressions
 ------------------
 
@@ -42,6 +35,10 @@ quoted expressions
 > quoted expressions.
 
 => AST = quoted expressions.
+
+> <https://dockyard.com/blog/2016/08/16/the-minumum-knowledge-you-need-to-start-metaprogramming-in-elixir>
+>
+> Macros receive AST as arguments and provide AST as return values.
 
 ### AST literals
 
@@ -111,6 +108,14 @@ defmodule Lain.CQRS.Loader do
   end
 end
 ```
+
+still in most cases:
+
+> <https://groups.google.com/d/msg/elixir-lang-core/g6kAJjuWDOc/iVbcTlmb1t4J>
+>
+> Most of the work should be done inside a quote instead. Some arguments
+> should be really handled as an AST expression... Those can be passed
+> down to the quote with escaping.
 
 ### quote/2 vs. Macro.escape/2
 

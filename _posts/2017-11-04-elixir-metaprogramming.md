@@ -210,6 +210,11 @@ defmacro my_macro(name) do
 end
 ```
 
+but execution of `unquote/1` inside `foo/0` (when using `bind_quoted` option)
+is deferred until runtime: without `unquote: false` option (which always comes
+with `bind_quoted` option) `unquote/1` inside `foo/0` would be executed during
+compilation.
+
 unquoting
 ---------
 

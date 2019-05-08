@@ -65,57 +65,6 @@ inside _mix.exs_).
 tips
 ----
 
-### add version to umbrella project configuration
-
-it's not added by default since umbrella application is not a normal Elixir
-application (as discussed above):
-
-```elixir
-# mix.exs
-
-def project do
-  [
-    version: "0.1.0",
-    # ...
-  ]
-end
-```
-
-still once added it can be used in AppSignal, Distillery and Bootleg configs
-(which is very handy):
-
-```elixir
-# config/appsignal.exs
-
-config :appsignal, :config,
-  active: true,
-  name: "UmbrellaApp",
-  revision: Mix.Project.config()[:version],
-  # ...
-```
-
-```elixir
-# rel/config.exs
-
-release :umbrella_app do
-  set(version: Mix.Project.config()[:version])
-  # ...
-end
-```
-
-```elixir
-# config/deploy.exs
-
-config :app, :alice
-config :version, Mix.Project.config()[:version]
-# ...
-```
-
-still it makes sense to bump versions of child applications as usual to
-communicate changes to them with semantic versioning (especially if you
-have changelogs). if version of child application is incremented version
-of umbrella application should be incremented as well but not vice versa.
-
 ### todo list when adding new child application
 
 - Ansible: create _prod.secret.exs_ (umbrella application role)
@@ -126,6 +75,90 @@ of umbrella application should be incremented as well but not vice versa.
 
 configuration
 -------------
+
+### versioning
+
+it makes a lot of sense to come up with some versioning scheme in umbrella
+application (it has none by default) - this version can be later used in a
+bunch of different configs (which is very handy):
+
+- AppSignal config
+
+  ```elixir
+  # config/appsignal.exs
+
+  config :appsignal, :config,
+    active: true,
+    name: "UmbrellaApp",
+    revision: Mix.Project.config()[:version],
+    # ...
+  ```
+
+- Distillery config
+
+  ```elixir
+  # rel/config.exs
+
+  release :umbrella_app do
+    set(version: Mix.Project.config()[:version])
+    # ...
+  end
+  ```
+
+- Bootleg config
+
+  ```elixir
+  # config/deploy.exs
+
+  config :app, :alice
+  config :version, Mix.Project.config()[:version]
+  # ...
+  ```
+
+either project version itself or Git revision can be used for this purpose:
+
+- project version (semantic versioning)
+
+  project version option is not added by default since umbrella application
+  is not a normal Elixir application (as discussed in `notes` section):
+
+  ```elixir
+  # mix.exs
+
+  def project do
+    [
+      version: "0.1.0",
+      # ...
+    ]
+  end
+  ```
+
+- Git revision
+
+  ```elixir
+  # mix.exs
+
+  def project do
+    [
+      version: "0.1.0",
+      git_revision: git_revision(),
+      # ...
+    ]
+  end
+
+  # https://stackoverflow.com/a/5694416/3632318
+  defp git_revision do
+    'git rev-parse --short HEAD'
+    |> :os.cmd()
+    |> List.to_string()
+    |> String.trim()
+  end
+  ```
+
+even though it's also possible to bump versions of child applications as
+usual (say, if version of child application is incremented, version of
+umbrella application is incremented as well but not vice versa), I think
+it's way easier in terms of maintanence not to bump their versions at all.
 
 ### AppSignal
 

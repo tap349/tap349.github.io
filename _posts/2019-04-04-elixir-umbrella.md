@@ -82,38 +82,32 @@ it makes a lot of sense to come up with some versioning scheme in umbrella
 application (it has none by default) - this version can be later used in a
 bunch of different configs (which is very handy):
 
-- AppSignal config
+```elixir
+# config/appsignal.exs
 
-  ```elixir
-  # config/appsignal.exs
-
-  config :appsignal, :config,
-    active: true,
-    name: "UmbrellaApp",
-    revision: Mix.Project.config()[:version],
-    # ...
-  ```
-
-- Distillery config
-
-  ```elixir
-  # rel/config.exs
-
-  release :umbrella_app do
-    set(version: Mix.Project.config()[:version])
-    # ...
-  end
-  ```
-
-- Bootleg config
-
-  ```elixir
-  # config/deploy.exs
-
-  config :app, :alice
-  config :version, Mix.Project.config()[:version]
+config :appsignal, :config,
+  active: true,
+  name: "UmbrellaApp",
+  revision: Mix.Project.config()[:version],
   # ...
-  ```
+```
+
+```elixir
+# rel/config.exs
+
+release :umbrella_app do
+  set(version: Mix.Project.config()[:version])
+  # ...
+end
+```
+
+```elixir
+# config/deploy.exs
+
+config :app, :alice
+config :version, Mix.Project.config()[:version]
+# ...
+```
 
 either project version itself or Git revision can be used for this purpose:
 
@@ -155,10 +149,10 @@ either project version itself or Git revision can be used for this purpose:
   end
   ```
 
-even though it's also possible to bump versions of child applications as
-usual (say, if version of child application is incremented, version of
-umbrella application is incremented as well but not vice versa), I think
-it's way easier in terms of maintanence not to bump their versions at all.
+though it's possible to bump versions of child applications as usual (say, if
+version of child application is incremented, version of umbrella application
+is incremented as well but not vice versa), I think it's way easier in terms
+of maintanence not to bump their versions at all.
 
 ### AppSignal
 
@@ -187,8 +181,8 @@ deployment
 
 ### Bootleg
 
-it's necessary to set version manually when deploying umbrella application -
-it can be fetched from umbrella project configuration (see the tip above):
+it's necessary to set version manually when deploying umbrella application
+(see `versioning` section above):
 
 ```elixir
 # config/deploy.exs

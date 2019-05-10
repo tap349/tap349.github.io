@@ -149,10 +149,15 @@ either project version itself or Git revision can be used for this purpose:
   end
   ```
 
+  when using Git revision, it's possible to have project version as well
+  (say, if you also need semantic versioning) - it just won't be used in
+  aforementioned configs.
+
 though it's possible to bump versions of child applications as usual (say, if
 version of child application is incremented, version of umbrella application
 is incremented as well but not vice versa), I think it's way easier in terms
-of maintanence not to bump their versions at all.
+of maintanence not to bump their versions at all (and reset to default value -
+say, `0.1.0`).
 
 ### AppSignal
 

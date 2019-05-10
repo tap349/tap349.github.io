@@ -195,14 +195,14 @@ about stacktrace
 > You should not rely on the ability to get the stacktrace outside of a
 > rescue / catch , it might get removed from the BEAM with any major release.
 
-stacktrace obtained via `Process.info(self(), :current_stacktrace)` outside
-`rescue`/`catch` blocks might not contain information about calling modules
-up in the stack - AFAIU stacktrace is only guaranteed to have entries up to
-the point where the error was raised.
+stacktrace is only guaranteed to have information about the place where
+error was raised - if stacktrace is obtained manually via `Process.info/2`,
+it might not contain information about all calling modules up in the stack
+(that is it might include some Erlang modules but not user modules).
 
 if, for example, operation returns error tuple instead of raising error and
 this error tuple is handled somewhere later, this operation might be missing
-in stacktrace (obtained in helper module) at all.
+in stacktrace obtained in helper module.
 
 => if you absolutely need information about the place where error occurred -
-raise error. you cannot rely on stacktrace obtained manually somewhere later.
+raise error, you cannot rely on stacktrace obtained manually somewhere later.

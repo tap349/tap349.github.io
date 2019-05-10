@@ -96,3 +96,18 @@ defmodule Lain.Foo do
   @env Application.get_env(:lain, :env)
 end
 ```
+
+(how to) convert module name to string without `Elixir` prefix
+--------------------------------------------------------------
+
+```elixir
+Macro.to_string(MyApp.Foo)
+# => "MyApp.Foo"
+```
+
+```elixir
+MyApp.Foo
+|> Module.split()
+|> Enum.join(".")
+# => "MyApp.Foo"
+```

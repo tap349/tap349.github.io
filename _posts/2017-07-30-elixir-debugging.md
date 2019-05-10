@@ -186,3 +186,23 @@ use `--debug` option to run in shell debug mode, say:
 ``` sh
 $ mix edeliver start production --debug
 ```
+
+about stacktrace
+----------------
+
+> <https://elixirforum.com/t/different-stacktrace-results/18133/4>
+>
+> You should not rely on the ability to get the stacktrace outside of a
+> rescue / catch , it might get removed from the BEAM with any major release.
+
+stacktrace obtained via `Process.info(self(), :current_stacktrace)` outside
+`rescue`/`catch` blocks might not contain information about calling modules
+up in the stack - AFAIU stacktrace is only guaranteed to have entries up to
+the point where the error was raised.
+
+if, for example, operation returns error tuple instead of raising error and
+this error tuple is handled somewhere later, this operation might be missing
+in stacktrace (obtained in helper module) at all.
+
+=> if you absolutely need information about the place where error occurred -
+raise error. you cannot rely on stacktrace obtained manually somewhere later.

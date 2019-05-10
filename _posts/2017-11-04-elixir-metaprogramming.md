@@ -40,6 +40,11 @@ quoted expressions
 >
 > Macros receive AST as arguments and provide AST as return values.
 
+> <https://elixir-lang.org/getting-started/meta/macros.html>
+>
+> That's what macros are all about. They are about receiving quoted
+> expressions and transforming them into something else.
+
 ### AST literals
 
 1. <https://elixir-lang.org/getting-started/meta/quote-and-unquote.html>

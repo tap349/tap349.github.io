@@ -847,3 +847,53 @@ error occurs sometime after running Quantum jobs:
 2. <https://bugs.erlang.org/browse/ERL-883>
 
 it looks like it's a bug in OTP 21.3 - so upgrade to 21.3.1 or a newer version.
+
+updating dependency downgrades it
+---------------------------------
+
+1. <https://hexdocs.pm/elixir/Version.html>
+
+```elixir
+# mix.exs
+
+defp deps do
+  [
+    {:appsignal, "~> 1.10"},
+    # ...
+  ]
+end
+```
+
+```elixir
+$ mix deps.update appsignal
+...
+Downgraded:
+  appsignal 1.10.5 => 1.10.0
+```
+
+so `mix deps.update appsignal` command downgrades `appsignal` package
+while it shouldn't as per requirement.
+
+a temporary fix is to specify a patch version as well:
+
+```elixir
+# mix.exs
+
+defp deps do
+  [
+    {:appsignal, "~> 1.10.5"},
+    # ...
+  ]
+end
+```
+
+**solution**
+
+it's not solution but rather a hint on where to look next.
+
+`appsignal` was downgraded after I added `decorators` package to my deps:
+the latter is already dependency of the former so adding it explicitly to
+my _mix.exs_ file must have broken something.
+
+after removing `decorators` package, everything got okay again: `appsignal`
+package was upgraded to `1.10.5` (the latest version at the moment).

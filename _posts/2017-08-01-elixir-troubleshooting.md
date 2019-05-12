@@ -871,8 +871,8 @@ Downgraded:
   appsignal 1.10.5 => 1.10.0
 ```
 
-so `mix deps.update appsignal` command downgrades `appsignal` package
-while it shouldn't as per requirement.
+so `mix deps.update appsignal` command downgrades `appsignal` package while
+it shouldn't as per requirement.
 
 a temporary fix is to specify a patch version as well:
 

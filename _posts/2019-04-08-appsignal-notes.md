@@ -31,22 +31,26 @@ setting sample data
 1. <https://docs.appsignal.com/elixir/instrumentation/tagging.html>
 3. <https://hexdocs.pm/appsignal/Appsignal.Transaction.html#set_sample_data/2>
 
-it's possible to add sample data (aka metadata) for the current transaction
+it's possible to set sample data (aka metadata) for the current transaction
 (obviously it must have been started beforehand).
 
-sample data can be set with `Appsignal.Transaction.set_sample_data/2` under
-different keys.
+some metadata can be added by AppSignal package automatically - say, request
+params when handling request. in other cases we can set sample data manually
+with `Appsignal.Transaction.set_sample_data/2` helper function.
+
+sample data can be set under different keys - the name of the key matters as
+it determines the way sample data is displayed in AppSignal UI.
 
 ### `params` key
 
-in theory any key can be used but it's better to use `params` key - in this
-case AppSignal will show supplied payload in dedicated `Parameters` section
-(the same key and section must be used for controller request params - avoid
-using `params` key when handling a request through a controller action since
-custom metadata may override existing one set by AppSignal package).
+when using `params`, key AppSignal will show supplied payload in dedicated
+`Parameters` section (the same key and section must be used for controller
+request params - avoid using `params` key when handling request through a
+controller action because custom metadata may override existing one set by
+AppSignal package).
 
-note that `params` key is also special in that `send_params` option is checked
-before setting sample data under this key:
+`params` key is also special in that `send_params` option is checked before
+setting sample data under this key:
 
 ```elixir
 # https://github.com/appsignal/appsignal-elixir/blob/master/lib/appsignal/transaction.ex#L263
@@ -72,8 +76,8 @@ end
 
 note `Kernel.binding/0` returns a keyword list `[user: user, date: date]` -
 of course it will be properly serialized before being sent to AppSignal but
-using a map is probably a better choice when setting sample data manually
-(map is also used to set tags - see below).
+using a map is probably a better choice when setting sample data explicitly
+(without `Kernel.binding/0`). also map is used to set tags - see below.
 
 ### `tags` key
 

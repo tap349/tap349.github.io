@@ -64,13 +64,16 @@ example:
 
 ```elixir
 def call(user, date) do
-  # binding/0 returns a keyword list [user: <USER>, date: <DATE>] -
-  # it will be properly serialized when being sent to AppSignal
   Appsignal.Transaction.set_sample_data("params", binding())
 
   # ...
 end
 ```
+
+note `Kernel.binding/0` returns a keyword list `[user: user, date: date]` -
+of course it will be properly serialized before being sent to AppSignal but
+using a map is probably a better choice when setting sample data manually
+(map is also used to set tags - see below).
 
 ### `tags` key
 

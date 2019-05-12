@@ -263,10 +263,10 @@ iex> Code.eval_quoted(quote do: "123" == unquote(Macro.escape(%{a: 1})))
 `use` macro
 -----------
 
-1. <https://dockyard.com/blog/2017/12/07/macro-madness-how-to-use-use-well>
+1. <https://elixir-lang.org/getting-started/alias-require-and-import.html#use>
+2. <https://dockyard.com/blog/2017/12/07/macro-madness-how-to-use-use-well>
 
-example
--------
+### example
 
 ```elixir
 # https://github.com/elixir-lang/elixir/blob/master/lib/elixir/lib/gen_server.ex
@@ -290,3 +290,36 @@ defmodule MyApp.CQRS.Loader do
   end
 end
 ```
+
+wrapping functions
+------------------
+
+it can be useful to do some housekeeping such as:
+
+- logging before and after function is called
+- adding custom instrumentation
+
+### custom `def` macro
+
+1. <https://kr00lix.com/wrap-methods-for-logging-in-elixir.html>
+
+in a nutshell it's just defining your function (say, `call`) but using custom
+`def` macro - it can be named, say, `def_with_log`.
+
+downsides of this approach:
+
+- no syntax highlighting of custom `def`
+- no proper stacktrace in case of error (because of macro)
+
+### wrapper function
+
+1. <https://medium.com/@andreichernykh/elixir-a-bit-about-macros-behaviours-84fd3de1595d>
+
+in a nutshell it's just adding another wrapper function (say, `call_with_log`)
+that calls original function (say, `call`) and does some housekeeping but that
+another function is defined with `use` macro.
+
+downsides of this approach:
+
+- it changes interface - it's necessary to change every place where original
+  function is called

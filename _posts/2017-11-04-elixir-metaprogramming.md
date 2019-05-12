@@ -302,6 +302,7 @@ it can be useful to do some housekeeping such as:
 ### custom `def` macro
 
 1. <https://kr00lix.com/wrap-methods-for-logging-in-elixir.html>
+2. <https://elixir-lang.org/getting-started/meta/quote-and-unquote.html#quoting>
 
 in a nutshell it's just defining your function (say, `call`) but using custom
 `def` macro - it can be named, say, `def_with_log`.
@@ -310,6 +311,23 @@ downsides of this approach:
 
 - no syntax highlighting of custom `def`
 - no proper stacktrace in case of error (because of macro)
+
+example:
+
+```elixir
+defmodule Common.Helpers.Operation do
+  defmacro def_with_tagging(head, do: body) do
+    {_name, _metadata, args} = head
+
+    quote do
+      def unquote(head) do
+        Appsignal.Transaction.set_sample_data("params", unquote(args))
+        unquote(body)
+      end
+    end
+  end
+end
+```
 
 ### wrapper function
 

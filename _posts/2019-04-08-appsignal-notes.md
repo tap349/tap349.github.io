@@ -72,7 +72,6 @@ example:
 ```elixir
 def call(user, date) do
   Appsignal.Transaction.set_sample_data("params", binding())
-
   # ...
 end
 ```

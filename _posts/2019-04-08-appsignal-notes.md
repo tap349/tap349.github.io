@@ -43,11 +43,14 @@ it determines the way sample data is displayed in AppSignal UI.
 
 ### `params` key
 
-when using `params`, key AppSignal will show supplied payload in dedicated
-`Parameters` section (the same key and section must be used for controller
-request params - avoid using `params` key when handling request through a
-controller action because custom metadata may override existing one set by
-AppSignal package).
+as mentioned above `params` key is used by AppSignal to set request params
+for the current transaction so it's better to avoid using `params` key when
+handling request through a controller action because custom metadata might
+override existing one set by AppSignal package.
+
+in other cases (say, in workers) it's very convenient to use this key since
+AppSignal will show supplied payload in dedicated `Parameters` section - you
+don't have to configure anything in AppSignal for it to work.
 
 `params` key is also special in that `send_params` option is checked before
 setting sample data under this key:

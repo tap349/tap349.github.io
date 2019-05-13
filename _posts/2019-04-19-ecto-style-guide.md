@@ -67,9 +67,9 @@ naming conventions
 order of schema fields
 ----------------------
 
-association field always comes last in:
+association field comes last in:
 
-- schema
+- schemas
 
   ```elixir
   defmodule Post do
@@ -80,7 +80,7 @@ association field always comes last in:
   end
   ```
 
-- factory
+- test factories
 
   ```elixir
   defmodule Factory do
@@ -93,11 +93,22 @@ association field always comes last in:
   end
   ```
 
-- schema loader
+- Ecto queries
+
+  ```elixir
+  Post
+  |> where(title: ^title)
+  |> where(user_id: ^user_id)
+  |> Repo.all()
+  ```
+
+association field comes first in:
+
+- function definitions
 
   ```elixir
   defmodule Post.Loader do
-    def get_by_title_and_user(title, user_id) do
+    def get_by_user_and_title(user_id, title) do
       Post
       |> where(title: ^title)
       |> where(user_id: ^user_id)
@@ -106,15 +117,6 @@ association field always comes last in:
   end
   ```
 
-on the other hand if this is user operation or service, user will always come
-first even if it will be passed to post loader as a last argument later:
-
-```elixir
-defmodule User.Services.SendPosts do
-  def call(user, title) do
-    title
-    |> Post.Loader.by_title_and_user(user.id)
-    |> send_posts()
-  end
-end
-```
+  rationale: even though it's Ecto's choice to always place association after
+  other schema fields, it seems more natural to pass association first from a
+  client perspective.

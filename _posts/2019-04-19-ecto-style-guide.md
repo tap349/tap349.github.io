@@ -118,4 +118,3 @@ defmodule User.Loader do
   end
 end
 ```
-

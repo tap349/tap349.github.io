@@ -63,3 +63,59 @@ naming conventions
 
 - `@create_permitted_params`
 - `@update_permitted_params`
+
+order of schema fields
+----------------------
+
+association field always comes last in:
+
+- schema
+
+  ```elixir
+  defmodule Post do
+    schema "posts" do
+      field :title, :string
+      belongs_to :user, User
+    end
+  end
+  ```
+
+- factory
+
+  ```elixir
+  defmodule Factory do
+    def build(:post) do
+      %Post{
+        title: "foo",
+        user: build(:user)
+      }
+    end
+  end
+  ```
+
+- schema loader
+
+  ```elixir
+  defmodule Post.Loader do
+    def get_by_title_and_user(title, user_id) do
+      Post
+      |> where(title: ^title)
+      |> where(user_id: ^user_id)
+      |> Repo.all()
+    end
+  end
+  ```
+
+on the other hand if this is user loader (operation, service), user will always
+come first even if it will be passed to post loader as a last argument later:
+
+```elixir
+defmodule User.Loader do
+  def get_all_post_titles(user, title) do
+    title
+    |> Post.Loader.by_title_and_user(user.id)
+    |> Enum.map(& &1.title)
+  end
+end
+```
+

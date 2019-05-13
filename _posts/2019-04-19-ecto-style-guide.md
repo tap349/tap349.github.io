@@ -111,7 +111,7 @@ come first even if it will be passed to post loader as a last argument later:
 
 ```elixir
 defmodule User.Loader do
-  def get_all_post_titles(user, title) do
+  def post_titles(user, title) do
     title
     |> Post.Loader.by_title_and_user(user.id)
     |> Enum.map(& &1.title)

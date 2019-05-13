@@ -106,15 +106,15 @@ association field always comes last in:
   end
   ```
 
-on the other hand if this is user loader (operation, service), user will always
-come first even if it will be passed to post loader as a last argument later:
+on the other hand if this is user operation or service, user will always come
+first even if it will be passed to post loader as a last argument later:
 
 ```elixir
-defmodule User.Loader do
-  def post_titles(user, title) do
+defmodule User.Services.SendPosts do
+  def call(user, title) do
     title
     |> Post.Loader.by_title_and_user(user.id)
-    |> Enum.map(& &1.title)
+    |> send_posts()
   end
 end
 ```

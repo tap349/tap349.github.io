@@ -341,3 +341,19 @@ downsides of this approach:
 
 - it changes interface - it's necessary to change every place where original
   function is called
+
+module templates
+----------------
+
+1. <https://github.com/elixir-lang/elixir/issues/638>
+2. <https://hexdocs.pm/elixir/Kernel.html#defoverridable/1>
+3. <https://dockyard.com/blog/2017/12/07/macro-madness-how-to-use-use-well>
+
+module (service, worker, etc.) template can be extracted using macro and then
+customized by implementing callbacks in client modules. those callbacks might
+either have default implementations in macro or not. in the former case it's
+necessary to make those callbacks overridable with `Kernel.defoverridable/1`.
+
+it's like having a base class in Ruby with or without default implementations
+of some methods (the very callbacks) and adding those implementations in child
+classes inheriting from a base one.

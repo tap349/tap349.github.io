@@ -357,3 +357,99 @@ necessary to make those callbacks overridable with `Kernel.defoverridable/1`.
 it's like having a base class in Ruby with or without default implementations
 of some methods (the very callbacks) and adding those implementations in child
 classes inheriting from a base one.
+
+template module:
+
+```elixir
+defmodule Template do
+  require Logger
+
+  @callback baz() :: any
+
+  defmacro __using__(_opts) do
+    quote do
+      @behaviour Template
+
+      def foo, do: Template.foo(__MODULE__)
+      def bar, do: Template.bar(__MODULE__)
+
+      # it's not necessary to make them overridable
+      defoverridable foo: 0, bar: 0
+    end
+  end
+
+  def foo(module) do
+    Logger.info("Calling foo...", module: module)
+    # always use `module` to call all callbacks and functions in
+    # `quote` block (that is `module.bar()` - not `bar(module)`)
+    # - in this case overridden versions (if any) will be used
+    module.bar()
+  end
+
+  def bar(module) do
+    Logger.info("Calling bar...", module: module)
+    module.baz()
+  end
+end
+```
+
+client module:
+
+```elixir
+defmodule Client do
+  use Template
+
+  @impl Template
+  def baz, do: "baz"
+end
+```
+
+usage:
+
+```elixir
+Client.foo()
+```
+
+### alternative implementation without macro
+
+alternatively it's possible to avoid using macro altogether by passing module
+implementing `Template` behaviour directly to `Template.perform/1`.
+
+template module:
+
+```elixir
+defmodule Template do
+  require Logger
+
+  @callback baz() :: any
+
+  def foo(module) do
+    Logger.info("Calling foo...", module: module)
+    # now it's possible to use `bar(module)` since there
+    # is no macro and functions cannot be overridden
+    bar(module)
+  end
+
+  def bar(module) do
+    Logger.info("Calling bar...", module: module)
+    module.baz()
+  end
+end
+```
+
+client module:
+
+```elixir
+defmodule Client do
+  use Template
+
+  @impl Template
+  def baz, do: "baz"
+end
+```
+
+usage:
+
+```elixir
+Template.foo(Client)
+```

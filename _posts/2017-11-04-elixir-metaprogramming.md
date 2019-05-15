@@ -423,7 +423,7 @@ Client.foo()
 ### alternative implementation without macro
 
 alternatively it's possible to avoid using macro altogether by passing module
-implementing `Template` behaviour directly to `Template.perform/1`.
+implementing `Template` behaviour directly to `Template.foo/1`.
 
 template module:
 

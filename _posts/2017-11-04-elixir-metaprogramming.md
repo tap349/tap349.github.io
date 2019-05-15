@@ -364,17 +364,27 @@ template module:
 defmodule Template do
   require Logger
 
+  # IMO it's not necessary to declare foo/0 and bar/0 as callbacks
+  @callback foo() :: any
+  @callback bar() :: any
   @callback baz() :: any
 
   defmacro __using__(_opts) do
     quote do
       @behaviour Template
 
+      @impl Template
       def foo, do: Template.foo(__MODULE__)
+
+      @impl Template
       def bar, do: Template.bar(__MODULE__)
 
-      # it's not necessary to make them overridable
-      defoverridable foo: 0, bar: 0
+      # it's not necessary to make all callbacks overridable but it
+      # can be useful if you, say, provide default implementation of
+      # baz/0 which is meant to be customized in some cases
+      defoverridable Template
+      # use this line if foo/0 and bar/0 are not declared as callbacks
+      #defoverridable foo: 0, bar: 0
     end
   end
 

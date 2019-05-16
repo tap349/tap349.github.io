@@ -463,10 +463,16 @@ conn = get(conn, webhook_path(conn, :show), ["hub.mode": "subscribe"])
 
 1. <https://elixirforum.com/t/using-application-get-env-application-put-env-in-exunit-tests/8019>
 
+sometimes it might be necessary to mock application configuration - say,
+to set some configuration paramater to invalid value.
+
 general recommendations:
 
-- don't use `async: true`
-- restore environment after the test
+- read configuration parameter at runtime (not via module attribute) so
+  that it's possible to mock it in tests
+- don't use `async: true` to prevent other tests from using mocked value
+  accidentaly
+- restore environment after the test using `ExUnit.Callback.on_exit/2`
 
 client module:
 
@@ -474,11 +480,6 @@ client module:
 defmodule MyApp.API.AccessToken do
   # ...
 
-  # read refresh token at runtime so that it's possible to
-  # set invalid refresh token in tests
-  #
-  # don't store refresh token in module attribute because
-  # the latter can't be changed after module is compiled
   defp refresh_token do
     Application.get_env(:my_app, :api)[:refresh_token]
   end
@@ -494,7 +495,6 @@ defmodule MyApp.API.AccessTokenTest do
 
   test "returns error when invalid request (invalid refresh token)" do
     api_config = Application.get_env(:my_app, :api)
-    # restore environment after the test
     on_exit(fn -> Application.put_env(:my_app, :api, api_config) end)
 
     new_api_config =

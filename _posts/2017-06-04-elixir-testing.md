@@ -297,14 +297,22 @@ of strict comparison:
 assert %{name: "foo"} = MyModule.call()
 ```
 
-### API result
+### using full or partial API result
 
-as a rule JSON API result consists of one or more objects (hashes, maps).
+as a rule JSON API result is either an object (hash, map) or an array of such
+objects.
 
-- use full objects (with all fields) in API tests
-- use partial objects (with some fields dropped) in API stubs and not API tests
+- use full objects (with all fields left) in API tests
 
-  leave only the fields which are used in business logic and remove others.
+  if API result is an array of objects, use the first object only:
+
+  ```elixir
+  assert [%{"foo" => 123} | _] = result
+  ```
+
+- use partial objects (with some fields dropped) in API stubs and non-API tests
+
+  leave only the fields which are used in business logic and remove the others.
 
 tips
 ----

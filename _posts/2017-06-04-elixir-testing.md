@@ -297,6 +297,15 @@ of strict comparison:
 assert %{name: "foo"} = MyModule.call()
 ```
 
+### API result
+
+as a rule JSON API result consists of one or more objects (hashes, maps).
+
+- use full objects (with all fields) in API tests
+- use partial objects (with some fields dropped) in API stubs and not API tests
+
+  leave only the fields which are used in business logic and remove others.
+
 tips
 ----
 

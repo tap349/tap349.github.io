@@ -71,8 +71,8 @@ iex> """
 "foo bar"
 ```
 
-(how to) get current environment in production
-----------------------------------------------
+(how to) get current environment at runtime
+-------------------------------------------
 
 > <https://stackoverflow.com/a/44747870>
 >
@@ -80,20 +80,28 @@ iex> """
 > compiled releases (built using Exrm/Distillery) or when Mix just isn't
 > available.
 
-=> store environment in config since Mix is not available in production:
+=> store environment in application configuration since Mix is not available
+in compiled application:
 
 ```elixir
 # config/config.exs
 
-# General application configuration
-config :lain,
+config :my_app,
   env: Mix.env(),
-  ecto_repos: [Lain.Repo]
+  ecto_repos: [MyApp.Repo]
 ```
 
 ```elixir
-defmodule Lain.Foo do
-  @env Application.get_env(:lain, :env)
+defmodule MyApp.Foo do
+  @env Application.get_env(:my_app, :env)
+
+  def call do
+    if @env == :prod do
+      # production code
+    else
+      # non-production code
+    end
+  end
 end
 ```
 

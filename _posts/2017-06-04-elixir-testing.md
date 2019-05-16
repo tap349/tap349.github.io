@@ -459,31 +459,83 @@ conn = get(conn, webhook_path(conn, :show), %{"hub.mode" => "subscribe"})
 conn = get(conn, webhook_path(conn, :show), ["hub.mode": "subscribe"])
 ```
 
-### (how to) mock environment in tests
+### (how to) mock application configuration in tests
 
-first it's necessary to store environment in config if you are going
-to use it in your code since Mix is not available in production - see
-[Elixir - Tips]({% post_url 2017-07-14-elixir-tips %}).
+1. <https://elixirforum.com/t/using-application-get-env-application-put-env-in-exunit-tests/8019>
+
+general recommendations:
+
+- don't use `async: true`
+- restore environment after the test
+
+client module:
 
 ```elixir
-# lib/lain/foo.ex
+defmodule MyApp.API.AccessToken do
+  # ...
 
-# don't store this value in module attribute if it's necessary
-# to mock env in tests - it must be calculated at runtime then
-if Application.get_env(:lain, :env) == :prod do
-  # production expression
-else
-  # non-production expression
+  # read refresh token at runtime so that it's possible to
+  # set invalid refresh token in tests
+  #
+  # don't store refresh token in module attribute because
+  # the latter can't be changed after module is compiled
+  defp refresh_token do
+    Application.get_env(:my_app, :api)[:refresh_token]
+  end
 end
 ```
 
-```elixir
-# test/lain/foo_test.exs
+test module:
 
-setup do
-  Application.put_env(:lain, :env, :prod)
+```elixir
+defmodule MyApp.API.AccessTokenTest do
+  use ExUnit.Case, async: false
+  # ...
+
+  test "returns error when invalid request (invalid refresh token)" do
+    api_config = Application.get_env(:my_app, :api)
+    # restore environment after the test
+    on_exit(fn -> Application.put_env(:my_app, :api, api_config) end)
+
+    new_api_config =
+      :my_app
+      |> Application.get_env(:api)
+      |> put_in([:refresh_token], "foo")
+
+    Application.put_env(:my_app, :api, new_api_config)
+
+    {:error, message} = MyApp.API.AccessToken.get()
+    assert "Error refreshing access token: 400: " <> _ = message
+  end
 end
 ```
+
+### (how to) mock current environment in tests
+
+1. [Elixir - Tips](%{ post_url 2017-07-14-elixir-tips })
+
+see the tip from [Elixir - Tips](%{ post_url 2017-07-14-elixir-tips }) on
+how to get current environment at runtime.
+
+if you need to test both production and non-production code branches, read
+read `:env` configuration paramater dynamically (not via module attribute):
+
+```diff
+  defmodule MyApp.Foo do
+-   @env Application.get_env(:my_app, :env)
+-
+    def call do
+-     if @env == :prod do
++     if Application.get_env(:my_app, :env) == :prod do
+        # production code
+      else
+        # non-production code
+      end
+    end
+  end
+```
+
+then mock `:env` configuration parameter as described in the tip above.
 
 ### (how to) test without starting your application and certain deps
 

@@ -37,6 +37,8 @@ default values in tests
   - some common value for enum fields (`currency: "USD"`)
   - field name as its default value (`login: "login"`)
 
+    it can be suffixed by some ID (say, `ext_id` if available)
+
   integer fields:
 
   - sequence of integer values starting from 1

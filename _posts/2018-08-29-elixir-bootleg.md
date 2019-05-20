@@ -223,6 +223,7 @@ they are now pretty close in terms of features and speed.
 - support by Phoenix
 
   1. <https://github.com/phoenixframework/phoenix/pull/1963>
+  2. <https://github.com/yarnpkg/yarn/issues/5654>
 
   Yarn is not natively supported by Phoenix:
 
@@ -246,6 +247,10 @@ they are now pretty close in terms of features and speed.
 
   as a result _package-lock.json_ is generated while Yarn uses _yarn.lock_ as a
   lockfile and doesn't recognize _package-lock.json_.
+
+  this might cause problems if you use npm in development and Yarn to compile
+  assets for production - different package versions may get installed in the
+  end => make sure to use the same package in both development and production.
 
 - speed
 

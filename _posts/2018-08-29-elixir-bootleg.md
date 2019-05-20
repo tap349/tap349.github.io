@@ -245,12 +245,15 @@ they are now pretty close in terms of features and speed.
   * running mix deps.compile
   ```
 
-  as a result _package-lock.json_ is generated while Yarn uses _yarn.lock_ as a
-  lockfile and doesn't recognize _package-lock.json_.
+  as a result _package-lock.json_ is generated while Yarn uses _yarn.lock_ as
+  a lockfile and doesn't recognize _package-lock.json_.
 
   this might cause problems if you use npm in development and Yarn to compile
-  assets for production - different package versions may get installed in the
-  end => make sure to use the same package in both development and production.
+  assets for production since different package versions may get installed in
+  the end.
+
+  => always make sure to use the same package manager in both development and
+  production if you prefer not to stick to npm all the time.
 
 - speed
 
@@ -271,9 +274,9 @@ they are now pretty close in terms of features and speed.
 
   so npm even runs 10s faster than Yarn - this doesn't say that npm is faster
   than Yarn but it says that Yarn is not several times faster than npm like it
-  was in the very beginning.
+  used to be in the very beginning.
 
-=> stick to npm in Bootleg tasks as well.
+=> stick to npm in Bootleg tasks.
 
 tips
 ----

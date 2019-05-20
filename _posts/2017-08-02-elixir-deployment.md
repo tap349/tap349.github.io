@@ -83,23 +83,9 @@ there are 2 alternative approaches to deal with secrets:
 
 compilation of static assets consists of 2 steps:
 
-- building assets (say, using Brunch)
-- generating digests and cache manifest for production (using `phx.digest` Mix task)
-
-#### assets are not used
-
-> If you are not serving or don’t care about assets at all, you can just remove
-> the cache_static_manifest configuration from config/prod.exs.
-
-so if application doesn't deal with assets remove this line in _config/prod.exs_:
-
-```diff
-  config :billing, BillingWeb.Endpoint,
-    load_from_system_env: true,
-+   url: [host: "example.com", port: 80]
--   url: [host: "example.com", port: 80],
--   cache_static_manifest: "priv/static/cache_manifest.json"
-```
+- building assets (say, using Brunch or Webpack)
+- generating digests and cache manifest for production (using `phx.digest` Mix
+  task)
 
 #### assets are used
 
@@ -134,6 +120,21 @@ so if application doesn't deal with assets remove this line in _config/prod.exs_
   +   "
   + }
   ```
+
+#### assets are not used
+
+> If you are not serving or don’t care about assets at all, you can just remove
+> the cache_static_manifest configuration from config/prod.exs.
+
+so if application doesn't deal with assets remove this line in _config/prod.exs_:
+
+```diff
+  config :billing, BillingWeb.Endpoint,
+    load_from_system_env: true,
++   url: [host: "example.com", port: 80]
+-   url: [host: "example.com", port: 80],
+-   cache_static_manifest: "priv/static/cache_manifest.json"
+```
 
 ### artifacts (resources, resource files - say, YAML or JSON files)
 

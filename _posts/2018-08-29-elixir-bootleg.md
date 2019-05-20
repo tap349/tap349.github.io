@@ -207,6 +207,8 @@ been already built => compiled assets are not included into release.
 
 #### Yarn vs. npm
 
+1. <https://medium.com/@vincentnewkirk/npm-vs-yarn-2019-e88757b17038>
+
 > <https://www.reddit.com/r/node/comments/83omh4/best_approaches_to_setting_up_environment/dvm2zo7>
 >
 > Even for packages that you use in multiple places, you can install them
@@ -215,20 +217,58 @@ been already built => compiled assets are not included into release.
 > bundled with more recent versions of npm. If you're using Yarn instead, you
 > can do `$ yarn webpack`, which should find Webpack in the local node_modules.
 
-so you can use either npm or Yarn to install npm packages and run Webpack but
-Yarn is not natively supported by Phoenix:
+so you can use either npm or Yarn to install npm packages and run Webpack -
+they are now pretty close in terms of features and speed.
 
-> <https://github.com/phoenixframework/phoenix/pull/1963#issuecomment-396079993>
->
-> npm has had improvements as well since yarn's release, and users are free
-> as always to use yarn on their new projects themselves.
+- support by Phoenix
 
-Mix tasks use npm under the hood => stick to npm in Bootleg tasks as well.
+  1. <https://github.com/phoenixframework/phoenix/pull/1963>
 
-another important reason to choose npm is that _assets/package-lock.json_
-is not used by Yarn when installing npm packages during deployment - it
-looks for _assets/yarn.lock_ (which is missing for obvious reasons since
-Mix tasks don't use Yarn).
+  Yarn is not natively supported by Phoenix:
+
+  > <https://github.com/phoenixframework/phoenix/pull/1963#issuecomment-396079993>
+  >
+  > It would be an implicit lookup and another thing to go wrong outside of the
+  > team's direct control. npm has had improvements as well since yarn's release,
+  > and users are free as always to use yarn on their new projects themselves.
+
+  "not natively supported" means if you generate new Phoenix project and opt to
+  fetch and install dependencies, npm is used to install node modules:
+
+  ```
+  $ mix phx.new foo
+  ...
+  Fetch and install dependencies? [Yn]
+  * running mix deps.get
+  * running cd assets && npm install && node node_modules/webpack/bin/webpack.js --mode development
+  * running mix deps.compile
+  ```
+
+  as a result _package-lock.json_ is generated while Yarn uses _yarn.lock_ as a
+  lockfile and doesn't recognize _package-lock.json_.
+
+- speed
+
+  ```
+  $ mix phx.new foo
+  $ cd foo/assets
+
+  $ rm -rf node_modules; date; npm install; date
+  Mon May 20 13:46:33 MSK 2019
+  ...
+  Mon May 20 13:47:01 MSK 2019
+
+  $ rm -rf node_modules; date; yarn install; date
+  Mon May 20 13:47:29 MSK 2019
+  ...
+  Mon May 20 13:48:10 MSK 2019
+  ```
+
+  so npm even runs 10s faster than Yarn - this doesn't say that npm is faster
+  than Yarn but it says that Yarn is not several times faster than npm like it
+  was in the very beginning.
+
+=> stick to npm in Bootleg tasks as well.
 
 tips
 ----

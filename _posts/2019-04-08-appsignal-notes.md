@@ -81,6 +81,21 @@ of course it will be properly serialized before being sent to AppSignal but
 using a map is probably a better choice when setting sample data explicitly
 (without `Kernel.binding/0`). also map is used to set tags - see below.
 
+***UPDATE (2019-05-20)***
+
+for some reason `Kernel.binding/0` returns empty keyword list in production -
+set sample data explicitly using a map:
+
+```elixir
+def call(user, date) do
+  Appsignal.Transaction.set_sample_data(
+    "params",
+    %{user: user, date: date}
+  )
+  # ...
+end
+```
+
 ### `tags` key
 
 1. <https://docs.appsignal.com/application/link-templates.html>

@@ -385,5 +385,8 @@ Exited with code 1
 
 **solution**
 
+1. <https://github.com/bitwalker/distillery/issues/562>
+2. <https://github.com/bitwalker/distillery/blob/master/priv/libexec/config.sh>
+
 TODO: not resolved actually - error is gone after running migrations manually
       and restarting the service but I still don't know what it was caused by.

@@ -337,8 +337,8 @@ troubleshooting
 $ MIX_ENV=prod mix bootleg.deploy
 ...
 Copying release archive from release workspace
-[172.104.236.23] (export BOOTLEG_ENV="production" REPLACE_OS_VARS="true" && /usr/bin/env mkdir -p /home/gertruda/prod/app)
-** (SSHError) SSHKit returned an internal error on 172.104.236.23: {:badmatch, {:error, :badarg}}
+[172.XXX.XXX.XXX] (export BOOTLEG_ENV="production" REPLACE_OS_VARS="true" && /usr/bin/env mkdir -p /home/gertruda/prod/app)
+** (SSHError) SSHKit returned an internal error on 172.XXX.XXX.XXX: {:badmatch, {:error, :badarg}}
     lib/bootleg/ssh.ex:99: anonymous fn/2 in Bootleg.SSH.run/2
     (elixir) lib/enum.ex:1327: Enum."-map/2-lists^map/1-0-"/2
     lib/bootleg/ssh.ex:118: Bootleg.SSH.run!/2
@@ -359,3 +359,31 @@ always specify user name as a string in Bootleg config:
 - config :user, :gertruda
 + config :user, "gertruda"
 ```
+
+### Unable to load vm.args and NAME is not exported, unable to configure node!
+
+```
+$ mix deploy
+...
+[139.XXX.XXX.XXX] (export BOOTLEG_ENV="production" REPLACE_OS_VARS="true" && /usr/bin/env mkdir -p /home/corina/prod/app)
+[139.XXX.XXX.XXX] cd /home/corina/prod/app && (export BOOTLEG_ENV="production" REPLACE_OS_VARS="true" && /usr/bin/env bin/corina migrate)
+[139.XXX.XXX.XXX] Unable to load vm.args and NAME is not exported, unable to configure node!
+** (SSHError) Command exited on 139.XXX.XXX.XXX with non-zero status (1)
+     cmd: bin/corina migrate
+  stdout: Unable to load vm.args and NAME is not exported, unable to configure node!
+
+    lib/bootleg/ssh.ex:125: Bootleg.SSH.run_result/2
+    (elixir) lib/enum.ex:1327: Enum."-map/2-lists^map/1-0-"/2
+    config/deploy.exs:39: anonymous fn/3 in Bootleg.DynamicTasks.Migrate.execute/0
+    (elixir) lib/enum.ex:1940: Enum."-reduce/3-lists^foldl/2-0-"/3
+    lib/bootleg/dsl.ex:370: Bootleg.DSL.invoke/1
+    (elixir) lib/enum.ex:769: Enum."-each/2-lists^foreach/1-0-"/2
+    (elixir) lib/enum.ex:769: Enum.each/2
+    (mix) lib/mix/task.ex:331: Mix.Task.run_task/3
+Exited with code 1
+```
+
+**solution**
+
+TODO: not resolved actually - error is gone after running migrations manually
+      and restarting the service but I still don't know what it was caused by.

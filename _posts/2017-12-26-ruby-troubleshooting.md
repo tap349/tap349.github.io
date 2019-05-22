@@ -80,3 +80,42 @@ old versions (error is gone):
 gem 'berkshelf', '7.0.2'
 gem 'chef', '14.1.1'
 ```
+
+can't find gem bundler (>= 0.a) with executable bundle (Gem::GemNotFoundException)
+----------------------------------------------------------------------------------
+
+```
+$ bundle
+Traceback (most recent call last):
+	2: from /Users/tap/.rbenv/versions/2.5.0/bin/bundle:23:in `<main>'
+	1: from /Users/tap/.rbenv/versions/2.5.0/lib/ruby/2.5.0/rubygems.rb:308:in `activate_bin_path'
+/Users/tap/.rbenv/versions/2.5.0/lib/ruby/2.5.0/rubygems.rb:289:in `find_spec_for_exe': can't find gem bundler (>= 0.a) with executable bundle (Gem::GemNotFoundException)
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/54038218/3632318>
+
+find current bundler version:
+
+```
+$ gem list --local bundler
+
+*** LOCAL GEMS ***
+
+bundler (2.0.1)
+```
+
+update bundler version in _Gemfile.lock_ manually:
+
+```diff
+  # Gemfile.lock
+
+  BUNDLED WITH
+-   1.16.1
++   2.0.1
+```
+
+```
+$ bundle
+```

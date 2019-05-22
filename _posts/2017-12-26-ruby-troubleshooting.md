@@ -116,6 +116,8 @@ update bundler version in _Gemfile.lock_ manually:
 +   2.0.1
 ```
 
+now it's possible to install gems:
+
 ```
 $ bundle
 ```

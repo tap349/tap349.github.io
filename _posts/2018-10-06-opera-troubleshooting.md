@@ -33,3 +33,14 @@ so it must be okay it's not shown all the time - click this menu item to
 force show it:
 
 | Opera: Opera (top menu) → Signed in as \<YOUR_EMAIL>
+
+warning is not shown before quitting with <D-Q>
+-----------------------------------------------
+
+setting corresponding option `Show warning before quitting with <D-Q>` on
+has no effect - if you close and open settings page again, this option is
+reset to off again.
+
+**solution**
+
+set `Warn on closing browser window with multiple tabs` flag to `Enabled`.

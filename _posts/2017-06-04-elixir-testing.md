@@ -302,17 +302,21 @@ assert %{name: "foo"} = MyModule.call()
 as a rule JSON API result is either an object (hash, map) or an array of such
 objects.
 
-- use full objects (with all fields left) in API tests
+- API tests
 
-  if API result is an array of objects, use the first object only:
+  - use full objects (with all fields left) in API tests
+  - don't sort fields (in alphabetical order or in order of significance)
+  - if API result is an array of objects, use the first object only:
 
-  ```elixir
-  assert [%{"foo" => 123} | _] = result
-  ```
+    ```elixir
+    assert [%{"foo" => 123} | _] = result
+    ```
 
-- use partial objects (with some fields dropped) in API stubs and non-API tests
+- API stubs and non-API tests
 
-  leave only the fields which are used in business logic and remove the others.
+  - use partial objects (with some fields dropped)
+  - leave only the fields which are used in business logic and remove the others
+  - don't sort fields either
 
 tips
 ----

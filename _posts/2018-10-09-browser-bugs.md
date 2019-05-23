@@ -19,6 +19,10 @@ Opera (56.0.3051.36)
 - application doesn't respond to any shortcuts after closing `Find in page`
   popup - it's necessary to focus application window manually with a mouse
 
+  ***UPDATE (2019-05-23)***
+
+  bug is fixed in Opera 60.0.3255.109.
+
 Yandex (18.9.0)
 ---------------
 

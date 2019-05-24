@@ -130,6 +130,32 @@ not before each test.
 => test cases without `async: true` are not run in parallel with test cases
 with `async: true`.
 
+### about `async: true` in database tests
+
+1. <https://hexdocs.pm/phoenix/testing_schemas.html#test-driving-a-changeset>
+
+<http://whatdidilearn.info/2018/04/01/testing-phoenix-models-and-controllers.html>:
+
+> By default, Phoenix uses the Ecto.Adapters.SQL.Sandbox module. Which
+> basically wraps every test within a transaction in order to rollback
+> it after a test is finished. That helps to keep the test database clean.
+>
+> "Testing Schemas" guide does not recommend us to use `async: true` option
+> if we are going to interact with the database:
+>
+> > Note: We should not tag any schema case that interacts with a database
+> > as :async. This may cause erratic test results and possibly even deadlocks.
+>
+> Although, Ecto.Adapters.SQL.Sandbox also contains a note about that:
+>
+> > While both PostgreSQL and MySQL support SQL Sandbox, only PostgreSQL
+> supports concurrent tests while running the SQL Sandbox. Therefore, do
+> not run concurrent tests with MySQL as you may run into deadlocks due
+> to its transaction implementation.
+>
+> We are using PostgreSQL for that project. So I am going to enable that
+> option at my own peril.
+
 ### [Mox] Mox.expect/4 vs. Mox.stub/3
 
 1. <https://martinfowler.com/articles/mocksArentStubs.html>
@@ -297,6 +323,54 @@ of strict comparison:
 assert %{name: "foo"} = MyModule.call()
 ```
 
+### default values
+
+- test factories
+
+  string fields:
+
+  - `John Doe`/`Jane Doe` (or just `John`/`Jane`) for name fields
+  - `example.com` for domain fields
+  - some common value for enum fields (`currency: "USD"`)
+  - field name as its default value (`login: "login"`)
+
+    it can be suffixed by some ID (say, `ext_id` if available)
+
+  integer fields:
+
+  - sequence of integer values starting from 1
+  - automatically generated integer (`System.unique_integer([:positive])`) for
+    fields with unique index on them
+
+- API stubs
+
+  use the same default values as in test factories.
+
+- tests
+
+  it's allowed to use any values including notorious `foo`/etc.
+
+### full vs. partial API result
+
+as a rule JSON API result is either an object (hash, map) or an array of such
+objects.
+
+- API tests
+
+  - use full objects (with all fields left) in API tests
+  - don't sort fields (in alphabetical order or in order of significance)
+  - if API result is an array of objects, use the first object only:
+
+    ```elixir
+    assert [%{"foo" => 123} | _] = result
+    ```
+
+- API stubs and non-API tests
+
+  - use partial objects (with some fields dropped)
+  - leave only the fields which are used in business logic and remove the others
+  - don't sort fields either
+
 tips
 ----
 
@@ -322,8 +396,8 @@ defp elixirc_paths(_), do: ["lib"]
 
 ***UPDATE***
 
-when generating new Phoenix projects, _test/support/_ is added to
-compilation paths by default.
+when generating new Phoenix projects, _test/support/_ is added to compilation
+paths by default.
 
 ### (how to) run specific tests (same as `focus` in RSpec)
 

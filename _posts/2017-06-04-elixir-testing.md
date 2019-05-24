@@ -297,27 +297,6 @@ of strict comparison:
 assert %{name: "foo"} = MyModule.call()
 ```
 
-### using full or partial API result
-
-as a rule JSON API result is either an object (hash, map) or an array of such
-objects.
-
-- API tests
-
-  - use full objects (with all fields left) in API tests
-  - don't sort fields (in alphabetical order or in order of significance)
-  - if API result is an array of objects, use the first object only:
-
-    ```elixir
-    assert [%{"foo" => 123} | _] = result
-    ```
-
-- API stubs and non-API tests
-
-  - use partial objects (with some fields dropped)
-  - leave only the fields which are used in business logic and remove the others
-  - don't sort fields either
-
 tips
 ----
 
@@ -345,46 +324,6 @@ defp elixirc_paths(_), do: ["lib"]
 
 when generating new Phoenix projects, _test/support/_ is added to
 compilation paths by default.
-
-### use MyApp.DataCase in tests with access to data layer
-
-1. <https://hexdocs.pm/phoenix/testing_schemas.html#test-driving-a-changeset>
-
-<http://whatdidilearn.info/2018/04/01/testing-phoenix-models-and-controllers.html>:
-
-> By default, Phoenix uses the Ecto.Adapters.SQL.Sandbox module. Which
-> basically wraps every test within a transaction in order to rollback
-> it after a test is finished. That helps to keep the test database clean.
->
-> "Testing Schemas" guide does not recommend us to use `async: true` option
-> if we are going to interact with the database:
->
-> > Note: We should not tag any schema case that interacts with a database
-> > as :async. This may cause erratic test results and possibly even deadlocks.
->
-> Although, Ecto.Adapters.SQL.Sandbox also contains a note about that:
->
-> > While both PostgreSQL and MySQL support SQL Sandbox, only PostgreSQL
-> supports concurrent tests while running the SQL Sandbox. Therefore, do
-> not run concurrent tests with MySQL as you may run into deadlocks due
-> to its transaction implementation.
->
-> We are using PostgreSQL for that project. So I am going to enable that
-> option at my own peril.
-
-_test/support/data_case.ex_:
-
-```diff
-- use ExUnit.CaseTemplate
-+ use ExUnit.CaseTemplate, async: true
-```
-
-or else it's possible to do it inside specific test module:
-
-```diff
-- use Sithex.DataCase
-+ use Sithex.DataCase, async: true
-```
 
 ### (how to) run specific tests (same as `focus` in RSpec)
 

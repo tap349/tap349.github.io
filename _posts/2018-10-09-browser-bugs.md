@@ -23,6 +23,8 @@ Opera (56.0.3051.36)
 
   bug is fixed in Opera 60.0.3255.109.
 
+- application crashes when opening and closing `Save Page As...` dialog box
+
 Yandex (18.9.0)
 ---------------
 

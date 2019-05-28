@@ -224,6 +224,29 @@ is stubbed in current process only - in this case in the process in which Mix
 loads _test/test\_helper.exs_ before executing tests (for some unknown reason
 this process always has `#PID<0.91.0>` on my machine).
 
+### testing GenServers
+
+1. <https://elixir-lang.org/getting-started/mix-otp/genserver.html#testing-a-genserver>
+
+start GenServer (Supervisor, etc.):
+
+- in _test/test_helper.exs_ for all tests
+
+  ```elixir
+  # test/test_helper.exs
+
+  Task.Supervisor.start_link(name: Yancy.YD.Agency.TaskSupervisor)
+  ```
+
+- in `setup`/`setup_all` block of specific test
+
+  ```elixir
+  setup do
+    start_supervised!({Task.Supervisor, name: Yancy.YD.Agency.TaskSupervisor})
+    :ok
+  end
+  ```
+
 style guide
 -----------
 

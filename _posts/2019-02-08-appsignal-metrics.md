@@ -15,6 +15,8 @@ categories: [appsignal]
 
 1. <https://docs.appsignal.com/metrics/custom.html>
 
+### collection
+
 > <https://docs.appsignal.com/appsignal/request-lifecycle.html>
 >
 > After your application serves the request, the transaction is closed and
@@ -27,18 +29,24 @@ custom metrics are not sent immediately - they must be buffered by agent
 during some amount of time (most likely 1 minute) and only then are they
 sent to AppSignal.
 
-=> all metric values are collected during this time frame (1 minute) and
-then final value is sent to AppSignal - it depends on metric type how this
-final value is obtained:
+metric values are collected during this time frame (~1 minute) and then
+final value (or values) is sent to AppSignal - it depends on metric type
+what value is eventually persisted if helper is called multiple times:
 
 - gauge: the latest value
-- measurement: sum of calls and mean value (2 values)
-- counter: sum of values
+- measurement: call count and average value
+- counter: sum of counter values
 
-measurement metric creates 2 metrics with `_count` and `_mean` suffixes -
-that is why 2 values are sent.
+for measurement metric both values are persisted - it creates 2 metric
+fields (`COUNT` and `MEAN`) for them accordingly (4 metric fields in all).
 
-examples:
+### display
+
+metric type also determines what values are used for current display time
+frame in web UI - the same rules apply as when collecting metrics but now
+these rules apply to persisted values (not the values passed to helpers).
+
+### examples
 
 - gauge: database size
 - measurement: RPM and average response time

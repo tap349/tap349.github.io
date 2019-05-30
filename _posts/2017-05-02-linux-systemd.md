@@ -103,8 +103,8 @@ useful options:
   (in the format `"2012-10-30 18:17:16"` or special string like `today`)
 - `-u, --unit` - show entries for specified unit only
 
-NOTE: be cautious when using `-e` and `-n` options:
-      they might cause some lines not to be printed.
+NOTE: be cautious when using `-e` and `-n` options: they might cause some
+      lines not to be printed.
 
 view recent entries with explanation messages:
 
@@ -118,8 +118,8 @@ view journal for specified unit:
 $ journalctl -u my-player.service
 ```
 
-view journal for multiple units at once
-(entries are merged in chronological order):
+view journal for multiple units at once (entries are merged in chronological
+order):
 
 ```sh
 $ journalctl -u my-player.service -u my-player.socket
@@ -148,11 +148,10 @@ creating custom unit file
   in _/etc/systemd/system/\<some_target\>.target.wants_ (as instructed in
   `[Install]` section of unit file).
 
-  but if you create a symlink of unit file in _/etc/systemd/system_
-  (instead of copying file itself) systemd for some reason considers
-  it to be enabled (this is not what you always want - maybe you want
-  that unit to be started by another unit using `Requires` directive
-  or it's a socket-activated service).
+  but if you create a symlink of unit file in _/etc/systemd/system_ (instead
+  of copying file itself), systemd for some reason considers it to be enabled
+  (it's not what you always want - maybe you want that unit to be started by
+  another unit using `Requires` directive or it's a socket-activated service).
 
 - enable unit if necessary
 
@@ -168,8 +167,8 @@ tips
 - foo.service
 - foo.timer
 
-if using timer for associated service enable timer unit only -
-associated service unit will be activated when the timer is reached:
+if using timer for associated service, enable timer unit only - associated
+service unit will be activated when the timer is reached:
 
 ```sh
 $ sudo systemctl enable foo.timer
@@ -180,7 +179,7 @@ $ sudo systemctl enable foo.timer
 - foo.service
 - foo.socket
 
-if using socket-based activation of the service enable socket unit only -
+if using socket-based activation of the service, enable socket unit only -
 associated service unit will be activated when anything is written to socket:
 
 ```sh
@@ -190,13 +189,13 @@ $ sudo systemctl enable foo.socket
 debugging
 ---------
 
-### viewing systemd journal
+### view service logs
 
-service units in most cases redirect their standard output and standard
-error to systemd journal - this is where you, say, can find information
-why specific service failed to start.
+service units in most cases redirect their standard output and standard error
+to systemd journal - this is where you, say, can find information why specific
+service failed to start.
 
-there are several options to view journal:
+there are several options to view systemd journal:
 
 - view all logs for specified unit
 
@@ -206,9 +205,8 @@ there are several options to view journal:
 
 - *[RECOMMENDED]* view all logs for specified unit with explanations
 
-  same as previous option but in most cases this is the most useful
-  way to view journal because it provides maximum information about
-  specified failed unit.
+  same as previous option but in most cases this is the most useful way to view
+  journal because it provides maximum information about specified failed unit.
 
   ```sh
   $ sudo journalctl -xe -u <service_name>

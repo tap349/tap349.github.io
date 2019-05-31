@@ -786,3 +786,19 @@ send(child_pid, :work)
     # ...
   end
 ```
+
+troubleshooting
+---------------
+
+### (DBConnection.OwnershipError) cannot find ownership process
+
+```
+$ mix test
+...
+== Compilation error in file test/gertruda/ga/ecomm_stat/query_test.exs ==
+** (DBConnection.OwnershipError) cannot find ownership process for #PID<0.473.0>.
+```
+
+**solution**
+
+you must have forgotten to use `test` macro (and no test process was started).

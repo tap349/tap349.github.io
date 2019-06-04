@@ -119,3 +119,32 @@ MyApp.Foo
 |> Enum.join(".")
 # => "MyApp.Foo"
 ```
+
+(how to) measure function execution time
+----------------------------------------
+
+1. <https://stackoverflow.com/a/29674651/3632318>
+2. <https://medium.com/elixirlabs/implement-a-basic-block-yield-with-elixir-d00f313831f7>
+
+```elixir
+defmodule Timer do
+  defmacro time_ms(do: body) do
+    quote do
+      # or else surround with calls to System.monotonic_time/0
+      {time, value} = :timer.tc(fn -> unquote(body) end)
+      {round(time / 1_000), value}
+    end
+  end
+end
+```
+
+usage:
+
+```elixir
+require Timer
+
+{time, result} =
+  Timer.time_ms do
+    Operation.call()
+  end
+```

@@ -23,12 +23,12 @@ with `Ecto.Repo.insert_all/3`:
 [error] Postgrex.Protocol (#PID<0.463.0>) disconnected: ** (DBConnection.ConnectionError) client #PID<0.553.0> exited
 ...
 ** (EXIT) an exception was raised:
-        ** (DBConnection.ConnectionError) connection not available and request was dropped from queue after 171ms.
-          You can configure how long requests wait in the queue using :queue_target and :queue_interval.
-          See DBConnection.start_link/2 for more information
-            (ecto_sql) lib/ecto/adapters/sql.ex:604: Ecto.Adapters.SQL.raise_sql_call_error/1
-            (ecto_sql) lib/ecto/adapters/sql.ex:513: Ecto.Adapters.SQL.insert_all/8
-            (ecto) lib/ecto/repo/schema.ex:56: Ecto.Repo.Schema.do_insert_all/6
+    ** (DBConnection.ConnectionError) connection not available and request was dropped from queue after 171ms.
+      You can configure how long requests wait in the queue using :queue_target and :queue_interval.
+      See DBConnection.start_link/2 for more information
+        (ecto_sql) lib/ecto/adapters/sql.ex:604: Ecto.Adapters.SQL.raise_sql_call_error/1
+        (ecto_sql) lib/ecto/adapters/sql.ex:513: Ecto.Adapters.SQL.insert_all/8
+        (ecto) lib/ecto/repo/schema.ex:56: Ecto.Repo.Schema.do_insert_all/6
 ```
 
 **solution**
@@ -72,9 +72,10 @@ with `Ecto.Repo.insert_all/3`:
 ```
 iex> MyApp.User.Mutator.delete_all()
 [error] Postgrex.Protocol (#PID<0.439.0>) disconnected: ** (DBConnection.ConnectionError)
-  client #PID<0.478.0> timed out because it queued and checked out the connection for longer than 15000ms
-** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed by the pool,
-  possibly due to a timeout or because the pool has been terminated)
+  client #PID<0.478.0> timed out because it queued and checked out the connection
+  for longer than 15000ms
+** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed
+  by the pool, possibly due to a timeout or because the pool has been terminated)
     (ecto_sql) lib/ecto/adapters/sql.ex:604: Ecto.Adapters.SQL.raise_sql_call_error/1
     (ecto_sql) lib/ecto/adapters/sql.ex:537: Ecto.Adapters.SQL.execute/5
 ```
@@ -150,3 +151,25 @@ def execute(adapter_meta, query_meta, prepared, params, opts) do
   {num, rows}
 end
 ```
+
+(Postgrex.Error) FATAL 53300 (too_many_connections) sorry, too many clients already
+-----------------------------------------------------------------------------------
+
+I got this error when running lots of tests asynchronously:
+
+```
+$ mix test
+...
+module=DBConnection.Connection [error] Postgrex.Protocol (#PID<0.1208.0>)
+  failed to connect: ** (Postgrex.Error) FATAL 53300 (too_many_connections)
+  sorry, too many clients already
+```
+
+**solution**
+
+1. <https://gigalixir.readthedocs.io/en/latest/main.html#common-errors>
+
+there are 2 ways to fix this error:
+
+- increase `max_connections` in _postgresql.conf_
+- or decrease `pool_size` in _config/test.secret.exs_

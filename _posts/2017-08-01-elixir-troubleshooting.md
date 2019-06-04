@@ -63,10 +63,11 @@ Node billing_prod@127.0.0.1 is not running!
 
 **solution**
 
-application is not responding because its Erlang node is no
-longer registered in epmd - see `troubleshooting` section of
-[Elixir - epmd]({% post_url 2017-09-02-elixir-epmd %})
-for explanation of how this could happen and how to fix it.
+1. [Elixir - epmd]({% post_url 2017-09-02-elixir-epmd %})
+
+application is not responding because its Erlang node is no longer registered
+in epmd - see `troubleshooting` section of the linked post for explanation of
+how this could happen and how to fix it.
 
 [edeliver] Host key verification failed
 ---------------------------------------
@@ -199,9 +200,11 @@ safe to do in your application).
 -------------------------------------------------------
 
 ```
-** (Mix) Could not start application neko: Neko.Application.start(:normal, []) returned an error: shutdown: failed to start child: :simple_rule_worker_pool
+** (Mix) Could not start application neko: Neko.Application.start(:normal, [])
+  returned an error: shutdown: failed to start child: :simple_rule_worker_pool
     ** (EXIT) an exception was raised:
-        ** (MatchError) no match of right hand side value: {:error, {:EXIT, {:undef, [{Neko.Rules.SimpleRule.Worker, :start_link, [[]], []}, ...]}}}
+        ** (MatchError) no match of right hand side value:
+          {:error, {:EXIT, {:undef, [{Neko.Rules.SimpleRule.Worker, :start_link, [[]], []}, ...]}}}
 ```
 
 **solution**
@@ -227,7 +230,9 @@ no longer alive:
 
 ```
 ** (stop) exited in: GenServer.call(#PID<0.24355.22>, {:get, #Function<0.105777791/1 in Neko.UserRate.Store.all/1>}, 5000)
-    ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
+    ** (EXIT) no process: the process is not alive or there's no process
+      currently associated with the given name, possibly because its
+      application isn't started
     (elixir) lib/gen_server.ex:774: GenServer.call/3
     (neko) lib/neko/rules/simple_rule.ex:43: Neko.Rules.SimpleRule.achievements/2
     (neko) lib/neko/rules/simple_rule/worker.ex:34: Neko.Rules.SimpleRule.Worker.handle_call/3
@@ -286,7 +291,9 @@ error must be caused by this sequence of steps:
   iex> Agent.stop(pid)
   iex> Agent.get(nil, &(&1))
   ** (exit) exited in: GenServer.call(#PID<0.437.0>, {:get, #Function<6.99386804/1 in :erl_eval.expr/5>}, 5000)
-      ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
+      ** (EXIT) no process: the process is not alive or there's no process
+        currently associated with the given name, possibly because its
+        application isn't started
       (elixir) lib/gen_server.ex:774: GenServer.call/3
   ```
 
@@ -295,7 +302,9 @@ error must be caused by this sequence of steps:
   ```
   iex> Agent.get(nil, &(&1))
   ** (exit) exited in: GenServer.call(nil, {:get, #Function<6.99386804/1 in :erl_eval.expr/5>}, 5000)
-      ** (EXIT) no process: the process is not alive or there's no process currently associated with the given name, possibly because its application isn't started
+      ** (EXIT) no process: the process is not alive or there's no process
+        currently associated with the given name, possibly because its
+        application isn't started
       (elixir) lib/gen_server.ex:766: GenServer.call/3
   ```
 
@@ -678,8 +687,8 @@ $ mix test
 ...
 ==> appsignal
 could not compile dependency :appsignal, "mix compile" failed. You can
-recompile this dependency with "mix deps.compile appsignal", update it
-with "mix deps.update appsignal" or clean it with "mix deps.clean appsignal"
+  recompile this dependency with "mix deps.compile appsignal", update it
+  with "mix deps.update appsignal" or clean it with "mix deps.clean appsignal"
 ** (UndefinedFunctionError) function Appsignal.System.agent_platform/0 is undefined or private
     Appsignal.System.agent_platform()
     mix_helpers.exs:12: Mix.Appsignal.Helper.verify_system_architecture/0
@@ -811,14 +820,14 @@ or else when using edeliver:
 $ APP='billing' MIX_ENV='prod' mix phx.digest
 ==> gettext
 Compiling 1 file (.yrl)
-could not compile dependency :gettext, "mix compile" failed. You can recompile
-this dependency with "mix deps.compile gettext", update it with "mix deps.update
-gettext" or clean it with "mix deps.clean gettext"
+could not compile dependency :gettext, "mix compile" failed. You can
+  recompile this dependency with "mix deps.compile gettext", update it
+  with "mix deps.update gettext" or clean it with "mix deps.clean gettext"
 ==> billing
 ** (Mix) Could not compile "src/gettext_po_parser.yrl" because the application
-"parsetools" could not be found. This may happen if your package manager broke
-Erlang into multiple packages and may be fixed by installing the missing
-"erlang-dev" and "erlang-parsetools" packages
+  "parsetools" could not be found. This may happen if your package manager
+  broke Erlang into multiple packages and may be fixed by installing the missing
+  "erlang-dev" and "erlang-parsetools" packages
 ```
 
 **solution**

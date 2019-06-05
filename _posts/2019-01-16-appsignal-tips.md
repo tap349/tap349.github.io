@@ -72,3 +72,25 @@ defmodule MyAppWeb.Router do
   # ...
 end
 ```
+
+use tags instead of specific metric name prefixes
+-------------------------------------------------
+
+> <https://docs.appsignal.com/metrics/custom.html>
+>
+> Custom metrics sometimes need some context what they're about. This
+> context can be added as tags so it doesn't need to be included in the
+> name and you can use the same metric name for different values.
+>
+> We do not recommend adding this context to your metric names like so:
+> eu.database_size, us.database_size and asia.database_size. This creates
+> multiple metrics that serve the same purpose. The same goes for any
+> dynamic string that builds the metric key, e.g. user_#{user.id}.
+
+```elixir
+# bad
+Appsignal.set_gauge("fb.stat.certainty", value)
+
+# good
+Appsignal.set_gauge("stat.certainty", value, %{platform: "fb"})
+```

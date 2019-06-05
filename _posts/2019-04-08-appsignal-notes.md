@@ -25,8 +25,8 @@ log location
 
 that is AppSignal log is not created in `working_directory_path` as I expected.
 
-setting sample data
--------------------
+sample data
+-----------
 
 1. <https://docs.appsignal.com/elixir/instrumentation/tagging.html>
 3. <https://hexdocs.pm/appsignal/Appsignal.Transaction.html#set_sample_data/2>
@@ -113,3 +113,30 @@ AppSignal will show these links in `Overview` section.
 ### other keys
 
 IDK how to display sample data set under different keys in AppSignal UI.
+
+custom metric dashboards
+------------------------
+
+### use tags instead of specific name prefixes
+
+1. <https://docs.appsignal.com/metrics/custom.html#metric-tags>
+2. <https://docs.appsignal.com/metrics/custom-metrics/dashboards.html#dashboard-graph-metrics-tags>
+
+> <https://docs.appsignal.com/metrics/custom.html#metric-tags>
+>
+> Custom metrics sometimes need some context what they're about. This
+> context can be added as tags so it doesn't need to be included in the
+> name and you can use the same metric name for different values.
+>
+> We do not recommend adding this context to your metric names like so:
+> eu.database_size, us.database_size and asia.database_size. This creates
+> multiple metrics that serve the same purpose. The same goes for any
+> dynamic string that builds the metric key, e.g. user_#{user.id}.
+
+```elixir
+# bad
+Appsignal.set_gauge("fb.stat.certainty", value)
+
+# good
+Appsignal.set_gauge("stat.certainty", value, %{platform: "fb"})
+```

@@ -73,8 +73,8 @@ defmodule MyAppWeb.Router do
 end
 ```
 
-use tags instead of specific metric name prefixes
--------------------------------------------------
+use tags instead of specific name prefixes for custom metrics
+-------------------------------------------------------------
 
 > <https://docs.appsignal.com/metrics/custom.html>
 >

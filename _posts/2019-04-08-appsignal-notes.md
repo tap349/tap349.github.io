@@ -117,10 +117,12 @@ IDK how to display sample data set under different keys in AppSignal UI.
 custom metric dashboards
 ------------------------
 
-### use tags instead of specific name prefixes
+### tags vs. name prefixes
 
 1. <https://docs.appsignal.com/metrics/custom.html#metric-tags>
 2. <https://docs.appsignal.com/metrics/custom-metrics/dashboards.html#dashboard-graph-metrics-tags>
+
+use tags instead of specific name prefixes:
 
 > <https://docs.appsignal.com/metrics/custom.html#metric-tags>
 >

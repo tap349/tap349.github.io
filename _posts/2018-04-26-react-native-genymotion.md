@@ -26,9 +26,9 @@ GApps are required to receive pushes (see `troubleshooting` section).
 
 ### virtual keyboard
 
-it's enabled by default on Android Emulator.
+it's enabled by default in Android Emulator but not in Genymotion.
 
-| Genymotion: `Configure this virtual device` (tool icon button)
+| Genymotion: my device → device menu (`vertical dots` icon) → `Edit`
 
 - [x] `Use virtual keyboard for text input`
 
@@ -41,7 +41,7 @@ debugging
 
 or
 
-| emulator (app): right toolbar → `Menu` (drawer icon button)
+| emulator (app): right toolbar → `Menu` (`drawer` icon button)
 
 ### connect to local web server
 

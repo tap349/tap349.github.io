@@ -16,7 +16,7 @@ categories: [opera]
 synchronization button is missing
 ---------------------------------
 
-synchronization button (person icon in toolbar next to address bar) is
+synchronization button (`person` icon in toolbar next to address bar) is
 missing after restarting Opera.
 
 **solution**

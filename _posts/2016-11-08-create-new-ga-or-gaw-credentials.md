@@ -28,7 +28,7 @@ we have only one developer token (obtained for manager account) for
 all our projects (including umka).
 
 - select manager account (top-level account that manages nested accounts)
-- gear icon (top right menu) → `Account settings` → `AdWords API Center` (left sidebar)
+- `gear` icon (top right menu) → `Account settings` → `AdWords API Center` (left sidebar)
 
 here you can find developer token.
 

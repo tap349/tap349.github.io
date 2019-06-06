@@ -25,8 +25,12 @@ NOTE: backticks are not used.
 
 environment (web page, program, etc.) can be specified before the path.
 
-path might include action or setting as a final node (say, menu item).
-if there are multiple settings they are specified separately as a list:
+it's possible to add path element description in parentheses: usually it's UI
+element which represents path element itself (say, menu item or button) or UI
+element containing described path element (say, top menu).
+
+path might include action or setting as a final node (say, menu item). if there
+are multiple settings they are specified separately as a list:
 
 | `Preferences` → `Keys` → `Hotkey`
 
@@ -35,11 +39,10 @@ if there are multiple settings they are specified separately as a list:
 
 NOTE: backticks are used for exact names.
 
-keep path on a single line (or else table won't be rendered) but it's
-allowed to use multiple table rows each row containing the path on a
-separate screen (window or page). or else it's multiple table rows can
-be used to split path into 2 parts - high-level part and the one that
-specifies exact location of UI element).
+keep path on a single line (or else table won't be rendered) but it's allowed
+to use multiple table rows each row containing the path on a separate screen
+(window or page). or else multiple table rows can be used to split path into 2
+parts - high-level part and the one that specifies exact location of UI element).
 
 ### use comment with arrow to specify return value
 

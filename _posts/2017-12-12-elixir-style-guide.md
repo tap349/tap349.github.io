@@ -53,11 +53,14 @@ def set(name \\ __MODULE__, rules) do
 end
 ```
 
-anonymous functions
--------------------
+parens
+------
 
-use parens for anonymous functions of arity 1+
-(just like for named functions):
+1. <https://hexdocs.pm/elixir/Code.html#format_string!/2-parens-and-no-parens-in-function-calls>
+
+### anonymous functions
+
+use parens for anonymous functions of arity 1+ (just like for named functions):
 
 ```elixir
 fn -> IO.puts("hello") end
@@ -75,6 +78,32 @@ Enum.reduce(achievements, %{}, fn x, acc ->
   Map.put(acc, comparison_key(x), x)
 end)
 ```
+
+### macros
+
+1. <https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1>
+
+> <https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1>
+>
+> As with any other function or macro call in Elixir, explicit parens can
+> also be used around the arguments before the do/end block.
+>
+> The choice between parens and no parens is a matter of preference.
+
+> <https://hexdocs.pm/elixir/Code.html#format_string!/2-parens-and-no-parens-in-function-calls>
+>
+> By default, Elixir will add parens to all calls except for ... calls that
+> have do/end blocks.
+
+use parens:
+
+- when macro is called like ordinary function
+- when macro has no `do/end` block
+
+don't use parens:
+
+- to emphasize DSL nature of macro
+- when macro has `do/end` block
 
 singular vs. plural namespace names
 -----------------------------------

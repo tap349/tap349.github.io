@@ -87,6 +87,12 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager 'build-tools;23.0.3'
   ```
 
+  install `platform-tools` package for `adb` tool:
+
+  ```sh
+  $ sdkmanager 'platform-tools'
+  ```
+
 - update installed packages
 
   update all installed packages to their latest versions:

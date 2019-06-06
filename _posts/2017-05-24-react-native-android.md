@@ -20,7 +20,7 @@ installation
 2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
 3. <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
 
-install prerequisites and react-native-cli:
+install prerequisites and `react-native-cli`:
 
 ```sh
 $ brew install node watchman
@@ -55,8 +55,8 @@ path=($path $ANDROID_HOME/platform-tools)
 
 - list all packages
 
-  list all packages along with outdated packages
-  (installed packages that have new version available).
+  list all packages along with outdated packages (installed packages that have
+  new version available).
 
   ```sh
   $ sdkmanager --list
@@ -101,8 +101,23 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager --update
   ```
 
-  this is preferred way to update Android SDK packages since
-  `android-sdk` brew formula is not updated frequently.
+  this is preferred way to update Android SDK packages since `android-sdk` brew
+  formula is not updated frequently.
+
+- uninstall specified packages
+
+  you might not need all mentioned packages when using Genymotion (say, system
+  images) but still some of them are still required (like `platform-tools` for
+  `adb`):
+
+  ```sh
+  $ sdkmanager --uninstall 'add-ons;addon-google_apis-google-23'
+  $ sdkmanager --uninstall 'platforms;android-23'
+  $ sdkmanager --uninstall 'system-images;android-23;default;x86_64'
+  $ sdkmanager --uninstall 'system-images;android-23;google_apis;x86_64'
+  $ sdkmanager --uninstall 'build-tools;23.0.3'
+  $ sdkmanager --uninstall 'platform-tools'
+  ```
 
 ### create new AVD (Android Virtual Device)
 

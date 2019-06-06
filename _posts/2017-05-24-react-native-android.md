@@ -67,49 +67,27 @@ API level 23 corresponds to Android 6.0 (Marshmallow).
   $ sdkmanager --list
   ```
 
-- install or update required packages (if they are installed)
+- install required packages
 
-  > Google APIs
+  - Google APIs
+  - Android SDK Platform 23 (Android 6.0 (Marshmallow))
+  - Intel x86 Atom_64 System Image
+  - Google APIs Intel x86 Atom_64 System Image
+  - Android SDK Build-Tools 23.0.3
+  - Android SDK Platform-Tools (for `adb`)
+  - Android Emulator (for `emulator`)
 
   ```sh
   $ sdkmanager 'add-ons;addon-google_apis-google-23'
-  ```
-
-  > Android SDK Platform 23 (Android 6.0 (Marshmallow))
-
-  ```sh
   $ sdkmanager 'platforms;android-23'
-  ```
-
-  > Intel x86 Atom_64 System Image
-
-  ```sh
   $ sdkmanager 'system-images;android-23;default;x86_64'
-  ```
-
-  > Google APIs Intel x86 Atom_64 System Image
-
-  ```sh
   $ sdkmanager 'system-images;android-23;google_apis;x86_64'
-  ```
-
-  > Android SDK Build-Tools 23.0.3
-
-  ```sh
   $ sdkmanager 'build-tools;23.0.3'
-  ```
-
-  for `adb` (Android Debug Bridge):
-
-  ```sh
   $ sdkmanager 'platform-tools'
-  ```
-
-  for `emulator` (Android Emulator):
-
-  ```sh
   $ sdkmanager 'emulator'
   ```
+
+  packages are updated if they are already installed.
 
 - update installed packages
 
@@ -522,6 +500,8 @@ Could not launch '../emulator/qemu/darwin-x86_64/qemu-system-x86_64': No such fi
 
 **solution**
 
+it's necessary to cd to emulator directory and use relative path:
+
 ```sh
 $ cd /usr/local/share/android-sdk/emulator
 $ ./emulator -avd Nexus_5X_API_23_x86_64
@@ -532,23 +512,22 @@ or else create an alias in _~/.zshenv_:
 ```conf
 export ANDROID_HOME=/usr/local/share/android-sdk
 
-alias avd='emulator -avd Nexus_5X_API_23_x86_64'
 alias emulator='cd $ANDROID_HOME/emulator && ./emulator'
+alias avd='emulator -avd Nexus_5X_API_23_x86_64'
 ```
 
 ***UPDATE***
 
 after updating emulator to version 26.1.4.0 it's no longer necessary to cd to
-emulator directory.
+emulator directory but still you cannot rely on `PATH` - use absolute path:
 
 _~/.zshenv_:
 
 ```conf
 alias avd='$ANDROID_HOME/emulator/emulator -avd Nexus_5X_API_23_x86_64'
+# this still causes `Qt library not found`:
+#alias avd='emulator -avd Nexus_5X_API_23_x86_64'
 ```
-
-we cannot use just `emulator` since it points to `/usr/local/bin/emulator`
-instead of `$ANDROID_HOME/emulator/emulator`.
 
 ### Cannot find AVD system path
 

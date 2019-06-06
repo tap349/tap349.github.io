@@ -913,3 +913,19 @@ documentation (https://goo.gl/yEcRrU) for more information.
 disable `Network Inspect`:
 
 | Redux DevTools: RMB → `Disable Network Inspect` (menu)
+
+Loading dependency graph, done.
+-------------------------------
+
+`npm start` hangs after `Loading dependency graph, done.` message.
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/16798>
+
+I'm not sure but maybe reinstalling Watchman helped to resolve the issue:
+
+```sh
+$ brew uninstall watchman
+$ brew install watchman
+```

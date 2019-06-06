@@ -81,10 +81,10 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager 'system-images;android-23;google_apis;x86_64'
   ```
 
-  > Android SDK Build-Tools 23.0.1
+  > Android SDK Build-Tools 23.0.3
 
   ```sh
-  $ sdkmanager 'build-tools;23.0.1'
+  $ sdkmanager 'build-tools;23.0.3'
   ```
 
 - update installed packages

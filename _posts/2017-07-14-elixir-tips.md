@@ -130,9 +130,9 @@ MyApp.Foo
 defmodule Timer do
   defmacro time_ms(do: body) do
     quote do
-      # or else surround with calls to System.monotonic_time/0
-      {time, value} = :timer.tc(fn -> unquote(body) end)
-      {round(time / 1_000), value}
+      # or surround with calls to System.monotonic_time/1
+      {time, result} = :timer.tc(fn -> unquote(body) end)
+      {round(time / 1_000), result}
     end
   end
 end
@@ -147,4 +147,22 @@ require Timer
   Timer.time_ms do
     Operation.call()
   end
+```
+
+don't use `bind_quoted` option of `Kernel.SpecialForms.quote/2` macro to pass
+`body` binding to macro - execution time will be always 0 then (it looks like
+execution time of unquoting `body` is measured - not execution time of `body`
+itself though IDK for sure, just a wild guess):
+
+```elixir
+defmodule Timer do
+  defmacro time_ms(do: body) do
+    quote bind_quoted: [body: body] do
+      # time is always 0 in this case
+      # (the same when using System.monotonic_time/1)
+      {time, result} = :timer.tc(fn -> body end)
+      {round(time / 1_000), result}
+    end
+  end
+end
 ```

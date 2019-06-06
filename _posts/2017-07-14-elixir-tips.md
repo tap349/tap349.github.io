@@ -166,3 +166,19 @@ defmodule Timer do
   end
 end
 ```
+
+don't use `require` when importing macros
+-----------------------------------------
+
+if macro is imported from another module, it's not necessary to `require` that
+module:
+
+```elixir
+# when macro is not imported
+require Foo
+Foo.my_macro()
+
+# when macro is imported
+import Foo, only: [my_macro: 0]
+my_macro()
+```

@@ -190,9 +190,9 @@ $ rails server
 
 ### start packager (JS server) (optional)
 
-if you don't start it manually it will be started automatically by
-`react-native run-android` in a new Terminal window. IMO it's better to do
-it manually in a separate iTerm2 tab instead of having an extra open window.
+if you don't start it manually it will be started by `react-native run-android`
+automatically in a new Terminal window. IMO it's better to do it manually in a
+separate iTerm2 tab instead of having an extra open window.
 
 NOTE: you may think of it as a Rails server but for RN application.
 

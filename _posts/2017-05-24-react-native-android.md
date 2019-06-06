@@ -45,13 +45,18 @@ export ANDROID_HOME=/usr/local/share/android-sdk
 path=($path $ANDROID_HOME/tools)
 # `sdkmanager` and `avdmanager`
 path=($path $ANDROID_HOME/tools/bin)
-# `adb` (Android Debug Bridge)
+# `adb`
 path=($path $ANDROID_HOME/platform-tools)
 ```
 
-### install Android SDK Platform packages (version 23)
+### install Android SDK packages
 
-<https://developer.android.com/studio/command-line/sdkmanager.html>
+1. <https://developer.android.com/studio/command-line/sdkmanager.html>
+
+`android-sdk` brew formula provides basic tools like `sdkmanager` but required
+packages must be installed manually (say, you might need different API level).
+
+API level 23 corresponds to Android 6.0 (Marshmallow).
 
 - list all packages
 
@@ -62,22 +67,29 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager --list
   ```
 
-- install required packages
-
-  install or update required packages if they are already installed:
+- install or update required packages (if they are installed)
 
   > Google APIs
 
+  ```sh
+  $ sdkmanager 'add-ons;addon-google_apis-google-23'
+  ```
+
   > Android SDK Platform 23 (Android 6.0 (Marshmallow))
 
+  ```sh
+  $ sdkmanager 'platforms;android-23'
+  ```
+
   > Intel x86 Atom_64 System Image
+
+  ```sh
+  $ sdkmanager 'system-images;android-23;default;x86_64'
+  ```
 
   > Google APIs Intel x86 Atom_64 System Image
 
   ```sh
-  $ sdkmanager 'add-ons;addon-google_apis-google-23'
-  $ sdkmanager 'platforms;android-23'
-  $ sdkmanager 'system-images;android-23;default;x86_64'
   $ sdkmanager 'system-images;android-23;google_apis;x86_64'
   ```
 
@@ -87,10 +99,16 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager 'build-tools;23.0.3'
   ```
 
-  install `platform-tools` package for `adb` tool:
+  for `adb` (Android Debug Bridge):
 
   ```sh
   $ sdkmanager 'platform-tools'
+  ```
+
+  for `emulator` (Android Emulator):
+
+  ```sh
+  $ sdkmanager 'emulator'
   ```
 
 - update installed packages
@@ -101,14 +119,10 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager --update
   ```
 
-  this is preferred way to update Android SDK packages since `android-sdk` brew
-  formula is not updated frequently.
-
 - uninstall specified packages
 
   you might not need all mentioned packages when using Genymotion (say, system
-  images) but still some of them are still required (like `platform-tools` for
-  `adb`):
+  images) but still some of them are required (like `platform-tools` for `adb`):
 
   ```sh
   $ sdkmanager --uninstall 'add-ons;addon-google_apis-google-23'
@@ -117,6 +131,7 @@ path=($path $ANDROID_HOME/platform-tools)
   $ sdkmanager --uninstall 'system-images;android-23;google_apis;x86_64'
   $ sdkmanager --uninstall 'build-tools;23.0.3'
   $ sdkmanager --uninstall 'platform-tools'
+  $ sdkmanager --uninstall 'emulator'
   ```
 
 ### create new AVD (Android Virtual Device)
@@ -167,8 +182,8 @@ it's a good idea to create an alias for this command in _~/.zshenv_:
 alias avd='emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920'
 ```
 
-according to emulator's log there is no need to install HAXM separately
-(it appears to have been already enabled):
+according to emulator's log there is no need to install HAXM separately (it
+appears to have been already enabled):
 
 ```
 Hax is enabled
@@ -523,8 +538,8 @@ alias emulator='cd $ANDROID_HOME/emulator && ./emulator'
 
 ***UPDATE***
 
-after updating emulator to version 26.1.4.0 it's no longer necessary to
-cd to emulator directory.
+after updating emulator to version 26.1.4.0 it's no longer necessary to cd to
+emulator directory.
 
 _~/.zshenv_:
 

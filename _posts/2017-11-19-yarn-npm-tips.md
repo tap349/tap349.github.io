@@ -50,8 +50,8 @@ $ which rnpm
 -------------------------------
 
 ```sh
-$ rm -rf node_modules/ && yarn install
-$ rm -rf node_modules/ && npm install
+$ rm -rf node_modules && yarn install
+$ rm -rf node_modules && npm install
 ```
 
 [npm] (how to) remove not used packages
@@ -113,7 +113,7 @@ $ npm run-script <bin_or_script>
 _~/.zshenv_:
 
 ```zsh
-alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
+alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && yarn cache clean && yarn install'
 ```
 
 ```sh

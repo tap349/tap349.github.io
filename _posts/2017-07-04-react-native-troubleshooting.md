@@ -16,7 +16,7 @@ categories: [react-native]
 NOTE:
 
 ```sh
-$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && npm cache clean && npm install'
+$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && npm cache clean && npm install'
 ```
 
 Couldn't find preset "es2015"
@@ -120,7 +120,7 @@ use yarn instead of npm (somehow it managed to install all required dependencies
 
 ```sh
 $ rm package-lock.json
-$ rm -rf node-modules/
+$ rm -rf node-modules
 $ yarn install
 $ yarn start
 ```

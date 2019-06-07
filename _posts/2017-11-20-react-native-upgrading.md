@@ -21,7 +21,7 @@ categories: [react-native]
 NOTE:
 
 ```sh
-$ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
+$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && npm cache clean && npm install'
 ```
 
 unlink all packages
@@ -32,7 +32,7 @@ unlink all packages
   1. <https://github.com/npomfret/upgrading-react-native>
 
   ```sh
-  $ watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install
+  $ npm_reset
   $ rm -rf ~/.gradle/caches/*
   $ git clone git@github.com:npomfret/upgrading-react-native.git
   $ node upgrading-react-native/unlink.js package.json
@@ -57,7 +57,7 @@ unlink all packages
   ```
 
   ```sh
-  $ yarn_reset
+  $ npm_reset
   $ ruby unlink_all_packages.rb
   ```
 
@@ -83,7 +83,7 @@ upgrade with react-native-git-upgrade
 2. <https://facebook.github.io/react-native/blog/2016/12/05/easier-upgrades.html>
 
 ```sh
-$ yarn global add react-native-git-upgrade
+$ npm install -g react-native-git-upgrade
 $ react-native-git-upgrade
 ```
 
@@ -131,7 +131,7 @@ post-upgrade instructions
 -------------------------
 
 ```sh
-$ yarn_reset
+$ npm_reset
 $ react-native run-ios
 $ react-native run-android
 ```

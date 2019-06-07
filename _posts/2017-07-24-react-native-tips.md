@@ -115,7 +115,7 @@ _Info.plist_ or else `canOpenUrl` will always return `false`.
 install `react-native-app-link` package to handle it for you:
 
 ```sh
-$ yarn add react-native-app-link --save
+$ npm install react-native-app-link --save
 ```
 
 NOTE: still opening application in App Store doesn't work in emulator.

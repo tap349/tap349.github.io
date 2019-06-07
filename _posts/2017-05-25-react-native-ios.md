@@ -49,12 +49,6 @@ same considerations as for Android.
 $ npm start
 ```
 
-or
-
-```sh
-$ yarn start
-```
-
 ### run application in emulator
 
 ```sh

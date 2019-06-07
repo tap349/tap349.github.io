@@ -16,7 +16,7 @@ categories: [react-native]
 NOTE:
 
 ```sh
-$ alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && yarn cache clean && yarn install'
+$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules/ && npm cache clean && npm install'
 ```
 
 Couldn't find preset "es2015"
@@ -49,9 +49,9 @@ quick-and-dirty fix for both Android and iOS:
 - get that section back
 - restart packager - still no error
 
-even if `shallowequal` package is removed from filesystem and
-installed again the error no longer occurs - maybe the 'right'
-version of `shallowequal` package is cached somewhere?
+even if `shallowequal` package is removed from filesystem and installed again
+the error no longer occurs - maybe the 'right' version of `shallowequal` package
+is cached somewhere?
 
 NOTE: still the error might occur the next time emulator is run.
 
@@ -66,23 +66,16 @@ all in all IDK why this error occurs and how to fix it in general.
 
 1. <https://github.com/dashed/shallowequal/issues/11>
 2. <https://github.com/dashed/shallowequal/commit/f515936c8a790fbc225add864265b6c82881c9b1>
-3. <https://yarnpkg.com/en/docs/cli/upgrade>
 
-bug was fixed in v1.0.2 by moving Babel settings to _.babelrc_
-so that they are not consumed by RN packager by default.
+bug was fixed in v1.0.2 by moving Babel settings to _.babelrc_ so that they are
+not consumed by RN packager by default.
 
-`react-side-effect` is the only package in my project that depends on
-`shallowequal` package (according to _yarn.lock_) =>
-upgrade `react-side-effect` package to update its dependencies
-(including `shallowequal` package) to their latest version:
+`react-side-effect` is the only package that depends on `shallowequal` package
+(according to _package-lock.json_) => update `react-side-effect` to update its
+dependencies (including `shallowequal`) to their latest version:
 
 ```sh
-$ yarn upgrade react-side-effect
-...
-success Saved 3 new dependencies.
-├─ exenv@1.2.2
-├─ react-side-effect@1.1.3
-└─ shallowequal@1.0.2
+$ npm update react-side-effect
 ```
 
 React.Children.only expected to receive a single React element child
@@ -107,7 +100,7 @@ errors after upgrading RN to 0.45.1
 ### Cannot find module X
 
 ```sh
-$ yarn start
+$ npm start
 ...
 > node node_modules/react-native/local-cli/cli.js start
 
@@ -296,7 +289,7 @@ the error occurs sometimes after adding new icon or updating existing one.
 
 **solution**
 
-restart packager (`yarn start`) and reload application in emulator.
+restart packager (`npm start`) and reload application in emulator.
 
 errors after upgrading RN to 0.47.0
 -----------------------------------
@@ -484,7 +477,7 @@ errors after upgrading RN to 0.52.1
 ### Error: While resolving module `react-native-vector-icons/Octicons`
 
 ```sh
-$ yarn start
+$ npm start
 ...
 error: bundling failed: Error: While resolving module `react-native-vector-icons/Octicons`, the Haste package `react-native-vector-icons` was found. However the module `Octicons` could not be found within the package. Indeed, none of these files exist:
 
@@ -499,7 +492,7 @@ error: bundling failed: Error: While resolving module `react-native-vector-icons
 
 ```sh
 $ rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
-$ yarn start
+$ npm start
 ```
 
 it looks like this file is recreated after each application build so it
@@ -747,8 +740,8 @@ Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'.
 **solution**
 
 ```sh
-$ yarn upgrade react-native-sentry
-$ yarn_reset
+$ npm update react-native-sentry
+$ npm_reset
 ```
 
 upgrading `react-native-sentry` didn't help - cleaning cache

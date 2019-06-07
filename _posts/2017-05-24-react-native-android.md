@@ -237,12 +237,6 @@ NOTE: you may think of it as a Rails server but for RN application.
 $ npm start
 ```
 
-or
-
-```sh
-$ yarn start
-```
-
 ### start emulator using specific AVD
 
 ```sh
@@ -471,7 +465,7 @@ $ react-native run-android --variant release
 $ react-native log-android
 ```
 
-NOTE: it's not required to run `yarn start`:
+NOTE: it's not required to run `npm start`:
 
 > You can kill any running packager instances, all your framework and
 > JavaScript code is bundled in the APK's assets.
@@ -817,8 +811,8 @@ FAILURE: Build failed with an exception.
 for each package that fails to compile:
 
 - bump its version in _package.json_ (preferably to the latest one)
-- `yarn`
-- `yarn upgrade <package_name>`
+- `npm install`
+- `npm updated <package_name>`
 
 if it doesn't help, try to unlink/link failing package manually:
 
@@ -847,5 +841,5 @@ A problem occurred configuring project ':app'.
 I haven't installed new dependencies after rebase:
 
 ```
-$ yarn
+$ npm install
 ```

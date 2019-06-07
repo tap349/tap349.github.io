@@ -210,7 +210,7 @@ below for details).
 
 - run application in debug mode (default build configuration)
 
-  | Xcode: `Product` (menu) → `Scheme` → `Edit Scheme...`
+  | Xcode: `Product` (top menu) → `Scheme` → `Edit Scheme...`
   | `Run` (left menu) → `Info` (tab)
 
   - `Build Configuration` (combobox): `Debug`
@@ -220,7 +220,7 @@ below for details).
 
 - run application in release mode
 
-  | Xcode: `Product` (menu) → `Scheme` → `Edit Scheme...`
+  | Xcode: `Product` (top menu) → `Scheme` → `Edit Scheme...`
   | `Run` (left menu) → `Info` (tab)
 
   - `Build Configuration` (combobox): `Release`

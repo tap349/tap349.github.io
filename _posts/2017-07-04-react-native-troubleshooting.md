@@ -912,7 +912,7 @@ documentation (https://goo.gl/yEcRrU) for more information.
 
 disable `Network Inspect`:
 
-| Redux DevTools: RMB → `Disable Network Inspect` (menu)
+| Redux DevTools: RMB → `Disable Network Inspect`
 
 Loading dependency graph, done.
 -------------------------------

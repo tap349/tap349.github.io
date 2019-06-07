@@ -69,7 +69,7 @@ directory in Finder after launching React Native Debugger.
 
 ### record network log
 
-| Redux DevTools: RMB → `Enable Network Inspect` (menu)
+| Redux DevTools: RMB → `Enable Network Inspect`
 
 | Developer Tools: `Network` (tab) → `Record network log` (button)
 

@@ -20,10 +20,15 @@ installation
 2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
 3. <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
 
-install prerequisites and `react-native-cli`:
+> <https://facebook.github.io/react-native/docs/getting-started.html>
+>
+> Node, Watchman, JDK
+>
+> The React Native CLI
 
 ```sh
 $ brew install node watchman
+$ brew cask install java8
 $ npm install -g react-native-cli
 ```
 
@@ -58,6 +63,8 @@ packages must be installed manually (say, you might need different API level).
 
 API level 23 corresponds to Android 6.0 (Marshmallow).
 
+`sdkmanager` commands:
+
 - list all packages
 
   list all packages along with outdated packages (installed packages that have
@@ -67,24 +74,10 @@ API level 23 corresponds to Android 6.0 (Marshmallow).
   $ sdkmanager --list
   ```
 
-- install required packages
-
-  - Google APIs
-  - Android SDK Platform 23 (Android 6.0 (Marshmallow))
-  - Intel x86 Atom_64 System Image
-  - Google APIs Intel x86 Atom_64 System Image
-  - Android SDK Build-Tools 23.0.3
-  - Android SDK Platform-Tools (for `adb`)
-  - Android Emulator (for `emulator`)
+- install packages
 
   ```sh
-  $ sdkmanager 'add-ons;addon-google_apis-google-23'
-  $ sdkmanager 'platforms;android-23'
-  $ sdkmanager 'system-images;android-23;default;x86_64'
-  $ sdkmanager 'system-images;android-23;google_apis;x86_64'
-  $ sdkmanager 'build-tools;23.0.3'
-  $ sdkmanager 'platform-tools'
-  $ sdkmanager 'emulator'
+  $ sdkmanager 'PACKAGE_NAME'
   ```
 
   packages are updated if they are already installed.
@@ -99,18 +92,69 @@ API level 23 corresponds to Android 6.0 (Marshmallow).
 
 - uninstall specified packages
 
-  you might not need all mentioned packages when using Genymotion (say, system
-  images) but still some of them are required (like `platform-tools` for `adb`):
-
   ```sh
-  $ sdkmanager --uninstall 'add-ons;addon-google_apis-google-23'
-  $ sdkmanager --uninstall 'platforms;android-23'
-  $ sdkmanager --uninstall 'system-images;android-23;default;x86_64'
-  $ sdkmanager --uninstall 'system-images;android-23;google_apis;x86_64'
-  $ sdkmanager --uninstall 'build-tools;23.0.3'
-  $ sdkmanager --uninstall 'platform-tools'
-  $ sdkmanager --uninstall 'emulator'
+  $ sdkmanager --uninstall 'PACKAGE_NAME'
   ```
+
+you might not need all mentioned packages when using Genymotion (say, system
+images) but still some of them are required (like `platform-tools` for `adb`):
+
+- Google APIs
+- Android SDK Platform 23 (Android 6.0 (Marshmallow))
+- Intel x86 Atom_64 System Image
+- Google APIs Intel x86 Atom_64 System Image
+- Android SDK Build-Tools 23.0.3
+- Android SDK Platform-Tools (for `adb`)
+- Android Emulator (for `emulator`)
+
+```sh
+$ sdkmanager 'add-ons;addon-google_apis-google-23'
+$ sdkmanager 'platforms;android-23'
+$ sdkmanager 'system-images;android-23;default;x86_64'
+$ sdkmanager 'system-images;android-23;google_apis;x86_64'
+$ sdkmanager 'build-tools;23.0.3'
+$ sdkmanager 'platform-tools'
+$ sdkmanager 'emulator'
+```
+
+even though _$ANDROID_HOME/tools/_ folder contains `emulator` executable, still
+it requires `emulator` package to be installed (or else you'll get the very `Qt
+library not found` error).
+
+you can launch Android Emulator via any of these executables:
+
+- _$ANDROID_HOME/tools/emulator_ (I'll use this one for no particular reason)
+- _$ANDROID_HOME/emulator/emulator_
+
+#### Intel Hardware Accelerated Execution Manager (HAXM)
+
+1. <https://developer.android.com/studio/run/emulator-acceleration>
+2. <https://stackoverflow.com/a/36908316/3632318>
+
+```sh
+$ sdkmanager 'extras;intel;Hardware_Accelerated_Execution_Manager'
+```
+
+> <https://stackoverflow.com/a/36908316/3632318>
+>
+> Even though the SDK manager says "Installed" it actually means that the Intel
+> HAXM executable was downloaded. You will still need to run the installer from
+> the "extras" directory to get it installed.
+
+```sh
+$ cd $ANDROID_HOME/extras/intel/Hardware_Accelerated_Execution_Manager
+$ sudo ./silent_install.sh
+```
+
+check current HAXM version:
+
+```sh
+$ $ANDROID_HOME/tools/emulator -accel-check
+accel:
+0
+HAXM version 7.3.2 (4) is installed and usable.
+accel
+```
 
 ### create new AVD (Android Virtual Device)
 
@@ -329,9 +373,9 @@ debugging
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>
 
-NOTE: Developer Menu is available only if application is launched
-      via `react-native` (that is it's not available if you just start
-      AVD and open already installed application by yourself).
+NOTE: Developer Menu is available only if application is launched via
+      `react-native` (that is it's not available if you just start AVD
+      and open already installed application by yourself).
 
 ### print to device system log
 
@@ -488,6 +532,10 @@ Available Packages:
 $ sdkmanager --list --verbose
 ```
 
+***UPDATE (2019-06-07)***
+
+`sdkmanager` doesn't truncate package paths anymore.
+
 ### Qt library not found
 
 1. <https://stackoverflow.com/questions/40931254>
@@ -524,8 +572,8 @@ emulator directory but still you cannot rely on `PATH` - use absolute path:
 _~/.zshenv_:
 
 ```conf
-alias avd='$ANDROID_HOME/emulator/emulator -avd Nexus_5X_API_23_x86_64'
-# this still causes `Qt library not found`:
+alias avd='$ANDROID_HOME/tools/emulator -avd Nexus_5X_API_23_x86_64'
+# `Qt library not found` again:
 #alias avd='emulator -avd Nexus_5X_API_23_x86_64'
 ```
 

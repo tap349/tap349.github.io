@@ -88,8 +88,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - _.psql_history_
   - _.zsh_history_
 - install additional software (must be downloaded manually):
-  - Paragon Driver for Mac OS (see above)
-  - Adobe Lightroom 5 (latest version as of now - 5.7.1)
+  - Adobe Lightroom 5 (the latest version as of now - 5.7.1)
 
     <https://forums.adobe.com/thread/1639590>
 
@@ -98,26 +97,26 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
           (see report details for specific path that failed) and don't forget
           to update symlinks.
 
-  - TopTracker
-  - erlang-history (from github)
+  - GoPanda2
+  - Grammarly
+  - Paragon Driver for Mac OS (see above)
   - Tomighty
-
-    Preferences:
-      - General:
+    - Preferences:
+      - General (tab):
         - Show time in status bar: Minutes only
-      - Time:
+      - Time (tab):
         - [ ] Start next timer automatically
-      - Notifications:
+      - Notifications (tab):
         - Play tick tock sound during:
           - [ ] Pomodoro
-      - Hotkeys:
+      - Hotkeys (tab):
         - Start Pomodoro: `<C-D-p>` (displayed in qwerty: `<C-D-r>`)
         - Stop Pomodoro: `<C-D-s>` (displayed in qwerty: `<C-D-;>`)
-
-  - GoPanda2
+  - TopTracker
 
   NOTE: additional software is usually stored in _~/soft/_ to keep it all
         in a single place since it's not managed by any package manager.
+
 - copy other files from backup (to name a few):
   - _~/Pictures/Lightroom/_
   - _~/backup/_

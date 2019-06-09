@@ -113,7 +113,7 @@ $ npm run-script <bin_or_script>
 _~/.zshenv_:
 
 ```zsh
-alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && yarn cache clean && yarn install'
+alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && yarn install'
 ```
 
 ```sh

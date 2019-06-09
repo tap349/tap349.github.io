@@ -16,7 +16,7 @@ categories: [react-native]
 NOTE:
 
 ```sh
-$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && npm cache clean && npm install'
+$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && npm cache clean --force && npm install'
 ```
 
 Couldn't find preset "es2015"

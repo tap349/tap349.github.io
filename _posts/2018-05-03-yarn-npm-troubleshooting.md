@@ -41,7 +41,7 @@ one you specified in _package.json_) is resolved over and over again.
 
 **solution**
 
-keep npm cache:
+clean npm cache:
 
 ```sh
 $ npm cache clean --force

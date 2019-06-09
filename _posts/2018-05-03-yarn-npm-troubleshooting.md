@@ -30,3 +30,20 @@ error Found incompatible module
 ```sh
 $ yarn --ignore-engines
 ```
+
+npm doesn't install the version of dependency from package-lock.json
+--------------------------------------------------------------------
+
+this can happen if you tried to install that depedency explicitly beforehand
+(say, by adding it to `dependencies` or `devDependencies` in _package.json_)
+but uninstalled it in the end. still incorrect version of that depedency (the
+one you specified in _package.json_) is resolved over and over again.
+
+**solution**
+
+keep npm cache:
+
+```sh
+$ npm cache clean --force
+$ npm install
+```

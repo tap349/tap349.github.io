@@ -13,7 +13,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-see [Yarn/npm - Tips]({% post_url 2017-11-19-yarn-npm-tips %}) for `npm_reset`.
+see [npm - Tips]({% post_url 2017-11-19-npm-tips %}) for `npm_reset`.
 
 Couldn't find preset "es2015"
 -----------------------------

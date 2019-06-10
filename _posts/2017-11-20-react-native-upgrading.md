@@ -21,7 +21,7 @@ react-native-git-upgrade
 3. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
 4. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
 
-see [Yarn/npm - Tips]({% post_url 2017-11-19-yarn-npm-tips %}) for `npm_reset`.
+see [npm - Tips]({% post_url 2017-11-19-npm-tips %}) for `npm_reset`.
 
 ### unlink all packages
 

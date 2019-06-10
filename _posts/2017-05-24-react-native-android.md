@@ -225,7 +225,7 @@ NOTE: emulator for Android is called Android Emulator (will be referred to as
 $ rails server
 ```
 
-### start packager (JS server) (optional)
+### start packager (JS server)
 
 if you don't start it manually it will be started by `react-native run-android`
 automatically in a new Terminal window. IMO it's better to do it manually in a
@@ -238,6 +238,10 @@ $ react-native start
 ```
 
 it's just RN wrapper for `npm start` command.
+
+***UPDATE (2019-06-10)***
+
+it's called Metro (Metro Bundler, JavaScript bundler for React Native) now.
 
 ### start emulator using specific AVD
 

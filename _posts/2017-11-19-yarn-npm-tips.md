@@ -117,9 +117,9 @@ $ npm run-script <bin_or_script>
 > 3. Reset Metro Bundler cache: `rm -rf $TMPDIR/react-*` or `npm start -- --reset-cache`.
 > 4. Remove haste cache: `rm -rf $TMPDIR/haste-map-react-native-packager-*`.
 
-_~/.zshenv_:
-
 ```zsh
+# _~/.zshenv_
+
 alias npm_reset='\
   watchman watch-del-all &&
   rm -rf "$TMPDIR/react-native-packager-cache-*" &&
@@ -135,10 +135,8 @@ $ npm_reset
 $ npm start -- --reset-cache
 ```
 
-it might be necessary to clean cache, say, when build fails.
-
-if it's necessary to reset cache only, using `npm start --reset-cache` might
-suffice - try it first.
+it might be necessary to clean cache, say, when build fails. in many cases it's
+enough just to reset cache - so try `npm start --reset-cache` command first.
 
 (how to) update a package
 -------------------------

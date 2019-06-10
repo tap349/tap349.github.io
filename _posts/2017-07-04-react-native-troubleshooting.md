@@ -971,7 +971,7 @@ NOTE: 0.43.1 is the latest version at the time of writing.
 $ react-native run-android
 ...
 > Task :app:compileDebugJavaWithJavac FAILED
-/Users/tap/dev/compleader/iceperkapp/android/app/src/main/java/com/iceperkapp/MainApplication.java:45: error: constructor RNSentryPackage in class RNSentryPac
+/Users/tap/dev/iceperkapp/android/app/src/main/java/com/iceperkapp/MainApplication.java:45: error: constructor RNSentryPackage in class RNSentryPac
 kage cannot be applied to given types;
             new RNSentryPackage(MainApplication.this),
             ^
@@ -1017,4 +1017,182 @@ D8: Cannot fit requested classes in a single dex file (# methods: 66744 > 65536)
       versionName "3.17"
       // ...
   }
+```
+
+### The Google Mobile Ads SDK was initialized incorrectly
+
+emulator:
+
+```
+Unfortunately, MyApp has stopped
+```
+
+```
+$ adb logcat
+...
+06-08 01:19:30.203  3738  3738 E AndroidRuntime: java.lang.RuntimeException: Unable to get provider com.google.android.gms.ads.MobileAdsInitProvider: java.lang.IllegalStateException:
+06-08 01:19:30.203  3738  3738 E AndroidRuntime:
+06-08 01:19:30.203  3738  3738 E AndroidRuntime: ******************************************************************************
+06-08 01:19:30.203  3738  3738 E AndroidRuntime: * The Google Mobile Ads SDK was initialized incorrectly. AdMob publishers    *
+06-08 01:19:30.203  3738  3738 E AndroidRuntime: * should follow the instructions here: https://goo.gl/fQ2neu to add a valid  *
+06-08 01:19:30.203  3738  3738 E AndroidRuntime: * App ID inside the AndroidManifest. Google Ad Manager publishers should     *
+06-08 01:19:30.203  3738  3738 E AndroidRuntime: * follow instructions here: https://goo.gl/h17b6x.                           *
+06-08 01:19:30.203  3738  3738 E AndroidRuntime: ******************************************************************************
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/53013453/3632318>
+2. <https://developers.google.com/admob/android/quick-start#update_your_androidmanifestxml>
+
+```diff
+  <!-- android/app/src/main/AndroidManifest.xml -->
+
+  <manifest>
+      <application>
++         <meta-data
++             android:name="com.google.android.gms.ads.APPLICATION_ID"
++             android:value="ca-app-pub-9176480316001296~1177893459"/>
+      </application>
+  </manifest>
+```
+
+### Invalid application ID
+
+emulator:
+
+```
+Unfortunately, MyApp has stopped
+```
+
+```
+$ adb logcat
+...
+06-08 10:37:17.754  4378  4378 E AndroidRuntime: java.lang.RuntimeException: Unable to get provider com.google.android.gms.ads.MobileAdsInitProvider: java.lang.IllegalStateException:
+06-08 10:37:17.754  4378  4378 E AndroidRuntime:
+06-08 10:37:17.754  4378  4378 E AndroidRuntime: ******************************************************************************
+06-08 10:37:17.754  4378  4378 E AndroidRuntime: * Invalid application ID. Follow instructions here: https://goo.gl/fQ2neu to *
+06-08 10:37:17.754  4378  4378 E AndroidRuntime: * find your app ID.                                                          *
+06-08 10:37:17.754  4378  4378 E AndroidRuntime: ******************************************************************************
+```
+
+**solution**
+
+make sure to replace slash with tilde in AdMob App ID:
+
+```diff
+  <!-- android/app/src/main/AndroidManifest.xml -->
+
+  <manifest>
+      <application>
+          <meta-data
++             android:name="com.google.android.gms.ads.APPLICATION_ID"
+-             android:value="ca-app-pub-9176480316001296/1177893459"/>
++             android:value="ca-app-pub-9176480316001296~1177893459"/>
+      </application>
+  </manifest>
+```
+
+# Plugin/Preset files are not allowed to export objects, only functions.
+
+```
+$ react-native start
+...
+Loading dependency graph, done.
+error: bundling failed: Error: Plugin/Preset files are not allowed to export objects, only functions. In /Users/tap/dev/iceperkapp2/node_modules/babel-preset-flow/lib/index.js
+    at createDescriptor (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:178:11)
+    at /Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:109:50
+    at Array.map (<anonymous>)
+    at createDescriptors (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:109:29)
+    at createPresetDescriptors (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:101:10)
+    at presets (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:47:19)
+    at mergeChainOpts (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-chain.js:320:26)
+    at /Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-chain.js:283:7
+    at mergeExtendsChain (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-chain.js:299:21)
+```
+
+**solution**
+
+1. <https://github.com/facebook/flow/issues/7046#issuecomment-443397899>
+
+try updating corresponding npm package:
+
+```
+$ npm uninstall babel-preset-flow
+$ npm install --save-dev @babel/preset-flow
+```
+
+```diff
+  // babel.config.js
+
+  module.exports = {
+-   presets: ['flow']
++   presets: ['@babel/preset-flow']
+  };
+```
+
+### The 'decorators' plugin requires a 'decoratorsBeforeExport' option, whose value must be a boolean
+
+```sh
+$ react-native start
+...
+error: bundling failed: Error: The 'decorators' plugin requires a 'decoratorsBeforeExport' option, whose value must be a boolean. If you are migrating from Babylon/Babel 6 or want to use the old decorators proposal, you should use the 'decorators-legacy' plugin instead of 'decorators'.
+    at validatePlugins (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/parser/lib/index.js:6093:13)
+    at getParser (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/parser/lib/index.js:11286:5)
+    at parse (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/parser/lib/index.js:11256:22)
+    at parser (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)
+    at normalizeFile (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)
+    at runSync (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transformation/index.js:44:43)
+    at transformSync (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transform.js:43:38)
+    at Object.transform (/Users/tap/dev/compleader/iceperkapp2/node_modules/metro-react-native-babel-transformer/src/index.js:202:20)
+```
+
+**solution**
+
+1. <https://react-redux.js.org/introduction/basic-tutorial#connecting-the-components>
+
+> <https://www.npmjs.com/package/babel-plugin-transform-decorators-legacy#babel--7x>
+>
+> This plugin is specifically for Babel 6.x. If you're using Babel 7, this plugin
+> is not for you. Babel 7's @babel/plugin-proposal-decorators officially supports
+> the same logic that this plugin has, but integrates better with Babel 7's other
+> plugins.
+
+but after having tried all possible combinations of `decoratorsBeforeExport` and
+`legacy` options I still couldn't make new decorators work. so:
+
+> <https://github.com/reduxjs/react-redux/issues/1162#issuecomment-453847059>
+>
+> We do not recommend using connect as a decorator, because the spec is unstable.
+
+=> it's easier not to use decorators at all (and remove all related packages),
+the more especially as it's a recommended approach.
+
+### TypeError: undefined is not an object (evaluating 'props.getItem')
+
+```
+$ adb logcat
+...
+06-10 00:18:39.077 10262 10367 E ReactNativeJS: TypeError: undefined is not an object (evaluating 'props.getItem')
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:
+06-10 00:18:39.077 10262 10367 E ReactNativeJS: This error is located at:
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in FlatList (at YellowBoxList.js:87)
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in RCTView (at View.js:45)
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in View (at YellowBoxList.js:79)
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in YellowBoxList (at YellowBox.js:104)
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in YellowBox (at AppContainer.js:93)
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in RCTView (at View.js:45)
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in View (at AppContainer.js:115)
+06-10 00:18:39.077 10262 10367 E ReactNativeJS:     in AppContainer (at renderApplication.js:34)
+06-10 00:18:39.090 10262 10367 E ReactNativeJS: TypeError: undefined is not an object (evaluating 'props.getItem')
+```
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/21154#issuecomment-439348692>
+
+in this case and in case of many other weird JS errors first try resetting cache:
+
+```
+$ react-native start --reset-cache
 ```

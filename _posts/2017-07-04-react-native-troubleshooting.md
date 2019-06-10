@@ -918,3 +918,103 @@ I'm not sure but maybe reinstalling Watchman helped to resolve the issue:
 $ brew uninstall watchman
 $ brew install watchman
 ```
+
+errors after upgrading RN from 0.52.1 to 0.59.9
+-----------------------------------------------
+
+### react-native-push-notification: Appears to be a git repo or submodule.
+
+```
+$ npm install
+...
+npm ERR! path /Users/tap/dev/iceperkapp/node_modules/react-native-push-notification
+npm ERR! code EISGIT
+npm ERR! git /Users/tap/dev/iceperkapp/node_modules/react-native-push-notification: Appears to be a git repo or submodule.
+npm ERR! git     /Users/tap/dev/iceperkapp/node_modules/react-native-push-notification
+npm ERR! git Refusing to remove it. Update manually,
+npm ERR! git or move it out of the way first.
+```
+
+**solution**
+
+1. <https://github.com/zo0r/react-native-push-notification/issues/1057>
+
+```sh
+$ rm -rf node_modules/*/.git
+```
+
+### incompatible types: ReadableArray cannot be converted to ReadableNativeArray
+
+```sh
+$ react-native run-android
+...
+> Task :react-native-sentry:compileDebugJavaWithJavac FAILED
+/Users/tap/dev/iceperkapp/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java:251: error: incompatible types: Read
+ableArray cannot be converted to ReadableNativeArray
+            addExceptionInterface(eventBuilder, exception.getString("type"), exception.getString("value"), stacktrace.getArray("frames"));
+                                                                                                                              ^
+Note: /Users/tap/dev/iceperkapp/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java uses or overrides a deprecated
+ API.
+```
+
+**solution**
+
+```sh
+$ npm install --save react-native-sentry@0.43.1
+```
+
+NOTE: 0.43.1 is the latest version at the time of writing.
+
+### constructor RNSentryPackage in class RNSentryPackage cannot be applied to given types
+
+```sh
+$ react-native run-android
+...
+> Task :app:compileDebugJavaWithJavac FAILED
+/Users/tap/dev/compleader/iceperkapp/android/app/src/main/java/com/iceperkapp/MainApplication.java:45: error: constructor RNSentryPackage in class RNSentryPac
+kage cannot be applied to given types;
+            new RNSentryPackage(MainApplication.this),
+            ^
+  required: no arguments
+  found: MainApplication
+  reason: actual and formal argument lists differ in length
+1 error
+```
+
+**solution**
+
+1. <https://github.com/getsentry/react-native-sentry/issues/490#issuecomment-438680937>
+
+```diff
+  // android/app/src/main/java/com/iceperkapp/MainApplication.java
+
+- new RNSentryPackage(MainApplication.this),
++ new RNSentryPackage(),
+```
+
+### Cannot fit requested classes in a single dex file
+
+```sh
+$ react-native run-android
+...
+> Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug FAILED
+D8: Cannot fit requested classes in a single dex file (# methods: 66744 > 65536)
+```
+
+**solution**
+
+1. <https://developer.android.com/studio/build/multidex>
+
+```diff
+  // android/app/build.gradle
+
+  defaultConfig {
+      applicationId "com.iceperkapp"
+      minSdkVersion rootProject.ext.minSdkVersion
+      targetSdkVersion rootProject.ext.targetSdkVersion
++     multiDexEnabled true
+      versionCode 97
+      versionName "3.17"
+      // ...
+  }
+```

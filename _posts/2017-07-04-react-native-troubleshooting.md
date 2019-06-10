@@ -13,11 +13,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-NOTE:
-
-```sh
-$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && npm cache clean --force && npm install'
-```
+see [Yarn/npm - Tips]({% post_url 2017-11-19-yarn-npm-tips %}) for `npm_reset`.
 
 Couldn't find preset "es2015"
 -----------------------------
@@ -100,7 +96,7 @@ errors after upgrading RN to 0.45.1
 ### Cannot find module X
 
 ```sh
-$ npm start
+$ react-native start
 ...
 > node node_modules/react-native/local-cli/cli.js start
 
@@ -289,7 +285,7 @@ the error occurs sometimes after adding new icon or updating existing one.
 
 **solution**
 
-restart packager (`npm start`) and reload application in emulator.
+restart packager (`react-native start`) and reload application in emulator.
 
 errors after upgrading RN to 0.47.0
 -----------------------------------
@@ -477,7 +473,7 @@ errors after upgrading RN to 0.52.1
 ### Error: While resolving module `react-native-vector-icons/Octicons`
 
 ```sh
-$ npm start
+$ react-native start
 ...
 error: bundling failed: Error: While resolving module `react-native-vector-icons/Octicons`, the Haste package `react-native-vector-icons` was found. However the module `Octicons` could not be found within the package. Indeed, none of these files exist:
 
@@ -492,7 +488,7 @@ error: bundling failed: Error: While resolving module `react-native-vector-icons
 
 ```sh
 $ rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
-$ npm start
+$ react-native start
 ```
 
 it looks like this file is recreated after each application build so it
@@ -910,7 +906,7 @@ disable `Network Inspect`:
 Loading dependency graph, done.
 -------------------------------
 
-`npm start` hangs after `Loading dependency graph, done.` message.
+`react-native start` hangs after `Loading dependency graph, done.` message.
 
 **solution**
 

@@ -46,7 +46,7 @@ $ rails server
 same considerations as for Android.
 
 ```sh
-$ npm start
+$ react-native start
 ```
 
 ### run application in emulator

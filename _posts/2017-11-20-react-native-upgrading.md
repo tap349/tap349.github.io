@@ -18,11 +18,7 @@ categories: [react-native]
 3. <https://github.com/facebook/react-native/issues/12261#issuecomment-284047679>
 4. <https://github.com/facebook/react-native/issues/12261#issuecomment-286355163>
 
-NOTE:
-
-```sh
-$ alias npm_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && npm cache clean --force && npm install'
-```
+see [Yarn/npm - Tips]({% post_url 2017-11-19-yarn-npm-tips %}) for `npm_reset`.
 
 unlink all packages
 -------------------

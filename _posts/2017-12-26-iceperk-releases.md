@@ -264,7 +264,7 @@ Execution failed for task ':app:bundleReleaseJsAndAssets'.
 reset cache:
 
 ```sh
-$ yarn start --reset-cache
+$ react-native start --reset-cache
 ```
 
 ### [iOS] uploaded build doesn't appear on `TestFlight` tab

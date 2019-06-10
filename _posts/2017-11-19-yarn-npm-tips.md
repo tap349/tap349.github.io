@@ -110,21 +110,35 @@ $ npm run-script <bin_or_script>
 
 1. <https://gist.github.com/jarretmoses/c2e4786fd342b3444f3bc6beff32098d>
 
+> message from `npm start`:
+>
+> 1. Clear watchman watches: `watchman watch-del-all`.
+> 2. Delete the `node_modules` folder: `rm -rf node_modules && npm install`.
+> 3. Reset Metro Bundler cache: `rm -rf $TMPDIR/react-*` or `npm start -- --reset-cache`.
+> 4. Remove haste cache: `rm -rf $TMPDIR/haste-map-react-native-packager-*`.
+
 _~/.zshenv_:
 
 ```zsh
-alias yarn_reset='watchman watch-del-all && rm -rf "$TMPDIR/react-*" && rm -rf node_modules && yarn install'
+alias npm_reset='\
+  watchman watch-del-all &&
+  rm -rf "$TMPDIR/react-native-packager-cache-*" &&
+  rm -rf "$TMPDIR/metro-bundler-cache-*" &&
+  rm -rf node_modules &&
+  npm cache clean --force &&
+  npm install
+  '
 ```
 
 ```sh
-$ yarn_reset
-$ yarn start --reset-cache
+$ npm_reset
+$ npm start -- --reset-cache
 ```
 
 it might be necessary to clean cache, say, when build fails.
 
-if it's necessary to reset cache only, using `yarn start --reset-cache`
-might suffice - try it first.
+if it's necessary to reset cache only, using `npm start --reset-cache` might
+suffice - try it first.
 
 (how to) update a package
 -------------------------

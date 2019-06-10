@@ -234,8 +234,10 @@ separate iTerm2 tab instead of having an extra open window.
 NOTE: you may think of it as a Rails server but for RN application.
 
 ```sh
-$ npm start
+$ react-native start
 ```
+
+it's just RN wrapper for `npm start` command.
 
 ### start emulator using specific AVD
 
@@ -465,10 +467,10 @@ $ react-native run-android --variant release
 $ react-native log-android
 ```
 
-NOTE: it's not required to run `npm start`:
+NOTE: it's not required to run `react-native start`:
 
-> You can kill any running packager instances, all your framework and
-> JavaScript code is bundled in the APK's assets.
+> You can kill any running packager instances, all your framework and JavaScript
+> code is bundled in the APK's assets.
 
 troubleshooting
 ---------------

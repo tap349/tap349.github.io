@@ -149,10 +149,16 @@ if Yarn/npm refuses to update a package (maybe it's a hack):
 - change package version in _package.json_
 - `yarn install`/`npm install`
 
-don't use peer dependencies
----------------------------
+use peer dependencies in npm packages only
+------------------------------------------
 
 1. <https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/>
+2. <https://stackoverflow.com/a/34645112/3632318>
+
+> <https://stackoverflow.com/a/34645112/3632318>
+>
+> peer dependencies tell npm: I need this package, but I need the version that
+> is part of the project, not some version private to my module.
 
 do I need to use peer dependencies if I am not npm package author?
 
@@ -164,8 +170,8 @@ say, _node_modules/react-native-push-notification/package.json_:
 },
 ```
 
-so `react-native-push-notification` peer-depends on `react-native` -
-what would happen if I use `react-native` of unsupported version:
+so `react-native-push-notification` peer-depends on `react-native` - what would
+happen if I use `react-native` of unsupported version:
 
 1. as a depedency of my application?
 2. as a peer dependency of my application?
@@ -209,21 +215,16 @@ what would happen if I use `react-native` of unsupported version:
   npm WARN react-native-push-notification@3.0.1 requires a peer of react-native@>=0.33 but none was installed.
   ```
 
-  => `react-native` is not installed at all - even I remove
-  `react-native-push-notification` from the list of dependencies
-  (no packages depend on specific version of `react-native` any more).
+  => `react-native` is not installed - even if `react-native-push-notification`
+  package is removed from the list of dependencies.
 
 TL;DR:
 
-don't use peer dependencies if you are not npm package author -
-they are not automatically installed:
+don't use peer dependencies if you are not npm package author - they are not
+automatically installed by npm (since version 3):
 
-> peer dependencies are not automatically installed unless
-> a dependent package explicitly depends on the peer package itself
+> peer dependencies are not automatically installed unless a dependent package
+> explicitly depends on the peer package itself
 
-so if you application depends on `react-native` package,
-add it to `depedencies` along with its version.
-
-another package (say, `react-native-foo`) that has `react-native`
-as a peer dependency will be installed only if version constraints
-of peer dependency are met by currently installed `react-native`.
+so if you application depends on `react-native` package, add it to `depedencies`
+along with its version.

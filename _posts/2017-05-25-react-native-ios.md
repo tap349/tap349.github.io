@@ -648,3 +648,19 @@ use it as a global platform for your project in _ios/Podfile_:
 - platform :ios, '8.0'
 + platform :ios, '9.0'
 ```
+
+### Could not find iPhone 6 simulator
+
+```sh
+$ react-native run-ios
+Scanning folders for symlinks in /Users/tap/dev/compleader/iceperkapp/node_modules (13ms)
+Found Xcode workspace iceperkapp.xcworkspace
+
+Could not find iPhone 6 simulator
+```
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/23282>
+
+upgrade React Native.

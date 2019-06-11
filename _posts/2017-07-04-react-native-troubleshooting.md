@@ -523,37 +523,8 @@ $ react-native run-ios
 
 **solution**
 
-reinstall CocoaPods - see instructions in solution for `<PBXGroup ...> attempted
-to initialize an object with an unknown UUID` issue.
-
-### <PBXGroup ...> attempted to initialize an object with an unknown UUID
-
-```
-$ pod install
-...
-[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `EEE09AF85CBC4DA8A7C4E137` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
-
-[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `9DEE1362370047E5817C99E0` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
-...
-```
-
-**solution**
-
-1. <https://github.com/CocoaPods/CocoaPods/issues/1822#issuecomment-304815540>
-
-reinstall CocoaPods:
-
-```sh
-$ cd ios/
-$ pod deintegrate
-$ pod install
-```
-
-***UPDATE (2019-06-11)***
-
-these warnings were gone after installing pods because `pod install` command
-updates _ios/iceperkapp.xcodeproj/project.pbxproj_ fixing or removing unknown
-UUIDs along the way.
+install pods (or reinstall CocoaPods if it doesn't help) - see the tip from
+[React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
 
 ### object file (.../libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
 

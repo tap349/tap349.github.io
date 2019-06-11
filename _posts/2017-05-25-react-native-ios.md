@@ -109,7 +109,18 @@ otherwise actual paddings, margins, etc. might be different from specified ones.
 tips
 ----
 
-### change screen resolution (scale) in emulator
+### (how to) reinstall CocoaPods
+
+remove CocoaPods from Xcode project and install pods again:
+
+```sh
+$ cd ios
+$ pod deintegrate
+$ pod repo update
+$ pod install
+```
+
+### (how to) change screen resolution (scale) in emulator
 
 1. <https://stackoverflow.com/questions/10481412>
 
@@ -127,20 +138,24 @@ or
 
 also there must be a way to change default scale by setting a value for
 appropriate preference key via `defaults write` as described in the link
-above - but it didn't work for me (probably because Apple changes these keys
-all the time).
+above - but it didn't work for me (probably because Apple changes these
+keys all the time).
 
-### run another simulator
+### (how to) run another simulator
 
-running another simulator means using another iPhone model -
-not another iOS version.
+running another simulator means using another iPhone model - not another iOS
+version.
 
 by default iPhone 6 simulator is used.
 
+***UPDATE (2019-06-11)***
+
+by default iPhone X simulator is used.
+
 #### switch from command line
 
-- close currently running simulator - or else it will be
-  used even if simulator of another iPhone model is started
+- close currently running simulator - or else it will be used even if simulator
+  of another iPhone model is started
 - `$ react-native run-ios --simulator 'iPhone 5'`
 
 NOTE: it's necessary to configure new simulator separately
@@ -152,14 +167,14 @@ NOTE: it's necessary to configure new simulator separately
 
 - `$ react-native run-ios` (reinstall application)
 
-### upload file to emulator
+### (how to) upload file to emulator
 
 just drag any file from Finder onto emulator window - if it's an image it will
 be automatically copied to Photos on iOS (I didn't experiment with other types
 of files). moreover it will be copied to Photos regardless of what application
 is currently opened.
 
-### add iPhone 4s simulator
+### (how to) add iPhone 4s simulator
 
 iPhone 4s model is not available by default - add it manually:
 
@@ -170,7 +185,7 @@ iPhone 4s model is not available by default - add it manually:
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
 - create simulator for iPhone 4s using downloaded runtime
 
-### delete all application data
+### (how to) delete all application data
 
 remove application inside emulator and install it again.
 
@@ -499,6 +514,29 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 > Since this is using Cocopods you need to use the workspace instead for
 > everything to get resolved correctly.
 
+### <PBXGroup ...> attempted to initialize an object with an unknown UUID
+
+```
+$ pod install
+...
+[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `EEE09AF85CBC4DA8A7C4E137` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
+
+[!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `9DEE1362370047E5817C99E0` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
+...
+```
+
+**solution**
+
+1. <https://github.com/CocoaPods/CocoaPods/issues/1822#issuecomment-304815540>
+
+reinstall CocoaPods - see the tip.
+
+***UPDATE (2019-06-11)***
+
+these warnings were gone after installing pods because `pod install` command
+updates _ios/iceperkapp.xcodeproj/project.pbxproj_ fixing or removing unknown
+UUIDs along the way.
+
 ### CocoaPods could not find compatible versions for pod "react-native-contacts"
 
 ```sh
@@ -545,9 +583,7 @@ pods were added to _ios/Podfile_ after linking corresponding libraries:
   end
 ```
 
-remove `iceperkapp-tvOSTests` and `iceperkappTests` targets from _ios/Podfile_
-altogether and try to install pods again.
-
+remove `iceperkapp-tvOSTests` and `iceperkappTests` targets from _ios/Podfile_.
 
 ### CocoaPods could not find compatible versions for pod "Google-Mobile-Ads-SDK"
 
@@ -576,7 +612,6 @@ Note: as of CocoaPods 1.0, `pod repo update` does not happen on `pod install` by
 
 ```sh
 $ pod repo update
-$ pod install
 ```
 
 ### CocoaPods could not find compatible versions for pod "RNCAsyncStorage"

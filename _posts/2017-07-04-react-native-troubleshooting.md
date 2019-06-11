@@ -15,7 +15,7 @@ categories: [react-native]
 
 see [npm - Tips]({% post_url 2017-11-19-npm-tips %}) for `npm_reset`.
 
-before googling any error first try resetting cache:
+try resetting cache first before googling the error:
 
 ```
 $ react-native start --reset-cache
@@ -523,8 +523,8 @@ $ react-native run-ios
 
 **solution**
 
-install pods (or reinstall CocoaPods if it doesn't help) - see the tip from
-[React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
+see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the
+tip on how to fix CocoaPods.
 
 ### object file (.../libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
 
@@ -673,8 +673,8 @@ $ npm update react-native-sentry
 $ npm_reset
 ```
 
-upgrading `react-native-sentry` didn't help - cleaning cache
-and reinstalling all node modules fixed the issue.
+upgrading `react-native-sentry` didn't help - cleaning cache and reinstalling
+all node modules fixed the issue.
 
 ### production release crashes on startup (in both Android and iOS devices)
 

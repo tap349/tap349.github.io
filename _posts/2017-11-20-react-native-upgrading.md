@@ -121,10 +121,9 @@ $ react-native link
 NOTE: this command didn't link all packages when upgrading to RN 0.52.1 -
       still it might be necessary to link some packages manually.
 
-### reinstall CocoaPods
+### fix CocoaPods
 
-I had to reinstall CocoaPods due to several CocoaPods related issues - see
-[React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %}).
+see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
 
 ### post-upgrade instructions
 
@@ -185,14 +184,9 @@ tips:
 - try to add new lines - not to delete existing ones
 - replace modified binary files too
 
-### update CocoaPods
+### fix CocoaPods
 
-```sh
-$ gem install cocoapods
-$ pod repo update
-$ cd ios
-$ pod install
-```
+see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
 
 ### try to build and start your application
 

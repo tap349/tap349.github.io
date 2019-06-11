@@ -109,11 +109,16 @@ otherwise actual paddings, margins, etc. might be different from specified ones.
 tips
 ----
 
-### (how to) reinstall CocoaPods
+### (how to) fix CocoaPods
 
-remove CocoaPods from Xcode project and install pods again:
+`pod deintegrate` command removes CocoaPods from Xcode project - it's not
+necessary to fix the problem in most cases.
+
+=> try installing pods with `pod install` command first. remove CocoaPods
+if it doesn't help only.
 
 ```sh
+$ gem install cocoapods
 $ cd ios
 $ pod deintegrate
 $ pod repo update
@@ -529,18 +534,21 @@ $ pod install
 
 1. <https://github.com/CocoaPods/CocoaPods/issues/1822#issuecomment-304815540>
 
-reinstall CocoaPods - see the tip.
-
-***UPDATE (2019-06-11)***
-
-these warnings were gone after installing pods because `pod install` command
+these warnings might be gone after running `pod install` command because it
 updates _ios/iceperkapp.xcodeproj/project.pbxproj_ fixing or removing unknown
-UUIDs along the way.
+UUIDs along the way:
+
+```
+$ pod install
+```
+
+see also the tip on how to fix CocoaPods if it doesn't help.
 
 ### CocoaPods could not find compatible versions for pod "react-native-contacts"
 
 ```sh
-$ cd ios && pod install
+$ cd ios
+$ pod install
 ...
 [!] CocoaPods could not find compatible versions for pod "react-native-contacts":
   In Podfile:
@@ -588,7 +596,8 @@ remove `iceperkapp-tvOSTests` and `iceperkappTests` targets from _ios/Podfile_.
 ### CocoaPods could not find compatible versions for pod "Google-Mobile-Ads-SDK"
 
 ```sh
-$ cd ios && pod install
+$ cd ios
+$ pod install
 ...
 Analyzing dependencies
 [!] CocoaPods could not find compatible versions for pod "Google-Mobile-Ads-SDK":
@@ -617,7 +626,8 @@ $ pod repo update
 ### CocoaPods could not find compatible versions for pod "RNCAsyncStorage"
 
 ```sh
-$ cd ios && pod install
+$ cd ios
+$ pod install
 ...
 Fetching podspec for `RNCAsyncStorage` from `../node_modules/@react-native-community/async-storage`
 [!] CocoaPods could not find compatible versions for pod "RNCAsyncStorage":

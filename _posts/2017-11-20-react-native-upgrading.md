@@ -105,6 +105,13 @@ $ kin ios/iceperkapp.xcodeproj/project.pbxproj
 
 NOTE: install Kin with `pip2` - not `pip3`.
 
+if Python interpreter is not found - reinstall `kin`:
+
+```sh
+$ pip2 uninstall kin
+$ pip2 install kin
+```
+
 ### link all packages
 
 ```sh

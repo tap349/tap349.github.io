@@ -202,8 +202,8 @@ $ react-native start
 $ react-native run-android
 ```
 
-most likely there will be lots of errors because many npm packages got broken
-because of new versions of RN, Babel, Gradle, whatever.
+most likely there will be lots of errors: many npm packages got broken because
+of new versions of RN, Babel, Gradle, whatever.
 
 see [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %}),
 `errors after upgrading RN from 0.52.1 to 0.59.9` section.

@@ -241,7 +241,7 @@ it's just RN wrapper for `npm start` command.
 
 ***UPDATE (2019-06-10)***
 
-it's called Metro (Metro Bundler, JavaScript bundler for React Native) now.
+it's called Metro (Metro Bundler, `JavaScript bundler for React Native`) now.
 
 ### start emulator using specific AVD
 

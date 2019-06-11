@@ -663,4 +663,4 @@ Could not find iPhone 6 simulator
 
 1. <https://github.com/facebook/react-native/issues/23282>
 
-upgrade React Native.
+upgrade RN.

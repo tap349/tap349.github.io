@@ -121,7 +121,7 @@ $ react-native link
 NOTE: this command didn't link all packages when upgrading to RN 0.52.1 -
       still it might be necessary to link some packages manually.
 
-### fix CocoaPods
+### repair CocoaPods
 
 see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
 
@@ -184,7 +184,7 @@ tips:
 - try to add new lines - not to delete existing ones
 - replace modified binary files too
 
-### fix CocoaPods
+### repair CocoaPods
 
 see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
 

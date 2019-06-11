@@ -109,7 +109,7 @@ otherwise actual paddings, margins, etc. might be different from specified ones.
 tips
 ----
 
-### (how to) fix CocoaPods
+### (how to) repair CocoaPods
 
 `pod deintegrate` command removes CocoaPods from Xcode project - it's not
 necessary to fix the problem in most cases.
@@ -542,7 +542,7 @@ UUIDs along the way:
 $ pod install
 ```
 
-see also the tip on how to fix CocoaPods if it doesn't help.
+see the tip on how to repair CocoaPods if it doesn't help.
 
 ### CocoaPods could not find compatible versions for pod "react-native-contacts"
 

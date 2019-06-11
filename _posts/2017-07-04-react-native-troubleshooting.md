@@ -524,7 +524,7 @@ $ react-native run-ios
 **solution**
 
 see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the
-tip on how to fix CocoaPods.
+tip on how to repair CocoaPods.
 
 ### object file (.../libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
 

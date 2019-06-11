@@ -497,8 +497,8 @@ $ rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
 $ react-native start
 ```
 
-it looks like this file is recreated after each application build so it
-makes sense to add this command to `postinstall` script in _package.json_:
+it looks like this file is recreated after each application build so it makes
+sense to add this command to `postinstall` script in _package.json_:
 
 ```diff
   "scripts": {

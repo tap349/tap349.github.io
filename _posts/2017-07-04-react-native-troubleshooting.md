@@ -15,6 +15,12 @@ categories: [react-native]
 
 see [npm - Tips]({% post_url 2017-11-19-npm-tips %}) for `npm_reset`.
 
+before googling any error first try resetting cache:
+
+```
+$ react-native start --reset-cache
+```
+
 Couldn't find preset "es2015"
 -----------------------------
 
@@ -517,61 +523,12 @@ $ react-native run-ios
 
 **solution**
 
-reinstall CocoaPods - see instructions in solution for `<PBXGroup ...>
-attempted to initialize an object with an unknown UUID` issue.
-
-### CocoaPods could not find compatible versions for pod "react-native-contacts"
-
-```sh
-$ pod install
-...
-[!] CocoaPods could not find compatible versions for pod "react-native-contacts":
-  In Podfile:
-    react-native-contacts (from `../node_modules/react-native-contacts`)
-
-Specs satisfying the `react-native-contacts (from `../node_modules/react-native-contacts`)` dependency were found, but they required a higher minimum deployment target.
-```
-
-**solution**
-
-<https://facebook.github.io/react-native/docs/linking-libraries-ios.html>:
-
-> If your iOS project is using CocoaPods (contains Podfile) and linked library
-> has podspec file, then react-native link will link library using Podfile.
-
-pods were added to _ios/Podfile_ after linking corresponding libraries:
-
-```diff
-  target 'iceperkapp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-+   pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
-+
-+   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
-+
-+   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
-+
-+   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
-+
-+   pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
-+
-+   pod 'Picker', :path => '../node_modules/react-native-picker'
-+
-+   pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
-+
-+   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-+
-+   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-+
-  end
-```
-
-remove `iceperkapp-tvOSTests` and `iceperkappTests` targets altogether
-and try to install pods again.
+reinstall CocoaPods - see instructions in solution for `<PBXGroup ...> attempted
+to initialize an object with an unknown UUID` issue.
 
 ### <PBXGroup ...> attempted to initialize an object with an unknown UUID
 
-```sh
+```
 $ pod install
 ...
 [!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `EEE09AF85CBC4DA8A7C4E137` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
@@ -592,9 +549,15 @@ $ pod deintegrate
 $ pod install
 ```
 
+***UPDATE (2019-06-11)***
+
+these warnings were gone after installing pods because `pod install` command
+updates _ios/iceperkapp.xcodeproj/project.pbxproj_ fixing or removing unknown
+UUIDs along the way.
+
 ### object file (.../libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
 
-```sh
+```
 $ react-native run-ios
 ...
 ld: warning: object file (<app_dir>/ios/build/Build/Products/Debug-iphonesimulator/libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
@@ -604,21 +567,20 @@ ld: warning: object file (<app_dir>/ios/build/Build/Products/Debug-iphonesimulat
 
 1. <https://stackoverflow.com/a/32950454/3632318>
 
-error explanation: `react-native-autogrow-textinput` library is
-built with `IPHONEOS_DEPLOYMENT_TARGET=9.3` build setting but
-the rest of the project (the library is linked to later) has been
-built with `IPHONEOS_DEPLOYMENT_TARGET=8.0` build setting =>
-hence the error.
+error explanation: `react-native-autogrow-textinput` package is built with
+`IPHONEOS_DEPLOYMENT_TARGET=9.3` build setting but the rest of the project (the
+library is linked to later) has been built with `IPHONEOS_DEPLOYMENT_TARGET=8.0`
+build setting => hence the error.
 
-the latest version of `react-native-autogrow-textinput` doesn't support
-iOS Deployment Target (DT) lower than 9.3 but current DT in iOS project
-is 8.0 => change DT in iOS project to 9.3 as well:
+the latest version of `react-native-autogrow-textinput` doesn't support iOS
+Deployment Target (DT) lower than 9.3 but current DT in iOS project is 8.0 =>
+change DT in iOS project to 9.3 as well:
 
 | Xcode: `Build Settings` → `Deployment` → `iOS Deployment Target`
 
 ### Undefined symbols for architecture x86_64
 
-```sh
+```
 $ react-native run-ios
 ...
 Undefined symbols for architecture x86_64:

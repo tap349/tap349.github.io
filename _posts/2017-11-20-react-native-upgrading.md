@@ -185,6 +185,15 @@ tips:
 - try to add new lines - not to delete existing ones
 - replace modified binary files too
 
+### update CocoaPods
+
+```sh
+$ gem install cocoapods
+$ pod repo update
+$ cd ios
+$ pod install
+```
+
 ### try to build and start your application
 
 ```sh

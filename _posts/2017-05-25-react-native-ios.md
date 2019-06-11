@@ -242,8 +242,8 @@ troubleshooting
 
 **solution**
 
-outdated version of `react-native-linear-gradient` package was used
-(it provides `LinearGradient` component).
+outdated version of `react-native-linear-gradient` package was used (it provides
+`LinearGradient` component).
 
 <https://github.com/react-native-community/react-native-linear-gradient>:
 
@@ -261,8 +261,8 @@ now in _package.json_:
   },
 ```
 
-that is currently used version of `react-native-linear-gradient` package is
-not even supposed to support this version of react-native.
+that is currently used version of `react-native-linear-gradient` package is not
+even supposed to support this version of react-native.
 
 there are 2 ways to solve the problem:
 
@@ -499,6 +499,56 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 > Since this is using Cocopods you need to use the workspace instead for
 > everything to get resolved correctly.
 
+### CocoaPods could not find compatible versions for pod "react-native-contacts"
+
+```sh
+$ cd ios && pod install
+...
+[!] CocoaPods could not find compatible versions for pod "react-native-contacts":
+  In Podfile:
+    react-native-contacts (from `../node_modules/react-native-contacts`)
+
+Specs satisfying the `react-native-contacts (from `../node_modules/react-native-contacts`)` dependency were found, but they required a higher minimum deployment target.
+```
+
+**solution**
+
+<https://facebook.github.io/react-native/docs/linking-libraries-ios.html>:
+
+> If your iOS project is using CocoaPods (contains Podfile) and linked library
+> has podspec file, then react-native link will link library using Podfile.
+
+pods were added to _ios/Podfile_ after linking corresponding libraries:
+
+```diff
+  target 'iceperkapp-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
++   pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
++
++   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
++
++   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
++
++   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
++
++   pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
++
++   pod 'Picker', :path => '../node_modules/react-native-picker'
++
++   pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
++
++   pod 'RNSVG', :path => '../node_modules/react-native-svg'
++
++   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
++
+  end
+```
+
+remove `iceperkapp-tvOSTests` and `iceperkappTests` targets from _ios/Podfile_
+altogether and try to install pods again.
+
+
 ### CocoaPods could not find compatible versions for pod "Google-Mobile-Ads-SDK"
 
 ```sh
@@ -527,4 +577,39 @@ Note: as of CocoaPods 1.0, `pod repo update` does not happen on `pod install` by
 ```sh
 $ pod repo update
 $ pod install
+```
+
+### CocoaPods could not find compatible versions for pod "RNCAsyncStorage"
+
+```sh
+$ cd ios && pod install
+...
+Fetching podspec for `RNCAsyncStorage` from `../node_modules/@react-native-community/async-storage`
+[!] CocoaPods could not find compatible versions for pod "RNCAsyncStorage":
+  In Podfile:
+    RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)
+
+Specs satisfying the `RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)` dependency were found, but they required a higher minimum deployment target.
+```
+
+**solution**
+
+find minimum deployment target for `RNCAsyncStorage` pod:
+
+```ruby
+# node_modules/@react-native-community/async-storage/RNCAsyncStorage.podspec
+
+Pod::Spec.new do |s|
+  # ...
+  s.platform     = :ios, "9.0"
+end
+```
+
+use it as a global platform for your project in _ios/Podfile_:
+
+```diff
+  # ios/Podfile
+
+- platform :ios, '8.0'
++ platform :ios, '9.0'
 ```

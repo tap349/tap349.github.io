@@ -200,6 +200,7 @@ $ pod install
 $ npm install
 $ react-native start
 $ react-native run-android
+$ react-native run-ios
 ```
 
 most likely there will be lots of errors: many npm packages got broken because

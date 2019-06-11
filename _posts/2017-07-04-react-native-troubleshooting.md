@@ -568,8 +568,8 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 1. <https://github.com/geektimecoil/react-native-onesignal/issues/18#issuecomment-287132994>
 2. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
 
-link `react-native-onesignal` and `react-native-sentry` libraries manually
-and rebuild application.
+link `react-native-onesignal` and `react-native-sentry` libraries manually and
+rebuild application.
 
 ### Cannot read property 'func' of undefined
 
@@ -1142,3 +1142,46 @@ error Failed to build iOS project. We ran "xcodebuild" command but it exited wit
 
 > To debug build logs further, consider building your app with Xcode.app, by
 > opening iceperkapp.xcworkspace
+
+### Duplicate module name: react-native
+
+```
+$ react-native start
+...
+Loading dependency graph...(node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
+  Duplicate module name: react-native
+  Paths: /Users/tap/dev/compleader/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/compleader/iceperkapp/node_modules/react-native/package.json
+
+This error is caused by `hasteImpl` returning the same name for different files.
+    at setModule (/Users/tap/dev/compleader/iceperkapp/node_modules/jest-haste-map/build/index.js:569:17)
+    at workerReply (/Users/tap/dev/compleader/iceperkapp/node_modules/jest-haste-map/build/index.js:641:9)
+    at processTicksAndRejections (internal/process/task_queues.js:89:5)
+    at async Promise.all (index 83)
+(node:10228) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
+(node:10228) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
+  Duplicate module name: react-native
+  Paths: /Users/tap/dev/compleader/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/compleader/iceperkapp/node_modules/react-native/package.json
+```
+
+**solution**
+
+1. <https://facebook.github.io/react-native/docs/integration-with-existing-apps#configuring-cocoapods-dependencies>
+2. [React Native - Upgrading]({% post_url 2017-11-20-react-native-upgrading %})
+
+first of all, incorrect version of `React` pod (0.11.0) was installed as
+dependency of `RNCAsyncStorage` pod:
+
+```ruby
+# node_modules/@react-native-community/async-storage/RNCAsyncStorage.podspec
+
+Pod::Spec.new do |s|
+  s.name         = "RNCAsyncStorage"
+  # ...
+
+  s.dependency 'React'
+end
+```
+
+=> see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for
+the tip on how to configure CocoaPods dependencies.

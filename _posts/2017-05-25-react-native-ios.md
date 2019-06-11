@@ -109,6 +109,13 @@ otherwise actual paddings, margins, etc. might be different from specified ones.
 tips
 ----
 
+### (how to) link library with native dependencies manually
+
+1. <http://facebook.github.io/react-native/docs/linking-libraries-ios#manual-linking>
+
+sometimes `react-native link` fails to library with native dependencies - in
+this case it's necessary possible to link library manually.
+
 ### (how to) repair CocoaPods
 
 `pod deintegrate` command removes CocoaPods from Xcode project - it's not
@@ -122,6 +129,46 @@ $ gem install cocoapods
 $ cd ios
 $ pod deintegrate
 $ pod repo update
+$ pod install
+```
+
+### (how to) configure CocoaPods dependencies
+
+1. <https://facebook.github.io/react-native/docs/integration-with-existing-apps#configuring-cocoapods-dependencies>
+
+```diff
+  # ios/Podfile
+
+  target 'iceperkapp' do
+    # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+    # use_frameworks!
+
++   pod 'React', path: '../node_modules/react-native', subspecs: [
++     'Core',
++     'CxxBridge', # Include this for RN >= 0.47
++     'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
++     'RCTText',
++     'RCTNetwork',
++     'RCTWebSocket', # Needed for debugging
++     'RCTAnimation', # Needed for FlatList and animations
++     'RCTImage',
++     'RCTPushNotification'
++   ]
++   # Explicitly include Yoga if you are using RN >= 0.42.0
++   pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga'
+
++   # Third party deps podspec link
++   pod 'DoubleConversion', podspec: '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
++   pod 'glog', podspec: '../node_modules/react-native/third-party-podspecs/glog.podspec'
++   pod 'Folly', podspec: '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+    # Pods for my_app
+    # ...
+  end
+```
+
+```sh
+$ cd ios
 $ pod install
 ```
 
@@ -371,8 +418,8 @@ Native module cannot be null.
 
 **solution**
 
-the error occurred after installing `react-native-push-notification`
-package, linking native libraries and trying to launch application:
+the error occurred after installing `react-native-push-notification` package,
+linking its native dependencies and trying to launch application:
 
 ```sh
 $ npm install --save react-native-push-notification
@@ -380,10 +427,8 @@ $ react-native link react-native-push-notification
 $ react-native run-ios
 ```
 
-it has turned out `PushNotificationIOS` native library (has native dependencies)
-from `react-native` package has not been linked automatically to my iOS project
-when linking dependencies for `react-native-push-notification` package
-(this is probably a bug in the latter):
+but it has turned out `PushNotificationIOS` library has not been linked to my
+iOS project automatically (note there's no message about linking `iOS module`):
 
 ```sh
 $ react-native link react-native-push-notification
@@ -391,7 +436,7 @@ Scanning 587 folders for symlinks in <app_dir>/node_modules (6ms)
 npm-install info Android module react-native-push-notification is already linked
 ```
 
-solution is to link `PushNotificationIOS` native library manually as instructed in
+solution is to link `PushNotificationIOS` library manually as instructed in
 [PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html).
 
 ### excessive logging in device system log
@@ -403,12 +448,12 @@ that is when running `react-native log-ios`.
 1. <https://stackoverflow.com/questions/37800790>
 2. <https://github.com/bradmartin/nativescript-videoplayer/issues/76>
 
-setting `OS_ACTIVITY_MODE` and `OS_ACTIVITY_DT_MODE` environment
-variables in Xcode project had no effect (link #1).
+setting `OS_ACTIVITY_MODE` and `OS_ACTIVITY_DT_MODE` environment variables in
+Xcode project had no effect (link #1).
 
-the only thing that helped to reduce the amount of logging output
-was exporting `SIMCTL_CHILD_OS_ACTIVITY_MODE` environment variable
-in the shell before starting application (link #2):
+the only thing that helped to reduce the amount of logging output was exporting
+`SIMCTL_CHILD_OS_ACTIVITY_MODE` environment variable in the shell before starting
+application (<https://github.com/bradmartin/nativescript-videoplayer/issues/76>):
 
 ```sh
 $ SIMCTL_CHILD_OS_ACTIVITY_MODE="disable" react-native run-ios

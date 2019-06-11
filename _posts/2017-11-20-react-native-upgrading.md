@@ -188,6 +188,10 @@ tips:
 
 see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
 
+### configure CocoaPods dependencies
+
+see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
+
 ### try to build and start your application
 
 ```sh

@@ -109,12 +109,44 @@ otherwise actual paddings, margins, etc. might be different from specified ones.
 tips
 ----
 
+### (how to) build application in Xcode
+
+- open application workspace (_\<APP\_NAME>.xcworkspace_)
+
+  1. <https://stackoverflow.com/a/21644948/3632318>
+
+  > <https://stackoverflow.com/a/21644948/3632318>
+  >
+  > You can still open your project files separately, but it is likely their
+  > targets won’t build because Xcode cannot resolve the dependencies unless
+  > you open the workspace file.
+  >
+  > Projects contain files (code/resouces), settings, and targets that build
+  > products from those files and settings. Workspaces contain projects which
+  > can reference each other.
+  >
+  > I think projects are sufficient in most cases. Don’t use workspaces unless
+  > there’s a specific reason.
+  >
+  > CocoaPods, which automatically handles 3rd party libraries for you, uses
+  > workspaces. Therefore, you have to use them, too, when you use CocoaPods.
+
+  => open workspace (not a project) when building application in Xcode.
+
+- clean build folder (just in case)
+
+  | Xcode: `Product` (top menu) → `Clean Build Folder`
+
+- build application as an executable product
+
+  | Xcode: `Product` (top menu) → `Build`
+
 ### (how to) link library with native dependencies manually
 
 1. <http://facebook.github.io/react-native/docs/linking-libraries-ios#manual-linking>
 
-sometimes `react-native link` fails to library with native dependencies - in
-this case it's necessary possible to link library manually.
+sometimes `react-native link` fails to link library with native dependencies -
+in this case it's necessary to link library manually.
 
 ### (how to) repair CocoaPods
 
@@ -375,8 +407,8 @@ Print: Entry, ":CFBundleIdentifier", Does Not Exist
 
 **solution**
 
-error was gone after solving problem with `react-native-linear-gradient`
-package (see above) and reinstalling all node modules.
+error was gone after solving problem with `react-native-linear-gradient` package
+(see above) and reinstalling all node modules.
 
 ### No bundle URL present
 
@@ -387,8 +419,8 @@ emulator window:
 ```
 No bundle URL present.
 
-Make sure you're running a packager or have included a .jsbundle file
-in your application bundle.
+Make sure you're running a packager or have included a .jsbundle file in your
+application bundle.
 ```
 
 **solution**
@@ -432,7 +464,7 @@ iOS project automatically (note there's no message about linking `iOS module`):
 
 ```sh
 $ react-native link react-native-push-notification
-Scanning 587 folders for symlinks in <app_dir>/node_modules (6ms)
+Scanning 587 folders for symlinks in <APP_DIR>/node_modules (6ms)
 npm-install info Android module react-native-push-notification is already linked
 ```
 
@@ -449,7 +481,7 @@ that is when running `react-native log-ios`.
 2. <https://github.com/bradmartin/nativescript-videoplayer/issues/76>
 
 setting `OS_ACTIVITY_MODE` and `OS_ACTIVITY_DT_MODE` environment variables in
-Xcode project had no effect (link #1).
+Xcode project had no effect (<https://stackoverflow.com/questions/37800790>).
 
 the only thing that helped to reduce the amount of logging output was exporting
 `SIMCTL_CHILD_OS_ACTIVITY_MODE` environment variable in the shell before starting
@@ -543,8 +575,8 @@ instruments[2536:17017] [MT] DVTPlugInLoading: Failed to load code for plug-in c
 
 1. <https://github.com/facebook/react-native/issues/14342>
 
-install additional components - you'll be prompted to install
-these components when you first start Xcode after updating it.
+install additional components - you'll be prompted to install these components
+when you first start Xcode after updating it.
 
 ### ld: library not found for -lFlurry-iOS-SDK
 
@@ -558,11 +590,20 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 
 **solution**
 
-1. <https://github.com/xxsnakerxx/react-native-flurry-analytics/issues/8>
-
+> <https://github.com/xxsnakerxx/react-native-flurry-analytics/issues/8>
+>
 > Try closing the Xcode project and instead open <project name>.xcworkspace.
 > Since this is using Cocopods you need to use the workspace instead for
 > everything to get resolved correctly.
+
+see also the tip `(how to) build project in Xcode` on why to open workspace
+rather than a project.
+
+still library might be really missing - in case you haven't linked it or
+automatic linking by `react-native link` failed.
+
+see the tip `(how to) link library with native dependencies manually` on
+how to link library manually in the latter case.
 
 ### <PBXGroup ...> attempted to initialize an object with an unknown UUID
 
@@ -708,7 +749,7 @@ use it as a global platform for your project in _ios/Podfile_:
 
 ```sh
 $ react-native run-ios
-Scanning folders for symlinks in /Users/tap/dev/compleader/iceperkapp/node_modules (13ms)
+Scanning folders for symlinks in <APP_DIR>/node_modules (13ms)
 Found Xcode workspace iceperkapp.xcworkspace
 
 Could not find iPhone 6 simulator

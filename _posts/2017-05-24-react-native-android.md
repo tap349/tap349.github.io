@@ -646,7 +646,7 @@ $ react-native run-android
 FAILURE: Build failed with an exception.
 
 * Where:
-Build file '<app_dir>/android/app/build.gradle' line: 108
+Build file '<APP_DIR>/android/app/build.gradle' line: 108
 
 * What went wrong:
 A problem occurred evaluating project ':app'.
@@ -801,10 +801,10 @@ the error occurred after upgrading RN to 0.47.0.
 ```sh
 $ react-native run-android
 ...
-<app_dir>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerPackage.java:19: error: method does not override or implement a method from a supertype
+<APP_DIR>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerPackage.java:19: error: method does not override or implement a method from a supertype
   @Override
   ^
-Note: <app_dir>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerActivityEventListener.java uses or overrides a deprecated API.
+Note: <APP_DIR>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerActivityEventListener.java uses or overrides a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 1 error
 :react-native-image-picker:compileReleaseJavaWithJavac FAILED

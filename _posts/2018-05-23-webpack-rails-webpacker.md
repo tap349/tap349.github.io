@@ -392,7 +392,7 @@ packs are then included in layout file using `javascript_pack_tag` and
   $ bin/webpack
   ...
   (Emitted value instead of an instance of Error)   resolve-url-loader cannot operate: CSS error
-    ENOENT: no such file or directory, open '<app_dir>/app/assets/css/bootstrap.css.map'
+    ENOENT: no such file or directory, open '<APP_DIR>/app/assets/css/bootstrap.css.map'
   ```
 
   that is _bootstrap.css.map_ is getting resolved relative to current

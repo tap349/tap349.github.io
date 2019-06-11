@@ -123,59 +123,55 @@ NOTE: still opening application in App Store doesn't work in emulator.
 process invalid props for all mounted components
 ------------------------------------------------
 
-I had one component (`TeamInfoPage`) pushed on top of another one
-(`TeamPage`) using navigator - the 1st component is not unmounted
-in this case.
+I had one component (`TeamInfoPage`) pushed on top of another one (`TeamPage`)
+using navigator - the 1st component is not unmounted in this case.
 
-it has turned out that `TeamPage` component is still updated in
-the background.
+it has turned out that `TeamPage` component is still updated in the background.
 
-so make sure to allow for invalid properties in hidden component
-caused by some action in pushed component (in my case team was
-destroyed in `TeamInfoPage` and I had to process undefined team
-in `TeamPage` component).
+so make sure to allow for invalid properties in hidden component caused by some
+action in pushed component (in my case team was destroyed in `TeamInfoPage` and
+I had to process undefined team in `TeamPage` component).
 
 don't return null from top level component's `render` method
 ------------------------------------------------------------
 
-in my case returning null from top level component (i.e. component
-rendered right in _App.js_ for specified route) caused application
-to crash.
+in my case returning null from top level component (i.e. component rendered
+right in _App.js_ for specified route) caused application to crash.
 
 ***UPDATE***
 
-well, I cannot reproduce it now - returning null just hides component.
-according to docs returning null used to be not supported in the past
-but that is no longer the case.
+well, I can't reproduce it now - returning null just hides component. according
+to docs returning null used to be not supported in the past but that's no longer
+the case.
 
-so just be cautious when returning null - if it breaks anything, return,
-say, `Text` instead.
+so just be cautious when returning null - if it breaks anything, return, say,
+`Text` instead.
 
 log error messages in `catch` clauses
 -------------------------------------
 
-in case of unhandled promise rejection there might be no relevant
-messages in `react-native log-ios` output - make sure that errors
-are logged in corresponding `catch` clauses in that case.
+in case of unhandled promise rejection there might be no relevant messages in
+`react-native log-ios` output - make sure errors are logged in corresponding
+`catch` clauses in that case.
 
 (how to) to use absolute paths for imports
 ------------------------------------------
 
 1. <https://medium.com/@davidjwoody/6b06ae3f65d1>
 
-the problem is that it's necessary to include application
-directory name if you want to use absolute paths:
+the problem is that it's necessary to include application directory name if you
+want to use absolute paths:
 
 ```javascript
-import MyComponent from '<app_dir>/app/components/MyComponent';
+import MyComponent from '<APP_DIR>/app/components/MyComponent';
 ```
 
-it's possible to use `babel-plugin-root-import` plugin but Vim's
-`gf` command (opens file under the cursor) doesn't understand its
-notation (`~` stands for `<app_dir>/app` by default).
+it's possible to use `babel-plugin-root-import` plugin but Vim's `gf` command
+(opens file under the cursor) doesn't understand its notation (`~` stands for
+`<APP_DIR>/app` by default).
 
-the solution is to create _package.json_ in directory from which
-you want to import (it's _app/_ as a rule):
+the solution is to create _package.json_ in directory from which you want to
+import (it's _app/_ as a rule):
 
 ```json
 {
@@ -189,10 +185,9 @@ this name can then be used when importing modules:
 import MyComponent from 'app/components/MyComponent';
 ```
 
-in fact the name can be anything (say, `app1`) but for Vim to find
-the file being imported it must match application top-level directory
-name (`app`) - that's the whole point of using custom name instead of
-`~` prefix.
+in fact the name can be anything (say, `app1`) but for Vim to find the file
+being imported it must match application top-level directory name (`app`) -
+that's the whole point of using custom name instead of `~` prefix.
 
 behaviour of nested ScrollViews
 -------------------------------

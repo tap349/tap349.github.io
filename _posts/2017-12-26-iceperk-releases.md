@@ -231,7 +231,7 @@ the error occurs when trying to upload archive to App Store.
   NOTE: this certificate might have been imported already
 
 - get private key of iOS Distribution certificate
-  (_iOS Distribution\_<Company>.p12_ file) from its creator and import it into
+  (_iOS Distribution\_\<Company>.p12_ file) from its creator and import it into
   the login keychain (its name is something like `iOS Distribution: <Company>`)
 
 ### [Android] ENOTEMPTY: directory not empty
@@ -243,8 +243,8 @@ build failed:
 $ cd android && ./gradlew assembleRelease && cd ..
 ...
 :app:bundleReleaseJsAndAssets
-Scanning 773 folders for symlinks in <app_dir>/node_modules (41ms)
-Scanning 773 folders for symlinks in <app_dir>/node_modules (37ms)
+Scanning 773 folders for symlinks in <APP_DIR>/node_modules (41ms)
+Scanning 773 folders for symlinks in <APP_DIR>/node_modules (37ms)
 Loading dependency graph, done.
 
 ENOTEMPTY: directory not empty, rmdir '/var/folders/1g/28pm7dxn0_l569vjyzlzp2zw0000gn/T/react-native-packager-cache-f18bd0fb39fa7507ecdd2fb6cd91757d41b78c44/cache'

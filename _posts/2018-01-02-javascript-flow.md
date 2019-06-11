@@ -662,7 +662,7 @@ for class fields in particular this error can be fixed in 2 ways:
 packager log and emulator window:
 
 ```
-SyntaxError: <app_dir>/node_modules/react-native/Libraries/Network/XMLHttpRequest.js:
+SyntaxError: <APP_DIR>/node_modules/react-native/Libraries/Network/XMLHttpRequest.js:
 Unexpected super class type: CallExpression
 ```
 

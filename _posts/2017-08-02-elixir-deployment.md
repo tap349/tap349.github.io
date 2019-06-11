@@ -510,7 +510,7 @@ NOTE: application must be restarted after changing EVM flags.
 
   important service unit options:
 
-  - `WorkingDirectory=<app_dir>`
+  - `WorkingDirectory=<APP_DIR>`
 
     set working directory instead of `HOME` environment variable
     to avoid creating many _.erlang.cookie_ files (which are not

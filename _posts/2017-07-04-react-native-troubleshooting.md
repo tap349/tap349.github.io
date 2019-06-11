@@ -27,8 +27,8 @@ Couldn't find preset "es2015"
 emulator window:
 
 ```
-SyntaxError: TransformError: <app_dir>/node_modules/shallowequal/index.js:
-Couldn't find preset "es2015" relative to directory "<app_dir>/node_modules/shallowequal"
+SyntaxError: TransformError: <APP_DIR>/node_modules/shallowequal/index.js:
+Couldn't find preset "es2015" relative to directory "<APP_DIR>/node_modules/shallowequal"
 ```
 
 **solution**
@@ -483,8 +483,8 @@ $ react-native start
 ...
 error: bundling failed: Error: While resolving module `react-native-vector-icons/Octicons`, the Haste package `react-native-vector-icons` was found. However the module `Octicons` could not be found within the package. Indeed, none of these files exist:
 
-  * `<app_dir>/node_modules/react-native/local-cli/core/__fixtures__/files/Octicons(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json)`
-  * `<app_dir>/node_modules/react-native/local-cli/core/__fixtures__/files/Octicons/index(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json)`
+  * `<APP_DIR>/node_modules/react-native/local-cli/core/__fixtures__/files/Octicons(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json)`
+  * `<APP_DIR>/node_modules/react-native/local-cli/core/__fixtures__/files/Octicons/index(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json)`
 ```
 
 **solution**
@@ -515,7 +515,7 @@ sense to add this command to `postinstall` script in _package.json_:
 ```sh
 $ react-native run-ios
 ...
-<app_dir>/node_modules/react-native-flurry-analytics/ios/RNFlurryAnalytics.m:2:9: fatal error: 'Flurry.h' file not found
+<APP_DIR>/node_modules/react-native-flurry-analytics/ios/RNFlurryAnalytics.m:2:9: fatal error: 'Flurry.h' file not found
 #import <Flurry.h>
         ^~~~~~~~~~
 1 error generated.
@@ -531,7 +531,7 @@ tip on how to repair CocoaPods.
 ```
 $ react-native run-ios
 ...
-ld: warning: object file (<app_dir>/ios/build/Build/Products/Debug-iphonesimulator/libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
+ld: warning: object file (<APP_DIR>/ios/build/Build/Products/Debug-iphonesimulator/libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
 ```
 
 **solution**
@@ -659,7 +659,7 @@ error: http error: [55] Failed sending data to the peer (SSL_write() returned SY
 FAILURE: Build failed with an exception.
 
 * Where:
-Script '<app_dir>/node_modules/react-native-sentry/sentry.gradle' line: 154
+Script '<APP_DIR>/node_modules/react-native-sentry/sentry.gradle' line: 154
 
 * What went wrong:
 Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'.
@@ -792,7 +792,7 @@ the error occurs after new Xcode has been downloaded (9.3 in my case):
 
 ```sh
 $ react-native run-ios
-Scanning folders for symlinks in /Users/tap/dev/iceperkapp/node_modules (43ms)
+Scanning folders for symlinks in <APP_DIR>/node_modules (43ms)
 Found Xcode workspace iceperkapp.xcworkspace
 dyld: Symbol not found: _SimDeviceBootKeyDisabledJobs
   Referenced from: /Applications/Xcode.app/Contents/Developer/usr/bin/simctl
@@ -860,10 +860,10 @@ errors after upgrading RN from 0.52.1 to 0.59.9
 ```
 $ npm install
 ...
-npm ERR! path /Users/tap/dev/iceperkapp/node_modules/react-native-push-notification
+npm ERR! path <APP_DIR>/node_modules/react-native-push-notification
 npm ERR! code EISGIT
-npm ERR! git /Users/tap/dev/iceperkapp/node_modules/react-native-push-notification: Appears to be a git repo or submodule.
-npm ERR! git     /Users/tap/dev/iceperkapp/node_modules/react-native-push-notification
+npm ERR! git <APP_DIR>/node_modules/react-native-push-notification: Appears to be a git repo or submodule.
+npm ERR! git     <APP_DIR>/node_modules/react-native-push-notification
 npm ERR! git Refusing to remove it. Update manually,
 npm ERR! git or move it out of the way first.
 ```
@@ -882,11 +882,11 @@ $ rm -rf node_modules/*/.git
 $ react-native run-android
 ...
 > Task :react-native-sentry:compileDebugJavaWithJavac FAILED
-/Users/tap/dev/iceperkapp/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java:251: error: incompatible types: Read
+<APP_DIR>/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java:251: error: incompatible types: Read
 ableArray cannot be converted to ReadableNativeArray
             addExceptionInterface(eventBuilder, exception.getString("type"), exception.getString("value"), stacktrace.getArray("frames"));
                                                                                                                               ^
-Note: /Users/tap/dev/iceperkapp/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java uses or overrides a deprecated
+Note: <APP_DIR>/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java uses or overrides a deprecated
  API.
 ```
 
@@ -904,7 +904,7 @@ NOTE: 0.43.1 is the latest version at the time of writing.
 $ react-native run-android
 ...
 > Task :app:compileDebugJavaWithJavac FAILED
-/Users/tap/dev/iceperkapp/android/app/src/main/java/com/iceperkapp/MainApplication.java:45: error: constructor RNSentryPackage in class RNSentryPac
+<APP_DIR>/android/app/src/main/java/com/iceperkapp/MainApplication.java:45: error: constructor RNSentryPackage in class RNSentryPac
 kage cannot be applied to given types;
             new RNSentryPackage(MainApplication.this),
             ^
@@ -1032,16 +1032,16 @@ make sure to replace slash with tilde in AdMob App ID:
 $ react-native start
 ...
 Loading dependency graph, done.
-error: bundling failed: Error: Plugin/Preset files are not allowed to export objects, only functions. In /Users/tap/dev/iceperkapp2/node_modules/babel-preset-flow/lib/index.js
-    at createDescriptor (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:178:11)
-    at /Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:109:50
+error: bundling failed: Error: Plugin/Preset files are not allowed to export objects, only functions. In <APP_DIR>/node_modules/babel-preset-flow/lib/index.js
+    at createDescriptor (<APP_DIR>/node_modules/@babel/core/lib/config/config-descriptors.js:178:11)
+    at <APP_DIR>/node_modules/@babel/core/lib/config/config-descriptors.js:109:50
     at Array.map (<anonymous>)
-    at createDescriptors (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:109:29)
-    at createPresetDescriptors (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:101:10)
-    at presets (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-descriptors.js:47:19)
-    at mergeChainOpts (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-chain.js:320:26)
-    at /Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-chain.js:283:7
-    at mergeExtendsChain (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/config/config-chain.js:299:21)
+    at createDescriptors (<APP_DIR>/node_modules/@babel/core/lib/config/config-descriptors.js:109:29)
+    at createPresetDescriptors (<APP_DIR>/node_modules/@babel/core/lib/config/config-descriptors.js:101:10)
+    at presets (<APP_DIR>/node_modules/@babel/core/lib/config/config-descriptors.js:47:19)
+    at mergeChainOpts (<APP_DIR>/node_modules/@babel/core/lib/config/config-chain.js:320:26)
+    at <APP_DIR>/node_modules/@babel/core/lib/config/config-chain.js:283:7
+    at mergeExtendsChain (<APP_DIR>/node_modules/@babel/core/lib/config/config-chain.js:299:21)
 ```
 
 **solution**
@@ -1070,14 +1070,14 @@ $ npm install --save-dev @babel/preset-flow
 $ react-native start
 ...
 error: bundling failed: Error: The 'decorators' plugin requires a 'decoratorsBeforeExport' option, whose value must be a boolean. If you are migrating from Babylon/Babel 6 or want to use the old decorators proposal, you should use the 'decorators-legacy' plugin instead of 'decorators'.
-    at validatePlugins (/Users/tap/dev/iceperkapp2/node_modules/@babel/parser/lib/index.js:6093:13)
-    at getParser (/Users/tap/dev/iceperkapp2/node_modules/@babel/parser/lib/index.js:11286:5)
-    at parse (/Users/tap/dev/iceperkapp2/node_modules/@babel/parser/lib/index.js:11256:22)
-    at parser (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)
-    at normalizeFile (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)
-    at runSync (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transformation/index.js:44:43)
-    at transformSync (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transform.js:43:38)
-    at Object.transform (/Users/tap/dev/iceperkapp2/node_modules/metro-react-native-babel-transformer/src/index.js:202:20)
+    at validatePlugins (<APP_DIR>/node_modules/@babel/parser/lib/index.js:6093:13)
+    at getParser (<APP_DIR>/node_modules/@babel/parser/lib/index.js:11286:5)
+    at parse (<APP_DIR>/node_modules/@babel/parser/lib/index.js:11256:22)
+    at parser (<APP_DIR>/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)
+    at normalizeFile (<APP_DIR>/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)
+    at runSync (<APP_DIR>/node_modules/@babel/core/lib/transformation/index.js:44:43)
+    at transformSync (<APP_DIR>/node_modules/@babel/core/lib/transform.js:43:38)
+    at Object.transform (<APP_DIR>/node_modules/metro-react-native-babel-transformer/src/index.js:202:20)
 ```
 
 **solution**
@@ -1140,6 +1140,8 @@ error Failed to build iOS project. We ran "xcodebuild" command but it exited wit
 
 **solution**
 
+this can be anything so:
+
 > To debug build logs further, consider building your app with Xcode.app, by
 > opening iceperkapp.xcworkspace
 
@@ -1150,18 +1152,18 @@ $ react-native start
 ...
 Loading dependency graph...(node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
   Duplicate module name: react-native
-  Paths: /Users/tap/dev/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/iceperkapp/node_modules/react-native/package.json
+  Paths: <APP_DIR>/ios/Pods/React/package.json collides with <APP_DIR>/node_modules/react-native/package.json
 
 This error is caused by `hasteImpl` returning the same name for different files.
-    at setModule (/Users/tap/dev/iceperkapp/node_modules/jest-haste-map/build/index.js:569:17)
-    at workerReply (/Users/tap/dev/iceperkapp/node_modules/jest-haste-map/build/index.js:641:9)
+    at setModule (<APP_DIR>/node_modules/jest-haste-map/build/index.js:569:17)
+    at workerReply (<APP_DIR>/node_modules/jest-haste-map/build/index.js:641:9)
     at processTicksAndRejections (internal/process/task_queues.js:89:5)
     at async Promise.all (index 83)
 (node:10228) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
 (node:10228) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 (node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
   Duplicate module name: react-native
-  Paths: /Users/tap/dev/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/iceperkapp/node_modules/react-native/package.json
+  Paths: <APP_DIR>/ios/Pods/React/package.json collides with <APP_DIR>/node_modules/react-native/package.json
 ```
 
 **solution**
@@ -1238,3 +1240,27 @@ now fix both problems:
   ```sh
   $ pod install
   ```
+
+### no known class method for selector 'didReceiveRemoteNotification:'
+
+build inside Xcode failed:
+
+```
+<APP_DIR>/ios/iceperkapp/AppDelegate.m:71:17: error: no known class method for selector 'didReceiveRemoteNotification:'
+  [RCTOneSignal didReceiveRemoteNotification:notification];
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+**solution**
+
+1. <https://github.com/geektimecoil/react-native-onesignal/issues/421#issuecomment-373877766>
+
+```diff
+  // ios/iceperkapp/AppDelegate.m
+
+- // Required for the notification event.
+- - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
+-   [RCTOneSignal didReceiveRemoteNotification:notification];
+- }
+-
+```

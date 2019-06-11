@@ -1167,10 +1167,10 @@ This error is caused by `hasteImpl` returning the same name for different files.
 **solution**
 
 1. <https://facebook.github.io/react-native/docs/integration-with-existing-apps#configuring-cocoapods-dependencies>
-2. [React Native - Upgrading]({% post_url 2017-11-20-react-native-upgrading %})
+2. <https://github.com/react-native-community/react-native-svg/issues/621#issuecomment-473346430>
 
-first of all, incorrect version of `React` pod (0.11.0) was installed as
-dependency of `RNCAsyncStorage` pod:
+incorrect version of `React` pod was installed into _ios/Pods/_ as a dependency
+of `RNCAsyncStorage` pod:
 
 ```ruby
 # node_modules/@react-native-community/async-storage/RNCAsyncStorage.podspec
@@ -1183,48 +1183,58 @@ Pod::Spec.new do |s|
 end
 ```
 
-=> see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the
-tip on how to configure CocoaPods dependencies.
+there are 2 problems here:
 
-since `RNCAsyncStorage` pod has `path` option in _ios/Podfile_ (which points to
-corresponding package location in _node\_modules/_ directory), it shouldn't be
-installed into _ios/Pods/_ - as well as its dependencies (that is `React` pod).
+- version of `React` pod is incorrect (0.11.0 but should be 0.59.9)
+- `React` pod shouldn't be installed into _ios/Pods/_ at all (see below why)
 
-but directories for both pods (_RNCAsyncStorage/_ and _React/_) are still there
-and _ios/Pods/React/package.json_ causes the very naming collision: it collides
-with _node\_modules/react-native/package.json_ which has the same module name
-(`react-native`).
+now fix both problems:
 
-this is because `pod install` doesn't remove unused pods from _ios/Pods/_ => it
-should be done manually by deintegrating your project:
+- configure CocoaPods dependencies correctly
 
-```sh
-$ cd ios
-$ pod deintegrate
-Deintegrating `iceperkapp.xcodeproj`
-Deleted 1 'Copy Pods Resources' build phases.
-Deleted 1 'Check Pods Manifest.lock' build phases.
-- libPods-iceperkapp.a
-- Pods-iceperkapp.debug.xcconfig
-- Pods-iceperkapp.release.xcconfig
-Deleting Pod file references from project
-- libPods-iceperkapp-tvOSTests.a
-- libPods-iceperkappTests.a
-Deleted 1 empty `Pods` groups from project.
-Removing `Pods` directory.
+  see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the
+  tip on how to configure CocoaPods dependencies.
 
-Project has been deintegrated. No traces of CocoaPods left in project.
-Note: The workspace referencing the Pods project still remains.
-```
+- remove `React` pod from _ios/Pods/_ directory
 
-or by just removing _ios/Pods/_ directory:
+  since `RNCAsyncStorage` pod has `path` option in _ios/Podfile_ (which points to
+  corresponding package location in _node\_modules/_ directory), it shouldn't be
+  installed into _ios/Pods/_ - as well as its dependencies (that is `React` pod).
 
-```sh
-$ rm -rf ios/Pods
-```
+  but directory for `React` pod is still there and _ios/Pods/React/package.json_
+  collides with _node\_modules/react-native/package.json_ as both have the same
+  `name` field - `react-native`.
 
-finally install pods again:
+  it happened because `pod install` doesn't remove unused pods from _ios/Pods/_
+  => it should be done manually by deintegrating your project:
 
-```sh
-$ pod install
-```
+  ```sh
+  $ cd ios
+  $ pod deintegrate
+  Deintegrating `iceperkapp.xcodeproj`
+  Deleted 1 'Copy Pods Resources' build phases.
+  Deleted 1 'Check Pods Manifest.lock' build phases.
+  - libPods-iceperkapp.a
+  - Pods-iceperkapp.debug.xcconfig
+  - Pods-iceperkapp.release.xcconfig
+  Deleting Pod file references from project
+  - libPods-iceperkapp-tvOSTests.a
+  - libPods-iceperkappTests.a
+  Deleted 1 empty `Pods` groups from project.
+  Removing `Pods` directory.
+
+  Project has been deintegrated. No traces of CocoaPods left in project.
+  Note: The workspace referencing the Pods project still remains.
+  ```
+
+  or just by removing _ios/Pods/_ directory:
+
+  ```sh
+  $ rm -rf ios/Pods
+  ```
+
+  finally install pods again:
+
+  ```sh
+  $ pod install
+  ```

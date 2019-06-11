@@ -70,7 +70,7 @@ use this format instead of specifying file path in front of cobe block in
 italics (_yarn.lock_) where possible - probably except for logs (there are
 no comments in logs).
 
-### insert link or path to the resource followed by blank line inside blockquotes
+### insert resource link followed by a blank line inside quotes
 
 > <https://rossta.net/blog/from-sprockets-to-webpack.html#deploying-with-capistrano-and-nginx>
 >
@@ -78,8 +78,16 @@ no comments in logs).
 > build output and NPM package installation via Yarn are shared across deploys
 
 in some cases when all quotes within section have the same source (and its
-link is given at the beginning of the section) the link inside blockquotes
-can be omitted.
+link is given at the beginning of the section), the link inside quotes can
+be omitted.
+
+### insert resource links at the beginning of the section
+
+1. <https://stackoverflow.com/a/32950454/3632318>
+
+if link is already used inside quotes and information from linked resource
+is not used outside these quotes, the link can be omitted at the beginning
+of the section.
 
 ### use backticks for shell commands but not for proper names
 

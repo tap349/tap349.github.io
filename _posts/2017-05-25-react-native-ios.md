@@ -113,8 +113,6 @@ tips
 
 - open application workspace (_\<APP\_NAME>.xcworkspace_)
 
-  1. <https://stackoverflow.com/a/21644948/3632318>
-
   > <https://stackoverflow.com/a/21644948/3632318>
   >
   > You can still open your project files separately, but it is likely their
@@ -596,8 +594,8 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 > Since this is using Cocopods you need to use the workspace instead for
 > everything to get resolved correctly.
 
-see also the tip `(how to) build project in Xcode` on why to open workspace
-rather than a project.
+see also the tip `(how to) build application in Xcode` on why to open
+workspace rather than a project when building application in Xcode.
 
 still library might be really missing - in case you haven't linked it or
 automatic linking by `react-native link` failed.

@@ -1070,14 +1070,14 @@ $ npm install --save-dev @babel/preset-flow
 $ react-native start
 ...
 error: bundling failed: Error: The 'decorators' plugin requires a 'decoratorsBeforeExport' option, whose value must be a boolean. If you are migrating from Babylon/Babel 6 or want to use the old decorators proposal, you should use the 'decorators-legacy' plugin instead of 'decorators'.
-    at validatePlugins (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/parser/lib/index.js:6093:13)
-    at getParser (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/parser/lib/index.js:11286:5)
-    at parse (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/parser/lib/index.js:11256:22)
-    at parser (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)
-    at normalizeFile (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)
-    at runSync (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transformation/index.js:44:43)
-    at transformSync (/Users/tap/dev/compleader/iceperkapp2/node_modules/@babel/core/lib/transform.js:43:38)
-    at Object.transform (/Users/tap/dev/compleader/iceperkapp2/node_modules/metro-react-native-babel-transformer/src/index.js:202:20)
+    at validatePlugins (/Users/tap/dev/iceperkapp2/node_modules/@babel/parser/lib/index.js:6093:13)
+    at getParser (/Users/tap/dev/iceperkapp2/node_modules/@babel/parser/lib/index.js:11286:5)
+    at parse (/Users/tap/dev/iceperkapp2/node_modules/@babel/parser/lib/index.js:11256:22)
+    at parser (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)
+    at normalizeFile (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)
+    at runSync (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transformation/index.js:44:43)
+    at transformSync (/Users/tap/dev/iceperkapp2/node_modules/@babel/core/lib/transform.js:43:38)
+    at Object.transform (/Users/tap/dev/iceperkapp2/node_modules/metro-react-native-babel-transformer/src/index.js:202:20)
 ```
 
 **solution**
@@ -1150,18 +1150,18 @@ $ react-native start
 ...
 Loading dependency graph...(node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
   Duplicate module name: react-native
-  Paths: /Users/tap/dev/compleader/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/compleader/iceperkapp/node_modules/react-native/package.json
+  Paths: /Users/tap/dev/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/iceperkapp/node_modules/react-native/package.json
 
 This error is caused by `hasteImpl` returning the same name for different files.
-    at setModule (/Users/tap/dev/compleader/iceperkapp/node_modules/jest-haste-map/build/index.js:569:17)
-    at workerReply (/Users/tap/dev/compleader/iceperkapp/node_modules/jest-haste-map/build/index.js:641:9)
+    at setModule (/Users/tap/dev/iceperkapp/node_modules/jest-haste-map/build/index.js:569:17)
+    at workerReply (/Users/tap/dev/iceperkapp/node_modules/jest-haste-map/build/index.js:641:9)
     at processTicksAndRejections (internal/process/task_queues.js:89:5)
     at async Promise.all (index 83)
 (node:10228) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
 (node:10228) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 (node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
   Duplicate module name: react-native
-  Paths: /Users/tap/dev/compleader/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/compleader/iceperkapp/node_modules/react-native/package.json
+  Paths: /Users/tap/dev/iceperkapp/ios/Pods/React/package.json collides with /Users/tap/dev/iceperkapp/node_modules/react-native/package.json
 ```
 
 **solution**
@@ -1185,3 +1185,46 @@ end
 
 => see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the
 tip on how to configure CocoaPods dependencies.
+
+since `RNCAsyncStorage` pod has `path` option in _ios/Podfile_ (which points to
+corresponding package location in _node\_modules/_ directory), it shouldn't be
+installed into _ios/Pods/_ - as well as its dependencies (that is `React` pod).
+
+but directories for both pods (_RNCAsyncStorage/_ and _React/_) are still there
+and _ios/Pods/React/package.json_ causes the very naming collision: it collides
+with _node\_modules/react-native/package.json_ which has the same module name
+(`react-native`).
+
+this is because `pod install` doesn't remove unused pods from _ios/Pods/_ => it
+should be done manually by deintegrating your project:
+
+```sh
+$ cd ios
+$ pod deintegrate
+Deintegrating `iceperkapp.xcodeproj`
+Deleted 1 'Copy Pods Resources' build phases.
+Deleted 1 'Check Pods Manifest.lock' build phases.
+- libPods-iceperkapp.a
+- Pods-iceperkapp.debug.xcconfig
+- Pods-iceperkapp.release.xcconfig
+Deleting Pod file references from project
+- libPods-iceperkapp-tvOSTests.a
+- libPods-iceperkappTests.a
+Deleted 1 empty `Pods` groups from project.
+Removing `Pods` directory.
+
+Project has been deintegrated. No traces of CocoaPods left in project.
+Note: The workspace referencing the Pods project still remains.
+```
+
+or by just removing _ios/Pods/_ directory:
+
+```sh
+$ rm -rf ios/Pods
+```
+
+finally install pods again:
+
+```sh
+$ pod install
+```

@@ -1129,3 +1129,16 @@ in this case and in case of many other weird JS errors first try resetting cache
 ```
 $ react-native start --reset-cache
 ```
+
+### We ran "xcodebuild" command but it exited with error code 65
+
+```
+$ react-native run-ios
+...
+error Failed to build iOS project. We ran "xcodebuild" command but it exited with error code 65. To debug build logs further, consider building your app with Xcode.app, by opening iceperkapp.xcworkspace
+```
+
+**solution**
+
+> To debug build logs further, consider building your app with Xcode.app, by
+> opening iceperkapp.xcworkspace

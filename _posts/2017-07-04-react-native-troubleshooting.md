@@ -1183,5 +1183,5 @@ Pod::Spec.new do |s|
 end
 ```
 
-=> see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for
-the tip on how to configure CocoaPods dependencies.
+=> see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the
+tip on how to configure CocoaPods dependencies.

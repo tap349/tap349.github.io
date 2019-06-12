@@ -1264,3 +1264,20 @@ build inside Xcode failed:
 - }
 -
 ```
+
+### node_modules/sentry-cli-binary/bin/sentry-cli: No such file or directory
+
+build inside Xcode failed:
+
+```
+/Users/tap/Library/Developer/Xcode/DerivedData/iceperkapp-fqktxncrxxusoqcuegfuetzddexv/Build/
+  Intermediates.noindex/iceperkapp.build/Debug-iphonesimulator/iceperkapp.build/
+  Script-00DD1BFF1BD5951E006B06BC.sh: line 4: ../node_modules/sentry-cli-binary/bin/sentry-cli:
+  No such file or directory
+Command PhaseScriptExecution failed with a nonzero exit code
+```
+
+**solution**
+
+find and replace all occurrences of `sentry-cli-binary` with `@sentry/cli` in
+your project.

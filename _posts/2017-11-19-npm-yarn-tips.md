@@ -72,7 +72,11 @@ $ npm prune
 
 ### Yarn
 
-`yarn install` command removes not used packages as well.
+`yarn install` command removes not used packages as well:
+
+> <https://yarnpkg.com/lang/en/docs/cli/prune/>
+>
+> The prune command isn’t necessary. yarn install will prune extraneous packages.
 
 (how to) run script or locally installed executable
 ---------------------------------------------------

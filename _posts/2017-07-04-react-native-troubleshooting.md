@@ -1341,5 +1341,48 @@ cause warnings like above if that deployment target is not supported by Xcode.
 
 ### withRef is removed
 
+emulator window:
+
 ```
+Unhandled JS Exception: withRef is removed. To access the wrapped instance,
+use a ref on the connected component
+```
+
+**solution**
+
+1. <https://react-redux.js.org/api/connect#forwardref-boolean>
+
+> <https://github.com/reduxjs/react-redux/releases/tag/v6.0.0>
+>
+> The withRef option to connect has been replaced with forwardRef. If
+> {forwardRef : true} has been passed to connect, adding a ref to the connected
+> wrapper component will actually return the instance of the wrapped component.
+
+> <https://github.com/reduxjs/react-redux/issues/1291#issuecomment-494188070>
+>
+> Basically, change withRef to forwardRef, and then delete the .getWrappedInstance()
+> part of componentRef.getWrappedInstance(). componentRef is your own component now.
+
+say:
+
+```diff
+  // MyComponent.js
+
+  export default connect(
+    mapStateToProps,
+    null,
+    null,
+-   {withRef: true},
++   {forwardRef: true},
+  )(MyComponent);
+```
+
+usage:
+
+```diff
+  <MyComponent ref={ref => this._myComponentRef = ref} />
+
+  // ...
+- this._myComponentRef.getWrappedInstance().save();
++ this._myComponentRef.save();
 ```

@@ -1309,6 +1309,21 @@ info warning: The iOS Simulator deployment target is set to 7.0, but the range o
 > target will be lower than specified, will have unused symbols and will cause
 > you a lot of headache.
 
+```ruby
+# node_modules/react-native-in-app-utils/react-native-in-app-utils.podspec
+
+Pod::Spec.new do |s|
+  # ...
+  s.platform        = :ios, "7.0"
+end
+```
+
+```ruby
+# ios/Podfile
+
+platform :ios, '9.0'
+```
+
 Podspecs and Podfile both specify deployment target for which a static library
 should be built. still deployment target in Podfile is not the minimum allowed
 deployment target => deployment target from Podspec might be used which will

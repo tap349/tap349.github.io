@@ -68,12 +68,12 @@ configuration
 
 ### Dvorak keyboard layout
 
-by default emulator uses QWERTY as hardware keyboard layout - it
-also means that all hotkeys (say, for Developer Menu) use it as well.
+by default emulator uses QWERTY as hardware keyboard layout - it also means
+that all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-| emulator (OS): `Settings` → `General` → `Keyboard` → `Hardware Keyboard` → `English (United States)` → `Dvorak`
+| emulator (OS): `Settings` → `General` → `Keyboard` → `Hardware Keyboard` → `English` → `Dvorak`
 
 ### Russian keyboard layout
 

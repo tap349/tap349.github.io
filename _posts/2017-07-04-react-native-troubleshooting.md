@@ -1313,3 +1313,5 @@ Podspecs and Podfile both specify deployment target for which a static library
 should be built. still deployment target in Podfile is not the minimum allowed
 deployment target => deployment target from Podspec might be used which will
 cause warnings like above if that deployment target is not supported by Xcode.
+
+=> ignore this warning for now.

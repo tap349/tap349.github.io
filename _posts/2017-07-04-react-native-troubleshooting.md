@@ -1299,6 +1299,14 @@ info warning: The iOS Simulator deployment target is set to 7.0, but the range o
 > It appears the newest version of Xcode doesn't support a deployment target
 > less than 8.0.
 
+> <https://github.com/CocoaPods/CocoaPods/issues/7314#issuecomment-422368382>
+>
+> if the target is built for 9.0, then the Pods should build for 9.0, not for
+> 8.0.
+>
+> It's nice to want to support more stuff, but it should come as fixes to the
+> actual CocoaPods gem, not as complex workarounds in people's Podfile.
+
 > <https://github.com/CocoaPods/CocoaPods/issues/7314#issuecomment-494659918>
 >
 > platform

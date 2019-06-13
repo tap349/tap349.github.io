@@ -1281,3 +1281,35 @@ Command PhaseScriptExecution failed with a nonzero exit code
 
 find and replace all occurrences of `sentry-cli-binary` with `@sentry/cli` in
 your project.
+
+### The iOS Simulator deployment target is set to 7.0
+
+```
+$ react-native run-ios
+...
+info warning: The iOS Simulator deployment target is set to 7.0, but the range of supported deployment target versions for this platform is 8.0 to 12.2.99. (in target 'InAppUtils')
+```
+
+**solution**
+
+1. <https://github.com/CocoaPods/CocoaPods/issues/8069>
+
+> <https://github.com/react-native-community/react-native-maps/issues/2638#issue-393483116>
+>
+> It appears the newest version of Xcode doesn't support a deployment target
+> less than 8.0.
+
+> <https://github.com/CocoaPods/CocoaPods/issues/7314#issuecomment-494659918>
+>
+> platform
+>
+> Specifies the platform for which a static library should be built, but NOT the
+> deployment target for which it should be built (the number in platform :ios,
+> '9.0' is only to find a compatible version of the pod). The actual deployment
+> target will be lower than specified, will have unused symbols and will cause
+> you a lot of headache.
+
+Podspecs and Podfile both specify deployment target for which a static library
+should be built. still deployment target in Podfile is not the minimum allowed
+deployment target => deployment target from Podspec might be used which will
+cause warnings like above if that deployment target is not supported by Xcode.

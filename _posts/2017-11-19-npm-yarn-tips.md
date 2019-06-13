@@ -1,6 +1,6 @@
 ---
 layout: post
-title: npm - Tips
+title: npm/Yarn - Tips
 date: 2017-11-19 03:09:25 +0300
 access: public
 comments: true
@@ -19,7 +19,7 @@ categories: [npm, yarn, js]
 ### npm
 
 ```sh
-$ npm install semistandard -g
+$ npm install -g semistandard
 /usr/local/bin/semistandard -> /usr/local/lib/node_modules/semistandard/bin/cmd.js
 $ which semistandard
 /usr/local/bin/semistandard
@@ -28,7 +28,7 @@ $ which semistandard
 - global packages dir: _/usr/local/lib/node_modules/_
 
   ```sh
-  $ npm root -g
+  $ npm -g root
   /usr/local/lib/node_modules/
   ```
 
@@ -47,12 +47,22 @@ $ which semistandard
 (how to) reinstall all packages
 -------------------------------
 
+### npm
+
 ```sh
 $ rm -rf node_modules && npm install
 ```
 
+### Yarn
+
+```sh
+$ rm -rf node_modules && yarn
+```
+
 (how to) remove not used packages
 ---------------------------------
+
+### npm
 
 not used packages appear after removing packages from _package.json_ manually.
 
@@ -60,23 +70,46 @@ not used packages appear after removing packages from _package.json_ manually.
 $ npm prune
 ```
 
+### Yarn
+
+`yarn install` command removes not used packages as well.
+
 (how to) run script or locally installed executable
 ---------------------------------------------------
 
-`$(npm bin)` resolves to _node\_modules/.bin/_ - it can be used to run
-executables from this directory directly.
+- executables
 
-- locally installed executables are stored in _node\_modules/.bin/_
-  (= symlinks to JS executable files provided by npm packages)
-- scripts are defined in `scripts` section of _package.json_
-  (= usually invocations of these executables with custom arguments)
+  executables are binaries provided by npm packages.
 
-`yarn run` runs both of them:
+  they are linked into _node\_modules/.bin/_:
+
+  > <https://docs.npmjs.com/files/folders#executables>
+  >
+  > executables are linked into ./node_modules/.bin so that they can be made
+  > available to scripts run through npm.
+
+  it's possible to run executables directly (npm bin folder is returned by
+  `npm bin` command):
+
+  ```sh
+  $ $(npm bin)/flow
+  ```
+
+- scripts
+
+  scripts are entries in `scripts` section of _package.json_, they are used
+  to run executables (probably with custom arguments).
+
+### npm
+
+```sh
+$ npm run-script <bin_or_script>
+```
+
+### Yarn
 
 ```sh
 $ yarn run <bin_or_script>
-$ npm run <bin_or_script>
-$ npm run-script <bin_or_script>
 ```
 
 (how to) reset all (and clean cache)
@@ -90,6 +123,11 @@ $ npm run-script <bin_or_script>
 > 2. Delete the `node_modules` folder: `rm -rf node_modules && npm install`.
 > 3. Reset Metro Bundler cache: `rm -rf $TMPDIR/react-*` or `npm start -- --reset-cache`.
 > 4. Remove haste cache: `rm -rf $TMPDIR/haste-map-react-native-packager-*`.
+
+it might be necessary to clean cache, say, when build fails. in many cases it's
+enough just to reset cache => try `npm start --reset-cache` command first.
+
+### npm
 
 ```zsh
 # _~/.zshenv_
@@ -110,11 +148,31 @@ $ npm_reset
 $ npm start --reset-cache
 ```
 
-it might be necessary to clean cache, say, when build fails. in many cases it's
-enough just to reset cache - so try `npm start --reset-cache` command first.
+### Yarn
+
+```zsh
+# _~/.zshenv_
+
+alias yarn_reset='\
+  watchman watch-del-all &&
+  rm -rf "$TMPDIR/react-native-packager-cache-*" &&
+  rm -rf "$TMPDIR/metro-bundler-cache-*" &&
+  rm -rf "$TMPDIR/haste-map-react-native-packager-*" &&
+  rm -rf node_modules &&
+  yarn cache clean &&
+  yarn install
+  '
+```
+
+```sh
+$ yarn_reset
+$ yarn start --reset-cache
+```
 
 (how to) update a package
 -------------------------
+
+### npm
 
 update to the latest version allowed by semantic version in _package.json_:
 
@@ -126,4 +184,18 @@ install specific version:
 
 ```sh
 $ npm install --save foo@1.2.3
+```
+
+### Yarn
+
+update to the latest version allowed by semantic version in _package.json_:
+
+```sh
+$ yarn upgrade foo
+```
+
+install specific version:
+
+```sh
+$ yarn install foo@1.2.3
 ```

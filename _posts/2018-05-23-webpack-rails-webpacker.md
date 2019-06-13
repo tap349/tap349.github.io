@@ -419,7 +419,7 @@ say, we want to use `toastr` JS library which consists of CSS and JS files.
 - install npm package
 
   ```sh
-  $ yarn install toastr
+  $ yarn add toastr
   ```
 
 - import CSS
@@ -631,8 +631,8 @@ $ rails assets:precompile
 ========================================
 ```
 
-disable Yarn integrity check in development environment
-(it's disabled in production environment by default):
+disable Yarn integrity check in development environment (it's disabled in
+production environment by default):
 
 ```ruby
 # config/environments/development.rb

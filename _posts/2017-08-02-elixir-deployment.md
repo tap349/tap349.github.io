@@ -107,7 +107,7 @@ compilation of static assets consists of 2 steps:
   +
   +     # install npm packages and build assets
   +     cd assets
-  +     yarn install
+  +     npm install
   +     node node_modules/brunch/bin/brunch build --production
   +
   +     # generate digest and cache manifest

@@ -205,7 +205,7 @@ that is in Bootleg 0.10.0 `compile` task both compiles project and builds
 release using Distillery => `phx_digest` hook is executed when release has
 been already built => compiled assets are not included into release.
 
-#### Yarn vs. npm
+#### npm vs. Yarn
 
 1. <https://medium.com/@vincentnewkirk/npm-vs-yarn-2019-e88757b17038>
 

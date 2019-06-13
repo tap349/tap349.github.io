@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Yarn/npm - Troubleshooting
+title: npm/Yarn - Troubleshooting
 date: 2018-05-03 21:25:56 +0300
 access: public
 comments: true
-categories: [yarn, npm, js]
+categories: [npm, yarn, js]
 ---
 
 <!-- more -->
@@ -17,7 +17,7 @@ The engine "node" is incompatible with this module
 --------------------------------------------------
 
 ```
-$ yarn
+$ yarn install
 ...[2/4] 🚚  Fetching packages...
 error upath@1.0.4: The engine "node" is incompatible with this module. Expected version ">=4 <=9".
 error Found incompatible module

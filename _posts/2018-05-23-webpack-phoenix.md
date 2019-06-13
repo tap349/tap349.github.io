@@ -884,7 +884,7 @@ say, we want to use `toastr` JS library which consists of CSS and JS files.
 
   ```sh
   $ cd assets
-  $ yarn install toastr
+  $ npm install --save toastr
   ```
 
 - import CSS
@@ -929,7 +929,7 @@ say, we want to use `toastr` JS library which consists of CSS and JS files.
 
 ```sh
 $ cd assets
-$ yarn install jquery
+$ npm install --save jquery
 ```
 
 just like for Webpacker, there are 2 ways to use jQuery
@@ -964,7 +964,7 @@ just like for Webpacker, there are 2 ways to use jQuery
 
 ```sh
 $ cd assets
-$ yarn add bootstrap
+$ npm install --save bootstrap
 ```
 
 ```scss

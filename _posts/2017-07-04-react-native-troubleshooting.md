@@ -13,7 +13,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-see [npm - Tips]({% post_url 2017-11-19-npm-tips %}) for `npm_reset`.
+see [npm/Yarn - Tips]({% post_url 2017-11-19-npm-yarn-tips %}) for `npm_reset`.
 
 try resetting cache first before googling the error:
 

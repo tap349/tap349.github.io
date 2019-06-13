@@ -18,7 +18,7 @@ SCSS
 
 ```sh
 $ cd assets
-$ npm install node-sass sass-loader --save-dev
+$ npm install --save-dev node-sass sass-loader
 ```
 
 ```sh

@@ -92,7 +92,7 @@ $ npm prune
   `npm bin` command):
 
   ```sh
-  $ $(npm bin)/flow
+  $ `npm bin`/flow
   ```
 
 - scripts

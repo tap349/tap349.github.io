@@ -1338,3 +1338,8 @@ deployment target => deployment target from Podspec might be used which will
 cause warnings like above if that deployment target is not supported by Xcode.
 
 => ignore this warning for now.
+
+### withRef is removed
+
+```
+```

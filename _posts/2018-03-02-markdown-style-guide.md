@@ -85,6 +85,10 @@ be omitted.
 
 1. <https://stackoverflow.com/a/32950454/3632318>
 
+insert resource links if linked resource is related to section subject and
+can be useful in one way or another - it doesn't have to be quoted inside
+this section or treat the subject directly.
+
 if link is already used inside quotes and information from linked resource
 is not used outside these quotes, the link can be omitted at the beginning
 of the section.

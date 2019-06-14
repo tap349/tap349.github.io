@@ -195,13 +195,15 @@ $ pod install
     # Pods for my_app
     pod 'Flurry-iOS-SDK/FlurrySDK'
     pod 'Google-Mobile-Ads-SDK'
-    pod 'Picker', path: '../node_modules/react-native-picker'
     pod 'RNCAsyncStorage', path: '../node_modules/@react-native-community/async-storage'
     pod 'RNSVG', path: '../node_modules/react-native-svg'
     pod 'RNVectorIcons', path: '../node_modules/react-native-vector-icons'
     # ...
   end
 ```
+
+for some reason including `Picker` pod from `react-native-picker` package
+causes build to fail even though it's recommended in official docs.
 
 ```sh
 $ cd ios

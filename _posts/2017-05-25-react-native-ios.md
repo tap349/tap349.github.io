@@ -193,6 +193,12 @@ $ pod install
 +   pod 'Folly', podspec: '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
     # Pods for my_app
+    pod 'Flurry-iOS-SDK/FlurrySDK'
+    pod 'Google-Mobile-Ads-SDK'
+    pod 'Picker', path: '../node_modules/react-native-picker'
+    pod 'RNCAsyncStorage', path: '../node_modules/@react-native-community/async-storage'
+    pod 'RNSVG', path: '../node_modules/react-native-svg'
+    pod 'RNVectorIcons', path: '../node_modules/react-native-vector-icons'
     # ...
   end
 ```

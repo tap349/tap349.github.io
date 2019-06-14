@@ -448,10 +448,20 @@ $ adb shell ls
 
 1. <https://stackoverflow.com/questions/9808560>
 
-use `10.0.2.2:3000` instead of `127.0.0.1:3000` to send requests to local web
-server (say, puma) because emulator runs behind virtual router and `10.0.2.2`
-is a special alias to you host loopback interface (that is, `127.0.0.1` on
-development machine).
+- AVD: `10.0.2.2`
+
+  > <https://developer.android.com/studio/run/emulator-networking>
+  >
+  > If you want to access services running on your development machine loopback
+  > interface (a.k.a. 127.0.0.1 on your machine), you should use the special
+  > address 10.0.2.2 instead.
+
+  => use `10.0.2.2:3000` instead of `127.0.0.1:3000` to send requests to local
+  web server (say, rails server) because emulator runs behind virtual router
+  and `10.0.2.2` is a special alias to you host loopback interface (that is,
+  `127.0.0.1` on development machine).
+
+- Genymotion: `10.0.3.2`
 
 ### show touchable areas
 

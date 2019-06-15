@@ -41,3 +41,5 @@ $ diskutil list
 $ sudo mkdir /Volumes/NTFS
 $ sudo ntfs-3g /dev/disk2s1 /Volumes/NTFS -olocal -oallow_other
 ```
+
+or else use Disk Utility application to find device identifier.

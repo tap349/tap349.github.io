@@ -27,3 +27,17 @@ open application in terminal
   ```sh
   $ /Applications/MyApp.app/Contents/MacOS/MyApp
   ```
+
+mount NTFS volume in read-write mode
+------------------------------------
+
+1. <https://github.com/osxfuse/osxfuse/wiki/NTFS-3G>
+
+```sh
+$ brew cask install osxfuse
+$ brew install ntfs-3g
+$ sudo reboot
+$ diskutil list
+$ sudo mkdir /Volumes/NTFS
+$ sudo ntfs-3g /dev/disk2s1 /Volumes/NTFS -olocal -oallow_other
+```

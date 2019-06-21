@@ -46,13 +46,6 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
   NOTE: script must be run after completing postinstallation setup!
 
-  e.g. `~/.oh-my-zsh` must be created before running the script:
-
-  - _~/.oh-my-zsh/_ must exist so that script could copy custom theme there
-  - oh-my-zsh installation script will rename existing _~/.zshrc_ into
-    _.zshrc.pre-oh-my-zsh_ -\> symlink _~/.zshrc_ into home directory
-    after oh-my-zsh is installed
-
   this script:
 
   - creates symlinks for all config files and directories
@@ -303,3 +296,38 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
   NOTE: fonts patched with `fontpatcher` have `-Powerline` suffix.
 
 - patched or unpatched `Inconsolate LGC` font for iTerm2 (install via brew)
+
+MacVim configuration
+--------------------
+
+1. [MacVim]({% post_url 2019-06-21-macvim %})
+
+```zsh
+# ~/.zlogin
+
+defaults write org.vim.MacVim MMShowAddTabButton 0
+defaults write org.vim.MacVim MMNoTitleBarWindow 1
+defaults write org.vim.MacVim MMZoomBoth 1
+defaults write org.vim.MacVim MMTextInsetTop 1
+defaults write org.vim.MacVim MMTextInsetRight 3
+defaults write org.vim.MacVim MMTextInsetBottom 5
+defaults write org.vim.MacVim MMTextInsetLeft 5
+defaults write org.vim.MacVim MMFullScreenFadeTime 0
+# https://github.com/macvim-dev/macvim/issues/390#issuecomment-254252969
+defaults write org.vim.MacVim SUEnableAutomaticChecks 0
+
+# currently unused settings
+
+# https://github.com/macvim-dev/macvim/wiki/FAQ#black-screen-on-full-screen
+# it's longer required on macOS Mojave and MacVim 8.1-151_2
+#defaults write org.vim.MacVim MMUseCGLayerAlways 1
+#defaults write org.vim.MacVim MMNoFontSubstitution 1
+#defaults write org.vim.MacVim MMNativeFullScreen 1
+#defaults write org.vim.MacVim MMTabMinWidth 120
+#defaults write org.vim.MacVim MMTabMaxWidth 250
+#defaults write org.vim.MacVim MMTabOptimumWidth 200
+```
+
+in fact it's not necessary to put these commands into _~/.zlogin_ and run them
+every time new Zsh shell is started: changes are persisted on OS level so it's
+enough to run them only once.

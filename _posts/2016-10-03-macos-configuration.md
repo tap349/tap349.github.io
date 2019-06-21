@@ -329,5 +329,5 @@ defaults write org.vim.MacVim SUEnableAutomaticChecks 0
 ```
 
 in fact it's not necessary to put these commands into _~/.zlogin_ and run them
-every time new Zsh shell is started: changes are persisted on OS level so it's
-enough to run them only once.
+every time new Zsh shell is started: changes are persisted on OS level (in the
+user defaults database) so it's enough to run them only once.

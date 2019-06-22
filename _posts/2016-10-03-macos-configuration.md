@@ -303,7 +303,7 @@ MacVim configuration
 1. [MacVim]({% post_url 2019-06-21-macvim %})
 
 ```zsh
-# ~/.zlogin
+# $ZDOTDIR/.zlogin
 
 defaults write org.vim.MacVim MMShowAddTabButton 0
 defaults write org.vim.MacVim MMNoTitleBarWindow 1
@@ -328,6 +328,7 @@ defaults write org.vim.MacVim SUEnableAutomaticChecks 0
 #defaults write org.vim.MacVim MMTabOptimumWidth 200
 ```
 
-in fact it's not necessary to put these commands into _~/.zlogin_ and run them
-every time new Zsh shell is started: changes are persisted on OS level (in the
-user defaults database) so it's enough to run them only once.
+in fact it's not necessary to put these commands into _$ZDOTDIR/.zlogin_ and
+run them every time new Zsh shell is started (which increases shell startup
+time): changes are persisted on OS level (in user defaults database) so it's
+enough to run them only once.

@@ -34,8 +34,8 @@ defmodule MyApp.Worker
 end
 ```
 
-NOTE: if AppSignal is disabled (`active` option is set to `false` - say,
-      in development), transaction is never started without warnings.
+NOTE: if AppSignal is disabled (`active` option is set to `false` - say, in
+      development), transaction is never started - silently, without warnings.
 
 if AppSignal transaction is not started (say, in GenServer):
 

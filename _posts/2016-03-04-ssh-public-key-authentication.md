@@ -102,17 +102,17 @@ SSH agent
   > Multiple identities may be stored in ssh-agent concurrently and ssh(1)
   > will automatically use them if present.
 
+  > man 1 ssh-add
+  >
+  > When run without arguments, it adds the files ~/.ssh/id_rsa, ~/.ssh/id_dsa,
+  > ~/.ssh/id_ecdsa, and ~/.ssh/id_ed25519.
+
   add default identities to SSH agent:
 
   ```sh
   $ ssh-add
   Identity added: /Users/tap/.ssh/id_rsa (/Users/tap/.ssh/id_rsa)
   ```
-
-  > man 1 ssh-add
-  >
-  > When run without arguments, it adds the files ~/.ssh/id_rsa,
-  > ~/.ssh/id_dsa, ~/.ssh/id_ecdsa, and ~/.ssh/id_ed25519.
 
 - list loaded identities
 
@@ -157,14 +157,14 @@ SSH agent
 
 1. <https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/ssh-agent>
 
-`ssh-agent` Zsh plugin can be used to start SSH agent and add identities
+`ssh-agent` Oh My Zsh plugin can be used to start SSH agent and add identities
 automatically:
 
 ```sh
-# _~/.zshrc_
+# .ZDOTDIR/.zshrc
 
 plugins(ssh-agent ...)
 ```
 
-only default identities are added by default (it's possible to add other
-identities - see documentation).
+only default identities are added by default - see documentation on how to add
+other identities.

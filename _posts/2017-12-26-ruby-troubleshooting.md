@@ -96,17 +96,28 @@ Traceback (most recent call last):
 
 1. <https://stackoverflow.com/a/54038218/3632318>
 
-find current bundler version:
+find current Bundler version:
 
 ```
 $ gem list --local bundler
 
 *** LOCAL GEMS ***
 
-bundler (2.0.1)
+bundler (2.0.2)
 ```
 
-update bundler version in _Gemfile.lock_ manually:
+find Bundler version in _Gemfile.lock_:
+
+```
+# Gemfile.lock
+
+BUNDLED WITH
+  1.16.1
+```
+
+now there are 2 possible solutions:
+
+### sync Gemfile.lock to Bundler version
 
 ```diff
   # Gemfile.lock
@@ -116,8 +127,11 @@ update bundler version in _Gemfile.lock_ manually:
 +   2.0.1
 ```
 
-now it's possible to install gems:
+### sync Bundler version to Gemfile.lock
 
+```sh
+$ gem install bundler -v 1.16.1
 ```
-$ bundle
-```
+
+in many cases this solution is preferable since it's easier and causes less
+problems with CI and deployment.

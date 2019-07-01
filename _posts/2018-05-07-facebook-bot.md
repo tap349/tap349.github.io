@@ -99,8 +99,8 @@ make sure you Messenger app is subscribed to `messaging_postbacks` event:
 | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
 | `Webhooks` (section) → `Edit events` (button)
 
-setup account linking
----------------------
+set up account linking
+----------------------
 
 1. <https://developers.facebook.com/docs/messenger-platform/identity/account-linking>
 2. <http://blog.99array.com/2017/05/28/facebook-account-linking/>

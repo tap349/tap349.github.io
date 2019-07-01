@@ -69,7 +69,7 @@ SSH agent
 ***UPDATE (2019-07-01)***
 
 SSH agent is started automatically upon the first usage of `ssh` - there's no
-need to setup anything.
+need to set up anything.
 
 ### manual setup
 

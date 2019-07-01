@@ -46,7 +46,7 @@ for API-only projects (see `mix help phx.new`):
 $ mix phx.new billing --no-webpack --no-html
 ```
 
-setup Git repo
+set up Git repo
 ---------------
 
 1. <https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/>
@@ -60,7 +60,7 @@ $ get remote add origin <REMOTE_REPO_URL>
 $ git push
 ```
 
-setup database
+set up database
 ---------------
 
 ### with Docker

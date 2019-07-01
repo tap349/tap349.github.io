@@ -66,6 +66,11 @@ SSH agent
 > the result will be returned to the requester. This way, private keys are
 > not exposed to clients using the agent.
 
+***UPDATE (2019-07-01)***
+
+SSH agent is started automatically upon the first usage of `ssh` - no need to
+setup anything.
+
 ### manual setup
 
 - start SSH agent
@@ -153,7 +158,7 @@ SSH agent
   +   ForwardAgent yes
   ```
 
-### automatic setup
+### Oh My Zsh plugin
 
 1. <https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/ssh-agent>
 
@@ -161,7 +166,7 @@ SSH agent
 automatically:
 
 ```sh
-# .ZDOTDIR/.zshrc
+# $ZDOTDIR/.zshrc
 
 plugins(ssh-agent ...)
 ```

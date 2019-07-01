@@ -68,8 +68,8 @@ SSH agent
 
 ***UPDATE (2019-07-01)***
 
-SSH agent is started automatically upon the first usage of `ssh` - no need to
-setup anything.
+SSH agent is started automatically upon the first usage of `ssh` - there's no
+need to setup anything.
 
 ### manual setup
 

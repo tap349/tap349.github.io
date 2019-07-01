@@ -158,29 +158,31 @@ need to setup anything.
   +   ForwardAgent yes
   ```
 
-### Zsh config
+### automatic setup
 
-```zsh
-# ZDOTDIR/.zshrc
+- Zsh config
 
-if [[ -z "$SSH_AUTH_SOCK" ]]; then
-  eval $(ssh-agent -s)
-  ssh-add
-fi
-```
+  ```zsh
+  # $ZDOTDIR/.zshrc
 
-### Oh My Zsh plugin
+  if [[ -z $SSH_AUTH_SOCK ]]; then
+    eval $(ssh-agent -s)
+    ssh-add
+  fi
+  ```
 
-1. <https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/ssh-agent>
+- Oh My Zsh plugin
 
-`ssh-agent` Oh My Zsh plugin can be used to start SSH agent and add identities
-automatically:
+  1. <https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/ssh-agent>
 
-```sh
-# $ZDOTDIR/.zshrc
+  `ssh-agent` Oh My Zsh plugin can be used to start SSH agent and add identities
+  automatically:
 
-plugins(ssh-agent ...)
-```
+  ```sh
+  # $ZDOTDIR/.zshrc
 
-only default identities are added by default - see documentation on how to add
-other identities.
+  plugins(ssh-agent ...)
+  ```
+
+  only default identities are added by default - see documentation on how to add
+  other identities.

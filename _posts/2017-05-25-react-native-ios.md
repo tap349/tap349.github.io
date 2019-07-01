@@ -109,6 +109,15 @@ otherwise actual paddings, margins, etc. might be different from specified ones.
 tips
 ----
 
+### (how to) clean project
+
+1. <https://stackoverflow.com/a/48019133/3632318>
+
+```sh
+$ cd ios
+$ xcodebuild clean
+```
+
 ### (how to) build application in Xcode
 
 - open application workspace (_\<APP\_NAME>.xcworkspace_)

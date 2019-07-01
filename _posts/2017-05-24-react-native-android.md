@@ -315,6 +315,15 @@ see `Accessibility` section of
 tips
 ----
 
+### (how to) clean project
+
+1. <https://stackoverflow.com/a/48019133/3632318>
+
+```sh
+$ cd android
+$ ./gradlew clean
+```
+
 ### change screen resolution (scale) in emulator
 
 just drag the corner of emulator window.

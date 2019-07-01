@@ -321,6 +321,7 @@ tips
 
 ```sh
 $ cd android
+$ ./gradlew cleanBuildCache
 $ ./gradlew clean
 ```
 

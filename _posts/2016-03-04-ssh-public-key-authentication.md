@@ -77,8 +77,8 @@ need to setup anything.
 
   start SSH agent and export required environment variables:
 
-  ```sh
-  $ eval `ssh-agent -s`
+  ```zsh
+  $ eval $(ssh-agent -s)
   ```
 
   SSH client uses these variables to establish connection to SSH agent.
@@ -157,6 +157,17 @@ need to setup anything.
       IdentityFile ~/.ssh/id_rsa
   +   ForwardAgent yes
   ```
+
+### Zsh config
+
+```zsh
+# ZDOTDIR/.zshrc
+
+if [[ -z "$SSH_AUTH_SOCK" ]]; then
+  eval $(ssh-agent -s)
+  ssh-add
+fi
+```
 
 ### Oh My Zsh plugin
 

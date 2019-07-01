@@ -24,7 +24,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - install all system updates in App Store
 - install brew:
 
-  ```sh
+  ```zsh
   $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   ```
 

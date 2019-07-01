@@ -9,24 +9,24 @@ categories: [zsh]
 
 loading order of Zsh startup files:
 
-_~/.zshenv_ → _~/.zshrc_ → _~/.zlogin_
+_$ZDOTDIR/.zshenv_ → _$ZDOTDIR/.zshrc_ → _$ZDOTDIR/.zlogin_
 
 - interactive login shell (`zsh -il -c "cmd"` or opening new tab in iTerm2):
 
-  - _~/.zshenv_
-  - _~/.zshrc_
-  - _~/.zlogin_
+  - _$ZDOTDIR/.zshenv_
+  - _$ZDOTDIR/.zshrc_
+  - _$ZDOTDIR/.zlogin_
 
 - interactive shell (`zsh -i -c "cmd"`):
 
-  - _~/.zshenv_
-  - _~/.zshrc_
+  - _$ZDOTDIR/.zshenv_
+  - _$ZDOTDIR/.zshrc_
 
 - login shell (`zsh -l -c "cmd"`):
 
-  - _~/.zshenv_
-  - _~/.zlogin_
+  - _$ZDOTDIR/.zshenv_
+  - _$ZDOTDIR/.zlogin_
 
 - non-interactive and not login shell (`zsh -c "cmd"`):
 
-  - _~/.zshenv_
+  - _$ZDOTDIR/.zshenv_

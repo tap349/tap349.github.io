@@ -906,3 +906,31 @@ my _mix.exs_ file must have broken something.
 
 after removing `decorators` package, everything got okay again: `appsignal`
 package was upgraded to `1.10.5` (the latest version at the moment).
+
+Could not compile dependency :idna
+----------------------------------
+
+`mix deploy` step log on CircleCI:
+
+```
+  stdout: ===> Compiling idna
+  stdout: Killed
+  stderr: ** (Mix) Could not compile dependency :idna, "/home/alice/.mix/rebar3 bare compile --paths "/tmp/bootleg/build/_build/prod/lib/*/ebin"" command failed. You can recompile this dependency with "mix deps.compile idna", update it with "mix deps.update idna" or clean it with "mix deps.clean idna"
+
+    lib/bootleg/ssh.ex:125: Bootleg.SSH.run_result/2
+    (elixir) lib/enum.ex:1327: Enum."-map/2-lists^map/1-0-"/2
+    (elixir) lib/enum.ex:1327: Enum."-map/2-lists^map/1-0-"/2
+    deps/bootleg/lib/bootleg/tasks/build/remote.exs:48: anonymous fn/4 in Bootleg.DynamicTasks.Compile.execute/0
+    (elixir) lib/enum.ex:1940: Enum."-reduce/3-lists^foldl/2-0-"/3
+    lib/bootleg/dsl.ex:370: Bootleg.DSL.invoke/1
+    deps/bootleg/lib/bootleg/tasks/build/remote.exs:16: Bootleg.DynamicTasks.RemoteBuild.execute/0
+    lib/bootleg/dsl.ex:370: Bootleg.DSL.invoke/1
+Exited with code 1
+```
+
+**solution**
+
+1. <https://github.com/elixir-lang/elixir/issues/3857>
+
+I run out of memory (and swap file was full) on build host - reboot did help.
+alternatively it's possible to increase swap file size.

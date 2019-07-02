@@ -1001,7 +1001,8 @@ NOTE: you can open a PR to the upstream repository from a fork.
 
 1. <https://github.com/facebook/react-native/issues/25292#issuecomment-502998885>
 2. <https://medium.com/@suchydan/how-to-solve-google-play-services-version-collision-in-gradle-dependencies-ef086ae5c75f>
-3. <https://medium.com/mindorks/avoiding-conflicts-in-android-gradle-dependencies-28e4200ca235>
+3. <https://github.com/facebook/react-native/issues/25307#issuecomment-503516458>
+4. <https://medium.com/mindorks/avoiding-conflicts-in-android-gradle-dependencies-28e4200ca235>
 
 in this solution it's not necessary to modify Google libraries but your own
 _android/app/build.gradle_ file only.

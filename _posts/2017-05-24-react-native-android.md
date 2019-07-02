@@ -616,7 +616,7 @@ export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 
 ### The SDK directory does not exist
 
-```sh
+```
 $ react-native run-android
 ...
 FAILURE: Build failed with an exception.
@@ -660,7 +660,7 @@ there are 2 ways to solve the problem:
 
 ### Could not get unknown property 'MYAPP_RELEASE_STORE_FILE'
 
-```sh
+```
 $ react-native run-android
 ...
 FAILURE: Build failed with an exception.
@@ -691,7 +691,7 @@ _android/app/build.gradle_ project file and build fails if they were not set.
 
 ### DeviceException: No connected devices!
 
-```sh
+```
 $ react-native run-android
 ...
 FAILURE: Build failed with an exception.
@@ -710,7 +710,7 @@ start emulator before running application.
 1. <https://github.com/oblador/react-native-vector-icons/issues/480>
 2. <https://github.com/facebook/react-native/issues/14223#issuecomment-304447493>
 
-```sh
+```
 $ react-native run-android
 ...
 FAILURE: Build failed with an exception.
@@ -767,8 +767,8 @@ application doesn't have launcher icon on home screen in emulator.
 
 **solution**
 
-`react-native run-android` installs application but doesn't add
-application launcher icon on home screen - you can do it manually:
+`react-native run-android` installs application but doesn't add application
+launcher icon on home screen - you can do it manually:
 
 - go to applications
 - click and hold application icon
@@ -776,7 +776,7 @@ application launcher icon on home screen - you can do it manually:
 
 ### Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
 
-```sh
+```
 $ react-native run-android
 ...
 com.android.ddmlib.InstallException: Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
@@ -792,7 +792,7 @@ build again.
 
 ### You have not accepted the license agreements of the following SDK components
 
-```sh
+```
 $ react-native run-android
 ...
 FAILURE: Build failed with an exception.
@@ -818,7 +818,7 @@ $ sudo sdkmanager --licenses
 
 the error occurred after upgrading RN to 0.47.0.
 
-```sh
+```
 $ react-native run-android
 ...
 <APP_DIR>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerPackage.java:19: error: method does not override or implement a method from a supertype
@@ -849,7 +849,7 @@ $ react-native link <package_name>
 
 ### Configuration with name 'default' not found.
 
-```sh
+```
 $ react-native run-android
 ...
 Building and installing the app on the device (cd android && ./gradlew installDebug)...
@@ -869,3 +869,210 @@ I haven't installed new dependencies after rebase:
 ```
 $ npm install
 ```
+
+### Manifest merger failed
+
+```
+$ react-native run-android
+...
+> Task :app:processDebugManifest FAILED
+/Users/tap/dev/compleader/iceperkapp/android/app/src/debug/AndroidManifest.xml:22:18-91 Error:
+        Attribute application@appComponentFactory value=(android.support.v4.app.CoreComponentFactory) from [com.android.support:support-compat:28.0.0] AndroidManifest.xml:22:18-91
+        is also present at [androidx.core:core:1.0.0] AndroidManifest.xml:22:18-86 value=(androidx.core.app.CoreComponentFactory).
+        Suggestion: add 'tools:replace="android:appComponentFactory"' to <application> element at AndroidManifest.xml:7:6-11:8 to override.
+
+See http://g.co/androidstudio/manifest-merger for more information about the manifest merger.
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:processDebugManifest'.
+> Manifest merger failed : Attribute application@appComponentFactory value=(android.support.v4.app.CoreComponentFactory) from [com.android.support:support-compat:28.0.0] AndroidManifest.xml:22:18-91
+        is also present at [androidx.core:core:1.0.0] AndroidManifest.xml:22:18-86 value=(androidx.core.app.CoreComponentFactory).
+        Suggestion: add 'tools:replace="android:appComponentFactory"' to <application> element at AndroidManifest.xml:7:6-11:8 to override.
+```
+
+**solution**
+
+> <https://medium.com/@yathousen/the-day-google-decided-to-shake-the-react-native-community-4ba5cdd33388>
+>
+> It was June 17th, 2019, Android released their new package names for their
+> DEPRECATED support libraries + other tools inside AndroidX...
+>
+> Basically, all of the basic libraries that Google provide for the Android +
+> React Native Community, on the last or close to last versions were affected.
+> In some cases, it was the fault of the react-native libraries maintainers
+> for using imports like + symbols that are ambiguous and generally take the
+> last version available of the library and in some other cases was caused by
+> the fact that the developer was actually using new features from the latest
+> release.
+
+> <https://stackoverflow.com/a/52517772/3632318>
+>
+> AndroidX is redesigned library to make package names more clear.
+
+> <https://stackoverflow.com/a/55849025/3632318>
+>
+> AndroidX is a major improvement to the original Android Support Library.
+>
+> AndroidX fully replaces the Support Library by providing feature parity and
+> new libraries.
+
+> <https://stackoverflow.com/a/54533702/3632318>
+>
+> One app should use either AndroidX or old Android Support libraries. That's
+> why you faced this issue.
+>
+> So the solution is to use either AndroidX or old Support Library.
+
+so the problem is that application must be using both new AndroidX and old
+Android Support libraries - hence the error.
+
+it's possible to examine all application dependencies using this command:
+
+```sh
+$ cd android
+$ ./gradlew app:dependencies
+```
+
+AFAIU there can be either `com.android.support` or `androidx.*` libraries in
+the output but not both.
+
+the reason why AndroidX libraries leak into current application dependencies
+is that many RN libraries use the latest versions of Google libraries instead
+of specific ones, say (note `+` symbol):
+
+```groovy
+// https://github.com/zo0r/react-native-push-notification/blob/c4c961cf3a76bffe4e9e36cf00201611eecbb898/android/build.gradle
+
+dependencies {
+    // ...
+    implementation "com.google.android.gms:play-services-gcm:${safeExtGet('googlePlayServicesVersion', '+')}"
+    // ...
+    implementation "com.google.firebase:firebase-messaging:${safeExtGet('firebaseVersion', '+')}"
+}
+```
+
+but the latest versions of Google started to depend on AndroidX libraries since
+June 17th, 2019 and it was a breaking change.
+
+there might be several solutions to this problem:
+
+#### [RECOMMENDED] try upgrading RN packages
+
+1. <https://github.com/react-native-community/async-storage/issues/128#issuecomment-505423631>
+
+maybe maintainers of RN packages have fixed their _build.gradle_ files to use
+specific versions of Google libraries:
+
+```sh
+$ yarn upgrade --pattern react-native
+```
+
+it was the case with `react-native-device-info` package:
+
+> <https://github.com/react-native-community/react-native-device-info/pull/693>
+>
+> With the latest firebase/gcm release, the latest version (+) now brings in
+> androidx dependencies. react-native won't be ready for androidx until 0.60
+> so constrain the gcm version to 16.1.0 (the latest pre-androidx version).
+
+```diff
+  # https://github.com/react-native-community/react-native-device-info/pull/693/files#diff-7ae5a9093507568eabbf35c3b0665732
+
+  dependencies {
+    implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
+-   implementation "com.google.android.gms:play-services-gcm:${safeExtGet('googlePlayServicesVersion', '+')}"
++   implementation "com.google.android.gms:play-services-gcm:${safeExtGet('googlePlayServicesVersion', '16.1.0')}"
+```
+
+#### fork RN packages
+
+1. <https://github.com/react-native-community/react-native-device-info/pull/693>
+
+if RN package is not actively maintained it might take a long time till it's
+fixed, so it makes sense to fork and fix it by yourself (just like it's done
+in the linked PR which is also mentioned previously).
+
+NOTE: you can open a PR to the upstream repository from a fork.
+
+#### force use of specific versions of Google libraries
+
+1. <https://github.com/facebook/react-native/issues/25292#issuecomment-502998885>
+2. <https://medium.com/@suchydan/how-to-solve-google-play-services-version-collision-in-gradle-dependencies-ef086ae5c75f>
+3. <https://medium.com/mindorks/avoiding-conflicts-in-android-gradle-dependencies-28e4200ca235>
+
+in this solution it's not necessary to modify Google libraries but your own
+_android/app/build.gradle_ file only.
+
+perform these steps for each RN package which depends on AndroidX libraries
+until there are no AndroidX dependencies (run `gradlew app:dependencies` to
+find such RN packages as described above):
+
+- find Google libraries in RN package dependencies
+
+  libraries inside `com.google.android.gms` and `com.google.firebase` groups
+  are affected:
+
+  ```groovy
+  // https://github.com/zo0r/react-native-push-notification/blob/c4c961cf3a76bffe4e9e36cf00201611eecbb898/android/build.gradle
+
+  dependencies {
+      // ...
+      implementation "com.google.android.gms:play-services-gcm:${safeExtGet('googlePlayServicesVersion', '+')}"
+      // ...
+      implementation "com.google.firebase:firebase-messaging:${safeExtGet('firebaseVersion', '+')}"
+  }
+  ```
+
+- exclude these libraries from RN package dependencies in your application
+
+  ```diff
+    // android/app/build.gradle
+
+    dependencies {
+  -     implementation project(':react-native-push-notification')
+  +     implementation(project(':react-native-push-notification')) {
+  +       exclude group: 'com.google.android.gms', module: 'play-services-gcm'
+  +       exclude group: 'com.google.firebase', module: 'firebase-messaging'
+  +     }
+  ```
+
+- use specific versions of these libraries in your application
+
+  ```diff
+    // android/app/build.gradle
+
+    dependencies {
+        // ...
+  +     implementation("com.google.android.gms:play-services-base:16.1.0") {
+  +       force = true;
+  +     }
+  +     implementation("com.google.android.gms:play-services-basement:16.2.0") {
+  +       force = true;
+  +     }
+  +     implementation("com.google.android.gms:play-services-gcm:16.1.0") {
+  +       force = true;
+  +     }
+  +     implementation("com.google.android.gms:play-services-stats:16.0.1") {
+  +       force = true;
+  +     }
+  +     implementation("com.google.firebase:firebase-messaging:18.0.0") {
+  +       force = true;
+  +     }
+  +     implementation("com.google.firebase:firebase-iid:18.0.0") {
+  +       force = true;
+  +     }
+    }
+  ```
+
+  a rule of thumb is not to use June versions, the last but one versions will
+  do in most cases.
+
+  see [Maven repository](https://mvnrepository.com/) for the list of library
+  versions and corresponding release dates.
+
+  it might be necessary to force versions of both direct and transitive RN
+  package dependencies (just like in example above) - inspect the output of
+  `gradlew app:dependencies` command after adding all direct dependencies.

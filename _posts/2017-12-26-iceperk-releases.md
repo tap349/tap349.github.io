@@ -215,7 +215,7 @@ either:
 - *[RECOMMENDED]* update Xcode to 8.3
 - disable bitcode in `Build Settings` → `Build Options` → `Enable Bitcode`
 
-### [iOS] "<Company>" has one iOS Distribution but its private key is not installed
+### [iOS] "\<Company>" has one iOS Distribution but its private key is not installed
 
 the error occurs when trying to upload archive to App Store.
 

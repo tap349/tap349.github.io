@@ -236,7 +236,6 @@ the error occurs when trying to upload archive to App Store.
 
 build failed:
 
-{% raw %}
 ```sh
 $ cd android && ./gradlew assembleRelease && cd ..
 ...
@@ -255,7 +254,6 @@ FAILURE: Build failed with an exception.
 Execution failed for task ':app:bundleReleaseJsAndAssets'.
 > Process 'command 'node'' finished with non-zero exit value 1
 ```
-{% endraw %}
 
 **solution**
 

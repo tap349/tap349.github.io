@@ -13,8 +13,8 @@ using non-standard directories in Rails project (_lib/_, _system/_, etc.).
 autoload_paths and eager_load_paths
 -----------------------------------
 
-- <http://urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell>
-- <http://blog.arkency.com/2014/11/dont-forget-about-eager-load-when-extending-autoload>
+1. <http://urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell>
+2. <http://blog.arkency.com/2014/11/dont-forget-about-eager-load-when-extending-autoload>
 
 by default only subdirectories of _app/_ are added to `autoload_paths` and
 `eager_load_paths` (the latter is used in environments with eager loading -

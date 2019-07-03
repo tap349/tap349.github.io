@@ -15,8 +15,8 @@ categories: [react-native]
 
 say, new release branch name is `release_3_16`.
 
-GitHub (part 1): merge into iceperk master branch
--------------------------------------------------
+GitHub (part 1): merge iceperk release branch into master branch
+----------------------------------------------------------------
 
 NOTE: branches can be merged manually or via PR.
 
@@ -24,8 +24,7 @@ NOTE: branches can be merged manually or via PR.
   - PR name: `Develop (Release 3.16)`
 - [`iceperk`] merge `develop` branch into `master` branch
   - PR name: `Master (Release 3.16)`
-- [`iceperkapp`] don't merge `release_3_16` branch into `develop`
-  branch so far!
+- [`iceperkapp`] don't merge `release_3_16` branch into `develop` branch so far!
 
 test backend and new release
 ----------------------------
@@ -47,7 +46,7 @@ this is to make sure nothing is broken for old releases.
 - use emulator and development server to run all sanity checks
 - [`iceperk`] deploy `master` branch to production
 
-### test new release (new features)
+### test new release against new backend (new features)
 
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
 - [`iceperkapp`] change environment to `development` in _Env.js_
@@ -55,19 +54,18 @@ this is to make sure nothing is broken for old releases.
 - [`iceperk`] switch to production billing in _billing.yml_ (if necessary)
 - use emulator and development server to test new features from Trello
 
-### test new release (sanity checks)
+### test new release against production server (sanity checks)
 
 - [`iceperkapp`] switch to `release_3_16` branch (new release)
 - [`iceperkapp`] change environment to `production` in _Env.js_
-- [`iceperk`] switch to `master` branch
-- [`iceperk`] switch to production billing in _billing.yml_
-- use emulator and development server to run all sanity checks
+- [`iceperk`] production server is used now
+- use emulator and production server to run all sanity checks
 
-or else it's possible to run sanity checks on real device using test
-build and production server.
+or else it's possible to run sanity checks on real device instead of emulator
+(using a test build).
 
-GitHub (part 2): merge into iceperkapp develop branch
------------------------------------------------------
+GitHub (part 2): merge iceperkapp release branch into develop branch
+--------------------------------------------------------------------
 
 - [`iceperkapp`] merge `release_3_16` branch into `develop` branch
   - PR name: `Develop (Release 3.16)`

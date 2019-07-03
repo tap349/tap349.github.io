@@ -876,7 +876,7 @@ $ npm install
 $ react-native run-android
 ...
 > Task :app:processDebugManifest FAILED
-/Users/tap/dev/compleader/iceperkapp/android/app/src/debug/AndroidManifest.xml:22:18-91 Error:
+<APP_DIR>/android/app/src/debug/AndroidManifest.xml:22:18-91 Error:
         Attribute application@appComponentFactory value=(android.support.v4.app.CoreComponentFactory) from [com.android.support:support-compat:28.0.0] AndroidManifest.xml:22:18-91
         is also present at [androidx.core:core:1.0.0] AndroidManifest.xml:22:18-86 value=(androidx.core.app.CoreComponentFactory).
         Suggestion: add 'tools:replace="android:appComponentFactory"' to <application> element at AndroidManifest.xml:7:6-11:8 to override.

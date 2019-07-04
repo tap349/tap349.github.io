@@ -13,6 +13,16 @@ categories: [react-native]
 {:toc}
 <hr>
 
+<dl>
+  <dt>AD</dt>
+  <dd>Apple Developer</dd>
+
+  <dt>GPC</dt>
+  <dd>Google Play Console</dd>
+</dl>
+
+<hr>
+
 say, new release branch name is `release_3_16`.
 
 GitHub (part 1): merge iceperk release branch into master branch
@@ -106,13 +116,51 @@ build and publish new release
 
 - open _iceperkapp.xcworkspace_ in Xcode
   - select `Generic iOS Device`
-  - create archive: `Product` (top menu) -\> `Archive`
-  - click `Upload to App Store..` button when archive is created
-  - follow on-screen instructions (leave defaults)
+  - create archive: `Product` (top menu) → `Archive`
+  - click `Distribute App` button when archive is created
+  - walk through the steps of the wizard
+
+    > Select a method of distribution:
+
+    - [x] `iOS App Store`
+
+    > Select a destination:
+
+    - [x] `Upload`
+
+    > App Store distribution options:
+
+    - [x] `Include bitcode for iOS content`
+    - [x] `Upload your app's symbols to receive symbolicated reports from Apple`
+
+    > Re-sign "iceperkapp":
+
+    - [x] `Automatically manage signing`
+
+    > Create a new iOS Distribution certificate:
+
+    NOTE: this step is missing if existing iOS Distribution certificate has
+          not expired.
+
+    - [x] `Generate an iOS Distribution certificate`
+
+    iOS Distribution signing certificate for your company will be generated,
+    added to your local Keychain and uploaded to:
+
+    | AD: `Certificates, IDs & Profiles` (left menu)
+    | `Certificates` (left menu)
+
+    > Export signing certificate:
+
+    NOTE: this step is missing if iOS Distribution certificate wasn't created
+          in a previous step.
+
+    - `Export Signing Certificate...` (button)
+
   - click `Upload` button in the end
 - [TestFlight] open `iTunes Connect` in browser
   - go to `TestFlight` tab
-  - go to `BUILDS` (left menu) -\> `iOS`
+  - go to `BUILDS` (left menu) → `iOS`
   - wait till new build is processed (it might temporarily disappear from the list)
   - open new iOS build
   - click `Provide Export Compliance Information` button
@@ -221,16 +269,19 @@ the error occurs when trying to upload archive to App Store.
 
 **solution**
 
-- download iOS certificate for `<Company>` (`iOS Distribution` Type) from
-  [iOS Certificates](https://developer.apple.com/account/ios/certificate/)
-  (_ios\_distribution.cer_ file) and import it into the login keychain
-  (its name is something like `iPhone Distribution: <Company>`)
+- download iOS certificate for `<Company>` (`iOS Distribution` Type)
 
-  NOTE: this certificate might have been imported already
+  1. <https://developer.apple.com/account/resources/certificates>
+
+  use this link to download certificate (`.cer` file) and import it into the
+  login keychain (its name is `iPhone Distribution: <Company>`).
+
+  NOTE: this certificate might have been already imported.
 
 - get private key of iOS Distribution certificate
-  (_iOS Distribution\_\<Company>.p12_ file) from its creator and import it into
-  the login keychain (its name is something like `iOS Distribution: <Company>`)
+
+  get private key (`.p12` file) from its creator and import it into the login
+  keychain (its name is like `iOS Distribution: <Company>`).
 
 ### [Android] ENOTEMPTY: directory not empty
 

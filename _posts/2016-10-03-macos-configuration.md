@@ -52,7 +52,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - copies fonts into _~/Library/Fonts/_
 
 - `mkdir ~/dev` and git clone all repos
-- menu bar: `Battery` -\> `Show percentage`
+- menu bar: `Battery` → `Show percentage`
 - add PureVPN service:
 
   <https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>

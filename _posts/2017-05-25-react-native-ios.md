@@ -623,6 +623,7 @@ how to link library manually in the latter case.
 ### <PBXGroup ...> attempted to initialize an object with an unknown UUID
 
 ```
+$ cd ios
 $ pod install
 ...
 [!] `<PBXGroup name=`Recovered References` UUID=`54040AF61FBD99E400048638`>` attempted to initialize an object with an unknown UUID. `EEE09AF85CBC4DA8A7C4E137` for attribute: `children`. This can be the result of a merge and  the unknown UUID is being discarded.
@@ -639,7 +640,8 @@ these warnings might be gone after running `pod install` command because it
 updates _ios/iceperkapp.xcodeproj/project.pbxproj_ fixing or removing unknown
 UUIDs along the way:
 
-```
+```sh
+$ cd ios
 $ pod install
 ```
 

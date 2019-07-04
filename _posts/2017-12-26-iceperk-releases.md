@@ -334,3 +334,50 @@ but different target:
   / or
   $ git push --delete origin 3.16
   ```
+
+### [iOS] Multiple commands produce '...libyoga.a'
+
+build failed in Xcode:
+
+```
+Multiple commands produce '...libyoga.a':
+1) Target 'yoga' has a command with output '...libyoga.a'
+2) Target 'yoga' has a command with output '...libyoga.a'
+
+Multiple commands produce '...libReact.a':
+1) Target 'React' has a command with output '...libReact.a'
+2) Target 'React' has a command with output '...libReact.a'
+```
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/20492#issuecomment-422958184>
+
+> <https://github.com/facebook/react-native/issues/20492#issuecomment-422958184>
+>
+> The following is needed to ensure the "archive" step works in XCode. It
+> removes React & Yoga from the Pods project, as it is already included in
+> the main project.
+>
+> Without this, you'd see errors when you archive like:
+> "Multiple commands produce ... libReact.a"
+> "Multiple commands produce ... libyoga.a"
+
+```ruby
+# ios/Podfile
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    targets_to_ignore = %w[React yoga]
+
+    if targets_to_ignore.include?(target.name)
+      target.remove_from_project
+    end
+  end
+end
+```
+
+```sh
+$ cd ios
+$ pod install
+```

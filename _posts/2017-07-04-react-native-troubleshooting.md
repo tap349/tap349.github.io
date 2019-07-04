@@ -1238,6 +1238,7 @@ now fix both problems:
   finally install pods again:
 
   ```sh
+  $ cd ios
   $ pod install
   ```
 

@@ -346,7 +346,7 @@ if it doesn't help:
   invitation to test new build will be sent to this user by email.
 
 - follow invitation link from email (`View in TestFlight` button)
-- accept invitation
+- follow on-screen instructions to accept invitation
 
   > To accept this invitation:
   >

@@ -352,7 +352,7 @@ if it doesn't help:
   >
   > 1. Get TestFlight from the App Store.
   > 2. Open TestFlight and choose Redeem.
-  > 3. Enter <INVITATION_CODE> and start testing.
+  > 3. Enter \<INVITATION_CODE> and start testing.
 
 ### [iOS] iTunes Store Operation Failed
 

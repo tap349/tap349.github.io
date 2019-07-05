@@ -1026,7 +1026,7 @@ make sure to replace slash with tilde in AdMob App ID:
   </manifest>
 ```
 
-# Plugin/Preset files are not allowed to export objects, only functions.
+### Plugin/Preset files are not allowed to export objects, only functions.
 
 ```
 $ react-native start

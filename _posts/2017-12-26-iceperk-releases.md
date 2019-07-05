@@ -19,6 +19,9 @@ categories: [react-native]
 
   <dt>GPC</dt>
   <dd>Google Play Console</dd>
+
+  <dt>IC</dt>
+  <dd>iTunes Connect</dd>
 </dl>
 
 <hr>
@@ -166,7 +169,7 @@ build and publish new release
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in popup window
   - click `Start Internal Testing` button
-  - run selective checks
+  - run selective checks in TestFlight application
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link → `iOS` (popup menu)
@@ -287,7 +290,7 @@ the error occurs when trying to upload archive to App Store.
 
 build failed:
 
-```sh
+```
 $ cd android && ./gradlew assembleRelease && cd ..
 ...
 :app:bundleReleaseJsAndAssets
@@ -316,17 +319,44 @@ $ react-native start --reset-cache
 
 ### [iOS] uploaded build doesn't appear on `TestFlight` tab
 
-it's okay for build to disappear temporarily from the list of builds
-but sometimes it might not appear in the list again - no matter how
-long you wait.
+it's okay for build to disappear temporarily from the list of builds but
+sometimes it might not appear in the list again - no matter how long you
+wait.
 
 **solution**
 
 bump build number and upload new build.
 
+### [iOS] test build doesn't appear in TestFlight application
+
+build has `Testing` status for `App Store Connect Users` but TestFlight
+application still shows `No Apps Available to Test` message.
+
+**solution**
+
+bump build number and upload new build.
+
+if it doesn't help:
+
+- remove user (say, yourself) from testers and then add him back
+
+  | IC: `My Apps` → `<MY_APP>` → `TestFlight` (tab)
+  | `App Store Connect Users` (left menu) → `Testers` (tab)
+
+  invitation to test new build will be sent to this user by email.
+
+- follow invitation link from email (`View in TestFlight` button)
+- accept invitation
+
+  > To accept this invitation:
+  >
+  > 1. Get TestFlight from the App Store.
+  > 2. Open TestFlight and choose Redeem.
+  > 3. Enter <INVITATION_CODE> and start testing.
+
 ### [iOS] iTunes Store Operation Failed
 
-the error occurs when trying to upload archive to App Store:
+the error occurs when trying to upload archive to App Store in Xcode:
 
 ```
 iTunes Store Operation Failed
@@ -339,9 +369,8 @@ description is 'Destination: Disk quota exceeded (5)'
 
 1. <https://stackoverflow.com/a/49045515/3632318>
 
-I bumped build number but forgot to change version number as well
-(`CFBundleVersion` and `CFBundleShortVersionString` properties in
-_Info.plist_ accordingly).
+I bumped build number but forgot to change version number (`CFBundleVersion`
+and `CFBundleShortVersionString` properties in _Info.plist_ accordingly).
 
 it might also help to validate archive before uploading it to App Store
 (`Validate...` button) - this gives more meaningful error messages when

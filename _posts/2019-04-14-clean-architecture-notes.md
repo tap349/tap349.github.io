@@ -41,7 +41,7 @@ intermediate operations.
 > Но если вы работаете над проектом один, и это простое приложение,
 > то не усложняйте (жизнь) лишним маппингом.
 
-### Заблуждение: маппинг в Interactor’e
+### Заблуждение: маппинг в Interactor'e
 
 > So when we pass data across a boundary, it is always in the form
 > that is most convenient for the inner circle.

@@ -315,6 +315,14 @@ see `Accessibility` section of
 tips
 ----
 
+### (how to) list all created AVDs
+
+```sh
+$ $ANDROID_HOME/tools/emulator -list-avds
+Nexus_5X_API_23_x86_64
+Nexus_5X_API_28_x86_64
+```
+
 ### (how to) clean project
 
 1. <https://stackoverflow.com/a/48019133/3632318>
@@ -331,10 +339,49 @@ just drag the corner of emulator window.
 
 ### (how to) use another Android version in emulator
 
+say, you want to use Android 9 (API level 28):
+
 - install required version of Android SDK Platform packages
-  (version 23 = Android 6)
+
+  ```sh
+  $ sdkmanager 'add-ons;addon-google_apis-google-28'
+  $ sdkmanager 'platforms;android-28'
+  $ sdkmanager 'system-images;android-28;default;x86_64'
+  $ sdkmanager 'system-images;android-28;google_apis;x86_64'
+  $ sdkmanager 'build-tools;28.0.3'
+  ```
+
 - create new AVD using system image of required version
+
+  ```sh
+  $ avdmanager create avd \
+  --force \
+  --package 'system-images;android-28;google_apis;x86_64' \
+  --name Nexus_5X_API_28_x86_64 \
+  --abi 'google_apis/x86_64' \
+  --device 9
+  ```
+
+- enable hardware keyboard for new AVD
+
+  ```diff
+    ; ~/.android/avd/Nexus_5X_API_28_x86_64.avd/config.ini
+
+  + hw.keyboard=yes
+  ```
+
 - start emulator using new AVD
+
+  ```zsh
+  # ~/.zshenv
+
+  alias avd6='$ANDROID_HOME/tools/emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920'
+  alias avd9='$ANDROID_HOME/tools/emulator -avd Nexus_5X_API_28_x86_64 -gpu host -skin 1080x1920'
+  ```
+
+  ```sh
+  $ avd9
+  ```
 
 ### (how to) upload file to emulator
 

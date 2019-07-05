@@ -325,18 +325,18 @@ $ ./gradlew cleanBuildCache
 $ ./gradlew clean
 ```
 
-### change screen resolution (scale) in emulator
+### (how to) change screen resolution (scale) in emulator
 
 just drag the corner of emulator window.
 
-### use another Android version in emulator
+### (how to) use another Android version in emulator
 
 - install required version of Android SDK Platform packages
   (version 23 = Android 6)
 - create new AVD using system image of required version
 - start emulator using new AVD
 
-### upload file to emulator
+### (how to) upload file to emulator
 
 1. <https://stackoverflow.com/questions/5151744/upload-picture-to-emulator-gallery>
 2. <https://stackoverflow.com/questions/17928576/refresh-android-mediastore-using-adb>
@@ -365,7 +365,7 @@ perform these steps to upload a file:
   in Applications → `Dev Tools` → `Media Provider`. but it doesn't work -
   something crashes with the message `Unfortunately, Dev Tools has stopped`.
 
-### delete all application data
+### (how to) delete all application data
 
 this can be useful if, say, it's impossible to log out normally.
 
@@ -376,6 +376,52 @@ package:com.iceperkapp
 ...
 $ adb shell pm clear com.iceperkapp
 Success
+```
+
+### (how to) build application with 64-bit libraries
+
+> <https://android-developers.googleblog.com/2019/01/get-your-apps-ready-for-64-bit.html>
+>
+> Starting August 1, 2019:
+>
+> All new apps and app updates that include native code are required to provide
+> 64-bit versions in addition to 32-bit versions when publishing to Google Play.
+
+> <https://developer.android.com/distribute/best-practices/develop/64-bit#building_with_android_studio_or_gradle>
+>
+> Enabling builds for your native code is as simple as adding the arm64-v8a
+> and/or x86_64, depending on the architecture(s) you wish to support, to the
+> ndk.abiFilters setting in your app's 'build.gradle' file
+
+```diff
+  // android/app/build.gradle
+
+  android {
+      defaultConfig {
+-         ndk.abiFilters "armeabi-v7a", "x86"
++         ndk.abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+      }
+```
+
+build application and inspect APK file to ensure 64-bit libraries are present:
+
+> <https://developer.android.com/distribute/best-practices/develop/64-bit#does_your_app_include_64-bit_libraries>
+>
+> The simplest way to check for 64-bit libraries is to inspect the structure of
+> your APK file. When built, the APK will be packaged with any native libraries
+> needed by the app.
+
+```sh
+$ cd android/app/build/outputs/apk
+$ zipinfo -1 app-release.apk | grep \.so$
+lib/arm64-v8a/libc++_shared.so
+...
+lib/armeabi-v7a/libc++_shared.so
+...
+lib/x86/libc++_shared.so
+...
+lib/x86_64/libc++_shared.so
+...
 ```
 
 debugging

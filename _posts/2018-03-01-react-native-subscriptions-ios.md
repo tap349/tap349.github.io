@@ -93,8 +93,8 @@ add subscription in IC
 
 > Leave the state of your product as Missing Metadata.
 >
-> Upload a a screenshot of your in-app purchase product once you
-> are done testing it and ready to upload it for review.
+> Upload a a screenshot of your in-app purchase product once you are done
+> testing it and ready to upload it for review.
 
 ### configure subscription group
 
@@ -103,8 +103,8 @@ add subscription in IC
 
 it's required to add localization for subscription group as well:
 
-> Before you can submit your in-app purchase for review,
-> you must add at least one localization to your subscription group.
+> Before you can submit your in-app purchase for review, you must add at least
+> one localization to your subscription group.
 
 - `Localizations` (section) → `⨁` (link) → `Russian`
   - `Subscription Group Display Name` (input): `Подписки`

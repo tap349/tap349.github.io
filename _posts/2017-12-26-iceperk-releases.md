@@ -291,7 +291,8 @@ the error occurs when trying to upload archive to App Store.
 build failed:
 
 ```
-$ cd android && ./gradlew assembleRelease && cd ..
+$ cd android
+$ ./gradlew assembleRelease
 ...
 :app:bundleReleaseJsAndAssets
 Scanning 773 folders for symlinks in <APP_DIR>/node_modules (41ms)
@@ -460,4 +461,38 @@ end
 ```sh
 $ cd ios
 $ pod install
+```
+
+### resource android:style/TextAppearance.Material.Widget.Button.Colored not found
+
+```
+$ cd android
+$ ./gradlew assembleRelease
+...
+> Task :react-native-exit-app:verifyReleaseResources FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':react-native-exit-app:verifyReleaseResources'.
+> 1 exception was raised by workers:
+  com.android.builder.internal.aapt.v2.Aapt2Exception: Android resource linking failed
+  error: resource android:style/TextAppearance.Material.Widget.Button.Borderless.Colored not found.
+  error: resource android:style/TextAppearance.Material.Widget.Button.Colored not found.
+  /Users/tap/dev/compleader/iceperkapp/node_modules/react-native-exit-app/android/build/intermediates/res/merged/release/values-v26/values-v26.xml:7: error: resource android:attr/colorError not found.
+```
+
+usually this error is accompanied by this warning when configuring corresponding
+project:
+
+```
+$ cd android
+$ ./gradlew assembleRelease
+...
+> Configure project :react-native-exit-app
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (25.0.0) is ignored, as it is below the minimum supported version (28.0.3) for Android Gradle Plugin 3.4.0.
+Android SDK Build Tools 28.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '25.0.0'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
 ```

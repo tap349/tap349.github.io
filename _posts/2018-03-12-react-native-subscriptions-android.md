@@ -306,8 +306,8 @@ test subscriptions are:
 test subscriptions are not created separately - they are real subscriptions
 but with special characteristics and behaviour for license testers.
 
-=> it's required to create and publish a real subscription in iTunes
-Connect as described above (application itself may stay unpublished).
+=> it's required to create and publish a real subscription in GP as described
+above (application itself may stay unpublished).
 
 <https://developer.android.com/google/play/billing/billing_admin.html#billing-form-add>:
 

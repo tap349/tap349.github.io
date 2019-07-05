@@ -648,8 +648,9 @@ link `react-native-contacts` library manually and rebuild application.
 
 ### Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'
 
-```sh
-$ cd android && ./gradlew assembleRelease; cd ..
+```
+$ cd android
+$ ./gradlew assembleRelease
 ...
 sentry-cli update to 1.28.1 is available!
 run sentry-cli update to update

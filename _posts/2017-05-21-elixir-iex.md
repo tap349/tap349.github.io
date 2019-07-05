@@ -37,7 +37,7 @@ categories: [elixir, iex]
 IEx loads the 1st file it finds:
 
 - _$PWD/.iex.exs_
-- _$HOME/.iex.exs_
+- _~/.iex.exs_
 
 => each project can have its own _.iex.exs_ with local aliases
 that don't pollute global namespace.

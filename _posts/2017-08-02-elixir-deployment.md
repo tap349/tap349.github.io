@@ -449,9 +449,9 @@ NOTE: application must be restarted after changing EVM flags.
   > In order to connect two nodes they need to share or know a secret
   > passphrase called a cookie (aka magic cookie).
   >
-  > As long as you are running both nodes on the same machine and
-  > the same user starts them they will automatically share the cookie
-  > (in the file $HOME/.erlang.cookie).
+  > As long as you are running both nodes on the same machine and the same
+  > user starts them they will automatically share the cookie (in the file
+  > $HOME/.erlang.cookie).
   >
   > In the distributed case we need to make sure that all nodes know or
   > share the cookie. This can be done in three ways:

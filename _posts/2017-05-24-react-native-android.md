@@ -183,7 +183,7 @@ emulator searches for AVDs in the following directories:
 
 - _$ANDROID_AVD_HOME_
 - _$ANDROID_SDK_HOME/avd/_
-- _$HOME/.android/avd/_
+- _~/.android/avd/_
 
 specify `-gpu` and `-skin` options when starting emulator:
 
@@ -293,9 +293,9 @@ NOTE: hot reloading is recommended over live reload.
 1. <https://stuff.mit.edu/afs/sipb/project/android/docs/tools/devices/managing-avds.html>
 
 edit configuration file _config.ini_ of each AVD in which you want to enable
-hardware keyboard (by default AVDs are stored in _$HOME/.android/avd/_).
+hardware keyboard (by default AVDs are stored in _~/.android/avd/_).
 
-_$HOME/.android/avd/\<name\>.avd/config.ini_:
+_~/.android/avd/\<name\>.avd/config.ini_:
 
 ```ini
 hw.keyboard=yes

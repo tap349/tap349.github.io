@@ -482,7 +482,7 @@ Execution failed for task ':react-native-exit-app:verifyReleaseResources'.
   /Users/tap/dev/compleader/iceperkapp/node_modules/react-native-exit-app/android/build/intermediates/res/merged/release/values-v26/values-v26.xml:7: error: resource android:attr/colorError not found.
 ```
 
-usually this error is accompanied by this warning when configuring corresponding
+the error is usually accompanied by this warning when configuring corresponding
 project:
 
 ```
@@ -496,3 +496,50 @@ WARNING: The specified Android SDK Build Tools version (25.0.0) is ignored, as i
 Android SDK Build Tools 28.0.3 will be used.
 To suppress this warning, remove "buildToolsVersion '25.0.0'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
 ```
+
+**solution**
+
+explanation:
+
+> <https://stackoverflow.com/a/49332191/3632318>
+>
+> android:style/TextAppearance.Material.Widget.Button.Borderless.Colored was
+> added in API 24 so you can't use it with version 23. You can use a style that
+> was added before version 23.
+
+in brief RN package is using component which is not available in API level 23
+(this API level is specified in _android/build.gradle_ file of that RN package).
+
+=> increase API level supported by RN package (either fork RN packaged yourself
+or find a fork where it has been already done):
+
+```diff
+  // android/build.gradle
+
+  android {
+-   compileSdkVersion 23
+-   buildToolsVersion "23.0.1"
++   compileSdkVersion 28
++   buildToolsVersion "28.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+-       targetSdkVersion 22
++       targetSdkVersion 28
+    }
+```
+
+> <https://stackoverflow.com/a/24523113/3632318>
+>
+> compileSdkVersion is the API version of Android that you compile against.
+>
+> buildToolsVersion is the version of the compilers (aapt, dx, renderscript
+> compiler, etc...) that you want to use. For each API level (starting with 18),
+> there is a matching .0.0 version.
+
+> <https://developer.android.com/studio/releases/gradle-plugin.html#3-2-0>
+>
+> 3.2.1 (October 2018)
+>
+> With this update, you no longer need to specify a version for the SDK Build
+> Tools. The Android Gradle plugin now uses version 28.0.3 by default.

@@ -906,8 +906,7 @@ Could not find iPhone 6 simulator
 
 upgrade RN.
 
-Undefined symbol: _OBJC_METACLASS_$_RCTEventEmitter
----------------------------------------------------
+### Undefined symbol: _OBJC_METACLASS_$_RCTEventEmitter
 
 1. <https://documentation.onesignal.com/docs/react-native-sdk-setup#section-add-notification-service-extension>
 

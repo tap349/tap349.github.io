@@ -958,7 +958,7 @@ D8: Cannot fit requested classes in a single dex file (# methods: 66744 > 65536)
 emulator:
 
 ```
-Unfortunately, MyApp has stopped
+Unfortunately, iceperkapp has stopped
 ```
 
 ```
@@ -996,7 +996,7 @@ $ adb logcat
 emulator:
 
 ```
-Unfortunately, MyApp has stopped
+Unfortunately, iceperkapp has stopped
 ```
 
 ```
@@ -1211,7 +1211,7 @@ now fix both problems:
   it happened because `pod install` doesn't remove unused pods from _ios/Pods/_
   => it should be done manually by deintegrating your project:
 
-  ```sh
+  ```
   $ cd ios
   $ pod deintegrate
   Deintegrating `iceperkapp.xcodeproj`
@@ -1387,4 +1387,44 @@ usage:
   // ...
 - this._myComponentRef.getWrappedInstance().save();
 + this._myComponentRef.save();
+```
+
+Could not get unknown property 'android' for root project 'iceperkapp' of type org.gradle.api.Project
+-----------------------------------------------------------------------------------------------------
+
+1. <https://documentation.onesignal.com/docs/react-native-sdk-setup#section-adding-the-gradle-plugin>
+
+```
+$ cd android
+$ ./gradlew assembleRelease
+...
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring root project 'iceperkapp'.
+> Could not get unknown property 'android' for root project 'iceperkapp' of type org.gradle.api.Project.
+```
+
+the error occured right after configuring `react-native-onesignal` package by
+following official `React Native SDK Setup` guide (see the link).
+
+**solution**
+
+official guide contains error:
+
+> <https://github.com/geektimecoil/react-native-onesignal/issues/550#issuecomment-396015932>
+>
+> you applied the onesignal-gradle-plugin to your root build.gradle or
+> android/build.gradle instead of the one in app/build.gradle
+
+```diff
+  // android/build.gradle
+
+- apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+```
+
+```diff
+  // android/app/build.gradle
+
++ apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 ```

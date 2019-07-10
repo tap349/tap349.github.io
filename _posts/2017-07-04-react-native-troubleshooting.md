@@ -1706,8 +1706,8 @@ $ npm install -g react-native-git-upgrade
 $ react-native-git-upgrade
 ```
 
-`react-native-git-upgrade` command downgraded `react` package to
-another alpha version and this is what most likely fixed the issue.
+`react-native-git-upgrade` command downgraded `react` package to another alpha
+version and this is what most likely fixed the issue.
 
 errors after upgrading RN to 0.47.0
 -----------------------------------
@@ -1765,7 +1765,7 @@ sense to add this command to `postinstall` script in _package.json_:
 
 ### fatal error: 'Flurry.h' file not found
 
-```sh
+```
 $ react-native run-ios
 ...
 <APP_DIR>/node_modules/react-native-flurry-analytics/ios/RNFlurryAnalytics.m:2:9: fatal error: 'Flurry.h' file not found
@@ -1791,10 +1791,9 @@ ld: warning: object file (<APP_DIR>/ios/build/Build/Products/Debug-iphonesimulat
 
 1. <https://stackoverflow.com/a/32950454/3632318>
 
-error explanation: `react-native-autogrow-textinput` package is built with
-`IPHONEOS_DEPLOYMENT_TARGET=9.3` build setting but the rest of the project (the
-library is linked to later) has been built with `IPHONEOS_DEPLOYMENT_TARGET=8.0`
-build setting => hence the error.
+`react-native-autogrow-textinput` is built with `IPHONEOS_DEPLOYMENT_TARGET=9.3`
+build setting but the rest of the project (the library is linked to later) has
+been built with `IPHONEOS_DEPLOYMENT_TARGET=8.0` build setting => hence the error.
 
 the latest version of `react-native-autogrow-textinput` doesn't support iOS
 Deployment Target (DT) lower than 9.3 but current DT in iOS project is 8.0 =>
@@ -1846,10 +1845,11 @@ import `PropTypes` from a separate `prop-types` package.
 
 error is shown in device system log and emulator window.
 
-the error occurs when evaluating this line in _deviceinfo.js_ file
-of `react-native-device-info` package:
+the error occurs when evaluating this line:
 
 ```javascript
+// node_modules/react-native-device-info/deviceinfo.js
+
 return RNDeviceInfo.appVersion;
 ```
 
@@ -1971,7 +1971,7 @@ $ rm -rf node_modules/*/.git
 
 ### incompatible types: ReadableArray cannot be converted to ReadableNativeArray
 
-```sh
+```
 $ react-native run-android
 ...
 > Task :react-native-sentry:compileDebugJavaWithJavac FAILED
@@ -1993,7 +1993,7 @@ NOTE: 0.43.1 is the latest version at the time of writing.
 
 ### constructor RNSentryPackage in class RNSentryPackage cannot be applied to given types
 
-```sh
+```
 $ react-native run-android
 ...
 > Task :app:compileDebugJavaWithJavac FAILED
@@ -2020,7 +2020,7 @@ kage cannot be applied to given types;
 
 ### Cannot fit requested classes in a single dex file
 
-```sh
+```
 $ react-native run-android
 ...
 > Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug FAILED

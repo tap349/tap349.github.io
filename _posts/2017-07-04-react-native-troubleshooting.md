@@ -1137,15 +1137,15 @@ A problem occurred configuring project ':app'.
 
 **solution**
 
-if you previously used Android Studio to run application it might have
-created _android/local.properties_ file in project with the following content:
+if you previously used Android Studio to run application it might have created
+_android/local.properties_ file in project with the following content:
 
 ```conf
 sdk.dir=/Users/tap/Library/Android/sdk
 ```
 
-that is RN now expects Android SDK to be installed in
-_~/Library/Android/sdk/_ (this is where Android Studio would install it).
+that is RN now expects Android SDK to be installed in _~/Library/Android/sdk/_
+(this is where Android Studio would install it).
 
 there are 2 ways to solve the problem:
 
@@ -1265,8 +1265,11 @@ CANNOT TRANSLATE guest DNS ip
 
 **solution**
 
-issue is resolved after updating emulator to version 26.1.4.0
-via `sdkmanager --update`.
+issue is resolved after updating emulator to version 26.1.4.0:
+
+```sh
+$ sdkmanager --update
+```
 
 ### no application launcher icon on home screen in emulator
 

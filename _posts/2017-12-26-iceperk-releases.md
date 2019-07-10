@@ -169,13 +169,13 @@ build and publish new release
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in popup window
   - click `Start Internal Testing` button
-  - install build via TestFlight application and run selective checks
+  - install new build via TestFlight application and run selective checks
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link → `iOS` (popup menu)
   - enter new `Store Version Number` (say, 3.16) in popup window
   - fill `What's New in This Version` section
-  - screenshots are added for iPhone 5.5" Display only
+  - screenshots must be added for iPhone 6.5" and iPhone 5.5" Displays
   - select new build
   - select `Automatically release this version` option
   - click `Save` button

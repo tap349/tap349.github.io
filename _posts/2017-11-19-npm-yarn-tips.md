@@ -95,8 +95,8 @@ $ npm prune
   it's possible to run executables directly (npm bin folder is returned by
   `npm bin` command):
 
-  ```sh
-  $ `npm bin`/flow
+  ```zsh
+  $ $(npm bin)/flow
   ```
 
 - scripts

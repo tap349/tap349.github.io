@@ -197,7 +197,7 @@ before building releases.
   $ build_android_release
   ```
 
-  new release is saved as _android/app/build/outputs/apk/app-release.apk_.
+  release is saved as _android/app/build/outputs/apk/app-release.apk_.
 
 - upload release to Google Drive
 

@@ -42,7 +42,7 @@ NOTE: backticks are used for exact names.
 keep path on a single line (or else table won't be rendered) but it's allowed
 to use multiple table rows each row containing the path on a separate screen
 (window or page). or else multiple table rows can be used to split path into 2
-parts - high-level part and the one that specifies exact location of UI element).
+parts - high-level part and the one specifying exact location of UI element).
 
 ### use comment with arrow to specify return value
 

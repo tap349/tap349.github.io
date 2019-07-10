@@ -169,7 +169,7 @@ build and publish new release
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in popup window
   - click `Start Internal Testing` button
-  - run selective checks in TestFlight application
+  - install build via TestFlight application and run selective checks
 - [App Store] open `iTunes Connect` in browser
   - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link → `iOS` (popup menu)
@@ -205,11 +205,12 @@ before building releases.
 
   - replace existing `app-release.apk` file with a new one
 
-- run selective checks
+- install release on any Android device and run selective checks
 - publish release in Google Play Console
 
   | GPC: `All applications` → `Хоккей. Ледовое братство`
-  | `Release management` (left menu) → `App releases` → `MANAGE PRODUCTION` (button) → `CREATE RELEASE` (button)
+  | `Release management` (left menu) → `App releases`
+  | `Production track` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
 
   > New release to production
 
@@ -226,8 +227,8 @@ before building releases.
 GitHub (part 3): create iceperkapp release on GitHub
 ----------------------------------------------------
 
-this is done AFTER release is published in both stores and all seems
-to be working okay:
+this is done AFTER release is published in both stores and all seems to be
+working okay:
 
 - [`iceperkapp`] merge `develop` branch into `master` branch
   - PR name: `Master (Release 3.16)`
@@ -479,7 +480,7 @@ Execution failed for task ':react-native-exit-app:verifyReleaseResources'.
   com.android.builder.internal.aapt.v2.Aapt2Exception: Android resource linking failed
   error: resource android:style/TextAppearance.Material.Widget.Button.Borderless.Colored not found.
   error: resource android:style/TextAppearance.Material.Widget.Button.Colored not found.
-  /Users/tap/dev/compleader/iceperkapp/node_modules/react-native-exit-app/android/build/intermediates/res/merged/release/values-v26/values-v26.xml:7: error: resource android:attr/colorError not found.
+  <APP_DIR>/node_modules/react-native-exit-app/android/build/intermediates/res/merged/release/values-v26/values-v26.xml:7: error: resource android:attr/colorError not found.
 ```
 
 the error is usually accompanied by this warning when configuring corresponding

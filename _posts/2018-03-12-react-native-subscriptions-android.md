@@ -127,7 +127,7 @@ can both set up subscription and test it on real device without publishing
 
 | GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` →
-| `Alpha` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
+|  `Alpha` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
 
 > New release to alpha
 

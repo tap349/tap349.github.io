@@ -209,8 +209,7 @@ before building releases.
 - publish release in Google Play Console
 
   | GPC: `All applications` → `Хоккей. Ледовое братство`
-  | `Release management` (left menu) → `App releases`
-  | `Production track` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
+  | `Release management` (left menu) → `App releases` → `Production track` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
 
   > New release to production
 

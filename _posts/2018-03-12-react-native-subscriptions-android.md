@@ -126,8 +126,7 @@ can both set up subscription and test it on real device without publishing
 (see `test with a test subscription` section).
 
 | GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases` →
-|  `Alpha` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
 
 > New release to alpha
 
@@ -509,8 +508,7 @@ so make sure to add payment info for this account before trying to make a purcha
 - `CREATE LIST` (button)
 
 | GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases`
-| `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section)
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section)
 
 - `Choose a testing method` (combobox): `Closed Alpha Testing`
 - `Users`: [x] `team` (activate the list)
@@ -525,8 +523,7 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
       installing and running it on real device with `adb`.
 
 | GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases`
-| `Alpha` (section) → `MANAGE` (button) → `EDIT RELEASE` (button)
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `EDIT RELEASE` (button)
 
 > New release to alpha
 
@@ -540,8 +537,7 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
 #### open opt-in URL in browser
 
 | GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases`
-| `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section) → `Opt-in URL` (input)
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section) → `Opt-in URL` (input)
 
 - open link in browser
 - `BECOME A TESTER` (button)

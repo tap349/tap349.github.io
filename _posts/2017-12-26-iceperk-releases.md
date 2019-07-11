@@ -103,6 +103,11 @@ prepare new release in iceperkapp
   <string>96</string>
   ```
 
+  don't forget to bump both numbers in _Info.plist_ files of all extensions
+  your iOS application contains (say, `OneSignalNotificationServiceExtension`)
+  or else you'll get warnings about version mismatch when uploading archive
+  to App Store.
+
   _android/app/build.gradle_:
 
   ```groovy

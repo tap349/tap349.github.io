@@ -253,23 +253,10 @@ working okay:
 troubleshooting
 ---------------
 
-### [iOS] Invalid bitcode version (Producer: '802.0.41.0_0' Reader: '800.0.42.1_0')
+1. [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})
 
-build failed in Xcode:
-
-```
-error: Invalid bitcode version (Producer: '802.0.42.0_0' Reader: '800.0.42.1_0')
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-```
-
-**solution**
-
-1. <https://stackoverflow.com/questions/43480556/xcode-8-2-1-error-invalid-bitcode-version-producer-802-0-41-0-0-reader>
-
-either:
-
-- *[RECOMMENDED]* update Xcode to 8.3
-- disable bitcode in `Build Settings` → `Build Options` → `Enable Bitcode`
+this section contains errors which occurred AFTER application is compiled - see
+the link for compilation errors.
 
 ### [iOS] "\<Company>" has one iOS Distribution but its private key is not installed
 
@@ -290,38 +277,6 @@ the error occurs when trying to upload archive to App Store.
 
   get private key (`.p12` file) from its creator and import it into the login
   keychain (its name is like `iOS Distribution: <Company>`).
-
-### [Android] ENOTEMPTY: directory not empty
-
-build failed:
-
-```
-$ cd android
-$ ./gradlew assembleRelease
-...
-:app:bundleReleaseJsAndAssets
-Scanning 773 folders for symlinks in <APP_DIR>/node_modules (41ms)
-Scanning 773 folders for symlinks in <APP_DIR>/node_modules (37ms)
-Loading dependency graph, done.
-
-ENOTEMPTY: directory not empty, rmdir '/var/folders/1g/28pm7dxn0_l569vjyzlzp2zw0000gn/T/react-native-packager-cache-f18bd0fb39fa7507ecdd2fb6cd91757d41b78c44/cache'
-
-:app:bundleReleaseJsAndAssets FAILED
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':app:bundleReleaseJsAndAssets'.
-> Process 'command 'node'' finished with non-zero exit value 1
-```
-
-**solution**
-
-reset cache:
-
-```sh
-$ react-native start --reset-cache
-```
 
 ### [iOS] uploaded build doesn't appear on `TestFlight` tab
 
@@ -420,131 +375,3 @@ different target:
   / or
   $ git push --delete origin 3.16
   ```
-
-### [iOS] Multiple commands produce '...libyoga.a'
-
-build failed in Xcode:
-
-```
-Multiple commands produce '...libyoga.a':
-1) Target 'yoga' has a command with output '...libyoga.a'
-2) Target 'yoga' has a command with output '...libyoga.a'
-
-Multiple commands produce '...libReact.a':
-1) Target 'React' has a command with output '...libReact.a'
-2) Target 'React' has a command with output '...libReact.a'
-```
-
-**solution**
-
-1. <https://github.com/facebook/react-native/issues/20492#issuecomment-422958184>
-
-> <https://github.com/facebook/react-native/issues/20492#issuecomment-422958184>
->
-> The following is needed to ensure the "archive" step works in XCode. It
-> removes React & Yoga from the Pods project, as it is already included in
-> the main project.
->
-> Without this, you'd see errors when you archive like:
-> "Multiple commands produce ... libReact.a"
-> "Multiple commands produce ... libyoga.a"
-
-```ruby
-# ios/Podfile
-
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    targets_to_ignore = %w[React yoga]
-
-    if targets_to_ignore.include?(target.name)
-      target.remove_from_project
-    end
-  end
-end
-```
-
-```sh
-$ cd ios
-$ pod install
-```
-
-### resource android:style/TextAppearance.Material.Widget.Button.Colored not found
-
-```
-$ cd android
-$ ./gradlew assembleRelease
-...
-> Task :react-native-exit-app:verifyReleaseResources FAILED
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':react-native-exit-app:verifyReleaseResources'.
-> 1 exception was raised by workers:
-  com.android.builder.internal.aapt.v2.Aapt2Exception: Android resource linking failed
-  error: resource android:style/TextAppearance.Material.Widget.Button.Borderless.Colored not found.
-  error: resource android:style/TextAppearance.Material.Widget.Button.Colored not found.
-  <APP_DIR>/node_modules/react-native-exit-app/android/build/intermediates/res/merged/release/values-v26/values-v26.xml:7: error: resource android:attr/colorError not found.
-```
-
-the error is usually accompanied by this warning when configuring corresponding
-project:
-
-```
-$ cd android
-$ ./gradlew assembleRelease
-...
-> Configure project :react-native-exit-app
-WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
-It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
-WARNING: The specified Android SDK Build Tools version (25.0.0) is ignored, as it is below the minimum supported version (28.0.3) for Android Gradle Plugin 3.4.0.
-Android SDK Build Tools 28.0.3 will be used.
-To suppress this warning, remove "buildToolsVersion '25.0.0'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
-```
-
-**solution**
-
-explanation:
-
-> <https://stackoverflow.com/a/49332191/3632318>
->
-> android:style/TextAppearance.Material.Widget.Button.Borderless.Colored was
-> added in API 24 so you can't use it with version 23. You can use a style that
-> was added before version 23.
-
-in brief RN package is using component which is not available in API level 23
-(this API level is specified in _android/build.gradle_ file of that RN package).
-
-=> increase API level supported by RN package (either fork RN packaged yourself
-or find a fork where it has been already done):
-
-```diff
-  // android/build.gradle
-
-  android {
--   compileSdkVersion 23
--   buildToolsVersion "23.0.1"
-+   compileSdkVersion 28
-+   buildToolsVersion "28.0.1"
-
-    defaultConfig {
-        minSdkVersion 16
--       targetSdkVersion 22
-+       targetSdkVersion 28
-    }
-```
-
-> <https://stackoverflow.com/a/24523113/3632318>
->
-> compileSdkVersion is the API version of Android that you compile against.
->
-> buildToolsVersion is the version of the compilers (aapt, dx, renderscript
-> compiler, etc...) that you want to use. For each API level (starting with 18),
-> there is a matching .0.0 version.
-
-> <https://developer.android.com/studio/releases/gradle-plugin.html#3-2-0>
->
-> 3.2.1 (October 2018)
->
-> With this update, you no longer need to specify a version for the SDK Build
-> Tools. The Android Gradle plugin now uses version 28.0.3 by default.

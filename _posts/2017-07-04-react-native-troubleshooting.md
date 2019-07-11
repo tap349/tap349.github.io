@@ -987,6 +987,16 @@ $ brew tap caskroom/versions
 $ brew cask install java8
 ```
 
+***UPDATE (2019-07-11)***
+
+`java8` formula is removed from `homebrew/cask-versions` repository - install
+`adoptopenjdk8` formula instead:
+
+```sh
+$ brew tap homebrew/cask-versions
+$ brew cask install adoptopenjdk8
+```
+
 ### Failed to finalize session : INSTALL_FAILED_VERSION_DOWNGRADE
 
 the error occurs when trying to install application with lower version

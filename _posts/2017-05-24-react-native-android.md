@@ -20,9 +20,10 @@ installation
 
 ### install Java 8
 
-1. <https://github.com/facebook/react-native/issues/17688>
+1. [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})
 
-`java8` formula is removed from `homebrew/cask-versions` repository:
+see `Could not determine java version from '9.0.4'` Android error in the linked
+post.
 
 ```sh
 $ brew tap homebrew/cask-versions

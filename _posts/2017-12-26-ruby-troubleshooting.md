@@ -129,6 +129,8 @@ now there are 2 possible solutions:
 
 ### sync Bundler version to Gemfile.lock
 
+1. <https://bundler.io/blog/2019/01/04/an-update-on-the-bundler-2-release.html>
+
 ```sh
 $ gem install bundler -v 1.16.1
 ```

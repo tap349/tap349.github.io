@@ -387,8 +387,8 @@ archive is not valid.
 if you have accidentally published release with a wrong target (branch), you
 can't edit target afterwards (though you can edit, say, tag or release title).
 
-follow these steps in this case to create new release with the same tag
-but different target:
+follow these steps in this case to create new release with the same tag but
+different target:
 
 - delete release
 

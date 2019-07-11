@@ -351,12 +351,14 @@ say, you want to use Android 9 (API level 28):
 - install required version of Android SDK Platform packages
 
   ```sh
-  $ sdkmanager 'add-ons;addon-google_apis-google-28'
+  $ sdkmanager 'add-ons;addon-google_apis-google-24'
   $ sdkmanager 'platforms;android-28'
   $ sdkmanager 'system-images;android-28;default;x86_64'
   $ sdkmanager 'system-images;android-28;google_apis;x86_64'
   $ sdkmanager 'build-tools;28.0.3'
   ```
+
+  NOTE: `add-ons;addon-google_apis-google-24` is the latest package available.
 
 - create new AVD using system image of required version
 

@@ -255,7 +255,7 @@ troubleshooting
 
 1. [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})
 
-this section contains errors which occurred AFTER application is compiled - see
+this section contains errors which occurred AFTER application was compiled - see
 the link for compilation errors.
 
 ### [iOS] "\<Company>" has one iOS Distribution but its private key is not installed

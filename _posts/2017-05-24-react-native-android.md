@@ -16,26 +16,32 @@ categories: [react-native, android]
 installation
 ------------
 
-1. <https://facebook.github.io/react-native/docs/getting-started.html>
-2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
-3. <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
+1. <https://medium.com/skyshidigital/install-react-native-without-android-studio-366317419e7e>
 
-> <https://facebook.github.io/react-native/docs/getting-started.html>
->
-> Node, Watchman, JDK
->
-> The React Native CLI
+### install Java 8
+
+1. <https://github.com/facebook/react-native/issues/17688>
+
+`java8` formula is removed from `homebrew/cask-versions` repository:
+
+```sh
+$ brew tap homebrew/cask-versions
+$ brew cask install adoptopenjdk8
+```
+
+### install Node, Watchman and React Native CLI
+
+1. <https://facebook.github.io/react-native/docs/getting-started.html#installing-dependencies>
+2. <https://docs.npmjs.com/getting-started/installing-npm-packages-globally>
 
 ```sh
 $ brew install node watchman
-$ brew cask install java8
 $ npm install -g react-native-cli
 ```
 
 ### install Android SDK
 
 ```sh
-$ brew cask install java
 $ brew cask install android-sdk
 ```
 

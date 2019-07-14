@@ -281,7 +281,7 @@ backup
 
 there are 2 ways to create a dump file (say, _dump.sql_):
 
-- send output to the dump file via `-f` option
+- send output to the dump file with `-f` option
 
   ```sh
   $ pg_dump -f dump.sql DATABASE

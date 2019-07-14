@@ -109,7 +109,7 @@ remote debugging
 - `foo` is a name of remote Erlang node running on `foo_host`
   (most likely it matches application name)
 
-### find out epmd and node ports on remote machine
+### find out epmd and node ports on remote host
 
 ```sh
 $ ssh foo_host 'epmd -names'

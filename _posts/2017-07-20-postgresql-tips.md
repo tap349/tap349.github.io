@@ -311,10 +311,10 @@ $ tar cvzf dump.sql.tar.gz dump.sql
 
 ```sh
 $ tar xvzf dump.sql.tar.gz
-$ psql -U USERNAME -f dump.sql DATABASE
+$ psql -h localhost -U USERNAME -p PORT -f dump.sql DATABASE
 ```
 
-it might be necessary to download the dump file from remote host beforehand:
+it might be necessary to download the dump file from remote host first:
 
 ```sh
 $ scp SSH_HOST:~/tmp/dump.sql.tar.gz dump.sql.tar.gz

@@ -21,14 +21,14 @@ psql
 ### login
 
 ```sh
-$ psql -h localhost -U sith_prod sith_prod
-/ enter password for database user sith_prod
+$ psql -h localhost -U USERNAME DATABASE
+/ enter password for database user USERNAME
 ```
 
 as `postgres` user:
 
 ```sh
-$ sudo -u postgres psql -U postgres sith_prod
+$ sudo -u postgres psql -U postgres DATABASE
 ```
 
 ### users
@@ -335,7 +335,7 @@ restore:
 $ tar xvf model_name.tar
 $ cd model_name/databases/
 $ gunzip PostgreSQL.sql.gz
-$ psql -U username -f ./PostgreSQL.sql database
+$ psql -U USERNAME -f ./PostgreSQL.sql DATABASE
 $ RAILS_ENV=test rails db:structure:load
 ```
 

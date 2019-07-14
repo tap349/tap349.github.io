@@ -277,44 +277,47 @@ backup
 
 ### using `pg_dump`
 
-create backup with data only:
+#### dump
+
+there are 2 ways to create a dump file (say, _dump.sql_):
+
+- send output to the dump file via `-f` option
+
+  ```sh
+  $ pg_dump -f dump.sql DATABASE
+  ```
+
+- redirect output to the dump file
+
+  ```sh
+  $ pg_dump DATABASE > dump.sql
+  ```
 
 ```sh
-(remote)$ mkdir ~/tmp && cd ~/tmp
-(remote)$ pg_dump -h localhost -U sith_prod -aOf dump.sql sith_prod
-(remote)$ tar cvzf dump.sql.tar.gz dump.sql
+$ pg_dump -h localhost -U USERNAME -p PORT -f dump.sql DATABASE
+$ tar cvzf dump.sql.tar.gz dump.sql
 ```
 
-create backup with structure and data:
+NOTE: use `postgres` user on macOS.
+
+use `-aO` options to dump the data only:
 
 ```sh
-(remote)$ mkdir ~/tmp && cd ~/tmp
-(remote)$ pg_dump sith_prod > dump.sql
-(remote)$ tar cvzf dump.sql.tar.gz dump.sql
+$ pg_dump -h localhost -U USERNAME -p PORT -aOf dump.sql DATABASE
+$ tar cvzf dump.sql.tar.gz dump.sql
 ```
 
-NOTE: use `postgres` user when creating backup on macOS:
+#### restore
 
 ```sh
-(local)$ pg_dump -h localhost -U postgres -aOf dump.sql sith_dev
+$ tar xvzf dump.sql.tar.gz
+$ psql -U USERNAME -f dump.sql DATABASE
 ```
 
-restore:
+it might be necessary to download the dump file from remote host beforehand:
 
 ```sh
-(local)$ cd ~/tmp
-(local)$ scp ssh_host:~/tmp/dump.sql.tar.gz dump.sql.tar.gz
-(local)$ tar xvzf dump.sql.tar.gz
-(local)$ psql -U sith_prod -f dump.sql sith_prod
-```
-
-this dump doesn't create tables so make sure schema is the same -
-if it's not the case it might be necessary to reset database with
-required schema. say, in Rails project:
-
-```sh
-$ git checkout master
-$ rails db:reset
+$ scp SSH_HOST:~/tmp/dump.sql.tar.gz dump.sql.tar.gz
 ```
 
 ### [Rails] using `backup` gem (structure + data)

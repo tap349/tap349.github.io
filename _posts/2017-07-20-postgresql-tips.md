@@ -287,7 +287,7 @@ there are 2 ways to create a dump file (say, _dump.sql_):
   $ pg_dump -f dump.sql DATABASE
   ```
 
-- redirect output to the dump file
+- redirect stdout to the dump file with `>` operator
 
   ```sh
   $ pg_dump DATABASE > dump.sql

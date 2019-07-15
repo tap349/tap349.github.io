@@ -260,7 +260,7 @@ preserves all spaces at the beginning of the next line:
 ```javascript
 const variable =
   `foo${gc.NBSP}bar \
-   baz${gc.NBSP}qux`; // leading spaces will be preserved
+   baz${gc.NBSP}qux`; // leading spaces are preserved
 ```
 
 [ES6] (how to) export and import

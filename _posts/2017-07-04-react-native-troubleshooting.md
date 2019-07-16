@@ -402,7 +402,7 @@ set `minHeight` and `initialHeight` properties:
 />
 ```
 
-### image uploading doesn't work in simulator
+### image uploading doesn't work in emulator
 
 response from AWS:
 
@@ -413,7 +413,7 @@ response from AWS:
 </Error>
 ```
 
-yellow warning in simulator:
+emulator window:
 
 ```
 [RNDebugger] Detected you've enabled Network Inspect and you're using `uri`

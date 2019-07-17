@@ -346,6 +346,10 @@ just drag the corner of emulator window.
 
 ### (how to) use another Android version in emulator
 
+NOTE: package names might differ not only in major versions (say, `x86_64`
+      architecture is not available for old versions) - inspect output of
+      `sdkmanager --list` command before installing new packages.
+
 say, you want to use Android 9 (API level 28):
 
 - install required version of Android SDK Platform packages

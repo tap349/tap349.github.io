@@ -16,34 +16,454 @@ categories: [react-native]
 {:toc}
 <hr>
 
-see [npm/Yarn - Tips]({% post_url 2017-11-19-npm-yarn-tips %}) for `npm_reset`.
-
 try resetting cache first before googling the error:
 
 ```sh
 $ react-native start --reset-cache
 ```
 
-## JS errors
-
-<!-- prettier-ignore -->
-1. [React Native - Troubleshooting (JS)]({% post_url 2019-07-18-react-native-troubleshooting-js %})
-
 ## iOS errors
 
-<!-- prettier-ignore -->
-1. [React Native - Troubleshooting (iOS)]({% post_url 2019-07-18-react-native-troubleshooting-ios %})
+1. [React Native - iOS]({% post_url 2017-05-25-react-native-ios %})
+   (`troubleshooting` section)
 
 ## Android errors
 
-<!-- prettier-ignore -->
-1. [React Native - Troubleshooting (Android)]({% post_url 2019-07-18-react-native-troubleshooting-android %})
+1. [React Native - Android]({% post_url 2017-05-25-react-native-android %})
+   (`troubleshooting` section)
 
-## errors after upgrading RN to 0.45.1
+## JS errors
 
-### Cannot find module X
+### Couldn't find preset "es2015"
+
+emulator window:
+
+```
+SyntaxError: TransformError: <APP_DIR>/node_modules/shallowequal/index.js:
+Couldn't find preset "es2015" relative to directory "<APP_DIR>/node_modules/shallowequal"
+```
+
+**solution**
+
+it has turned out that `shallowequal` is the only module in _node_modules/_ that
+configures Babel presets to use in its _package.json_:
+
+```json
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+```
+
+quick-and-dirty fix for both Android and iOS:
+
+- remove offending section from _package.json_ of `shallowequal` package
+- restart packager - no error
+- get that section back
+- restart packager - still no error
+
+even if `shallowequal` package is removed from filesystem and installed again
+the error no longer occurs - maybe the 'right' version of `shallowequal` package
+is cached somewhere?
+
+NOTE: still the error might occur the next time emulator is run.
+
+[Android] the error might disappear after enabling hot reloading in emulator
+(`<D-m>` → `Enable Hot Reloading`) - enabling live reload has no effect.
+
+[iOS] enabling hot reloading never helped - use the fix above.
+
+all in all IDK why this error occurs and how to fix it in general.
+
+**_UPDATE_**
+
+1. <https://github.com/dashed/shallowequal/issues/11>
+2. <https://github.com/dashed/shallowequal/commit/f515936c8a790fbc225add864265b6c82881c9b1>
+
+bug was fixed in v1.0.2 by moving Babel settings to _.babelrc_ so that they are
+not consumed by RN packager by default.
+
+`react-side-effect` is the only package that depends on `shallowequal` package
+(according to _package-lock.json_) => update `react-side-effect` to update its
+dependencies (including `shallowequal`) to their latest version:
 
 ```sh
+$ npm update react-side-effect
+```
+
+### React.Children.only expected to receive a single React element child
+
+device system log:
+
+```
+<Critical>: Unhandled JS Exception: React.Children.only expected to receive a single React element child.
+```
+
+**solution**
+
+1. <https://facebook.github.io/react-native/docs/touchablehighlight.html>
+
+> TouchableHighlight must have one child (not zero or more than one). If you
+> wish to have several child components, wrap them in a View.
+
+### Maximum call stack size exceeded
+
+device system log:
+
+```
+<Warning>: Warning: Cannot update during an existing state transition
+(such as within `render` or another component's constructor).
+Render methods should be a pure function of props and state;
+constructor side-effects are an anti-pattern, but can be moved to
+`componentWillMount`.
+<Error>: Maximum call stack size exceeded.
+<Critical>: Unhandled JS Exception: Maximum call stack size exceeded.
+```
+
+**solution**
+
+1. <https://stackoverflow.com/questions/37387351>
+
+DON'T:
+
+- dispatch Redux actions (`this.props.store.dispatch(...)`) or
+- set component state (`this.setState(...)`)
+
+in `render()` method or any other method that is called from `render()` method
+(that is when component is being rendered) - this will cause an infinite loop.
+
+for example, if you dispatch action when component is being rendered:
+
+1. reducers update the store according to that action
+2. parent component is re-rendered using `forceUpdate()` (in my case it's
+   subscribed to store updates)
+3. component is re-rendered too
+4. action is immediately dispatched again (infinite loop)
+
+to avoid infinite loop dispatch actions and set component state only in
+
+- constructor or
+- callbacks that are not immediately invoked when component is being rendered
+
+### In next release empty section headers will be rendered
+
+emulator window:
+
+```
+Warning: In next release empty section headers will be rendered. In this
+release you can use 'enableEmptySections' flag to render empty section headers.
+```
+
+**solution**
+
+1. <https://github.com/FaridSafi/react-native-gifted-listview/issues/39#issuecomment-217073492>
+
+> If you use cloneWithRows then you don't have sections and so there's no issue
+> with section headers showing up. The confusing part is that even if you don't
+> use sections, it will still throw the warning mentioning sections. In this
+> case, you can just set enableEmptySections={true} and forget about it.
+
+```jsx
+<ListView
+  enableEmptySections={true}
+  ...
+/>
+```
+
+### onEndReached event of ListView keeps on firing
+
+**solution**
+
+1. <https://stackoverflow.com/questions/38531369>
+2. <https://github.com/facebook/react-native/issues/6002>
+3. <https://facebook.github.io/react-native/docs/refreshcontrol.html>
+
+don't nest `ListView` in `ScrollView` - this is what causes `onEndReached` event
+to be triggered again and again.
+
+in most cases it means not to use `ScrollView` at all if you have to use
+`ListView`:
+
+- if you use `refreshControl` property of `ScrollView` note that `ListView` has
+  the same property
+- if you use some header in `ScrollView` it's possible to render the very same
+  header in `renderHeader` callback of `ListView`
+
+### ListView becomes blank
+
+when pushing another page and then going back to page with `ListView` the latter
+becomes blank (nothing is rendered where `ListView` is supposed to be rendered).
+at the same time adjacent components are rendered properly (=> it's not that
+wrapped collection becomes empty).
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/8607>
+
+```jsx
+<ListView
+  removeClippedSubviews={false}
+  ...
+/>
+```
+
+though I guess it's more of a hack than real solution.
+
+### SyntaxError wallet.png: Unexpected character (1:0)
+
+the error occurs sometimes after adding new icon or updating existing one.
+
+**solution**
+
+restart packager (`react-native start`) and reload application in emulator.
+
+### Actions must be plain objects
+
+emulator window:
+
+```
+Actions must be plain objects. Use custom middleware for async actions.
+```
+
+the error occurs when trying to dispatch a thunk (Thunk middleware is applied).
+
+**solution**
+
+I used curly braces instead of parens when defining thunk action creator:
+
+```diff
+- export const requestCreateAuthentication = (phone_number) => {
++ export const requestCreateAuthentication = (phone_number) => (
+   (dispatch, getState, api) => {
+     // ...
+   }
+- }
++ )
+```
+
+### TouchableOpacity ignores initial opacity
+
+`TouchableOpacity` ignores `opacity` property - it's set only when application
+is hot reloaded in emulator.
+
+**solution**
+
+1. <https://github.com/facebook/react-native/pull/12628>
+2. <https://github.com/facebook/react-native/pull/8909>
+
+according to these links the issue has been closed (that is fixed) but it
+doesn't look like this (or maybe it's another but related issue).
+
+anyway I've found a workaround - create nested `View` and set `opacity` property
+on it instead of `TouchableOpacity` itself:
+
+{% raw %}
+
+```jsx
+<TouchableOpacity>
+  <View style={{opacity: 0.5}}>
+    <Text>{title}</Text>
+  </View>
+</TouchableOpacity>
+```
+
+{% endraw %}
+
+### Unknown named module
+
+the error occurs when trying to load image using `Image`.
+
+device system log:
+
+```
+<Notice>: { [Error: Unknown named module: '~/components/_new/graphics/images/ion-ios-person.png'] ... }
+```
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/2481>
+
+it turns out you cannot load images dynamically - provide static URI instead
+(that is don't construct it dynamically, say, using variable interpolation):
+
+{% raw %}
+
+```jsx
+<Image
+  style={{height: 30, width: 35}}
+  source={require('~/components/_new/graphics/images/ion-person-stalker.png')}
+/>
+```
+
+{% endraw %}
+
+### ScrollView with unbounded height doesn't grow on scrolling
+
+1. <https://stackoverflow.com/a/43525913/3632318>
+
+I use `ScrollView` as a top-level container - when all its content doesn't fit
+on the screen (say, on iPhone 4s), the `ScrollView` doesn't grow when trying to
+scroll down: hidden content becomes visible but overflows the container.
+
+the solution is to use `flexGrow: 1` instead of `flex: 1` for container:
+
+{% raw %}
+
+```jsx
+<ScrollView
+  contentContainerStyle={{flexGrow: 1}}
+  scrollEnabled={true}
+></ScrollView>
+```
+
+{% endraw %}
+
+### TextInput inside TouchableOpacity intercepts touches
+
+when `TouchableOpacity` wraps `TextInput` and the latter is pressed, `onPress`
+callback of `TouchableOpacity` is not invoked.
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/14958#issuecomment-324237317>
+
+```jsx
+<TouchableOpacity onPress={this._handlePress}>
+  <View pointerEvents='none'>
+    <TextInput editable={false} />
+  </View>
+</TouchableOpacity>
+```
+
+### `fontWeight={600}` is not applied to TextInput
+
+the error occurs if Gill Sans font is used only - setting font weight works with
+`Text` and when default font is used instead.
+
+**solution**
+
+TODO
+
+### undefined is not an object (evaluating 'Sentry.options.logLevel')
+
+device system log:
+
+```
+<Notice>: { [TypeError: undefined is not an object (evaluating 'Sentry.options.logLevel')] ... }
+```
+
+**solution**
+
+<https://github.com/getsentry/react-native-sentry/issues/237#issuecomment-330779566>:
+
+```javascript
+Sentry.config(SENTRY_ENDPOINT);
+if (!__DEV__) {
+  Sentry.install();
+}
+```
+
+### ScrollView content is partially hidden below when scrolled to the bottom
+
+make sure that all `ScrollView` parents have `flex: 1`.
+
+### ScrollView inside Modal doesn't respect `keyboardShouldPersistTaps='handled'`
+
+1. <https://github.com/facebook/react-native/issues/10138>
+
+make sure to set `keyboardShouldPersistTaps='handled'` on ALL parent
+`ScrollView`s outside of `Modal`:
+
+> <Modal> cares about its (scrollview) parent stack, I assumed it would be like
+> if rendered on top level
+
+this error seems to be reproduced only when `ScrollView` is rendered inside
+`Modal`.
+
+### Swiper image (child) is occasionally blank
+
+this often happens, say, after removing the child (game in my application) -
+adjacent game should become visible but blank area is shown instead.
+
+**solution**
+
+1. <https://github.com/leecade/react-native-swiper/issues/196#issuecomment-249540289>
+2. <https://github.com/leecade/react-native-swiper/issues/609>
+3. <https://facebook.github.io/react-native/docs/scrollview.html#removeclippedsubviews>
+
+adding `removeClippedSubviews={false}` property to `Swiper` component seems to
+solve the problem for the time being (AFAIU when this property is false, all
+offscreen children are force rendered - this might be not suitable for long
+lists but in my case all lists are short so it shouldn't be a problem).
+
+**_UPDATE_**
+
+still this doesn't help - the only solution that works thus far is
+<https://github.com/leecade/react-native-swiper/issues/609#issuecomment-338190488>.
+
+**_UPDATE_**
+
+nothing of the above works )
+
+consider using `react-native-snap-carousel` instead of `react-native-swiper`.
+
+### TextInput jumps when added dynamically
+
+**solution**
+
+set `minHeight` and `initialHeight` properties:
+
+```jsx
+<TextInput value='foo' minHeight={20} initialHeight={20} />
+```
+
+### image uploading doesn't work in emulator
+
+response from AWS:
+
+```xml
+<Error>
+  <Code>MalformedPOSTRequest</Code>
+  <Message>The body of your POST request is not well-formed multipart/form-data.</Message>
+</Error>
+```
+
+emulator window:
+
+```
+[RNDebugger] Detected you've enabled Network Inspect and you're using `uri`
+in FormData, it will be a problem if you use it for upload, please see the
+documentation (https://goo.gl/yEcRrU) for more information.
+```
+
+**solution**
+
+1. <https://github.com/jhen0409/react-native-debugger/blob/master/docs/network-inspect-of-chrome-devtools.md>
+
+disable `Network Inspect`:
+
+<!-- prettier-ignore -->
+| Redux DevTools: RMB → `Disable Network Inspect`
+
+### Loading dependency graph, done.
+
+`react-native start` hangs after `Loading dependency graph, done.` message.
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/16798>
+
+I'm not sure but maybe reinstalling Watchman helped to resolve the issue:
+
+```sh
+$ brew uninstall watchman
+$ brew install watchman
+```
+
+### [0.45.1] Cannot find module X
+
+```
 $ react-native start
 ...
 > node node_modules/react-native/local-cli/cli.js start
@@ -70,7 +490,7 @@ $ yarn install
 $ yarn start
 ```
 
-### DeviceInfo native module is not installed correctly
+### [0.45.1] DeviceInfo native module is not installed correctly
 
 emulator window:
 
@@ -84,7 +504,7 @@ DeviceInfo native module is not installed correctly
 
 rebuild application.
 
-### Unhandled JS Exception: undefined is not an object
+### [0.45.1] Unhandled JS Exception: undefined is not an object
 
 emulator window:
 
@@ -119,9 +539,7 @@ $ react-native-git-upgrade
 `react-native-git-upgrade` command downgraded `react` package to another alpha
 version and this is what most likely fixed the issue.
 
-## errors after upgrading RN to 0.47.0
-
-### Module JSTimersExecution is not a registered callable module
+### [0.47.0] Module JSTimersExecution is not a registered callable module
 
 1. <https://stackoverflow.com/questions/45594935>
 
@@ -135,40 +553,7 @@ Module JSTimersExecution is not a registered callable module (calling callTimers
 
 rebuild application.
 
-### method does not override or implement a method from a supertype
-
-```
-$ react-native run-android
-...
-<APP_DIR>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerPackage.java:19: error: method does not override or implement a method from a supertype
-  @Override
-  ^
-Note: <APP_DIR>/node_modules/react-native-image-picker/android/src/main/java/com/imagepicker/ImagePickerActivityEventListener.java uses or overrides a deprecated API.
-Note: Recompile with -Xlint:deprecation for details.
-1 error
-:react-native-image-picker:compileReleaseJavaWithJavac FAILED
-
-FAILURE: Build failed with an exception.
-```
-
-**solution**
-
-for each package that fails to compile:
-
-- bump its version in _package.json_ (preferably to the latest one)
-- `npm install`
-- `npm updated <package_name>`
-
-if it doesn't help, try to unlink/link failing package manually:
-
-```sh
-$ react-native unlink <package_name>
-$ react-native link <package_name>
-```
-
-## errors after upgrading RN to 0.52.1
-
-### Error: While resolving module `react-native-vector-icons/Octicons`
+### [0.52.1] Error: While resolving module `react-native-vector-icons/Octicons`
 
 ```
 $ react-native start
@@ -202,67 +587,7 @@ sense to add this command to `postinstall` script in _package.json_:
   },
 ```
 
-### fatal error: 'Flurry.h' file not found
-
-```
-$ react-native run-ios
-...
-<APP_DIR>/node_modules/react-native-flurry-analytics/ios/RNFlurryAnalytics.m:2:9: fatal error: 'Flurry.h' file not found
-#import <Flurry.h>
-        ^~~~~~~~~~
-1 error generated.
-```
-
-**solution**
-
-see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the tip
-on how to repair CocoaPods.
-
-### object file (.../libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
-
-```
-$ react-native run-ios
-...
-ld: warning: object file (<APP_DIR>/ios/build/Build/Products/Debug-iphonesimulator/libAutoGrowTextInput.a(AutogrowTextInputManager.o)) was built for newer iOS version (9.3) than being linked (8.0)
-```
-
-**solution**
-
-1. <https://stackoverflow.com/a/32950454/3632318>
-
-`react-native-autogrow-textinput` is built with `IPHONEOS_DEPLOYMENT_TARGET=9.3`
-build setting but the rest of the project (the library is linked to later) has
-been built with `IPHONEOS_DEPLOYMENT_TARGET=8.0` build setting => hence the
-error.
-
-the latest version of `react-native-autogrow-textinput` doesn't support iOS
-Deployment Target (DT) lower than 9.3 but current DT in iOS project is 8.0 =>
-change DT in iOS project to 9.3 as well:
-
-| Xcode: `Build Settings` → `Deployment` → `iOS Deployment Target`
-
-### Undefined symbols for architecture x86_64
-
-```
-$ react-native run-ios
-...
-Undefined symbols for architecture x86_64:
-  "_OBJC_CLASS_$_RCTOneSignal", referenced from:
-      objc-class-ref in AppDelegate.o
-  "_OBJC_CLASS_$_RNSentry", referenced from:
-      objc-class-ref in AppDelegate.o
-ld: symbol(s) not found for architecture x86_64
-```
-
-**solution**
-
-1. <https://github.com/geektimecoil/react-native-onesignal/issues/18#issuecomment-287132994>
-2. <https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking>
-
-link `react-native-onesignal` and `react-native-sentry` libraries manually and
-rebuild application.
-
-### Cannot read property 'func' of undefined
+### [0.52.1] Cannot read property 'func' of undefined
 
 error is shown in device system log and emulator window.
 
@@ -281,7 +606,7 @@ onPress: React.PropTypes.func.isRequired;
 
 import `PropTypes` from a separate `prop-types` package.
 
-### Cannot read property 'appVersion' of undefined
+### [0.52.1] Cannot read property 'appVersion' of undefined
 
 error is shown in device system log and emulator window.
 
@@ -300,7 +625,7 @@ return RNDeviceInfo.appVersion;
 
 link `react-native-device-info` library manually and rebuild application.
 
-### Invariant Violation: Native component for "BVLinearGradient" does not exist
+### [0.52.1] Invariant Violation: Native component for "BVLinearGradient" does not exist
 
 error in device system log and emulator window.
 
@@ -310,7 +635,7 @@ error in device system log and emulator window.
 
 link `react-native-linear-gradient` library manually and rebuild application.
 
-### TypeError: Cannot read property 'isPickerShow' of undefined
+### [0.52.1] TypeError: Cannot read property 'isPickerShow' of undefined
 
 error in device system log and emulator window.
 
@@ -320,7 +645,7 @@ error in device system log and emulator window.
 
 link `react-native-picker` library manually and rebuild application.
 
-### Cannot read property 'showImagePicker' of undefined
+### [0.52.1] Cannot read property 'showImagePicker' of undefined
 
 error in device system log and emulator window.
 
@@ -330,7 +655,7 @@ error in device system log and emulator window.
 
 link `react-native-image-picker` library manually and rebuild application.
 
-### TypeError: undefined is not an object (evaluating 'Contacts.getAll')
+### [0.52.1] TypeError: undefined is not an object (evaluating 'Contacts.getAll')
 
 error in device system log and emulator window.
 
@@ -338,38 +663,7 @@ error in device system log and emulator window.
 
 link `react-native-contacts` library manually and rebuild application.
 
-### Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'
-
-```
-$ cd android
-$ ./gradlew assembleRelease
-...
-sentry-cli update to 1.28.1 is available!
-run sentry-cli update to update
-error: http error: [55] Failed sending data to the peer (SSL_write() returned SYSCALL, errno = 32)
-:app:bundleReleaseJsAndAssets FAILED
-
-FAILURE: Build failed with an exception.
-
-* Where:
-Script '<APP_DIR>/node_modules/react-native-sentry/sentry.gradle' line: 154
-
-* What went wrong:
-Execution failed for task ':app:bundleReleaseJsAndAssetsreleaseSentryUpload'.
-> Process 'command 'node_modules/sentry-cli-binary/bin/sentry-cli'' finished with non-zero exit value 1
-```
-
-**solution**
-
-```sh
-$ npm update react-native-sentry
-$ npm_reset
-```
-
-upgrading `react-native-sentry` didn't help - cleaning cache and reinstalling
-all node modules fixed the issue.
-
-### production release crashes on startup (in both Android and iOS devices)
+### [0.52.1] production release crashes on startup (in both Android and iOS devices)
 
 **solution**
 
@@ -382,13 +676,10 @@ all node modules fixed the issue.
 
 replace `View.propTypes.style` with `ViewPropTypes.style` in all components.
 
-see also [React Native -
-Android]({% post_url 2017-05-24-react-native-android %}) (`debugging` section)
-on how to debug similar problems on Android.
+see [React Native - Android]({% post_url 2017-05-24-react-native-android %})
+(`debugging` section) on how to debug similar problems on Android.
 
-## errors after upgrading RN from 0.52.1 to 0.59.9
-
-### react-native-push-notification: Appears to be a git repo or submodule.
+### [0.59.9] react-native-push-notification: Appears to be a git repo or submodule.
 
 ```
 $ npm install
@@ -409,157 +700,7 @@ npm ERR! git or move it out of the way first.
 $ rm -rf node_modules/*/.git
 ```
 
-### incompatible types: ReadableArray cannot be converted to ReadableNativeArray
-
-```
-$ react-native run-android
-...
-> Task :react-native-sentry:compileDebugJavaWithJavac FAILED
-<APP_DIR>/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java:251: error: incompatible types: Read
-ableArray cannot be converted to ReadableNativeArray
-            addExceptionInterface(eventBuilder, exception.getString("type"), exception.getString("value"), stacktrace.getArray("frames"));
-                                                                                                                              ^
-Note: <APP_DIR>/node_modules/react-native-sentry/android/src/main/java/io/sentry/RNSentryModule.java uses or overrides a deprecated
- API.
-```
-
-**solution**
-
-```sh
-$ npm install --save react-native-sentry@0.43.1
-```
-
-NOTE: 0.43.1 is the latest version at the time of writing.
-
-### constructor RNSentryPackage in class RNSentryPackage cannot be applied to given types
-
-```
-$ react-native run-android
-...
-> Task :app:compileDebugJavaWithJavac FAILED
-<APP_DIR>/android/app/src/main/java/com/iceperkapp/MainApplication.java:45: error: constructor RNSentryPackage in class RNSentryPac
-kage cannot be applied to given types;
-            new RNSentryPackage(MainApplication.this),
-            ^
-  required: no arguments
-  found: MainApplication
-  reason: actual and formal argument lists differ in length
-1 error
-```
-
-**solution**
-
-1. <https://github.com/getsentry/react-native-sentry/issues/490#issuecomment-438680937>
-
-```diff
-  // android/app/src/main/java/com/iceperkapp/MainApplication.java
-
-- new RNSentryPackage(MainApplication.this),
-+ new RNSentryPackage(),
-```
-
-### Cannot fit requested classes in a single dex file
-
-```
-$ react-native run-android
-...
-> Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug FAILED
-D8: Cannot fit requested classes in a single dex file (# methods: 66744 > 65536)
-```
-
-**solution**
-
-1. <https://developer.android.com/studio/build/multidex>
-
-```diff
-  // android/app/build.gradle
-
-  defaultConfig {
-      applicationId "com.iceperkapp"
-      minSdkVersion rootProject.ext.minSdkVersion
-      targetSdkVersion rootProject.ext.targetSdkVersion
-+     multiDexEnabled true
-      versionCode 97
-      versionName "3.17"
-      // ...
-  }
-```
-
-### The Google Mobile Ads SDK was initialized incorrectly
-
-emulator:
-
-```
-Unfortunately, iceperkapp has stopped
-```
-
-```
-$ adb logcat
-...
-06-08 01:19:30.203  3738  3738 E AndroidRuntime: java.lang.RuntimeException: Unable to get provider com.google.android.gms.ads.MobileAdsInitProvider: java.lang.IllegalStateException:
-06-08 01:19:30.203  3738  3738 E AndroidRuntime:
-06-08 01:19:30.203  3738  3738 E AndroidRuntime: ******************************************************************************
-06-08 01:19:30.203  3738  3738 E AndroidRuntime: * The Google Mobile Ads SDK was initialized incorrectly. AdMob publishers    *
-06-08 01:19:30.203  3738  3738 E AndroidRuntime: * should follow the instructions here: https://goo.gl/fQ2neu to add a valid  *
-06-08 01:19:30.203  3738  3738 E AndroidRuntime: * App ID inside the AndroidManifest. Google Ad Manager publishers should     *
-06-08 01:19:30.203  3738  3738 E AndroidRuntime: * follow instructions here: https://goo.gl/h17b6x.                           *
-06-08 01:19:30.203  3738  3738 E AndroidRuntime: ******************************************************************************
-```
-
-**solution**
-
-1. <https://stackoverflow.com/a/53013453/3632318>
-2. <https://developers.google.com/admob/android/quick-start#update_your_androidmanifestxml>
-
-```diff
-  <!-- android/app/src/main/AndroidManifest.xml -->
-
-  <manifest>
-      <application>
-+         <meta-data
-+             android:name="com.google.android.gms.ads.APPLICATION_ID"
-+             android:value="ca-app-pub-9176480316001296~1177893459"/>
-      </application>
-  </manifest>
-```
-
-### Invalid application ID
-
-emulator:
-
-```
-Unfortunately, iceperkapp has stopped
-```
-
-```
-$ adb logcat
-...
-06-08 10:37:17.754  4378  4378 E AndroidRuntime: java.lang.RuntimeException: Unable to get provider com.google.android.gms.ads.MobileAdsInitProvider: java.lang.IllegalStateException:
-06-08 10:37:17.754  4378  4378 E AndroidRuntime:
-06-08 10:37:17.754  4378  4378 E AndroidRuntime: ******************************************************************************
-06-08 10:37:17.754  4378  4378 E AndroidRuntime: * Invalid application ID. Follow instructions here: https://goo.gl/fQ2neu to *
-06-08 10:37:17.754  4378  4378 E AndroidRuntime: * find your app ID.                                                          *
-06-08 10:37:17.754  4378  4378 E AndroidRuntime: ******************************************************************************
-```
-
-**solution**
-
-make sure to replace slash with tilde in AdMob App ID:
-
-```diff
-  <!-- android/app/src/main/AndroidManifest.xml -->
-
-  <manifest>
-      <application>
-          <meta-data
-+             android:name="com.google.android.gms.ads.APPLICATION_ID"
--             android:value="ca-app-pub-9176480316001296/1177893459"/>
-+             android:value="ca-app-pub-9176480316001296~1177893459"/>
-      </application>
-  </manifest>
-```
-
-### Plugin/Preset files are not allowed to export objects, only functions.
+### [0.59.9] Plugin/Preset files are not allowed to export objects, only functions.
 
 ```
 $ react-native start
@@ -597,7 +738,7 @@ $ npm install --save-dev @babel/preset-flow
   };
 ```
 
-### The 'decorators' plugin requires a 'decoratorsBeforeExport' option, whose value must be a boolean
+### [0.59.9] The 'decorators' plugin requires a 'decoratorsBeforeExport' option, whose value must be a boolean
 
 ```
 $ react-native start
@@ -635,7 +776,7 @@ but after having tried all possible combinations of `decoratorsBeforeExport` and
 => it's easier not to use decorators at all (and remove all related packages),
 the more especially as it's a recommended approach.
 
-### TypeError: undefined is not an object (evaluating 'props.getItem')
+### [0.59.9] TypeError: undefined is not an object (evaluating 'props.getItem')
 
 ```
 $ adb logcat
@@ -665,218 +806,7 @@ cache:
 $ react-native start --reset-cache
 ```
 
-### We ran "xcodebuild" command but it exited with error code 65
-
-```
-$ react-native run-ios
-...
-error Failed to build iOS project. We ran "xcodebuild" command but it exited with error code 65. To debug build logs further, consider building your app with Xcode.app, by opening iceperkapp.xcworkspace
-```
-
-**solution**
-
-this can be anything so:
-
-> To debug build logs further, consider building your app with Xcode.app, by
-> opening iceperkapp.xcworkspace
-
-### Duplicate module name: react-native
-
-```
-$ react-native start
-...
-Loading dependency graph...(node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
-  Duplicate module name: react-native
-  Paths: <APP_DIR>/ios/Pods/React/package.json collides with <APP_DIR>/node_modules/react-native/package.json
-
-This error is caused by `hasteImpl` returning the same name for different files.
-    at setModule (<APP_DIR>/node_modules/jest-haste-map/build/index.js:569:17)
-    at workerReply (<APP_DIR>/node_modules/jest-haste-map/build/index.js:641:9)
-    at processTicksAndRejections (internal/process/task_queues.js:89:5)
-    at async Promise.all (index 83)
-(node:10228) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
-(node:10228) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-(node:10228) UnhandledPromiseRejectionWarning: Error: jest-haste-map: Haste module naming collision:
-  Duplicate module name: react-native
-  Paths: <APP_DIR>/ios/Pods/React/package.json collides with <APP_DIR>/node_modules/react-native/package.json
-```
-
-**solution**
-
-1. <https://facebook.github.io/react-native/docs/integration-with-existing-apps#configuring-cocoapods-dependencies>
-2. <https://github.com/react-native-community/react-native-svg/issues/621#issuecomment-473346430>
-
-incorrect version of `React` pod was installed into _ios/Pods/_ as a dependency
-of `RNCAsyncStorage` pod:
-
-```ruby
-# node_modules/@react-native-community/async-storage/RNCAsyncStorage.podspec
-
-Pod::Spec.new do |s|
-  s.name         = "RNCAsyncStorage"
-  # ...
-
-  s.dependency 'React'
-end
-```
-
-there are 2 problems here:
-
-- version of `React` pod is incorrect (0.11.0 but should be 0.59.9)
-- `React` pod shouldn't be installed into _ios/Pods/_ at all (see below why)
-
-now fix both problems:
-
-- configure CocoaPods dependencies correctly
-
-  see [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}) for the
-  tip on how to configure CocoaPods dependencies.
-
-- remove `React` pod from _ios/Pods/_ directory
-
-  since `RNCAsyncStorage` pod has `path` option in _ios/Podfile_ (which points
-  to corresponding package location in _node_modules/_ directory), it shouldn't
-  be installed into _ios/Pods/_ - as well as its dependencies (that is `React`
-  pod).
-
-  but directory for `React` pod is still there and _ios/Pods/React/package.json_
-  collides with _node_modules/react-native/package.json_ as both have the same
-  `name` field - `react-native`.
-
-  it happened because `pod install` doesn't remove unused pods from _ios/Pods/_
-  => it should be done manually by deintegrating your project:
-
-  ```
-  $ cd ios
-  $ pod deintegrate
-  Deintegrating `iceperkapp.xcodeproj`
-  Deleted 1 'Copy Pods Resources' build phases.
-  Deleted 1 'Check Pods Manifest.lock' build phases.
-  - libPods-iceperkapp.a
-  - Pods-iceperkapp.debug.xcconfig
-  - Pods-iceperkapp.release.xcconfig
-  Deleting Pod file references from project
-  - libPods-iceperkapp-tvOSTests.a
-  - libPods-iceperkappTests.a
-  Deleted 1 empty `Pods` groups from project.
-  Removing `Pods` directory.
-
-  Project has been deintegrated. No traces of CocoaPods left in project.
-  Note: The workspace referencing the Pods project still remains.
-  ```
-
-  or just by removing _ios/Pods/_ directory:
-
-  ```sh
-  $ rm -rf ios/Pods
-  ```
-
-  finally install pods again:
-
-  ```sh
-  $ cd ios
-  $ pod install
-  ```
-
-### no known class method for selector 'didReceiveRemoteNotification:'
-
-build inside Xcode failed:
-
-```
-<APP_DIR>/ios/iceperkapp/AppDelegate.m:71:17: error: no known class method for selector 'didReceiveRemoteNotification:'
-  [RCTOneSignal didReceiveRemoteNotification:notification];
-                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-```
-
-**solution**
-
-1. <https://github.com/geektimecoil/react-native-onesignal/issues/421#issuecomment-373877766>
-
-```diff
-  // ios/iceperkapp/AppDelegate.m
-
-- // Required for the notification event.
-- - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
--   [RCTOneSignal didReceiveRemoteNotification:notification];
-- }
--
-```
-
-### node_modules/sentry-cli-binary/bin/sentry-cli: No such file or directory
-
-build inside Xcode failed:
-
-```
-/Users/tap/Library/Developer/Xcode/DerivedData/iceperkapp-fqktxncrxxusoqcuegfuetzddexv/Build/
-  Intermediates.noindex/iceperkapp.build/Debug-iphonesimulator/iceperkapp.build/
-  Script-00DD1BFF1BD5951E006B06BC.sh: line 4: ../node_modules/sentry-cli-binary/bin/sentry-cli:
-  No such file or directory
-Command PhaseScriptExecution failed with a nonzero exit code
-```
-
-**solution**
-
-find and replace all occurrences of `sentry-cli-binary` with `@sentry/cli` in
-your project.
-
-### The iOS Simulator deployment target is set to 7.0
-
-```
-$ react-native run-ios
-...
-info warning: The iOS Simulator deployment target is set to 7.0, but the range of supported deployment target versions for this platform is 8.0 to 12.2.99. (in target 'InAppUtils')
-```
-
-**solution**
-
-1. <https://github.com/CocoaPods/CocoaPods/issues/8069>
-
-> <https://github.com/react-native-community/react-native-maps/issues/2638#issue-393483116>
->
-> It appears the newest version of Xcode doesn't support a deployment target
-> less than 8.0.
-
-> <https://github.com/CocoaPods/CocoaPods/issues/7314#issuecomment-422368382>
->
-> if the target is built for 9.0, then the Pods should build for 9.0, not for
-> 8.0.
->
-> It's nice to want to support more stuff, but it should come as fixes to the
-> actual CocoaPods gem, not as complex workarounds in people's Podfile.
-
-> <https://github.com/CocoaPods/CocoaPods/issues/7314#issuecomment-494659918>
->
-> platform
->
-> Specifies the platform for which a static library should be built, but NOT the
-> deployment target for which it should be built (the number in platform :ios,
-> '9.0' is only to find a compatible version of the pod). The actual deployment
-> target will be lower than specified, will have unused symbols and will cause
-> you a lot of headache.
-
-```ruby
-# node_modules/react-native-in-app-utils/react-native-in-app-utils.podspec
-
-Pod::Spec.new do |s|
-  # ...
-  s.platform        = :ios, "7.0"
-end
-```
-
-```ruby
-# ios/Podfile
-
-platform :ios, '9.0'
-```
-
-Podspecs and Podfile both specify deployment target for which a static library
-should be built. still deployment target in Podfile is not the minimum allowed
-deployment target => deployment target from Podspec might be used which will
-cause warnings like above if that deployment target is not supported by Xcode.
-
-=> ignore this warning for now.
-
-### withRef is removed
+### [0.59.9] withRef is removed
 
 emulator window:
 

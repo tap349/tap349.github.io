@@ -7,6 +7,8 @@ comments: true
 categories: [react-native]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,8 +16,7 @@ categories: [react-native]
 {:toc}
 <hr>
 
-react-native-git-upgrade
-------------------------
+## react-native-git-upgrade
 
 1. <https://facebook.github.io/react-native/docs/upgrading.html>
 2. <https://medium.zenika.com/easier-react-native-upgrades-with-rn-diff-5020b5c3de2d>
@@ -41,7 +42,7 @@ see [npm/Yarn - Tips]({% post_url 2017-11-19-npm-yarn-tips %}) for `npm_reset`.
 
 - using my own simple Ruby script
 
-  _unlink\_all\_packages.rb_:
+  _unlink_all_packages.rb_:
 
   ```ruby
   require 'json'
@@ -65,8 +66,8 @@ see [npm/Yarn - Tips]({% post_url 2017-11-19-npm-yarn-tips %}) for `npm_reset`.
 1. <https://github.com/facebook/react-native/issues/12261#issuecomment-341510929>
 2. <http://roadfiresoftware.com/2015/09/automatically-resolving-git-merge-conflicts-in-xcodes-project-pbxproj/>
 
-using `union` merge strategy for _project.pbxproj_ instructs
-Git to use both sides (`ours` and `theirs`) during a merge.
+using `union` merge strategy for _project.pbxproj_ instructs Git to use both
+sides (`ours` and `theirs`) during a merge.
 
 _.gitattributes_:
 
@@ -86,12 +87,12 @@ $ react-native-git-upgrade
 
 ### resolve conflicts
 
-resolve conflicts in all modified by `react-native-git-upgrade` files except
-for _project.pbxproj_ - all conflicts should be merged automatically for this
-file because of `union` merge strategy set in _.gitattributes_ previously.
+resolve conflicts in all modified by `react-native-git-upgrade` files except for
+_project.pbxproj_ - all conflicts should be merged automatically for this file
+because of `union` merge strategy set in _.gitattributes_ previously.
 
-enable gitgutter in MacVim and resolve conflicts in modified files manually
-one by one (search for `ours`/`theirs` conflict markers).
+enable gitgutter in MacVim and resolve conflicts in modified files manually one
+by one (search for `ours`/`theirs` conflict markers).
 
 ### verify and fix project.pbxproj file
 
@@ -119,12 +120,13 @@ $ pip2 install kin
 $ react-native link
 ```
 
-NOTE: this command didn't link all packages when upgrading to RN 0.52.1 -
-      still it might be necessary to link some packages manually.
+NOTE: this command didn't link all packages when upgrading to RN 0.52.1 - still
+it might be necessary to link some packages manually.
 
 ### repair CocoaPods
 
-see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
+see the tip from [React Native -
+iOS]({% post_url 2017-05-25-react-native-ios %}).
 
 ### post-upgrade instructions
 
@@ -136,21 +138,21 @@ $ react-native run-android
 
 NOTE: don't forget to rebuild both iOS and Android applications!
 
-***UPDATE***
+**_UPDATE_**
 
-after fixing different issues related to RN upgrade some libraries turned out
-to be not linked - link all libraries again (just in case):
+after fixing different issues related to RN upgrade some libraries turned out to
+be not linked - link all libraries again (just in case):
 
 ```sh
 $ react-native link
 ```
 
-even after running this command I had to link a lot of libraries manually
-(see [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})) -
-it looks like `react-native link` command is somehow broken in RN 0.52.1.
+even after running this command I had to link a lot of libraries manually (see
+[React Native -
+Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})) - it
+looks like `react-native link` command is somehow broken in RN 0.52.1.
 
-rn-diff-purge
--------------
+## rn-diff-purge
 
 1. <https://facebook.github.io/react-native/docs/upgrading.html#alternative>
 
@@ -187,11 +189,13 @@ tips:
 
 ### repair CocoaPods
 
-see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
+see the tip from [React Native -
+iOS]({% post_url 2017-05-25-react-native-ios %}).
 
 ### configure CocoaPods dependencies
 
-see the tip from [React Native - iOS]({% post_url 2017-05-25-react-native-ios %}).
+see the tip from [React Native -
+iOS]({% post_url 2017-05-25-react-native-ios %}).
 
 ### try to build and start your application
 
@@ -204,6 +208,3 @@ $ react-native run-ios
 
 most likely there will be lots of errors: many npm packages got broken because
 of new versions of RN, Babel, Gradle, whatever.
-
-see [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %}),
-`errors after upgrading RN from 0.52.1 to 0.59.9` section.

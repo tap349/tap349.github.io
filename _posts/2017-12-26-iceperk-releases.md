@@ -7,6 +7,8 @@ comments: true
 categories: [react-native]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -29,8 +31,7 @@ categories: [react-native]
 
 say, new release branch name is `release_3_16`.
 
-GitHub (part 1): merge iceperk release branch into master branch
-----------------------------------------------------------------
+## GitHub (part 1): merge iceperk release branch into master branch
 
 NOTE: branches can be merged manually or via PR.
 
@@ -40,8 +41,7 @@ NOTE: branches can be merged manually or via PR.
   - PR name: `Master (Release 3.16)`
 - [`iceperkapp`] don't merge `release_3_16` branch into `develop` branch so far!
 
-test backend and new release
-----------------------------
+## test backend and new release
 
 seed data for testing:
 
@@ -78,21 +78,19 @@ this is to make sure nothing is broken for old releases.
 or else it's possible to run sanity checks on real device instead of emulator
 (using a test build).
 
-GitHub (part 2): merge iceperkapp release branch into develop branch
---------------------------------------------------------------------
+## GitHub (part 2): merge iceperkapp release branch into develop branch
 
 - [`iceperkapp`] merge `release_3_16` branch into `develop` branch
   - PR name: `Develop (Release 3.16)`
 - [`iceperkapp`] switch to `develop` branch (we use it to build releases)
 
-prepare new release in iceperkapp
----------------------------------
+## prepare new release in iceperkapp
 
 - change environment to `production` in _Env.js_ before generating releases
 - increment version number and build number in both iOS and Android projects
 
   NOTE: these numbers might have been already changed right after creating
-        `release_3_16` branch.
+  `release_3_16` branch.
 
   _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
 
@@ -104,9 +102,9 @@ prepare new release in iceperkapp
   <string>96</string>
   ```
 
-  don't forget to bump both numbers in _Info.plist_ files of all extensions
-  your iOS application contains (say, `OneSignalNotificationServiceExtension`)
-  or else you'll get `ITMS-90473` warnings (`CFBundleVersion Mismatch` and
+  don't forget to bump both numbers in _Info.plist_ files of all extensions your
+  iOS application contains (say, `OneSignalNotificationServiceExtension`) or
+  else you'll get `ITMS-90473` warnings (`CFBundleVersion Mismatch` and
   `CFBundleShortVersionString Mismatch`) when uploading archive to App Store.
 
   _android/app/build.gradle_:
@@ -118,12 +116,12 @@ prepare new release in iceperkapp
 
 - commit changes and push to `develop` branch
 
-build and publish new release
------------------------------
+## build and publish new release
 
 ### iOS
 
 - open _iceperkapp.xcworkspace_ in Xcode
+
   - select `Generic iOS Device`
   - create archive: `Product` (top menu) → `Archive`
   - click `Distribute App` button when archive is created
@@ -148,29 +146,32 @@ build and publish new release
 
     > Create a new iOS Distribution certificate:
 
-    NOTE: this step is missing if existing iOS Distribution certificate has
-          not expired.
+    NOTE: this step is missing if existing iOS Distribution certificate has not
+    expired.
 
     - [x] `Generate an iOS Distribution certificate`
 
     iOS Distribution signing certificate for your company will be generated,
     added to your local Keychain and uploaded to:
 
+    <!-- prettier-ignore -->
     | AD: `Certificates, IDs & Profiles` (left menu)
     | `Certificates` (left menu)
 
     > Export signing certificate:
 
-    NOTE: this step is missing if iOS Distribution certificate wasn't created
-          in a previous step.
+    NOTE: this step is missing if iOS Distribution certificate wasn't created in
+    a previous step.
 
     - `Export Signing Certificate...` (button)
 
   - click `Upload` button in the end
+
 - [TestFlight] open `iTunes Connect` in browser
   - go to `TestFlight` tab
   - go to `BUILDS` (left menu) → `iOS`
-  - wait till new build is processed (it might temporarily disappear from the list)
+  - wait till new build is processed (it might temporarily disappear from the
+    list)
   - open new iOS build
   - click `Provide Export Compliance Information` button
   - select `No` (app doesn't use encryption) in popup window
@@ -207,6 +208,7 @@ before building releases.
 
 - upload release to Google Drive
 
+  <!-- prettier-ignore -->
   | Google Drive: `Shared with me` → `ICEperk` → `AppBuilds`
 
   - replace existing `app-release.apk` file with a new one
@@ -214,6 +216,7 @@ before building releases.
 - install release on any Android device and run selective checks
 - publish release in Google Play Console
 
+  <!-- prettier-ignore -->
   | GPC: `All applications` → `Хоккей. Ледовое братство`
   | `Release management` (left menu) → `App releases` → `Production track` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
 
@@ -229,8 +232,7 @@ before building releases.
   - `Rollout percentage` (input): `100%` (it's `50%` by default)
   - `START ROLLOUT TO PRODUCTION` (button)
 
-GitHub (part 3): create iceperkapp release on GitHub
-----------------------------------------------------
+## GitHub (part 3): create iceperkapp release on GitHub
 
 this is done AFTER release is published in both stores and all seems to be
 working okay:
@@ -239,6 +241,7 @@ working okay:
   - PR name: `Master (Release 3.16)`
 - [`iceperkapp`] create new release on GitHub
 
+  <!-- prettier-ignore -->
   | GitHub: `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab)
 
   - `Tag version` (input + combobox): `3.16`
@@ -246,20 +249,20 @@ working okay:
   - `Release title` (input): `Release 3.16`
   - `Publish release` (button)
 
-- [`iceperk`] create and push branch for new release from `develop` branch
-  (say, `release_3_17`)
+- [`iceperk`] create and push branch for new release from `develop` branch (say,
+  `release_3_17`)
 - [`iceperkapp`] create and push branch for new release from `develop` branch
   (say, `release_3_17`)
 
-troubleshooting
----------------
+## troubleshooting
 
+<!-- prettier-ignore -->
 1. [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})
 
-this section contains errors which occurred AFTER application was compiled - see
-the link for compilation errors.
+this section contains errors which occurred when preparing release - see the
+linked post for compile-time and runtime errors.
 
-### [iOS] "\<Company>" has one iOS Distribution but its private key is not installed
+### "\<Company>" has one iOS Distribution but its private key is not installed
 
 the error occurs when trying to upload archive to App Store.
 
@@ -279,17 +282,16 @@ the error occurs when trying to upload archive to App Store.
   get private key (`.p12` file) from its creator and import it into the login
   keychain (its name is like `iOS Distribution: <Company>`).
 
-### [iOS] uploaded build doesn't appear on `TestFlight` tab
+### uploaded build doesn't appear on `TestFlight` tab
 
 it's okay for build to disappear temporarily from the list of builds but
-sometimes it might not appear in the list again - no matter how long you
-wait.
+sometimes it might not appear in the list again - no matter how long you wait.
 
 **solution**
 
 bump build number and upload new build.
 
-### [iOS] test build doesn't appear in TestFlight application
+### test build doesn't appear in TestFlight application
 
 build has `Testing` status for `App Store Connect Users` but TestFlight
 application still shows `No Apps Available to Test` message.
@@ -302,6 +304,7 @@ if it doesn't help:
 
 - remove user (say, yourself) from testers and then add him back
 
+  <!-- prettier-ignore -->
   | IC: `My Apps` → `<MY_APP>` → `TestFlight` (tab)
   | `App Store Connect Users` (left menu) → `Testers` (tab)
 
@@ -316,7 +319,7 @@ if it doesn't help:
   > 2. Open TestFlight and choose Redeem.
   > 3. Enter \<INVITATION_CODE> and start testing.
 
-### [iOS] iTunes Store Operation Failed
+### iTunes Store Operation Failed
 
 the error occurs when trying to upload archive to App Store in Xcode:
 
@@ -331,12 +334,12 @@ description is 'Destination: Disk quota exceeded (5)'
 
 1. <https://stackoverflow.com/a/49045515/3632318>
 
-I bumped build number but forgot to change version number (`CFBundleVersion`
-and `CFBundleShortVersionString` properties in _Info.plist_ accordingly).
+I bumped build number but forgot to change version number (`CFBundleVersion` and
+`CFBundleShortVersionString` properties in _Info.plist_ accordingly).
 
 it might also help to validate archive before uploading it to App Store
-(`Validate...` button) - this gives more meaningful error messages when
-archive is not valid.
+(`Validate...` button) - this gives more meaningful error messages when archive
+is not valid.
 
 ### GitHub release is created with a wrong target (branch)
 
@@ -348,6 +351,7 @@ different target:
 
 - delete release
 
+  <!-- prettier-ignore -->
   | GitHub: `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button)
 
 - delete current tag

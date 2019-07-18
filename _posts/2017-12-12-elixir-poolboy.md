@@ -11,6 +11,7 @@ sample steps to set up Poolboy worker pool.
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

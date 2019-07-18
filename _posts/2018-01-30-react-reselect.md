@@ -9,6 +9,7 @@ categories: [react, reselect]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

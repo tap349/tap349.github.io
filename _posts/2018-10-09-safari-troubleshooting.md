@@ -9,6 +9,7 @@ categories: [safari]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

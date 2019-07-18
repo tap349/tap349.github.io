@@ -9,6 +9,7 @@ categories: [dry-rb]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -9,6 +9,7 @@ categories: [react-native, ios]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

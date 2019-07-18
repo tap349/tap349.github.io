@@ -11,6 +11,7 @@ steps to configure new macOS installation.
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

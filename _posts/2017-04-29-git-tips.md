@@ -9,6 +9,7 @@ categories: [git]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

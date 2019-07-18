@@ -9,6 +9,7 @@ categories: [appsignal, elixir]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

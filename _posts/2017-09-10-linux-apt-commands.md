@@ -9,6 +9,7 @@ categories: [linux, ubuntu]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

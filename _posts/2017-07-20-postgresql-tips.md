@@ -9,6 +9,7 @@ categories: [postgresql, rails]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -12,6 +12,7 @@ basic ideas stay the same in Ruby/Rails project.
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

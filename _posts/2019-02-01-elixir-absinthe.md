@@ -9,6 +9,7 @@ categories: [elixir, absinthe]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

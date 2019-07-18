@@ -9,6 +9,7 @@ categories: [chrome]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -9,6 +9,7 @@ categories: [elixir, otp, ets]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

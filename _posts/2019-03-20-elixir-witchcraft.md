@@ -9,6 +9,7 @@ categories: [elixir]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

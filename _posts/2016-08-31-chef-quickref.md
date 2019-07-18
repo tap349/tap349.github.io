@@ -11,6 +11,7 @@ refined and focused quickref for `chef-zero` and `knife-zero`.
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

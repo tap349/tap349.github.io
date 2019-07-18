@@ -9,6 +9,7 @@ categories: [js, es6, es7, esnext]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

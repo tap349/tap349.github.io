@@ -9,6 +9,7 @@ categories: [opera, yandex, vivaldi]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

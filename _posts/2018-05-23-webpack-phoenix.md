@@ -9,6 +9,7 @@ categories: [webpack, phoenix]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

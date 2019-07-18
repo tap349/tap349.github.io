@@ -9,6 +9,7 @@ categories: [ruby, rubocop]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -9,6 +9,7 @@ categories: [gtd]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

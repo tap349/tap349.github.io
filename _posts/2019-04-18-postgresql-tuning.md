@@ -9,6 +9,7 @@ categories: [postgresql]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

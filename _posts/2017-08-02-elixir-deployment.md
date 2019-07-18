@@ -9,6 +9,7 @@ categories: [elixir, phoenix, deployment]
 
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -7,6 +7,8 @@ comments: true
 categories: [react-native]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -16,8 +18,7 @@ categories: [react-native]
 
 1. <https://facebook.github.io/react-native/docs/running-on-device.html>
 
-debug and release modes
------------------------
+## debug and release modes
 
 NOTE: all the notes below are true for both iOS and Android.
 
@@ -28,11 +29,11 @@ mode is a build configuration in Xcode parlance.
 - in debug mode:
 
   - `__DEV__` variable is set to true
-  - Developer Menu is available - shake real device to access it
-    (or press Menu button on Android devices if it's available)
+  - Developer Menu is available - shake real device to access it (or press Menu
+    button on Android devices if it's available)
   - hot reloading works as a rule (use live reload if it doesn't)
-  - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu
-    to open React Native Debugger
+  - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu to
+    open React Native Debugger
 
 - in release mode:
 
@@ -47,23 +48,22 @@ all possible combinations of environment and mode are:
 - production + debug
 - production + release
 
-the value of `__DEV__` variable is determined by current mode
-(debug or release) - not by current environment.
+the value of `__DEV__` variable is determined by current mode (debug or
+release) - not by current environment.
 
-iOS
----
+## iOS
 
-- it's not necessary to uninstall existing application from device
-  like for Android (and it doesn't matter how existing application
-  was installed - via App Store, TestFlight or whatever) - it will
-  be replaced with a build run from Xcode
+- it's not necessary to uninstall existing application from device like for
+  Android (and it doesn't matter how existing application was installed - via
+  App Store, TestFlight or whatever) - it will be replaced with a build run from
+  Xcode
 - make sure notebook and real device use the same Wi-Fi network
 - open _\<project_name>.xcworkspace_
 - select real device as the build target in Xcode toolbar
 - connect to development server
 
-  change server address for development environment: development server
-  is now available by notebook's local IP address - not `localhost`.
+  change server address for development environment: development server is now
+  available by notebook's local IP address - not `localhost`.
 
   _app/api/ApiHelpers.js_:
 
@@ -85,10 +85,10 @@ iOS
 
 - build and run application
 
+  <!-- prettier-ignore -->
   | Xcode: `▶` (toolbar button)
 
-Android
--------
+## Android
 
 - uninstall application from device if it's already installed from Google Play
 
@@ -124,13 +124,12 @@ Android
 
   now local `3000` port is mapped to mobile's `3000` port.
 
-  `3000` is the port development server is listening on
-  (accordingly it's specified as development server port in
-  both _app/api/ApiHelpers.js_ and _app/api/graphql/run.js_).
+  `3000` is the port development server is listening on (accordingly it's
+  specified as development server port in both _app/api/ApiHelpers.js_ and
+  _app/api/graphql/run.js_).
 
-  it's not required to forward `8081` port which is used to
-  communicate with packager - this is done automatically when
-  you run application:
+  it's not required to forward `8081` port which is used to communicate with
+  packager - this is done automatically when you run application:
 
   ```sh
   $ react-native run-android
@@ -138,9 +137,9 @@ Android
   Running /usr/local/share/android-sdk/platform-tools/adb -s 4d00af1d6fa7306d reverse tcp:8081 tcp:8081
   ```
 
-  also change server address for development environment: development
-  server is now available by both `localhost` and notebook's local IP
-  address (but not `10.0.2.2` or `10.0.3.2` - like in case of emulator).
+  also change server address for development environment: development server is
+  now available by both `localhost` and notebook's local IP address (but not
+  `10.0.2.2` or `10.0.3.2` - like in case of emulator).
 
   _app/api/ApiHelpers.js_:
 
@@ -162,6 +161,6 @@ Android
 
 - build and run application
 
-  running `react-native run-android` will install application on all
-  devices listed in `adb devices` output - say, both real device and
-  emulator (it's safe to close emulator).
+  running `react-native run-android` will install application on all devices
+  listed in `adb devices` output - say, both real device and emulator (it's safe
+  to close emulator).

@@ -7,6 +7,8 @@ comments: true
 categories: [dns]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -36,38 +38,35 @@ categories: [dns]
 
 > <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 >
-> You can set up a custom subdomain, such as blog.example.com, by creating
-> a CNAME record through your DNS provider.
+> You can set up a custom subdomain, such as blog.example.com, by creating a
+> CNAME record through your DNS provider.
 
-register root domain
---------------------
+## register root domain
 
 I want to use subdomain `blog.tap349.com` of my root domain `tap349.com` as a
 custom domain for my blog on GitHub Pages (<http://tap349.github.io>) - I will
 refer to it as a custom blog domain hereafter to avoid ambiguity.
 
-add custom blog domain in repo settings on GitHub
--------------------------------------------------
+## add custom blog domain in repo settings on GitHub
 
 1. <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 
-this will create _CNAME_ file with a custom blog domain in the root of
-blog repo (in a separate commit):
+this will create _CNAME_ file with a custom blog domain in the root of blog repo
+(in a separate commit):
 
 ```
 blog.tap349.com
 ```
 
-update nameservers used by your domain registrar
-------------------------------------------------
+## update nameservers used by your domain registrar
 
 1. <https://www.digitalocean.com/community/tutorials/how-to-point-to-digitalocean-nameservers-from-common-domain-registrars>
 
 > To use DigitalOcean DNS, you'll need to update the nameservers used by your
 > domain registrar to DigitalOcean's nameservers instead.
 
-enter DigitalOcean nameservers in DNS settings of your domain registrar
-(it might be necessary to select your root domain first):
+enter DigitalOcean nameservers in DNS settings of your domain registrar (it
+might be necessary to select your root domain first):
 
 - `ns1.digitalocean.com`
 - `ns2.digitalocean.com`
@@ -77,17 +76,17 @@ enter DigitalOcean nameservers in DNS settings of your domain registrar
 > saved them. During this time, the domain registrar communicates the changes
 > you've made with your ISP (Internet Service Provider). In turn, your ISP
 > caches the new nameservers to ensure quick site connections. This process
-> usually takes about 30 minutes, but could take up to a few hours depending
-> on your registrar and your ISP's communication methods.
+> usually takes about 30 minutes, but could take up to a few hours depending on
+> your registrar and your ISP's communication methods.
 
-add CNAME record for custom blog domain
----------------------------------------
+## add CNAME record for custom blog domain
 
 1. <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 2. <https://www.digitalocean.com/community/tutorials/an-introduction-to-digitalocean-dns#cname-records>
 
 CNAME record must be created through your current DNS provider.
 
+<!-- prettier-ignore -->
 | DigitalOcean: `Create ▼` (top right menu) → `Domains/DNS`
 | `<YOUR_DOMAIN>` → `CNAME` (tab)
 
@@ -100,12 +99,12 @@ this will make DNS lookups for <http://blog.tap349.com> to redirect to
 at the same time if you open <http://tap349.github.io> in browser it will
 substitute URL for <http://blog.tap349.com>.
 
-check custom blog domain is set up correctly
---------------------------------------------
+## check custom blog domain is set up correctly
 
 1. <https://help.github.com/articles/setting-up-a-custom-subdomain/>
 
 {% raw %}
+
 ```
 $ dig blog.tap349.com +nostats +nocomments +nocmd
 ; <<>> DiG 9.10.6 <<>> blog.tap349.com +nostats +nocomments +nocmd
@@ -115,10 +114,10 @@ blog.tap349.com.	43200	IN	CNAME	tap349.github.io.
 tap349.github.io.	3600	IN	CNAME	sni.github.map.fastly.net.
 ...
 ```
+
 {% endraw %}
 
-*[OPTIONAL]* use root domain as a custom blog domain
-----------------------------------------------------
+## _[OPTIONAL]_ use root domain as a custom blog domain
 
 1. <https://help.github.com/articles/setting-up-an-apex-domain/>
 

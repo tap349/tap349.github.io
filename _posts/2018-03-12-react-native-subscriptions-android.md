@@ -7,6 +7,8 @@ comments: true
 categories: [react-native, android]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -30,8 +32,7 @@ categories: [react-native, android]
 1. <https://developer.android.com/google/play/billing/index.html>
 2. <https://developer.android.com/google/play/billing/billing_subscriptions.html>
 
-implement subscriptions in application
---------------------------------------
+## implement subscriptions in application
 
 1. <https://github.com/idehub/react-native-billing>
 
@@ -58,12 +59,13 @@ implement subscriptions in application
 
 GPC:
 
-> Licensing allows you to prevent unauthorized distribution of your app.
-> It can also be used to verify in-app billing purchases.
+> Licensing allows you to prevent unauthorized distribution of your app. It can
+> also be used to verify in-app billing purchases.
 
 1. <https://support.google.com/googleplay/android-developer/answer/186113?hl=en>
 2. <https://developer.android.com/google/play/billing/billing_admin.html#license_key>
 
+<!-- prettier-ignore -->
 | GPC: `All applications` → `<MY_APP>`
 | `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
 
@@ -84,8 +86,9 @@ _android/app/src/main/res/values/strings.xml_:
 > communication between your application and the Google Play server. To use the
 > Google Play application, your application must request the proper permission.
 >
-> If your application does not declare the In-app Billing permission, but attempts
-> to send billing requests, Google Play refuses the requests and responds with an error.
+> If your application does not declare the In-app Billing permission, but
+> attempts to send billing requests, Google Play refuses the requests and
+> responds with an error.
 
 _android/app/src/main/AndroidManifest.xml_:
 
@@ -95,8 +98,7 @@ _android/app/src/main/AndroidManifest.xml_:
   <uses-feature android:name="android.hardware.camera" android:required="false"/>
 ```
 
-add subscription in GPC
------------------------
+## add subscription in GPC
 
 ### create signed APK
 
@@ -110,22 +112,23 @@ NOTE: you cannot upload APK with the same build number twice.
 
 <https://developer.android.com/google/play/billing/billing_admin.html#billing-list-setup>:
 
-> The link to the In-app Products page appears only if you have a
-> Google payments merchant account and the app's manifest includes
-> the com.android.vending.BILLING permission.
+> The link to the In-app Products page appears only if you have a Google
+> payments merchant account and the app's manifest includes the
+> com.android.vending.BILLING permission.
 
-NOTE: in fact `In-app products` page is available even when application with
-      IAB permission is not uploaded but there are no `MANAGED PRODUCTS` and
-      `SUBSCRIPTIONS` tabs to manage corresponding items in product list.
+NOTE: in fact `In-app products` page is available even when application with IAB
+permission is not uploaded but there are no `MANAGED PRODUCTS` and
+`SUBSCRIPTIONS` tabs to manage corresponding items in product list.
 
 => upload APK with IAB permission to alpha channel to be able to set up
-subscription (actually upload APK anywhere - alpha channel is just the
-safest option).
+subscription (actually upload APK anywhere - alpha channel is just the safest
+option).
 
-at the same time it's not required to publish (rollout) application - you
-can both set up subscription and test it on real device without publishing
-(see `test with a test subscription` section).
+at the same time it's not required to publish (rollout) application - you can
+both set up subscription and test it on real device without publishing (see
+`test with a test subscription` section).
 
+<!-- prettier-ignore -->
 | GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
 
@@ -133,7 +136,8 @@ can both set up subscription and test it on real device without publishing
 
 - `BROWSE_FILES` (button) → add new APK
 - `Release name` (input): `3.15-alpha` (for example)
-- `What's new in this release?` (textarea): release notes (they will be used for alpha only)
+- `What's new in this release?` (textarea): release notes (they will be used for
+  alpha only)
 - `SAVE` (button) → `REVIEW` (button)
 
 > Confirm rollout to alpha: 3.15
@@ -144,6 +148,7 @@ can both set up subscription and test it on real device without publishing
 
 1. <https://support.google.com/googleplay/android-developer/answer/138000?hl=en&ref_topic=3452890>
 
+<!-- prettier-ignore -->
 | GPC: `Settings` (left menu)
 | `Pricing templates` (left menu) → `NEW PRICING TEMPLATE` (button)
 
@@ -154,9 +159,9 @@ can both set up subscription and test it on real device without publishing
 
 about `Add applicable tax on top of price` tax option:
 
-> Local tax is added in addition to set price in select countries. Local
-> prices are generated using exchange rates and local pricing patterns.
-> Tax is only added in countries with set tax rates.
+> Local tax is added in addition to set price in select countries. Local prices
+> are generated using exchange rates and local pricing patterns. Tax is only
+> added in countries with set tax rates.
 
 => EUR 2.09 (~ RUB 149) becomes EUR 2.49 (~ RUB 179).
 
@@ -165,8 +170,9 @@ about `Add applicable tax on top of price` tax option:
 1. <https://developer.android.com/google/play/billing/billing_admin.html#billing-form-add>
 
 NOTE: you can't set up subscription until you upload APK with IAB permission
-      (see `upload APK to alpha` section).
+(see `upload APK to alpha` section).
 
+<!-- prettier-ignore -->
 | GPC: `All applications` → `<MY_APP>`
 | `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button)
 
@@ -175,13 +181,13 @@ NOTE: you can't set up subscription until you upload APK with IAB permission
 - `Description` (input): `Полное отключение рекламы в приложении`
 - `Status` (radiobutton): `ACTIVE`
 
-  setting `ACTIVE` status means subscription is published (activated) after
-  it's created - once subscription is published, it can't be deactivated or
-  deleted, neither can you modify the price or billing period afterwards.
+  setting `ACTIVE` status means subscription is published (activated) after it's
+  created - once subscription is published, it can't be deactivated or deleted,
+  neither can you modify the price or billing period afterwards.
 
   you can opt to publish subscription later but still it must be done
-  eventually - no account (even test one) can purchase a subscription
-  until it's published (see `test with a real subscription` section).
+  eventually - no account (even test one) can purchase a subscription until it's
+  published (see `test with a real subscription` section).
 
 - `Pricing` (combobox): `Import from pricing template` →
   `RUB 149.00 - Подписка на месяц` → `IMPORT` (button)
@@ -190,8 +196,7 @@ NOTE: you can't set up subscription until you upload APK with IAB permission
 - `Grace period` (radiobutton): `7 DAYS` (default)
 - `SAVE` (button)
 
-test subscription on real device
---------------------------------
+## test subscription on real device
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#testing-subscriptions>
 2. <https://stackoverflow.com/a/22469253/3632318> (list of requirements)
@@ -200,21 +205,23 @@ test subscription on real device
 
 emulator (app):
 
-> InAppBilling is not available. InAppBilling will not work/test on
-> an emulator, only a physical Android device.
+> InAppBilling is not available. InAppBilling will not work/test on an emulator,
+> only a physical Android device.
 
 ### testing with static responses
 
-YOU DON'T NEED TO TOUCH GOOGLE PLAY CONSOLE AT ALL TO TEST WITH STATIC RESPONSES.
+YOU DON'T NEED TO TOUCH GOOGLE PLAY CONSOLE AT ALL TO TEST WITH STATIC
+RESPONSES.
 
 1. <https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static>
 2. <https://github.com/idehub/react-native-billing#testing-with-static-responses>
 
-> You do not need to list the reserved products in your application's product list.
-> Google Play already knows about the reserved product IDs. Also, you do not need
-> to upload your application to the Play Console to perform static response tests
-> with the reserved product IDs. You can simply install your application on a device,
-> log into the device, and make billing requests using the reserved product IDs.
+> You do not need to list the reserved products in your application's product
+> list. Google Play already knows about the reserved product IDs. Also, you do
+> not need to upload your application to the Play Console to perform static
+> response tests with the reserved product IDs. You can simply install your
+> application on a device, log into the device, and make billing requests using
+> the reserved product IDs.
 
 reserved product IDs:
 
@@ -238,11 +245,12 @@ _android/app/src/main/res/values/strings.xml_:
   </resources>
 ```
 
-however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property
-altogether - or else you'll get `String resource ID #0x0` error.
+however you cannot remove `RNB_GOOGLE_PLAY_LICENSE_KEY` property altogether - or
+else you'll get `String resource ID #0x0` error.
 
 #### run application on real device
 
+<!-- prettier-ignore -->
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
 #### troubleshooting
@@ -280,9 +288,10 @@ altogether - or else you'll get `String resource ID #0x0` error.
   </table>
 
   it has turned out you can only purchase when testing with static responses but
-  not subscribe. all other subscription related methods from `react-native-billing`
-  package (`isSubscribed`, `getSubscriptionDetails`) are working as expected (that
-  is they return relevant static responses - for subscription, not for purchase).
+  not subscribe. all other subscription related methods from
+  `react-native-billing` package (`isSubscribed`, `getSubscriptionDetails`) are
+  working as expected (that is they return relevant static responses - for
+  subscription, not for purchase).
 
   <https://github.com/idehub/react-native-billing#testing-with-your-own-in-app-products>:
 
@@ -304,8 +313,8 @@ test subscriptions are:
 - renew 6 times only (cancelled automatically afterwards)
 - can be managed (say, cancelled in GP)
 
-test subscriptions are not created separately - they are real subscriptions
-but with special characteristics and behaviour for license testers.
+test subscriptions are not created separately - they are real subscriptions but
+with special characteristics and behaviour for license testers.
 
 => it's required to create and publish a real subscription in GP as described
 above (application itself may stay unpublished).
@@ -328,16 +337,17 @@ above (application itself may stay unpublished).
 1. <https://developer.android.com/google/play/billing/billing_testing.html#setup>
 2. <https://developer.android.com/google/play/billing/billing_admin.html#billing-testing-setup>
 
+<!-- prettier-ignore -->
 | GPC: `Settings` (left menu)
 | `Developer account` (left menu) → `Account details` → `License Testing` (section)
 
 - `Gmail accounts with testing access` (textarea): `*.tap349@gmail.com`
 
-it's not required that license test account is linked to a valid payment
-method (I could make a test purchase without any linked payment method).
+it's not required that license test account is linked to a valid payment method
+(I could make a test purchase without any linked payment method).
 
-if user is registered as both license and alpha tester, being a license
-tester has priority: he'll be offered to purchase test subscription only.
+if user is registered as both license and alpha tester, being a license tester
+has priority: he'll be offered to purchase test subscription only.
 
 NOTE: license test account must be a primary account on real device!
 
@@ -352,29 +362,30 @@ see `include license key in application build` section.
 
 #### uninstall existing application from real device
 
-it's necessary to uninstall application from device beforehand
-or else you'll get either `INSTALL_FAILED_DUPLICATE_PERMISSION`
-or `INSTALL_FAILED_ALREADY_EXISTS` error:
+it's necessary to uninstall application from device beforehand or else you'll
+get either `INSTALL_FAILED_DUPLICATE_PERMISSION` or
+`INSTALL_FAILED_ALREADY_EXISTS` error:
 
 ```sh
 $ adb uninstall com.iceperkapp
 ```
 
-NOTE: `com.iceperkapp` is both package name and `applicationId`
-      from _android/app/build.gradle_.
+NOTE: `com.iceperkapp` is both package name and `applicationId` from
+_android/app/build.gradle_.
 
 #### set either development or production environment in application
 
-it's possible to purchase test subscriptions in both `development`
-and `production` environments (see the next section) - just don't
-forget to forward ports in `development`.
+it's possible to purchase test subscriptions in both `development` and
+`production` environments (see the next section) - just don't forget to forward
+ports in `development`.
 
 #### run or install application on real device
 
+<!-- prettier-ignore -->
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
-NOTE: application (being installed now) and APK (uploaded to GPC) must
-      have the same version name and build number.
+NOTE: application (being installed now) and APK (uploaded to GPC) must have the
+same version name and build number.
 
 TODO: previous statement should be checked (and find its source).
 
@@ -430,40 +441,39 @@ TODO: previous statement should be checked (and find its source).
     </tr>
   </table>
 
-  you cannot use developer account to test real subscriptions -
-  even with test transactions (and of course you cannot make real
-  purchases since you cannot pay to yourself).
+  you cannot use developer account to test real subscriptions - even with test
+  transactions (and of course you cannot make real purchases since you cannot
+  pay to yourself).
 
 - `isSubscribed` returns true after subscription is cancelled
 
   1. <https://github.com/idehub/react-native-billing/issues/62>
   2. <https://github.com/idehub/react-native-billing/issues/57>
 
-  NOTE: this problem is Android-specific since we validate receipt by
-        ourselves on iOS (and subscription status is always up-to-date).
+  NOTE: this problem is Android-specific since we validate receipt by ourselves
+  on iOS (and subscription status is always up-to-date).
 
-  when test subscription is cancelled, `isSubscribed` keeps on returning
-  true. reinstalling application and refreshing subscription status cache
-  with `loadOwnedPurchasesFromGoogle` doesn't help - most likely there is
-  nothing wrong with my implementation and `react-native-billing` package:
+  when test subscription is cancelled, `isSubscribed` keeps on returning true.
+  reinstalling application and refreshing subscription status cache with
+  `loadOwnedPurchasesFromGoogle` doesn't help - most likely there is nothing
+  wrong with my implementation and `react-native-billing` package:
 
-  > if im not wrong, thats the way PlayStore works, its cycle can take
-  > days to remove the "Subscribed" item from user PlayStore/Account.
-  > Even coding in Android, after canceled the subscription take some
-  > days to disappear.
+  > if im not wrong, thats the way PlayStore works, its cycle can take days to
+  > remove the "Subscribed" item from user PlayStore/Account. Even coding in
+  > Android, after canceled the subscription take some days to disappear.
 
-  possible solution (but not an easy one) is to use server-side validation
-  of subscriptions with `in-app-purchase` package.
+  possible solution (but not an easy one) is to use server-side validation of
+  subscriptions with `in-app-purchase` package.
 
-  even though `isSubscribed` returns true, subscription is not actually
-  active - you can purchase it again (though it's button to purchase is
-  hidden inside application because of `isSuscribed` returning true).
+  even though `isSubscribed` returns true, subscription is not actually active -
+  you can purchase it again (though it's button to purchase is hidden inside
+  application because of `isSuscribed` returning true).
 
-  ***UPDATE***
+  **_UPDATE_**
 
   `isSubscribed` is still true 12 hours later.
 
-  ***UPDATE***
+  **_UPDATE_**
 
   `isSubscribed` is eventually false 2 days later.
 
@@ -475,8 +485,8 @@ TODO: previous statement should be checked (and find its source).
 <https://developer.android.com/google/play/billing/billing_testing.html#billing-testing-test>:
 
 > You can do end-to-end testing of your app by publishing it to an alpha
-> distribution channel. This allows you to publish the app to the Google
-> Play Store, but limit its availability to just the testers you designate.
+> distribution channel. This allows you to publish the app to the Google Play
+> Store, but limit its availability to just the testers you designate.
 
 #### add alpha testers (alpha tester accounts)
 
@@ -499,8 +509,10 @@ release review summary when trying to publish release to alpha without testers:
 so I've removed myself from license testers (`*.tap349@gmail.com` email) and
 added to alpha testers instead (see below). also unlike for license test account
 it's important that alpha tester account be linked to a valid payment method -
-so make sure to add payment info for this account before trying to make a purchase.
+so make sure to add payment info for this account before trying to make a
+purchase.
 
+<!-- prettier-ignore -->
 | GPC: `Settings` (left menu)
 | `Manage testers` (left menu) → `CREATE LIST` (button)
 
@@ -508,6 +520,7 @@ so make sure to add payment info for this account before trying to make a purcha
 - `Add email addresses` (input): `*.tap349@gmail.com`
 - `CREATE LIST` (button)
 
+<!-- prettier-ignore -->
 | GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section)
 
@@ -520,9 +533,10 @@ it's possible to add/remove alpha testers after release is published.
 #### publish release to alpha
 
 NOTE: publish release to alpha only if you're planning to start Alpha Testing
-      (either open or closed) - don't publish if you will test application by
-      installing and running it on real device with `adb`.
+(either open or closed) - don't publish if you will test application by
+installing and running it on real device with `adb`.
 
+<!-- prettier-ignore -->
 | GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `EDIT RELEASE` (button)
 
@@ -537,6 +551,7 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
 
 #### open opt-in URL in browser
 
+<!-- prettier-ignore -->
 | GPC: `All applications` → `<MY_APP>`
 | `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section) → `Opt-in URL` (input)
 
@@ -563,23 +578,25 @@ in both cases `react-native-billing` rejects promise with this error message:
 Purchase or subscribe failed with error: <error_code>
 ```
 
-publish release with subscription
----------------------------------
+## publish release with subscription
 
 ### update tax info (if necessary)
 
+<!-- prettier-ignore -->
 | GPC: `Settings` (left menu)
 | `Developer account` (left menu) → `Payment settings` → `Settings` (section) → `MANAGE SETTINGS` (button)
 | `Payments profile` (section) → `United States tax info` → `✎` (link) → `UPDATE TAX INFO` (link)
 
 > Tax form questions
 
+<!-- prettier-ignore -->
 - `Are you a US citizen, US resident alien, US corporation or US partnership?` (radiobutton): [x] `No`
 - `CONTINUE` (button)
 
 > Certificate of Foreign Status
 
 - `Classification` (combobox): `LLC`
+<!-- prettier-ignore -->
 - `Signature of beneficial owner (or individual authorized to sign for beneficial owner):` (input): `T* Sm*`
 - `SUBMIT` (button)
 
@@ -587,18 +604,19 @@ publish release with subscription
 
 new app appeared in GP almost immediately (it took about 1 minute).
 
-view financial reports
-----------------------
+## view financial reports
 
 ### test subscriptions
 
 test transactions are not shown in financial reports. IDK how to view them -
-currently I can track them through GP emails only (they are sent to license
-test account email each time subscription is renewed or cancelled).
+currently I can track them through GP emails only (they are sent to license test
+account email each time subscription is renewed or cancelled).
 
 ### real subscriptions
 
+<!-- prettier-ignore -->
 | GPC: `All applications` → `<MY_APP>`
 | `Financial reports` (left menu) → `Subscriptions`
 
-statistics are collected with 2 days delay (there're no data for the last 2 days).
+statistics are collected with 2 days delay (there're no data for the last 2
+days).

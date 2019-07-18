@@ -7,6 +7,8 @@ comments: true
 categories: [postgresql]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,8 +16,7 @@ categories: [postgresql]
 {:toc}
 <hr>
 
-tools
------
+## tools
 
 - `psql`
 - pgAdmin
@@ -36,8 +37,7 @@ tools
   / enter postgres password
   ```
 
-open sessions (connections)
----------------------------
+## open sessions (connections)
 
 1. <https://serverfault.com/questions/128284>
 
@@ -55,5 +55,6 @@ open sessions (connections)
 
 - pgAdmin
 
+  <!-- prettier-ignore -->
   | pgAdmin: `Servers` (browser) → `<MY_SERVER>` → `Databases` → `<MY_DATABASE>`
   | `Dashboard` (tab in main window) → `Server activity` (section) → `Sessions`

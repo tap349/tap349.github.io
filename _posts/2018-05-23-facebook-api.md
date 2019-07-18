@@ -7,6 +7,8 @@ comments: true
 categories: [facebook]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -56,13 +58,11 @@ categories: [facebook]
 
 <hr>
 
-Facebook Login
---------------
+## Facebook Login
 
 1. [Permissions Reference - Facebook Login](https://developers.facebook.com/docs/facebook-login/permissions/v3.1)
 
-Graph API
----------
+## Graph API
 
 1. <https://developers.facebook.com/docs/graph-api>
 
@@ -70,16 +70,16 @@ Graph API
 
 1. <https://developers.facebook.com/docs/graph-api/changelog/version3.0>
 
-you can get `active_billing_date_preference` and `next_bill_date` info only
-if your token is generated for `Ads Manager` App (`App ID` field in ATD).
+you can get `active_billing_date_preference` and `next_bill_date` info only if
+your token is generated for `Ads Manager` App (`App ID` field in ATD).
 
 ### get page conversations
 
 1. <https://developers.facebook.com/docs/graph-api/reference/page/conversations/>
 2. <https://developers.facebook.com/docs/graph-api/reference/v3.1/conversation>
 
-first generate long-lived PAT with `read_page_mailboxes` permission - see
-`PAT` section below.
+first generate long-lived PAT with `read_page_mailboxes` permission - see `PAT`
+section below.
 
 this PAT can be now used to fetch page conversations:
 
@@ -98,17 +98,16 @@ filtering conversations by date is removed by Facebook:
 
 > <https://developers.facebook.com/support/bugs/420363721670492>
 >
-> it appears as if we would have to delete conversations in order to
-> prevent retrieving all conversations all the time.
+> it appears as if we would have to delete conversations in order to prevent
+> retrieving all conversations all the time.
 >
-> So if I want to get a message from January I have to paginate all
-> over the object until January?
+> So if I want to get a message from January I have to paginate all over the
+> object until January?
 
-it's only possible to limit the number of conversations to fetch using
-`limit` modifier.
+it's only possible to limit the number of conversations to fetch using `limit`
+modifier.
 
-Marketing API
--------------
+## Marketing API
 
 1. <https://developers.facebook.com/docs/marketing-apis>
 2. [Business Manager](https://developers.facebook.com/docs/marketing-api/business-manager-api)
@@ -215,14 +214,14 @@ sample response:
 > There are two main payment settings for Facebook ads:
 >
 > Automatic payments: We'll automatically charge you whenever you spend a
-> certain amount known as your billing threshold and again on your monthly
-> bill date for any leftover costs. This is how you'll pay if you use PayPal
-> or most credit and debit cards to purchase ads.
+> certain amount known as your billing threshold and again on your monthly bill
+> date for any leftover costs. This is how you'll pay if you use PayPal or most
+> credit and debit cards to purchase ads.
 >
-> Manual payments: You'll add money to your account first, and then we'll
-> deduct from that amount up to once a day as you run ads. This is how you'll
-> pay if you use a manual payment method (like PayTM or Boleto Bancário) to
-> purchase ads. With manual payments, you won't have a billing threshold.
+> Manual payments: You'll add money to your account first, and then we'll deduct
+> from that amount up to once a day as you run ads. This is how you'll pay if
+> you use a manual payment method (like PayTM or Boleto Bancário) to purchase
+> ads. With manual payments, you won't have a billing threshold.
 
 ```
 UAT scopes: email,public_profile,ads_management,ads_read,manage_pages
@@ -272,9 +271,9 @@ sample response:
 }
 ```
 
-available balance in `funding_source_details` is decreased every day - on
-every `ad_account_billing_charge` event, I guess. you can parse this string
-to predict when user is close to running out of money.
+available balance in `funding_source_details` is decreased every day - on every
+`ad_account_billing_charge` event, I guess. you can parse this string to predict
+when user is close to running out of money.
 
 ### get campaign insights
 
@@ -334,13 +333,12 @@ sample response:
 }
 ```
 
-it turns out that `read_insights` permission is not required to read
-insights - it must be sufficient to have `ads_read` permission only.
+it turns out that `read_insights` permission is not required to read insights -
+it must be sufficient to have `ads_read` permission only.
 
 NOTE: insights are shown/available not for all campaigns - IDK why yet.
 
-user IDs
---------
+## user IDs
 
 1. <https://developers.facebook.com/docs/messenger-platform/identity/id-matching>
 
@@ -360,25 +358,24 @@ user IDs
 
 - page-scoped ID (PSID)
 
-  > When a person interacts with a business via Messenger, an ID is created
-  > for the specific Page associated with the bot in Messenger, which is called
+  > When a person interacts with a business via Messenger, an ID is created for
+  > the specific Page associated with the bot in Messenger, which is called
   > Page-scoped ID.
 
-access tokens
--------------
+## access tokens
 
 1. <https://developers.facebook.com/docs/facebook-login/access-tokens>
 
 - temporary token is called short-lived one
 - permanent token is called long-lived one
 
-short-lived token can be extended in ATD - this means it will be turned
-into long-lived token (in fact it will be a brand new token then).
+short-lived token can be extended in ATD - this means it will be turned into
+long-lived token (in fact it will be a brand new token then).
 
 ### UAT
 
-> User access tokens are generally obtained via a login dialog and
-> require a person to permit your app to obtain one.
+> User access tokens are generally obtained via a login dialog and require a
+> person to permit your app to obtain one.
 
 ### AAT
 
@@ -390,16 +387,17 @@ into long-lived token (in fact it will be a brand new token then).
 
 1. [Facebook - Bot]({% post_url 2018-05-07-facebook-bot %})
 
+<!-- prettier-ignore -->
 | FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
 | `Token Generation` (section) → `Select a Page` (combobox)
 
 this PAT is long-lived and has only messenger permissions for selected page
 (that is `pages_messaging_*` permissions).
 
-***UPDATE***
+**_UPDATE_**
 
-new `KhLead` PAT generated this way now has not only messenger permissions
-but `read_page_mailboxes` permission as well (as though it was saved after
+new `KhLead` PAT generated this way now has not only messenger permissions but
+`read_page_mailboxes` permission as well (as though it was saved after
 generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 #### generate long-lived PAT with arbitrary permissions in GAE
@@ -408,10 +406,12 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get UAT with required permissions
 
+  <!-- prettier-ignore -->
   | GAE
 
   - `Application` (combobox): `<MY_APP>`
 
+  <!-- prettier-ignore -->
   | GAE: `Get Token` (dropdown menu) → `Get User Access Token`
 
   > Select Permissions
@@ -421,6 +421,7 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get short-lived PAT
 
+  <!-- prettier-ignore -->
   | GAE
 
   use UAT generated above to get short-lived PAT:
@@ -430,14 +431,15 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
   GET v3.1/<PAGE_ID>?fields=access_token
   ```
 
-  see [Facebook - Tips]({% post_url 2018-06-01-facebook-tips %}) on how to
-  find page ID.
+  see [Facebook - Tips]({% post_url 2018-06-01-facebook-tips %}) on how to find
+  page ID.
 
-  => short-lived PAT is generated (expires in 1 hour) - now it's necessary
-  to extend it and get a new long-lived PAT in ATD.
+  => short-lived PAT is generated (expires in 1 hour) - now it's necessary to
+  extend it and get a new long-lived PAT in ATD.
 
 - get long-lived PAT
 
+  <!-- prettier-ignore -->
   | ATD
 
   paste short-lived PAT into ATD and click `Extend Access Token` button at the

@@ -7,6 +7,8 @@ comments: true
 categories: [react-native]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,13 +16,13 @@ categories: [react-native]
 {:toc}
 <hr>
 
-configuration
--------------
+## configuration
 
 ### install GApps
 
 1. <https://stackoverflow.com/a/20137324/3632318>
 
+<!-- prettier-ignore -->
 | emulator (app): right toolbar → `Open GAPPS` (button)
 
 GApps are required to receive pushes (see `troubleshooting` section).
@@ -29,19 +31,21 @@ GApps are required to receive pushes (see `troubleshooting` section).
 
 it's enabled by default in Android Emulator but not in Genymotion.
 
+<!-- prettier-ignore -->
 | Genymotion: my device → device menu (`vertical dots` icon) → `Edit`
 
 - [x] `Use virtual keyboard for text input`
 
-debugging
----------
+## debugging
 
 ### Developer Menu
 
+<!-- prettier-ignore -->
 | emulator (app): `<D-m>`
 
 or
 
+<!-- prettier-ignore -->
 | emulator (app): right toolbar → `Menu` (`drawer` icon button)
 
 ### connect to local web server
@@ -50,14 +54,13 @@ or
 
 use `10.0.3.2:3000`.
 
-troubleshooting
----------------
+## troubleshooting
 
 ### reloading doesn't work
 
-network requests are sent to development server after running
-application with `react-native run-android` but are no longer
-sent after the first reload (connection with packager is not lost).
+network requests are sent to development server after running application with
+`react-native run-android` but are no longer sent after the first reload
+(connection with packager is not lost).
 
 **solution**
 
@@ -68,7 +71,7 @@ temporary fixes:
 - run application again with `react-native run-android`
 - force close and open application inside emulator
 
-***UPDATE***
+**_UPDATE_**
 
 reloading doesn't work again so temporary fixes are still pertinent.
 
@@ -80,5 +83,5 @@ no push token is associated with user device (just like on iOS emulator).
 
 install GApps (see `configuration` section).
 
-NOTE: it might be required to restart emulator and run application again
-      for pushes to work.
+NOTE: it might be required to restart emulator and run application again for
+pushes to work.

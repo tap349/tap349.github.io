@@ -1,6 +1,6 @@
 ---
 layout: post
-title: React Native - Troubleshooting (iOS errors)
+title: React Native - Troubleshooting (iOS)
 date: 2019-07-18 16:38:22 +0300
 access: public
 comments: true

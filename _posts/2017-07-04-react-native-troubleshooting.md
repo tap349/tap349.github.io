@@ -26,15 +26,18 @@ $ react-native start --reset-cache
 
 ## JS errors
 
-{% include_relative 2019-07-18-react-native-troubleshooting-(js-errors).md %}
+<!-- prettier-ignore -->
+1. [React Native - Troubleshooting (JS)]({% post_url 2019-07-18-react-native-troubleshooting-js %})
 
 ## iOS errors
 
-{% include_relative 2019-07-18-react-native-troubleshooting-(ios-errors).md %}
+<!-- prettier-ignore -->
+1. [React Native - Troubleshooting (iOS)]({% post_url 2019-07-18-react-native-troubleshooting-ios %})
 
 ## Android errors
 
-{% include_relative 2019-07-18-react-native-troubleshooting-(android-errors).md %}
+<!-- prettier-ignore -->
+1. [React Native - Troubleshooting (Android)]({% post_url 2019-07-18-react-native-troubleshooting-android %})
 
 ## errors after upgrading RN to 0.45.1
 

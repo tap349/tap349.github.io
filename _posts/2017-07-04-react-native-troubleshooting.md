@@ -29,7 +29,7 @@ $ react-native start --reset-cache
 
 ## Android errors
 
-1. [React Native - Android]({% post_url 2017-05-25-react-native-android %})
+1. [React Native - Android]({% post_url 2017-05-24-react-native-android %})
    (`troubleshooting` section)
 
 ## JS errors

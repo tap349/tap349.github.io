@@ -343,7 +343,7 @@ the error occurs if Gill Sans font is used only - setting font weight works with
 
 **solution**
 
-TODO
+TODO: still not resolved.
 
 ### undefined is not an object (evaluating 'Sentry.options.logLevel')
 

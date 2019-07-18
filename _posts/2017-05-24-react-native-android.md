@@ -179,7 +179,7 @@ $ avdmanager create avd \
 $ avdmanager list avd
 ```
 
-### configure emulator to use that AVD
+### create alias to start emulator using that AVD
 
 1. <https://stackoverflow.com/questions/42718973>
 2. <https://developer.android.com/studio/run/emulator-acceleration.html#command-gpu>
@@ -251,7 +251,7 @@ it's just RN wrapper for `npm start` command.
 
 it's called Metro (Metro Bundler, `JavaScript bundler for React Native`) now.
 
-### start emulator using specific AVD
+### start emulator
 
 ```sh
 $ emulator -avd Nexus_5X_API_23_x86_64 -gpu host -skin 1080x1920
@@ -1584,3 +1584,23 @@ or find a fork where it has been already done):
 >
 > With this update, you no longer need to specify a version for the SDK Build
 > Tools. The Android Gradle plugin now uses version 28.0.3 by default.
+
+### FATAL EXCEPTION IN SYSTEM PROCESS: WindowManager
+
+1. <https://stackoverflow.com/questions/26808669/android-avd-is-crashing-with-nullpointerexception-on-startup>
+
+error occurs when starting emulator using AVD with Android 4.4 => emulator is
+stuck on splash screen:
+
+```
+$ adb logcat
+...
+E/AndroidRuntime(21204): *** FATAL EXCEPTION IN SYSTEM PROCESS: WindowManager
+E/AndroidRuntime(21204): java.lang.NullPointerException
+E/AndroidRuntime(21204): 	at com.android.server.display.LocalDisplayAdapter$LocalDisplayDevice.getDisplayDeviceInfoLocked(LocalDisplayAdapter.java:147)
+E/AndroidRuntime(21204): 	at com.android.server.display.DisplayManagerService.handleDisplayDeviceAddedLocked(DisplayManagerService.java:852)
+```
+
+**solution**
+
+TODO: still not resolved.

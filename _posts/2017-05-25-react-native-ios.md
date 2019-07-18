@@ -50,7 +50,7 @@ same considerations as for Android.
 $ react-native start
 ```
 
-### run application in emulator
+### start emulator and run application in emulator
 
 ```sh
 $ react-native run-ios
@@ -58,8 +58,8 @@ $ react-native run-ios
 
 this command:
 
-- builds application
 - starts emulator
+- builds application
 - installs application
 
 the first run might take a while since RN will build the whole Xcode project.

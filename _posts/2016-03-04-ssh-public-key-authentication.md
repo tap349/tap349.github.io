@@ -7,8 +7,11 @@ comments: true
 categories: [ssh]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
@@ -36,8 +39,7 @@ categories: [ssh]
 > important of these is public key authentication for interactive and automated
 > connections.
 
-flow
-----
+## flow
 
 > <https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.foto100/pkauth.htm>
 >
@@ -46,27 +48,26 @@ flow
 > key and the server checks that the corresponding public key is authorized to
 > accept the account.
 
-each host entry in SSH config (_~/.ssh/config_) has `IdentityFile` option
-which specifies the path to identity file for this host.
+each host entry in SSH config (_~/.ssh/config_) has `IdentityFile` option which
+specifies the path to identity file for this host.
 
 SSH client uses SSH config to decide which identity to use by looking up
 required host in SSH config and reading its `IdentityFile` option.
 
-SSH client then asks SSH agent to provide this identity to authenticate
-login to remote server - AFAIU identity is identified either by its file
-path or corresponding public key (both are shown in `ssh-add -L` output).
+SSH client then asks SSH agent to provide this identity to authenticate login to
+remote server - AFAIU identity is identified either by its file path or
+corresponding public key (both are shown in `ssh-add -L` output).
 
-SSH agent
----------
+## SSH agent
 
 > man 1 ssh-agent
 >
 > The agent will never send a private key over its request channel. Instead,
-> operations that require a private key will be performed by the agent, and
-> the result will be returned to the requester. This way, private keys are
-> not exposed to clients using the agent.
+> operations that require a private key will be performed by the agent, and the
+> result will be returned to the requester. This way, private keys are not
+> exposed to clients using the agent.
 
-***UPDATE (2019-07-01)***
+**_UPDATE (2019-07-01)_**
 
 SSH agent is started automatically upon the first usage of `ssh` - there's no
 need to set up anything.
@@ -85,13 +86,13 @@ need to set up anything.
 
   > <http://www.snailbook.com/faq/about-agent.auto.html>
   >
-  > Some people express irritation over this seemingly convoluted procedure,
-  > and wonder why they can't just run ssh-agent and be done with it.
+  > Some people express irritation over this seemingly convoluted procedure, and
+  > wonder why they can't just run ssh-agent and be done with it.
   >
-  > In Unix, there is no way for a process to directly change the environment
-  > of other existing processes; it can only change its own environment, and
-  > those of child processes it starts. Thus, running ssh-agent cannot affect
-  > the environment of the shell which starts the agent.
+  > In Unix, there is no way for a process to directly change the environment of
+  > other existing processes; it can only change its own environment, and those
+  > of child processes it starts. Thus, running ssh-agent cannot affect the
+  > environment of the shell which starts the agent.
   >
   > Having the agent print out shell commands which can be easily executed to
   > set the variables, is as convenient as it gets.
@@ -104,8 +105,8 @@ need to set up anything.
   >
   > The agent initially does not have any private keys. Keys are added using
   > ssh(1) (see AddKeysToAgent in ssh_config(5) for details) or ssh-add(1).
-  > Multiple identities may be stored in ssh-agent concurrently and ssh(1)
-  > will automatically use them if present.
+  > Multiple identities may be stored in ssh-agent concurrently and ssh(1) will
+  > automatically use them if present.
 
   > man 1 ssh-add
   >
@@ -140,8 +141,8 @@ need to set up anything.
   > <https://www.ssh.com/ssh/agent#sec-SSH-Agent-Forwarding>
   >
   > Furthermore, the SSH protocol implements agent forwarding, a mechanism
-  > whereby an SSH client allows an SSH server to use the local ssh-agent on
-  > the server the user logs into, as if it was local there.
+  > whereby an SSH client allows an SSH server to use the local ssh-agent on the
+  > server the user logs into, as if it was local there.
   >
   > When the user uses an SSH client on the server, the client will try to
   > contact the agent implemented by the server, and the server then forwards

@@ -7,14 +7,16 @@ comments: true
 categories: [elixir, ecto]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
+<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
 
-naming conventions
-------------------
+## naming conventions
 
 ### mutator functions
 
@@ -26,8 +28,7 @@ naming conventions
 - `@create_permitted_params`
 - `@update_permitted_params`
 
-order
------
+## order
 
 ### order of schema fields
 
@@ -85,8 +86,7 @@ association field comes first in:
   other schema fields, it seems more natural to pass association first from a
   client perspective.
 
-migrations
-----------
+## migrations
 
 ### always add `null: true` option in migrations
 
@@ -94,7 +94,7 @@ migrations
 2. <https://www.postgresql.org/docs/11/ddl-constraints.html#id-1.5.4.5.6>
 
 Ecto doesn't add not-null constraint by default when adding new column but
-specifying `null: true` option explicitly is required when modifying column
-to drop existing not-null constraint (or else it won't be dropped).
+specifying `null: true` option explicitly is required when modifying column to
+drop existing not-null constraint (or else it won't be dropped).
 
 so always add `null: true` in migrations for the sake of consistency.

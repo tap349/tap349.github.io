@@ -1627,7 +1627,7 @@ W/ActivityManager( 1564):   Force finishing activity com.iceperkapp/.MainActivit
 
 1. <https://stackoverflow.com/a/54501907/3632318>
 
-class wasn't found because multidex support wasn't properly configured:
+multidex support wasn't properly configured:
 
 ```diff
   // android/app/build.gradle

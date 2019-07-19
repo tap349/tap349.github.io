@@ -1604,3 +1604,55 @@ E/AndroidRuntime(21204): 	at com.android.server.display.DisplayManagerService.ha
 **solution**
 
 TODO: still not resolved.
+
+### Unable to get provider com.google.android.gms.ads.MobileAdsInitProvider
+
+application crashes on startup:
+
+```
+$ adb logcat
+...
+E/AndroidRuntime( 2579): FATAL EXCEPTION: main
+E/AndroidRuntime( 2579): Process: com.iceperkapp, PID: 2579
+E/AndroidRuntime( 2579): java.lang.RuntimeException: Unable to get provider com.google.android.gms.ads.MobileAdsInitProvider: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.ads.MobileAdsInitProvider" on path: DexPathList[[zip file "/data/app/com.iceperkapp-2.apk"],nativeLibraryDirectories=[/data/app-lib/com.iceperkapp-2, /vendor/lib, /system/lib]]
+E/AndroidRuntime( 2579):   at android.app.ActivityThread.installProvider(ActivityThread.java:4793)
+...
+E/AndroidRuntime( 2579): Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.ads.MobileAdsInitProvider" on path: DexPathList[[zip file "/data/app/com.iceperkapp-2.apk"],nativeLibraryDirectories=[/data/app-lib/com.iceperkapp-2, /vendor/lib, /system/lib]]
+E/AndroidRuntime( 2579):   at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+...
+W/ActivityManager( 1564):   Force finishing activity com.iceperkapp/.MainActivity
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/54501907/3632318>
+
+class wasn't found because multidex support wasn't properly configured:
+
+```diff
+  // android/app/build.gradle
+
+  android {
+      defaultConfig {
+          // ...
++         multiDexEnabled true
+      }
+  }
+
+  dependencies {
+      // ...
++     implementation 'com.android.support:multidex:1.0.3'
+  }
+```
+
+```diff
+  // android/app/src/main/java/com/iceperkapp/MainApplication.java
+
+- import android.app.Application;
++ import android.support.multidex.MultiDexApplication;
+
+  // ...
+
+- public class MainApplication extends Application implements ReactApplication {
++ public class MainApplication extends MultiDexApplication implements ReactApplication {
+```

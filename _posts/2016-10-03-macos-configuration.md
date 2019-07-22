@@ -7,6 +7,8 @@ comments: true
 categories: [macos]
 ---
 
+<!-- @format -->
+
 steps to configure new macOS installation.
 
 <!-- more -->
@@ -16,11 +18,10 @@ steps to configure new macOS installation.
 {:toc}
 <hr>
 
-basic setup
------------
+## basic setup
 
 NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
-      (<http://www.seagate.com/support/downloads/item/ntfs-driver-for-mac-os-master-dl>).
+(<http://www.seagate.com/support/downloads/item/ntfs-driver-for-mac-os-master-dl>).
 
 - install all system updates in App Store
 - install brew:
@@ -66,8 +67,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - 2Do
   - Trello
   - MacVim
-  - iTerm2
   - Telegram Desktop
+  - iTerm2
 - Dictionary:
   - select `New Oxford American Dictionary (American English)` and
     `Oxford Russian Dictionary (Russian-English)`
@@ -82,14 +83,15 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - _.psql_history_
   - _.zsh_history_
 - install additional software (must be downloaded manually):
+
   - Adobe Lightroom 5 (the latest version as of now - 5.7.1)
 
     <https://forums.adobe.com/thread/1639590>
 
     NOTE: app might fail to launch if you opted for case-sensitive filesystem
-          when installing macOS. rename offensive directories to lower case
-          (see report details for specific path that failed) and don't forget
-          to update symlinks.
+    when installing macOS. rename offensive directories to lower case (see
+    report details for specific path that failed) and don't forget to update
+    symlinks.
 
   - GoPanda2
   - Grammarly
@@ -108,8 +110,8 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
         - Stop Pomodoro: `<C-D-s>` (displayed in qwerty: `<C-D-;>`)
   - TopTracker
 
-  NOTE: additional software is usually stored in _~/soft/_ to keep it all
-        in a single place since it's not managed by any package manager.
+  NOTE: additional software is usually stored in _~/soft/_ to keep it all in a
+  single place since it's not managed by any package manager.
 
 - copy other files from backup (to name a few):
   - _~/Pictures/Lightroom/_
@@ -120,8 +122,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - _~/soft/_
 - sign in to iTunes Store
 
-System Preferences
-------------------
+## System Preferences
 
 ### General
 
@@ -195,8 +196,8 @@ System Preferences
 
 - Point & click (tab):
   - [x] Look up & data detectors
-  - [x] Secondary click: Click or tap with two fingers
-    (default value after checking `Tap to click` option)
+  - [x] Secondary click: Click or tap with two fingers (default value after
+        checking `Tap to click` option)
   - [x] Tap to click
 - More gestures (tab):
   - [x] Mission Control: Swipe up with four fingers
@@ -232,8 +233,8 @@ System Preferences
 ### Network
 
 - PureVPN:
-  - [x] Show VPN status in menu bar
-    (optionally select `Show Time Connected` in menu bar)
+  - [x] Show VPN status in menu bar (optionally select `Show Time Connected` in
+        menu bar)
 
 ### Sharing
 
@@ -253,20 +254,19 @@ System Preferences
 
 ### Accessibility
 
-NOTE: currently disabled because of a significant delay
-      when scrolling with inertia in iOS emulator.
+NOTE: currently disabled because of a significant delay when scrolling with
+inertia in iOS emulator.
 
 - Mouse & Trackpad (left menu):
   - Trackpad Options... (button):
     - [ ] Enable dragging: three fingers drag
 
-font configuration
-------------------
+## font configuration
 
 these fonts should be installed to _~/Library/Fonts/_ directory:
 
-- unpatched `Andale Mono MT Std` and `Andale Mono MT Std Bold` fonts
-  (copy manually from dotfiles)
+- unpatched `Andale Mono MT Std` and `Andale Mono MT Std Bold` fonts (copy
+  manually from dotfiles)
 
   this font is one of main ones for MacVim.
 
@@ -285,9 +285,9 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 
   NOTE: to get new downloaded font applied close all Vim windows.
 
-- patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font
-  (copy one of them manually from dotfiles and patch with `fontpatcher` script
-  unless it's already patched)
+- patched regular `MonacoB`, `MonacoB2` or `Inconsolata LGC` font (copy one of
+  them manually from dotfiles and patch with `fontpatcher` script unless it's
+  already patched)
 
   this patched is not used directly but solves 2 problems in MacVim:
 
@@ -298,8 +298,7 @@ these fonts should be installed to _~/Library/Fonts/_ directory:
 
 - patched or unpatched `Inconsolate LGC` font for iTerm2 (install via brew)
 
-MacVim configuration
---------------------
+## MacVim configuration
 
 1. [MacVim]({% post_url 2019-06-21-macvim %})
 
@@ -329,7 +328,7 @@ defaults write org.vim.MacVim SUEnableAutomaticChecks 0
 #defaults write org.vim.MacVim MMTabOptimumWidth 200
 ```
 
-in fact it's not necessary to put these commands into _$ZDOTDIR/.zlogin_ and
+in fact it's not necessary to put these commands into _\$ZDOTDIR/.zlogin_ and
 run them every time new Zsh shell is started (which increases shell startup
 time): changes are persisted on OS level (in user defaults database) so it's
 enough to run them only once.

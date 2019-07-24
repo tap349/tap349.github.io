@@ -312,3 +312,90 @@ not editable `TextInput` itself doesn't receive touch events.
 
 it's required to add proxy `View` with `pointerEvents='none'` - otherwise
 `_handlePress` callback is not even called.
+
+## numberToCurrency helper
+
+1. <https://github.com/facebook/react-native/issues/19410#issuecomment-434232762>
+2. <https://stackoverflow.com/a/16233919>
+3. <https://learn.javascript.ru/intl>
+
+- install `intl` npm package
+
+  ```sh
+  $ yarn add intl
+  ```
+
+- load `Intl.js` polyfill and required locale data
+
+  ```javascript
+  // app/App.js
+
+  require('intl');
+  require('intl/locale-data/jsonp/en-US');
+  require('intl/locale-data/jsonp/ru-RU');
+  ```
+
+- configure i18next instance to use full locale
+
+  make sure to use full locale (`en-US`) rather than language only (`en`) when
+  configuring i18next instance - it'll be passed to `Intl.NumberFormat` as is:
+
+  ```javascript
+  // app/i18n/index.js
+
+  import i18n from 'i18next';
+  import {initReactI18next} from 'react-i18next';
+
+  i18n.use(initReactI18next).init({
+    lng: 'en-US',
+    //lng: 'ru-RU',
+  });
+  ```
+
+- implement `numberToCurrency` helper using `Intl.NumberFormat` object
+
+  1. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat>
+
+  ```javascript
+  // app/services/I18n.js
+
+  import i18n from 'i18next';
+
+  const I18n = {
+    numberToCurrency(number) {
+      const locale = i18n.language;
+
+      let currency = null;
+      switch (locale) {
+        case 'ru-RU':
+          currency = 'RUB';
+          break;
+        case 'en-US':
+          currency = 'USD';
+          break;
+        default:
+          throw `Unknown locale: ${locale}`;
+      }
+
+      const formatter = new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency,
+        currencyDisplay: 'symbol',
+        minimumFractionDigits: 0,
+      });
+
+      return formatter.format(number);
+    },
+  };
+
+  export default I18n;
+  ```
+
+  usage:
+
+  ```javascript
+  import I18n from 'app/services/I18n';
+
+  // somewhere inside RN component:
+  I18n.numberToCurrency(100);
+  ```

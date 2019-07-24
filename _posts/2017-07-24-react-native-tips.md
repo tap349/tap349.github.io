@@ -7,6 +7,8 @@ comments: true
 categories: [react-native]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,20 +16,18 @@ categories: [react-native]
 {:toc}
 <hr>
 
-(how to) set application icon badge number
-------------------------------------------
+## (how to) set application icon badge number
 
 1. <https://stackoverflow.com/questions/40313361>
 
 ### Android
 
-not supported natively - use 3rd party libraries like
-[ShortcutBadger](https://github.com/leolin310148/ShortcutBadger).
+not supported natively - use 3rd party libraries like `ShortcutBadger`.
 
 though not all Android launchers are supported (not all launchers support
-showing application icon badger number at all) - e.g. badge number is not
-set on application icon in emulator (Nexus 5X) with the following error in
-device system log (`adb logcat`):
+showing application icon badger number at all) - e.g. badge number is not set on
+application icon in emulator (Nexus 5X) with the following error in device
+system log (`adb logcat`):
 
 ```sh
 Caused by: me.leolin.shortcutbadger.ShortcutBadgeException:
@@ -42,42 +42,39 @@ for instructions how to link `PushNotificationIOS` native library manually.
 
 **universal solution**
 
-use [react-native-push-notification](https://github.com/zo0r/react-native-push-notification)
-RN package which:
+use `react-native-push-notification` RN package which:
 
 - uses `ShortcutBadger` under the hood for Android
 - links `PushNotificationIOS` native library for iOS
 
-  the package is supposed to do it automatically but it fails to do so -
-  see [iOS troubleshooting]({% post_url 2017-05-25-react-native-ios %})
+  the package is supposed to do it automatically but it fails to do so - see
+  [iOS troubleshooting]({% post_url 2017-05-25-react-native-ios %})
   (`application fails to start (native module cannot be null)`).
 
   in a nutshell - link `PushNotificationIOS` native library manually.
 
-(how to) dismiss keyboard when tapping outside of TextInput
------------------------------------------------------------
+## (how to) dismiss keyboard when tapping outside of TextInput
 
 1. <https://stackoverflow.com/questions/41426862>
 2. <https://blog.brainsandbeards.com/react-native-keyboard-handling-tips-a2472b74c114>
 
-by default keyboard is not dismissed when tapping outside of
-`TextInput` - wrap the latter in `ScrollView` for this to happen:
+by default keyboard is not dismissed when tapping outside of `TextInput` - wrap
+the latter in `ScrollView` for this to happen:
 
 ```jsx
 <ScrollView keyboardShouldPersistTaps='handled'>
   <InputSearch
     label='SEARCH'
     value={this.state.search}
-    onChangeText={(value) => this.setState({search: value})}
+    onChangeText={value => this.setState({search: value})}
   />
 </ScrollView>
 ```
 
-if there is a `ListView` somewhere below you'll have to wrap
-`ScrollView` in `View` - otherwise it's not visible.
+if there is a `ListView` somewhere below you'll have to wrap `ScrollView` in
+`View` - otherwise it's not visible.
 
-(how to) dismiss keyboard when pressing `<CR>` on keyboard
-----------------------------------------------------------
+## (how to) dismiss keyboard when pressing `<CR>` on keyboard
 
 1. <https://facebook.github.io/react-native/docs/textinput.html>
 
@@ -88,8 +85,7 @@ if there is a `ListView` somewhere below you'll have to wrap
 />
 ```
 
-(how to) open application in store
-----------------------------------
+## (how to) open application in store
 
 1. <https://stackoverflow.com/questions/35612383>
 
@@ -110,8 +106,8 @@ examples of final URLs:
 
 <http://facebook.github.io/react-native/docs/linking.html#canopenurl>:
 
-since iOS 9 it's necessary to allow to query schemas explicitly in
-_Info.plist_ or else `canOpenUrl` will always return `false`.
+since iOS 9 it's necessary to allow to query schemas explicitly in _Info.plist_
+or else `canOpenUrl` will always return `false`.
 
 install `react-native-app-link` package to handle it for you:
 
@@ -121,8 +117,7 @@ $ npm install --save react-native-app-link
 
 NOTE: still opening application in App Store doesn't work in emulator.
 
-process invalid props for all mounted components
-------------------------------------------------
+## process invalid props for all mounted components
 
 I had one component (`TeamInfoPage`) pushed on top of another one (`TeamPage`)
 using navigator - the 1st component is not unmounted in this case.
@@ -133,13 +128,12 @@ so make sure to allow for invalid properties in hidden component caused by some
 action in pushed component (in my case team was destroyed in `TeamInfoPage` and
 I had to process undefined team in `TeamPage` component).
 
-don't return null from top level component's `render` method
-------------------------------------------------------------
+## don't return null from top level component's `render` method
 
 in my case returning null from top level component (i.e. component rendered
 right in _App.js_ for specified route) caused application to crash.
 
-***UPDATE***
+**_UPDATE_**
 
 well, I can't reproduce it now - returning null just hides component. according
 to docs returning null used to be not supported in the past but that's no longer
@@ -148,15 +142,13 @@ the case.
 so just be cautious when returning null - if it breaks anything, return, say,
 `Text` instead.
 
-log error messages in `catch` clauses
--------------------------------------
+## log error messages in `catch` clauses
 
 in case of unhandled promise rejection there might be no relevant messages in
 `react-native log-ios` output - make sure errors are logged in corresponding
 `catch` clauses in that case.
 
-(how to) to use absolute paths for imports
-------------------------------------------
+## (how to) to use absolute paths for imports
 
 1. <https://medium.com/@davidjwoody/6b06ae3f65d1>
 
@@ -190,8 +182,7 @@ in fact the name can be anything (say, `app1`) but for Vim to find the file
 being imported it must match application top-level directory name (`app`) -
 that's the whole point of using custom name instead of `~` prefix.
 
-behaviour of nested ScrollViews
--------------------------------
+## behaviour of nested ScrollViews
 
 `ScrollView` is scrollable if `scrollEnabled={true}` (default value).
 
@@ -214,8 +205,7 @@ together inside `ScrollView 1`.
 
 but in general it's better to avoid nested `ScrollView`s.
 
-(how to) add comments inside JSX
---------------------------------
+## (how to) add comments inside JSX
 
 ```jsx
 <MyComponent>
@@ -224,27 +214,21 @@ but in general it's better to avoid nested `ScrollView`s.
 </MyComponent>
 ```
 
-(how to) add newline inside Text
----------------------------------
+## (how to) add newline inside Text
 
 ```jsx
 <Text>foo{'\n'}bar</Text>
 ```
 
-(how to) add whitespace (not NBSP) inside Text
-----------------------------------------------
+## (how to) add whitespace (not NBSP) inside Text
 
 ```jsx
 <Text>
-  click{' '}
-  <Text>
-    "this link"
-  </Text>
+  click <Text>"this link"</Text>
 </Text>
 ```
 
-(how to) make animations smooth
--------------------------------
+## (how to) make animations smooth
 
 1. <https://facebook.github.io/react-native/docs/interactionmanager.html>
 
@@ -253,41 +237,36 @@ so schedule fetching data after all interactions have completed (animations are
 interactions as well):
 
 ```javascript
-import {
-  InteractionManager,
-} from 'react-native';
+import {InteractionManager} from 'react-native';
 
 export default class ShowPage extends React.Component {
   state = {
     interactionsComplete: false,
-  }
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-      Promise
-        .all([
-          this.props.getGame(),
-          this.props.getGameStat(),
-        ])
+      Promise.all([this.props.getGame(), this.props.getGameStat()])
         .then(() => this.setState({interactionsComplete: true}))
         .catch(AlertHelpers.serverError);
     });
   }
 
-  render () {
-    if (!this.state.interactionsComplete) { return <IndicatorHOC />; }
+  render() {
+    if (!this.state.interactionsComplete) {
+      return <IndicatorHOC />;
+    }
     // ...
   }
 }
 ```
 
-(how to) disable keyboard for not editable TextInput
-----------------------------------------------------
+## (how to) disable keyboard for not editable TextInput
 
 on Android keyboard pops up when not editable `TextInput` is tapped.
 
-in my case this was caused by focusing `TextInput` on each tap manually
-(it's wrapped into `TouchableWithoutFeedback` to extend tappable area):
+in my case this was caused by focusing `TextInput` on each tap manually (it's
+wrapped into `TouchableWithoutFeedback` to extend tappable area):
 
 ```jsx
 render () {
@@ -319,8 +298,7 @@ solution is to disable focusing not editable `TextInput`:
 
 not editable `TextInput` itself doesn't receive touch events.
 
-(how to) handle press on not editable TextInput
------------------------------------------------
+## (how to) handle press on not editable TextInput
 
 1. <https://github.com/facebook/react-native/issues/14958>
 
@@ -332,5 +310,5 @@ not editable `TextInput` itself doesn't receive touch events.
 </TouchableOpacity>
 ```
 
-it's required to add proxy `View` with `pointerEvents='none'` -
-otherwise `_handlePress` callback is not even called.
+it's required to add proxy `View` with `pointerEvents='none'` - otherwise
+`_handlePress` callback is not even called.

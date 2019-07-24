@@ -325,7 +325,7 @@ it's required to add proxy `View` with `pointerEvents='none'` - otherwise
   $ yarn add intl
   ```
 
-- load `Intl.js` polyfill and required locale data
+- load `Intl.js` polyfill and all locales your application needs to support
 
   ```javascript
   // app/App.js

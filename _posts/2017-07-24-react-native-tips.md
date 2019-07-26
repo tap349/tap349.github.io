@@ -36,9 +36,10 @@ Caused by: me.leolin.shortcutbadger.ShortcutBadgeException:
 
 ### iOS
 
-supported natively - see
-[PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html)
-for instructions how to link `PushNotificationIOS` native library manually.
+1. [PushNotificationIOS](http://facebook.github.io/react-native/docs/pushnotificationios.html)
+
+supported natively - see the link for how to link `PushNotificationIOS` native
+library manually.
 
 **universal solution**
 

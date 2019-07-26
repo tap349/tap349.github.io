@@ -558,7 +558,7 @@ installing and running it on real device with `adb`.
 - open link in browser
 - `BECOME A TESTER` (button)
 - `Download the <MY_APP> app on Google Play` (link)
-- install application from Google Play Store
+- install application from the Google Play Store
 - try to make a purchase
 
 ### subscription error codes
@@ -596,8 +596,9 @@ Purchase or subscribe failed with error: <error_code>
 > Certificate of Foreign Status
 
 - `Classification` (combobox): `LLC`
-<!-- prettier-ignore -->
-- `Signature of beneficial owner (or individual authorized to sign for beneficial owner):` (input): `T* Sm*`
+  <!-- prettier-ignore -->
+- `Signature of beneficial owner (or individual authorized to sign for beneficial owner):`
+  (input): `T* Sm*`
 - `SUBMIT` (button)
 
 ### rollout app to production

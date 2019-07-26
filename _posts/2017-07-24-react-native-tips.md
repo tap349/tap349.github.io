@@ -90,7 +90,7 @@ if there is a `ListView` somewhere below you'll have to wrap `ScrollView` in
 
 1. <https://stackoverflow.com/questions/35612383>
 
-first find out application IDs in App Store and Play Store:
+first find out application IDs in the App Store and the Google Play Store:
 
 - iOS: <https://linkmaker.itunes.apple.com>
 - Android: <https://play.google.com/store/apps>
@@ -116,7 +116,7 @@ install `react-native-app-link` package to handle it for you:
 $ npm install --save react-native-app-link
 ```
 
-NOTE: still opening application in App Store doesn't work in emulator.
+NOTE: still opening application in the App Store doesn't work in emulator.
 
 ## process invalid props for all mounted components
 

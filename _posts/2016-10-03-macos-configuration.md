@@ -23,7 +23,7 @@ steps to configure new macOS installation.
 NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 (<http://www.seagate.com/support/downloads/item/ntfs-driver-for-mac-os-master-dl>).
 
-- install all system updates in App Store
+- install all system updates in the App Store
 - install brew:
 
   ```zsh
@@ -41,7 +41,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - `git clone git@github.com:tap349/tap349.github.io.git ~/blog`
 - `cd ~/.dotfiles && brew bundle -v`
 
-  rerun command if download request for any app from App Store fails
+  rerun command if download request for any app from the App Store fails
 
 - postinstallation setup (see comments in _Brewfile_)
 - `~/.dotfiles/install.sh`
@@ -226,9 +226,9 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - [x] Keychain
 - [x] Find My Mac
 
-### App Store
+### Software Update
 
-- [ ] Automatically check for updates
+- [ ] Automatically keep my Mac up to date
 
 ### Network
 

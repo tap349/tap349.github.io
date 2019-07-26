@@ -140,6 +140,9 @@ NOTE: don't forget to rebuild both iOS and Android applications!
 
 **_UPDATE_**
 
+<!-- prettier-ignore -->
+1. [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})
+
 after fixing different issues related to RN upgrade some libraries turned out to
 be not linked - link all libraries again (just in case):
 
@@ -148,9 +151,8 @@ $ react-native link
 ```
 
 even after running this command I had to link a lot of libraries manually (see
-[React Native -
-Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})) - it
-looks like `react-native link` command is somehow broken in RN 0.52.1.
+the linked post) - it looks like `react-native link` command is somehow broken
+in RN 0.52.1.
 
 ## rn-diff-purge
 
@@ -189,13 +191,11 @@ tips:
 
 ### repair CocoaPods
 
-see the tip from [React Native -
-iOS]({% post_url 2017-05-25-react-native-ios %}).
+1. [React Native - iOS]({% post_url 2017-05-25-react-native-ios %})
 
 ### configure CocoaPods dependencies
 
-see the tip from [React Native -
-iOS]({% post_url 2017-05-25-react-native-ios %}).
+1. [React Native - iOS]({% post_url 2017-05-25-react-native-ios %})
 
 ### try to build and start your application
 
@@ -208,3 +208,14 @@ $ react-native run-ios
 
 most likely there will be lots of errors: many npm packages got broken because
 of new versions of RN, Babel, Gradle, whatever.
+
+## regenerate ios/ and android/ folders
+
+1. <https://stackoverflow.com/a/42507293/3632318>
+
+I haven't tried it by myself but the idea to recreate both iOS and Android
+applications from scratch seems to be very attractive - especially when you've
+got to upgrade between multiple major versions and it turns into a nightmare.
+
+just make sure that both the App Store and the Google Play Store believe it's
+the same application.

@@ -105,7 +105,8 @@ or else it's possible to run sanity checks on real device instead of emulator
   don't forget to bump both numbers in _Info.plist_ files of all extensions your
   iOS application contains (say, `OneSignalNotificationServiceExtension`) or
   else you'll get `ITMS-90473` warnings (`CFBundleVersion Mismatch` and
-  `CFBundleShortVersionString Mismatch`) when uploading archive to App Store.
+  `CFBundleShortVersionString Mismatch`) when uploading archive to the App
+  Store.
 
   _android/app/build.gradle_:
 
@@ -264,7 +265,7 @@ linked post for compile-time and runtime errors.
 
 ### "\<Company>" has one iOS Distribution but its private key is not installed
 
-the error occurs when trying to upload archive to App Store.
+the error occurs when trying to upload archive to the App Store.
 
 **solution**
 
@@ -321,7 +322,7 @@ if it doesn't help:
 
 ### iTunes Store Operation Failed
 
-the error occurs when trying to upload archive to App Store in Xcode:
+the error occurs when trying to upload archive to the App Store in Xcode:
 
 ```
 iTunes Store Operation Failed
@@ -337,7 +338,7 @@ description is 'Destination: Disk quota exceeded (5)'
 I bumped build number but forgot to change version number (`CFBundleVersion` and
 `CFBundleShortVersionString` properties in _Info.plist_ accordingly).
 
-it might also help to validate archive before uploading it to App Store
+it might also help to validate archive before uploading it to the App Store
 (`Validate...` button) - this gives more meaningful error messages when archive
 is not valid.
 

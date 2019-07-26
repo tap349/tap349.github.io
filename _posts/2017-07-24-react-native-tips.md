@@ -331,8 +331,8 @@ it's required to add proxy `View` with `pointerEvents='none'` - otherwise
   // app/App.js
 
   require('intl');
-  require('intl/locale-data/jsonp/en-US');
   require('intl/locale-data/jsonp/ru-RU');
+  require('intl/locale-data/jsonp/en-US');
   ```
 
 - configure i18next instance to use full locale

@@ -214,8 +214,8 @@ of new versions of RN, Babel, Gradle, whatever.
 1. <https://stackoverflow.com/a/42507293/3632318>
 
 I haven't tried it by myself but the idea to recreate both iOS and Android
-applications from scratch seems to be very attractive - especially when you've
-got to upgrade between multiple major versions and it turns into a nightmare.
+applications from scratch seems no-nonsense - especially when you've got to
+upgrade between multiple major versions and it turns into a nightmare.
 
-just make sure that both the App Store and the Google Play Store believe it's
-the same application.
+NOTE: the App Store and the Google Play Store shouldn't notice these are new
+applications so make sure to use the same identifiers and certificates.

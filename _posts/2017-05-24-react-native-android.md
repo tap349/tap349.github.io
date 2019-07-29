@@ -488,6 +488,35 @@ lib/x86_64/libc++_shared.so
 ...
 ```
 
+### (how to) increase AVD RAM size
+
+1. <https://stackoverflow.com/questions/9322540>
+
+say, for `Nexus_5X_API_23_x86_64` AVD:
+
+- in AVD config
+
+  > <http://www.androiddocs.com/tools/devices/managing-avds-cmdline.html>
+  >
+  > Device ram size (hw.ramSize)
+  >
+  > The amount of physical RAM on the device, in megabytes. Default value is
+  > "96".
+
+  ```diff
+    # ~/.android/avd/Nexus_5X_API_23_x86_64.avd/config.ini
+
+  + hw.ramSize 768
+  ```
+
+- from command line
+
+  use `-memory` option:
+
+  ```sh
+  $ emulator -avd Nexus_5X_API_23_x86_64 -memory 768
+  ```
+
 ## debugging
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>
@@ -947,7 +976,7 @@ $ sdkmanager --list --verbose
 
 1. <https://stackoverflow.com/questions/40931254>
 
-```sh
+```
 $ emulator -avd Nexus_5X_API_23_x86_64
 [140735129182208]:ERROR:./android/qt/qt_setup.cpp:28:Qt library not found at ../emulator/lib64/qt/lib
 Could not launch '../emulator/qemu/darwin-x86_64/qemu-system-x86_64': No such file or directory

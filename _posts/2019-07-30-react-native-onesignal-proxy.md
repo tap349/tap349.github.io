@@ -32,7 +32,8 @@ categories: [react-native]
 
 - clone <https://github.com/OneSignal/OneSignal-Android-SDK>
 
-  NOTE: no need to fork this repo - we're not going to commit and push changes.
+  NOTE: there's no need to fork this repo - we're not going to commit and push
+  changes.
 
   ```sh
   $ git clone git@github.com:OneSignal/OneSignal-Android-SDK.git

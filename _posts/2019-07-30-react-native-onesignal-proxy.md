@@ -1,6 +1,6 @@
 ---
 layout: post
-title: React Native - Onesignal Proxy
+title: React Native - OneSignal Proxy
 date: 2019-07-30 10:43:47 +0300
 access: public
 comments: true

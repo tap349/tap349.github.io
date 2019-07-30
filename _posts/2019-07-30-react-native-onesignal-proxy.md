@@ -28,6 +28,9 @@ categories: [react-native]
 
 ## Nginx
 
+1. <https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/>
+2. <https://vc.ru/claim/76946-servis-push-uvedomleniy-onesignal-nedostupen-v-rossii?comment=1334456>
+
 configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
 ```diff

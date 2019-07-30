@@ -7,6 +7,8 @@ comments: true
 categories: [chef]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,19 +16,17 @@ categories: [chef]
 {:toc}
 <hr>
 
-knife-solo and knife-zero are installed at the same time
---------------------------------------------------------
+## knife-solo and knife-zero are installed at the same time
 
 `knife` executables from these gems might conflict with each other since
 `knife-solo` is installed as ordinary gem (`gem install knife-solo` →
 _~/.rbenv/shims/knife_) while `knife-zero` is installed using ChefDK
 (`chef install gem knife-zero` → _/opt/chefdk/bin/knife_).
 
-so only one of them can be available at any given time -
-see [rbenv]({% post_url 2016-03-30-rbenv %}) for details.
+so only one of them can be available at any given time - see
+[rbenv]({% post_url 2016-03-30-rbenv %}) for details.
 
-Doing old-style registration with the validation key at
--------------------------------------------------------
+## Doing old-style registration with the validation key at
 
 ```sh
 $ knife zero bootstrap builder --node-name builder
@@ -38,14 +38,12 @@ Delete your validation key in order to use your user credentials instead
 
 <https://github.com/higanworks/knife-zero/issues/24>:
 
-> Don't worry about it.
-> This warning message is not effect Knife-Zero's behavior.
-> Because authrization of Chef-Zero is dummy.
+> Don't worry about it. This warning message is not effect Knife-Zero's
+> behavior. Because authorization of Chef-Zero is dummy.
 
-ArgumentErrorwrong number of arguments (given 1, expected 2)
-------------------------------------------------------------
+## ArgumentErrorwrong number of arguments (given 1, expected 2)
 
-```sh
+```
 $ knife zero bootstrap billing --node-name billing
 
 Connecting to billing
@@ -62,10 +60,9 @@ $ brew cask reinstall chefdk
 $ chef gem install knife-zero
 ```
 
-There is a dependency conflict, but the solver could not determine the precise cause in the time allotted
----------------------------------------------------------------------------------------------------------
+## There is a dependency conflict, but the solver could not determine the precise cause in the time allotted
 
-```sh
+```
 $ berks vendor
 Resolving cookbook dependencies...
 ...
@@ -78,8 +75,7 @@ There is a dependency conflict, but the solver could not determine the precise c
 the error occurs after adding non-existing custom cookbook as dependency in
 application cookbook's _metadata.rb_ file - so just remove that dependency.
 
-undefined method `set' for Chef::Platform:Class
------------------------------------------------
+## undefined method `set' for Chef::Platform:Class
 
 ```
 $ knife zero converge 'name:billing'
@@ -119,23 +115,22 @@ Relevant File Content:
 $ berks update git
 ```
 
-also I had to update all cookbooks that depend on `git` cookbook
-which are used in my application cookbook:
+also I had to update all cookbooks that depend on `git` cookbook which are used
+in my application cookbook:
 
 ```sh
 $ berks update appbox
 ```
 
-then remove directory with vendored cookbooks and vendor them again
-(this is what really helped):
+then remove directory with vendored cookbooks and vendor them again (this is
+what really helped):
 
 ```sh
 $ rm -rf berks-cookbooks/
 $ berks vendor
 ```
 
-uninitialized constant Chef::Resource::PostgresqlUser
------------------------------------------------------
+## uninitialized constant Chef::Resource::PostgresqlUser
 
 ```
 $ knife zero converge 'name:billing'
@@ -166,8 +161,9 @@ Recipe: postgresql::setup_users
 
 1. <https://github.com/realchrisolin/chef-postgresql/commit/7683f11aedf967bca4c40eb8a72dc14d0f0ebf03>
 
-it looks like new version of Chef doesn't provide `Chef::Resource::PostgresqlUser`
-resource (same for `PostgresqlDatabase` and `PostgresqlExtension` resources).
+it looks like new version of Chef doesn't provide
+`Chef::Resource::PostgresqlUser` resource (same for `PostgresqlDatabase` and
+`PostgresqlExtension` resources).
 
 _providers/user.rb_ (`chef-postgresql` cookbook):
 
@@ -178,8 +174,7 @@ _providers/user.rb_ (`chef-postgresql` cookbook):
 
 make the same changes in _providers/database.rb_ and _providers/extension.rb_.
 
-undefined method `[]' for nil:NilClass (nginx/recipes/ohai_plugin.rb:27)
-------------------------------------------------------------------------
+## undefined method `[]' for nil:NilClass (nginx/recipes/ohai_plugin.rb:27)
 
 ```
 $ knife zero converge 'name:billing'
@@ -207,8 +202,7 @@ Cookbook Trace:
 
 use [chef_nginx](https://github.com/chef-cookbooks/chef_nginx) cookbook instead.
 
-`berks install` doesn't install dependency
-------------------------------------------
+## `berks install` doesn't install dependency
 
 _cookbooks/phoenix_nginx/metadata.rb_:
 
@@ -216,15 +210,14 @@ _cookbooks/phoenix_nginx/metadata.rb_:
 depends 'chef_nginx'
 ```
 
-but `berks install` doesn't install this cookbook even though it's available
-in Chef supermarket.
+but `berks install` doesn't install this cookbook even though it's available in
+Chef supermarket.
 
 **solution**
 
 delete _Berksfile.lock_ and run `berks install` again.
 
-Failed to restart nginx.service: Unit nginx.service not found.
---------------------------------------------------------------
+## Failed to restart nginx.service: Unit nginx.service not found.
 
 ```
 $ knife zero converge 'name:billing'
@@ -247,8 +240,8 @@ $ knife zero converge 'name:billing'
 
 **solution**
 
-obviously `chef_nginx` cookbook has created init script but
-for some reason is trying to restart systemd unit.
+obviously `chef_nginx` cookbook has created init script but for some reason is
+trying to restart systemd unit.
 
 _cookbooks/phoenix_nginx/attributes/default.rb_:
 
@@ -257,8 +250,7 @@ _cookbooks/phoenix_nginx/attributes/default.rb_:
 + override['nginx']['init_style'] = 'systemd'
 ```
 
-undefined method `definition' for Custom resource ruby_rbenv_ruby from cookbook ruby_rbenv
-------------------------------------------------------------------------------------------
+## undefined method `definition' for Custom resource ruby_rbenv_ruby from cookbook ruby_rbenv
 
 ```
 $ knife zero converge 'name:billing'
@@ -280,8 +272,8 @@ Cookbook Trace:
 
 1. <https://github.com/sous-chefs/ruby_rbenv/issues/166>
 
-this error occurs after updating `ruby_rbenv` cookbook to its latest version
-as of now - 2.0.6. so it seems to be a bug in `ruby_rbenv` cookbook itself -
+this error occurs after updating `ruby_rbenv` cookbook to its latest version as
+of now - 2.0.6. so it seems to be a bug in `ruby_rbenv` cookbook itself -
 downgrade it to some earlier version.
 
 _cookbooks/rails_rbenv/metadata.rb_:
@@ -295,8 +287,7 @@ $ berks update ruby_rbenv
 $ berks vendor && knife zero converge 'name:billing'
 ```
 
-1 node found, but does not have the required attribute to establish the connection
-----------------------------------------------------------------------------------
+## 1 node found, but does not have the required attribute to establish the connection
 
 ```sh
 $ knife zero converge 'name:billing'
@@ -318,10 +309,11 @@ gem 'knife-zero', '1.19.3'
 this problem is caused by new version of `knife` which doesn't understand
 `knife[:attribute]` setting in _.chef/knife.rb_ any more.
 
-<https://docs.chef.io/config_rb_knife.html>:
-
+> <https://docs.chef.io/config_rb_knife.html>
+>
 > knife[:ssh_attribute]
->   The attribute used when opening an SSH connection.
+>
+> The attribute used when opening an SSH connection.
 
 so either specify `-a` option on command line:
 
@@ -336,11 +328,10 @@ or use new `ssh_attribute` setting in _.chef/knife.rb_:
 + knife[:ssh_attribute] = 'ipaddress'
 ```
 
-see also discussion on `ipaddress` vs. `['ipaddress']` in
-[Chef - How knife connects to node]({% post_url 2016-02-27-chef-how-knife-connects-to-node %}).
+see also discussion on `ipaddress` vs. `['ipaddress']` in [Chef - How knife
+connects to node]({% post_url 2016-02-27-chef-how-knife-connects-to-node %}).
 
-fatal: could not read Username for 'https://github.com': Device not configured
-------------------------------------------------------------------------------
+## fatal: could not read Username for 'https://github.com': Device not configured
 
 ```
 $ berks
@@ -356,8 +347,7 @@ fatal: could not read Username for 'https://github.com': Device not configured
 
 specified repo (`leaprail/redisio`) no longer exists.
 
-Could not satisfy version constraints for: ruby_rbenv
------------------------------------------------------
+## Could not satisfy version constraints for: ruby_rbenv
 
 ```
 $ knife zero converge 'name:sith'
@@ -377,13 +367,11 @@ still I cannot find any version constraints for specified cookbook.
 
 **solution**
 
-try to remove `Berksfile.lock` and run `berks` or `berks vendor` again.
-if that doesn't help, remove vendored cookbook from _berks-cookbooks/_
-(see [Chef - Tips]({% post_url 2018-01-16-chef-tips %}) on how to update
-cookbook).
+try to remove `Berksfile.lock` and run `berks` or `berks vendor` again. if that
+doesn't help, remove vendored cookbook from _berks-cookbooks/_ (see [Chef -
+Tips]({% post_url 2018-01-16-chef-tips %}) on how to update cookbook).
 
-git-core is a virtual package provided by multiple packages, you must explicitly select one
--------------------------------------------------------------------------------------------
+## git-core is a virtual package provided by multiple packages, you must explicitly select one
 
 ```
 $ knife zero converge 'name:sith'
@@ -421,23 +409,22 @@ when 'debian', 'suse'
   default['rbenv']['user_home_root'] = '/home'
 ```
 
-solution is to use `git` package instead of `git-core`: override the
-following attribute in application or wrapper cookbook (this is still
-not fixed in master branch of `ruby_rbenv` cookbook):
+solution is to use `git` package instead of `git-core`: override the following
+attribute in application or wrapper cookbook (this is still not fixed in master
+branch of `ruby_rbenv` cookbook):
 
 ```ruby
 override['rbenv']['install_pkgs'] = %w[git grep]
 ```
 
-***NOTE***
+**_NOTE_**
 
-since version 2.0.0 `ruby-rbenv` cookbook uses resources instead of
-attributes and recipes - so you cannot override installed packages
-any longer. if you still don't want to refuse from attributes-based
-configuration stick to the latest 1.x.x version - 1.2.1.
+since version 2.0.0 `ruby-rbenv` cookbook uses resources instead of attributes
+and recipes - so you cannot override installed packages any longer. if you still
+don't want to refuse from attributes-based configuration stick to the latest
+1.x.x version - 1.2.1.
 
-No candidate version available for libgdbm3
--------------------------------------------
+## No candidate version available for libgdbm3
 
 server OS: Ubuntu 18.04 LTS.
 
@@ -483,11 +470,10 @@ override['ruby_build']['install_pkgs_cruby'] = %w[
 ]
 ```
 
-this is fixed in 2.x.x branch of `ruby_rbenv` cookbook itself but I'm not
-going to use that branch (see comments above) so this is the only solution.
+this is fixed in 2.x.x branch of `ruby_rbenv` cookbook itself but I'm not going
+to use that branch (see comments above) so this is the only solution.
 
-`rbenv install --list` does not include new Ruby version
---------------------------------------------------------
+## `rbenv install --list` does not include new Ruby version
 
 new Ruby version is listed when logged in as application user but not when
 logged in as `devops` user.
@@ -512,4 +498,27 @@ $ cd ~/.rbenv/plugins/ruby-build/
 $ git pull origin master
 $ cd -
 $ rbenv install --list
+```
+
+## cannot load such file -- chef/mixin/language
+
+```
+$ knife zero converge 'name:iceperk'
+...
+================================================================================
+Recipe Compile Error in /var/chef/cache/cookbooks/windows/libraries/windows_package.rb
+================================================================================
+
+LoadError
+---------
+cannot load such file -- chef/mixin/language
+```
+
+**solution**
+
+```sh
+$ rm -rf berks-cookbooks/
+$ berks update
+$ berks vendor
+$ knife zero converge 'name:iceperk'
 ```

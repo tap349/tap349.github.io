@@ -90,6 +90,9 @@ categories: [react-native]
 
 - replace original Android SDK dependency in _android/build.gradle_
 
+  1. <https://developer.android.com/studio/build/dependencies>
+  2. <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
+
   NOTE: make sure to remove `exclude group` line - OneSignal classes are not
   found otherwise.
 
@@ -105,6 +108,8 @@ categories: [react-native]
   - }
   + implementation files('libs/onesignal-<MY_APP>.jar')
   ```
+
+  or else you might try to reference AAR file directly - see the linked post #2.
 
 - commit and push changes
 

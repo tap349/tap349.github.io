@@ -26,6 +26,24 @@ categories: [react-native]
 > Android SDK into a jar, and you can compile the iOS SDK into a framework or a
 > static library, or even host it as a private cocoapod.
 
+## Nginx
+
+configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
+
+```diff
+  # /etc/nginx/sites-available/<MY_APP>_production
+
+  server {
+    listen 443 ssl;
+
+    # ...
+
++   location /onesignal/ {
++     proxy_pass https://onesignal.com/;
++   }
+  }
+```
+
 ## Android
 
 ### OneSignal-Android-SDK

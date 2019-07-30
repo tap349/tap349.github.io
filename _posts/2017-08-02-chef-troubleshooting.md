@@ -522,3 +522,62 @@ $ berks update
 $ berks vendor
 $ knife zero converge 'name:iceperk'
 ```
+
+## Cookbook http_stub_status_module not found.
+
+```
+$ knife zero converge 'name:iceperk'
+...
+Recipe: nginx::ohai_plugin
+  ...
+  ================================================================================
+  Recipe Compile Error in /var/chef/cache/cookbooks/app_iceperk/recipes/default.rb
+  ================================================================================
+
+  Chef::Exceptions::CookbookNotFound
+  ----------------------------------
+  Cookbook http_stub_status_module not found. If you're loading http_stub_status_module from another cookbook, make sure you configure the dependency in your metadata
+
+  Cookbook Trace:
+  ---------------
+    /var/chef/cache/cookbooks/nginx/recipes/source.rb:83:in `block in from_file'
+    /var/chef/cache/cookbooks/nginx/recipes/source.rb:82:in `each'
+    /var/chef/cache/cookbooks/nginx/recipes/source.rb:82:in `from_file'
+    /var/chef/cache/cookbooks/rails_nginx/recipes/default.rb:11:in `from_file'
+    /var/chef/cache/cookbooks/app_iceperk/recipes/default.rb:16:in `from_file'
+```
+
+**solution**
+
+```diff
+  # cookbooks/rails_nginx/attributes/default.rb
+
+- 'http_stub_status_module',
+- 'http_ssl_module',
+- 'http_gzip_static_module'
++ 'nginx::http_stub_status_module',
++ 'nginx::http_ssl_module',
++ 'nginx::http_gzip_static_module'
+```
+
+it's a bug in `nginx` cookbook (v9.0.0):
+
+```ruby
+# berks-cookbooks/nginx/recipes/default.rb
+
+node['nginx']['default']['modules'].each do |ngx_module|
+  include_recipe "nginx::#{ngx_module}"
+end
+```
+
+=> don't prefix module names with `nginx::` when including `nginx` recipe.
+
+```ruby
+# berks-cookbooks/nginx/recipes/source.rb
+
+node['nginx']['source']['modules'].each do |ngx_module|
+  include_recipe ngx_module
+end
+```
+
+=> prefix module names with `nginx::` when including `nginx::source` recipe.

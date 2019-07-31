@@ -407,7 +407,8 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get UAT with required permissions
 
-  |- GAE -|
+  | GAE |
+  | --- |
 
   - `Application` (combobox): `<MY_APP>`
 

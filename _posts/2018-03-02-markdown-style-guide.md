@@ -7,6 +7,8 @@ comments: true
 categories: [markdown]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -16,15 +18,21 @@ categories: [markdown]
 
 ### use blockquotes for quotations and current page titles (say, wizard steps)
 
-> 1) Step 1: Create Policy
+> 1. Step 1: Create Policy
 
 NOTE: backticks are not used.
 
-### use table row to specify path (location within a web page, program, etc.)
+### use table to specify path (location within a web page, program, etc.)
 
-| iTunes Connect: `My Apps` → `<MY_APP>` → `Features` (tab)
+| iTunes Connect                            |
+| ----------------------------------------- |
+| `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-environment (web page, program, etc.) can be specified before the path.
+environment (web page, program, etc.) can be specified in a table header. it's
+necessary to add a header with environment in case of multiple rows - otherwise
+Prettier doesn't treat them as table rows and breaks formatting because tables
+without header are not allowed in standard Markdown (and Prettier is not aware
+of Kramdown).
 
 it's possible to add path element description in parentheses: usually it's UI
 element which represents path element itself (say, menu item or button) or UI
@@ -40,10 +48,10 @@ are multiple settings they are specified separately as a list:
 
 NOTE: backticks are used for exact names.
 
-keep path on a single line (or else table won't be rendered) but it's allowed
-to use multiple table rows each row containing the path on a separate screen
+keep path on a single line (or else table won't be rendered) but it's allowed to
+use multiple table rows each row containing the path on a separate screen
 (window or page). or else multiple table rows can be used to split path into 2
-parts - high-level part and the one specifying exact location of UI element).
+parts - high-level part and the one specifying exact location of UI element.
 
 ### use comment with arrow to specify return value
 
@@ -68,8 +76,8 @@ use this format instead of `pry>` or `iex>` prompts where possible.
 ```
 
 use this format instead of specifying file path in front of cobe block in
-italics (_yarn.lock_) where possible - probably except for logs (there are
-no comments in logs).
+italics (_yarn.lock_) where possible - probably except for logs (there are no
+comments in logs).
 
 ### insert resource link followed by a blank line inside quotes
 
@@ -78,21 +86,21 @@ no comments in logs).
 > set public/packs and node_modules as shared directories to ensure Webpack
 > build output and NPM package installation via Yarn are shared across deploys
 
-in some cases when all quotes within section have the same source (and its
-link is given at the beginning of the section), the link inside quotes can
-be omitted.
+in some cases when all quotes within section have the same source (and its link
+is given at the beginning of the section), the link inside quotes can be
+omitted.
 
 ### insert resource links at the beginning of the section
 
 1. <https://stackoverflow.com/a/32950454/3632318>
 
-insert resource links if linked resource is related to section subject and
-can be useful in one way or another - it doesn't have to be quoted inside
-this section or treat the subject directly.
+insert resource links if linked resource is related to section subject and can
+be useful in one way or another - it doesn't have to be quoted inside this
+section or treat the subject directly.
 
-if link is already used inside quotes and information from linked resource
-is not used outside these quotes, the link can be omitted at the beginning
-of the section.
+if link is already used inside quotes and information from linked resource is
+not used outside these quotes, the link can be omitted at the beginning of the
+section.
 
 ### use backticks for shell commands but not for proper names
 
@@ -100,8 +108,8 @@ of the section.
 
 ### try to minimize usage of backticks in headers
 
-say, it's okay to use `psql` in main text but it's better to omit backticks
-when it's used in any header.
+say, it's okay to use `psql` in main text but it's better to omit backticks when
+it's used in any header.
 
-still in many cases it's necessary to use backticks to avoid ambiguity (say,
-for shell commands with arguments - that is when they contain spaces).
+still in many cases it's necessary to use backticks to avoid ambiguity (say, for
+shell commands with arguments - that is when they contain spaces).

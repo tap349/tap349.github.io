@@ -84,10 +84,10 @@ redirect URI (say, `http://sith.local`) or else you'll get this error:
 > be able to load this URL, add all domains and subdomains of your app to the
 > App Domains field in your app settings.
 
-|FD|
-|-|
+| FD                                                                |
+| ----------------------------------------------------------------- |
 | `PRODUCTS` (section in left menu) → `Facebook Login` → `Settings` |
-| `Client OAuth Settings` (section) |
+| `Client OAuth Settings` (section)                                 |
 
 - `Valid OAuth Redirect URIs` (input): add
   `http://sith.local:4000/auth/facebook/callback`

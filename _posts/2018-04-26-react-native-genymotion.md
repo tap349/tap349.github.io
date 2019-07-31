@@ -22,8 +22,9 @@ categories: [react-native]
 
 1. <https://stackoverflow.com/a/20137324/3632318>
 
-<!-- prettier-ignore -->
-| emulator (app): right toolbar → `Open GAPPS` (button)
+| emulator(app)                         |
+| ------------------------------------- |
+| right toolbar → `Open GAPPS` (button) |
 
 GApps are required to receive pushes (see `troubleshooting` section).
 
@@ -40,13 +41,15 @@ it's enabled by default in Android Emulator but not in Genymotion.
 
 ### Developer Menu
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>`
+| emulator(app) |
+| ------------- |
+| `<D-m>`       |
 
 or
 
-<!-- prettier-ignore -->
-| emulator (app): right toolbar → `Menu` (`drawer` icon button)
+| emulator(app)                                 |
+| --------------------------------------------- |
+| right toolbar → `Menu` (`drawer` icon button) |
 
 ### connect to local web server
 

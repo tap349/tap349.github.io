@@ -52,7 +52,6 @@ package.
 
 ### create IAP
 
-<!-- prettier-ignore -->
 | IC: `My Apps` → `<MY_APP>` → `Features` (tab)
 | `In-App Purchases` (left menu) → `In-App Purchases` (section) → `⨁` (link)
 

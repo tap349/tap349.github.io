@@ -230,9 +230,9 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   - rename _OneSignal_ to _libOneSignal.a_
   - copy _libOneSignal.a_ to _ios/_ replacing existing file with the same name
 
-  don't forget to link this static library (known as _libRTCOneSignal.a_ in
-  Xcode) to both your application and OneSignal notification service extension
-  (`OneSignalNotificationServiceExtension`).
+  don't forget to link this library (_libRCTOneSignal.a_ to be precise - the
+  same library but without support for `i386` and `x86_64` architectures) to
+  both your application and OneSignal notification service extension.
 
 - commit and push changes
 

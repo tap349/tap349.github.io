@@ -55,6 +55,7 @@ categories: [postgresql]
 
 - pgAdmin
 
-  <!-- prettier-ignore -->
-  | pgAdmin: `Servers` (browser) → `<MY_SERVER>` → `Databases` → `<MY_DATABASE>`
-  | `Dashboard` (tab in main window) → `Server activity` (section) → `Sessions`
+  | pgAdmin                                                                     |
+  | --------------------------------------------------------------------------- |
+  | `Servers` (browser) → `<MY_SERVER>` → `Databases` → `<MY_DATABASE>`         |
+  | `Dashboard` (tab in main window) → `Server activity` (section) → `Sessions` |

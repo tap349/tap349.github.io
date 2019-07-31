@@ -387,9 +387,10 @@ long-lived token (in fact it will be a brand new token then).
 
 1. [Facebook - Bot]({% post_url 2018-05-07-facebook-bot %})
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Token Generation` (section) → `Select a Page` (combobox)
+| FB                                                           |
+| ------------------------------------------------------------ |
+| `PRODUCTS` (section in left menu) → `Messenger` → `Settings` |
+| `Token Generation` (section) → `Select a Page` (combobox)    |
 
 this PAT is long-lived and has only messenger permissions for selected page
 (that is `pages_messaging_*` permissions).
@@ -406,13 +407,13 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get UAT with required permissions
 
-  <!-- prettier-ignore -->
   | GAE
 
   - `Application` (combobox): `<MY_APP>`
 
-  <!-- prettier-ignore -->
-  | GAE: `Get Token` (dropdown menu) → `Get User Access Token`
+  | GAE                                                   |
+  | ----------------------------------------------------- |
+  | `Get Token` (dropdown menu) → `Get User Access Token` |
 
   > Select Permissions
 
@@ -421,7 +422,6 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get short-lived PAT
 
-  <!-- prettier-ignore -->
   | GAE
 
   use UAT generated above to get short-lived PAT:
@@ -439,7 +439,6 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get long-lived PAT
 
-  <!-- prettier-ignore -->
   | ATD
 
   paste short-lived PAT into ATD and click `Extend Access Token` button at the

@@ -73,15 +73,17 @@ categories: [facebook]
 
 1. <https://stackoverflow.com/a/37853597/3632318>
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Webhooks`
-| `Edit Subscription` (button)
+| FD                                             |
+| ---------------------------------------------- |
+| `PRODUCTS` (section in left menu) → `Webhooks` |
+| `Edit Subscription` (button)                   |
 
 ### subscribe webhook to page events
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Webhooks` (section) → `Select a Page` (combobox) → `Subscribe` (button)
+| FD                                                                       |
+| ------------------------------------------------------------------------ |
+| `PRODUCTS` (section in left menu) → `Messenger` → `Settings`             |
+| `Webhooks` (section) → `Select a Page` (combobox) → `Subscribe` (button) |
 
 ## generate page access token
 
@@ -99,9 +101,10 @@ PATs in either FD or GAE.
 
 make sure you Messenger app is subscribed to `messaging_postbacks` event:
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Webhooks` (section) → `Edit events` (button)
+| FD                                                           |
+| ------------------------------------------------------------ |
+| `PRODUCTS` (section in left menu) → `Messenger` → `Settings` |
+| `Webhooks` (section) → `Edit events` (button)                |
 
 ## set up account linking
 
@@ -120,9 +123,10 @@ make sure you Messenger app is subscribed to `messaging_postbacks` event:
 you must be app admin (not page admin) to receive webhooks events when user
 sends a message to a page associated with your Messenger app (bot):
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Token Generation` (section)
+| FD                                                           |
+| ------------------------------------------------------------ |
+| `PRODUCTS` (section in left menu) → `Messenger` → `Settings` |
+| `Token Generation` (section)                                 |
 
 > Page token is required to start using the APIs. This page token will have all
 > messenger permissions even if your app is not approved to use them yet, though
@@ -159,9 +163,10 @@ I see the error in browser when trying to complete account linking flow.
 I haven't subscribed my webhook to `messaging_account_linking` page event => add
 `messaging_account_linking` page subscription field in Messenger settings:
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Webhooks` (section) → `Edit events` (button)
+| FD                                                           |
+| ------------------------------------------------------------ |
+| `PRODUCTS` (section in left menu) → `Messenger` → `Settings` |
+| `Webhooks` (section) → `Edit events` (button)                |
 
 > Edit Page Subscription Fields
 
@@ -189,8 +194,9 @@ Error validating access token: The user has not authorized application <app_id>
 
 solution is to authorize application once again by generating new PAT:
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Messenger` → `Settings`
-| `Token Generation` (section) → `Page` (combobox)
+| FD                                                           |
+| ------------------------------------------------------------ |
+| `PRODUCTS` (section in left menu) → `Messenger` → `Settings` |
+| `Token Generation` (section) → `Page` (combobox)             |
 
 select required page and copy generated PAT into Messenger app.

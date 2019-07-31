@@ -84,9 +84,10 @@ redirect URI (say, `http://sith.local`) or else you'll get this error:
 > be able to load this URL, add all domains and subdomains of your app to the
 > App Domains field in your app settings.
 
-<!-- prettier-ignore -->
-| FD: `PRODUCTS` (section in left menu) → `Facebook Login` → `Settings`
-| `Client OAuth Settings` (section)
+|FD|
+|-|
+| `PRODUCTS` (section in left menu) → `Facebook Login` → `Settings` |
+| `Client OAuth Settings` (section) |
 
 - `Valid OAuth Redirect URIs` (input): add
   `http://sith.local:4000/auth/facebook/callback`
@@ -171,17 +172,19 @@ account:
 
 - app with data access
 
-  <!-- prettier-ignore -->
-  | Facebook: `▼` (top right menu) → `Settings`
-  | `Apps and Websites` (left menu) → `Active` (tab)
+  | Facebook                                         |
+  | ------------------------------------------------ |
+  | `▼` (top right menu) → `Settings`                |
+  | `Apps and Websites` (left menu) → `Active` (tab) |
 
   added app will have `email,public_profile` scopes.
 
 - business integration with data and account access
 
-  <!-- prettier-ignore -->
-  | Facebook: `▼` (top right menu) → `Settings`
-  | `Business Integrations` (left menu) → `Active` (tab)
+  | Facebook                                             |
+  | ---------------------------------------------------- |
+  | `▼` (top right menu) → `Settings`                    |
+  | `Business Integrations` (left menu) → `Active` (tab) |
 
   added business integration will have all permissions
   (`email,public_profile,ads_management,ads_read`).

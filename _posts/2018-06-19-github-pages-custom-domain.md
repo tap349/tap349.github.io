@@ -86,9 +86,10 @@ might be necessary to select your root domain first):
 
 CNAME record must be created through your current DNS provider.
 
-<!-- prettier-ignore -->
-| DigitalOcean: `Create ▼` (top right menu) → `Domains/DNS`
-| `<YOUR_DOMAIN>` → `CNAME` (tab)
+| DigitalOcean                                |
+| ------------------------------------------- |
+| `Create ▼` (top right menu) → `Domains/DNS` |
+| `<YOUR_DOMAIN>` → `CNAME` (tab)             |
 
 - `HOSTNAME`: `blog.tap349.com`
 - `IS AN ALIAS OF`: `tap349.github.io`

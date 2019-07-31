@@ -119,7 +119,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     1. <https://github.com/OneSignal/OneSignal-iOS-SDK/commit/ad7ce9f9ee1600609fb8560e6a857f2c361d572a>
     2. <https://stackoverflow.com/a/31181280/3632318>
 
-    {::comment} prettier-ignore {::/comment}
+    [//]: # (prettier-ignore)
     | Xcode: `Product` (top menu) → `Scheme` → `OneSignal-Static-Framework`
     | Xcode: `Product` (top menu) → `Destination` → `Generic iOS Device`
 

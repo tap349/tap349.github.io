@@ -148,7 +148,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     of `OneSignal` target will cause the build of static library to fail.
 
     but `OneSignal-Static-Framework` scheme runs _build_fat_framework.sh_ script
-    which seems to solve this problem by creating universal binary file:
+    which seems to solve this problem by creating a universal binary file:
 
     ```sh
     # iOS_SDK/OneSignalSDK/build_fat_framework.sh

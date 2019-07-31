@@ -68,7 +68,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   + private static final String BASE_URL = "https://<PROXY_HOST>/onesignal/api/v1/";
   ```
 
-- build AAR file
+- build Android library
 
   > <https://developer.android.com/studio/projects/android-library>
   >
@@ -110,6 +110,8 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   ```
 
 - build static library
+
+  1. <https://stackoverflow.com/a/22556684/3632318>
 
   - open _iOS_SDK/OneSignalSDK/OneSignal.xcodeproj_ in Xcode
   - select scheme and destination
@@ -185,40 +187,45 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   $ cd react-native-onesignal
   ```
 
-- copy Android SDK JAR file to _android/libs/_
+- update Android SDK dependency
 
-  > <https://stackoverflow.com/a/21485222/3632318>
-  >
-  > The AAR file consists of a JAR file and some resource files
+  input: Android library file _onesignal-release.aar_.
 
-  - extract _classes.jar_ from _onesignal-release.aar_ file
+  - extract _classes.jar_ from _onesignal-release.aar_
+
+    > <https://stackoverflow.com/a/21485222/3632318>
+    >
+    > The AAR file consists of a JAR file and some resource files
+
   - rename _classes.jar_ to _onesignal-<MY_APP>.jar_ (or whatever)
   - copy _onesignal-<MY_APP>.jar_ to _android/libs/_
+  - replace original Android SDK dependency in _android/build.gradle_
 
-- replace original Android SDK dependency in _android/build.gradle_
+    1. <https://developer.android.com/studio/build/dependencies>
+    2. <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
 
-  1. <https://developer.android.com/studio/build/dependencies>
-  2. <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
+    NOTE: make sure to remove `exclude group` line - OneSignal classes are not
+    found otherwise.
 
-  NOTE: make sure to remove `exclude group` line - OneSignal classes are not
-  found otherwise.
+    ```diff
+      // android/build.gradle
 
-  ```diff
-    // android/build.gradle
+    - implementation('com.onesignal:OneSignal:3.11.1') {
+    -     // Exclude com.android.support(Android Support library) as the version range starts at 26.0.0
+    -     //    This is due to compileSdkVersion defaulting to 23 which cant' be lower than the support library version
+    -     //    And the fact that the default root project is missing the Google Maven repo required to pull down 26.0.0+
+    -     exclude group: 'com.android.support'
+    -     // Keeping com.google.android.gms(Google Play services library) as this version range starts at 10.2.1
+    - }
+    + implementation files('libs/onesignal-<MY_APP>.jar')
+    ```
 
-  - implementation('com.onesignal:OneSignal:3.11.1') {
-  -     // Exclude com.android.support(Android Support library) as the version range starts at 26.0.0
-  -     //    This is due to compileSdkVersion defaulting to 23 which cant' be lower than the support library version
-  -     //    And the fact that the default root project is missing the Google Maven repo required to pull down 26.0.0+
-  -     exclude group: 'com.android.support'
-  -     // Keeping com.google.android.gms(Google Play services library) as this version range starts at 10.2.1
-  - }
-  + implementation files('libs/onesignal-<MY_APP>.jar')
-  ```
+    or else you might try to reference AAR file directly - see the linked post
+    #2.
 
-  or else you might try to reference AAR file directly - see the linked post #2.
+- update iOS SDK dependency
 
-- copy iOS static library to _ios/_
+  input: static library file _OneSignal_.
 
   - rename _OneSignal_ to _libOneSignal.a_
   - copy _libOneSignal.a_ to _ios/_ replacing existing file with the same name

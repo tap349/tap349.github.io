@@ -189,7 +189,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
 - update Android SDK dependency
 
-  input: Android library file _onesignal-release.aar_.
+  input: new Android library file (_onesignal-release.aar_).
 
   - extract _classes.jar_ from _onesignal-release.aar_
 
@@ -225,7 +225,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
 - update iOS SDK dependency
 
-  input: static library file _OneSignal_.
+  input: new static library file (_OneSignal_).
 
   - rename _OneSignal_ to _libOneSignal.a_
   - copy _libOneSignal.a_ to _ios/_ replacing existing file with the same name

@@ -443,8 +443,9 @@ documentation (https://goo.gl/yEcRrU) for more information.
 
 disable `Network Inspect`:
 
-<!-- prettier-ignore -->
-| Redux DevTools: RMB → `Disable Network Inspect`
+| Redux DevTools                  |
+| ------------------------------- |
+| RMB → `Disable Network Inspect` |
 
 ### Loading dependency graph, done.
 

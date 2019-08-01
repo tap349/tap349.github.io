@@ -40,20 +40,24 @@ if you need to specify environment only, add empty row:
 | -------------- |
 |                |
 
-if you need to specify path only (single row only), don't add header:
+if you need to specify path only (single row only), add empty header:
 
+|                                           |
+| ----------------------------------------- |
 | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-=> environment (if present) should be always specified in a table header.
+=> always specify header and at least one row - even if they are empty.
 
 it's possible to add path element description in parentheses: usually it's UI
 element which represents path element itself (say, menu item or button) or UI
 element containing described path element (say, top menu).
 
 path might include action or setting as a final node (say, menu item). if there
-are multiple settings they are specified separately as a list:
+are multiple settings, they are specified separately as a list:
 
-| `Preferences` → `Keys` → `Hotkey`
+|                                   |
+| --------------------------------- |
+| `Preferences` → `Keys` → `Hotkey` |
 
 - [x] `Show/hide iTerm2 with a system-wide hotkey`
 - `Hotkey`: `<C-D-t>`

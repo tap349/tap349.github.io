@@ -155,9 +155,10 @@ or else it's possible to run sanity checks on real device instead of emulator
     iOS Distribution signing certificate for your company will be generated,
     added to your local Keychain and uploaded to:
 
-    <!-- prettier-ignore -->
-    | AD: `Certificates, IDs & Profiles` (left menu)
-    | `Certificates` (left menu)
+    | AD                                         |
+    | ------------------------------------------ |
+    | `Certificates, IDs & Profiles` (left menu) |
+    | `Certificates` (left menu)                 |
 
     > Export signing certificate:
 
@@ -209,17 +210,19 @@ before building releases.
 
 - upload release to Google Drive
 
-  <!-- prettier-ignore -->
-  | Google Drive: `Shared with me` → `ICEperk` → `AppBuilds`
+  | Google Drive                               |
+  | ------------------------------------------ |
+  | `Shared with me` → `ICEperk` → `AppBuilds` |
 
   - replace existing `app-release.apk` file with a new one
 
 - install release on any Android device and run selective checks
 - publish release in Google Play Console
 
-  <!-- prettier-ignore -->
-  | GPC: `All applications` → `Хоккей. Ледовое братство`
-  | `Release management` (left menu) → `App releases` → `Production track` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
+  | GPC                                                                                                                              |
+  | -------------------------------------------------------------------------------------------------------------------------------- |
+  | `All applications` → `Хоккей. Ледовое братство`                                                                                  |
+  | `Release management` (left menu) → `App releases` → `Production track` (section) → `MANAGE` (button) → `CREATE RELEASE` (button) |
 
   > New release to production
 
@@ -242,8 +245,9 @@ working okay:
   - PR name: `Master (Release 3.16)`
 - [`iceperkapp`] create new release on GitHub
 
-  <!-- prettier-ignore -->
-  | GitHub: `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab)
+  | GitHub                                                                                  |
+  | --------------------------------------------------------------------------------------- |
+  | `37 releases` (link in repo header) → `Draft a new release` (button) → `Releases` (tab) |
 
   - `Tag version` (input + combobox): `3.16`
   - `Target` (combobox): `master`
@@ -305,9 +309,10 @@ if it doesn't help:
 
 - remove user (say, yourself) from testers and then add him back
 
-  <!-- prettier-ignore -->
-  | IC: `My Apps` → `<MY_APP>` → `TestFlight` (tab)
-  | `App Store Connect Users` (left menu) → `Testers` (tab)
+  | IC                                                      |
+  | ------------------------------------------------------- |
+  | `My Apps` → `<MY_APP>` → `TestFlight` (tab)             |
+  | `App Store Connect Users` (left menu) → `Testers` (tab) |
 
   invitation to test new build will be sent to this user by email.
 
@@ -352,8 +357,9 @@ different target:
 
 - delete release
 
-  <!-- prettier-ignore -->
-  | GitHub: `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button)
+  | GitHub                                                                          |
+  | ------------------------------------------------------------------------------- |
+  | `37 releases` (link in repo header) → `Release 3.16` (link) → `Delete` (button) |
 
 - delete current tag
 

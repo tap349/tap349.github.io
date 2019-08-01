@@ -26,6 +26,8 @@ NOTE: backticks are not used.
 
 1. <https://kramdown.gettalong.org/syntax.html#tables>
 
+[1]: {% post_url 2019-07-19-prettier %}
+
 <dl>
   <dt>context</dt>
   <dd>web page, program, etc.</dd>
@@ -52,7 +54,8 @@ path only (prefer to always specify context though):
 | ----------------------------------------- |
 | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-=> always add header and at least one row - even if they are empty.
+=> always add header and at least one row - even if they are empty (otherwise
+Prettier breaks formatting of Markdown tables - see [Prettier][1]).
 
 it's possible to add path element description in parentheses: usually it's UI
 element which represents path element itself (say, menu item or button) or UI

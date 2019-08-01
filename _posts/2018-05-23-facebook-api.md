@@ -445,6 +445,7 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
   | ATD |
   | --- |
+  |     |
 
   paste short-lived PAT into ATD and click `Extend Access Token` button at the
   bottom of the page (you will be prompted to type your FB account password to

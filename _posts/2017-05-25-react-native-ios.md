@@ -79,7 +79,7 @@ it's possible to change it to Dvorak inside emulator:
 
 ### Russian keyboard layout
 
-| emulator (app)                                                                 |
+| emulator                                                                       |
 | ------------------------------------------------------------------------------ |
 | `Hardware` (top menu) → `Keyboard` → `Use the Same Keyboard Language as macOS` |
 
@@ -89,11 +89,11 @@ it's possible to change it to Dvorak inside emulator:
 
 NOTE: hot reloading is recommended over live reload (the former is much faster).
 
-| emulator (app)                 |
+| emulator                       |
 | ------------------------------ |
 | `<D-d>` → `Enable Live Reload` |
 
-| emulator (app)                   |
+| emulator                         |
 | -------------------------------- |
 | `<D-d>` → `Enable Hot Reloading` |
 
@@ -103,7 +103,7 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### hide device bezels
 
-| emulator (app)                                 |
+| emulator                                       |
 | ---------------------------------------------- |
 | `Window` (top menu) → [ ] `Show Device Bezels` |
 
@@ -112,7 +112,7 @@ all before Xcode 9 AFAIK).
 
 ### [Xcode 9.3+] turn on pixel accurate mode
 
-| emulator (app)                             |
+| emulator                                   |
 | ------------------------------------------ |
 | `Window` (top menu) → [x] `Pixel Accurate` |
 
@@ -238,15 +238,15 @@ $ pod install
 
 1. <https://stackoverflow.com/questions/10481412>
 
-| emulator (app)                |
+| emulator                      |
 | ----------------------------- |
 | `Window` (top menu) → `Scale` |
 
 or
 
-| emulator (app) |
-| -------------- |
-|                |
+| emulator |
+| -------- |
+|          |
 
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
@@ -280,7 +280,7 @@ NOTE: configure new simulator separately (see [configuration](#configuration)).
 
 #### switch from inside simulator
 
-| emulator (app)                                             |
+| emulator                                                   |
 | ---------------------------------------------------------- |
 | `Hardware` (top menu) → `Device` → `iOS 10.2` → `iPhone 5` |
 
@@ -320,19 +320,19 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### Developer Menu
 
-| emulator (app) |
-| -------------- |
-| `<D-d>`        |
+| emulator |
+| -------- |
+| `<D-d>`  |
 
 ### Inspector
 
-| emulator (app)             |
+| emulator                   |
 | -------------------------- |
 | `<D-d>` → `Show Inspector` |
 
 or
 
-| emulator (app)   |
+| emulator         |
 | ---------------- |
 | `<D-i>` (toggle) |
 
@@ -344,19 +344,19 @@ $ react-native log-ios
 
 ### reload application in emulator manually
 
-| emulator (app)     |
+| emulator           |
 | ------------------ |
 | `<D-d>` → `Reload` |
 
 or
 
-| emulator (app) |
-| -------------- |
-| `<D-r>`        |
+| emulator |
+| -------- |
+| `<D-r>`  |
 
 ### show touchable areas
 
-| emulator (app)                                 |
+| emulator                                       |
 | ---------------------------------------------- |
 | `<D-i>` → `Touchables` (bottom menu) → `<D-i>` |
 
@@ -364,15 +364,15 @@ or
 
 ### toggle software keyboard
 
-| emulator (app)                                                  |
+| emulator                                                        |
 | --------------------------------------------------------------- |
 | `Hardware` (top menu) → `Keyboard` → `Toggle Software Keyboard` |
 
 or
 
-| emulator (app) |
-| -------------- |
-| `<D-k>`        |
+| emulator |
+| -------- |
+| `<D-k>`  |
 
 ## troubleshooting
 

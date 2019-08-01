@@ -217,7 +217,7 @@ before building releases.
   - replace existing `app-release.apk` file with a new one
 
 - install release on any Android device and run selective checks
-- publish release in Google Play Console
+- publish release in GPC
 
   | GPC                                                                                                                              |
   | -------------------------------------------------------------------------------------------------------------------------------- |

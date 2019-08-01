@@ -700,11 +700,8 @@ now in _package.json_:
 
 ```json
   "dependencies": {
-    ...
     "react-native": "^0.42.0",
-    ...
-    "react-native-linear-gradient": "^1.6.2"
-    ...
+    "react-native-linear-gradient": "^1.6.2",
   },
 ```
 

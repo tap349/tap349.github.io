@@ -202,7 +202,7 @@ before building releases.
 - assemble release
 
   ```sh
-  $ build_android_release='cd android && ./gradlew assembleRelease; cd ..'
+  $ alias build_android_release='cd android && ./gradlew assembleRelease; cd ..'
   $ build_android_release
   ```
 

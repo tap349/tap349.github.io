@@ -26,9 +26,6 @@ NOTE: backticks are not used.
 
 1. <https://kramdown.gettalong.org/syntax.html#tables>
 
-NOTE: unlike Kramdown, Prettier doesn't allow tables without a header and breaks
-formatting if the latter is not present.
-
 <dl>
   <dt>context</dt>
   <dd>web page, program, etc.</dd>

@@ -199,34 +199,18 @@ copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
 from `C******d/iceperkapp_certificates/android` GitHub repo (see _README.md_)
 before building releases.
 
-- assemble release
+- build APK (Android Package)
 
-  build either AAB (new upload format) or APK:
+  1. <https://developer.android.com/studio/build/building-cmdline#build_apk>
 
-  - AAB (Android App Bundle)
+  ```sh
+  $ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
+  $ build_apk
+  ```
 
-    1. <https://developer.android.com/guide/app-bundle/>
-    2. <https://developer.android.com/studio/build/building-cmdline#build_bundle>
+  APK is saved as _android/app/build/outputs/apk/app-release.apk_.
 
-    ```sh
-    $ alias build_aab='cd android && ./gradlew bundleRelease; cd ..'
-    $ build_aab
-    ```
-
-    release is saved as _android/app/build/outputs/bundle/release/app.aab_.
-
-  - APK (Android Package)
-
-    1. <https://developer.android.com/studio/build/building-cmdline#build_apk>
-
-    ```sh
-    $ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
-    $ build_apk
-    ```
-
-    release is saved as _android/app/build/outputs/apk/app-release.apk_.
-
-- upload release to Google Drive
+- upload APK to Google Drive
 
   | Google Drive                               |
   | ------------------------------------------ |
@@ -234,8 +218,32 @@ before building releases.
 
   - replace existing release with a new one
 
-- install release on any Android device and run selective checks
-- publish release in GPC
+- install APK on any Android device and run selective checks
+
+  > <https://developer.android.com/studio/build/building-cmdline#build_bundle>
+  >
+  > Unlike an APK, you can't deploy an app bundle directly to a device. So, if
+  > you want to quickly test or share an APK with someone else, you should
+  > instead build an APK.
+
+- build AAB (Android App Bundle)
+
+  1. <https://developer.android.com/studio/build/building-cmdline#build_bundle>
+
+  > <https://developer.android.com/guide/app-bundle/>
+  >
+  > An Android App Bundle is a new upload format that includes all your app’s
+  > compiled code and resources, but defers APK generation and signing to Google
+  > Play.
+
+  ```sh
+  $ alias build_aab='cd android && ./gradlew bundleRelease; cd ..'
+  $ build_aab
+  ```
+
+  AAB is saved as _android/app/build/outputs/bundle/release/app.aab_.
+
+- publish AAB in GPC
 
   | GPC                                                                                                                              |
   | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -244,7 +252,7 @@ before building releases.
 
   > New release to production
 
-  - `BROWSE_FILES` (button) → add new AAB or APK
+  - `BROWSE_FILES` (button) → add new AAB
   - `Release name` (input): `3.16` (for example)
   - `What's new in this release?` (textarea): release notes
   - `SAVE` (button) → `REVIEW` (button)

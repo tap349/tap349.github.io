@@ -28,11 +28,14 @@ NOTE: backticks are not used.
 | ----------------------------------------- |
 | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-environment (web page, program, etc.) can be specified in a table header. it's
-necessary to add a header with environment in case of multiple rows - otherwise
-Prettier doesn't treat them as table rows and breaks formatting because tables
-without header are not allowed in standard Markdown (and Prettier is not aware
-of Kramdown).
+| iTunes Connect |
+| -------------- |
+|                |
+
+environment (web page, program, etc.) is always specified in a table header:
+unlike Kramdown, Prettier doesn't allow tables without a header and breaks
+formatting if the latter is not present. it's necessary to add empty row if you
+need to specify environment only.
 
 it's possible to add path element description in parentheses: usually it's UI
 element which represents path element itself (say, menu item or button) or UI

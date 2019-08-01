@@ -675,9 +675,9 @@ launch Xcode and install additional required components when prompted.
 
 1. <https://github.com/shoutem/ui/issues/134>
 
-| Xcode                           |
-| ------------------------------- |
-| `Issue navigator` → `Buildtime` |
+| Xcode                                  |
+| -------------------------------------- |
+| `Issue navigator` (icon) → `Buildtime` |
 
 ```sh
 > BVLinearGradient:

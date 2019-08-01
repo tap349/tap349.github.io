@@ -285,18 +285,21 @@ TODO: still not resolved.
 
 1. <https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html>
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>` → `Enable Live Reload`
+| emulator                       |
+| ------------------------------ |
+| `<D-m>` → `Enable Live Reload` |
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>` → `Enable Hot Reloading`
+| emulator                         |
+| -------------------------------- |
+| `<D-m>` → `Enable Hot Reloading` |
 
 NOTE: hot reloading is recommended over live reload.
 
 ### performance tweaks
 
-<!-- prettier-ignore -->
-| emulator (OS): Applications → `Dev Settings` → `Force GPU rendering` [x]
+| emulator (OS)                                             |
+| --------------------------------------------------------- |
+| Applications → `Dev Settings` → `Force GPU rendering` [x] |
 
 ### enable hardware keyboard
 
@@ -315,8 +318,9 @@ NOTE: by default `hw.keyboard=no`.
 
 or else it's possible to enable hardware keyboard inside emulator OS:
 
-<!-- prettier-ignore -->
-| emulator (OS): `Settings` → `Language & input` → `Current keyboard` → `Hardware` [x] / `English (US)` [x]
+| emulator (OS)                                                                              |
+| ------------------------------------------------------------------------------------------ |
+| `Settings` → `Language & input` → `Current keyboard` → `Hardware` [x] / `English (US)` [x] |
 
 ### scroll with 3 fingers
 
@@ -531,23 +535,27 @@ add `console.log('foo');` and reload manually (hot reloading doesn't pick it).
 
 ### Developer Menu
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>`
+| emulator |
+| -------- |
+| `<D-m>`  |
 
 ### Inspector
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>` → `Toggle Inspector`
+| emulator                     |
+| ---------------------------- |
+| `<D-m>` → `Toggle Inspector` |
 
 ### Dev Settings
 
-<!-- prettier-ignore -->
-| emulator (OS): Applications → `Dev Settings`
+| emulator (OS)                 |
+| ----------------------------- |
+| Applications → `Dev Settings` |
 
 or
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>` → `Dev Settings`
+| emulator                 |
+| ------------------------ |
+| `<D-m>` → `Dev Settings` |
 
 ### verbose emulator log
 
@@ -576,13 +584,15 @@ $ avd -verbose
 
 ### reload application in emulator manually
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>` → `Reload`
+| emulator           |
+| ------------------ |
+| `<D-m>` → `Reload` |
 
 or
 
-<!-- prettier-ignore -->
-| emulator (app): `rr`
+| emulator |
+| -------- |
+| `rr`     |
 
 ### run remote interactive shell
 
@@ -619,9 +629,10 @@ $ adb shell ls
 
 ### show touchable areas
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-m>` → `Toggle Inspector` → `Touchables` (bottom menu)
-| `<D-m>` → `Toggle Inspector`
+| emulator                                                  |
+| --------------------------------------------------------- |
+| `<D-m>` → `Toggle Inspector` → `Touchables` (bottom menu) |
+| `<D-m>` → `Toggle Inspector`                              |
 
 => touchable areas are still marked with dotted line
 

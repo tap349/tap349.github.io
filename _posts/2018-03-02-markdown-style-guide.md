@@ -27,18 +27,24 @@ NOTE: backticks are not used.
 1. <https://kramdown.gettalong.org/syntax.html#tables>
 
 environment (web page, program, etc.) is always specified in a table header
-because, unlike Kramdown, Prettier doesn't allow tables without a header and
-breaks formatting if the latter is not present:
+(unlike Kramdown, Prettier doesn't allow tables without a header and breaks
+formatting if the latter is not present):
 
 | iTunes Connect                            |
 | ----------------------------------------- |
 | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-it's necessary to add empty row if you need to specify environment only:
+if you need to specify environment only, add empty row:
 
 | iTunes Connect |
 | -------------- |
 |                |
+
+if you need to specify path only (single row only), don't add header:
+
+| `My Apps` → `<MY_APP>` → `Features` (tab) |
+
+=> environment (if present) should be always specified in a table header.
 
 it's possible to add path element description in parentheses: usually it's UI
 element which represents path element itself (say, menu item or button) or UI

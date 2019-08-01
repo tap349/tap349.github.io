@@ -65,9 +65,10 @@ GPC:
 1. <https://support.google.com/googleplay/android-developer/answer/186113?hl=en>
 2. <https://developer.android.com/google/play/billing/billing_admin.html#license_key>
 
-<!-- prettier-ignore -->
-| GPC: `All applications` → `<MY_APP>`
-| `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing`
+| GPC                                                                                |
+| ---------------------------------------------------------------------------------- |
+| `All applications` → `<MY_APP>`                                                    |
+| `Development tools` (left menu) → `Services & APIs` → `Licensing & in-app billing` |
 
 _android/app/src/main/res/values/strings.xml_:
 
@@ -128,9 +129,10 @@ at the same time it's not required to publish (rollout) application - you can
 both set up subscription and test it on real device without publishing (see
 `test with a test subscription` section).
 
-<!-- prettier-ignore -->
-| GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `CREATE RELEASE` (button)
+| GPC                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------- |
+| `All applications` → `<MY_APP>`                                                                                       |
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `CREATE RELEASE` (button) |
 
 > New release to alpha
 
@@ -148,9 +150,10 @@ both set up subscription and test it on real device without publishing (see
 
 1. <https://support.google.com/googleplay/android-developer/answer/138000?hl=en&ref_topic=3452890>
 
-<!-- prettier-ignore -->
-| GPC: `Settings` (left menu)
-| `Pricing templates` (left menu) → `NEW PRICING TEMPLATE` (button)
+| GPC                                                               |
+| ----------------------------------------------------------------- |
+| `Settings` (left menu)                                            |
+| `Pricing templates` (left menu) → `NEW PRICING TEMPLATE` (button) |
 
 - `Name` (input): `Подписка на месяц`
 - `Price` (input): `149`
@@ -172,9 +175,10 @@ about `Add applicable tax on top of price` tax option:
 NOTE: you can't set up subscription until you upload APK with IAB permission
 (see `upload APK to alpha` section).
 
-<!-- prettier-ignore -->
-| GPC: `All applications` → `<MY_APP>`
-| `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button)
+| GPC                                                                                                       |
+| --------------------------------------------------------------------------------------------------------- |
+| `All applications` → `<MY_APP>`                                                                           |
+| `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button) |
 
 - `Product ID` (input): `com.iceperk.iceperkapp.sub.noads.monthly`
 - `Title` (input): `Скрытие рекламы на месяц`
@@ -337,9 +341,10 @@ above (application itself may stay unpublished).
 1. <https://developer.android.com/google/play/billing/billing_testing.html#setup>
 2. <https://developer.android.com/google/play/billing/billing_admin.html#billing-testing-setup>
 
-<!-- prettier-ignore -->
-| GPC: `Settings` (left menu)
-| `Developer account` (left menu) → `Account details` → `License Testing` (section)
+| GPC                                                                               |
+| --------------------------------------------------------------------------------- |
+| `Settings` (left menu)                                                            |
+| `Developer account` (left menu) → `Account details` → `License Testing` (section) |
 
 - `Gmail accounts with testing access` (textarea): `*.tap349@gmail.com`
 
@@ -512,17 +517,19 @@ it's important that alpha tester account be linked to a valid payment method -
 so make sure to add payment info for this account before trying to make a
 purchase.
 
-<!-- prettier-ignore -->
-| GPC: `Settings` (left menu)
-| `Manage testers` (left menu) → `CREATE LIST` (button)
+| GPC                                                   |
+| ----------------------------------------------------- |
+| `Settings` (left menu)                                |
+| `Manage testers` (left menu) → `CREATE LIST` (button) |
 
 - `List name` (input): `team`
 - `Add email addresses` (input): `*.tap349@gmail.com`
 - `CREATE LIST` (button)
 
-<!-- prettier-ignore -->
-| GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section)
+| GPC                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------- |
+| `All applications` → `<MY_APP>`                                                                                        |
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section) |
 
 - `Choose a testing method` (combobox): `Closed Alpha Testing`
 - `Users`: [x] `team` (activate the list)
@@ -536,9 +543,10 @@ NOTE: publish release to alpha only if you're planning to start Alpha Testing
 (either open or closed) - don't publish if you will test application by
 installing and running it on real device with `adb`.
 
-<!-- prettier-ignore -->
-| GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `EDIT RELEASE` (button)
+| GPC                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------- |
+| `All applications` → `<MY_APP>`                                                                                     |
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `EDIT RELEASE` (button) |
 
 > New release to alpha
 
@@ -551,9 +559,10 @@ installing and running it on real device with `adb`.
 
 #### open opt-in URL in browser
 
-<!-- prettier-ignore -->
-| GPC: `All applications` → `<MY_APP>`
-| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section) → `Opt-in URL` (input)
+| GPC                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `All applications` → `<MY_APP>`                                                                                                               |
+| `Release management` (left menu) → `App releases` → `Alpha` (section) → `MANAGE` (button) → `Manage testers` (section) → `Opt-in URL` (input) |
 
 - open link in browser
 - `BECOME A TESTER` (button)
@@ -582,10 +591,11 @@ Purchase or subscribe failed with error: <error_code>
 
 ### update tax info (if necessary)
 
-<!-- prettier-ignore -->
-| GPC: `Settings` (left menu)
-| `Developer account` (left menu) → `Payment settings` → `Settings` (section) → `MANAGE SETTINGS` (button)
-| `Payments profile` (section) → `United States tax info` → `✎` (link) → `UPDATE TAX INFO` (link)
+| GPC                                                                                                      |
+| -------------------------------------------------------------------------------------------------------- |
+| `Settings` (left menu)                                                                                   |
+| `Developer account` (left menu) → `Payment settings` → `Settings` (section) → `MANAGE SETTINGS` (button) |
+| `Payments profile` (section) → `United States tax info` → `✎` (link) → `UPDATE TAX INFO` (link)          |
 
 > Tax form questions
 
@@ -615,9 +625,10 @@ account email each time subscription is renewed or cancelled).
 
 ### real subscriptions
 
-<!-- prettier-ignore -->
-| GPC: `All applications` → `<MY_APP>`
-| `Financial reports` (left menu) → `Subscriptions`
+| GPC                                               |
+| ------------------------------------------------- |
+| `All applications` → `<MY_APP>`                   |
+| `Financial reports` (left menu) → `Subscriptions` |
 
 statistics are collected with 2 days delay (there're no data for the last 2
 days).

@@ -85,8 +85,9 @@ release) - not by current environment.
 
 - build and run application
 
-  <!-- prettier-ignore -->
-  | Xcode: `▶` (toolbar button)
+  | Xcode                |
+  | -------------------- |
+  | `▶` (toolbar button) |
 
 ## Android
 

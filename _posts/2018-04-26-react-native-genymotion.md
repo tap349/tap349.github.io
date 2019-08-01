@@ -32,8 +32,9 @@ GApps are required to receive pushes (see `troubleshooting` section).
 
 it's enabled by default in Android Emulator but not in Genymotion.
 
-<!-- prettier-ignore -->
-| Genymotion: my device → device menu (`vertical dots` icon) → `Edit`
+| Genymotion                                              |
+| ------------------------------------------------------- |
+| my device → device menu (`vertical dots` icon) → `Edit` |
 
 - [x] `Use virtual keyboard for text input`
 

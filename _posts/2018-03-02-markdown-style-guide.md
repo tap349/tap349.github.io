@@ -36,23 +36,23 @@ NOTE: backticks are not used.
   <dd>location within a web page, program, etc.</dd>
 </dl>
 
-context is specified in a table header, paths are specified in table rows:
+- context is specified in a table header, paths are specified in table rows:
 
-| iTunes Connect                            |
-| ----------------------------------------- |
-| `My Apps` → `<MY_APP>` → `Features` (tab) |
+  | iTunes Connect                            |
+  | ----------------------------------------- |
+  | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-context only:
+- context only:
 
-| iTunes Connect |
-| -------------- |
-|                |
+  | iTunes Connect |
+  | -------------- |
+  |                |
 
-path only (prefer to always specify context though):
+- path only (prefer to always specify context though):
 
-|                                           |
-| ----------------------------------------- |
-| `My Apps` → `<MY_APP>` → `Features` (tab) |
+  |                                           |
+  | ----------------------------------------- |
+  | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
 => always add header and at least one row - even if they are empty (otherwise
 Prettier breaks formatting of Markdown tables - see [Prettier][1]).

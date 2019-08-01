@@ -34,8 +34,9 @@ after restarting Opera.
 so it must be okay it's not shown all the time - click this menu item to force
 show it:
 
-<!-- prettier-ignore -->
-| Opera: Opera (top menu) → Signed in as \<YOUR_EMAIL>
+| Opera                                            |
+| ------------------------------------------------ |
+| `Opera` (top menu) → `Signed in as <YOUR_EMAIL>` |
 
 ## warning is not shown before quitting with <D-Q>
 

@@ -407,7 +407,9 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get UAT with required permissions
 
-  | GAE
+  | GAE |
+  | --- |
+  |     |
 
   - `Application` (combobox): `<MY_APP>`
 
@@ -441,7 +443,9 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get long-lived PAT
 
-  | ATD
+  | ATD |
+  | --- |
+  |     |
 
   paste short-lived PAT into ATD and click `Extend Access Token` button at the
   bottom of the page (you will be prompted to type your FB account password to

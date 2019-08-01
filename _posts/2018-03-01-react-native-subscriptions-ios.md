@@ -246,8 +246,8 @@ details).
   - `Build Configuration` (combobox): `Release`
   - `Close` (button)
 
-  | Xcode |
-  | ----- |
+  | Xcode                |
+  | -------------------- |
   | `▶` (toolbar button) |
 
 #### troubleshooting
@@ -365,11 +365,10 @@ details).
 
 ### beta testing
 
-<!-- prettier-ignore -->
-|IC|
-|-|
+| IC                                          |
+| ------------------------------------------- |
 | `My Apps` → `<MY_APP>` → `TestFlight` (tab) |
-| `All Testers` (left menu) |
+| `All Testers` (left menu)                   |
 
 beta testers (or just testers) are IC users who are invited to test TestFlight
 builds - that is they must have been already added before. just like sandbox

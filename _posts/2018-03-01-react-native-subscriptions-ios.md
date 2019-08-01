@@ -41,9 +41,10 @@ categories: [react-native, ios]
 
 ### obtain a shared secret
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
-| `In-App Purchases` (left menu) → `App-Specific Shared Secret` → `View Master Shared Secret` (link)
+| IC                                                                                                 |
+| -------------------------------------------------------------------------------------------------- |
+| `My Apps` → `<MY_APP>` → `Features` (tab)                                                          |
+| `In-App Purchases` (left menu) → `App-Specific Shared Secret` → `View Master Shared Secret` (link) |
 
 shared secret is used to validate receipts with `iap-receipt-validator` npm
 package.
@@ -52,9 +53,10 @@ package.
 
 ### create IAP
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
-| `In-App Purchases` (left menu) → `In-App Purchases` (section) → `⨁` (link)
+| IC                                                                         |
+| -------------------------------------------------------------------------- |
+| `My Apps` → `<MY_APP>` → `Features` (tab)                                  |
+| `In-App Purchases` (left menu) → `In-App Purchases` (section) → `⨁` (link) |
 
 > Select the in-app purchase you want to create.
 
@@ -81,9 +83,10 @@ package.
 
 ### configure IAP
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
-| `In-App Purchases` (left menu) → `<subscription>` (link)
+| IC                                                       |
+| -------------------------------------------------------- |
+| `My Apps` → `<MY_APP>` → `Features` (tab)                |
+| `In-App Purchases` (left menu) → `<subscription>` (link) |
 
 - [x] `Cleared for Sale`
 - `Subscription Duration` (combobox): `1 Month`
@@ -104,9 +107,10 @@ package.
 
 ### configure subscription group
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
-| `<subscription_group>` (link)
+| IC                                        |
+| ----------------------------------------- |
+| `My Apps` → `<MY_APP>` → `Features` (tab) |
+| `<subscription_group>` (link)             |
 
 it's required to add localization for subscription group as well:
 
@@ -146,9 +150,10 @@ with special characteristics and behaviour for sandbox testers.
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `Users and Roles` → `Sandbox Testers` (tab)
-| `Testers` (section) → `⨁` (link)
+| IC                                                      |
+| ------------------------------------------------------- |
+| `My Apps` → `Users and Roles` → `Sandbox Testers` (tab) |
+| `Testers` (section) → `⨁` (link)                        |
 
 tips and notes regarding sandbox tester:
 
@@ -219,27 +224,31 @@ details).
 
 - run application in debug mode (default build configuration)
 
-  <!-- prettier-ignore -->
-  | Xcode: `Product` (top menu) → `Scheme` → `Edit Scheme...`
-  | `Run` (left menu) → `Info` (tab)
+  | Xcode                                              |
+  | -------------------------------------------------- |
+  | `Product` (top menu) → `Scheme` → `Edit Scheme...` |
+  | `Run` (left menu) → `Info` (tab)                   |
 
   - `Build Configuration` (combobox): `Debug`
   - `Close` (button)
 
-  <!-- prettier-ignore -->
-  | Xcode: `▶` (toolbar button)
+  | Xcode                |
+  | -------------------- |
+  | `▶` (toolbar button) |
 
 - run application in release mode
 
-  <!-- prettier-ignore -->
-  | Xcode: `Product` (top menu) → `Scheme` → `Edit Scheme...`
-  | `Run` (left menu) → `Info` (tab)
+  | Xcode                                              |
+  | -------------------------------------------------- |
+  | `Product` (top menu) → `Scheme` → `Edit Scheme...` |
+  | `Run` (left menu) → `Info` (tab)                   |
 
   - `Build Configuration` (combobox): `Release`
   - `Close` (button)
 
-  <!-- prettier-ignore -->
-  | Xcode: `▶` (toolbar button)
+  | Xcode |
+  | ----- |
+  | `▶` (toolbar button) |
 
 #### troubleshooting
 
@@ -357,8 +366,10 @@ details).
 ### beta testing
 
 <!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `TestFlight` (tab)
-| `All Testers` (left menu)
+|IC|
+|-|
+| `My Apps` → `<MY_APP>` → `TestFlight` (tab) |
+| `All Testers` (left menu) |
 
 beta testers (or just testers) are IC users who are invited to test TestFlight
 builds - that is they must have been already added before. just like sandbox
@@ -382,9 +393,10 @@ when beta tester is making a purchase, all Apple dialogs no longer have the line
 2. <https://developer.apple.com/app-store/review/guidelines/>
 3. <https://help.apple.com/itunes-connect/developer/#/dev84b80958f>
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `Features` (tab)
-| `In-App Purchases` (left menu) → `<subscription>` (link) → `Review Information` (section)
+| IC                                                                                        |
+| ----------------------------------------------------------------------------------------- |
+| `My Apps` → `<MY_APP>` → `Features` (tab)                                                 |
+| `In-App Purchases` (left menu) → `<subscription>` (link) → `Review Information` (section) |
 
 - `Screenshot`: screenshot of your app with subscription popup
 - `Review Notes`: details on how you work with subscription in your app
@@ -399,9 +411,10 @@ from `Missing Metadata` to `Ready to Submit`.
 
 ### create new app version
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `App Store` (tab)
-| `⨁ VERSION OR PLATFORM` (link in left menu) → `iOS` (popup menu)
+| IC                                                               |
+| ---------------------------------------------------------------- |
+| `My Apps` → `<MY_APP>` → `App Store` (tab)                       |
+| `⨁ VERSION OR PLATFORM` (link in left menu) → `iOS` (popup menu) |
 
 - `Store Version Number`: new version number (say, `3.14`)
 - `Create` button
@@ -421,9 +434,10 @@ new app version has `Prepare for Submission` status now.
 
 1. <https://stackoverflow.com/a/42191936/3632318>
 
-<!-- prettier-ignore -->
-| IC: `My Apps` → `<MY_APP>` → `App Store` (tab)
-| `3.14 Prepare for Submission` (left menu) → `In-App Purchases` (section) → `⨁` (link)
+| IC                                                                                    |
+| ------------------------------------------------------------------------------------- |
+| `My Apps` → `<MY_APP>` → `App Store` (tab)                                            |
+| `3.14 Prepare for Submission` (left menu) → `In-App Purchases` (section) → `⨁` (link) |
 
 NOTE: `In-App Purchases` section is available only if you've created IAP before.
 
@@ -462,9 +476,10 @@ in fact it took about 30 minutes for new app version to appear in the App Store.
 
   > The Mobile Ads SDK for iOS utilizes Apple's advertising identifier (IDFA).
 
-  <!-- prettier-ignore -->
-  | IC: `My Apps` → `<MY_APP>` → `App Store` (tab)
-  | `3.14 Prepare for Submission` (left menu) → `Submit for Review` (button)
+  | IC                                                                       |
+  | ------------------------------------------------------------------------ |
+  | `My Apps` → `<MY_APP>` → `App Store` (tab)                               |
+  | `3.14 Prepare for Submission` (left menu) → `Submit for Review` (button) |
 
   - `Does this app use the Advertising Identifier (IDFA)?`: [x] `Yes`
   - `This app uses the Advertising Identifier to (select all that apply):`
@@ -476,9 +491,10 @@ in fact it took about 30 minutes for new app version to appear in the App Store.
 
 - binary rejected (release didn't pass a review because of IAP)
 
-  <!-- prettier-ignore -->
-  | IC: `My Apps` → `<MY_APP>` → `Activity` (tab)
-  | `App Store Versions` (left menu) → `Resolution Center` (link)
+  | IC                                                            |
+  | ------------------------------------------------------------- |
+  | `My Apps` → `<MY_APP>` → `Activity` (tab)                     |
+  | `App Store Versions` (left menu) → `Resolution Center` (link) |
 
   > **2.** 1 Performance: App Completeness
   >
@@ -599,9 +615,10 @@ in fact it took about 30 minutes for new app version to appear in the App Store.
 
     1. <https://stackoverflow.com/a/7764496/3632318>
 
-    <!-- prettier-ignore -->
-    | IC: `My Apps` → `<MY_APP>` → `Features` (tab)
-    | `In-App Purchases` (left menu) → `<subscription>` (link)
+    | IC                                                       |
+    | -------------------------------------------------------- |
+    | `My Apps` → `<MY_APP>` → `Features` (tab)                |
+    | `In-App Purchases` (left menu) → `<subscription>` (link) |
 
     find the section that has a red circle mark - it's necessary to update
     information there. in my case it was `Localizations` section and I had a red
@@ -642,10 +659,12 @@ in fact it took about 30 minutes for new app version to appear in the App Store.
 
 ## view financial reports
 
-<!-- prettier-ignore -->
-| IC: `App Analytics` → `Overview` (tab)
-| `In-App Purchases` (widget) or `Sales` (widget)
+| IC                                              |
+| ----------------------------------------------- |
+| `App Analytics` → `Overview` (tab)              |
+| `In-App Purchases` (widget) or `Sales` (widget) |
 
-<!-- prettier-ignore -->
-| IC: `App Analytics` → `Metrics` (tab)
-| `In-App Purchases` (left menu) or `Sales` (left menu)
+| IC                                                    |
+| ----------------------------------------------------- |
+| `App Analytics` → `Metrics` (tab)                     |
+| `In-App Purchases` (left menu) or `Sales` (left menu) |

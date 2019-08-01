@@ -30,10 +30,10 @@ NOTE: backticks are not used.
 
 <dl>
   <dt>context</dt>
-  <dd>web page, program, etc.</dd>
+  <dd>service, web page, program, etc.</dd>
 
   <dt>path</dt>
-  <dd>location within a web page, program, etc.</dd>
+  <dd>location within context</dd>
 </dl>
 
 - context is specified in a table header, paths are specified in table rows:

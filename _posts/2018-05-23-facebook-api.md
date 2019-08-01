@@ -422,7 +422,9 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
 
 - get short-lived PAT
 
-  | GAE
+  | GAE |
+  | --- |
+  |     |
 
   use UAT generated above to get short-lived PAT:
 

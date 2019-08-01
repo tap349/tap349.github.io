@@ -22,31 +22,40 @@ categories: [markdown]
 
 NOTE: backticks are not used.
 
-### use table to specify path (location within a web page, program, etc.)
+### use table to specify context and path
 
 1. <https://kramdown.gettalong.org/syntax.html#tables>
 
-environment (web page, program, etc.) is always specified in a table header
-(unlike Kramdown, Prettier doesn't allow tables without a header and breaks
-formatting if the latter is not present):
+NOTE: unlike Kramdown, Prettier doesn't allow tables without a header and breaks
+formatting if the latter is not present.
+
+<dl>
+  <dt>context</dt>
+  <dd>web page, program, etc.</dd>
+
+  <dt>path</dt>
+  <dd>location within a web page, program, etc.</dd>
+</dl>
+
+context is specified in a table header, paths are specified in table rows:
 
 | iTunes Connect                            |
 | ----------------------------------------- |
 | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-if you need to specify environment only, add empty row:
+context only:
 
 | iTunes Connect |
 | -------------- |
 |                |
 
-if you need to specify path only (single row only), add empty header:
+path only (prefer to always specify context though):
 
 |                                           |
 | ----------------------------------------- |
 | `My Apps` → `<MY_APP>` → `Features` (tab) |
 
-=> always specify header and at least one row - even if they are empty.
+=> always add header and at least one row - even if they are empty.
 
 it's possible to add path element description in parentheses: usually it's UI
 element which represents path element itself (say, menu item or button) or UI
@@ -55,7 +64,7 @@ element containing described path element (say, top menu).
 path might include action or setting as a final node (say, menu item). if there
 are multiple settings, they are specified separately as a list:
 
-|                                   |
+| iTunes Connect                    |
 | --------------------------------- |
 | `Preferences` → `Keys` → `Hotkey` |
 

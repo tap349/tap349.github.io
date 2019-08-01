@@ -24,6 +24,8 @@ NOTE: backticks are not used.
 
 ### use table to specify path (location within a web page, program, etc.)
 
+1. <https://kramdown.gettalong.org/syntax.html#tables>
+
 | iTunes Connect                            |
 | ----------------------------------------- |
 | `My Apps` → `<MY_APP>` → `Features` (tab) |

@@ -201,12 +201,30 @@ before building releases.
 
 - assemble release
 
-  ```sh
-  $ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
-  $ build_apk
-  ```
+  build either AAB (new upload format) or APK:
 
-  release is saved as _android/app/build/outputs/apk/app-release.apk_.
+  - AAB (Android App Bundle)
+
+    1. <https://developer.android.com/guide/app-bundle/>
+    2. <https://developer.android.com/studio/build/building-cmdline#build_bundle>
+
+    ```sh
+    $ alias build_aab='cd android && ./gradlew bundleRelease; cd ..'
+    $ build_aab
+    ```
+
+    release is saved as _android/app/build/outputs/bundle/release/app.aab_.
+
+  - APK (Android Package)
+
+    1. <https://developer.android.com/studio/build/building-cmdline#build_apk>
+
+    ```sh
+    $ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
+    $ build_apk
+    ```
+
+    release is saved as _android/app/build/outputs/apk/app-release.apk_.
 
 - upload release to Google Drive
 
@@ -214,7 +232,7 @@ before building releases.
   | ------------------------------------------ |
   | `Shared with me` → `ICEperk` → `AppBuilds` |
 
-  - replace existing `app-release.apk` file with a new one
+  - replace existing release with a new one
 
 - install release on any Android device and run selective checks
 - publish release in GPC
@@ -226,7 +244,7 @@ before building releases.
 
   > New release to production
 
-  - `BROWSE_FILES` (button) → add new APK
+  - `BROWSE_FILES` (button) → add new AAB or APK
   - `Release name` (input): `3.16` (for example)
   - `What's new in this release?` (textarea): release notes
   - `SAVE` (button) → `REVIEW` (button)

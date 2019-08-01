@@ -73,13 +73,15 @@ all hotkeys (say, for Developer Menu) use it as well.
 
 it's possible to change it to Dvorak inside emulator:
 
-<!-- prettier-ignore -->
-| emulator (OS): `Settings` → `General` → `Keyboard` → `Hardware Keyboard` → `English` → `Dvorak`
+| emulator (OS)                                                                    |
+| -------------------------------------------------------------------------------- |
+| `Settings` → `General` → `Keyboard` → `Hardware Keyboard` → `English` → `Dvorak` |
 
 ### Russian keyboard layout
 
-<!-- prettier-ignore -->
-| emulator menu: `Hardware` → `Keyboard` → `Use the Same Keyboard Language as macOS`
+| emulator (app)                                                                 |
+| ------------------------------------------------------------------------------ |
+| `Hardware` (top menu) → `Keyboard` → `Use the Same Keyboard Language as macOS` |
 
 ### enable live/hot reloading
 
@@ -87,11 +89,13 @@ it's possible to change it to Dvorak inside emulator:
 
 NOTE: hot reloading is recommended over live reload (the former is much faster).
 
-<!-- prettier-ignore -->
-| emulator (app) → `<D-d>` → `Enable Live Reload`
+| emulator (app)                 |
+| ------------------------------ |
+| `<D-d>` → `Enable Live Reload` |
 
-<!-- prettier-ignore -->
-| emulator (app) → `<D-d>` → `Enable Hot Reloading`
+| emulator (app)                   |
+| -------------------------------- |
+| `<D-d>` → `Enable Hot Reloading` |
 
 ### scroll with 3 fingers
 
@@ -99,16 +103,18 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### hide device bezels
 
-<!-- prettier-ignore -->
-| emulator menu: `Window` → [ ] `Show Device Bezels`
+| emulator (app)                                 |
+| ---------------------------------------------- |
+| `Window` (top menu) → [ ] `Show Device Bezels` |
 
 device bezels are shown by default since Xcode 9 (there was no such option at
 all before Xcode 9 AFAIK).
 
 ### [Xcode 9.3+] turn on pixel accurate mode
 
-<!-- prettier-ignore -->
-| emulator menu: `Window` → [x] `Pixel Accurate`
+| emulator (app)                             |
+| ------------------------------------------ |
+| `Window` (top menu) → [x] `Pixel Accurate` |
 
 otherwise actual paddings, margins, etc. might be different from specified ones.
 
@@ -147,13 +153,15 @@ $ xcodebuild clean
 
 - clean build folder (just in case)
 
-  <!-- prettier-ignore -->
-  | Xcode: `Product` (top menu) → `Clean Build Folder`
+  | Xcode                                       |
+  | ------------------------------------------- |
+  | `Product` (top menu) → `Clean Build Folder` |
 
 - build application as an executable product
 
-  <!-- prettier-ignore -->
-  | Xcode: `Product` (top menu) → `Build`
+  | Xcode                          |
+  | ------------------------------ |
+  | `Product` (top menu) → `Build` |
 
 ### (how to) link library with native dependencies manually
 
@@ -230,13 +238,15 @@ $ pod install
 
 1. <https://stackoverflow.com/questions/10481412>
 
-<!-- prettier-ignore -->
-| emulator menu: `Window` → `Scale`
+| emulator (app)                |
+| ----------------------------- |
+| `Window` (top menu) → `Scale` |
 
 or
 
-<!-- prettier-ignore -->
-| emulator (app):
+| emulator (app) |
+| -------------- |
+|                |
 
 - `<D-1>` - 100% (default)
 - `<D-2>` - 75%
@@ -270,8 +280,9 @@ NOTE: configure new simulator separately (see [configuration](#configuration)).
 
 #### switch from inside simulator
 
-<!-- prettier-ignore -->
-| emulator menu: `Hardware` → `Device` → `iOS 10.2` → `iPhone 5`
+| emulator (app)                                             |
+| ---------------------------------------------------------- |
+| `Hardware` (top menu) → `Device` → `iOS 10.2` → `iPhone 5` |
 
 - `$ react-native run-ios` (reinstall application)
 
@@ -286,10 +297,11 @@ is currently opened.
 
 iPhone 4s model is not available by default - add it manually:
 
-<!-- prettier-ignore -->
-| Xcode: `Product` (top menu) → `Destination` → `Add Additional Simulators...`
-| `Simulators` (tab) → `+` (icon in bottom left corner)
-| `OS Version` (dropdown menu) → `Download more simulator runtimes...`
+| Xcode                                                                 |
+| --------------------------------------------------------------------- |
+| `Product` (top menu) → `Destination` → `Add Additional Simulators...` |
+| `Simulators` (tab) → `+` (icon in bottom left corner)                 |
+| `OS Version` (dropdown menu) → `Download more simulator runtimes...`  |
 
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
 - create simulator for iPhone 4s using downloaded runtime
@@ -308,18 +320,21 @@ same as for [Android]({% post_url 2017-05-24-react-native-android %}).
 
 ### Developer Menu
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-d>`
+| emulator (app) |
+| -------------- |
+| `<D-d>`        |
 
 ### Inspector
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-d>` → `Show Inspector`
+| emulator (app)             |
+| -------------------------- |
+| `<D-d>` → `Show Inspector` |
 
 or
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-i>` (toggle)
+| emulator (app)   |
+| ---------------- |
+| `<D-i>` (toggle) |
 
 ### device system log (`iOS device syslog`)
 
@@ -329,30 +344,35 @@ $ react-native log-ios
 
 ### reload application in emulator manually
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-d>` → `Reload`
+| emulator (app)     |
+| ------------------ |
+| `<D-d>` → `Reload` |
 
 or
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-r>`
+| emulator (app) |
+| -------------- |
+| `<D-r>`        |
 
 ### show touchable areas
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-i>` → `Touchables` (bottom menu) → `<D-i>`
+| emulator (app)                                 |
+| ---------------------------------------------- |
+| `<D-i>` → `Touchables` (bottom menu) → `<D-i>` |
 
 => touchable areas are still marked with dotted line
 
 ### toggle software keyboard
 
-<!-- prettier-ignore -->
-| emulator menu: `Hardware` → `Keyboard` → `Toggle Software Keyboard`
+| emulator (app)                                                  |
+| --------------------------------------------------------------- |
+| `Hardware` (top menu) → `Keyboard` → `Toggle Software Keyboard` |
 
 or
 
-<!-- prettier-ignore -->
-| emulator (app): `<D-k>`
+| emulator (app) |
+| -------------- |
+| `<D-k>`        |
 
 ## troubleshooting
 
@@ -393,8 +413,9 @@ the latest version of `react-native-autogrow-textinput` doesn't support iOS
 Deployment Target (DT) lower than 9.3 but current DT in iOS project is 8.0 =>
 change DT in iOS project to 9.3 as well:
 
-<!-- prettier-ignore -->
-| Xcode: `Build Settings` → `Deployment` → `iOS Deployment Target`
+| Xcode                                                     |
+| --------------------------------------------------------- |
+| `Build Settings` → `Deployment` → `iOS Deployment Target` |
 
 ### [0.52.1] Undefined symbols for architecture x86_64
 
@@ -654,7 +675,9 @@ launch Xcode and install additional required components when prompted.
 
 1. <https://github.com/shoutem/ui/issues/134>
 
-| Xcode: `Issue navigator` → `Buildtime`
+| Xcode                           |
+| ------------------------------- |
+| `Issue navigator` → `Buildtime` |
 
 ```sh
 > BVLinearGradient:
@@ -692,7 +715,9 @@ there are 2 ways to solve the problem:
 
 - manually edit files in `react-native-linear-gradient` package
 
-  | Xcode: `Project navigator`
+  | Xcode               |
+  | ------------------- |
+  | `Project navigator` |
 
   replace old imports with new ones in all files inside
   _\<MY_APP>/Libraries/BVLinearGradient.xcodeproj/BVLinearGradient/_:
@@ -881,8 +906,9 @@ _Info.plist_:
 
 or else edit _Info.plist_ in Xcode:
 
-<!-- prettier-ignore -->
-| Xcode: `Project navigator` → _\<MY_APP>/\<MY_APP>/Info.plist_
+| Xcode                                                  |
+| ------------------------------------------------------ |
+| `Project navigator` → _\<MY_APP>/\<MY_APP>/Info.plist_ |
 
 ### Library not loaded: .../CoreSimulator
 
@@ -1140,7 +1166,9 @@ the link).
 
 ### Invalid bitcode version (Producer: '802.0.41.0_0' Reader: '800.0.42.1_0')
 
-| Xcode: `Product` (top menu) → `Archive`
+| Xcode                            |
+| -------------------------------- |
+| `Product` (top menu) → `Archive` |
 
 ```
 error: Invalid bitcode version (Producer: '802.0.42.0_0' Reader: '800.0.42.1_0')
@@ -1158,7 +1186,9 @@ either:
 
 ### Multiple commands produce '...libyoga.a'
 
-| Xcode: `Product` (top menu) → `Archive`
+| Xcode                            |
+| -------------------------------- |
+| `Product` (top menu) → `Archive` |
 
 ```
 Multiple commands produce '...libyoga.a':

@@ -732,9 +732,7 @@ there are 2 ways to solve the problem:
 
   ```json
   "dependencies": {
-    ...
     "react-native-linear-gradient": "^2.0.0",
-    ...
   },
   ```
 

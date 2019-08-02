@@ -92,28 +92,35 @@ or else it's possible to run sanity checks on real device instead of emulator
   NOTE: these numbers might have been already changed right after creating
   `release_3_16` branch.
 
-  _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
+  - iOS
 
-  ```xml
-  <key>CFBundleShortVersionString</key>
-  <string>3.16</string>
-  <!-- ... -->
-  <key>CFBundleVersion</key>
-  <string>96</string>
-  ```
+    _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
 
-  don't forget to bump both numbers in _Info.plist_ files of all extensions your
-  iOS application contains (say, `OneSignalNotificationServiceExtension`) or
-  else you'll get `ITMS-90473` warnings (`CFBundleVersion Mismatch` and
-  `CFBundleShortVersionString Mismatch`) when uploading archive to the App
-  Store.
+    ```xml
+    <key>CFBundleShortVersionString</key>
+    <string>3.16</string>
+    <!-- ... -->
+    <key>CFBundleVersion</key>
+    <string>96</string>
+    ```
 
-  _android/app/build.gradle_:
+    don't forget to bump both numbers in _Info.plist_ files of all extensions
+    your iOS application contains (say, `OneSignalNotificationServiceExtension`)
+    or else you'll get `ITMS-90473` warnings (`CFBundleVersion Mismatch` and
+    `CFBundleShortVersionString Mismatch`) when uploading archive to the App
+    Store.
 
-  ```groovy
-  versionCode 96
-  versionName "3.16"
-  ```
+  - Android
+
+    NOTE: it's possible to create releases with the same `versionName` (release
+    name in GPC) - you have to bump `versionCode` only (`Version code` in GPC).
+
+    _android/app/build.gradle_:
+
+    ```groovy
+    versionCode 96
+    versionName "3.16"
+    ```
 
 - commit changes and push to `develop` branch
 
@@ -195,9 +202,21 @@ or else it's possible to run sanity checks on real device instead of emulator
 
 ### Android
 
-copy _gradle.properties_ and _iceperkkeystore.keystore_ (release store file)
-from `C******d/iceperkapp_certificates/android` GitHub repo (see _README.md_)
-before building releases.
+- add upload certificate and private key to sign releases
+
+  this private key is used to sign releases (APK and AAB) locally - before
+  uploading to GPC.
+
+  ```sh
+  $ git clone git@github.com:C***d/iceperkapp_certificates.git
+  $ cd iceperkapp_certificates
+  $ cd android
+  $ cp .gradle/gradle.properties ~/.gradle/
+  $ cp iceperkkeystore.keystore <MY_APP>/android/app/
+  ```
+
+  _iceperkkeystore.keystore_ is a Java keystore (contains both certificate and
+  corresponding private key).
 
 - build APK (Android Package)
 
@@ -216,7 +235,7 @@ before building releases.
   | ------------------------------------------ |
   | `Shared with me` → `ICEperk` → `AppBuilds` |
 
-  - replace existing release with a new one
+  replace existing APK with a new one.
 
 - install APK on any Android device and run selective checks
 
@@ -226,7 +245,7 @@ before building releases.
   > you want to quickly test or share an APK with someone else, you should
   > instead build an APK.
 
-- enroll in app signing in GPC
+- add enroll in app signing in GPC
 
   NOTE: this is done only once before uploading AAB for the first time.
 
@@ -279,6 +298,14 @@ before building releases.
   ```
 
   AAB is saved as _android/app/build/outputs/bundle/release/app.aab_.
+
+- upload AAB to Google Drive
+
+  | Google Drive                               |
+  | ------------------------------------------ |
+  | `Shared with me` → `ICEperk` → `AppBuilds` |
+
+  replace existing AAB with a new one.
 
 - publish AAB in GPC
 

@@ -226,6 +226,43 @@ before building releases.
   > you want to quickly test or share an APK with someone else, you should
   > instead build an APK.
 
+- enroll in app signing in GPC
+
+  NOTE: this is done only once before uploading AAB for the first time.
+
+  > <https://support.google.com/googleplay/android-developer/answer/7384423?hl=en>
+  >
+  > With app signing by Google Play, Google manages and protects your app's
+  > signing key for you and uses it to sign your APKs for distribution. It’s a
+  > secure way to store your app signing key that helps protect you if your key
+  > is ever lost or compromised.
+  >
+  > Important: To use Android App Bundles, the recommended app publishing
+  > format, you need to enroll in app signing by Google Play before uploading
+  > your app bundle on the Play Console.
+
+  | GPC                                                                                                        |
+  | ---------------------------------------------------------------------------------------------------------- |
+  | `All applications` → `Хоккей. Ледовое братство`                                                            |
+  | `Release management` (left menu) → `App signing` → `Export and upload a key from a Java keystore` (option) |
+
+  - download PEPK tool
+  - export and encrypt app signing private key with PEPK tool
+
+    ```sh
+    $ cd android/app
+    $ java -jar pepk.jar \
+      --keystore=<MYAPP_RELEASE_STORE_FILE> \
+      --alias=<MYAPP_RELEASE_KEY_ALIAS> \
+      --output=<PRIVATE_KEY_FILE> \
+      --encryptionkey=<MYAPP_RELEASE_KEY_PASSWORD>
+    ```
+
+    `MYAPP_*` are Gradle properties from _~/.gradle/gradle.properties_,
+    `PRIVATE_KEY_FILE` is a private key path.
+
+  - upload private key to GPC
+
 - build AAB (Android App Bundle)
 
   1. <https://developer.android.com/studio/build/building-cmdline#build_bundle>

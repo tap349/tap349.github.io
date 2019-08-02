@@ -342,6 +342,8 @@ working okay:
   - `Tag version` (input + combobox): `3.16`
   - `Target` (combobox): `master`
   - `Release title` (input): `Release 3.16`
+  - `Describe this release` (textarea): description from the App Store or the
+    Google Play Store
   - `Publish release` (button)
 
 - [`iceperk`] create and push branch for new release from `develop` branch (say,

@@ -172,7 +172,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   output file: _iOS_SDK/OneSignalSDK/Framework/OneSignal.framework/OneSignal_ -
   (it's a symlink which points to a static library).
 
-  you may check all required architectures are present in a static library:
+  use `lipo` to check a static library contains all required architectures:
 
   ```sh
   $ lipo -archs OneSignal

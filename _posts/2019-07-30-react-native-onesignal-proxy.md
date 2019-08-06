@@ -49,13 +49,10 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
 ## OneSignal-Android-SDK
 
-- clone <https://github.com/OneSignal/OneSignal-Android-SDK>
-
-  NOTE: there's no need to fork this repo - we're not going to commit and push
-  changes there.
+- fork and clone <https://github.com/OneSignal/OneSignal-Android-SDK>
 
   ```sh
-  $ git clone git@github.com:OneSignal/OneSignal-Android-SDK.git
+  $ git clone git@github.com:<MY_COMPANY>/OneSignal-Android-SDK.git
   $ cd OneSignal-Android-SDK
   ```
 
@@ -90,13 +87,10 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
 ## OneSignal-iOS-SDK
 
-- clone <https://github.com/OneSignal/OneSignal-iOS-SDK>
-
-  NOTE: there's no need to fork this repo - we're not going to commit and push
-  changes there.
+- fork and clone <https://github.com/OneSignal/OneSignal-iOS-SDK>
 
   ```sh
-  $ git clone git@github.com:OneSignal/OneSignal-iOS-SDK.git
+  $ git clone git@github.com:<MY_COMPANY>/OneSignal-iOS-SDK.git
   $ cd OneSignal-iOS-SDK
   ```
 

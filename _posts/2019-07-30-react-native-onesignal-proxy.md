@@ -216,7 +216,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   ```
 
   though not strictly necessary, it's better to stick to the same version of
-  `react-native-onesignal` npm package since you have been already using it in
+  `react-native-onesignal` npm package since you've been already using it in
   your application.
 
 - update Android SDK dependency (using JAR)

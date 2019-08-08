@@ -223,7 +223,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
   NOTE: this method of updating Android SDK dependency is not recommended since
   eventually it causes application to crash on old Android devices (Android 6-)
-  with this error:
+  when the latter goes to the background - this error is sent to Sentry:
 
   ```
   java.lang.IllegalArgumentException: No such service ComponentInfo{com.iceperkapp/com.onesignal.SyncJobService}

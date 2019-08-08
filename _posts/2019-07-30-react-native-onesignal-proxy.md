@@ -198,7 +198,8 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   - replace original Android SDK dependency in _android/build.gradle_
 
     1. <https://developer.android.com/studio/build/dependencies>
-    2. <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
+
+    [1]: <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
 
     NOTE: make sure to remove `exclude group` line - OneSignal classes are not
     found otherwise.
@@ -216,8 +217,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     + implementation files('libs/onesignal-<MY_APP>.jar')
     ```
 
-    or else you might try to reference AAR file directly - see the linked post
-    #2.
+    or else you might try to reference AAR file directly - see [1].
 
 - update iOS SDK dependency
 

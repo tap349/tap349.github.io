@@ -217,7 +217,8 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     + implementation files('libs/onesignal-<MY_APP>.jar')
     ```
 
-    or else you might try to reference AAR file directly - see [1].
+    or else you might try to reference AAR file directly - see [Referencing
+    local aar files with Android Studio’s new Gradle-based build system][1].
 
 - update iOS SDK dependency
 

@@ -55,7 +55,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   $ git clone git@github.com:<MY_COMPANY>/OneSignal-Android-SDK.git
   $ cd OneSignal-Android-SDK
   $ git checkout 3.11.1
-  $ git checkout -b <MY_COMPANY>
+  $ git checkout -b <MY_APP>
   ```
 
   `3.11.1` is the version used by your application (as a dependency of
@@ -203,7 +203,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   $ git clone git@github.com:<MY_COMPANY>/react-native-onesignal.git
   $ cd react-native-onesignal
   $ git checkout 3.3.1
-  $ git checkout -b <MY_COMPANY>
+  $ git checkout -b <MY_APP>
   ```
 
   `3.3.1` is the version used by your application:
@@ -331,7 +331,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     // package.json
 
   - "react-native-onesignal": "^3.2.14",
-  + "react-native-onesignal": "github:<MY_COMPANY>/react-native-onesignal",
+  + "react-native-onesignal": "github:<MY_COMPANY>/react-native-onesignal#<MY_APP>",
   ```
 
   ```sh

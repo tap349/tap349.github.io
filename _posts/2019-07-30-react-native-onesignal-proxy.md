@@ -193,8 +193,8 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     >
     > The AAR file consists of a JAR file and some resource files
 
-  - rename _classes.jar_ to _onesignal-<MY_APP>.jar_ (or whatever)
-  - copy _onesignal-<MY_APP>.jar_ to _android/libs/_
+  - rename _classes.jar_ to _onesignal-\<MY_APP>.jar_ (or whatever)
+  - copy _onesignal-\<MY_APP>.jar_ to _android/libs/_
   - replace original Android SDK dependency in _android/build.gradle_
 
     1. <https://developer.android.com/studio/build/dependencies>

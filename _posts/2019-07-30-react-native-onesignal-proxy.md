@@ -54,7 +54,28 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   ```sh
   $ git clone git@github.com:<MY_COMPANY>/OneSignal-Android-SDK.git
   $ cd OneSignal-Android-SDK
+  $ git checkout 3.11.1
+  $ git checkout -b <MY_COMPANY>
   ```
+
+  `3.11.1` is the version used by your application (as a dependency of
+  `react-native-onesignal` npm package):
+
+  ```groovy
+  // node_modules/react-native-onesignal/android/build.gradle
+
+  dependencies {
+      // ...
+
+      implementation('com.onesignal:OneSignal:3.11.1') {
+          exclude group: 'com.android.support'
+      }
+  }
+  ```
+
+  though not strictly necessary, it's better to stick to the same version of
+  `OneSignal-Android-SDK` plugin in your fork since it must have been already
+  tested against `react-native-onesignal` npm package.
 
 - change `BASE_URL` in _OneSignalRestClient.java_
 
@@ -181,9 +202,34 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   ```sh
   $ git clone git@github.com:<MY_COMPANY>/react-native-onesignal.git
   $ cd react-native-onesignal
+  $ git checkout 3.3.1
+  $ git checkout -b <MY_COMPANY>
   ```
 
-- update Android SDK dependency
+  `3.3.1` is the version used by your application:
+
+  ```conf
+  # yarn.lock
+
+  "react-native-onesignal@github:<MY_COMPANY>/react-native-onesignal#iceperk":
+    version "3.3.1"
+  ```
+
+  though not strictly necessary, it's better to stick to the same version of
+  `react-native-onesignal` npm package since you have been already using it in
+  your application.
+
+- update Android SDK dependency (using JAR)
+
+  NOTE: this method of updating Android SDK dependency is not recommended since
+  eventually it causes application to crash on old Android devices (Android 6-)
+  with this error:
+
+  ```
+  java.lang.IllegalArgumentException: No such service ComponentInfo{com.iceperkapp/com.onesignal.SyncJobService}
+  ```
+
+  => update Android SDK dependency using AAR instead (see the next section).
 
   input: new Android library file (_onesignal-release.aar_).
 
@@ -199,27 +245,62 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
     1. <https://developer.android.com/studio/build/dependencies>
 
-    <!-- prettier-ignore -->
-    [1]: <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
-
-    NOTE: make sure to remove `exclude group` line - OneSignal classes are not
-    found otherwise.
+    NOTE: make sure to remove block with `exclude group` line - OneSignal
+    classes are not found otherwise.
 
     ```diff
       // android/build.gradle
 
-    - implementation('com.onesignal:OneSignal:3.11.1') {
-    -     // Exclude com.android.support(Android Support library) as the version range starts at 26.0.0
-    -     //    This is due to compileSdkVersion defaulting to 23 which cant' be lower than the support library version
-    -     //    And the fact that the default root project is missing the Google Maven repo required to pull down 26.0.0+
-    -     exclude group: 'com.android.support'
-    -     // Keeping com.google.android.gms(Google Play services library) as this version range starts at 10.2.1
-    - }
-    + implementation files('libs/onesignal-<MY_APP>.jar')
+      dependencies {
+          // ...
+
+    -     implementation('com.onesignal:OneSignal:3.11.1') {
+    -         // Exclude com.android.support(Android Support library) as the version range starts at 26.0.0
+    -         //    This is due to compileSdkVersion defaulting to 23 which cant' be lower than the support library version
+    -         //    And the fact that the default root project is missing the Google Maven repo required to pull down 26.0.0+
+    -         exclude group: 'com.android.support'
+    -         // Keeping com.google.android.gms(Google Play services library) as this version range starts at 10.2.1
+    -     }
+    +     implementation files('libs/onesignal-<MY_APP>.jar')
     ```
 
-    or else you might try to reference AAR file directly - see [Referencing
-    local aar files with Android Studio’s new Gradle-based build system][1].
+- _[RECOMMENDED]_ update Android SDK dependency (using AAR)
+
+  input: new Android library file (_onesignal-release.aar_).
+
+  - copy _onesignal-release.aar_ to _onesignal-\<MY_APP>.jar_
+  - copy _onesignal-\<MY_APP>.jar_ to _android/libs/_
+  - replace original Android SDK dependency in _android/build.gradle_
+
+    1. <https://developer.android.com/studio/build/dependencies>
+    2. <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
+
+    NOTE: make sure to remove block with `exclude group` line - OneSignal
+    classes are not found otherwise.
+
+    ```diff
+      // android/build.gradle
+
+    + repositories {
+    +     mavenCentral()
+    +     flatDir {
+    +       dirs 'libs'
+    +     }
+    + }
+    +
+      dependencies {
+          // ...
+
+    -     implementation('com.onesignal:OneSignal:3.11.1') {
+    -         // Exclude com.android.support(Android Support library) as the version range starts at 26.0.0
+    -         //    This is due to compileSdkVersion defaulting to 23 which cant' be lower than the support library version
+    -         //    And the fact that the default root project is missing the Google Maven repo required to pull down 26.0.0+
+    -         exclude group: 'com.android.support'
+    -         // Keeping com.google.android.gms(Google Play services library) as this version range starts at 10.2.1
+    -     }
+    +     implementation 'com.onesignal:OneSignal:3.11.1@aar'
+      }
+    ```
 
 - update iOS SDK dependency
 

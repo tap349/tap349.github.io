@@ -199,6 +199,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
     1. <https://developer.android.com/studio/build/dependencies>
 
+    <!-- prettier-ignore -->
     [1]: <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
 
     NOTE: make sure to remove `exclude group` line - OneSignal classes are not

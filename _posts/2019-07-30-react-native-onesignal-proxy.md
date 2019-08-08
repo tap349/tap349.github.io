@@ -79,6 +79,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
   ```sh
   $ cd OneSignalSDK
+  $ chmod +x gradlew
   $ ./gradlew build -x test
   ```
 

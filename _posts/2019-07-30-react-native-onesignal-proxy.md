@@ -240,12 +240,16 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     > The AAR file consists of a JAR file and some resource files
 
   - rename _classes.jar_ to _onesignal-\<MY_APP>.jar_ (or whatever)
+
+    even though the name of JAR file can be anything, don't forget to keep it
+    in sync with a reference to this file in _android/build.gradle_.
+
   - copy _onesignal-\<MY_APP>.jar_ to _android/libs/_
   - replace original Android SDK dependency in _android/build.gradle_
 
     1. <https://developer.android.com/studio/build/dependencies>
 
-    NOTE: make sure to remove block with `exclude group` line - OneSignal
+    NOTE: make sure to remove the block with `exclude group` line - OneSignal
     classes are not found otherwise.
 
     ```diff
@@ -268,14 +272,18 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
   input: new Android library file (_onesignal-release.aar_).
 
-  - copy _onesignal-release.aar_ to _onesignal-\<MY_APP>.jar_
+  - rename _onesignal-release.aar_ to _onesignal-\<MY_APP>.aar
+
+    the name of AAR can be anything and it's not referenced anywhere directly
+    including _android/build.gradle_.
+
   - copy _onesignal-\<MY_APP>.jar_ to _android/libs/_
   - replace original Android SDK dependency in _android/build.gradle_
 
     1. <https://developer.android.com/studio/build/dependencies>
     2. <https://life.nimbco.com/2013/09/referencing-local-aar-files-with-android-studios-new-gradle-based-build-system/>
 
-    NOTE: make sure to remove block with `exclude group` line - OneSignal
+    NOTE: make sure to remove the block with `exclude group` line - OneSignal
     classes are not found otherwise.
 
     ```diff

@@ -292,7 +292,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
     + repositories {
     +     mavenCentral()
     +     flatDir {
-    +       dirs 'libs'
+    +         dirs 'libs'
     +     }
     + }
     +

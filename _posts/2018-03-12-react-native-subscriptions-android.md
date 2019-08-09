@@ -312,7 +312,7 @@ else you'll get `String resource ID #0x0` error.
 
 test subscriptions are:
 
-- purchased with a test card (test trasactions are created)
+- purchased with a test card (test transactions are created)
 - have shortened periods (say, 1 month → 5 minutes)
 - renew 6 times only (cancelled automatically afterwards)
 - can be managed (say, cancelled in GP)

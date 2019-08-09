@@ -127,7 +127,7 @@ option).
 
 at the same time it's not required to publish (rollout) application - you can
 both set up subscription and test it on real device without publishing (see
-`test with a test subscription` section).
+`testing with test subscriptions` section).
 
 | GPC                                                                                                                   |
 | --------------------------------------------------------------------------------------------------------------------- |

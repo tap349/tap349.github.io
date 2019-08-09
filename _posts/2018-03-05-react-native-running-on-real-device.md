@@ -55,8 +55,7 @@ release) - not by current environment.
 
 - it's not necessary to uninstall existing application from device like for
   Android (and it doesn't matter how existing application was installed - via
-  App Store, TestFlight or whatever) - it will be replaced with a build from
-  Xcode
+  App Store or TestFlight) - it will be replaced with a build run from Xcode
 - make sure notebook and real device use the same Wi-Fi network
 - open _\<project_name>.xcworkspace_
 - select real device as the build target in Xcode toolbar

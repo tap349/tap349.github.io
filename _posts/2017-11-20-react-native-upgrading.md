@@ -169,6 +169,8 @@ I tried to upgrade RN from 0.52.1 to 0.59.9 with `rn-diff-purge`.
 
 **_UPDATE (2019-08-09)_**
 
+1. <https://github.com/react-native-community/upgrade-helper>
+
 [1]: <https://react-native-community.github.io/upgrade-helper/>
 
 use [Upgrade Helper][1] instead - it's a convenient web tool that works on top

@@ -190,8 +190,8 @@ NOTE: you can't set up subscription until you upload APK with IAB permission
   neither can you modify the price or billing period afterwards.
 
   you can opt to publish subscription later but still it must be done
-  eventually - no account (even test one) can purchase a subscription until it's
-  published (see `test with a real subscription` section).
+  eventually - no account (even a test one) can purchase a subscription until
+  it's published (see `test with a real subscription` section).
 
 - `Pricing` (combobox): `Import from pricing template` →
   `RUB 149.00 - Подписка на месяц` → `IMPORT` (button)

@@ -69,7 +69,7 @@ release) - not by current environment.
   ```diff
     const LOCALHOST = Platform.OS === 'ios'
   -   ? 'http://localhost:3000'
-  +   ? 'http://192.168.0.36:3000'
+  +   ? 'http://192.168.0.50:3000'
       : 'http://10.0.2.2:3000';
   ```
 
@@ -78,7 +78,7 @@ release) - not by current environment.
   ```diff
     const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
   -   ? 'http://localhost:3000'
-  +   ? 'http://192.168.0.36:3000'
+  +   ? 'http://192.168.0.50:3000'
       : 'http://10.0.2.2:3000';
   ```
 

@@ -24,20 +24,20 @@ NOTE: all the notes below are true for both iOS and Android.
 
 NOTE: APKs and TestFlight builds are always built in release mode.
 
-mode is a build configuration in Xcode parlance.
+mode is called a build configuration in Xcode parlance.
 
-- in debug mode:
+- debug mode:
 
-  - `__DEV__` variable is set to true
+  - `__DEV__` variable is set to `true`
   - Developer Menu is available - shake real device to access it (or press Menu
     button on Android devices if it's available)
   - hot reloading works as a rule (use live reload if it doesn't)
   - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu to
     open React Native Debugger
 
-- in release mode:
+- release mode:
 
-  - `__DEV__` variable is set to false
+  - `__DEV__` variable is set to `false`
   - Developer Menu is not available
   - hot reloading and live reload don't work
   - you cannot debug JS remotely

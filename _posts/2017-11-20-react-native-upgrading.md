@@ -167,6 +167,13 @@ I tried to upgrade RN from 0.52.1 to 0.59.9 with `rn-diff-purge`.
 > react-native-git-upgrade is painful. A simple diff by recreating the project
 > is a much much simpler way to get a diff on every new React Native release.
 
+**_UPDATE (2019-08-09)_**
+
+[1]: <https://react-native-community.github.io/upgrade-helper/>
+
+use [Upgrade Helper][1] instead - it's a convenient web tool that works on top
+of `rn-diff-purge` (and provides some extra features).
+
 ### upgrade react and react-native dependencies
 
 ```sh

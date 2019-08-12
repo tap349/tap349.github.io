@@ -150,7 +150,7 @@ with special characteristics and behaviour for sandbox testers.
 
 subscription status check (includes loading products, fetching and validating
 receipt) can be performed in `development` environment and without adding any
-sandbox users.
+sandbox users - just run application in debug mode on real device.
 
 make sure subscription status is not disabled for `development` environment
 programmatically (in `DaemonHelpers.updateSubscriptionStatus()` in my case).

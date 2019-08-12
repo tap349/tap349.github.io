@@ -178,7 +178,7 @@ NOTE: you can't set up subscription until you upload APK with IAB permission
 | GPC                                                                                                       |
 | --------------------------------------------------------------------------------------------------------- |
 | `All applications` → `<MY_APP>`                                                                           |
-| `Store presence` (left menu) → `In-app products` → `SUBSCRIPTIONS` (tab) → `CREATE SUBSCRIPTION` (button) |
+| `Store presence` (left menu) → `In-app products` → `Subscriptions` (tab) → `+ Create subscription` (button) |
 
 - `Product ID` (input): `com.iceperk.iceperkapp.sub.noads.monthly`
 - `Title` (input): `Скрытие рекламы на месяц`
@@ -328,7 +328,7 @@ test subscriptions:
 test subscriptions are not created separately - they are real subscriptions but
 with special characteristics and behaviour for license testers.
 
-=> it's required to create and publish a real subscription in GP as described
+=> it's required to create and publish a real subscription in GPC as described
 above (application itself may stay unpublished).
 
 <https://developer.android.com/google/play/billing/billing_admin.html#billing-form-add>:
@@ -490,6 +490,11 @@ TODO: previous statement should be double-checked (and find its source).
   **_UPDATE_**
 
   `isSubscribed` is eventually false 2 days later.
+
+- `Details was not found`
+
+  subscription is not set up for current locale in GPC (say, it might work in
+  `ru-RU` locale but not in `en-US` locale).
 
 ### testing with real subscriptions
 

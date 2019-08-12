@@ -146,6 +146,15 @@ with special characteristics and behaviour for sandbox testers.
 
 ### sandbox testing
 
+#### subscription status check
+
+subscription status check (includes loading products, fetching and validating
+receipt) can be performed in `development` environment and without adding any
+sandbox users.
+
+make sure subscription status is not disabled for `development` environment
+programmatically (in `DaemonHelpers.updateSubscriptionStatus()` in my case).
+
 #### add sandbox testers (sandbox tester accounts)
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>

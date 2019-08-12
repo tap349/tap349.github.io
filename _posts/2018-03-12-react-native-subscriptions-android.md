@@ -227,7 +227,10 @@ RESPONSES.
 > application on a device, log into the device, and make billing requests using
 > the reserved product IDs.
 
-reserved product IDs:
+#### use reserved product ID
+
+replace real product ID (`com.iceperk.iceperkapp.sub.noads.monthly`) with one of
+reserved ones:
 
 - android.test.purchased
 - android.test.canceled

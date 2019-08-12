@@ -146,18 +146,12 @@ with special characteristics and behaviour for sandbox testers.
 
 ### sandbox testing
 
-#### subscription status check
-
-subscription status check (includes loading products, fetching and validating
-receipt) can be performed in `development` environment and without adding any
-sandbox users - just run application in debug mode on real device.
-
-make sure subscription status is not disabled for `development` environment
-programmatically (in `DaemonHelpers.updateSubscriptionStatus()` in my case).
-
 #### add sandbox testers (sandbox tester accounts)
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
+
+NOTE: it's not required to use sandbox testers to check subscription status
+(skip this section if all you want is to check subscription status).
 
 | IC                                                                  |
 | ------------------------------------------------------------------- |
@@ -210,25 +204,27 @@ in the end I could make a purchase using not verified sandbox tester account.
 I have successfully verified email of another sandbox tester - most likely it
 was temporary technical problem on Apple side.
 
-#### set either development or production environment in application
+#### set environment in application
 
-it's possible to purchase test subscriptions in both `development` and
-`production` environments but read the caveats about validating receipt from
-sandbox tester in `production` environment in the next section.
+sandbox tester can purchase a test subscription in `production` environment but
+subscription status cannot be checked since sandbox receipt cannot be validated
+in `production` environment (see `troubleshooting` section for details):
 
-NOTE: there were lots of `Network request failed` errors when trying to purchase
-a test subscription - so keep on trying.
+- test subscriptions can be purchased in both `development` and `production`
+  environments
+- subscription status can be checked in `development` environment only
+
+  make sure checking subscription status is not disabled for `development`
+  environment (in `DaemonHelpers.updateSubscriptionStatus()` in my case).
+
+NOTE: there were lots of `Network request failed` errors when purchasing a test
+subscription => keep on trying.
 
 #### run application on real device
 
 <!-- prettier-ignore -->
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 2. <http://pinkstone.co.uk/deploying-your-app-from-xcode-to-a-device-with-release-build-configuration/>
-
-sandbox tester can purchase a subscription in production release but
-subscription status cannot be checked because sandbox receipt cannot be
-validated in `production` environment (see `troubleshooting` section below for
-details).
 
 - run application in debug mode (default build configuration)
 
@@ -324,7 +320,7 @@ details).
   function of `iap-receipt-validator` package when trying to validate receipt of
   sandbox tester.
 
-  so switch to `development` environment or send `development` environment to
+  => switch to `development` environment or send `development` environment to
   `iapReceiptValidator` function regardless of current environment.
 
 - checking subscription status always fails in production release
@@ -385,7 +381,7 @@ testers they:
 - deal with test subscriptions only (shortened periods, etc.)
 - are not charged when making IAP
 
-NOTE: beta testers can't buy subscription even if it's approved it IC.
+NOTE: beta testers can't buy subscription even if it's approved in IC.
 
 #### install application from TestFlight
 

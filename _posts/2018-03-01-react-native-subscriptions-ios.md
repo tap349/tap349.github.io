@@ -150,10 +150,9 @@ with special characteristics and behaviour for sandbox testers.
 
 1. <https://support.magplus.com/hc/en-us/articles/203809008-iOS-How-to-Test-In-App-Purchases-in-Your-App>
 
-| IC                                                      |
-| ------------------------------------------------------- |
-| `My Apps` → `Users and Roles` → `Sandbox Testers` (tab) |
-| `Testers` (section) → `⨁` (link)                        |
+| IC                                                                  |
+| ------------------------------------------------------------------- |
+| `Users and Access` → `Sandbox` → `Testers` (left menu) → `⨁` (link) |
 
 tips and notes regarding sandbox tester:
 

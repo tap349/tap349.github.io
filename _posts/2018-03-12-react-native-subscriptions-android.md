@@ -355,7 +355,7 @@ it's not required that license test account is linked to a valid payment method
 (I could make a test purchase without any linked payment method).
 
 if user is registered as both license and alpha tester, being a license tester
-has priority: he'll be offered to purchase test subscription only.
+has priority: he'll be offered to purchase a test subscription only.
 
 NOTE: license test account must be a primary account on real device!
 
@@ -383,9 +383,8 @@ _android/app/build.gradle_.
 
 #### set either development or production environment in application
 
-it's possible to purchase test subscriptions in both `development` and
-`production` environments (see the next section) - just don't forget to forward
-ports in `development`.
+test subscriptions can be purchased in both `development` and `production`
+environments - just don't forget to forward ports in `development` environment.
 
 #### run or install application on real device
 

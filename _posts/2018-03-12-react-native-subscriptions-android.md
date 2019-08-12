@@ -227,6 +227,11 @@ RESPONSES.
 > application on a device, log into the device, and make billing requests using
 > the reserved product IDs.
 
+**_UPDATE (2019-08-13)_**
+
+I couldn't manage to make static responses work - stick to testing with test or
+real subscriptions.
+
 #### use reserved product ID
 
 replace real product ID (`com.iceperk.iceperkapp.sub.noads.monthly`) with one of
@@ -371,8 +376,10 @@ see `include license key in application build` section.
 #### uninstall existing application from real device
 
 it's necessary to uninstall application from device beforehand or else you'll
-get either `INSTALL_FAILED_DUPLICATE_PERMISSION` or
-`INSTALL_FAILED_ALREADY_EXISTS` error:
+get one of these errors:
+
+- `INSTALL_FAILED_DUPLICATE_PERMISSION` or
+- `INSTALL_FAILED_ALREADY_EXISTS`
 
 ```sh
 $ adb uninstall com.iceperkapp
@@ -381,7 +388,7 @@ $ adb uninstall com.iceperkapp
 NOTE: `com.iceperkapp` is both package name and `applicationId` from
 _android/app/build.gradle_.
 
-#### set either development or production environment in application
+#### set environment in application
 
 test subscriptions can be purchased in both `development` and `production`
 environments - just don't forget to forward ports in `development` environment.
@@ -394,7 +401,7 @@ environments - just don't forget to forward ports in `development` environment.
 NOTE: application (being installed now) and APK (uploaded to GPC) must have the
 same version name and build number.
 
-TODO: previous statement should be checked (and find its source).
+TODO: previous statement should be double-checked (and find its source).
 
 - run application in debug mode
 

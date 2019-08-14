@@ -64,18 +64,18 @@ release) - not by current environment.
   change server address for development environment: development server is now
   available by notebook's local IP address - not `localhost`.
 
-  _app/api/ApiHelpers.js_:
-
   ```diff
+    // app/api/ApiHelpers.js
+
     const LOCALHOST = Platform.OS === 'ios'
   -   ? 'http://localhost:3000'
   +   ? 'http://192.168.0.50:3000'
       : 'http://10.0.2.2:3000';
   ```
 
-  _app/api/graphql/run.js_:
-
   ```diff
+    // app/api/graphql/run.js
+
     const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
   -   ? 'http://localhost:3000'
   +   ? 'http://192.168.0.50:3000'
@@ -141,18 +141,18 @@ release) - not by current environment.
   now available by both `localhost` and notebook's local IP address (but not
   `10.0.2.2` or `10.0.3.2` - like in case of emulator).
 
-  _app/api/ApiHelpers.js_:
-
   ```diff
+    // app/api/ApiHelpers.js
+
     const LOCALHOST = Platform.OS === 'ios'
       ? 'http://localhost:3000'
   -   : 'http://10.0.2.2:3000';
   +   : 'http://localhost:3000';
   ```
 
-  _app/api/graphql/run.js_:
-
   ```diff
+    // app/api/graphql/run.js
+
     const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
       ? 'http://localhost:3000'
   -   : 'http://10.0.2.2:3000';
@@ -164,3 +164,32 @@ release) - not by current environment.
   running `react-native run-android` will install application on all devices
   listed in `adb devices` output - say, both real device and emulator (it's safe
   to close emulator).
+
+## troubleshooting
+
+### notebook's local IP is unreachable
+
+IDK why it happens - maybe because of some router settings.
+
+**solution**
+
+use ngrok (not tested for Android - anyway `localhost` should work thanks to
+port forwarding):
+
+```diff
+  // app/api/ApiHelpers.js
+
+  const LOCALHOST = Platform.OS === 'ios'
+-   ? 'http://localhost:3000'
++   ? 'http://b27357e9.ngrok.io'
+    : 'http://localhost:3000';
+```
+
+```diff
+  // app/api/graphql/run.js
+
+  const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
+-   ? 'http://localhost:3000'
++   ? 'http://b27357e9.ngrok.io'
+    : 'http://localhost:3000';
+```

@@ -175,9 +175,9 @@ about `Add applicable tax on top of price` tax option:
 NOTE: you can't set up subscription until you upload APK with IAB permission
 (see `upload APK to alpha` section).
 
-| GPC                                                                                                       |
-| --------------------------------------------------------------------------------------------------------- |
-| `All applications` → `<MY_APP>`                                                                           |
+| GPC                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------- |
+| `All applications` → `<MY_APP>`                                                                             |
 | `Store presence` (left menu) → `In-app products` → `Subscriptions` (tab) → `+ Create subscription` (button) |
 
 - `Product ID` (input): `com.iceperk.iceperkapp.sub.noads.monthly`

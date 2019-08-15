@@ -66,7 +66,7 @@ inside _mix.exs_).
 tips
 ----
 
-### todo list when adding new child application
+### todo list when adding a new child application
 
 - Ansible: create _prod.secret.exs_ (umbrella application role)
 - Distillery: add to release (_rel/config.exs_)

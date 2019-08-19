@@ -71,7 +71,7 @@ tips
 - Ansible: create _prod.secret.exs_ (umbrella application role)
 - Distillery: add to release (_rel/config.exs_)
 - Distillery: add repo (`ReleaseTasks` module)
-- Bootleg: symlink _prod.secret.exs_ (_config/deploy/production.exs_)
+- Bootleg: symlink _prod.secret.exs_ (_config/deploy.exs_)
 - CircleCI: create _test.secret.exs_ for both stages (_.circleci/config.yml_)
 
 configuration

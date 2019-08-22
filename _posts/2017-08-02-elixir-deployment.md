@@ -720,6 +720,8 @@ production host:
 ```elixir
 # lib/reika/release_tasks.ex
 
+# https://hexdocs.pm/mix/Mix.Tasks.Release.html#module-one-off-commands-eval-and-rpc
+# https://hexdocs.pm/distillery/guides/running_migrations.html
 defmodule Reika.ReleaseTasks do
   @start_apps [
     :crypto,
@@ -734,7 +736,6 @@ defmodule Reika.ReleaseTasks do
   @es_cluster Reika.ES.Cluster
   @es_indexes [:reika_shops]
 
-  # https://hexdocs.pm/distillery/guides/running_migrations.html
   def migrate do
     start_apps()
     start_repos()

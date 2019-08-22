@@ -736,7 +736,7 @@ defmodule Reika.ReleaseTasks do
   @es_cluster Reika.ES.Cluster
   @es_indexes [:reika_shops]
 
-  def migrate do
+  def eval_migrate do
     # configuration of apps is not available unless they are loaded
     start_apps()
     start_repos()
@@ -836,7 +836,7 @@ on production host:
 
 ```sh
 $ bin/reika stop
-$ bin/reika command Elixir.Reika.ReleaseTasks migrate
+$ bin/reika eval "Elixir.Reika.ReleaseTasks.eval_migrate()"
 ```
 
 locations on production host

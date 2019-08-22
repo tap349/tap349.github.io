@@ -721,7 +721,6 @@ production host:
 # lib/reika/release_tasks.ex
 
 # https://hexdocs.pm/mix/Mix.Tasks.Release.html#module-one-off-commands-eval-and-rpc
-# https://hexdocs.pm/distillery/guides/running_migrations.html
 defmodule Reika.ReleaseTasks do
   @start_apps [
     :crypto,
@@ -736,6 +735,7 @@ defmodule Reika.ReleaseTasks do
   @es_cluster Reika.ES.Cluster
   @es_indexes [:reika_shops]
 
+  # https://hexdocs.pm/distillery/guides/running_migrations.html
   def eval_migrate do
     # configuration of apps is not available unless they are loaded
     start_apps()
@@ -748,7 +748,8 @@ defmodule Reika.ReleaseTasks do
   end
 
   # https://hexdocs.pm/elasticsearch/distillery.html
-  def build_es_indexes do
+  def eval_build_es_indexes do
+    # configuration of apps is not available unless they are loaded
     start_apps()
     start_repos()
     start_es_cluster()

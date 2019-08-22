@@ -737,6 +737,7 @@ defmodule Reika.ReleaseTasks do
   @es_indexes [:reika_shops]
 
   def migrate do
+    # configuration of apps is not available unless they are loaded
     start_apps()
     start_repos()
 

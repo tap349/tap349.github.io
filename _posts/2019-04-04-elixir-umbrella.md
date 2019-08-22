@@ -68,11 +68,18 @@ tips
 
 ### todo list when adding a new child application
 
+when using Distillery releases:
+
 - Ansible: create _prod.secret.exs_ (umbrella application role)
 - Distillery: add to release (_rel/config.exs_)
 - Distillery: add repo (`ReleaseTasks` module)
 - Bootleg: symlink _prod.secret.exs_ (_config/deploy.exs_)
 - CircleCI: create _test.secret.exs_ for both stages (_.circleci/config.yml_)
+
+when using Elixir releases:
+
+- Release: add to release (_mix.exs_)
+- Release: add to child apps (`ReleaseTasks` module)
 
 configuration
 -------------

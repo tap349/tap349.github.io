@@ -1275,9 +1275,3 @@ info Android module "react-native-flurry-sdk" is already linked
 ? Do you need to integrate Flurry Push? No
 Flurry: libReactNativeFlurry.a is successfully linked to project.
 ```
-
-run application:
-
-```sh
-$ react-native run-ios
-```

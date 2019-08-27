@@ -124,3 +124,11 @@ export default class App extends Component {
 > Yes, the original store.dispatch() function is 100% synchronous, and when it
 > returns the state has been updated. Any asynchronicity happens if middleware
 > intercept the action and do something different.
+
+## `__DEV__`
+
+> <https://stackoverflow.com/a/33264515/3632318>
+>
+> You can use the **DEV** global variable in JavaScript to determine if you're
+> using React Native packager or not. If you are running your app in the iOS
+> Simulator or Android emulator **DEV** will be set to true.

@@ -1247,3 +1247,37 @@ $ react-native run-ios
 > <https://github.com/flurry/react-native-flurry-sdk/issues/14#issuecomment-517790903>
 >
 > If you are not using CocoaPods, please stick to react-native-flurry-sdk@3.7.0.
+
+### info duplicate symbol _OBJC_CLASS_$_ReactNativeFlurry
+
+```
+$ react-native run-ios
+...
+info duplicate symbol _OBJC_CLASS_$_ReactNativeFlurry in:
+    <APP_DIR>/ios/build/iceperkapp/Build/Products/Debug-iphonesimulator/libReactNativeFlurry.a(ReactNativeFlurry.o)
+    <APP_DIR>/ios/build/iceperkapp/Build/Products/Debug-iphonesimulator/libReactNativeFlurryWithMessaging.a(ReactNativeFlurry.o)
+...
+info ld: 920 duplicate symbols for architecture i386
+```
+
+**solution**
+
+> <https://github.com/react-native-community/react-native-maps/issues/718#issuecomment-256842449>
+>
+> First I made sure that react-native link goes on without an error.
+
+link `link react-native-flurry-sdk` again (I already did it before):
+
+```
+$ react-native link react-native-flurry-sdk
+info iOS module "react-native-flurry-sdk" is already linked
+info Android module "react-native-flurry-sdk" is already linked
+? Do you need to integrate Flurry Push? No
+Flurry: libReactNativeFlurry.a is successfully linked to project.
+```
+
+run application:
+
+```sh
+$ react-native run-ios
+```

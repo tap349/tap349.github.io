@@ -1228,3 +1228,22 @@ end
 $ cd ios
 $ pod install
 ```
+
+### 'Flurry.h' file not found
+
+error occurs after switching to `react-native-flurry-sdk` npm package (from
+`react-native-flurry-analytics`):
+
+```
+$ react-native run-ios
+...
+<APP_DIR>/node_modules/react-native-flurry-sdk/ios/ReactNativeFlurry/ReactNativeFlurry.m:23:9: fatal error: 'Flurry.h' file not found
+...
+<APP_DIR>/node_modules/react-native-flurry-sdk/ios/ReactNativeFlurry/ReactNativeFlurryConfigListener.h:23:9: fatal error: 'FConfig.h' file not found
+```
+
+**solution**
+
+> <https://github.com/flurry/react-native-flurry-sdk/issues/14#issuecomment-517790903>
+>
+> If you are not using CocoaPods, please stick to react-native-flurry-sdk@3.7.0.

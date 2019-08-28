@@ -1280,16 +1280,43 @@ Flurry: libReactNativeFlurry.a is successfully linked to project.
 
 application crashes on startup:
 
-```sh
+```
 $ react-native run-ios
-```
-
-```
 $ react-native log-ios
 ...
-Aug 28 10:41:11 MacBook-Pro-Personal iceperkapp[96992]: <Error>: *** Terminating app due to uncaught exception 'GADInvalidInitializationException', reason: 'The Google Mobile Ads SDK was initialized incorrectly. Google AdMob publishers should follow instructions here: https://googlemobileadssdk.page.link/admob-ios-update-plist to include the AppMeasurement framework, set the -ObjC linker flag, and set GADApplicationIdentifier with a valid App ID. Google Ad Manager publishers should follow instructions here: https://googlemobileadssdk.page.link/ad-manager-ios-update-plist'
+Aug 28 10:41:11 MacBook-Pro-Personal iceperkapp[96992]: <Error>: ***
+Terminating app due to uncaught exception 'GADInvalidInitializationException',
+reason: 'The Google Mobile Ads SDK was initialized incorrectly. Google AdMob
+publishers should follow instructions here:
+https://googlemobileadssdk.page.link/admob-ios-update-plist to include the
+AppMeasurement framework, set the -ObjC linker flag, and set
+GADApplicationIdentifier with a valid App ID. Google Ad Manager publishers
+should follow instructions here:
+https://googlemobileadssdk.page.link/ad-manager-ios-update-plist'
 ```
 
 **solution**
 
+`Google-Mobile-Ads-SDK` pod had been added to _ios/Podfile_ without specific
+version so it was updated I removed _ios/Podfile.lock_ and install pods from
+scratch.
 
+> <https://developers.google.com/ad-manager/mobile-ads-sdk/ios/quick-start#update_your_infoplist>
+>
+> Declare that your app is an Ad Manager app by adding the GADIsAdManagerApp
+> key with a boolean value YES to your app's Info.plist.
+>
+> This step is required as of Google Mobile Ads SDK version 7.42.0. Failure to
+> add add this Info.plist entry results in a crash with the message: "The
+> Google Mobile Ads SDK was initialized incorrectly."
+
+```diff
+  <!-- ios/iceperkapp/Info.plist -->
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
++   <key>GADIsAdManagerApp</key>
++   <true/>
+```

@@ -80,13 +80,13 @@ $ sudo -u postgres psql -U postgres DATABASE
 
   1. <https://stackoverflow.com/questions/760210>
 
-  grant all privileges:
+  grant all privileges on all tables:
 
   ```sql
   GRANT ALL ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
   ```
 
-  grant read-only access:
+  grant `SELECT` privilege (read-only access) on all tables:
 
   ```sql
   GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
@@ -94,13 +94,13 @@ $ sudo -u postgres psql -U postgres DATABASE
 
 - revoke privileges from user
 
-  revoke all privileges:
+  revoke all privileges on all tables:
 
   ```sql
   REVOKE ALL ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
   ```
 
-  revoke read-only access:
+  revoke `SELECT` privilege (read-only access) on all tables:
 
   ```sql
   REVOKE SELECT ON ALL TABLES IN SCHEMA PUBLIC TO reporter;

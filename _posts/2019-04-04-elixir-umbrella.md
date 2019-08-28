@@ -81,6 +81,15 @@ when using Elixir releases:
 - Release: add to release (_mix.exs_)
 - Release: add to child apps (`ReleaseTasks` module)
 
+in my case it's also necessary to grant `SELECT` privilege on new tables for
+`reporter` user after deployment:
+
+```
+$ psql -h localhost -U devops -d alice_prod
+...
+alice_prod=# GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+```
+
 configuration
 -------------
 

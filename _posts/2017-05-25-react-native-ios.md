@@ -1320,3 +1320,20 @@ scratch.
 +   <key>GADIsAdManagerApp</key>
 +   <true/>
 ```
+
+### `useNativeDriver` is not supported because the native animated module is missing
+
+emulator window:
+
+```
+Animated: `useNativeDriver` is not supported because the native animated module
+is missing. Falling back to JS-based animation. To resolve this, add
+`RCTAnimation` module to the app, or remove `useNativeDriver`. More info:
+https://github.com/facebook/react-native/issues/11094#issuecomment-263240420
+```
+
+**solution**
+
+> <https://github.com/facebook/react-native/issues/11094#issuecomment-263240420>
+>
+> drag and drop libRCTAnimation.a to Link Binary With Libraries

@@ -1275,3 +1275,21 @@ info Android module "react-native-flurry-sdk" is already linked
 ? Do you need to integrate Flurry Push? No
 Flurry: libReactNativeFlurry.a is successfully linked to project.
 ```
+
+### The Google Mobile Ads SDK was initialized incorrectly
+
+application crashes on startup:
+
+```sh
+$ react-native run-ios
+```
+
+```
+$ react-native log-ios
+...
+Aug 28 10:41:11 MacBook-Pro-Personal iceperkapp[96992]: <Error>: *** Terminating app due to uncaught exception 'GADInvalidInitializationException', reason: 'The Google Mobile Ads SDK was initialized incorrectly. Google AdMob publishers should follow instructions here: https://googlemobileadssdk.page.link/admob-ios-update-plist to include the AppMeasurement framework, set the -ObjC linker flag, and set GADApplicationIdentifier with a valid App ID. Google Ad Manager publishers should follow instructions here: https://googlemobileadssdk.page.link/ad-manager-ios-update-plist'
+```
+
+**solution**
+
+

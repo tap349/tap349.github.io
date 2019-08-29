@@ -245,7 +245,7 @@ or else it's possible to run sanity checks on real device instead of emulator
   > you want to quickly test or share an APK with someone else, you should
   > instead build an APK.
 
-- add enroll in app signing in GPC
+- enroll in app signing in GPC
 
   NOTE: this is done only once before uploading AAB for the first time.
 

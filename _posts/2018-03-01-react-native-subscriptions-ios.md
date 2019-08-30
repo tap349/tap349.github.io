@@ -226,33 +226,11 @@ subscription => keep on trying.
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 2. <http://pinkstone.co.uk/deploying-your-app-from-xcode-to-a-device-with-release-build-configuration/>
 
-- run application in debug mode (default build configuration)
+run application in Xcode (in debug or release mode):
 
-  | Xcode                                              |
-  | -------------------------------------------------- |
-  | `Product` (top menu) → `Scheme` → `Edit Scheme...` |
-  | `Run` (left menu) → `Info` (tab)                   |
-
-  - `Build Configuration` (combobox): `Debug`
-  - `Close` (button)
-
-  | Xcode                |
-  | -------------------- |
-  | `▶` (toolbar button) |
-
-- run application in release mode
-
-  | Xcode                                              |
-  | -------------------------------------------------- |
-  | `Product` (top menu) → `Scheme` → `Edit Scheme...` |
-  | `Run` (left menu) → `Info` (tab)                   |
-
-  - `Build Configuration` (combobox): `Release`
-  - `Close` (button)
-
-  | Xcode                |
-  | -------------------- |
-  | `▶` (toolbar button) |
+| Xcode                |
+| -------------------- |
+| `▶` (toolbar button) |
 
 #### troubleshooting
 

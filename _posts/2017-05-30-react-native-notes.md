@@ -132,3 +132,52 @@ export default class App extends Component {
 > You can use the **DEV** global variable in JavaScript to determine if you're
 > using React Native packager or not. If you are running your app in the iOS
 > Simulator or Android emulator **DEV** will be set to true.
+
+## debug and release modes
+
+NOTE: APKs and TestFlight builds are always built in release mode.
+
+all the notes below are true for both iOS and Android:
+
+- debug mode:
+
+  - `__DEV__` variable is set to `true`
+  - Developer Menu is available - shake real device to access it (or press Menu
+    button on Android devices if it's available)
+  - hot reloading works as a rule (use live reload if it doesn't)
+  - you can debug JS remotely - select `Debug JS Remotely` in Developer Menu to
+    open React Native Debugger
+
+- release mode:
+
+  - `__DEV__` variable is set to `false`
+  - Developer Menu is not available
+  - hot reloading and live reload don't work
+  - you cannot debug JS remotely
+
+the value of `__DEV__` variable is determined by current mode - not by current
+environment.
+
+all possible combinations of environment and mode are:
+
+- development + debug
+- production + debug
+- production + release
+
+**_UPDATE (2019-08-30)_**
+
+it has turned out current mode greatly affects how application behaves - error
+in production sometimes can be reproduced after switching to release mode only
+(and conversely - it might be ignored in debug mode).
+
+### iOS
+
+mode is called a build configuration in Xcode parlance:
+
+| Xcode                                              |
+| -------------------------------------------------- |
+| `Product` (top menu) → `Scheme` → `Edit Scheme...` |
+| `Run` (left menu) → `Info` (tab)                   |
+
+- `Build Configuration` (combobox): `Debug`/`Release`
+- `Close` (button)

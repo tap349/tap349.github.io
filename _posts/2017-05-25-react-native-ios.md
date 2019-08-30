@@ -909,7 +909,7 @@ or else edit _Info.plist_ in Xcode:
 
 the error occurred after updating Xcode from 8.2.1 to 9.2.
 
-```sh
+```
 $ react-native run-ios
 ...
 instruments[2536:17017] [MT] DVTPlugInLoading: Failed to load code for plug-in com.apple.xray.discovery.mobiledevice (/Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/XRMobileDeviceDiscoveryPlugIn.xrplugin), error = Error Domain=NSCocoaErrorDomain Code=3587 "dlopen_preflight(/Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/XRMobileDeviceDiscoveryPlugIn.xrplugin/Contents/MacOS/XRMobileDeviceDiscoveryPlugIn): Library not loaded: /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator
@@ -1095,7 +1095,7 @@ use it as a global platform for your project in _ios/Podfile_:
 
 ### Could not find iPhone 6 simulator
 
-```sh
+```
 $ react-native run-ios
 Scanning folders for symlinks in <APP_DIR>/node_modules (13ms)
 Found Xcode workspace iceperkapp.xcworkspace
@@ -1337,3 +1337,26 @@ https://github.com/facebook/react-native/issues/11094#issuecomment-263240420
 > <https://github.com/facebook/react-native/issues/11094#issuecomment-263240420>
 >
 > drag and drop libRCTAnimation.a to Link Binary With Libraries
+
+### Requiring unknown module "./locale/de"
+
+application crashes on startup after changing system language to German (in
+production and when run inside Xcode in release mode):
+
+```
+iceperkapp[3682:961450] Unhandled JS Exception: Requiring unknown module "./locale/de".
+[error][tid:com.facebook.react.JavaScript] Requiring unknown module "./locale/de".
+iceperkapp[3682:961413] Requiring unknown module "./locale/de".
+iceperkapp[3682:961450] *** Terminating app due to uncaught exception
+  'RCTFatalException: Unhandled JS Exception: Requiring unknown module
+  "./locale/de".', reason: 'Unhandled JS Exception: Requiring unknown module
+  "./locale/de"., stack:
+```
+
+**solution**
+
+error message is self-explanatory and it's quite obvious how to fix the error.
+what's interesting is that it couldn't be reproduced in emulator and on real
+device while application was running in debug mode - only after switching to
+release mode did application start to crash which allowed to see crash log in
+Xcode and fix the error.

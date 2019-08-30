@@ -168,7 +168,8 @@ all possible combinations of environment and mode are:
 
 it has turned out current mode greatly affects how application behaves - error
 in production sometimes can be reproduced after switching to release mode only
-(and conversely - it might be ignored in debug mode).
+(and conversely - it might be ignored in debug mode) => switch to release mode
+to fully emulate production environment.
 
 ### iOS
 

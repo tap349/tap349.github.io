@@ -190,7 +190,7 @@ or else it's possible to run sanity checks on real device instead of emulator
   - go to `App Store` tab
   - click `⨁ VERSION OR PLATFORM` link → `iOS` (popup menu)
   - enter new `Store Version Number` (say, 3.16) in popup window
-  - fill `What's New in This Version` section
+  - fill `What's New in This Version` section (for each supported language)
   - screenshots must be added for iPhone 6.5" and iPhone 5.5" Displays
   - select new build
   - select `Automatically release this version` option
@@ -318,7 +318,8 @@ or else it's possible to run sanity checks on real device instead of emulator
 
   - `BROWSE_FILES` (button) → add new AAB
   - `Release name` (input): `3.16` (for example)
-  - `What's new in this release?` (textarea): release notes
+  - `What's new in this release?` (textarea): enter release notes (for each
+    supported language)
   - `SAVE` (button) → `REVIEW` (button)
 
   > Confirm rollout to production: 3.16

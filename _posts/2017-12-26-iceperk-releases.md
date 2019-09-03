@@ -35,11 +35,9 @@ say, new release branch name is `release_3_16`.
 
 NOTE: branches can be merged manually or via PR.
 
-- [`iceperk`] merge `release_3_16` branch into `develop` branch
-  - PR name: `Develop (Release 3.16)`
-- [`iceperk`] merge `develop` branch into `master` branch
-  - PR name: `Master (Release 3.16)`
-- [`iceperkapp`] don't merge `release_3_16` branch into `develop` branch so far!
+- [`iceperk`] merge `release_3_16` branch into `master` branch
+  - PR name: `Release 3.16`
+- [`iceperkapp`] don't merge `release_3_16` branch into `master` branch so far!
 
 ## test backend and new release
 
@@ -53,7 +51,7 @@ seed data for testing:
 
 this is to make sure nothing is broken for old releases.
 
-- [`iceperkapp`] switch to `develop` branch (previous release)
+- [`iceperkapp`] switch to `master` branch (previous release)
 - [`iceperkapp`] change environment to `development` in _Env.js_
 - [`iceperk`] switch to `master` branch
 - [`iceperk`] switch to production billing in _billing.yml_
@@ -78,11 +76,11 @@ this is to make sure nothing is broken for old releases.
 or else it's possible to run sanity checks on real device instead of emulator
 (using a test build).
 
-## GitHub (part 2): merge iceperkapp release branch into develop branch
+## GitHub (part 2): merge iceperkapp release branch into master branch
 
-- [`iceperkapp`] merge `release_3_16` branch into `develop` branch
-  - PR name: `Develop (Release 3.16)`
-- [`iceperkapp`] switch to `develop` branch (we use it to build releases)
+- [`iceperkapp`] merge `release_3_16` branch into `master` branch
+  - PR name: `Release 3.16`
+- [`iceperkapp`] switch to `master` branch (to build release next)
 
 ## prepare new release in iceperkapp
 
@@ -122,7 +120,7 @@ or else it's possible to run sanity checks on real device instead of emulator
     versionName "3.16"
     ```
 
-- commit changes and push to `develop` branch
+- commit changes and push to `master` branch
 
 ## build and publish new release
 
@@ -332,8 +330,6 @@ or else it's possible to run sanity checks on real device instead of emulator
 this is done AFTER release is published in both stores and all seems to be
 working okay:
 
-- [`iceperkapp`] merge `develop` branch into `master` branch
-  - PR name: `Master (Release 3.16)`
 - [`iceperkapp`] create new release on GitHub
 
   | GitHub                                                                                  |
@@ -347,9 +343,9 @@ working okay:
     Google Play Store
   - `Publish release` (button)
 
-- [`iceperk`] create and push branch for new release from `develop` branch (say,
+- [`iceperk`] create and push branch for new release from `master` branch (say,
   `release_3_17`)
-- [`iceperkapp`] create and push branch for new release from `develop` branch
+- [`iceperkapp`] create and push branch for new release from `master` branch
   (say, `release_3_17`)
 
 ## troubleshooting

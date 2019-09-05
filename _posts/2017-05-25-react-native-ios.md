@@ -1413,3 +1413,23 @@ Module RCTEventEmitter is not a registered callable module (calling receiveTouch
 ```sh
 $ react-native --reset-cache
 ```
+
+### Module AppRegistry is not a registered callable module
+
+emulator window:
+
+```
+Unhandled JS Exception: Module AppRegistry is not a registered callable module
+(calling runApplication)
+```
+
+**solution**
+
+> <https://github.com/facebook/react-native/issues/17724#issuecomment-360174492>
+>
+> This error often occurs when there is another problem with evaluating your JS
+> bundle earlier. Basically, there’s another error that is literally covered up
+> by the red box of this one.
+>
+> The developer experience could be better, but try checking the native device
+> logs for errors to see what happened before this AppRegistry error.

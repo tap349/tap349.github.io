@@ -170,8 +170,9 @@ I tried to upgrade RN from 0.52.1 to 0.59.9 with `rn-diff-purge`.
 **_UPDATE (2019-08-09)_**
 
 1. <https://github.com/react-native-community/upgrade-helper>
+2. <https://facebook.github.io/react-native/blog/2019/07/03/version-60#upgrade-helper>
 
-[1]: <https://react-native-community.github.io/upgrade-helper/>
+[1]: https://react-native-community.github.io/upgrade-helper/
 
 use [Upgrade Helper][1] instead - it's a convenient web tool that works on top
 of `rn-diff-purge` (and provides some extra features).
@@ -228,3 +229,27 @@ upgrade between multiple major versions and it turns into a nightmare.
 
 NOTE: the App Store and the Google Play Store shouldn't notice these are new
 applications so make sure to use the same identifiers and certificates.
+
+## upgrade notes
+
+### upgrading to RN 0.60.5
+
+1. <https://github.com/react-native-community/releases/blob/master/CHANGELOG.md#060>
+2. <https://facebook.github.io/react-native/blog/2019/07/03/version-60>
+
+- CLI autolinking
+
+  > <https://facebook.github.io/react-native/blog/2019/07/03/version-60#native-modules-are-now-autolinked>
+  >
+  > The team working on the React Native CLI has introduced major improvements
+  > to native module linking called autolinking! Most scenarios will not require
+  > the use of react-native link anymore. At the same time, the team overhauled
+  > the linking process in general. Be sure to `react-native unlink` any
+  > preexisting dependencies as mentioned in the docs above.
+
+  => now there's no need to link libraries manually - it's done automatically
+  when building the app.
+
+  for iOS remove all application pods from _ios/Podfile_ (`BVLinearGradient`,
+  `Picker`, `RNCAsyncStorage`, etc.) and run `pod install` - RN module pods will
+  be detected automatically..

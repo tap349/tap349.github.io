@@ -239,6 +239,8 @@ applications so make sure to use the same identifiers and certificates.
 
 - CLI autolinking
 
+  1. <https://github.com/react-native-community/cli/blob/master/docs/autolinking.md>
+
   > <https://facebook.github.io/react-native/blog/2019/07/03/version-60#native-modules-are-now-autolinked>
   >
   > The team working on the React Native CLI has introduced major improvements

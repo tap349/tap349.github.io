@@ -1157,7 +1157,7 @@ the link).
 
 - install Notification Service Extension without Cocoapods
 
-  1. <https://documentation.onesignal.com/docs/react-native-sdk-setup#section-without-cocoapods>
+  1. <https://documentation.onesignal.com/docs/react-native-sdk-setup-continued-without-cocoapods>
 
 ### Invalid bitcode version (Producer: '802.0.41.0_0' Reader: '800.0.42.1_0')
 

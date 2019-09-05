@@ -248,8 +248,12 @@ applications so make sure to use the same identifiers and certificates.
   > preexisting dependencies as mentioned in the docs above.
 
   => now there's no need to link libraries manually - it's done automatically
-  when building the app.
+  when building application.
 
   for iOS remove all application pods from _ios/Podfile_ (`BVLinearGradient`,
-  `Picker`, `RNCAsyncStorage`, etc.) and run `pod install` - RN module pods will
-  be detected automatically..
+  `Picker`, `RNCAsyncStorage`, etc.) and run `pod install` - these RN module
+  pods must be detected automatically.
+
+  however this is not the case with `OneSignalNotificationServiceExtension`
+  extension - I still had to link it manually in Xcode (select corresponding
+  target and add _libRCTOneSignal.a_ in `Link Binary With Libraries` section).

@@ -1248,7 +1248,7 @@ $ react-native run-ios
 >
 > If you are not using CocoaPods, please stick to react-native-flurry-sdk@3.7.0.
 
-### duplicate symbol
+### duplicate symbol _OBJC_CLASS_$_ReactNativeFlurry
 
 ```
 $ react-native run-ios
@@ -1260,7 +1260,23 @@ info duplicate symbol _OBJC_CLASS_$_ReactNativeFlurry in:
 info ld: 920 duplicate symbols for architecture i386
 ```
 
-or
+**solution**
+
+> <https://github.com/react-native-community/react-native-maps/issues/718#issuecomment-256842449>
+>
+> First I made sure that react-native link goes on without an error.
+
+make sure you've linked the library:
+
+```
+$ react-native link react-native-flurry-sdk
+info iOS module "react-native-flurry-sdk" is already linked
+info Android module "react-native-flurry-sdk" is already linked
+? Do you need to integrate Flurry Push? No
+Flurry: libReactNativeFlurry.a is successfully linked to project.
+```
+
+### [0.60.5] duplicate symbol _OBJC_IVAR_$_SentryUser._extra
 
 ```
 $ react-native run-ios
@@ -1273,39 +1289,21 @@ ld: 282 duplicate symbols for architecture i386
 
 **solution**
 
-- RN \< 0.60.0
+CLI autolinking is used RN 0.60+ => you don't link libraries manually now.
 
-  > <https://github.com/react-native-community/react-native-maps/issues/718#issuecomment-256842449>
-  >
-  > First I made sure that react-native link goes on without an error.
+in my case I replaced `react-native-sentry` with `@sentry/react-native` and
+there were identical static library files but with different names in build
+folder (_libRNSentry.a_ and _Sentry/libSentry.a_).
 
-  make sure you've linked the library:
+BTW running `Clean Build Folder` in Xcode didn't help - IDK what exactly it
+cleans but _ios/build/iceperkapp/Build/Products/Debug-iphonesimulator/_ was
+left intact.
 
-  ```
-  $ react-native link react-native-flurry-sdk
-  info iOS module "react-native-flurry-sdk" is already linked
-  info Android module "react-native-flurry-sdk" is already linked
-  ? Do you need to integrate Flurry Push? No
-  Flurry: libReactNativeFlurry.a is successfully linked to project.
-  ```
+removin iOS build folder helped:
 
-- RN >= 0.60.0
-
-  autolinking is used so you don't link libraries manually.
-
-  remove iOS build folder:
-
-  ```sh
-  $ rm -rf ios/build
-  ```
-
-  in my case I replaced `react-native-sentry` with `@sentry/react-native` and
-  there were identical static library files but with different names in build
-  folder (_libRNSentry.a_ and _Sentry/libSentry.a_).
-
-  BTW running `Clean Build Folder` in Xcode didn't help - IDK what exactly it
-  cleans but _ios/build/iceperkapp/Build/Products/Debug-iphonesimulator/_ was
-  left intact.
+```sh
+$ rm -rf ios/build
+```
 
 ### The Google Mobile Ads SDK was initialized incorrectly
 

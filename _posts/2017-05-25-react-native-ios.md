@@ -1397,3 +1397,19 @@ what's interesting is that it couldn't be reproduced in emulator and on real
 device while application was running in debug mode - only after switching to
 release mode did application start to crash which allowed to see crash log in
 Xcode and fix the error.
+
+### Module RCTEventEmitter is not a registered callable module
+
+emulator window:
+
+```
+Module RCTEventEmitter is not a registered callable module (calling receiveTouches)
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/57108272/3632318>
+
+```sh
+$ react-native --reset-cache
+```

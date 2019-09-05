@@ -150,7 +150,7 @@ alias npm_reset='\
 
 ```sh
 $ npm_reset
-$ npm start --reset-cache
+$ react-native start --reset-cache
 ```
 
 ### Yarn
@@ -171,7 +171,7 @@ alias yarn_reset='\
 
 ```sh
 $ yarn_reset
-$ yarn start --reset-cache
+$ react-native start --reset-cache
 ```
 
 (how to) update a package

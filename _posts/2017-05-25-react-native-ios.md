@@ -120,6 +120,14 @@ otherwise actual paddings, margins, etc. might be different from specified ones.
 
 ## tips
 
+### (how to) open application workspace in Xcode
+
+1. <https://facebook.github.io/react-native/blog/2019/07/03/version-60#cocoapods-by-default>
+
+```sh
+$ xed ios
+```
+
 ### (how to) clean project
 
 1. <https://stackoverflow.com/a/48019133/3632318>

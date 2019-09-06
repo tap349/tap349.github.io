@@ -1433,3 +1433,62 @@ Unhandled JS Exception: Module AppRegistry is not a registered callable module
 >
 > The developer experience could be better, but try checking the native device
 > logs for errors to see what happened before this AppRegistry error.
+
+### Native module cannot be null
+
+emulator window:
+
+```
+Unhandled JS Exception: Requiring module "index.js", which threw an exception:
+Invariant Violation: Native module cannot be null.
+```
+
+**solution**
+
+[1]: https://github.com/react-native-community/react-native-push-notification-ios#appdelegatem
+
+this error means that some library hasn't been properly linked and it can be any
+library which makes it hard to debug this error.
+
+I debugged it by creating a separate empty _App.js_ and importing packages one
+by one till I got the error above.
+
+it has turned out `react-native-push-notification` package was to blame.
+
+> <https://facebook.github.io/react-native/docs/pushnotificationios>
+>
+> PushNotificationIOS
+>
+> Deprecated. Use @react-native-community/push-notification-ios instead.
+
+in fact `react-native-push-notification` package already uses it as dependency
+but still it's necessary to add a correct pod in _Podfile_ - it's not detected
+automatically like other RN module pods:
+
+```diff
+  # ios/Podfile
+
+- pod 'React-RCTPushNotification', :path => '../node_modules/react-native/Libraries/PushNotificationIOS'
++ pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
+```
+
+```sh
+$ cd ios
+$ pod install
+```
+
+for application to build, it's also necessary to modify _AppDelegate.m_ as per
+instructions in [README][1]:
+
+```diff
+  // ios/iceperkapp/AppDelegate.m
+
+- #import "RCTPushNotificationManager.h"
++ #import <RNCPushNotificationIOS.h>
+
+  // and other changes
+```
+
+```sh
+$ react-native run-ios
+```

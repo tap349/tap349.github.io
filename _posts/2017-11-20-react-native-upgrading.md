@@ -259,3 +259,11 @@ applications so make sure to use the same identifiers and certificates.
   however this is not the case with `OneSignalNotificationServiceExtension`
   extension - I still had to link it manually in Xcode (select corresponding
   target and add _libRCTOneSignal.a_ in `Link Binary With Libraries` section).
+
+  not all packages support autolinking - first of all this concerns outdated
+  packages which haven't been updated for a while. in case of iOS they might
+  have no podspec => link such packages as usual - using `react-native link`:
+
+  ```sh
+  $ react-native link react-native-admob
+  ```

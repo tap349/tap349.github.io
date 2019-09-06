@@ -1292,6 +1292,11 @@ Execution failed for task ':app:processDebugManifest'.
 
 **solution**
 
+[1]: {% post_url 2019-09-06-react-native-060 %}
+
+error is caused by AndroidX libraries leaking into application dependencies -
+unless you upgrade RN to 0.60+, it's easier to force use of Android Support
+Libraries - see [2019-09-06-react-native-060][1] for details.
 
 ### Could not get unknown property 'android' for root project 'iceperkapp' of type org.gradle.api.Project
 

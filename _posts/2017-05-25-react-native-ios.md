@@ -1492,3 +1492,23 @@ instructions in [README][1]:
 ```sh
 $ react-native run-ios
 ```
+
+### "RNGADBannerView" was not found in the UIManager
+
+emulator window:
+
+```
+Invariant Violation: requireNativeComponent: "RNGADBannerView" was not found in
+the UIManager.
+```
+
+**solution**
+
+> <https://stackoverflow.com/a/57820761/3632318>
+>
+> it looks like react-native-admob package doesn't support autolinking
+> (introduced in React Native 0.60) - it's still necessary to link it manually
+
+```sh
+$ react-native link react-native-admob
+```

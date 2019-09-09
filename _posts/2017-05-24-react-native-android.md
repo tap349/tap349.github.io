@@ -1541,6 +1541,13 @@ $ keytool -genkey -v -keystore debug.keystore -storepass android \
   -validity 10000
 ```
 
+or else it might be possible to use production keystore in debug mode:
+
+```sh
+$ cd android/app
+$ cp <MY_APP>.keystore debug.keystore
+```
+
 ### [0.60.5] Program type already present: com.sbugert.rnadmob.BuildConfig
 
 ```

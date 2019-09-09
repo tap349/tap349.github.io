@@ -1527,7 +1527,7 @@ $ react-native run-android
 ...
 * What went wrong:
 Execution failed for task ':app:validateSigningDebug'.
-> Keystore file '/Users/tap/dev/compleader/iceperkapp/android/app/debug.keystore' not found for signing config 'debug'.
+> Keystore file '<APP_DIR>/android/app/debug.keystore' not found for signing config 'debug'.
 ```
 
 **solution**

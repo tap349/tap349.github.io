@@ -798,7 +798,7 @@ D8: Cannot fit requested classes in a single dex file (# methods: 66744 > 65536)
 
 ### [0.59.9] The Google Mobile Ads SDK was initialized incorrectly
 
-emulator:
+emulator window:
 
 ```
 Unfortunately, iceperkapp has stopped
@@ -836,7 +836,7 @@ $ adb logcat
 
 ### [0.59.9] Invalid application ID
 
-emulator:
+emulator window:
 
 ```
 Unfortunately, iceperkapp has stopped

@@ -1541,7 +1541,7 @@ $ keytool -genkey -v -keystore debug.keystore -storepass android \
   -validity 10000
 ```
 
-### Program type already present: com.sbugert.rnadmob.BuildConfig
+### [0.60.5] Program type already present: com.sbugert.rnadmob.BuildConfig
 
 ```
 $ react-native run-android
@@ -1571,3 +1571,25 @@ in my case `react-native-admob` (or `RNAdMob`) was referenced twice in:
 
 solution is to remove it completely everywhere (autolinking should handle it
 automatically).
+
+### [0.60.5] com.android.ddmlib.InstallException: INSTALL_FAILED_UPDATE_INCOMPATIBLE
+
+```
+$ react-native run-android
+...
+* What went wrong:
+Execution failed for task ':app:installDebug'.
+> com.android.builder.testing.api.DeviceException: com.android.ddmlib.InstallException: INSTALL_FAILED_UPDATE_INCOMPATIBLE
+```
+
+**solution**
+
+I generated debug keystore before - it's necessary to reinstall application:
+
+> <https://github.com/meteor/meteor/issues/5266#issuecomment-142789166>
+>
+> INSTALL_FAILED_UPDATE_INCOMPATIBLE is an Android error that means an apk
+> cannot be installed because its signature is incompatible with the currently
+> installed version. This happens when you try to update a signed release build
+> with a debug build for instance. The solution is to uninstall the existing app
+> from the device.

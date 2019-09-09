@@ -1546,6 +1546,7 @@ $ keytool -genkey -v -keystore debug.keystore -storepass android \
 ```
 $ react-native run-android
 ...
+* What went wrong:
 Execution failed for task ':app:transformClassesWithMultidexlistForDebug'.
 > com.android.build.api.transform.TransformException: Error while generating the main dex list:
   Error while merging dex archives:

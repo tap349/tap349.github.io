@@ -1540,3 +1540,33 @@ $ keytool -genkey -v -keystore debug.keystore -storepass android \
   -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 \
   -validity 10000
 ```
+
+### Program type already present: com.sbugert.rnadmob.BuildConfig
+
+```
+$ react-native run-android
+...
+Execution failed for task ':app:transformClassesWithMultidexlistForDebug'.
+> com.android.build.api.transform.TransformException: Error while generating the main dex list:
+  Error while merging dex archives:
+  Program type already present: com.sbugert.rnadmob.BuildConfig
+  Learn how to resolve the issue at https://developer.android.com/studio/build/dependencies#duplicate_classes.
+```
+
+**solution**
+
+> <https://developer.android.com/studio/build/dependencies#duplicate_classes>
+>
+> If a class appears more than once on the runtime classpath, you get an error
+> similar to the following:
+>
+> Program type already present com.example.MyClass
+
+in my case `react-native-admob` was referenced twice in:
+
+- _android/app/build.gradle_ (`implementation`)
+- _android/settings.gradle_ (`include`)
+- _android/app/src/main/java/com/iceperkapp/MainApplication.java_ (`import`)
+
+solution is to remove it completely everywhere (autolinking should handle it
+automatically).

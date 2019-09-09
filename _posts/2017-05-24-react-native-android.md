@@ -1562,7 +1562,7 @@ Execution failed for task ':app:transformClassesWithMultidexlistForDebug'.
 >
 > Program type already present com.example.MyClass
 
-in my case `react-native-admob` was referenced twice in:
+in my case `react-native-admob` (or `RNAdMob`) was referenced twice in:
 
 - _android/app/build.gradle_ (`implementation`)
 - _android/settings.gradle_ (`include`)

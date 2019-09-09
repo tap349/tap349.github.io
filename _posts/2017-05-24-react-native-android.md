@@ -1519,3 +1519,24 @@ multidex support wasn't properly configured:
 - public class MainApplication extends Application implements ReactApplication {
 + public class MainApplication extends MultiDexApplication implements ReactApplication {
 ```
+
+### [0.60.5] Keystore file '<APP_DIR>/android/app/debug.keystore' not found for signing config 'debug'
+
+```
+$ react-native run-android
+...
+* What went wrong:
+Execution failed for task ':app:validateSigningDebug'.
+> Keystore file '/Users/tap/dev/compleader/iceperkapp/android/app/debug.keystore' not found for signing config 'debug'.
+```
+
+**solution**
+
+1. <https://github.com/facebook/react-native/issues/25629#issuecomment-511209583>
+
+```sh
+$ cd android/app
+$ keytool -genkey -v -keystore debug.keystore -storepass android \
+  -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 \
+  -validity 10000
+```

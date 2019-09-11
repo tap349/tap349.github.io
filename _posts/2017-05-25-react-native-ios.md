@@ -1215,8 +1215,9 @@ Multiple commands produce '...libReact.a':
 > main project.
 >
 > Without this, you'd see errors when you archive like:
-> "Multiple commands produce ... libReact.a"
-> "Multiple commands produce ... libyoga.a"
+>
+> - "Multiple commands produce ... libReact.a"
+> - "Multiple commands produce ... libyoga.a"
 
 ```ruby
 # ios/Podfile

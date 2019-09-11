@@ -1637,7 +1637,46 @@ this variable is not interpolated for some reason when `:app:lintVitalRelease`
 task is run => hard-code multidex version:
 
 ```diff
+  // android/app/build.gradle
+
 - def multidex_version = "2.0.1"
 - implementation 'androidx.multidex:multidex:$multidex_version'
 + implementation 'androidx.multidex:multidex:2.0.1'
+```
+
+### [0.60.5] Could not find androidx.multidex:multidex:$multidex_version.
+
+```
+$ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
+$ build_apk
+...
+> Task :app:lintVitalRelease FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:lintVitalRelease'.
+> Could not resolve all artifacts for configuration ':react-native-image-picker:debugUnitTestRuntimeClasspath'.
+   > Could not resolve org.easytesting:fest-assert-core:2.0M10.
+     Required by:
+         project :react-native-image-picker
+      > Could not resolve org.easytesting:fest-assert-core:2.0M10.
+         > Could not get resource 'https://jitpack.io/org/easytesting/fest-assert-core/2.0M10/fest-assert-core-2.0M10.pom'.
+            > Could not GET 'https://jitpack.io/org/easytesting/fest-assert-core/2.0M10/fest-assert-core-2.0M10.pom'. Received status code 522 from server: Origin Connection Time-out
+```
+
+**solution**
+
+RN Upgrade Helper suggests adding JitPack repository but since it cannot be
+resolved the easiest solution is to remove it altogether:
+
+```diff
+  // android/build.gradle
+
+  allprojects {
+      repositories {
+-         maven { url "https://jitpack.io" }
+          // ...
+      }
+  }
 ```

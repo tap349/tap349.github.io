@@ -1600,3 +1600,44 @@ I generated debug keystore before - it's necessary to reinstall application:
 > installed version. This happens when you try to update a signed release build
 > with a debug build for instance. The solution is to uninstall the existing app
 > from the device.
+
+
+### [0.60.5] Could not find androidx.multidex:multidex:$multidex_version.
+
+```
+$ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
+$ build_apk
+...
+> Task :app:lintVitalRelease FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:lintVitalRelease'.
+> Could not resolve all artifacts for configuration ':app:debugUnitTestRuntimeClasspath'.
+   > Could not find androidx.multidex:multidex:$multidex_version.
+     Required by:
+         project :app
+```
+
+**solution**
+
+even though it's officially recommended to use `multidex_version` variable:
+
+> <https://developer.android.com/studio/build/multidex#mdex-pre-l>
+>
+> ```groovy
+> dependencies {
+>     def multidex_version = "2.0.1"
+>     implementation 'androidx.multidex:multidex:$multidex_version'
+> }
+> ```
+
+this variable is not interpolated for some reason when `:app:lintVitalRelease`
+task is run => hard-code multidex version:
+
+```diff
+- def multidex_version = "2.0.1"
+- implementation 'androidx.multidex:multidex:$multidex_version'
++ implementation 'androidx.multidex:multidex:2.0.1'
+```

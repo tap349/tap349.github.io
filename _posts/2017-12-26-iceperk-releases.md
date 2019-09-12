@@ -85,41 +85,8 @@ or else it's possible to run sanity checks on real device instead of emulator
 ## prepare new release in iceperkapp
 
 - change environment to `production` in _Env.js_ before generating releases
-- increment version number and build number in both iOS and Android projects
-
-  NOTE: these numbers might have been already changed right after creating
-  `release_3_16` branch.
-
-  - iOS
-
-    _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
-
-    ```xml
-    <key>CFBundleShortVersionString</key>
-    <string>3.16</string>
-    <!-- ... -->
-    <key>CFBundleVersion</key>
-    <string>96</string>
-    ```
-
-    don't forget to bump both numbers in _Info.plist_ files of all extensions
-    your iOS application contains (say, `OneSignalNotificationServiceExtension`)
-    or else you'll get `ITMS-90473` warnings (`CFBundleVersion Mismatch` and
-    `CFBundleShortVersionString Mismatch`) when uploading archive to the App
-    Store.
-
-  - Android
-
-    NOTE: it's possible to create releases with the same `versionName` (release
-    name in GPC) - you have to bump `versionCode` only (`Version code` in GPC).
-
-    _android/app/build.gradle_:
-
-    ```groovy
-    versionCode 96
-    versionName "3.16"
-    ```
-
+- make sure version number and build number are incremented in both iOS and
+  Android projects
 - commit changes and push to `master` branch
 
 ## build and publish new release
@@ -351,6 +318,39 @@ working okay:
   `release_3_17`)
 - [`iceperkapp`] create and push branch for new release from `master` branch
   (say, `release_3_17`)
+
+## increment version number and build number
+
+increment version number and build number in both iOS and Android projects.
+
+### iOS
+
+_ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):
+
+```xml
+<key>CFBundleShortVersionString</key>
+<string>3.16</string>
+<!-- ... -->
+<key>CFBundleVersion</key>
+<string>96</string>
+```
+
+don't forget to bump both numbers in _Info.plist_ files of all extensions your
+iOS application contains (say, `OneSignalNotificationServiceExtension`) or else
+you'll get `ITMS-90473` warnings (`CFBundleVersion Mismatch` and
+`CFBundleShortVersionString Mismatch`) when uploading archive to the App Store.
+
+### Android
+
+NOTE: it's possible to create releases with the same `versionName` (release name
+in GPC) - you have to bump `versionCode` only (`Version code` in GPC).
+
+_android/app/build.gradle_:
+
+```groovy
+versionCode 96
+versionName "3.16"
+```
 
 ## troubleshooting
 

@@ -187,7 +187,7 @@ or else it's possible to run sanity checks on real device instead of emulator
 
 - enroll in app signing in GPC
 
-  NOTE: this is done only once before uploading AAB for the first time.
+  this is done only once before uploading AAB for the first time.
 
   > <https://support.google.com/googleplay/android-developer/answer/7384423?hl=en>
   >

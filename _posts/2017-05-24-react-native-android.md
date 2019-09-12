@@ -1736,8 +1736,7 @@ don't set color directly on `Picker.Item` component:
 </Picker>
 ```
 
-while it works for iOS, setting `Picker.Item` color overrides colors for both
+while it works on iOS, setting `Picker.Item` color overrides colors for both
 `SpinnerItem` and `SpinnerDropDownItem` items from _res/values/styles.xml_ =>
 selected item and item from drop-down menu now have the same color (while we
 need different colors).
-

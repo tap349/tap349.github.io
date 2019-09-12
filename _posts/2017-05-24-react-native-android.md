@@ -1680,3 +1680,64 @@ resolved the easiest solution is to remove it altogether:
       }
   }
 ```
+
+### [0.60.5] font color of Picker.Item is always black
+
+```jsx
+import {Picker} from 'react-native';
+
+<Picker style={{color: '#FFF'}}>
+  {this.props.values.map((h, i) => (
+    <Picker.Item key={i} value={h} />
+  ))}
+</Picker>
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/39141949/3632318>
+
+> <https://stackoverflow.com/a/38989005/3632318>
+>
+> If you take a look at the style prop, it's the style for the Picker, not the
+> Picker items.
+>
+> You can also see from the docs that the Picker has itemStyle prop but it's
+> iOS only. Styling the Android Picker items can be done via native Android
+> only.
+
+```diff
+  <!-- android/app/src/main/res/values/styles.xml -->
+
+  <resources>
+      <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
++         <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
++         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
+      </style>
++     <style name="SpinnerItem">
++         <item name="android:textColor">#FFFFFF</item>
++         <item name="android:background">@null</item>
++         <item name="android:textSize">18sp</item>
++     </style>
++     <style name="SpinnerDropDownItem">
++         <item name="android:textColor">#000000</item>
++         <item name="android:background">@null</item>
++     </style>
+  </resources>
+```
+
+don't set color directly on `Picker.Item` component:
+
+```jsx
+<Picker style={{color: '#FFF'}}>
+  {this.props.values.map((h, i) => (
+    <Picker.Item key={i} color='#FFF' value={h} />
+  ))}
+</Picker>
+```
+
+while it works for iOS, setting `Picker.Item` color overrides colors for both
+`SpinnerItem` and `SpinnerDropDownItem` items from _res/values/styles.xml_ =>
+selected item and item from drop-down menu now have the same color (while we
+need different colors).
+

@@ -855,29 +855,3 @@ usage:
 - this._myComponentRef.getWrappedInstance().save();
 + this._myComponentRef.save();
 ```
-
-### [0.60.5] font color of Picker.Item is always black
-
-```jsx
-import {Picker} from 'react-native';
-
-<Picker style={{color: '#FFF'}}>
-  {this.props.values.map((h, i) => (
-    <Picker.Item key={i} value={h} />
-  ))}
-</Picker>
-```
-
-**solution**
-
-most likely `Picker.Item` no longer inherits its style from `Picker` component
-in RN 0.60 - now it's necessary to specify color for `Picker.Item` itself:
-
-```diff
-  <Picker style={{color: '#FFF'}}>
-    {this.props.values.map((h, i) => (
--     <Picker.Item key={i} value={h} />
-+     <Picker.Item key={i} color='#FFF' value={h} />
-    ))}
-  </Picker>
-```

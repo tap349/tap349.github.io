@@ -521,6 +521,55 @@ say, for `Nexus_5X_API_23_x86_64` AVD:
   $ emulator -avd Nexus_5X_API_23_x86_64 -memory 768
   ```
 
+### (how to) style native Picker
+
+1. <https://stackoverflow.com/a/39141949/3632318>
+
+> <https://stackoverflow.com/a/38989005/3632318>
+>
+> If you take a look at the style prop, it's the style for the Picker, not the
+> Picker items.
+>
+> You can also see from the docs that the Picker has itemStyle prop but it's
+> iOS only. Styling the Android Picker items can be done via native Android
+> only.
+
+```diff
+  <!-- android/app/src/main/res/values/styles.xml -->
+
+  <resources>
+      <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
++         <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
++         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
+      </style>
++     <style name="SpinnerItem">
++         <item name="android:textColor">#FFFFFF</item>
++         <item name="android:textSize">18sp</item>
++         <item name="android:background">@null</item>
++     </style>
++     <style name="SpinnerDropDownItem">
++         <item name="android:textColor">#000000</item>
++         <item name="android:background">@null</item>
++         <item name="android:padding">8dp</item>
++     </style>
+  </resources>
+```
+
+don't set color directly on `Picker.Item` component:
+
+```jsx
+<Picker style={{color: '#FFF'}}>
+  {this.props.values.map((h, i) => (
+    <Picker.Item key={i} color='#FFF' value={h} />
+  ))}
+</Picker>
+```
+
+while it works on iOS, setting `Picker.Item` color overrides colors for both
+`SpinnerItem` and `SpinnerDropDownItem` items from _res/values/styles.xml_ =>
+selected item and item from drop-down menu now have the same color (while we
+need different colors).
+
 ## debugging
 
 1. <https://facebook.github.io/react-native/docs/debugging.html>
@@ -1601,7 +1650,6 @@ I generated debug keystore before - it's necessary to reinstall application:
 > with a debug build for instance. The solution is to uninstall the existing app
 > from the device.
 
-
 ### [0.60.5] Could not find androidx.multidex:multidex:$multidex_version.
 
 ```
@@ -1695,48 +1743,4 @@ import {Picker} from 'react-native';
 
 **solution**
 
-1. <https://stackoverflow.com/a/39141949/3632318>
-
-> <https://stackoverflow.com/a/38989005/3632318>
->
-> If you take a look at the style prop, it's the style for the Picker, not the
-> Picker items.
->
-> You can also see from the docs that the Picker has itemStyle prop but it's
-> iOS only. Styling the Android Picker items can be done via native Android
-> only.
-
-```diff
-  <!-- android/app/src/main/res/values/styles.xml -->
-
-  <resources>
-      <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-+         <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
-+         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
-      </style>
-+     <style name="SpinnerItem">
-+         <item name="android:textColor">#FFFFFF</item>
-+         <item name="android:background">@null</item>
-+         <item name="android:textSize">18sp</item>
-+     </style>
-+     <style name="SpinnerDropDownItem">
-+         <item name="android:textColor">#000000</item>
-+         <item name="android:background">@null</item>
-+     </style>
-  </resources>
-```
-
-don't set color directly on `Picker.Item` component:
-
-```jsx
-<Picker style={{color: '#FFF'}}>
-  {this.props.values.map((h, i) => (
-    <Picker.Item key={i} color='#FFF' value={h} />
-  ))}
-</Picker>
-```
-
-while it works on iOS, setting `Picker.Item` color overrides colors for both
-`SpinnerItem` and `SpinnerDropDownItem` items from _res/values/styles.xml_ =>
-selected item and item from drop-down menu now have the same color (while we
-need different colors).
+see the tip on how to style native Picker.

@@ -200,6 +200,8 @@ or else it's possible to run sanity checks on real device instead of emulator
 
 ### Android
 
+#### one-time actions
+
 - add upload certificate and private key to sign releases
 
   this private key is used to sign releases (APK and AAB) locally - before
@@ -215,33 +217,6 @@ or else it's possible to run sanity checks on real device instead of emulator
 
   _iceperkkeystore.keystore_ is a Java keystore (contains both certificate and
   corresponding private key).
-
-- build APK (Android Package)
-
-  1. <https://developer.android.com/studio/build/building-cmdline#build_apk>
-
-  ```sh
-  $ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
-  $ build_apk
-  ```
-
-  APK is saved as _android/app/build/outputs/apk/app-release.apk_.
-
-- upload APK to Google Drive
-
-  | Google Drive                               |
-  | ------------------------------------------ |
-  | `Shared with me` → `ICEperk` → `AppBuilds` |
-
-  replace existing APK with a new one.
-
-- install APK on any Android device and run selective checks
-
-  > <https://developer.android.com/studio/build/building-cmdline#build_bundle>
-  >
-  > Unlike an APK, you can't deploy an app bundle directly to a device. So, if
-  > you want to quickly test or share an APK with someone else, you should
-  > instead build an APK.
 
 - enroll in app signing in GPC
 
@@ -279,6 +254,35 @@ or else it's possible to run sanity checks on real device instead of emulator
     `PRIVATE_KEY_FILE` is a private key path.
 
   - upload private key to GPC
+
+#### every time
+
+- build APK (Android Package)
+
+  1. <https://developer.android.com/studio/build/building-cmdline#build_apk>
+
+  ```sh
+  $ alias build_apk='cd android && ./gradlew assembleRelease; cd ..'
+  $ build_apk
+  ```
+
+  APK is saved as _android/app/build/outputs/apk/app-release.apk_.
+
+- upload APK to Google Drive
+
+  | Google Drive                               |
+  | ------------------------------------------ |
+  | `Shared with me` → `ICEperk` → `AppBuilds` |
+
+  replace existing APK with a new one.
+
+- install APK on any Android device and run selective checks
+
+  > <https://developer.android.com/studio/build/building-cmdline#build_bundle>
+  >
+  > Unlike an APK, you can't deploy an app bundle directly to a device. So, if
+  > you want to quickly test or share an APK with someone else, you should
+  > instead build an APK.
 
 - build AAB (Android App Bundle)
 

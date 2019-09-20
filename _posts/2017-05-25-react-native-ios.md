@@ -1257,7 +1257,7 @@ $ react-native run-ios
 >
 > If you are not using CocoaPods, please stick to react-native-flurry-sdk@3.7.0.
 
-### duplicate symbol _OBJC_CLASS_$_ReactNativeFlurry
+### duplicate symbol \_OBJC_CLASS_$_ReactNativeFlurry
 
 ```
 $ react-native run-ios

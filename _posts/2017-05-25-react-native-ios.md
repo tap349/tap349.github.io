@@ -1285,7 +1285,7 @@ info Android module "react-native-flurry-sdk" is already linked
 Flurry: libReactNativeFlurry.a is successfully linked to project.
 ```
 
-### [0.60.5] duplicate symbol _OBJC_IVAR_$_SentryUser._extra
+### [0.60.5] duplicate symbol \_OBJC_IVAR_$_SentryUser._extra
 
 ```
 $ react-native run-ios

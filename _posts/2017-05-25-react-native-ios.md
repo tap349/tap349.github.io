@@ -1308,7 +1308,7 @@ BTW running `Clean Build Folder` in Xcode didn't help - IDK what exactly it
 cleans but _ios/build/iceperkapp/Build/Products/Debug-iphonesimulator/_ was
 left intact.
 
-removin iOS build folder helped:
+removing iOS build folder helped:
 
 ```sh
 $ rm -rf ios/build

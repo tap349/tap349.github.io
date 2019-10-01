@@ -7,6 +7,8 @@ comments: true
 categories: [js, eslint, flow]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -20,8 +22,7 @@ see also [JavaScript - ESLint]({% post_url 2017-06-10-javascript-eslint %}).
 2. <https://github.com/facebook/flow>
 3. <https://github.com/ryyppy/flow-guide>
 
-installation
-------------
+## installation
 
 ### install Flow locally
 
@@ -64,7 +65,8 @@ plugins:
 <https://github.com/ryyppy/flow-guide#eslint-configuration>:
 
 > there will be some warnings about unused variables whenever you write type
-> declarations. The eslint plugin eslint-plugin-flowtype will mute those warnings.
+> declarations. The eslint plugin eslint-plugin-flowtype will mute those
+> warnings.
 
 I don't see any warnings mentioned above but this plugin is still useful: say,
 it adds ESLint rule to check for presence of Flow declaration (`// @flow`) if
@@ -79,13 +81,12 @@ Type annotations require valid Flow declaration.
 this rule `flowtype/no-types-missing-file-annotation` must be a part of
 recommended configuration (`plugin:flowtype/recommended`).
 
-`eslint-plugin-flowtype` plugin is ESLint plugin - it's not meant to check
-for Flow type errors or to show them! checking for type errors is performed
-by `flow` binary (use either `flow status` in terminal or `flow` syntastic
-JS checker in Vim).
+`eslint-plugin-flowtype` plugin is ESLint plugin - it's not meant to check for
+Flow type errors or to show them! checking for type errors is performed by
+`flow` binary (use either `flow status` in terminal or `flow` syntastic JS
+checker in Vim).
 
-configuration
--------------
+## configuration
 
 ### generate Flow config
 
@@ -95,22 +96,20 @@ $ yarn run flow init
 
 this will create empty _.flowconfig_ in the project root.
 
-usage
------
+## usage
 
 ### flag files to be checked with `// @flow`
 
-according to Flow documentation `@flow` annotation can
-be placed anywhere in JS file - it just instructs Flow
-to check current file.
+according to Flow documentation `@flow` annotation can be placed anywhere in JS
+file - it just instructs Flow to check current file.
 
-but in my case ONLY the files with `@flow` annotation
-at the very beginning of the file are checked by Flow.
+but in my case ONLY the files with `@flow` annotation at the very beginning of
+the file are checked by Flow.
 
 <https://github.com/facebook/flow/issues/3316>:
 
-it's possible to use `@flow weak` for weak mode -
-say, it allows not to specify types for all parameters.
+it's possible to use `@flow weak` for weak mode - say, it allows not to specify
+types for all parameters.
 
 ### ignore Flow errors on a one-off basis
 
@@ -135,7 +134,7 @@ now Flow can be run using any of these commands:
 $ yarn run flow
 ```
 
-***UPDATE***
+**_UPDATE_**
 
 it's not required to add `flow` script - everything works as is.
 
@@ -151,13 +150,12 @@ $ yarn run flow
 $ yarn run flow check
 ```
 
-Vim integration
----------------
+## Vim integration
 
 ### [NOT USED] syntastic
 
-NOTE: Flow must be installed globally for syntastic
-      `flow` checker to be available (like for ESLint).
+NOTE: Flow must be installed globally for syntastic `flow` checker to be
+available (like for ESLint).
 
 ```sh
 $ yarn global add flow-bin
@@ -175,22 +173,22 @@ let g:syntastic_javascript_checkers = ['flow']
 <https://medium.com/@renatoagds/flow-vim-the-long-journey-497e020114e5>:
 
 another way to integrate Flow with syntastic is to feed file content into
-`flow check-contents` - but now that `flow focus-check` command is added
-this method seems to be obsolete.
+`flow check-contents` - but now that `flow focus-check` command is added this
+method seems to be obsolete.
 
 ### [NOT USED] vim-flow
 
-syntastic already performs linting of JS files so linting
-provided by this plugin (automatic or manual checks - via
-`FlowMake` command) seems to be excessive.
+syntastic already performs linting of JS files so linting provided by this
+plugin (automatic or manual checks - via `FlowMake` command) seems to be
+excessive.
 
-still `FlowJumpToDef` and `FlowType` commands might be useful -
-just make sure to disable automatic checks on save.
+still `FlowJumpToDef` and `FlowType` commands might be useful - just make sure
+to disable automatic checks on save.
 
 ### ale
 
-unlike syntastic, ALE doesn't require Flow to be installed globally -
-it finds Flow script (`$(npm bin)/flow`) somehow.
+unlike syntastic, ALE doesn't require Flow to be installed globally - it finds
+Flow script (`$(npm bin)/flow`) somehow.
 
 ```vim
 " ~/.vim/vimrc
@@ -200,13 +198,11 @@ let g:ale_linters = {
       \ }
 ```
 
-style guide
------------
+## style guide
 
 1. <https://github.com/ryyppy/flow-guide#flow-style-guide>
 
-notes
------
+## notes
 
 ### function and property variance
 
@@ -214,11 +210,11 @@ notes
 
 <https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)>:
 
-> One function type is a subtype of another when it is safe to use a function
-> of one type in a context that expects a function of a different type.
-> It is safe to substitute a function f for a function g (substitute function g
-> with function f) if f accepts a more general type of arguments and returns
-> a more specific type than g.
+> One function type is a subtype of another when it is safe to use a function of
+> one type in a context that expects a function of a different type. It is safe
+> to substitute a function f for a function g (substitute function g with
+> function f) if f accepts a more general type of arguments and returns a more
+> specific type than g.
 >
 > In other words, the type constructor is contravariant in the input type and
 > covariant in the output type.
@@ -230,9 +226,9 @@ notes
 
 <https://flow.org/en/docs/lang/depth-subtyping/>:
 
-> By default, object properties are invariant, which allow both
-> reads and writes, but are more restrictive in the values they
-> accept (when they are declared - my note).
+> By default, object properties are invariant, which allow both reads and
+> writes, but are more restrictive in the values they accept (when they are
+> declared - my note).
 
 - invariant properties accept specified type only
 
@@ -291,13 +287,11 @@ notes
 
 <https://flow.org/en/docs/types/classes/>:
 
-> JavaScript classes in Flow operate both as a value and a type.
-> You write classes the same way you would without Flow,
-> but then you can use the name of the class as a type:
+> JavaScript classes in Flow operate both as a value and a type. You write
+> classes the same way you would without Flow, but then you can use the name of
+> the class as a type:
 >
-> class MyClass {
->   // ...
-> }
+> class MyClass { // ... }
 >
 > let myInstance: MyClass = new MyClass();
 >
@@ -309,14 +303,13 @@ use `interface` to add structural typing for classes.
 
 <https://flow.org/en/docs/types/generics/>:
 
-Classes (when being used as a type), type aliases, and interfaces with
-generics are parameterized (all require that you pass type arguments).
-Functions and function types do not have parameterized generics
-(functions and function types with generics don't require to pass type
-arguments to use them).
+Classes (when being used as a type), type aliases, and interfaces with generics
+are parameterized (all require that you pass type arguments). Functions and
+function types do not have parameterized generics (functions and function types
+with generics don't require to pass type arguments to use them).
 
-say, `React.Component<Props, State>` is a parameterized generic class type
-(it's necessary to pass `Props` and `State` types when using this class type).
+say, `React.Component<Props, State>` is a parameterized generic class type (it's
+necessary to pass `Props` and `State` types when using this class type).
 
 <https://flow.org/en/docs/types/unions/>:
 
@@ -326,35 +319,34 @@ say, `React.Component<Props, State>` is a parameterized generic class type
 
 > Intersection types require all in, but one out.
 >
-> When you create an intersection of object types,
-> you merge all of their properties together.
+> When you create an intersection of object types, you merge all of their
+> properties together.
 
 ### [Type System](https://flow.org/en/docs/lang)
 
 <https://flow.org/en/docs/lang/subtypes/#toc-subtypes-of-functions>:
 
-> The function subtyping rule is this: a function type B is a subtype
-> of a function type A if and only if B’s inputs are a superset of A’s,
-> and B’s outputs are a subset of A’s.
+> The function subtyping rule is this: a function type B is a subtype of a
+> function type A if and only if B’s inputs are a superset of A’s, and B’s
+> outputs are a subset of A’s.
 
 <https://flow.org/en/docs/lang/nominal-structural>:
 
-> Flow uses structural typing for objects and functions,
-> but nominal typing for classes.
+> Flow uses structural typing for objects and functions, but nominal typing for
+> classes.
 >
-> If you wanted to use a class structurally you could do
-> that by mixing them with objects as interfaces.
+> If you wanted to use a class structurally you could do that by mixing them
+> with objects as interfaces.
 
 <https://flow.org/en/docs/lang/width-subtyping/>:
 
-> Width subtyping: a type that is “wider” (i.e., has more properties)
-> is a subtype of a narrower type.
+> Width subtyping: a type that is “wider” (i.e., has more properties) is a
+> subtype of a narrower type.
 
 > Exact object types disable width subtyping, and do not allow additional
 > properties to exist.
 
-[React](https://flow.org/en/docs/react/)
-----------------------------------------
+## [React](https://flow.org/en/docs/react/)
 
 - annotate component with `@flow`
 
@@ -373,8 +365,8 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   ```
 
   and pass it into `React.Component` as a type argument
-  (`React.Component<Props, State>` is a parameterized generic
-  type that takes 2 arguments):
+  (`React.Component<Props, State>` is a parameterized generic type that takes 2
+  arguments):
 
   ```javascript
   export default class Checkbox extends React.Component<Props> {
@@ -382,8 +374,8 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   }
   ```
 
-  if component extends another custom component (not `React.Component`),
-  specify props type inside class body:
+  if component extends another custom component (not `React.Component`), specify
+  props type inside class body:
 
   ```javascript
   export default class Checkbox extends BaseCheckbox {
@@ -392,24 +384,22 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   }
   ```
 
-
 - add default props as usual
 
   ```javascript
   export default class Checkbox extends React.Component<Props> {
     static defaultProps = {
       isDisabled: false,
-    }
+    };
     // ...
   }
   ```
 
-  NOTE: default prop value is not type checked for some reason -
-        you can set it to any value. to be precise, its type is
-        infered from `defaultProps` but Flow doesn't check that
-        it's the same type as in `Props` type.
+  NOTE: default prop value is not type checked for some reason - you can set it
+  to any value. to be precise, its type is infered from `defaultProps` but Flow
+  doesn't check that it's the same type as in `Props` type.
 
-- add maybe type for component ref
+* add maybe type for component ref
 
   1. <https://flow.org/en/docs/react/refs>
 
@@ -421,11 +411,11 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   }
   ```
 
-- install `babel-plugin-react-flow-props-to-prop-types` plugin for
-  runtime checks (Flow performs static checks only)
+* install `babel-plugin-react-flow-props-to-prop-types` plugin for runtime
+  checks (Flow performs static checks only)
 
-  IMPORTANT: don't install this plugin - it causes strange errors
-             (see `troubleshooting` section)!
+  IMPORTANT: don't install this plugin - it causes strange errors (see
+  `troubleshooting` section)!
 
   ```sh
   $ yarn add prop-types prop-types-extra
@@ -442,15 +432,17 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   }
   ```
 
-- don't use decorators - Flow doesn't support them as of now
+* don't use decorators - Flow doesn't support them as of now
 
   1. <https://github.com/facebook/flow/issues/3405>
   2. <https://github.com/agentcooper/react-redux-flow-example/blob/master/src/Counter.js>
 
   ```javascript
-  @connect(mapStateToProps, mapDispatchToProps)
-  export default class MyComponent extends React.Component<Props> {
-  }
+  @connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )
+  export default class MyComponent extends React.Component<Props> {}
   ```
 
   =>
@@ -469,8 +461,7 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   };
   type Props = OwnProps & StateProps & DispatchProps;
 
-  class MyComponent extends React.Component<Props> {
-  }
+  class MyComponent extends React.Component<Props> {}
 
   const connector: Connector<OwnProps, Props> = connect(
     mapStateToProps,
@@ -479,8 +470,7 @@ say, `React.Component<Props, State>` is a parameterized generic class type
   export default connector(MyComponent);
   ```
 
-types
------
+## types
 
 a very useful example of using Flow types (with their corresponding prop types)
 from _REAMDE.md_ of `babel-plugin-react-flow-props-to-prop-types` plugin:
@@ -504,29 +494,37 @@ type FooProps = {
         string_property_3: string,
       },
       string_property_2: string,
-    }
+    },
   },
   should_error_if_provided: void,
-  intersection: {foo: string} & { bar: number } & Qux,
+  intersection: {foo: string} & {bar: number} & Qux,
   some_external_type: SomeExternalType,
   some_external_type_intersection: {foo: string} & SomeExternalType,
-}
+};
 ```
 
-libdefs
--------
+## libdefs
 
 1. <https://flow.org/en/docs/libdefs/>
 
-> Using the /flow-typed directory for libdefs is a convention that enables
-> Flow to JustWork™ out of the box and encourages consistency across projects
-> that use Flow
+> Using the /flow-typed directory for libdefs is a convention that enables Flow
+> to JustWork™ out of the box and encourages consistency across projects that
+> use Flow
 
-=> it's not necessary to specify _flow-typed/_ as libdefs directory
-explicitly using `[libs]` section of _.flowconfig_.
+=> it's not necessary to specify _flow-typed/_ as libdefs directory explicitly
+using `[libs]` section of _.flowconfig_.
 
-troubleshooting
----------------
+## debugging
+
+1. <https://github.com/facebook/flow/issues/7277#issuecomment-447848767>
+
+```sh
+$ yarn run flow --show-all-branches
+```
+
+output gives detailed information about what Flow is complaining about.
+
+## troubleshooting
 
 ### Flow typechecks the whole node_modules/ directory
 
@@ -536,15 +534,15 @@ the best solution so far is to install library definitions from `flow-typed`.
 
 ### Required module not found
 
-if the whole _node\_modules/_ directory is ignored in _.flowconfig_,
-Flow cannot find some modules like `react-native` or `react-redux`.
+if the whole _node_modules/_ directory is ignored in _.flowconfig_, Flow cannot
+find some modules like `react-native` or `react-redux`.
 
 - use more granular ignores in _.flowconfig_
 
   1. <https://github.com/facebook/flow/issues/1548#issuecomment-198477146>
 
-  that is don't ignore the whole _node\_modules/_ directory but do
-  it on per package basis so that Flow can find required modules.
+  that is don't ignore the whole _node_modules/_ directory but do it on per
+  package basis so that Flow can find required modules.
 
 - replace not found module with stub module
 
@@ -568,10 +566,9 @@ Flow cannot find some modules like `react-native` or `react-redux`.
   module.name_mapper='^react-redux$' -> '<PROJECT_ROOT>/ModuleStub'
   ```
 
-  also it might be necessary to stub all images since their names
-  are replaced with `RelativeImageStub` in defalut _.flowconfig_
-  but this module is not available if the whole _node\_modules/_
-  directory is ignored.
+  also it might be necessary to stub all images since their names are replaced
+  with `RelativeImageStub` in defalut _.flowconfig_ but this module is not
+  available if the whole _node_modules/_ directory is ignored.
 
 - provide external library definitions from `flow-typed` repository
 
@@ -620,8 +617,8 @@ esproposal.decorators=ignore
 
 1. <https://github.com/facebook/flow/issues/1606#issuecomment-267775546>
 
-this is usually a problem when adding new properties to a [sealed
-object](https://flow.org/en/docs/types/objects/#toc-sealed-objects).
+this is usually a problem when adding new properties to a
+[sealed object](https://flow.org/en/docs/types/objects/#toc-sealed-objects).
 
 to fix it cast object to `Object` (it makes this object unsealed?):
 
@@ -635,10 +632,10 @@ for class fields in particular this error can be fixed in 2 ways:
 
   ```javascript
   export default class NewPage extends Component {
-    render () {
-      return <Form ref={ref => (this: NewPage)._form = ref} />;
+    render() {
+      return <Form ref={ref => ((this: NewPage)._form = ref)} />;
       // this works too:
-      return <Form ref={ref => (this: Object)._form = ref} />;
+      return <Form ref={ref => ((this: Object)._form = ref)} />;
     }
   }
   ```
@@ -651,12 +648,11 @@ for class fields in particular this error can be fixed in 2 ways:
   export default class NewPage extends Component {
     _form: Form;
 
-    render () {
-      return <Form ref={ref => this._form = ref} />;
+    render() {
+      return <Form ref={ref => (this._form = ref)} />;
     }
   }
   ```
-
 
 ### Unexpected super class type: CallExpression
 

@@ -16,56 +16,42 @@ categories: []
 {:toc}
 <hr>
 
-TODO: lecture 1.1: Haskell allows to express ideas at a higher level of
-abstraction (find place in printed book where to insert this phrase)
-TODO: add this rationale to printed sheets
-TODO: add structure section here
-TODO: complete highlighting Chapter 2 (Types and Functions)
-TODO: read lecture 1.1 and 1.2 till end
-TODO: think of tasks in the lesson itself and homework (ask to listen to
-lecture 1.1 on youtube and ask students to tell what they understood - it makes
-sense to read parts of this lecture in the lesson and to try to translate it)
-TODO: separate Haskell lesson?
+before the lesson:
+
+- print some text for each of 14 students (for them to read it and translate)
+
+in the lesson:
+
+- lesson vocabulary (or it can be populated dynamically during the lesson)
+- (?) download the first 2 lectures and listen to them in class
+- ask questions about the things they might know (say, static vs. dynamic
+  typing, examples of programming languages)
+
+HW:
+
+- translate from English to Russian and back (several variants or even
+  individual tasks?)
+- learn current lesson's vocabulary - I will ask translations in the next lesson
+- watch the 1st youtube video lecture 1.1 - I will ask how you understand
+  certain episodes in the next lesson
+- translate parts of book (say, the 1st chapter) - individual paragraphs for
+  each student
+
+TODO:
+
+- composition is associative (read about it somewhere else)
+- complete highlighting Chapter 2 (Types and Functions)
+- watch lecture 1.1 till end (and lecture 1.2 if you have time)
+- separate Haskell lesson?
 
 ## RATIONALE
 
-That is why would you want to study category theory and why and how it can be
-useful to you - future programmers and engineers. Let us be honest - very few of
-you will dedicate your life to science. And frankly speaking Tula State
-University prepares engineers first of all - not scientists. This is not good
-or bad - it's just the way it is.
-
-I want to start with a quote - it's just a comment to YouTube video (BB):
-
-> <https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_>
->
-> Me when I was a student: Who cares about theory, I want to learn Java and get
-> a job
->
-> Me today: God I wish I wasn't so stupid back then
-
-IDK if you realize it now or not - but you need to learn some theory. And not
-somewhere in the future but right now. Because you will have no time in the
-future to do it thoroughly. You'll get a job, start a family, start jogging,
-etc. Your spare time will be decreasing every year. So now is the best time to
-learn theory and category theory in particular.
-
-Why category theory? Because you will encounter lots of terms from category
-theory in your daily life as software developers. Finally if you opt to learn
-and use functional programming languages you will have to deal with a lot of
-concepts from category theory. Of course you don't have to know the math to use
-some programming primitives but having this knowledge will give you advantage
-over you collegues. And you will thank yourself that you spent some time
-learning the basics here in the university.
-
-This course will be based on the book and video lectures by Bartosz Milewski. As
-you might guess he is some Polish guy judging by his surname. He got his PhD in
-Theoretical Physics in Poland. He worked in Microsoft, then founded his own
-company, wrote a book "C++ in Action". His interest in C++ template
-metaprogramming and concurrency naturally led him to Haskell and then to
-category theory. His series of blog posts was converted to the book "Category
-Theory for Programmers" which became quite popular. This book is topic of our
-course.
+Also I'd like to clarify that I am neither professional teacher or professional
+scientist - I am a professional software developer. That is I earn my living by
+writing programs in different programming languages. That is why that is why you
+might know many things better than me because I studied them many years ago
+while you are studying right now. Probably the one thing I know better than most
+of you is English. Though it’s also not perfect of course )
 
 IDK whether you are familiar with reading technical literature in English but
 IMO it's quite straightforward compared to reading fiction: vocabulary is quite
@@ -85,24 +71,20 @@ important things. So I want to solidify my knowledge of this topic by myself
 because the best way to learn anything is to try to explain it to someone else -
 to you in this case :)
 
-Also I'd like to clarify that I am neither professional teacher or professional
-scientist - I am a professional software developer. That is I earn my living by
-writing programs in different programming languages. That is why that is why you
-might know many things better than me because I studied them many years ago
-while you are studying right now. Probably the one thing I know better than most
-of you is English. though it’s also not perfect of course )
-
 ## STRUCTURE OF THE COURSE
 
-TODO
+This course will be based on the book and video lectures by Bartosz Milewski. As
+you might guess he is some Polish guy judging by his surname. He got his PhD in
+Theoretical Physics in Poland. He worked in Microsoft, then founded his own
+company, wrote a book "C++ in Action". His interest in C++ template
+metaprogramming and concurrency naturally led him to Haskell and then to
+category theory. His series of blog posts was converted to the book "Category
+Theory for Programmers" which became quite popular. This book is a topic of our
+course. This book is accompanied by video lectures on YouTube which we'll also
+be using.
 
-## Video lectures
-
-### 1.1: Motivation and Philosophy
-
-### 1.2: What is a category?
-
-> https://ncatlab.org/nlab/show/Set
->
-> Set is the (or a) category with sets as objects and functions between sets as
-> morphisms.
+Finally this book has a lot of examples in Haskell. It's HIGHLY likely that you
+don't Haskell - just like me. But still it's quite popular languages in certain
+groups of people. So we're going to take time to learn its basics. Some concepts
+will be introduced as we study the book. Maybe we'll dedicate a whole lesson to
+learning its syntax and basic constructs.

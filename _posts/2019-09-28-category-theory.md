@@ -89,6 +89,9 @@ Theory for Programmers" which became quite popular. This book is a topic of our
 course. This book is accompanied by video lectures on YouTube which we'll also
 be using.
 
+Our goal is study the 1st part of the book - it's a challenging task but we
+have approximately 10 classes in this semester so we have all chances to do it.
+
 Finally this book has a lot of examples in Haskell. It's HIGHLY likely that you
 don't Haskell - just like me. But still it's quite popular languages among
 certain groups of people. So we're going to take time to learn its basics. Some

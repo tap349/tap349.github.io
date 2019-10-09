@@ -312,7 +312,7 @@ iPhone 4s model is not available by default - add it manually:
 | `OS Version` (dropdown menu) → `Download more simulator runtimes...`  |
 
 - download `iOS 9.3 Simulator` runtime (the last version supported by iPhone 4s)
-- create simulator for iPhone 4s using downloaded runtime
+- create simulator of iPhone 4s using downloaded runtime
 
 ### (how to) delete all application data
 
@@ -1101,14 +1101,13 @@ use it as a global platform for your project in _ios/Podfile_:
 + platform :ios, '9.0'
 ```
 
-### Could not find iPhone 6 simulator
+### Could not find "iPhone 5" simulator
 
 ```
 $ react-native run-ios
-Scanning folders for symlinks in <APP_DIR>/node_modules (13ms)
-Found Xcode workspace iceperkapp.xcworkspace
-
-Could not find iPhone 6 simulator
+...
+info Found Xcode workspace "iceperkapp.xcworkspace"
+error Could not find "iPhone 5" simulator. Run CLI with --verbose flag for more details.
 ```
 
 **solution**
@@ -1116,6 +1115,16 @@ Could not find iPhone 6 simulator
 1. <https://github.com/facebook/react-native/issues/23282>
 
 upgrade RN.
+
+***UPDATE (2019-10-09)***
+
+another error occurred after upgrading macOS to Catalina - there were no iOS
+simulators of old devices (all iPhones prior to iPhone 8) in Xcode.
+
+=> it's necessary to download simulator runtime for all supported devices to
+appear in the list (say, if you download `iOS 12.2 Simulator`, simulators for
+iPhone 5s and above should appear in the list) - see `(how to) add iPhone 4s
+simulator` tip on how to download more simulator runtimes.
 
 ### Undefined symbol: \_OBJC_METACLASS\_\$\_RCTEventEmitter
 

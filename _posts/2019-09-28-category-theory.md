@@ -16,8 +16,16 @@ categories: []
 {:toc}
 <hr>
 
-TODO: add this to preface on paper
-TODO: add structure section
+TODO: lecture 1.1: Haskell allows to express ideas at a higher level of
+abstraction (find place in printed book where to insert this phrase)
+TODO: add this rationale to printed sheets
+TODO: add structure section here
+TODO: complete highlighting Chapter 2 (Types and Functions)
+TODO: read lecture 1.1 and 1.2 till end
+TODO: think of tasks in the lesson itself and homework (ask to listen to
+lecture 1.1 on youtube and ask students to tell what they understood - it makes
+sense to read parts of this lecture in the lesson and to try to translate it)
+TODO: separate Haskell lesson?
 
 ## RATIONALE
 

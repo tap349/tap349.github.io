@@ -19,9 +19,12 @@ categories: []
 before the lesson:
 
 - print some text for each of 14 students (for them to read it and translate)
+- print rationale from here
 
 in the lesson:
 
+- ask everyone to read and translate part of the book (using printed sheets of
+  paper)
 - lesson vocabulary (or it can be populated dynamically during the lesson)
 - (?) download the first 2 lectures and listen to them in class
 - ask questions about the things they might know (say, static vs. dynamic
@@ -36,6 +39,7 @@ HW:
   certain episodes in the next lesson
 - translate parts of book (say, the 1st chapter) - individual paragraphs for
   each student
+- (?) challenge for chapters 1 and 2
 
 TODO:
 
@@ -50,8 +54,10 @@ Also I'd like to clarify that I am neither professional teacher or professional
 scientist - I am a professional software developer. That is I earn my living by
 writing programs in different programming languages. That is why that is why you
 might know many things better than me because I studied them many years ago
-while you are studying right now. Probably the one thing I know better than most
-of you is English. Though it’s also not perfect of course )
+while you are studying right now. What I’m going to talk about with you may be
+not mathematically strict so pardon for sloppiness. Probably the one thing I
+know better than most of you is English. Though it’s also not perfect either of
+course )
 
 IDK whether you are familiar with reading technical literature in English but
 IMO it's quite straightforward compared to reading fiction: vocabulary is quite
@@ -84,7 +90,7 @@ course. This book is accompanied by video lectures on YouTube which we'll also
 be using.
 
 Finally this book has a lot of examples in Haskell. It's HIGHLY likely that you
-don't Haskell - just like me. But still it's quite popular languages in certain
-groups of people. So we're going to take time to learn its basics. Some concepts
-will be introduced as we study the book. Maybe we'll dedicate a whole lesson to
-learning its syntax and basic constructs.
+don't Haskell - just like me. But still it's quite popular languages among
+certain groups of people. So we're going to take time to learn its basics. Some
+concepts will be introduced as we study the book. Maybe we'll dedicate a whole
+lesson to learning its syntax and basic constructs.

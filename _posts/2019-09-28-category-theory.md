@@ -163,9 +163,9 @@ CT is closely related to FP and FP has the following benefits:
   and (what is most important) to make it right. You don't have to worry about
   mutexes and atomic operations - it's all built into the language.
 
-  Java also offers tools to write concurrent programs but still it hurts =>
-  most developers avoid using these tools. At least this was the case when I
-  used Java at my work more than 6 years ago :)
+  Java also offers tools to write concurrent programs but still it hurts => most
+  developers avoid using these tools. At least this was the case when I used
+  Java at my work more than 6 years ago :)
 
 - side effects are limited and controlled
 

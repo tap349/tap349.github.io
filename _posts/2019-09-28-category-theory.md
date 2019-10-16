@@ -251,7 +251,7 @@ R.compose(
 
   here W is called domain and X - codomain.
 
-  We show that (f . g) . h = f . (g . h) as follows.
+  We show that `(f . g) . h = f . (g . h)` as follows.
 
   Let w ∈ W (w is an element of, is a member of, is in, belongs to W). Then
 
@@ -265,7 +265,7 @@ R.compose(
   (f . (g . h))(w) = f((g . h)(w)) = f(g(h(w)))
   ```
 
-  Since (( f . g) . h)(w) = (f . (g . h))(w) for all w ∈ W, we have
+  Since `(( f . g) . h)(w) = (f . (g . h))(w)` for all w ∈ W, we have
 
   ```
   ( f . g) . h = f . (g . h)

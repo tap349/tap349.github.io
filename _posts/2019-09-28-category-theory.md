@@ -175,8 +175,8 @@ CT is closely related to FP and FP has the following benefits:
 ## 1 Category: The Essence of Composition
 
 Category consists of objects and arrows that go between them. Arrows are called
-morphisms. It's a general term, kind of transformation but it's easy to think of
-arrows as functions: functions are just one type of morphisms.
+**morphisms**. It's a general term, kind of transformation but it's easy to
+think of arrows as functions: functions are just one type of morphisms.
 
 The essence of category is composition. Arrows compose: if there are arrows A →
 B and B → C then arrow A → C is their composition which is denoted by a small
@@ -202,72 +202,81 @@ R.compose(
 
 ### Properties of Composition
 
-1. Composition is associative
+- Composition is associative
 
-### Associativity
+  > <https://en.wikipedia.org/wiki/Operator_associativity>
+  >
+  > In programming languages, the associativity of an operator is a property
+  > that determines how operators of the same precedence are grouped in the
+  > absence of parentheses.
 
-> <https://en.wikipedia.org/wiki/Operator_associativity>
->
-> In programming languages, the associativity of an operator is a property that
-> determines how operators of the same precedence are grouped in the absence of
-> parentheses.
+  => associativity rules make sense only when we have 2 or more operators!
 
-=> associativity rules make sense only when we have 2 or more operators!
+  In our case composition operator is a white circle (○).
 
-In our case composition operator is a white circle (○).
+  Parentheses indicate that composition (or any other operation) is to be
+  performed first for the parentehsized functions.
 
-**Parentheses** indicate that composition (or any other operation) is to be
-performed first for the parentehsized functions.
+  Operators can be (also they, say, `operator has the right associativity`):
 
-Operators can be (also they, say, `operator has the right associativity`):
+  - associative
 
-- associative
+    operations are grouped arbitrarily: composition, multiplication and
+    addition. if operations are both left and right associative, they are
+    associative.
 
-  operations are grouped arbitrarily: composition, multiplication and addition.
-  if operations are both left and right associative, they are associative.
+  - left-associative
 
-- left-associative
+    operations are grouped from the left: subtraction and division.
 
-  operations are grouped from the left: subtraction and division.
+  - right-associative
 
-- right-associative
+    operations are grouped from the right.
 
-  operations are grouped from the right.
+  - non-associative
 
-- non-associative
+    operations cannot be chained, often because the output type is incompatible
+    with the input types.
 
-  operations cannot be chained, often because the output type is incompatible
-  with the input types.
+  don't confuse right to left order of composition with associativity of
+  composition (which means it's both left-associative and right-associative).
 
-don't confuse right to left order of composition with associativity of
-composition (which means it's both left-associative and right-associative).
+  Proof that composition is associative.
 
-### Proof that composition is associative
+  Let W, X, Y and Z be sets, and suppose that we are given functions:
 
-Let W, X, Y and Z be sets, and suppose that we are given functions:
+  ```
+  h: W → X, g: X → Y, f: Y → Z
+  ```
 
-```
-h: W → X, g: X → Y, f: Y → Z
-```
+  here W is called domain and X - codomain.
 
-here W is called domain and X - codomain.
+  We show that (f . g) . h = f . (g . h) as follows.
 
-We show that (f . g) . h = f . (g . h) as follows.
+  Let w ∈ W (w is an element of, is a member of, is in, belongs to W). Then
 
-Let w ∈ W (w is an element of, is a member of, is in, belongs to W). Then
+  ```
+  (( f . g) . h)(w) = (f . g)(h(w)) = f(g(h(w)))
+  ```
 
-```
-(( f . g) . h)(w) = (f . g)(h(w)) = f(g(h(w)))
-```
+  and
 
-and
+  ```
+  (f . (g . h))(w) = f((g . h)(w)) = f(g(h(w)))
+  ```
 
-```
-(f . (g . h))(w) = f((g . h)(w)) = f(g(h(w)))
-```
+  Since (( f . g) . h)(w) = (f . (g . h))(w) for all w ∈ W, we have
 
-Since (( f . g) . h)(w) = (f . (g . h))(w) for all w ∈ W, we have
+  ```
+  ( f . g) . h = f . (g . h)
+  ```
 
-```
-( f . g) . h = f . (g . h)
-```
+- For every object A there is an arrow which is a unit of composition
+
+  This arrow loops from the object to itself. The unit arrow for object A is
+  called **identity** on A.
+
+  In case of function identity arrow is implemented as identity function.
+
+  Identity function is not that useful in daily life but it's useful as an
+  argument to, or a return from, a higher-order function.

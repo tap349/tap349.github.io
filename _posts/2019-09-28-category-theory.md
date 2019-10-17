@@ -71,7 +71,7 @@ Our goal is to study the 1st part of the book - it's a challenging task but we
 have approximately 10 classes in this semester so we have all chances to do it.
 
 Finally this book has a lot of examples in Haskell. It's HIGHLY likely that you
-don't Haskell - just like me. But still it's quite popular languages among
+don't know Haskell - just like me. But still it's quite popular languages among
 certain groups of people. So we're going to take time to learn its basics. Some
 concepts will be introduced as we study the book. Maybe we'll dedicate a whole
 lesson to learning its syntax and basic constructs.
@@ -200,7 +200,7 @@ R.compose(
 // => 30
 ```
 
-### Properties of Composition
+### 1.2 Properties of Composition
 
 - Composition is associative
 
@@ -279,4 +279,18 @@ R.compose(
   In case of function identity arrow is implemented as identity function.
 
   Identity function is not that useful in daily life but it's useful as an
-  argument to, or a return from, a higher-order function.
+  argument to, or a return from, a higher-order function. For example, HOF
+  might do nothing but still it has to return a function to be used down the
+  chain of functions => here identity function comes to the rescue.
+
+### 1.3 Composition is the Essence of Programming
+
+Composition is how we solve non-trivial problems in programming - moreover it's
+the ONLY way we know about how to deal with complex problems: we decompose
+bigger problems into smaller problems and so on. After that we write code to
+solve all the small problems. Then there comes the essence of programming: we
+compose those pieces of code, combine solutions to small problems to create
+solutions to larger problems. Decomposition wouldn't make sense without composition.
+
+This is so called "divide and conquer" approach or they also say "to eat an
+elephant in small pieces".

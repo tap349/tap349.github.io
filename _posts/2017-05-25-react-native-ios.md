@@ -1615,14 +1615,20 @@ it doesn't matter much on case-insensitive filesystems but that's not my case.
   ```sh
   $ diskutil apfs addVolume disk1 APFS iceperkapp
   $ mv <APP_DIR>/ios/Pods /Volumes/iceperkapp/ios
+  $ mv <APP_DIR>/node_modules /Volumes/iceperkapp
   $ brew install bindfs
   $ bindfs /Volumes/iceperkapp/ios/Pods <APP_DIR>/ios/Pods
+  $ bindfs /Volumes/iceperkapp/node_modules <APP_DIR>/node_module
   ```
 
   mounting _ios/Pods/_ from APFS volume fixes problem with a previous solution:
   _\<APP_DIR>/ios/Pods/_ is now indistinguishable from ordinary directory - it's
   like a hardlink (except for the fact it's not possible to create hardlinks to
   directories).
+
+  NOTE: it's also necessary to do the same for _node_modules/_ directory since
+  some relative paths are resolved to _/Volumes/iceperkapp/node_modules/*_ when
+  building Xcode project.
 
   also it's no longer necessary to remove a trailing slash from _/ios/Pods/_
   directory in _.gitignore_:

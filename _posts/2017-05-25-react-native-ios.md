@@ -1604,8 +1604,8 @@ it doesn't matter much on case-insensitive filesystems but that's not my case.
   // ...
   ```
 
-  as a result Xcode project will not compile on another machine (most likely -
-  I didn't try).
+  as a result Xcode project will not build on another machine (most likely - I
+  didn't try).
 
 - separate case-insensitive APFS volume + mount
 

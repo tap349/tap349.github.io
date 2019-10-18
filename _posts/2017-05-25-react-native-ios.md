@@ -1551,40 +1551,85 @@ pod:
 
 it doesn't matter much on case-insensitive filesystems but that's not my case.
 
-one solution is to fork `Protobuf` pod and format all imports correctly:
+- fork `Protobuf` pod
 
-```diff
-  // ios/Pods/Protobuf/objectivec/GPBWellKnownTypes.h
+  one solution is to fork `Protobuf` pod and format all imports correctly:
 
-  #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
--   #import <protobuf/Any.pbobjc.h>
--   #import <protobuf/Duration.pbobjc.h>
--   #import <protobuf/Timestamp.pbobjc.h>
-+   #import <Protobuf/Any.pbobjc.h>
-+   #import <Protobuf/Duration.pbobjc.h>
-+   #import <Protobuf/Timestamp.pbobjc.h>
-```
+  ```diff
+    // ios/Pods/Protobuf/objectivec/GPBWellKnownTypes.h
 
-but it's not a good variant because, first, you have to maintain the fork and
-sync it with upstream from time to time and, second, I don't know how to make
-use of this fork in _ios/Podfile_ because `Protobuf` pod is not referenced
-directly in _ios/Podfile_ - it's a dependency of `Firebase/Messaging` pod.
+    #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
+  -   #import <protobuf/Any.pbobjc.h>
+  -   #import <protobuf/Duration.pbobjc.h>
+  -   #import <protobuf/Timestamp.pbobjc.h>
+  +   #import <Protobuf/Any.pbobjc.h>
+  +   #import <Protobuf/Duration.pbobjc.h>
+  +   #import <Protobuf/Timestamp.pbobjc.h>
+  ```
 
-better solution is to create a separate case-insensitive APFS volume and move
-_ios/Pods/_ directory there - see [Steam - Troubleshooting][1] for details:
+  but it's not a good variant because, first, you have to maintain the fork and
+  sync it with upstream from time to time and, second, I don't know how to make
+  use of this fork in _ios/Podfile_ because `Protobuf` pod is not referenced
+  directly in _ios/Podfile_ - it's a dependency of `Firebase/Messaging` pod.
 
-```sh
-$ diskutil apfs addVolume disk1 APFS iceperkapp
-$ mv <APP_DIR>/ios/Pods /Volumes/iceperkapp/ios
-$ ln -s /Volumes/iceperkapp/ios/Pods <APP_DIR>/ios/Pods
-```
+- separate case-insensitive APFS volume + symlink
 
-also it's necessary to edit project's _.gitignore_ file because Git considers
-symlinks to be files, not directories:
+  better solution is to create a separate case-insensitive APFS volume and move
+  _ios/Pods/_ directory there - see [Steam - Troubleshooting][1] for details:
 
-```diff
-  # .gitignore
+  ```sh
+  $ diskutil apfs addVolume disk1 APFS iceperkapp
+  $ mv <APP_DIR>/ios/Pods /Volumes/iceperkapp/ios
+  $ ln -s /Volumes/iceperkapp/ios/Pods <APP_DIR>/ios/Pods
+  ```
 
-- /ios/Pods/
-+ /ios/Pods
-```
+  also it's necessary to remove a trailing slash from _/ios/Pods/_ directory in
+  _.gitignore_ because Git considers symlinks to be files, not directories:
+
+  ```diff
+    # .gitignore
+
+  - /ios/Pods/
+  + /ios/Pods
+  ```
+
+  disadvantage of his solution is that this symlink is resolved in Xcode
+  configuration files:
+
+  ```
+  // ios/iceperkapp.xcodeproj/project.pbxproj
+
+  // ...
+  "${PODS_ROOT}/../../../../<APP_DIR>/node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+  // ...
+  ```
+
+  as a result Xcode project will not compile on another machine (most likely -
+  I didn't try).
+
+- separate case-insensitive APFS volume + mount
+
+  same as a previous solution but _ios/Pods/_ from APFS volume is mounted to
+  _\<APP_DIR>/ios/Pods/_ (instead of creating such a symlink):
+
+  ```sh
+  $ diskutil apfs addVolume disk1 APFS iceperkapp
+  $ mv <APP_DIR>/ios/Pods /Volumes/iceperkapp/ios
+  $ brew install bindfs
+  $ bindfs /Volumes/iceperkapp/ios/Pods <APP_DIR>/ios/Pods
+  ```
+
+  mounting _ios/Pods/_ from APFS volume fixes problem with a previous solution:
+  _\<APP_DIR>/ios/Pods/_ is now indistinguishable from ordinary directory - it's
+  like a hardlink (except for the fact it's not possible to create hardlinks to
+  directories).
+
+  also it's no longer necessary to remove a trailing slash from _/ios/Pods/_
+  directory in _.gitignore_:
+
+  ```diff
+    # .gitignore
+
+  - /ios/Pods
+  + /ios/Pods/
+  ```

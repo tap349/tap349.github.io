@@ -39,7 +39,7 @@ you don't know or about anything about English :) This is why we're here.
 IDK whether you are familiar with reading technical literature in English but
 IMO it's quite straightforward compared to reading fiction: vocabulary is quite
 limited and you will learn most of it after reading, say, the first 50 pages.
-Our course will be basde on one book and this book is no exception. I encourage
+Our course will be based on one book and this book is no exception. I encourage
 you to read it by yourself and ask questions if you have a hard time
 understanding anything from the book. I will say a few words about the book
 later.
@@ -279,18 +279,45 @@ R.compose(
   In case of function identity arrow is implemented as identity function.
 
   Identity function is not that useful in daily life but it's useful as an
-  argument to, or a return from, a higher-order function. For example, HOF
-  might do nothing but still it has to return a function to be used down the
-  chain of functions => here identity function comes to the rescue.
+  argument to, or a return from, a higher-order function. For example, HOF might
+  do nothing but still it has to return a function to be used down the chain of
+  functions => here identity function comes to the rescue.
 
 ### 1.3 Composition is the Essence of Programming
 
 Composition is how we solve non-trivial problems in programming - moreover it's
-the ONLY way we know about how to deal with complex problems: we decompose
-bigger problems into smaller problems and so on. After that we write code to
-solve all the small problems. Then there comes the essence of programming: we
-compose those pieces of code, combine solutions to small problems to create
-solutions to larger problems. Decomposition wouldn't make sense without composition.
+the ONLY way we know about how to deal with complex problems: if you want to
+deal with complex problems you have to be able to chop the bigger problem into
+smaller subproblems and so forth, solve them separately and then combine
+solutions together. This is the essence of programming: we combine solutions to
+small problems to create solutions to larger problems. Decomposition wouldn't
+make sense without composition.
 
 This is so called "divide and conquer" approach or they also say "to eat an
 elephant in small pieces".
+
+Say, you don't know how to build a rocket because you don't know how to divide
+this problem into subproblems and solve each of these subproblems separately.
+If you are able to divide your big problem into small tasks - your problem is
+half solved.
+
+Moreover we can see only those problems which have structure - we don't see
+problems that don't have structure or which we don't know how to chop into
+pieces. In this case we say that we don't know how to solve these problems, we
+just give up. That is we like numerous classifications - this is how understand
+the world around us.
+
+Composability may be not a property of nature but a property of our brain only.
+We have to see structure everywhere 
+
+=> CT is not about math, it's about our minds, how our minds operate. It
+doesn't help us to learn what things are but it helps us to learn how we can
+study, explore these things.
+
+Composition lies at the very root of CT - it's part of the definition of
+category itself. And composition is the essence of programming:
+
+CATEGORY => (essence of) => COMPOSITION => (essence of) => PROGRAMMING
+
+=> composition is what likens CT and programming: both CT and programming are
+about composing things.

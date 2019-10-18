@@ -1615,10 +1615,9 @@ it doesn't matter much on case-insensitive filesystems but that's not my case.
   ```sh
   $ diskutil apfs addVolume disk1 APFS iceperkapp
   $ mv <APP_DIR>/ios/Pods /Volumes/iceperkapp/ios
-  $ mv <APP_DIR>/node_modules /Volumes/iceperkapp
   $ brew install bindfs
   $ bindfs /Volumes/iceperkapp/ios/Pods <APP_DIR>/ios/Pods
-  $ bindfs /Volumes/iceperkapp/node_modules <APP_DIR>/node_module
+  $ ln -s <APP_DIR>/node_modules /Volumes/iceperkapp/node_modules
   ```
 
   mounting _ios/Pods/_ from APFS volume fixes problem with a previous solution:
@@ -1626,7 +1625,7 @@ it doesn't matter much on case-insensitive filesystems but that's not my case.
   like a hardlink (except for the fact it's not possible to create hardlinks to
   directories).
 
-  NOTE: it's also necessary to do the same for _node_modules/_ directory since
+  NOTE: it's necessary to create a symlink to _node_modules/_ on APFS volume -
   some relative paths are resolved to _/Volumes/iceperkapp/node_modules/*_ when
   building Xcode project.
 

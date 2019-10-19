@@ -37,15 +37,6 @@ description of debug and release modes.
   ```diff
     // app/api/ApiHelpers.js
 
-    const LOCALHOST = Platform.OS === 'ios'
-  -   ? 'http://localhost:3000'
-  +   ? 'http://192.168.0.50:3000'
-      : 'http://10.0.2.2:3000';
-  ```
-
-  ```diff
-    // app/api/graphql/run.js
-
     const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
   -   ? 'http://localhost:3000'
   +   ? 'http://192.168.0.50:3000'
@@ -95,8 +86,7 @@ description of debug and release modes.
   now local `3000` port is mapped to mobile's `3000` port.
 
   `3000` is the port development server is listening on (accordingly it's
-  specified as development server port in both _app/api/ApiHelpers.js_ and
-  _app/api/graphql/run.js_).
+  specified as development server port in _app/api/ApiHelpers.js_).
 
   it's not required to forward `8081` port which is used to communicate with
   packager - this is done automatically when you run application:
@@ -115,15 +105,6 @@ description of debug and release modes.
     // app/api/ApiHelpers.js
 
     const LOCALHOST = Platform.OS === 'ios'
-      ? 'http://localhost:3000'
-  -   : 'http://10.0.2.2:3000';
-  +   : 'http://localhost:3000';
-  ```
-
-  ```diff
-    // app/api/graphql/run.js
-
-    const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
       ? 'http://localhost:3000'
   -   : 'http://10.0.2.2:3000';
   +   : 'http://localhost:3000';
@@ -150,15 +131,6 @@ port forwarding):
   // app/api/ApiHelpers.js
 
   const LOCALHOST = Platform.OS === 'ios'
--   ? 'http://localhost:3000'
-+   ? 'http://b27357e9.ngrok.io'
-    : 'http://localhost:3000';
-```
-
-```diff
-  // app/api/graphql/run.js
-
-  const DEVELOPMENT_BASE_URL = Platform.OS === 'ios'
 -   ? 'http://localhost:3000'
 +   ? 'http://b27357e9.ngrok.io'
     : 'http://localhost:3000';

@@ -143,7 +143,7 @@ CT is closely related to FP and FP has the following benefits:
 - FP becomes popular again, imperative languages (Java, JS) introduce functional
   features
 
-  One example of such a feature is a monad. Some programmings languages support
+  One example of such a feature is a monad. Some programming languages support
   monads natively (say, Haskell) while others provide separate packages or
   libraries. Say, `dry-monads` gem in Ruby or `witchcraft` package in Elixir.
   Many people speak about monads but no one knows for sure what they are

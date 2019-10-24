@@ -54,7 +54,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - copies fonts into _~/Library/Fonts/_
 
 - `mkdir ~/dev` and git clone all repos
-- menu bar: `Battery` → `Show percentage`
+- Menu Bar: `Battery` → `Show percentage`
 - add PureVPN service:
 
   <https://support.purevpn.com/how-to-setup-purevpn-l2tp-manually-on-mac>
@@ -109,6 +109,12 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
         - Start Pomodoro: `<C-D-p>` (displayed in qwerty: `<C-D-r>`)
         - Stop Pomodoro: `<C-D-s>` (displayed in qwerty: `<C-D-;>`)
   - TopTracker
+  - uTorrent Web:
+    - System Preferences:
+      - Users & Groups:
+        - Login Items: remove
+    - Menu Bar:
+      - [ ] Show Dock Icon
 
   NOTE: additional software is usually stored in _~/soft/_ to keep it all in a
   single place since it's not managed by any package manager.

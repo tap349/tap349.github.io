@@ -202,7 +202,11 @@ R.compose(
 
 ### 1.2 Properties of Composition
 
-- Composition is associative
+- composition is associative
+
+  `h . (g . f)` = `(h . g) . f` = `h . g . f`
+
+  => it's not necessary to use parentheses.
 
   > <https://en.wikipedia.org/wiki/Operator_associativity>
   >
@@ -271,14 +275,19 @@ R.compose(
   ( f . g) . h = f . (g . h)
   ```
 
-- For every object A there is an arrow which is a unit of composition
+- there is a unit of composition for every object A
 
-  This arrow loops from the object to itself. The unit arrow for object A is
-  called **identity** on A.
+  unit of composition for A is called identity on A (aka unit arrow or identity
+  arrow - it's an arrow that loops from the object to itself).
+
+  identity on A is both left and right identity:
+
+  `f . idA = f`
+  `idB . f = f`
 
   In case of function identity arrow is implemented as identity function.
 
-  Identity function is not that useful in daily life but it's useful as an
+  Identity function is not that useful in our daily life but it's useful as an
   argument to, or a return from, a higher-order function. For example, HOF might
   do nothing but still it has to return a function to be used down the chain of
   functions => here identity function comes to the rescue.
@@ -321,3 +330,5 @@ CATEGORY => (essence of) => COMPOSITION => (essence of) => PROGRAMMING
 
 => composition is what likens CT and programming: both CT and programming are
 about composing things.
+
+# 2 Types and Functions

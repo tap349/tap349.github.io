@@ -277,7 +277,8 @@ R.compose(
 
 - there is a unit of composition for every object A
 
-  unit of composition for A is called identity on A (aka unit arrow or identity
+  unit of composition for A is called **identity** on A (aka unit arrow or
+  identity
   arrow - it's an arrow that loops from the object to itself).
 
   identity on A is both left and right identity:
@@ -317,7 +318,7 @@ just give up. That is we like numerous classifications - this is how understand
 the world around us.
 
 Composability may be not a property of nature but a property of our brain only.
-We have to see structure everywhere 
+We have to see structure everywhere.
 
 => CT is not about math, it's about our minds, how our minds operate. It
 doesn't help us to learn what things are but it helps us to learn how we can

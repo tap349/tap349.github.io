@@ -140,15 +140,16 @@ it's not required to add `flow` script - everything works as is.
 
 ### run Flow
 
-```sh
-# same as `flow status` - starts Flow server (if not started yet),
-# does a full check, prints the results and monitors changes to
-# your code in the background checking those changes incrementally
-# for errors - current errors can be shown by typing `flow` again
-$ yarn run flow
-# does a full check in the foreground without starting Flow server
-$ yarn run flow check
-```
+- `yarn run flow`
+
+  same as `flow status` - starts Flow server (if not started yet), does a full
+  check, prints the results and monitors changes to your code in the background
+  checking those changes incrementally for errors - current errors can be shown
+  by typing `flow` again.
+
+- `yarn run flow check`
+
+  does a full check in the foreground without starting Flow server.
 
 ## Vim integration
 
@@ -285,8 +286,8 @@ let g:ale_linters = {
 
 ### [Type Annotations](https://flow.org/en/docs/types)
 
-<https://flow.org/en/docs/types/classes/>:
-
+> <https://flow.org/en/docs/types/classes/>:
+>
 > JavaScript classes in Flow operate both as a value and a type. You write
 > classes the same way you would without Flow, but then you can use the name of
 > the class as a type:
@@ -297,16 +298,15 @@ let g:ale_linters = {
 >
 > This is because classes in Flow are nominally typed.
 
-<https://flow.org/en/docs/types/interfaces/>:
+> <https://flow.org/en/docs/types/interfaces/>:
+>
+> use `interface` to add structural typing for classes.
 
-use `interface` to add structural typing for classes.
-
-<https://flow.org/en/docs/types/generics/>:
-
-Classes (when being used as a type), type aliases, and interfaces with generics
-are parameterized (all require that you pass type arguments). Functions and
-function types do not have parameterized generics (functions and function types
-with generics don't require to pass type arguments to use them).
+> <https://flow.org/en/docs/types/generics/>:
+>
+> Classes (when being used as a type), type aliases, and interfaces with
+> generics are parameterized (all require that you pass type arguments).
+> Functions and function types do not have parameterized generics.
 
 say, `React.Component<Props, State>` is a parameterized generic class type (it's
 necessary to pass `Props` and `State` types when using this class type).
@@ -324,25 +324,26 @@ necessary to pass `Props` and `State` types when using this class type).
 
 ### [Type System](https://flow.org/en/docs/lang)
 
-<https://flow.org/en/docs/lang/subtypes/#toc-subtypes-of-functions>:
-
+> <https://flow.org/en/docs/lang/subtypes/#toc-subtypes-of-functions>:
+>
 > The function subtyping rule is this: a function type B is a subtype of a
 > function type A if and only if B’s inputs are a superset of A’s, and B’s
 > outputs are a subset of A’s.
 
-<https://flow.org/en/docs/lang/nominal-structural>:
-
+> <https://flow.org/en/docs/lang/nominal-structural>:
+>
 > Flow uses structural typing for objects and functions, but nominal typing for
 > classes.
 >
 > If you wanted to use a class structurally you could do that by mixing them
 > with objects as interfaces.
 
-<https://flow.org/en/docs/lang/width-subtyping/>:
-
-> Width subtyping: a type that is “wider” (i.e., has more properties) is a
-> subtype of a narrower type.
-
+> <https://flow.org/en/docs/lang/width-subtyping/>:
+>
+> This is a kind of subtyping commonly referred to as “width subtyping” because
+> a type that is “wider” (i.e., has more properties) is a subtype of a narrower
+> type.
+>
 > Exact object types disable width subtyping, and do not allow additional
 > properties to exist.
 

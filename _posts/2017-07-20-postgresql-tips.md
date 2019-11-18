@@ -467,3 +467,13 @@ $ psql -U devops -d postgres -h localhost
 postgres=# DROP DATABASE IF EXISTS eva_prod;
 DROP DATABASE
 ```
+
+## (how to) remove PostgreSQL completely
+
+```sh
+$ sudo apt autoremove --purge postgresql-12
+$ sudo rm -rf /etc/postgresql
+$ sudo rm -rf /run/postgresql
+$ sudo rm -rf /var/lib/postgresql
+$ sudo apt install postgresql-12
+```

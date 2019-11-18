@@ -7,6 +7,8 @@ comments: true
 categories: [postgresql]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,15 +16,14 @@ categories: [postgresql]
 {:toc}
 <hr>
 
-problems with new homebrew versioning scheme
---------------------------------------------
+## problems with new homebrew versioning scheme
 
 1. <https://github.com/Homebrew/brew/blob/master/docs/Versions.md>
 
 running `brew upgrade` has created quite a mess for me because of a new
 versioning scheme: `postgresql95` formula is replaced with `postgresql@9.5`
-(this is because homebrew/core now supports multiple versions).
-but this migration was not smooth and resulted in many errors, to name a few:
+(this is because homebrew/core now supports multiple versions). but this
+migration was not smooth and resulted in many errors, to name a few:
 
 - `invalid value for parameter "TimeZone": "UTC"`
 
@@ -33,11 +34,11 @@ but this migration was not smooth and resulted in many errors, to name a few:
   `psql` must have a symlink in _/usr/local/bin/_ (it has been added to `PATH`
   in _~/.zshenv_ in my case) - it's gone now for some mysterious reason.
 
-- `psql: FATAL:  database "db_name" does not exist`
+- `psql: FATAL: database "db_name" does not exist`
 
   this is because running `brew upgrade` has created new data directory for
-  `postgresql@9.5` (_/usr/local/var/postgresql@9.5_) while all my databases
-  are stored in _/usr/local/var/postgres_.
+  `postgresql@9.5` (_/usr/local/var/postgresql@9.5_) while all my databases are
+  stored in _/usr/local/var/postgres_.
 
 **solution**
 
@@ -51,14 +52,15 @@ so this is what I did to fix problems mentioned above:
 - `brew prune postgresql@9.5` (remove old 9.5 versions - if any)
 - `brew link postgresql@9.5 --force` (create symlink in _/usr/local/bin_)
 
-  it's not recommended though - it must be better to add _bin_ directory
-  of specific PostgreSQL installation to `PATH` explicitly in _~/.zshenv_.
+  it's not recommended though - it must be better to add _bin_ directory of
+  specific PostgreSQL installation to `PATH` explicitly in _~/.zshenv_.
 
-- `cd /usr/local/var && mv postgres postgresql@9.5` (rename directory with databases)
+- `cd /usr/local/var && mv postgres postgresql@9.5` (rename directory with
+  databases)
 
-  it might be necessary to remove existing _postgresql@9.5_ directory
-  beforehand that could be created when upgrading PostgreSQL
-  (but still double check it doesn't contain any databases).
+  it might be necessary to remove existing _postgresql@9.5_ directory beforehand
+  that could be created when upgrading PostgreSQL (but still double check it
+  doesn't contain any databases).
 
 - `rm /usr/local/Cellar/postgresql95` (remove symlink to `postgresql@9.5`)
 
@@ -66,14 +68,13 @@ so this is what I did to fix problems mentioned above:
 
 - `gem uninstall pg && bundle` (reinstall `pg` gem)
 
-NOTE: installing `postgresql` formula still installs the latest version
-      (9.6 as of now) - all directories are named just `postgresql` accordingly.
-      but its binaries are not symlinked into _usr/bin/local_ directory
-      by default (now they all point to 9.5 installation) -
-      if you need it run `brew link postgresql --force` manually.
+NOTE: installing `postgresql` formula still installs the latest version (9.6 as
+of now) - all directories are named just `postgresql` accordingly. but its
+binaries are not symlinked into _usr/bin/local_ directory by default (now they
+all point to 9.5 installation) - if you need it run
+`brew link postgresql --force` manually.
 
-psql: could not connect to server: Connection refused
------------------------------------------------------
+## psql: could not connect to server: Connection refused
 
 ```
 $ psql -d <DB_NAME>
@@ -98,8 +99,8 @@ could not connect to server: Connection refused
 <https://stackoverflow.com/a/13573207/3632318>
 
 the problem usually appears after hard reboot. the latter doesn't allow
-PostgreSQL to exit gracefully and delete its PID files - _postmaster.pid_
-in particular. so upon reboot PostgreSQL thinks it's still running and
+PostgreSQL to exit gracefully and delete its PID files - _postmaster.pid_ in
+particular. so upon reboot PostgreSQL thinks it's still running and
 corresponding service fails to start.
 
 so just delete that PID file and start the service:
@@ -109,15 +110,14 @@ $ rm /usr/local/var/postgresql@9.5/postmaster.pid
 $ brew services start postgresql@9.5
 ```
 
-or else try to restart the service (stopping the service might
-remove obsolete PID file - I didn't try this method though):
+or else try to restart the service (stopping the service might remove obsolete
+PID file - I didn't try this method though):
 
 ```sh
 $ brew services restart postgresql@9.5
 ```
 
-command not found: psql
------------------------
+## command not found: psql
 
 ```
 $ psql --version
@@ -126,8 +126,8 @@ zsh: command not found: psql
 
 **solution**
 
-in my case only versioned formula of PostgreSQL (`postgresql@9.5`) was
-installed but it didn't create a symlink to `psql` in _/usr/local/bin/_.
+in my case only versioned formula of PostgreSQL (`postgresql@9.5`) was installed
+but it didn't create a symlink to `psql` in _/usr/local/bin/_.
 
 to solve this problem either:
 
@@ -149,8 +149,7 @@ to solve this problem either:
   path=(/usr/local/Cellar/postgresql@9.5/9.5.10/bin $path)
   ```
 
-psql: could not connect to server: No such file or director
------------------------------------------------------------
+## psql: could not connect to server: No such file or director
 
 ```
 $ psql -d postgres
@@ -161,8 +160,8 @@ psql: could not connect to server: No such file or directory
 
 **solution**
 
-to diagnose this and similar problems run `postgres` in the foreground
-(see `brew info postgresql output`):
+to diagnose this and similar problems run `postgres` in the foreground (see
+`brew info postgresql output`):
 
 ```
 $ pg_ctl -D /usr/local/var/postgres start
@@ -174,11 +173,11 @@ pg_ctl: could not start server
 Examine the log output.
 ```
 
-it turns out _/usr/local/var/postgres_ contains data for PostgreSQL 9.6
-(when `postgresql` formula was installed, 9.6 was the latest version).
+it turns out _/usr/local/var/postgres_ contains data for PostgreSQL 9.6 (when
+`postgresql` formula was installed, 9.6 was the latest version).
 
-=> it's necessary to migrate existing data from a previous major version
-(9.6) to the latest one (10) (see `brew info postgresql output`):
+=> it's necessary to migrate existing data from a previous major version (9.6)
+to the latest one (10) (see `brew info postgresql output`):
 
 ```
 $ brew postgresql-upgrade-database
@@ -196,11 +195,11 @@ This user must also own the server process.
 ==> Successfully started `postgresql` (label: homebrew.mxcl.postgresql)
 ```
 
-this command will install a previous major version of PostgreSQL
-(if it has been uninstalled) which is required to upgrade database.
+this command will install a previous major version of PostgreSQL (if it has been
+uninstalled) which is required to upgrade database.
 
-after upgrade is complete, you can remove old major version along
-with its data (_/usr/local/var/postgres.old_):
+after upgrade is complete, you can remove old major version along with its data
+(_/usr/local/var/postgres.old_):
 
 ```sh
 $ brew uninstall postgresql@9.6
@@ -227,8 +226,7 @@ Type "help" for help.
 postgres=#
 ```
 
-Error: Invalid data directory for cluster 10 main
--------------------------------------------------
+## Error: Invalid data directory for cluster 10 main
 
 ```sh
 $ psql -U sith_production -d sith_production
@@ -257,26 +255,72 @@ restart `postgresql` service for changes to take effect.
 
 <https://stackoverflow.com/a/26735105/3632318>:
 
-> Authentication methods details:
-> trust - anyone who can connect to the server is authorized to access the database
-> peer - use client's operating system user name as database user name to access it.
-> md5 - password-base authentication
+> Authentication methods details: trust - anyone who can connect to the server
+> is authorized to access the database peer - use client's operating system user
+> name as database user name to access it. md5 - password-base authentication
 
-FATAL: remaining connection slots are reserved for non-replication superuser connections
-----------------------------------------------------------------------------------------
+## FATAL: remaining connection slots are reserved for non-replication superuser connections
 
 this error indicates you have run out of connections.
 
 **solution**
 
-see [PostgreSQL - Tuning]({% post_url 2019-04-18-postgresql-tuning %}) on how
-to increase the maximum number of allowed connections.
+see [PostgreSQL - Tuning]({% post_url 2019-04-18-postgresql-tuning %}) on how to
+increase the maximum number of allowed connections.
 
 see [PostgreSQL - Monitoring]({% post_url 2019-04-18-postgresql-monitoring %})
 on how to monitor open connections.
 
-FATAL: sorry, too many clients already
---------------------------------------
+## FATAL: sorry, too many clients already
 
 most likely this error is also caused by a low number of allowed connections -
 see solution for the error above.
+
+## could not access the server configuration file "/etc/postgresql/12/main/postgresql.conf"
+
+```
+$ sudo -u postgres /usr/lib/postgresql/12/bin/postgres \
+  -D /var/lib/postgresql/12/main \
+  -c config_file=/etc/postgresql/12/main/postgresql.conf
+
+postgres: could not access the server configuration file "/etc/postgresql/12/main/postgresql.conf": No such file or directory
+```
+
+**solution**
+
+[1]: {% post_url 2017-07-20-postgresql-tips %}
+
+the problem was with already existing cluster.
+
+first I reinstalled PostgreSQL manually:
+
+```sh
+$ sudo apt autoremove --purge postgresql-12
+$ sudo rm -rf /etc/postgresql
+$ sudo rm -rf /run/postgresql
+$ sudo apt install postgresql-12
+```
+
+but cluster from previous installation must have remained in the system so a new
+cluster was not created when running the last command:
+
+```
+$ sudo apt install postgresql-12
+...
+Configuring already existing cluster (configuration: /etc/postgresql/12/main, data: /var/lib/postgresql/12/main, owner: 113:118)
+Error: move_conffile: required configuration file /var/lib/postgresql/12/main/postgresql.conf does not exist
+Error: could not create default cluster. Please create it manually with
+
+  pg_createcluster 12 main --start
+
+or a similar command (see 'man pg_createcluster').
+```
+
+=> solution is to remove old clusters manually and run installation again:
+
+```sh
+$ sudo rm -rf /var/lib/postgresql
+$ sudo apt install postgresql-12
+```
+
+see the tip on how to remove PostgreSQL completely in [PostgreSQL - Tips][1].

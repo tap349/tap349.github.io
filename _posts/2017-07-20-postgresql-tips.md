@@ -336,7 +336,7 @@ restore:
 $ tar xvf model_name.tar
 $ cd model_name/databases/
 $ gunzip PostgreSQL.sql.gz
-$ psql -U USERNAME -f ./PostgreSQL.sql DATABASE
+$ psql -h localhost -U USERNAME -f ./PostgreSQL.sql DATABASE
 $ RAILS_ENV=test rails db:structure:load
 ```
 

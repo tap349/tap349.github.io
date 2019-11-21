@@ -7,6 +7,8 @@ comments: true
 categories: [ruby]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,8 +16,7 @@ categories: [ruby]
 {:toc}
 <hr>
 
-Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
-------------------------------------------------------------------
+## Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
 
 the error occurred after installing a new Ruby version (2.5.0):
 
@@ -34,8 +35,7 @@ try to update offending gem:
 $ bundle update json
 ```
 
-uninitialized constant Gem::BundlerVersionFinder (NameError)
-------------------------------------------------------------
+## uninitialized constant Gem::BundlerVersionFinder (NameError)
 
 ```
 $ berks
@@ -51,24 +51,24 @@ error was gone after upgrading Ruby version from 2.5.0 to 2.5.1:
 $ echo 2.5.1 > .ruby-version
 ```
 
-if this doesn't help, try to clean up old versions of installed gems
-(this will remove currently installed versions as well):
+if this doesn't help, try to clean up old versions of installed gems (this will
+remove currently installed versions as well):
 
 ```sh
 $ gem cleanup
 $ bundle
 ```
 
-`gem cleanup` removes bundled gems only (gems specified in _Gemfile_ of
-current project) though it might affect other projects if they are using
-the same gems (run `bundle` for those projects as well in that case).
+`gem cleanup` removes bundled gems only (gems specified in _Gemfile_ of current
+project) though it might affect other projects if they are using the same gems
+(run `bundle` for those projects as well in that case).
 
-***UPDATE***
+**_UPDATE_**
 
 it has turned out the problem was caused by specific version of either
 `berkshelf` or `chef` or both.
 
-old versions (there is error):
+old versions (error is present):
 
 ```ruby
 gem 'berkshelf', '6.3.1'
@@ -82,8 +82,7 @@ gem 'berkshelf', '7.0.2'
 gem 'chef', '14.1.1'
 ```
 
-can't find gem bundler (>= 0.a) with executable bundle (Gem::GemNotFoundException)
-----------------------------------------------------------------------------------
+## can't find gem bundler (>= 0.a) with executable bundle (Gem::GemNotFoundException)
 
 ```
 $ bundle

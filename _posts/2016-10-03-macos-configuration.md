@@ -219,6 +219,11 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - Input (tab):
   - Input volume: min (disable microphone)
 
+### Keyboard
+
+- Text (tab):
+  - [ ] Use smart quotes and dashes
+
 ### iCloud
 
 - [x] iCloud Drive:

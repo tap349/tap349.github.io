@@ -1744,3 +1744,31 @@ import {Picker} from 'react-native';
 **solution**
 
 see the tip on how to style native Picker.
+
+### net::ERR_CLEARTEXT_NOT_PERMITTED
+
+we got this error in WebView after being redirected to another page:
+
+```
+Error loading page
+Domain: undefined
+Error Code: -1
+Description: net::ERR_CLEARTEXT_NOT_PERMITTED
+```
+
+**solution**
+
+1. <https://stackoverflow.com/a/52708032/3632318>
+
+```diff
+  <!-- android/app/src/main/AndroidManifest.xml -->
+
+  <application
+    android:name=".MainApplication"
+    android:label="@string/app_name"
+    android:icon="@mipmap/ic_launcher"
+    android:allowBackup="false"
+-   android:theme="@style/AppTheme">
++   android:theme="@style/AppTheme"
++   android:usesCleartextTraffic="true">
+```

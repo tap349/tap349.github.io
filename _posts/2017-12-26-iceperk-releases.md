@@ -319,10 +319,6 @@ working okay:
 - [`iceperkapp`] create and push branch for new release from `master` branch
   (say, `release_3_17`)
 
-## increment version number and build number
-
-increment version number and build number in both iOS and Android projects.
-
 ### iOS
 
 _ios/iceperkapp/Info.plist_ (Xcode: `General` → `Identity` → `Build`):

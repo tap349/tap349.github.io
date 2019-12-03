@@ -7,6 +7,8 @@ comments: true
 categories: [postgresql]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,8 +16,7 @@ categories: [postgresql]
 {:toc}
 <hr>
 
-9.4 → 9.5
----------
+## 9.4 → 9.5
 
 1. <https://www.postgresql.org/docs/9.5/static/pgupgrade.html>
 2. <https://www.postgresql.org/docs/10/static/pgupgrade.html>
@@ -36,8 +37,8 @@ $ brew install postgresql
 $ brew link postgresql
 ```
 
-`install` command will also initialize new database but
-you can always do it manually if something goes wrong:
+`install` command will also initialize new database but you can always do it
+manually if something goes wrong:
 
 ```sh
 $ initdb /usr/local/var/postgres
@@ -90,8 +91,7 @@ P.S. also 2 scripts are generated after `pg_upgrade` in PWD:
 - _analyze_new_cluster.sh_ (generate statistics for 9.5)
 - _delete_old_cluster.sh_ (delete 9.4 data - same command as above)
 
-10.6 → 11.1
------------
+## 10.6 → 11.1
 
 just run `brew postgresql-upgrade-database`:
 

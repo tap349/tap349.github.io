@@ -7,6 +7,8 @@ comments: true
 categories: [docker]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -14,8 +16,7 @@ categories: [docker]
 {:toc}
 <hr>
 
-(how to) revert container to its original image
------------------------------------------------
+## (how to) revert container to its original image
 
 it might be useful to discard all data persisted inside container.
 
@@ -27,43 +28,16 @@ $ docker-compose rm db
 $ docker-compose up db
 ```
 
-(how to) rebuild image
-----------------------
+## (how to) rebuild image
 
-it might necessary when configuration options applied at build time are
+it might be necessary when configuration options applied at build time are
 changed - say, you want to edit docker image tag:
-
-```yaml
-# docker-compose.yml
-
-version: '2.2'
-services:
-  db:
-    build:
-      context: .
-      dockerfile: postgresql.dockerfile
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - 5434:5432
-```
 
 ```diff
   # postgresql.dockerfile
 
 - FROM postgres:10.4
 + FROM postgres:11.1
-```
-
-in case of `db` service it might be necessary (1) to rebuild image AND (2) to
-create a new container because in old one the data directory might have been
-initialized by older version of PostgreSQL:
-
-```
-db_1  | 2019-02-18 09:19:23.315 UTC [1] DETAIL:  The data directory was
-  initialized by PostgreSQL version 10, which is not compatible with this
-  version 11.1 (Debian 11.1-1.pgdg90+1).
 ```
 
 > <https://github.com/docker/compose/issues/1487#issuecomment-107048571>
@@ -78,3 +52,52 @@ $ docker-compose build db
 $ docker-compose rm db
 $ docker-compose up db
 ```
+
+NOTE: this destroys all data - if you want to migrate data, see the next tip.
+
+## (how to) migrate data from old Postgres version
+
+```diff
+  # docker-compose.yml
+
+  version: '2'
+  services:
+    db:
+-     image: postgres:9.4
++     image: postgres:12.0
+```
+
+now you need to migrate data - otherwise you'll get such error:
+
+```
+$ docker-compose up db
+...
+db_1  | 2019-02-18 09:19:23.315 UTC [1] DETAIL:  The data directory was
+  initialized by PostgreSQL version 10, which is not compatible with this
+  version 11.1 (Debian 11.1-1.pgdg90+1).
+```
+
+- backup database
+
+  1. [PostgreSQL - Tips]({% post_url 2017-07-20-postgresql-tips %})
+
+  ```sh
+  $ docker-compose exec db pg_dumpall -U postgres > dump.sql
+  ```
+
+- rebuild image
+
+  ```sh
+  $ docker-compose stop db
+  $ docker-compose build db
+  $ docker-compose rm db
+  $ docker-compose up db
+  ```
+
+- restore database
+
+  1. [PostgreSQL - Tips]({% post_url 2017-07-20-postgresql-tips %})
+
+  ```sh
+  $ cat dump.sql | eval 'docker-compose exec -T db psql -U "postgres" -d "myapp_development"'
+  ```

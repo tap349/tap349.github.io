@@ -14,8 +14,7 @@ categories: [postgresql, rails]
 {:toc}
 <hr>
 
-psql
-----
+## psql
 
 1. <https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-META-COMMANDS>
 
@@ -181,8 +180,7 @@ _/usr/local/Cellar/postgresql/9.6.3/share/postgresql/extension/_.
   CREATE EXTENSION pg_trgm;
   ```
 
-query optimization
-------------------
+## query optimization
 
 1. <https://robots.thoughtbot.com/why-postgres-wont-always-use-an-index>
 
@@ -273,8 +271,7 @@ query optimization
   CREATE INDEX teams_on_is_public_idx ON teams (is_public);
   ```
 
-backup
-------
+## backup
 
 ### using `pg_dump`
 
@@ -450,8 +447,7 @@ $ psql -h localhost -p 5434 -U postgres -d reika_dev
 SELECT * FROM pg_timezone_names WHERE name='Europe/Moscow';
 ```
 
-(how to) drop database
-----------------------
+## (how to) drop database
 
 the point is that you can't connect to the database you're going to drop -
 you'll get the error then:

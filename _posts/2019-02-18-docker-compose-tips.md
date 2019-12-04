@@ -57,6 +57,8 @@ NOTE: this destroys all data - if you want to migrate data, see the next tip.
 
 ## (how to) migrate data from old Postgres version
 
+1. <https://peter.grman.at/upgrade-postgres-9-container-to-10/>
+
 ```diff
   # docker-compose.yml
 

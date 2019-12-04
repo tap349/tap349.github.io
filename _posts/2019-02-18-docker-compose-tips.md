@@ -98,6 +98,13 @@ db_1  | 2019-02-18 09:19:23.315 UTC [1] DETAIL:  The data directory was
 
   1. [PostgreSQL - Tips]({% post_url 2017-07-20-postgresql-tips %})
 
+  > <https://www.postgresql.org/docs/9.1/backup-dump.html#BACKUP-DUMP-ALL>
+  >
+  > Actually, you can specify any existing database name to start from...
+  >
+  > pg_dumpall works by emitting commands to re-create roles, tablespaces, and
+  > empty databases, then invoking pg_dump for each database.
+
   ```sh
   $ cat dump.sql | eval 'docker-compose exec -T db psql -U "postgres" -d "myapp_development"'
   ```

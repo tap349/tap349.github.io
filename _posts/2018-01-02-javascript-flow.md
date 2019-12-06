@@ -525,6 +525,50 @@ $ yarn run flow --show-all-branches
 
 output gives detailed information about what Flow is complaining about.
 
+## tips
+
+### using with GraphQL
+
+- sync GraphQL fragments (used in queries) to GraphQL types on server
+- sync Flow types to GraphQL fragments
+- use ad hoc nested Flow types for associations in fragments
+
+  ```flow
+  // flow-typed/ExtraPracticeAds.js
+
+  declare type ExtraPracticeAd = {
+    +game: {
+      +address: ?string,
+    },
+    +extraPracticeBookings: $ReadOnlyArray<{
+      +id: number,
+    }>,
+  };
+  ```
+
+- type nested objects with `$PropertyType` and `$ElementType`
+
+  1. <https://github.com/facebook/flow/issues/4896>
+  2. <https://flow.org/en/docs/types/utilities/#toc-propertytype>
+  3. <https://flow.org/en/docs/types/utilities/#toc-elementtype>
+
+  > <https://flow.org/en/docs/types/utilities/#toc-elementtype>
+  >
+  > one of the things that also makes $ElementType<T, K> more powerful than
+  > $PropertyType<T, k> is that you can use it with generics.
+
+  => `$ElementType` can be always used in place of `$PropertyType`.
+
+  ```flow
+  type OwnProps = {
+    game: $PropertyType<ExtraPracticeAd, 'game'>,
+    extraPracticeBooking: $ElementType<
+      $PropertyType<ExtraPracticeAd, 'extraPracticeBookings'>,
+      number,
+    >,
+  };
+  ```
+
 ## troubleshooting
 
 ### Flow typechecks the whole node_modules/ directory

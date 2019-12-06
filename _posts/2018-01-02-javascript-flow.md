@@ -531,6 +531,10 @@ output gives detailed information about what Flow is complaining about.
 
 - sync GraphQL fragments (used in queries) to GraphQL types on server
 - sync Flow types to GraphQL fragments
+
+  if there are multiple fragments (say, for different use cases) - create
+  different Flow types.
+
 - use ad hoc nested Flow types for associations in fragments
 
   ```flow

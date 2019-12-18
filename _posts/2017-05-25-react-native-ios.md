@@ -1523,6 +1523,10 @@ the UIManager.
 $ react-native link react-native-admob
 ```
 
+***UPDATE (2019-12-18)***
+
+Podspec file was added in `react-native-admob@v2.0.0-beta.6`.
+
 ### 'protobuf/Any.pbobjc.h' file not found
 
 ```

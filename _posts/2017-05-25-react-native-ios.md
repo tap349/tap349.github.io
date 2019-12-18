@@ -1247,6 +1247,15 @@ $ cd ios
 $ pod install
 ```
 
+***UPDATE (2019-12-18)***
+
+| Xcode               |
+| ------------------- |
+| `Project navigator` |
+
+there were 2 references to _Pods_ project in application workspace in Xcode =>
+I removed one of them.
+
 ### 'Flurry.h' file not found
 
 error occurs after switching to `react-native-flurry-sdk` npm package (from

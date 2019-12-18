@@ -1651,3 +1651,15 @@ it doesn't matter much on case-insensitive filesystems but that's not my case.
   - /ios/Pods
   + /ios/Pods/
   ```
+
+**_UPDATE (2019-12-18)_**
+
+1. <https://github.com/protocolbuffers/protobuf/issues/6803#issuecomment-565606351>
+
+```ruby
+# ios/Podfile
+
+post_install do |installer|
+  system('cd Pods/Headers/Public; ln -s Protobuf protobuf')
+end
+```

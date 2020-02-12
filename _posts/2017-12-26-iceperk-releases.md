@@ -233,7 +233,7 @@ or else it's possible to run sanity checks on real device instead of emulator
   $ build_apk
   ```
 
-  APK is saved as _android/app/build/outputs/apk/app-release.apk_.
+  APK is saved as _android/app/build/outputs/apk/release/app-release.apk_.
 
 - upload APK to Google Drive
 

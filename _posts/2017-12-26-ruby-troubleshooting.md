@@ -137,3 +137,25 @@ $ gem install bundler -v 1.16.1
 
 in many cases this solution is preferable since it's easier and causes less
 problems with CI and deployment.
+
+## [__NSCFConstantString initialize] may have been in progress in another thread when fork() was called
+
+```
+$ rails console
+[1] pry(main)> Profile.count
+objc[29838]: +[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called.
+objc[29838]: +[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.
+```
+
+**solution**
+
+1. <https://github.com/puma/puma/issues/2084>
+
+error has something to do with the latest version of `psql` (12.1) that must be
+used by `pg` gem (`psql` is provided by `libpq` package in my case).
+
+- edit `libpq` formula to install old version (11.7)
+- uninstall and install `libpq` package
+- reinstall `pg` gem to build native extensions against old version of `libpq`
+- rollback changes in `libpq` formula
+- uninstall and install `libpq` package

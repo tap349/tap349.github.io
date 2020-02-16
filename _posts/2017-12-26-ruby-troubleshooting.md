@@ -161,6 +161,8 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
   ```
 
   ```diff
+    # /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/libpq.rb
+
     class Libpq < Formula
       desc "Postgres C API library"
       homepage "https://www.postgresql.org/docs/12/libpq.html"
@@ -179,10 +181,12 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
   psql (PostgreSQL) 11.7
   ```
 
+  NOTE: maybe it's not necessary to build from source.
+
 - reinstall `pg` gem to build native extensions against old version of `libpq`
 
   ```diff
-  # Gemfile
+    # Gemfile
 
   - gem 'pg'
   ```
@@ -192,7 +196,7 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
   ```
 
   ```diff
-  # Gemfile
+    # Gemfile
 
   + gem 'pg'
   ```

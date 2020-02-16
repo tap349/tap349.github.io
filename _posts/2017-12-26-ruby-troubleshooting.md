@@ -189,6 +189,7 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
     # Gemfile
 
   - gem 'pg'
+  + # gem 'pg'
   ```
 
   ```sh
@@ -198,6 +199,7 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
   ```diff
     # Gemfile
 
+  - # gem 'pg'
   + gem 'pg'
   ```
 

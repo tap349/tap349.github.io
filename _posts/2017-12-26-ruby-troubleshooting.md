@@ -155,7 +155,63 @@ error has something to do with the latest version of `psql` (12.1) that must be
 used by `pg` gem (`psql` is provided by `libpq` package in my case).
 
 - edit `libpq` formula to install old version (11.7)
-- uninstall and install `libpq` package
+
+  ```sh
+  $ brew edit libpq
+  ```
+
+  ```diff
+    class Libpq < Formula
+      desc "Postgres C API library"
+      homepage "https://www.postgresql.org/docs/12/libpq.html"
+  -   url "https://ftp.postgresql.org/pub/source/v12.1/postgresql-12.1.tar.bz2"
+  -   sha256 "a09bf3abbaf6763980d0f8acbb943b7629a8b20073de18d867aecdb7988483ed"
+  +   url "https://ftp.postgresql.org/pub/source/v11.7/postgresql-11.7.tar.bz2"
+  +   sha256 "324ae93a8846fbb6a25d562d271bc441ffa8794654c5b2839384834de220a313"
+      revision 1
+  ```
+
+- reinstall `libpq` package from source
+
+  ```sh
+  $ brew reinstall libpq --build-from-source
+  $ psql --version
+  psql (PostgreSQL) 11.7
+  ```
+
 - reinstall `pg` gem to build native extensions against old version of `libpq`
+
+  ```diff
+  # Gemfile
+
+  - gem 'pg'
+  ```
+
+  ```sh
+  $ bundle
+  ```
+
+  ```diff
+  # Gemfile
+
+  + gem 'pg'
+  ```
+
+  ```sh
+  $ bundle
+  ```
+
 - rollback changes in `libpq` formula
-- uninstall and install `libpq` package
+
+  ```sh
+  $ cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
+  $ git checkout Formula/libpq.rb
+  ```
+
+- reinstall `libpq` package
+
+  ```sh
+  $ brew reinstall libpq
+  $ psql --version
+  psql (PostgreSQL) 12.1
+  ```

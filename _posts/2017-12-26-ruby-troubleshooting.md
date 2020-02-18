@@ -187,21 +187,16 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
 
 - reinstall `pg` gem to build native extensions against old version of `libpq`
 
-  ```diff
-    # Gemfile
-
-  - gem 'pg'
-  + #gem 'pg'
-  ```
-
   ```sh
-  $ bundle
+  $ bundle remove pg
   ```
+
+  NOTE: it doesn't work if you remove `gem 'pg'` from _Gemfile_ manually and run
+  `bundle` afterwards.
 
   ```diff
     # Gemfile
 
-  - #gem 'pg'
   + gem 'pg'
   ```
 

@@ -181,7 +181,9 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
   psql (PostgreSQL) 11.7
   ```
 
-  NOTE: maybe it's not necessary to build from source.
+  if you try to install `libpq` bottle (without `--build-from-source` option),
+  `brew` will fallback to building from source because old versions of `libpq`
+  bottle are not available.
 
 - reinstall `pg` gem to build native extensions against old version of `libpq`
 

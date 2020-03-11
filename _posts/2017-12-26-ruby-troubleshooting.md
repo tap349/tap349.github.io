@@ -209,6 +209,7 @@ used by `pg` gem (`psql` is provided by `libpq` package in my case).
   ```sh
   $ cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
   $ git checkout Formula/libpq.rb
+  $ cd -
   ```
 
 - reinstall `libpq` package

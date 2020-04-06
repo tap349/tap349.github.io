@@ -144,6 +144,16 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - [x] Automatically hide and show the Dock
 - [ ] Show recent applications in Dock
 
+### Users & Groups
+
+- Login Items (tab):
+  - VPNAutoConnect (Hide [ ])
+  - Sip (Hide [ ])
+  - Flexiglass (Hide [ ])
+  - Cloud Mail.Ru (Hide [ ])
+  - smcFanControl (Hide [ ])
+  - Docker (Hide [ ])
+
 ### Security & Privacy
 
 - General (tab):

@@ -14,8 +14,7 @@ categories: [elixir, ecto]
 {:toc}
 <hr>
 
-(DBConnection.ConnectionError) connection not available and request was dropped from queue after 171ms
-------------------------------------------------------------------------------------------------------
+## (DBConnection.ConnectionError) connection not available and request was dropped from queue after 171ms
 
 error occurs when importing lots of entries in batches (batch size is 1000)
 with `Ecto.Repo.insert_all/3`:
@@ -67,8 +66,7 @@ with `Ecto.Repo.insert_all/3`:
 +   queue_interval: 100_000
 ```
 
-(DBConnection.ConnectionError) client timed out because it queued and checked out the connection for longer than 15000ms
-------------------------------------------------------------------------------------------------------------------------
+## (DBConnection.ConnectionError) client timed out because it queued and checked out the connection for longer than 15000ms
 
 ```
 iex> MyApp.User.Mutator.delete_all()
@@ -153,8 +151,7 @@ def execute(adapter_meta, query_meta, prepared, params, opts) do
 end
 ```
 
-(Postgrex.Error) FATAL 53300 (too_many_connections) sorry, too many clients already
------------------------------------------------------------------------------------
+## (Postgrex.Error) FATAL 53300 (too_many_connections) sorry, too many clients already
 
 I got this error when running lots of tests asynchronously:
 
@@ -174,3 +171,25 @@ there are 2 ways to fix this error:
 
 - increase `max_connections` in _postgresql.conf_
 - or decrease `pool_size` in _config/test.secret.exs_
+
+## (Postgrex.QueryError) postgresql protocol can not handle 158816 parameters, the maximum is 65535
+
+error occurs when importing too many entries:
+
+```
+[error] Postgrex.Protocol (#PID<0.2502.0>) disconnected: ** (Postgrex.QueryError) postgresql protocol can not handle 158816 parameters, the maximum is 65535
+...
+** (Postgrex.QueryError) postgresql protocol can not handle 158816 parameters, the maximum is 65535
+  (ecto_sql 3.4.2) lib/ecto/adapters/sql.ex:612: Ecto.Adapters.SQL.raise_sql_call_error/1
+  (ecto_sql 3.4.2) lib/ecto/adapters/sql.ex:521: Ecto.Adapters.SQL.insert_all/8
+  (ecto 3.4.0) lib/ecto/repo/schema.ex:54: Ecto.Repo.Schema.do_insert_all/6
+  (yancy 0.1.0) lib/yancy/yd/agency_client/operations/collect_daily_campaign_reports.ex:56: anonymous fn/3 in Yancy.YD.AgencyClient.Operations.CollectDailyCampaignReports.import_campaign_reports/3
+```
+
+**solution**
+
+1. <https://github.com/commanded/eventstore/issues/77>
+
+insert entries in batches: if row has 20 columns, max batch size must be
+`65536 / 20 = floor(3276)`.
+

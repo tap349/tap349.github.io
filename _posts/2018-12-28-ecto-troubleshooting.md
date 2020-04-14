@@ -7,6 +7,8 @@ comments: true
 categories: [elixir, ecto]
 ---
 
+<!-- @format -->
+
 <!-- more -->
 
 <!-- prettier-ignore -->
@@ -16,8 +18,8 @@ categories: [elixir, ecto]
 
 ## (DBConnection.ConnectionError) connection not available and request was dropped from queue after 171ms
 
-error occurs when importing lots of entries in batches (batch size is 1000)
-with `Ecto.Repo.insert_all/3`:
+error occurs when importing lots of entries in batches (batch size is 1000) with
+`Ecto.Repo.insert_all/3`:
 
 ```
 [error] Postgrex.Protocol (#PID<0.463.0>) disconnected: ** (DBConnection.ConnectionError) client #PID<0.553.0> exited
@@ -41,16 +43,16 @@ with `Ecto.Repo.insert_all/3`:
 >
 > Handling requests is done through a queue.
 >
-> :queue_target in milliseconds, defaults to 50
-> :queue_interval in milliseconds, defaults to 1000
+> :queue_target in milliseconds, defaults to 50 :queue_interval in milliseconds,
+> defaults to 1000
 >
-> Our goal is to stay under :queue_target for :queue_interval. In case we
-> can’t reach that, then we double the :queue_target. If we go above that,
-> then we start dropping messages.
+> Our goal is to stay under :queue_target for :queue_interval. In case we can’t
+> reach that, then we double the :queue_target. If we go above that, then we
+> start dropping messages.
 >
-> For example, by default our queue time is 50ms. If we stay above 50ms
-> for a whole second, we double the target to 100ms and we start dropping
-> messages once it goes above the new limit.
+> For example, by default our queue time is 50ms. If we stay above 50ms for a
+> whole second, we double the target to 100ms and we start dropping messages
+> once it goes above the new limit.
 
 ```diff
   # config/prod.secret.exs
@@ -87,7 +89,7 @@ which defaults to 15_000 ms:
 > <https://github.com/elixir-ecto/ecto/issues/1838#issuecomment-265692336>
 >
 > You can either Ecto.Adapters.SQL.query(Repo, query, params, timeout: 30_000)
-> or by setting the timeout: 30_000 in your Repo configuration in your config/*
+> or by setting the timeout: 30_000 in your Repo configuration in your config/\*
 > files.
 
 - on per a repository operation basis
@@ -97,7 +99,7 @@ which defaults to 15_000 ms:
   > Almost all of the repository operations below accept the following options:
   >
   > :timeout - The time in milliseconds to wait for the query call to finish,
-  >   :infinity will wait indefinitely (default: 15000);
+  > :infinity will wait indefinitely (default: 15000);
 
   ```elixir
   MyApp.Repo.delete_all(MyApp.User, timeout: 120_000)
@@ -135,8 +137,8 @@ which defaults to 15_000 ms:
   end
   ```
 
-set breakpoint in `Ecto.Adapters.SQL.execute/5` to see actual options being
-used when performing repository operation:
+set breakpoint in `Ecto.Adapters.SQL.execute/5` to see actual options being used
+when performing repository operation:
 
 ```elixir
 # deps/ecto_sql/lib/ecto/adapters/sql.ex
@@ -192,4 +194,3 @@ error occurs when importing too many entries:
 
 insert entries in batches: if row has 20 columns, max batch size must be
 `65536 / 20 = floor(3276)`.
-

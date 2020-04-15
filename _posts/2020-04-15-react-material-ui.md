@@ -29,4 +29,6 @@ categories: [react, mui]
   `Box` and `flex: 1` to its child) remove `Box` wrapper at all and add outer
   spacing properties directly to child component styles.
 
+  in simple cases and unless required still prefer `Box` to layout components.
+
 - use styles for inner styling (including width and height)

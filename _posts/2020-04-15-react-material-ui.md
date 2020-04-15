@@ -2,7 +2,7 @@
 layout: post
 title: React - Material UI
 date: 2020-04-15 13:28:17 +0300
-access: private
+access: public
 comments: true
 categories: [react, mui]
 ---

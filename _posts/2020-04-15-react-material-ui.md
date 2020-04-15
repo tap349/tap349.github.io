@@ -20,17 +20,13 @@ categories: [react, mui]
 
 1. <https://material-ui.com/system/spacing/>
 
-- use `Box` component for outer spacing (margin, padding)
+- use `Box` component for outer spacing (`margin`, `padding`) where possible
+
+  in some cases additional `Box` components may break existing flexbox layout
+  because by default they have `display: block` property.
+
+  in this case to avoid adding extra styles (say, `display: flex; flex: 1` to
+  `Box` and `flex: 1` to its child) remove `Box` wrapper at all and add outer
+  spacing properties directly to child component styles.
+
 - use styles for inner styling (including width and height)
-
-don't use `Box` for inner styling:
-
-> <https://material-ui.com/components/box/#overriding-material-ui-components>
->
-> However, sometimes you have to target the underlying DOM element. For
-> instance, you want to change the text color of the button. The Button
-> component defines its own color. CSS inheritance doesn't help.
-
-To workaround this problem you can use `React.cloneElement()` or `render` props
-but in this case you would have to rely on the order of imports which looks
-ugly.

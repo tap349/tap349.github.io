@@ -16,7 +16,9 @@ categories: [react, mui]
 {:toc}
 <hr>
 
-## spacing
+## style guide
+
+### spacing
 
 1. <https://material-ui.com/system/spacing/>
 

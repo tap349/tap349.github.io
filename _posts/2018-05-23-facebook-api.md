@@ -411,16 +411,16 @@ generating PAT with `read_page_mailboxes` permission in GAE - see below).
   | --- |
   |     |
 
-  - `Application` (combobox): `<MY_APP>`
+  - `Facebook App` (combobox): `<MY_APP>`
 
   | GAE                                                   |
   | ----------------------------------------------------- |
-  | `Get Token` (dropdown menu) → `Get User Access Token` |
+  | `User or Page` (dropdown menu) → `Get User Access Token` |
 
   > Select Permissions
 
   - [x] `read_page_mailboxes`
-  - `Get Access Token` (button)
+  - `Generate Access Token` (button)
 
 - get short-lived PAT
 

@@ -341,3 +341,49 @@ is in development mode. It must be in public to create this ad.
 
 make sure a proper application with status `Live` is selected in GAE
 when generating access token.
+
+### Requires ads_management permission to manage the object
+
+formatted errors from systemd journal:
+
+```
+Error collecting insight for ad account 888 (2020-04-30):
+
+%{
+  body: %{
+    "error" => %{
+      "code" => 200,
+      "fbtrace_id" => "A0vUFt8Ada8MHHd1UdAk0UV",
+      "message" => "(#200) Requires ads_management permission to manage the object",
+      "type" => "OAuthException"
+    }
+  },
+  status: 403
+}
+```
+
+```
+Error granting access to ad account 5069:
+
+%{
+  body: %{
+    "error" => %{
+      "code" => 294,
+      "fbtrace_id" => "AiCUwKc_wUcJFqjQQYqtQIR",
+      "message" => "(#294) Managing advertisements requires an access token with the extended permission for ads_management",
+      "type" => "OAuthException"
+    }
+  },
+  status: 403
+}
+```
+
+**solution**
+
+I checked existing access token permissions in ADT - there were no `ads_read`
+and `ads_management` permissions and I couldn't generate a new UAT with these
+permissions in GAE.
+
+then I switched from live to development mode - all permissions appeared again.
+I'm not sure it was exactly because of switching to development mode but these
+events happened almost one after another.

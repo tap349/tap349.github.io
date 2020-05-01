@@ -101,3 +101,19 @@ shown - it doesn't matter how many times I open and close application itself.
 solution is to kill `DashlaneAgent` process - say, using `htop` or
 `Activity Monitor`. login pop-up window must appear the next time Dashlane is
 launched.
+
+## youtube-dl is unable to download videos
+
+```
+$ youtube-dl <URL>
+...
+ERROR: unable to download video data: HTTP Error 403: Forbidden
+```
+
+**solution**
+
+1. <https://www.ostechnix.com/fix-unable-to-download-video-data-http-error-403-forbidden-error/>
+
+```sh
+$ youtube-dl --rm-cache-dir
+```

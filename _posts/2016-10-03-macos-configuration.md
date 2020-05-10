@@ -132,6 +132,29 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 
 ## System Preferences
 
+### Apple ID
+
+- [x] iCloud Drive:
+  - Options (button):
+    - [x] Books
+    - [x] Reminders
+    - [x] Weather
+    - [x] Voice Memos
+    - [x] System Preferences
+- [x] Photos
+- [ ] Mail
+- [x] Contacts
+- [x] Calendars
+- [x] Reminders
+- [x] Safari
+- [x] Notes
+- [ ] Siri
+- [x] Keychain
+- [x] Find My Mac
+- [ ] News
+- [ ] Stocks
+- [ ] Home
+
 ### General
 
 - [ ] Automatically hide and show the menu bar
@@ -153,6 +176,16 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Cloud Mail.Ru (Hide [ ])
   - smcFanControl (Hide [ ])
   - Docker (Hide [ ])
+
+### Accessibility
+
+NOTE: this option might cause significant delay when scrolling with inertia in
+iOS emulator.
+
+- Pointer Control (left menu):
+  - Mouse & Trackpad (tab):
+    - Trackpad Options... (button):
+      - [x] Enable dragging: three fingers drag
 
 ### Security & Privacy
 
@@ -236,22 +269,6 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 - Text (tab):
   - [ ] Use smart quotes and dashes
 
-### iCloud
-
-- [x] iCloud Drive:
-  - Options (button):
-    - [x] iBooks
-    - [x] Reminders
-    - [x] Weather
-    - [x] System Preferences
-- [x] Contacts
-- [x] Calendars
-- [x] Reminders
-- [x] Safari
-- [x] Notes
-- [x] Keychain
-- [x] Find My Mac
-
 ### Software Update
 
 - [ ] Automatically keep my Mac up to date
@@ -277,15 +294,6 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
     - Date options:
       - [ ] Show the day of the week
       - [x] Show date
-
-### Accessibility
-
-NOTE: currently disabled because of a significant delay when scrolling with
-inertia in iOS emulator.
-
-- Mouse & Trackpad (left menu):
-  - Trackpad Options... (button):
-    - [ ] Enable dragging: three fingers drag
 
 ## font configuration
 

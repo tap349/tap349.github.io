@@ -161,7 +161,7 @@ class User < ActiveRecord::Base
 ```
 
 pay attention that custom ransacker filter is defined on association model.
-this way filter will be applied (corresponding search conditions are present in URL) but filter values will not filled in filter itself (it will be empty).
+this way filter will be applied (corresponding search conditions are present in URL) but filter values will not be filled in filter itself (it will be empty).
 instead it's necessary to specify ransacker type datetime:
 
 ```ruby

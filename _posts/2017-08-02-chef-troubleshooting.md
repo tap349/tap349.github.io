@@ -581,3 +581,24 @@ end
 ```
 
 => prefix module names with `nginx::` when including `nginx::source` recipe.
+
+## Train::UserError: Sudo failed: sudo: a terminal is required to read the password
+
+```
+$ knife zero bootstrap instatinder --node-name instatinder
+...
+Connecting to instatinder using ssh
+ERROR: Train::UserError: Sudo failed: sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+```
+
+**solution**
+
+1. <https://github.com/chef/chef/issues/9404>
+
+it must be a bug in `train` gem when reading password from the standard input -
+specify both `--connection-password` and `--use-sudo-password` options so that
+you don't have to enter password at command line prompt:
+
+```
+$ knife zero bootstrap instatinder --node-name instatinder --connection-password PASSWORD --use-sudo-password
+```

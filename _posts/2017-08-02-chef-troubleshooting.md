@@ -602,3 +602,17 @@ you don't have to enter password at command line prompt:
 ```
 $ knife zero bootstrap instatinder --node-name instatinder --connection-password PASSWORD --use-sudo-password
 ```
+
+## Dependency 'ruby_rbenv' was not found. Please make sure it is in your Berksfile
+
+```
+$ berks update ruby_rbenv
+Dependency 'ruby_rbenv' was not found. Please make sure it is in your Berksfile, and then run `berks install` to download and install the missing dependencies.
+```
+
+**solution**
+
+```
+$ rm Berksfile.lock
+$ berks
+```

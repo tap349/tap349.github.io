@@ -616,3 +616,26 @@ Dependency 'ruby_rbenv' was not found. Please make sure it is in your Berksfile,
 $ rm Berksfile.lock
 $ berks
 ```
+
+## service[postgresql] cannot be found in the resource collection
+
+```
+$ berks vendor && knife zero converge 'name:instatinder'
+...
+Compiling Cookbooks...
+...
+[2020-07-16T09:47:14+00:00] FATAL: Chef::Exceptions::ResourceNotFound: resource postgresql_server_conf[configure postgresql] is configured to notify resource service[postgresql] with action reload, but service[postgresql] cannot be found in the resource collection. postgresql_server_conf[configure postgresql] is defined in .../instatinderchef/.chef/local-mode-cache/cache/cookbooks/rails_postgresql/recipes/server.rb:17:in `from_file'
+```
+
+**solution**
+
+it's safe to omit calling `postgresql_server_conf` resource at all:
+
+```diff
+  # cookbooks/rails_postgresql/recipes/server.rb
+
+- postgresql_server_conf 'configure postgresql' do
+-   version node['rails_postgresql']['version']
+-   notifies :reload, 'service[postgresql]'
+- end
+```

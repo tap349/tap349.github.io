@@ -639,3 +639,63 @@ it's safe to omit calling `postgresql_server_conf` resource at all:
 -   notifies :reload, 'service[postgresql]'
 - end
 ```
+
+## Cannot force update the current branch
+
+```
+$ berks vendor && knife zero converge 'name:instatinder'
+...
+* rbenv_plugin[ruby-build] action install
+  * git[Install ruby-build plugin] action sync
+    - set up remote tracking branches for https://github.com/rbenv/ruby-build.git at origin
+    ================================================================================
+    Error executing action `sync` on resource 'git[Install ruby-build plugin]'
+    ================================================================================
+
+    Mixlib::ShellOut::ShellCommandFailed
+    ------------------------------------
+    Expected process to exit with [0], but received '128'
+    ---- Begin output of git branch -f deploy f3cbd189041cbd46d4b0bfa9b30031149b4616ed ----
+    STDOUT:
+    STDERR: fatal: Cannot force update the current branch.
+    ---- End output of git branch -f deploy f3cbd189041cbd46d4b0bfa9b30031149b4616ed ----
+    Ran git branch -f deploy f3cbd189041cbd46d4b0bfa9b30031149b4616ed returned 128
+
+    Resource Declaration:
+    ---------------------
+    # In .../instatinderchef/.chef/local-mode-cache/cache/cookbooks/ruby_rbenv/resources/plugin.rb
+
+     32:   git "Install #{new_resource.name} plugin" do
+     33:     destination ::File.join(new_resource.root_path, 'plugins', new_resource.name)
+     34:     repository new_resource.git_url
+     35:     reference new_resource.git_ref
+     36:     user new_resource.user if new_resource.user
+     37:     checkout_branch 'deploy'
+     38:     action :sync
+     39:   end
+     40: end
+```
+
+**solution**
+
+1. <https://github.com/sous-chefs/ruby_rbenv/issues/289>
+
+> <https://stackoverflow.com/a/29559362/3632318>
+>
+> git branch -f my-backup origin/my-backup is allowed only if your current
+> branch is not my-backup
+
+checkout `master` branch in `ruby-build` repo for each user for whom you're
+running resources from `ruby_rbenv` cookbook:
+
+```sh
+$ ssh instatinder
+$ cd ~/.rbenv/plugins/ruby-build
+$ git checkout master
+```
+
+```sh
+$ ssh devops@instatinder
+$ cd ~/.rbenv/plugins/ruby-build
+$ git checkout master
+```

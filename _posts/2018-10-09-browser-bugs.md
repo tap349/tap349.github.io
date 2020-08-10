@@ -26,6 +26,10 @@ Opera (56.0.3051.36)
 
 - application crashes when opening and closing `Save Page As...` dialog box
 
+  ***UPDATE (2020-08-10)***
+
+  bug seems to be fixed in Opera 70.0.3728.95.
+
 Yandex (18.9.0)
 ---------------
 

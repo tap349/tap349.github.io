@@ -338,8 +338,9 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
   $ yarn
   ```
 
-- build and run Android application in emulator
+- build and run application in emulator
 
   ```sh
+  $ react-native run-ios
   $ react-native run-android
   ```

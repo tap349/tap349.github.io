@@ -272,7 +272,7 @@ configure Nginx as a reverse proxy to proxy requests to `https://onesignal.com`:
 
   input: new Android library file (_onesignal-release.aar_).
 
-  - rename _onesignal-release.aar_ to _onesignal-\<MY_APP>.aar
+  - rename _onesignal-release.aar_ to _onesignal-\<MY_APP>.aar_
 
     the name of AAR can be anything and it's not referenced anywhere directly
     including _android/build.gradle_.

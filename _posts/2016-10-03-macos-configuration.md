@@ -165,7 +165,6 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
 ### Users & Groups
 
 - Login Items (tab):
-  - VPNAutoConnect (Hide [ ])
   - Sip (Hide [ ])
   - Flexiglass (Hide [ ])
   - Cloud Mail.Ru (Hide [ ])

@@ -97,6 +97,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - GoPanda2
   - Grammarly
   - Notion
+  - Obsidian
   - Paragon Driver for Mac OS (see above)
   - Tomighty
     - Preferences:

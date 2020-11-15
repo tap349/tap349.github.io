@@ -169,6 +169,7 @@ NOTE: to backup files on external NTFS HDD use Paragon Driver for Mac OS
   - Flexiglass (Hide [ ])
   - Cloud Mail.Ru (Hide [ ])
   - smcFanControl (Hide [ ])
+  - Flux (Hide [ ])
   - Docker (Hide [ ])
 
 ### Accessibility

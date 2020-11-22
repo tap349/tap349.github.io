@@ -400,3 +400,15 @@ it's required to add proxy `View` with `pointerEvents='none'` - otherwise
   // somewhere inside RN component:
   I18n.numberToCurrency(100);
   ```
+
+## (how to) expand absolutely positioned view
+
+```javascript
+width: '100%'
+```
+
+or
+
+```javascript
+left: 0, right: 0
+```

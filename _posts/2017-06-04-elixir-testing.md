@@ -803,3 +803,28 @@ $ mix test
 **solution**
 
 you must have forgotten to use `test` macro (and no test process was started).
+
+### Setting Logger level doesn't filter logs
+
+I have configure Logger to use `warning` log level:
+
+```elixir
+# config/test.exs
+
+config :logger, level: :warning
+```
+
+Still I see `debug` messages when running `mix test`.
+
+**solution**
+
+> <https://elixirforum.com/t/cant-configure-logger-in-exunit-tests-run-with-mix-in-elixir-1-11/35427/4>
+>
+> I’ve verified that the problem is the --no-start flag to mix test. If I run
+> the tests without it, the logger is configured correctly to the :error
+> severity level.
+>
+> Apparently Application.ensure_all_started(:fun_with_flags) alone is not enough
+> to compensate for the --no-start flag.
+
+=> Remove `--no-start` flag for now.

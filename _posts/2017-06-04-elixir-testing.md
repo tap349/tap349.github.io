@@ -818,13 +818,40 @@ Still I see `debug` messages when running `mix test`.
 
 **solution**
 
-> <https://elixirforum.com/t/cant-configure-logger-in-exunit-tests-run-with-mix-in-elixir-1-11/35427/4>
->
-> I’ve verified that the problem is the --no-start flag to mix test. If I run
-> the tests without it, the logger is configured correctly to the :error
-> severity level.
->
-> Apparently Application.ensure_all_started(:fun_with_flags) alone is not enough
-> to compensate for the --no-start flag.
+There are 2 possible solutions:
 
-=> Remove `--no-start` flag for now.
+- Remove `--no-start` flag
+
+  > <https://elixirforum.com/t/cant-configure-logger-in-exunit-tests-run-with-mix-in-elixir-1-11/35427/4>
+  >
+  > I’ve verified that the problem is the --no-start flag to mix test. If I run
+  > the tests without it, the logger is configured correctly to the :error
+  > severity level.
+  >
+  > Apparently Application.ensure_all_started(:fun_with_flags) alone is not enough
+  > to compensate for the --no-start flag.
+
+  ```diff
+    # mix.exs
+
+    defp aliases do
+      [
+  -     test: ["ecto.migrate --quiet", "test --no-start"]
+  +     test: ["ecto.migrate --quiet", "test"]
+      ]
+    end
+  ```
+
+- Configure `logger` application at runtime
+
+  > <https://elixirforum.com/t/cant-configure-logger-in-exunit-tests-run-with-mix-in-elixir-1-11/35427/5?u=tap349>
+  >
+  > I got the previous quiet output in my tests by configuring the Logger module
+  > at runtime in test_helpers.exs, adding a Logger.configure([level: :warning])
+  > call.
+
+  ```elixir
+  # test/test_helper.exs
+
+  Logger.configure(level: Application.get_env(:logger, :level))
+  ```

@@ -806,7 +806,7 @@ you must have forgotten to use `test` macro (and no test process was started).
 
 ### Setting Logger level doesn't filter logs
 
-I have configure Logger to use `warning` log level:
+I have configured Logger to use `warning` log level:
 
 ```elixir
 # config/test.exs

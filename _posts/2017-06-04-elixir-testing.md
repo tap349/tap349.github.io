@@ -844,7 +844,7 @@ There are 2 possible solutions:
 
 - Configure `logger` application at runtime
 
-  > <https://elixirforum.com/t/cant-configure-logger-in-exunit-tests-run-with-mix-in-elixir-1-11/35427/5?u=tap349>
+  > <https://elixirforum.com/t/cant-configure-logger-in-exunit-tests-run-with-mix-in-elixir-1-11/35427/5>
   >
   > I got the previous quiet output in my tests by configuring the Logger module
   > at runtime in test_helpers.exs, adding a Logger.configure([level: :warning])

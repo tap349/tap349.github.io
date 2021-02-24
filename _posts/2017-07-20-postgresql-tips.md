@@ -82,13 +82,21 @@ $ sudo -u postgres psql -U postgres DATABASE
   grant all privileges on all tables:
 
   ```sql
-  GRANT ALL ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  GRANT ALL ON ALL TABLES TO reporter;
   ```
 
   grant `SELECT` privilege (read-only access) on all tables:
 
   ```sql
-  GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  GRANT SELECT ON ALL TABLES TO reporter;
+  ```
+
+- grant read-only access to specific rows in table
+
+  ```sql
+  CREATE ROLE john WITH LOGIN PASSWORD 'foo';
+  CREATE VIEW john_reports AS SELECT * FROM reports where user_id = 1;
+  GRANT SELECT ON john_reports TO john;
   ```
 
 - revoke privileges from user
@@ -96,13 +104,13 @@ $ sudo -u postgres psql -U postgres DATABASE
   revoke all privileges on all tables:
 
   ```sql
-  REVOKE ALL ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  REVOKE ALL ON ALL TABLES TO reporter;
   ```
 
   revoke `SELECT` privilege (read-only access) on all tables:
 
   ```sql
-  REVOKE SELECT ON ALL TABLES IN SCHEMA PUBLIC TO reporter;
+  REVOKE SELECT ON ALL TABLES TO reporter;
   ```
 
 ### databases

@@ -9,7 +9,6 @@ categories: [react-native, flexbox]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -11,7 +11,6 @@ categories: [chef]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

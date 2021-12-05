@@ -11,7 +11,6 @@ categories: [dns]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

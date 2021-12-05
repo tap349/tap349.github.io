@@ -9,7 +9,6 @@ categories: [js, eslint]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

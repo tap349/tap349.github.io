@@ -9,7 +9,6 @@ categories: [steam]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

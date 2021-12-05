@@ -1,0 +1,1055 @@
+---
+layout: post
+title: Elixir
+date: 2016-12-31 13:05:42 +0300
+access: public
+comments: true
+categories: [elixir]
+---
+
+Elixir notes (mostly based on "Programming Elixir" by Dave Thomas).
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+types
+-----
+
+- value types:
+  - integers
+  - floats
+  - atoms (booleans are just atoms)
+  - ranges
+  - regular expressions
+- system types:
+  - PIDs and ports
+  - references
+- collection types:
+  - tuples
+  - lists
+  - maps
+  - binaries
+
+pattern matching
+----------------
+
+during pattern matching all unbound variables must be on LHS of an equals sign:
+
+```
+iex> a = 1
+1
+iex> 2 = b
+** (CompileError) iex:2: undefined function b/0
+```
+
+pattern matching is recursive - we can match patterns inside patterns:
+
+```elixir
+def for_location([h = [_, target_loc, _, _] | t], target_loc) do
+  [h | for_location(t, target_loc)]
+end
+```
+
+if `target_loc` argument matches the 2nd element of list head,
+`h` variable matches the whole list head (is getting bound to it).
+
+### pattern-matching maps in function parameters
+
+1. <https://stackoverflow.com/a/39722394/3632318>
+2. <https://medium.com/@turnandface/pattern-matching-in-elixir-743e71ceac92>
+3. <https://blog.robphoenix.com/elixir/notes-on-elixir-pattern-matching-maps/>
+
+```elixir
+def show(conn, %{"user_id" => user_id} = params) do
+  # some stuff using user_id and params
+end
+```
+
+<https://medium.com/@turnandface/pattern-matching-in-elixir-743e71ceac92>:
+
+> Elixir is pattern matching params first (the passed in map is RHS,
+> `params` variable becomes LHS), then pattern matches user_id as LHS
+> against params which is now RHS, like so.
+
+in fact, it can be written the other way around
+(<https://blog.robphoenix.com/elixir/notes-on-elixir-pattern-matching-maps/>):
+
+```elixir
+def show(conn, params = %{"user_id" => user_id}) do
+  # some stuff using user_id and params
+end
+```
+
+the match will be successful if `params` map has `user_id` key with any value
+(the latter will be bound to `user_id` variable).
+
+also it's possible to pattern-match against specific `user_id` value
+instead of binding any value to `user_id` variable:
+
+```elixir
+def show(conn, %{"user_id" => 2} = params) do
+  # some stuff using params
+end
+```
+
+the match will be successful only if `params` map has `user_id` key with value `2`.
+
+functions
+---------
+
+function consists of head and body:
+
+<dl>
+  <dt>head</dt>
+  <dd>function name, parameter list, optional guard clause</dd>
+
+  <dt>body</dt>
+  <dd>sequence of expressions</dd>
+</dl>
+
+### function capturing (& notation aka capture syntax)
+
+`&` - function capture operator
+
+- create anonymous function using provided expression
+
+  ```elixir
+  add_one = &(&1 + 1) # form with parentheses
+  add_one = & &1 + 1 # form without parentheses
+  to_tuple = & {&1, &2}
+  ```
+
+  anonymous functions defined using `&` operator must have at least
+  one argument (placeholders &1, &2, etc.):
+
+  ```
+  iex> a = &(1)
+  ** (CompileError) iex:29: invalid args for &, expected an expression in the
+  format of &Mod.fun/arity, &local/arity or a capture containing at least one
+  argument as &1, got: {1}
+  iex> a = &(&1)
+  #Function<6.52032458/1 in :erl_eval.expr/5>
+  iex> a.(1)
+  1
+  ```
+
+- capture named function
+
+  NOTE: captured named functions become anonymous ones with
+        arity of named functions (or smaller arity if named
+        function is partially applied - see below).
+
+  Elixir Guide:
+
+  > this notation can actually be used to retrieve a named function
+  > as a function type
+
+  "Programming Elixir":
+
+  > you can give it (& operator) the name and arity of an existing
+  > function, and it will return an anonymous function that calls it
+
+  this can be useful when you want to pass named function (either standard or
+  your own one) as another function argument:
+
+  ```elixir
+  Enum.each([1, 2, 3, 4], &IO.inspect/1)
+  ```
+
+  it's possible to call captured function directly:
+
+  ```
+  iex> puts = &IO.puts/1
+  &IO.puts/1
+  iex> puts.(123)
+  123
+  :ok
+  ```
+
+  it's possible to omit module name when using named function from the same
+  module:
+
+  ```elixir
+  defmodule Test do
+    def foo do
+      Enum.each([1, 2, 3, 4], &bar/1)
+    end
+
+    def bar(value) do
+      IO.inspect(value)
+    end
+  end
+  ```
+
+- capture and partially apply named function
+
+  1. <http://blog.patrikstorm.com/function-currying-in-elixir>
+  2. <https://github.com/Qqwy/elixir_currying>
+
+  <http://homepages.inf.ed.ac.uk/stg/NOTES/node33.html>:
+
+  > functions that return functions as results are called
+  > curried functions after Haskell B. Curry.
+
+  <https://en.wikipedia.org/wiki/Higher-order_function>:
+
+  > a higher-order function (also functional, functional form or functor)
+  > is a function that does at least one of the following:
+  >
+  > - takes one or more functions as arguments
+  > - returns a function as its result
+  >
+  > All other functions are first-order functions.
+
+  so curried function is not necessarily a HOC.
+
+  named function can be captured in 2 ways:
+
+  - by providing function arity:
+
+    ```elixir
+    Enum.each([1, 2, 3, 4], &IO.inspect/1)
+    ```
+
+  - by providing placeholders (&1, &2, etc.) for function arguments:
+
+    ```elixir
+    Enum.each([1, 2, 3, 4], &IO.inspect(&1))
+    Enum.each([1, 2, 3, 4], &(IO.inspect(&1))) # the same
+    ```
+
+  the 2nd variant of capture syntax can be used both to capture and
+  partially apply named functions or even create curried functions
+  (even though Elixir is believed not to support currying):
+
+  ```elixir
+  defmodule Foo do
+    def test a, b, c do
+      a * b + c
+    end
+  end
+
+  fun_1 = &Foo.test(1, &1, &2) # => #Function<12.99386804/2 in :erl_eval.expr/5>
+  fun_1.(2, 3) # => 5
+
+  fun_2 = &Foo.test(&1, 2, &2) # => #Function<12.99386804/2 in :erl_eval.expr/5>
+  fun_2.(1, 3) # => 5
+
+  fun_3 = &Foo.test(1, 2, &1) # => #Function<6.99386804/1 in :erl_eval.expr/5>
+  fun_3.(3) # => 5
+
+  fun_4 = &Foo.test(&1, &2, 3) # => #Function<12.99386804/2 in :erl_eval.expr/5>
+  fun_5 = &fun_4.(&1, 2) # => #Function<6.99386804/1 in :erl_eval.expr/5>
+  fun_5.(1) # => 5
+  ```
+
+  in some sense it's even more flexible than traditional currying
+  in that we can apply arguments not only from left to right and
+  one by one but in any order and even multiple arguments at once.
+
+### `do...end` block
+
+`do...end` block is a way to group expressions treating them as a single entity.
+
+- actual syntax:
+
+  ```elixir
+  # enclose multiline do...end block in ()
+  defmodule Times, do: (
+    # single line do...end block
+    def double(n), do: n * 2
+    def triple(n), do: n * 3
+  )
+  ```
+
+  NOTE: if using actual syntax function parameters MUST BE
+        enclosed in parentheses!
+
+- with syntactic sugar:
+
+  ```elixir
+  defmodule Times do
+    def double n do
+      n * 2
+    end
+
+    def triple do
+      n * 3
+    end
+  end
+  ```
+
+### multiple clauses
+
+both anonymous and named functions can have multiple clauses - these are
+not multiple function definitions but multiple clauses of the same function
+definition (I assume 'function clause' == 'function definition clause').
+
+- anonymous functions:
+
+  ```elixir
+  fn
+    parameter-list -> body
+    parameter-list -> body
+  end
+
+  # or:
+
+  fn
+    parameter-list ->
+      body
+    parameter-list ->
+      body
+  end
+  ```
+
+- named functions:
+
+  ```elixir
+  defmodule Example do
+    def name(parameter-list), do: body
+    def name(parameter-list), do: body
+  end
+  ```
+
+NOTE:
+
+- multiple clauses of named functions must be adjacent (grouped together)
+  in the source file
+- all clauses of both anonymous and named functions must have the same arity
+
+### private functions
+
+1. <https://github.com/christopheradams/elixir_style_guide#private-functions-with-same-name-as-public>
+
+naming convention for private functions with the same name as public functions
+(such private functions usually have higher arity than public functions - e.g.
+to pass accumulator around):
+
+- prefix with `_` ("Programming Elixir")
+- prefix with `do_` ("The Elixir Style Guide")
+
+```elixir
+def sum(list), do: _sum(list, 0)
+
+# Programming Elixir
+defp _sum([], total), do: total
+defp _sum([h | t], total), do: _sum(t, h + total)
+
+# The Elixir Style Guide
+defp do_sum([], total), do: total
+defp do_sum([h | t], total), do: do_sum(t, h + total)
+```
+
+modules
+-------
+
+all named functions must be defined inside modules!
+
+module names are just atoms: any name (not necessarily module name) starting with
+an uppercase letter is converted internally into an atom prefixed with `Elixir.`:
+
+```
+iex> is_atom IO
+true
+iex> to_string IO
+"Elixir.IO"
+iex> to_string Example
+"Elixir.Example"
+iex> :"Elixir.Example" == Example
+true
+```
+
+NOTE: `Example` module is not even defined - it's just an arbitrary name here.
+
+=> it's possible to call any module function this way:
+
+```
+iex> :"Elixir.IO".puts 123
+```
+
+in Erlang atoms are lowercase names, all module names are atoms
+=> to call function from Erlang module in Elixir just convert
+Erlang module name into valid Elixir atom:
+
+```
+iex> :io.format("number is ~3.1f~n", [5.123])
+```
+
+in Erlang it's equivalent to:
+
+```erlang
+1> io:format("number is ~3.1f~n", [5.123]).
+```
+
+### nested modules
+
+"Programming Elixir":
+
+> Module nesting is an illusion - all modules are defined at the top level.
+> When we define a module inside another, Elixir simply prepends the outer
+> module name to the inner module name, putting a dot between the two.
+
+=> there is no particular relationship between, say, modules
+`Google.Adwords.Importer` and `Google`!
+
+### module directives
+
+1. <http://elixir-lang.org/getting-started/alias-require-and-import.html>
+
+Elixir has 3 directives for modules, all of them are lexically scoped -
+they are effective from the point they are encountered till the end of
+enclosing scope (say, function).
+
+- `import`
+
+  use module functions without specifying module name:
+
+  ```elixir
+  defmodule Example do
+    def func do
+      import List, only: [flatten: 1]
+      flatten [1, [2, 3], 4]
+    end
+  end
+  ```
+
+  tips:
+
+  - use in the smallest possible scope
+  - use `only:` to import only the functions you need
+
+  > Note that importing a module automatically requires it.
+
+- `alias`
+
+  create alias for module (to cut down on typing):
+
+  ```elixir
+  defmodule Example do
+    def func date do
+      alias Google.Adwords.Importer, as: Importer
+      date |> Importer.import()
+    end
+  end
+  ```
+
+  other usage examples:
+
+  ```elixir
+  # same as above
+  # (last part of module name is used by default)
+  alias Google.Adwords.Importer
+  # alias multiple modules at once
+  alias Google.Adwords.{Importer, Parser}
+  ```
+
+- `require`
+
+  make macros from specified module available in containing module
+  (= ensure `require`d module is compiled and available).
+
+  > In general a module does not need to be required before usage,
+  > except if we want to use the macros available in that module.
+
+also Elixir has macro `use` (it's not directive) which:
+
+- requires specified module
+- just calls `__using__/1` macro on that module (to inject some code into current context)
+
+that is
+
+```elixir
+defmodule Example do
+  use Feature, option: :value
+end
+```
+
+is compiled to:
+
+```elixir
+defmodule Example do
+  require Feature
+  Feature.__using__(option: :value)
+end
+```
+
+primary purpose of `use` is to reduce boilerplate, say:
+
+- to generate default implementations of required functions (`use GenServer`)
+- to import required modules (`use MyApp, :controller`)
+
+### module attributes
+
+```elixir
+defmodule MyList do
+  @z_ascii_code 122
+
+  def caeser([h | t], n) when h <= @z_ascii_code + n do
+    [h + n | caeser(t, n)]
+  end
+end
+```
+
+used:
+
+- for configuration and metadata (like `dsl_attribute` in our projects)
+- instead of constants in other programming languages
+
+lists
+-----
+
+```
+iex> [1 | [2 | [3 | []]]]
+[1, 2, 3]
+```
+
+### keyword lists
+
+`Keyword` module is used to manipulate keyword lists.
+
+keyword list is a list of tuples where the 1st element is atom:
+
+```elixir
+[a: 1, b: 2]
+# is equivalent to
+[{:a, 1}, {:b, 2}]
+```
+
+keyword lists are usually used to store options passed to functions:
+
+```elixir
+def draw_text(text, options \\ []) do
+  options = Keyword.merge(@defaults, options)
+  ...
+end
+```
+
+### character lists
+
+charlists lists are also known as charlists.
+
+character list is just a list of integers (codepoints) internally -
+in IEx it's printed as a list of characters if all characters are printable.
+
+force print charlist as a collection of codepoints:
+
+- `:io.format/2`
+
+  `~w` forces 'cat' to be written as an Erlang term:
+
+  ```
+  iex> :io.format "~w~n", ['cat']
+  [99,97,116]
+  :ok
+  ```
+
+- `List.to_tuple/1`
+
+  ```
+  iex> List.to_tuple 'cat'
+  {99, 97, 116}
+  ```
+
+- add non printable character codepoint (say, `0`)
+
+  ```
+  iex> 'z' ++ [0]
+  [122, 0]
+  ```
+
+- ? notation to get codepoint of single character
+
+  ```
+  iex> ?c
+  99
+  iex> ?\s
+  32
+  ```
+
+maps
+----
+
+`Map` module is used to manipulate maps.
+
+choosing between maps and keyword lists (both are dictionaries):
+
+|                                 | map   | keyword list |
+|:--------------------------------|:-----:|:------------:|
+| use in pattern matching         | ✓     |              |
+| allow duplicate keys            |       | ✓            |
+| preserve order of elements      |       | ✓            |
+| use to store options            |       | ✓            |
+| use as general key/value store  | ✓     |              |
+
+### pattern matching with maps
+
+- empty map matches any map (empty map must be on LHS)
+
+  ```
+  iex> %{} = %{1 => :ok, 2 => :error}
+  %{1 => :ok, 2 => :error}
+  iex> %{1 => :ok, 2 => :error} = %{}
+  ** (MatchError) no match of right hand side value: %{}
+  ```
+
+- pattern matching cannot bind values to keys
+
+  ```
+  iex> %{a => :ok} = %{1 => :ok, 2 => :error}
+  ** (CompileError) iex:27: illegal use of variable a inside map key match,
+  maps can only match on existing variable by using ^a
+  ```
+
+  use `^` pin operator for keys to explicitly prohibit binding
+  (= use current variable value and don't even try to rebind variable):
+
+  ```
+  iex> a = 1
+  1
+  iex> %{^a => :ok} = %{1 => :ok, 2 => :error}
+  %{1 => :ok, 2 => :error}
+  ```
+
+### structs
+
+struct is kind of a named map with associated behaviour which is
+defined in a module by using `defstruct` macro inside it
+(internally it's a bare map with `__struct__` key that holds
+the name of the struct).
+
+```elixir
+# User is a name of the struct
+defmodule User do
+  # keys with default values (keyword list)
+  defstruct name: "", email: "", is_admin: false
+  # keys without default values (list of atoms) -
+  # nil is assumed
+  #defstruct [:name, :email, :is_admin]
+
+  def admin?(%User{name: name, is_admin: is_admin})
+      when name != "",
+      do: is_admin
+end
+```
+
+NOTE: [access syntax](#access-module) cannot be used to access struct fields
+(only field-based lookup):
+
+```
+iex> user = %User{}
+iex> user[:name]
+** (UndefinedFunctionError) function User.fetch/2 is undefined
+(User does not implement the Access behaviour)
+iex> user.name
+nil
+```
+
+### nested accessors (`Kernel` module)
+
+1. <https://hexdocs.pm/elixir/Kernel.html>
+
+nested accessors act pretty much like lenses - see
+[Creating Lenses in Elixir](https://medium.com/@aaronabrook/37e2318c3846)
+for description of lenses and how they compare to nested accessors.
+
+they work with any data structure that implements `Access` behaviour
+(dictionaries, lists, tuples):
+
+|                   | macro                    | function            |
+|                   | (static accessors)       | (dynamic accessors) |
+|-------------------|--------------------------|---------------------|
+| get_in            | no                       | (data, keys)        |
+| put_in            | (path, value)            | (data, keys, value) |
+| update_in         | (path, fn)               | (data, keys, fn)    |
+| get_and_update_in | (path, fn)               | (data, keys, fn)    |
+
+macros are more concise but functions allow to specify the set of keys
+at runtime => hence macros are static nested accessors while functions
+are dynamic ones.
+
+path in macros is extracted using, well, macro this way:
+
+```elixir
+# using access syntax (maps and keyword lists - but not structs)
+put_in(opts[:foo][:bar], :baz)
+# using field-based lookup (maps only - including structs)
+put_in(opts.foo.bar, :baz)
+# both are equivalent to
+put_in(opts, [:foo, :bar], :baz)
+```
+
+`get_in(opts, [:foo, :bar])` is equivalent to `opts.dig(:foo, :bar)` in Ruby.
+
+#### `Access` module
+
+`Access` module provides functions to be used with `get_in` and friends
+to filter keys in dictionaries or elements in lists and tuples.
+
+1. <https://dockyard.com/blog/2016/02/01/elixir-best-practices-deeply-nested-maps>
+2. <https://github.com/elixir-lang/elixir/blob/v1.2.2/lib/elixir/lib/access.ex#L50>
+3. <https://elixirforum.com/t/put-update-deep-inside-nested-maps-and-auto-create-intermediate-keys/7993/8>
+
+> `foo[bar]` - access syntax (named after `Access` module where it's implemented)
+> `foo.bar` - field-based lookup (aka path form)
+
+functions for dictionaries:
+
+- `Access.key/2` (provide default value for missing key)
+- `Access.key!/1` (expects key to be always available)
+- `Access.pop/1`
+
+NB: you can provide default value for missing key => it's possible to create
+deeply nested structures on the fly:
+
+```elixir
+put_in(%{a: %{}}, Enum.map([:a, :b, :c], &Access.key(&1, %{})), 42)
+# => %{a: %{b: %{c: 42}}}
+```
+
+```elixir
+opts = %{foo: 1, bar: %{baz: 2}}
+
+get_in(opts, [Access.key(:bar, nil), :baz]) # 2
+# which is equivalent to
+get_in(opts, [:bar, :baz]) # 2
+
+Access.pop(opts, :foo) # {1, %{bar: %{baz: 2}}}
+```
+
+functions for lists:
+
+- `Access.all/0`
+- `Access.at/1`
+
+```elixir
+opts = [%{foo: :bar}, %{foo: :baz}]
+# get all :foo values of the list opts
+get_in(opts, [Access.all(), :foo]) # [:bar, :baz]
+# get the 1st :foo value of the list opts
+get_in(opts, [Access.at(0), :foo]) # :bar
+```
+
+functions for tuples:
+
+- `Access.elem/1`
+
+```elixir
+opts = [foo: {1, 2}]
+get_in(opts, [:foo, Access.elem(1)]) # 2
+```
+
+all together:
+
+```elixir
+opts = [%{foo: {1, 2}}, %{foo: {3, 4}}]
+get_in(opts, [Access.at(0), :foo, Access.elem(1)]) # 2
+```
+
+sets
+----
+
+```
+iex> set_1 = MapSet.new([1, 2, 3])
+iex> set_2 = 3..5 |> Enum.into(MapSet.new)
+iex> MapSet.member?(set_1, 1)
+true
+iex> MapSet.union(set_1, set_2)
+#MapSet<[1, 2, 3, 4, 5]>
+iex> MapSet.difference(set_1, set_2)
+#MapSet<[1, 2]>
+iex> MapSet.difference(set_2, set_1)
+#MapSet<[4, 5]>
+iex> MapSet.intersection(set_1, set_2)
+#MapSet<[3]>
+```
+
+streams
+-------
+
+can be used when you need:
+
+- to defer processing until you need the data
+- to deal with large collections, big files or remote resources<br>
+  (when you don't need all the data at once or just cannot get all
+  the data physically - like in case of remote resources)
+
+to get lazy behaviour when dealing with collections just replace `Enum` module
+with `Stream` one (since all stream implement `Enumerable` protocol) and call,
+say, `Enum.to_list/0` or `Enum.take/1` in the end:
+
+```
+iex> [1, 2, 3, 4, 4] |> Enum.map(&(&1 * &1)) |> Enum.with_index()
+[{1, 0}, {4, 1}, {9, 2}, {16, 3}, {16, 4}]
+iex> stream = [1, 2, 3, 4, 4] |> Stream.map(&(&1 * &1)) |> Stream.with_index()
+#Stream<[enum: [1, 2, 3, 4, 4],
+ funs: [#Function<47.36862645/1 in Stream.map/2>,
+  #Function<64.36862645/1 in Stream.with_index/2>]]>
+iex> stream |> Enum.to_list()
+[{1, 0}, {4, 1}, {9, 2}, {16, 3}, {16, 4}]
+```
+
+benefit of using stream is that we don't store any intermediate results -
+we just pass successive elements from one function to the next in the chain.
+
+apart from `Stream` more and more modules now also support streams:
+
+```elixir
+IO.puts File.open!("test.txt") |> IO.stream(:line) |> Enum.to_list()
+# is equivalent to:
+IO.puts File.stream!("test.txt") |> Enum.to_list()
+```
+
+`Stream` functions to build your own streams:
+
+- `Stream.cycle`
+
+  cycles through collection elements infinitely:
+
+  ```elixir
+  Stream.cycle(~w{green white})
+  |> Stream.zip(1..5)
+  |> Enum.map(fn {class, index} ->
+    ~s{<tr class="#{class}"><td>#{index}</td></tr>\n}
+  end)
+  |> IO.puts()
+  ```
+
+- `Stream.repeatedly`
+
+  calls supplied function each time new value is requested:
+
+  ```
+  iex> Stream.repeatedly(&:random.uniform/0) |> Enum.take(3)
+  [0.4435846174457203, 0.7230402056221108, 0.94581636451987]
+  ```
+
+- `Stream.iterate`
+
+  generates values infinitely using initial value and iteration function:
+
+  ```
+  iex> Stream.iterate(0, &(&1 + 1)) |> Enum.take(5)
+  [0, 1, 2, 3, 4]
+  ```
+
+  useful to generate all kinds of progressions (arithmetic, geometric, etc.).
+
+- `Stream.unfold`
+
+  general form of iteration function:
+
+  ```elixir
+  fn state -> {stream_value, new_state} end
+  ```
+
+  almost same as above but:
+
+  - iteration function has to be called to get the 1st stream value<br>
+    (in `Stream.iterate` initial value is the 1st stream value)
+  - stream value doesn't have to be equal to new state<br>
+    (in `Stream.iterate` new state is current stream value)
+
+  example:
+
+  ```
+  iex> Stream.unfold({0, 1}, fn {n1, n2} -> {n1, {n2, n1 + n2}} end) |> Enum.take(8)
+  [0, 1, 1, 2, 3, 5, 8, 13]
+  ```
+
+- `Stream.resource`
+
+  this function builds upon `Stream.unfold` and is intended to work with
+  resources.
+
+  it has 3 arguments:
+
+  - function to get resource (instead of initial value in `Stream.unfold`)
+  - iteration function
+  - function to deallocate resource
+
+  ```elixir
+  Stream.resource(fn -> File.open!("test.txt") end,
+                  fn file ->
+                    case IO.read(file, :line) do
+                      data when is_binary(data) -> {[data], file}
+                      _ -> {:halt, file}
+                    end
+                  end,
+                  fn file -> File.close(file) end)
+  ```
+
+comprehensions
+--------------
+
+they are used to map and/or filter collections.
+
+general form:
+
+```
+result = for generator{, generator}{, filter}[, into: value], do: expression
+generator = pattern <- enumerable_thing
+```
+
+example (it works like nested for loops do):
+
+```
+iex> first8 = [1, 2, 3, 4, 5, 6, 7, 8]
+iex> for x <- first8, y <- first8, x >= y, rem(x * y, 10) == 0, do: {x, y}
+[{5, 2}, {5, 4}, {6, 5}, {8, 5}]
+```
+
+using comprehensions with binaries:
+
+```
+iex> for <<char <- "hello">>, do: char
+'hello'
+```
+
+`into` parameter allows to save the result of comprehensions into specified
+collection (it must implement `Collectable` protocol):
+
+```
+iex> for x <- ~w{cat dog}, into: %{}, do: {x, String.upcase(x)}
+%{"cat" => "CAT", "dog" => "DOG"}
+```
+
+binaries
+--------
+
+binary is a bitstring (sequence of bits) where the number of bits is divisible
+by 8 (that is each term occupies 1 byte). it has the form:
+
+```
+<<term[::modifier], ...>>
+```
+
+excess bits in binary are stripped:
+
+```
+iex> <<255>>
+<<255>>
+iex> <<256>>
+<<0>>
+iex> <<257>>
+<<1>>
+```
+
+if you set term size that is not divisible by 8 the term is no longer a binary:
+
+```elixir
+<<256>> # binary (size is 8 bits) => <<0>>
+<<256::size(9)>> # bitstring (size is 9 bits) => <<128, 0::size(1)>>
+```
+
+```elixir
+# integers
+<<0, 1, 255>>
+# integers with size modifier
+<<1::size(3), 2::size(2)>> # 001 10 => <<6::size(5)>>
+# floats
+# https://www.doc.ic.ac.uk/~eedwards/compsys/float/
+<<2.5::float>> # <<64, 4, 0, 0, 0, 0, 0, 0>>
+```
+
+### strings
+
+string (aka dqs - double-quoted string) is UTF-8 encoded binary.
+
+<https://hexdocs.pm/elixir/String.html>:
+
+- codepoint is a single Unicode character
+  (may be represented by 1+ bytes)
+- grapheme can consist of multiple codepoints
+  (that may be perceived as a single character by readers)
+
+```
+iex> string = "\u0065\u0301"
+iex> byte_size(string)
+3
+iex> String.length(string)
+1
+iex> String.codepoints(string)
+["e", "́"]
+iex> String.graphemes(string)
+["é"]
+```
+
+#### strings vs. character lists
+
+- "hello" - string
+- 'hello' - character list
+
+both strings and character lists:
+
+- can hold characters in UTF-8 encoding
+- may contain escape sequences
+- allow interpolation
+- allow to escape special characters with backslash
+- support heredocs
+
+### heredocs
+
+heredoc is string contents delimited with triple single (`'''`) or
+double (`"""`) quotes on separate lines:
+
+```elixir
+IO.puts """
+hello
+world!
+"""
+```
+
+NOTE: trailing delimiter must be indented to the same level as the contents.
+
+heredocs are used extensively to add documentation for functions and modules.
+
+### sigils
+
+sigil is a symbol with magical powers - it starts with a tilde, followed by
+a letter (sigil type), delimited content and optionally some modifiers.
+
+possible delimiters: `<>, {}, [], (), ||, //, "", ''`
+
+sigil types:
+
+| sigil type  | description
+|-------------|------------------------------------------------
+| ~C          | character list without escaping and interpolation
+| ~c          | character list with escaping and interpolation
+| ~D          | Date in format yyyy-mm-dd
+| ~N          | naive DateTime in format yyyy-mm-dd dd:mm:ss[.ddd]
+| ~R          | regexp without escaping and interpolation
+| ~r          | regexp with escaping and interpolation
+| ~S          | string without escaping and interpolation
+| ~s          | string with escaping and interpolation
+| ~T          | Time in format hh:mm:ss[.dddd]
+| ~W          | list of words without escaping and interpolation
+| ~w          | list of words with escaping and interpolation
+
+modifiers for ~W and ~w sigils:
+
+| modifier  | sigils returns
+|-----------|------------------------------------------------
+| a         | list of atoms
+| c         | list of character lists
+| s         | list of strings
+
+modifiers for ~R and ~r sigils:
+
+| modifier  | meaning
+|-----------|------------------------------------------------
+| f         | force pattern to start to match on the 1st line of miltiline string
+| g         | support named groups
+| i         | make matches case insensitive
+| m         | ^ and $ match start and end of lines of multiline string
+| s         | allow . to match newline characters
+| U         | make * and + modifiers ungreedy (same as *? and +?)
+| u         | enable Unicode-specific patterns like \p
+| x         | extended mode (ignore whitespaces and comments)
+
+TODO: I stopped at page 138 (Binaries and Pattern Matching)

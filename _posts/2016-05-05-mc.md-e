@@ -1,0 +1,22 @@
+---
+layout: post
+title: mc
+date: 2016-05-05 14:52:38 +0300
+access: public
+comments: true
+categories: [mc]
+---
+
+<!-- more -->
+
+troubleshooting
+---------------
+
+### mc is slow when switching panes
+
+the problem is related to using subshell support (concurrent shell support).
+
+to disable it run mc with `--nosubshell` (`-u`) option but in this case
+_~/.zshrc_ is not sourced and consequently all cd aliases are not available.
+
+having huge _~/.zsh_history_ might also slow things down (especially at startup).

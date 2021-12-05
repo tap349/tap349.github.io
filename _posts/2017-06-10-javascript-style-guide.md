@@ -11,7 +11,6 @@ categories: [js]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

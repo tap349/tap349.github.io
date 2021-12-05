@@ -11,7 +11,6 @@ categories: [ruby]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

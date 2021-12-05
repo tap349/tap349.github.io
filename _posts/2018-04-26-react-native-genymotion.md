@@ -11,7 +11,6 @@ categories: [react-native]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

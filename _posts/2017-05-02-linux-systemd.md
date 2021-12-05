@@ -9,7 +9,6 @@ categories: [linux, systemd]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

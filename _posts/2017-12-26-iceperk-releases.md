@@ -11,7 +11,6 @@ categories: [react-native]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
@@ -350,7 +349,6 @@ versionName "3.16"
 
 ## troubleshooting
 
-<!-- prettier-ignore -->
 1. [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})
 
 this section contains errors which occurred when preparing release - see the

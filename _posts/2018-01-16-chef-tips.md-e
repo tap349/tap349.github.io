@@ -1,0 +1,33 @@
+---
+layout: post
+title: Chef - Tips
+date: 2018-01-16 16:17:13 +0300
+access: public
+comments: true
+categories: [chef]
+---
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+update or downgrade community cookbook
+--------------------------------------
+
+in application cookbook:
+
+```ruby
+# metadata.rb
+
+depends 'ruby_rbenv', '1.0.1'
+```
+
+```sh
+$ berks update ruby_rbenv
+$ berks vendor
+```
+
+it might be necessary to remove vendored cookbook from _berks-cookbooks/_!

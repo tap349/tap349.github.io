@@ -1,0 +1,292 @@
+---
+layout: post
+title: frontend
+date: 2016-04-21 13:42:25 +0300
+access: public
+comments: true
+categories: [rails, css, sass, js]
+---
+
+notes about frontend development in Rails.
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+layouts
+-------
+
+1. <http://guides.rubyonrails.org/layouts_and_rendering.html#finding-layouts>
+
+looking up current layout in Rails (more specific match wins):
+
+- application layout (_app/views/layouts/application.html.slim_)
+- controller-specific layout (_app/views/layouts/photos.html.slim_)
+- `layout 'header'` declaration in controller
+  (can be overriden by child controllers)
+- `render layout: 'header'`:
+  - in controller action to render action view
+    (overrides controller's layout)
+  - in view itself with view content passed in block argument
+    (renders view in specified layout keeping controller's layout)
+
+`<body>` classes
+----------------
+
+consider adding 2 classes to `<body>` of each page in `application.html.slim`:
+
+- `"c-#{controller_name}"`
+- `"p-#{controller_name}-#{action_name}"`
+
+it will make it easier to bind common CSS rules for all actions of controller:
+
+```sass
+.c-sites
+  padding: 10px
+  ...
+```
+
+instead of:
+
+```sass
+.sites-index,
+.sites-new,
+.sites-show
+  padding: 10px
+  ...
+```
+
+also it will make it natural to have this file naming scheme:
+
+- _app/assets/sites.sass_ for controller-wide CSS rules
+- _app/assets/sites/show.sass_ for page-specific CSS rules
+
+Sass mixins
+-----------
+
+1. <http://sass-lang.com/guide#topic-6>
+
+media queries
+-------------
+
+1. <http://www.w3schools.com/cssref/css3_pr_mediaquery.asp>
+2. <http://stackoverflow.com/questions/8549529>
+
+in CSS2 they were called media types, in CSS3 - media queries.
+
+media queries are used to define different style rules for
+different media types after checking media features:
+
+- width and height of the viewport (display area, browser window)
+- width and height of the device (computer screen)
+- orientation (landscape or portrait)
+- resolution
+
+for styles rules (CSS) to be applied media queries must resolve to true
+(media type matches device **and** all media features are true).
+
+media query syntax (using SASS):
+
+```
+@media not|only media_type and (media_feature)
+  CSS
+```
+
+- specifying media type can be omitted (`all` media type is used by default)
+- `only` keyword is used to hide associated CSS from older user agents
+  (they consider it to be unknown media type and just ignore associated CSS) -
+  new user agents ignore `only` keyword
+
+media types (devices):
+
+- `all` (default)
+- `screen` (screens, smartphones, tablets - most common)
+- `print` (printers)
+- `speech` (screenreaders)
+
+other media types are deprecated.
+
+media features:
+
+- `max-height`/`max-width` (max height or width of viewport)
+- `min-height`/`min-width` (min height or width of viewport)
+- `max-device-height`/`max-device-width` (max height or width of device)
+- `min-device-height`/`min-device-width` (min height or width of device)
+
+using images
+------------
+
+1. <http://guides.rubyonrails.org/layouts_and_rendering.html#asset-tag-helpers>
+
+Rails asset tag helpers:
+
+- `javascript_include_tag` (commonly used in `<head>` section)
+- `stylesheet_link_tag` (commonly used in `<head>` section)
+- `image_tag`
+- `video_tag`
+- `audio_tag`
+
+asset tag helpers don't check presence of assets at specified locations.
+
+1. <http://stackoverflow.com/a/20211017>
+
+images are placed in _app/assets/images/_ and can be used in:
+
+- view (`image_tag` helper)
+- CSS:
+  - `background: image-url('logo.png')`
+    (Rails path helper - image is loaded in separate request)
+  - `background: inline-image('logo.png')`
+    (Compass inline data helper - embeds image directly in CSS)
+
+about mobile-first and responsive design
+----------------------------------------
+
+### mobile-first design
+
+1. <http://www.html5rocks.com/en/mobile/responsivedesign/>
+
+**NOTE**: the article contains many tips on how to design for mobile.
+
+advantages of mobile-first design:
+
+- easier to extend for larger screens than vice versa
+- serving styles without media queries is faster
+  (important for mobile devices)
+- serving mobile styles first supports more devices
+  (some devices might not support media queries at all)
+
+ALWAYS CHECK mobile design on mobile phone itself
+(or at least using device mode of Developer Tools in Chrome)!
+
+### responsive vs. adaptive design
+
+1. <https://studio.uxpin.com/blog/responsive-vs-adaptive-design-whats-best-choice-designers/>
+
+- responsive design: `@media (min-width: X)`
+- adaptive design: `@media (min-device-width: X)`
+
+### my implementation of mobile-first responsive design
+
+**NOTE**: container div is parent of both sidebar and main divs.
+
+- mobile version (primary):
+  - stack sidebar and main divs on top of each other
+    (using default `display: block`)
+- desktop version (activated by media query):
+  - make sidebar div float to the right
+    (alternatively use `display: inline-block` for sidebar and main divs)
+  - set container `max-width` property
+  - fix all paddings and margins
+
+CSS properties
+--------------
+
+### `border`
+
+1. <http://stackoverflow.com/a/2922934/3632318>
+
+- `border: 0` (short for `border-width: 0`)
+- `border: none` (short for `border-style: none`)
+
+### `cursor`
+
+- always use `cursor: pointer` for clickable elements
+- by default `cursor: auto` is used - browser sets a cursor
+
+when using default cursor I couldn't click `search` icon at the bottom (1-2 px) -
+probably the very tip of default cursor is not active (can't be used for pointing).
+
+### `position`
+
+`position: absolute`:
+
+- `right` sets offset to the left of right border of parent container
+- `margin-right` sets a new offset relative to the offset set by `right`
+
+### `width` vs. `max-width`
+
+<http://www.w3schools.com/css/css_max-width.asp>
+
+- `max-width` \> `width` => `width`
+- `max-width` \< `width` => `max-width`
+
+### `z-index`
+
+`z-index` property is used to specify z-order (the stack order) of elements:
+
+- by default `z-index: auto` (element has the same stack level as its parent)
+- element with higher z-index is in front of element with lower z-index
+- works on positioned elements only (with position `absolute`, `relative` or `fixed`)
+
+avoid using sequential numbers that don't count from 1 (e.g. `5,6,7..`)
+as it might lead to confusion about where missing z-indexes (`1,2,3,4`) are.
+
+prefer sequences `1,2,3...` (without gaps) or `100,200,300...`.
+
+`z-index` property has no effect on SVG elements: first elements are painted first.
+
+CSS recipes
+-----------
+
+see [CSS recipes]({% post_url 2016-07-08-css-recipes %}).
+
+using Ajax requests
+-------------------
+
+- <http://guides.rubyonrails.org/working_with_javascript_in_rails.html>
+
+_views/foos/edit.html.slim_:
+
+```slim
+- form_url = foo_url(@foo)
+= simple_form_for @foo, url: form_url do |f|
+  = f.input :name, input_html: { data: { 'form-url': form_url } }
+```
+
+_assets/javascripts/pages/foos/edit.coffee_:
+
+```coffee
+@on 'turbolinks:load', 'c-foos', ->
+  $foo_name_input = $('input#foo_name')
+  $foo_name_input.on 'blur', ->
+    $.ajax
+      url: $foo_name_input.data('form-url'),
+      type: 'PATCH',
+      dataType: 'json',
+      data:
+        foo:
+          name: $foo_name_input.val()
+      success: (data) ->
+        if data['valid?']
+          console.log "foo #{data.id} updated"
+          $('span.foo_name').html(data.name)
+        else
+          errors = JSON.stringify(data.errors)
+          console.log "foo #{data.id} not updated: #{errors}"
+```
+
+_controllers/foos_controller.rb_:
+
+```ruby
+def update
+  @foo.update(update_params)
+
+  respond_to do |format|
+    format.html { redirect_to(foos_url) }
+    format.json
+  end
+end
+```
+
+_views/foos/update.json.jb_:
+
+```ruby
+@foo.attributes.merge(
+  valid?: @foo.valid?,
+  errors: @foo.errors.messages
+)
+```

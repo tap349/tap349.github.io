@@ -11,7 +11,6 @@ categories: [opera]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

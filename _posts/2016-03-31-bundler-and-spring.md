@@ -12,7 +12,6 @@ intricacies of using `bundle exec`, bundler and spring binstubs.
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -1,0 +1,204 @@
+---
+layout: post
+title: Rails i18n
+date: 2016-03-29 10:11:50 +0300
+access: public
+comments: true
+categories: [rails i18n]
+---
+
+configuration of Rails app to support I18n.
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+routes
+------
+
+_routes.rb_:
+
+```ruby
+Rails.application.routes.draw do
+  scope '(:locale)', locale: /en/ do
+    # all your routes
+  end
+end
+```
+
+_application_controller.rb_:
+
+```ruby
+class ApplicationController < ActionController::Base
+  before_action :set_locale
+
+  ...
+
+private
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def default_url_options options = {}
+    options.merge locale: params[:locale]
+  end
+
+  ...
+end
+```
+
+- with `en` locale (e.g. <http://test.com/en/foo>):
+
+  - optional dynamic segment matches (`params[:locale] = 'en'`)
+  - all other routes match as usual
+  - `I18n.locale` is set `'en'` in `ApplicationController#set_locale`
+  - `locale: en` option is merged into default URL options passed to all URL
+    helpers - all generated URLs in current request will have path starting with `en/`
+
+- with `ru` locale (e.g. <http://test.com/ru/foo>):
+
+  - optional dynamic segment doesn't match
+  - `no route matches` error because there is no route starting with `ru`
+
+- without any locale (e.g. <http://test.com/foo>):
+
+  - optional dynamic segment doesn't match (`params[:locale] = nil`)
+  - all other routes match as usual
+  - `I18n.locale` is set to default locale (`'ru'`) in `ApplicationController#set_locale`
+  - `locale: nil` option is merged into default URL options passed to all URL
+    helpers - all generated URLs in current request will have path without locale
+
+this scheme doesn't work with custom URL generator class that includes
+`Rails.application.routes.url_helpers` module.
+URL helpers available from this module won't have access to view context and
+consequently to default URL options set in `ApplicationController` -
+they will try to use the first argument as a value for `locale` parameter
+which will result in `no route matches` error.
+
+**solution**: don't use URL generator classes and pass view context explicitly
+whenever it's necessary to use URL helpers outside of controller or view.
+
+### active admin
+
+AA controllers are not inherited from `ApplicationController` and
+consequently don't have correct default URL options set.
+
+that is why URL helpers in AA don't generate correct URLs
+(for the same reason as URL helpers in custom URL generator classes above).
+
+simple solution is to exclude AA routes from `locale` scope in _routes.rb_:
+
+```ruby
+Rails.application.routes.draw do
+  scope '(:locale)', locale: /en/ do
+    ...
+  end
+
+  ActiveAdmin.routes(self)
+end
+```
+
+RSpec
+-----
+
+**WARNING**: obsolete section - see [rails console](#rails-console) for details.
+
+for some obscure reason locale is not set to default locale
+(`config.i18n.default_locale` option in _application.rb_)
+and defaults to `:en`.
+
+thusly it has to be set manually (either to `:ru` or `I18n.default_locale`):
+
+- in each spec:
+
+  ```ruby
+  before { I18n.locale = I18n.default_locale }
+  ```
+
+- globally in _spec/rails_helper.rb_ (or support file in _spec/support/_):
+
+  ```ruby
+  RSpec.configure do |config|
+    config.before :suite do
+      I18n.locale = I18n.default_locale
+    end
+  end
+  ```
+
+**NOTE**: translations from class methods are loaded before `before` block!
+
+rails console
+-------------
+
+by default locale is `:en` (e.g. in rails console and RSpec) even when
+default locale is set to `:ru` in _application.rb_.
+
+to fix it add initializer _config/initializers/i18n.rb_:
+
+```ruby
+I18n.locale = :ru
+I18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml')]
+I18n.reload!
+```
+
+adding all `yml` files from _config/locales/_ to load path is not obligatory
+here since all translations from _config/locales/*.rb,yml_ must be auto loaded.
+
+adding this initializer fixes locale for RSpec as well -
+it's no longer necessary to explicitly set locale in RSpec config files.
+
+mailers
+-------
+
+_application.rb_:
+
+```ruby
+config.action_mailer.default_url_options = {
+  host: Pumba::DOMAIN, only_path: false, locale: I18n.locale
+}
+```
+
+Sidekiq
+-------
+
+<https://github.com/mperham/sidekiq/issues/750>
+
+_config/initializers/sidekiq.rb_:
+
+```ruby
+require 'sidekiq/middleware/i18n'
+```
+
+Capybara
+--------
+
+URL helpers used in feature specs don't use default URL options from
+`ApplicationController` for the same reason as URL helpers from custom
+URL generator class (see [above](#routes)).
+
+one workaround for this problem is to define
+ad hoc `default_url_options` method for specs.
+
+_spec/support/capybara_support.rb_:
+
+```ruby
+module CapybaraSupport
+  def default_url_options
+    { locale: nil }
+  end
+end
+```
+
+then include this module in each feature spec that uses URL helpers:
+
+```ruby
+include CapybaraSupport
+
+feature 'sign in' do
+  ...
+end
+```

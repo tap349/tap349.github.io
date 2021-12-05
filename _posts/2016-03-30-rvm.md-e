@@ -1,0 +1,67 @@
+---
+layout: post
+title: RVM
+date: 2016-03-30 17:02:50 +0300
+access: public
+comments: true
+categories: [rvm, ruby]
+---
+
+configuration of sourcing, `PATH` and `command-t` Vim plugin for RVM.
+
+<!-- more -->
+
+sourcing
+--------
+
+sourcing RVM:
+
+```sh
+[[ -s "~/.rvm/scripts/rvm" ]] && source "~/.rvm/scripts/rvm"
+```
+
+after installation RVM adds this source line automatically to many rc files.
+
+but it's required to source RVM only twice:
+
+- in _.zlogin_ for Zsh
+- in _.profile_ for macvim (<https://rvm.io/integration/vim>)
+
+remove sourcing RVM from everywhere else.
+
+**NOTE**: don't source RVM in _.zshenv_ because in that case
+          RVM doesn't switch to its default ruby in new Zsh session.
+
+PATH
+----
+
+I modified `PATH` in 2 locations (IDK if it's strictly necessary):
+
+* in _.zshenv_:
+
+  ```sh
+  path=(~/.rvm/bin ~/scripts ~/scripts/git /usr/local/bin /usr/bin /usr/sbin /bin /sbin $path)
+  ```
+
+- in _.profile_:
+
+  ```sh
+  PATH=$PATH:~/.rvm/bin
+  ```
+
+command-t
+---------
+
+switch to system ruby when compiling `command-t` Vim plugin in _~.vim/update_bundles_:
+
+```ruby
+puts "compiling command-t..."
+
+# https://langui.sh/2014/03/10/wunused-command-line-argument-hard-error-in-future-is-a-harsh-mistress
+environment = 'ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"'
+command_t_path = File.join 'command-t', 'ruby', 'command-t'
+rvm_init_script = 'source ~/.rvm/scripts/rvm'
+command_t_build_script = 'rvm use system && ruby extconf.rb && make'
+
+puts `zsh -c 'cd #{command_t_path} && #{rvm_init_script} && #{environment} #{command_t_build_script}'`
+```

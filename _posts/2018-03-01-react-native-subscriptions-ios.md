@@ -11,7 +11,6 @@ categories: [react-native, ios]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
@@ -123,7 +122,6 @@ it's required to add localization for subscription group as well:
 
 ## test subscription on real device
 
-<!-- prettier-ignore -->
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
 it's required to run application on real device to make purchases: the only
@@ -222,7 +220,6 @@ subscription => keep on trying.
 
 #### run application on real device
 
-<!-- prettier-ignore -->
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 2. <http://pinkstone.co.uk/deploying-your-app-from-xcode-to-a-device-with-release-build-configuration/>
 

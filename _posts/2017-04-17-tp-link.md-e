@@ -1,0 +1,40 @@
+---
+layout: post
+title: TP-Link
+date: 2017-04-17 03:54:24 +0300
+access: public
+comments: true
+categories: [tp-link]
+---
+
+<!-- @format -->
+
+<!-- more -->
+
+## reserve IP address for device
+
+1. <https://superuser.com/a/599573/326775>
+2. <https://superuser.com/a/904500/326775>
+3. <http://www.dslreports.com/forum/r27866899-ARP-Binding-vs-DHCP-Address-Reservation>
+
+- reserve IP address for device when it's using DHCP
+
+  | Admin Panel                    |
+  | ------------------------------ |
+  | `DHCP` → `Address Reservation` |
+
+  - `MAC Address`: 54-04-A6-29-XX-XX
+  - `Reserved IP Address`: 192.168.0.110
+  - `Status`: `Enabled`
+
+- bind IP address to MAC address in device's ARP table
+
+  | Admin Panel                             |
+  | --------------------------------------- |
+  | `IP & MAC Binding` → `Binding Settings` |
+
+  - `Bind`: [x]
+  - `MAC Address`: 54-04-A6-29-XX-XX
+  - `IP Address`: 192.168.0.110
+
+- restart router

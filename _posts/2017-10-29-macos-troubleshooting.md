@@ -11,7 +11,6 @@ categories: [macos]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -11,7 +11,6 @@ categories: [react-native]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
@@ -140,7 +139,6 @@ NOTE: don't forget to rebuild both iOS and Android applications!
 
 **_UPDATE_**
 
-<!-- prettier-ignore -->
 1. [React Native - Troubleshooting]({% post_url 2017-07-04-react-native-troubleshooting %})
 
 after fixing different issues related to RN upgrade some libraries turned out to

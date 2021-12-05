@@ -1,0 +1,21 @@
+---
+layout: post
+title: rmagick
+date: 2016-12-18 15:53:28 +0300
+access: public
+comments: true
+categories: [rails, rmagick]
+---
+
+all problems related to rmagick can be solved by rebuilding native extensions:
+
+```sh
+$ gem pristine rmagick
+```
+
+if it doesn't help switch to lower imagemagick version:
+
+```sh
+$ brew switch imagemagick 6.9.7-2
+$ gem pristine rmagick
+```

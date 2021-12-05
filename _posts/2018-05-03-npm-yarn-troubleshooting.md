@@ -9,7 +9,6 @@ categories: [npm, yarn, js]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

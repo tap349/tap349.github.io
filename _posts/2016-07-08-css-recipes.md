@@ -11,7 +11,6 @@ CSS recipes.
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

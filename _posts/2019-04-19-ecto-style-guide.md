@@ -11,7 +11,6 @@ categories: [elixir, ecto]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -1,0 +1,118 @@
+---
+layout: post
+title: bundler
+date: 2017-04-17 19:27:01 +0300
+access: public
+comments: true
+categories: [bundler]
+---
+
+<!-- more -->
+
+groups
+------
+
+<http://bundler.io/groups.html>
+
+gems outside any named group are in `default` group.
+
+install gems from all groups:
+
+```sh
+$ bundle
+```
+
+install gems from all groups except `production`:
+
+```sh
+$ bundle --without production
+```
+
+if your app is gem dependent gems are added to gemspec file instead of
+_Gemfile_ using `add_runtime_dependency` (kind of `default` group) or
+`add_development_dependency` (kind of `development` group) methods.
+these dependencies are then included in _Gemfile_ using `gemspec` directive.
+in this case _Gemfile_ might contain only `test` or custom groups.
+
+require
+-------
+
+<http://bundler.io/groups.html>
+
+require all gems from groups `default` and `production`:
+
+```ruby
+Bundler.require(:default, :production)
+```
+
+Rails app by default requires `default` and group corresponding to
+current environment in _config/application.rb_:
+
+```ruby
+# Rails.groups = [:default, Rails.env]
+Bundler.require(*Rails.groups)
+```
+
+in plain Ruby app you have 2 options:
+
+- require all gems from all or selected groups in _lib/my_app.rb_
+  (common entry point of CLI application or gem)
+
+  ```ruby
+  # require gems from all groups
+  Bundler.require
+  # require gems from default and production groups
+  Bundler.require(:default, :production)
+  ```
+
+  current environment can be fetched from custom environment
+  variable - you've got to set it manually when launching app.
+
+  this method is recommended for large `Gemfile`s.
+
+- require gems manually in appropriate files where they are used
+
+  - gems from `test` group (say, `rspec`) are required in
+    _spec/spec_helper.rb_
+  - gems which are used in _Rakefile_ only (say, `rubocop`) are
+    required only there
+  - `pry-byebug` gem can be required in _lib/my_app.rb_ only if
+    `DEBUG` environment variable is set
+
+  this method is recommended for smaller `Gemfile`s.
+
+setup
+-----
+
+<http://bundler.io/bundler_setup.html>
+
+bundler setup configures the load path so that gems from all or specified groups
+can be required.
+
+- configure the load path for all gems:
+
+  ```ruby
+  require 'bundler/setup'
+  ```
+
+- configure the load paths for gems from specified groups:
+
+  ```ruby
+  Bundler.setup(:default, :development)
+  ```
+
+- in theory you should first configure the load path and then require gems:
+
+  ```ruby
+  require 'bundler/setup'
+  Bundler.require
+  ```
+
+  but in practice I don't configure the load path as described above -
+  all gems can be required without configuring the load path first.
+
+  UPDATE: I encountered situations when gem cannot be loaded because it's
+          not found without calling `require 'bundler/setup'` first -
+          this is the case for `ruby-fifo` gem and my own gem `files`.
+          thus I had to configure the load path before requiring gems by adding
+          `require 'bundler/setup'` to the beginning of _lib/my_app.rb_ file.

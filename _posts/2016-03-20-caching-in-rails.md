@@ -11,7 +11,6 @@ notes about caching in Rails.
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

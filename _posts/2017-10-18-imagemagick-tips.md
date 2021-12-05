@@ -9,7 +9,6 @@ categories: [imagemagick]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

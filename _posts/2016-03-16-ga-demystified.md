@@ -13,7 +13,6 @@ information about [Google Analytics](https://analytics.google.com) and its API.
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
@@ -28,7 +27,6 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 **account ID**
 
-<!-- prettier-ignore -->
 | `Account Settings` → `Basic Settings` → `Account Id`
 
 - format: `\d+`
@@ -42,7 +40,6 @@ Administration page has 3 columns: ACCOUNT - PROPERTY - VIEW.
 
 it's displayed in both places:
 
-<!-- prettier-ignore -->
 | `Property Settings` → `Basic Settings` → `Tracking Id`
 | `Tracking Info` → `Tracking Code` → `Tracking ID`
 
@@ -59,7 +56,6 @@ it's displayed in both places:
 
 **view ID (profile ID)**
 
-<!-- prettier-ignore -->
 | `View Settings` → `Basic Settings` → `View ID`
 
 - format: `\d+`
@@ -80,7 +76,6 @@ NOTE: not displayed in UI
 
 1. <https://console.developers.google.com>
 
-<!-- prettier-ignore -->
 | `Credentials` (left sidebar) → `Credentials` → `Credentials` (tab)
 
 OAuth 2.0 client IDs:
@@ -189,7 +184,6 @@ to get Google Analytics data it's necessary to approve at least the last scope.
 APIs Explorer provides its own default credentials (client ID and client secret)
 when executing queries. or else it's possible to provide custom credentials:
 
-<!-- prettier-ignore -->
 | `Settings` (icon in upper right corner) → `Set API key / OAuth 2.0 Client ID` → `Custom credentials`
 
 as a rule using default credentials must be sufficient as it's all the same it's

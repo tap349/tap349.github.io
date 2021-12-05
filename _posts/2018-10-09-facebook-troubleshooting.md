@@ -9,7 +9,6 @@ categories: [facebook]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

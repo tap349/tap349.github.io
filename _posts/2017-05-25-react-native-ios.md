@@ -11,7 +11,6 @@ categories: [react-native, ios]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
@@ -1216,7 +1215,6 @@ Multiple commands produce '...libReact.a':
 
 1. <https://github.com/facebook/react-native/issues/20492#issuecomment-422958184>
 
-<!-- prettier-ignore -->
 > <https://github.com/facebook/react-native/issues/20492#issuecomment-422958184>
 >
 > The following is needed to ensure the "archive" step works in XCode. It

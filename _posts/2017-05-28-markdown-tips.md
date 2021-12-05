@@ -9,7 +9,6 @@ categories: [markdown]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

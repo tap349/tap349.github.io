@@ -1,0 +1,45 @@
+---
+layout: post
+title: GPG - Tips
+date: 2019-06-27 18:14:06 +0200
+access: public
+comments: true
+categories: [gpg]
+---
+
+<!-- @format -->
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+## encrypt/decrypt file with a symmetric cipher
+
+1. <https://www.gnupg.org/gph/en/manual/x110.html>
+
+### read passphrase from file
+
+```gpg
+# ~/.gnupg/gpg.conf
+
+passphrase-file /Users/tap/.gnupg/passphrase
+```
+
+### encrypt
+
+```sh
+$ gpg -c foo.txt
+$ ls
+foo.txt foo.txt.gpg
+```
+
+### decrypt
+
+```sh
+$ gpg -d -o bar.txt foo.txt.gpg
+$ ls
+bar.txt foo.txt foo.txt.gpg
+```

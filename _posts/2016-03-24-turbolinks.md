@@ -11,7 +11,6 @@ notes about turbolinks.
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

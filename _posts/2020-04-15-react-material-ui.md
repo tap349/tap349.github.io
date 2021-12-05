@@ -11,7 +11,6 @@ categories: [react, mui]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

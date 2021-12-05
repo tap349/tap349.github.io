@@ -11,7 +11,6 @@ categories: [react-native, android]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>
@@ -262,7 +261,6 @@ else you'll get `String resource ID #0x0` error.
 
 #### run application on real device
 
-<!-- prettier-ignore -->
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
 #### troubleshooting
@@ -395,7 +393,6 @@ environments - just don't forget to forward ports in `development` environment.
 
 #### run or install application on real device
 
-<!-- prettier-ignore -->
 1. [React Native - Running on Real Device]({% post_url 2018-03-05-react-native-running-on-real-device %})
 
 NOTE: application (being installed now) and APK (uploaded to GPC) must have the
@@ -613,14 +610,12 @@ Purchase or subscribe failed with error: <error_code>
 
 > Tax form questions
 
-<!-- prettier-ignore -->
 - `Are you a US citizen, US resident alien, US corporation or US partnership?` (radiobutton): [x] `No`
 - `CONTINUE` (button)
 
 > Certificate of Foreign Status
 
 - `Classification` (combobox): `LLC`
-  <!-- prettier-ignore -->
 - `Signature of beneficial owner (or individual authorized to sign for beneficial owner):`
   (input): `T* Sm*`
 - `SUBMIT` (button)

@@ -16,7 +16,6 @@ into existing application with traditional HTML templates.
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

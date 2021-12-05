@@ -11,7 +11,6 @@ categories: [lecture]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

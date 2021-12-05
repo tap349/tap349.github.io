@@ -11,7 +11,6 @@ categories: [ffmpeg]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

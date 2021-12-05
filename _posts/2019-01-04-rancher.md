@@ -9,7 +9,6 @@ categories: [docker]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

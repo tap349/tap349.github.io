@@ -9,7 +9,6 @@ categories: [sql]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -9,7 +9,6 @@ categories: [vim]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

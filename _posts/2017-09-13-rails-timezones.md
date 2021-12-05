@@ -9,7 +9,6 @@ categories: [rails]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

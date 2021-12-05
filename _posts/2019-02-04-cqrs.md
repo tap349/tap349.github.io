@@ -9,7 +9,6 @@ categories: [architecture]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

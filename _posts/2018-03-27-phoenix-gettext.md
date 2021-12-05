@@ -9,7 +9,6 @@ categories: [phoenix, gettext]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

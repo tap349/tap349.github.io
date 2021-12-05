@@ -1,0 +1,95 @@
+---
+layout: post
+title: Git - Notes
+date: 2019-06-24 22:01:16 +0200
+access: public
+comments: true
+categories: [git]
+---
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+<dl>
+  <dt>remote</dt>
+  <dd>remote repository</dd>
+
+  <dt>upstream</dt>
+  <dd>upstream branch, tracking branch, remote-tracking branch</dd>
+
+  <dt>origin</dt>
+  <dd>name for the remote a project was originally cloned from</dd>
+</dl>
+
+<hr>
+
+## upstream
+
+1. <https://stackoverflow.com/a/37770744/3632318>
+
+> <https://git-scm.com/book/id/v2/Git-Branching-Remote-Branches>
+>
+> Checking out a local branch from a remote branch automatically creates what
+> is called a “tracking branch” (or sometimes an “upstream branch”). Tracking
+> branches are local branches that have a direct relationship to a remote
+> branch. If you’re on a tracking branch and type git pull, Git automatically
+> knows which server to fetch from and branch to merge into.
+>
+> When you clone a repository, it generally automatically creates a master
+> branch that tracks origin/master.
+
+list all local branches and their upstream branches (if any):
+
+```sh
+$ git branch -vv
+```
+
+say, you create a new branch and push it into remote repository:
+
+```sh
+$ git checkout -b foo
+$ git push
+```
+
+NOTE: if remote repository is not specified, it defaults to `origin`.
+
+this is what happens as a result:
+
+```
+$ git branch -avv
+  master                d87ad32 [origin/master] misc
+* foo                   d87ad32 misc
+  remotes/origin/master d87ad32 misc
+  remotes/origin/foo    d87ad32 misc
+```
+
+- `foo` is created in local repository
+- `foo` is created in remote repository
+- `origin/foo` is created in local repository
+- `foo` doesn't track `origin/foo`
+
+there 2 ways to set upstream:
+
+- for existing branch
+
+  ```
+  $ git branch -u origin/foo
+  > Branch 'foo' set up to track remote branch 'foo' from 'origin'.
+  ```
+
+- for existing or new branch
+
+  1. <https://stackoverflow.com/a/6089415/3632318>
+
+  ```sh
+  $ git push -u
+  ```
+
+  > <https://stackoverflow.com/a/37770744/3632318>
+  >
+  > So you should supply -u flag on the first push. In fact, you can supply it
+  > on any later push, and it will set or change the upstream at that point.

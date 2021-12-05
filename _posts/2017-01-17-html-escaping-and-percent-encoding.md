@@ -9,7 +9,6 @@ categories: [phoenix, rails, html]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

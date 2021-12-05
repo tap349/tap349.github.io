@@ -30,7 +30,6 @@ namespace :post do
 
         <!-- more -->
 
-        <!-- prettier-ignore -->
         * TOC
         {:toc}
         <hr>

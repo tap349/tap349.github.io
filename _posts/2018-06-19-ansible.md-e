@@ -1,0 +1,1363 @@
+---
+layout: post
+title: Ansible
+date: 2018-06-19 01:34:36 +0300
+
+access: public
+comments: true
+categories: [ansible]
+---
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+<dl>
+  <dt>Ansible project</dt>
+  <dd>= playbook project</dd>
+
+  <dt>playbook</dt>
+  <dd>consists of plays</dd>
+
+  <dt>play</dt>
+  <dd>maps a group of hosts to roles in playbook</dd>
+
+  <dt>import_role</dt>
+  <dd>= module, directive or statement</dd>
+
+  <dt>included role</dt>
+  <dd>role loaded using import_role or include_role</dd>
+
+  <dt>recursive loop</dt>
+  <dd>infinite recursion</dd>
+
+  <dt>passing through variables</dt>
+  <dd>
+    passing variables to template or included role which are defined in
+    terms of already existing variables with the same name and in the same
+    scope (say, {% raw %}<code>foo: "{{ foo }}"</code>{% endraw %})
+  </dd>
+</dl>
+
+<hr>
+
+1. <https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html>
+2. <https://github.com/leucos/ansible-tuto>
+3. <https://semaphoreci.com/community/tutorials/how-to-deploy-rails-applications-with-ansible-capistrano-and-semaphore>
+
+installation
+------------
+
+```sh
+$ brew install ansible
+```
+
+usually Python is installed on remote node via task but it can be installed
+manually as well - say, to be able to run ad-hoc commands:
+
+```sh
+$ ssh sithex
+# apt install python
+```
+
+configuration
+-------------
+
+### SSH config entry
+
+add SSH config entry for remote node:
+
+```sshconfig
+# .ssh/config
+
+Host sithex
+ User sithex
+ Hostname DIGITAL_OCEAN_IP
+ IdentityFile ~/.ssh/id_rsa
+ ForwardAgent yes
+```
+
+### SSH user
+
+1. <https://docs.ansible.com/ansible/2.4/intro_configuration.html#remote-user>
+
+> <https://stackoverflow.com/a/36677811>
+>
+> Besides, ansible_user is used when we want to specifiy default SSH user in
+> ansible hosts file where as remote_user is used in playbook context.
+
+by default user from corresponding entry in SSH config is used but it might
+be app user (like in SSH config entry above) so it's better to specify SSH
+user to run Ansible as explicitly:
+
+```cfg
+# ansible.cfg
+
+[defaults]
+
+# formerly known as `user`
+remote_user = root
+```
+
+now it's necessary to copy your SSH public key to remote node (unless
+it's already done - say, in DigitalOcean Control Panel):
+
+```sh
+$ ssh-copy-id -i ~/.ssh/id_rsa.pub root@sithex
+/ enter root password
+$ ssh root@sithex
+```
+
+NOTE: it's considered to be not very secure to permit root login via SSH.
+
+### inventory file
+
+> <https://github.com/leucos/ansible-tuto/tree/master/step-03>
+>
+> Hosts in inventory can be grouped arbitrarily. For instance, you could
+> have a debian group, a web-servers group, a production group, etc...
+
+```yaml
+[web]
+sithex
+```
+
+`[web]` here is a group name (optional).
+
+running
+-------
+
+by default Ansible assumes inventory file is stored in _/etc/ansible/hosts_.
+unless you store it there you'll get this error when running any command:
+
+```sh
+$ ansible francesca -m ping
+ [WARNING]: Unable to parse /etc/ansible/hosts as an inventory source
+ [WARNING]: No inventory was parsed, only implicit localhost is available
+ [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+ [WARNING]: Could not match supplied host pattern, ignoring: francesca
+```
+
+to fix this error specify inventory file path explicitly with `-i` option:
+
+```sh
+$ ansible francesca -i inventories/prod/hosts -m ping
+```
+
+### ad-hoc commands
+
+1. <https://docs.ansible.com/ansible/2.5/user_guide/intro_adhoc.html>
+
+ad-hoc commands can be useful for testing purposes to make sure everything
+is configured correctly.
+
+ping all nodes:
+
+> <https://github.com/leucos/ansible-tuto/tree/master/step-02>
+>
+> `all` is a shortcut meaning 'all hosts found in inventory file'.
+
+```
+$ ansible all -m ping
+sithex | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+execute shell command on specific node:
+
+```
+$ ansible sithex -m shell -a 'date'
+sithex | SUCCESS | rc=0 >>
+Mon Jun 18 22:58:35 UTC 2018
+```
+
+### running master playbook
+
+```sh
+$ ansible-playbook -i inventories/prod/hosts -l sithex -v site.yml
+```
+
+see `environments` and `multiple applications` sections for description
+of specified `ansible-playbook` options.
+
+notes
+-----
+
+### playbooks
+
+1. <https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html>
+
+it's better to store playbooks in Ansible project root directory (this is
+what recommended in Best Practices) since roles imported inside playbooks
+are searched for relative to current directory - and they are not found by
+their name if playbooks are stored in _playbooks/_ directory.
+
+### roles
+
+roles are executed once within one play only (where hosts are specified) -
+not across all plays and playbooks in Ansible project:
+
+> <https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html>
+>
+> Ansible will only allow a role to execute once, even if defined multiple times,
+> if the parameters defined on the role are not different for each definition.
+
+#### role dependencies
+
+> <https://docs.ansible.com/ansible/devel/user_guide/playbooks_reuse_roles.html#role-dependencies>
+>
+> Role dependencies must use the classic role definition style.
+
+```yaml
+# roles/sithexapp/meta/main.yml
+
+dependencies:
+  - role: elixir
+```
+
+> <https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html>
+>
+> Role dependencies are always executed before the role that includes them, and
+> may be recursive. Dependencies also follow the duplication rules specified above.
+
+#### role dependencies vs. `import_role` (or `include_role`)
+
+1. <https://github.com/ansible/ansible/issues/23733>
+
+it looks like they serve the same purpose - to execute a role passing parameters
+when required:
+
+{% raw %}
+```yaml
+# roles/sithexapp/meta/main.yml
+# role dependency
+
+dependencies:
+  - role: elixir
+    app_name: "{{ sithexapp_app_name }}"
+    app_user: "{{ sithexapp_app_user }}"
+
+# roles/sithexapp/tasks/main.yml
+# import_role
+
+- import_role: name=elixirapp
+  vars:
+    app_name: "{{ sithexapp_app_name }}"
+    app_user: "{{ sithexapp_app_user }}"
+```
+{% endraw %}
+
+the only difference I see is that role dependencies are always executed before
+the role that includes them while `import_role` can be inserted anywhere among
+other role tasks.
+
+in both cases roles follow duplication rules (see `roles` section above).
+
+currently I use role dependecies to install system dependencies (like install
+Elixir itself) and `import_role` - to configure application (like create users,
+directories, etc.).
+
+***UPDATE***
+
+it's easier to always use `import_role` so that all included roles are listed
+in one file (_roles/my_app/tasks/main.yml_).
+
+#### `include_role` vs. `import_role`
+
+> <https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html>
+>
+> When roles are defined in the classic manner, they are treated as static
+> imports and processed during playbook parsing.
+
+> <https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_includes.html#includes-vs-imports>
+>
+> - All import* statements are pre-processed at the time playbooks are parsed.
+> - All include* statements are processed as they encountered during the execution
+>   of the playbook.
+
+I still can't grasp the difference between these directives and use
+`import_role` one because it seems to be more strict.
+
+***UPDATE (2019-04-25)***
+
+I've found the difference between the two:
+
+> <https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#applying-when-to-roles-imports-and-includes>
+>
+> (When a conditional is used with import_* tasks) you will note a lot of
+> ‘skipped’ output by default in Ansible when using this approach on systems
+> that don’t match the criteria.
+>
+> When a conditional is used with include_* tasks instead of imports, it is
+> applied only to the include task itself and not to any other tasks within
+> the included file(s).
+
+so it's better to use `include_role` when executing the role conditionally
+and `import_role` otherwise:
+
+```yaml
+# conditional execution
+- include_vars: file=postgresql.yml
+- include_role: name=postgresql
+  when: elixirapp_postgresql is defined
+
+# not conditional execution
+- include_vars: file=elixir.yml
+- import_role: name=elixir
+```
+
+otherwise if role is imported (not included) conditionally, `when` statement
+is applied to each task inside the role but these tasks are still evaluated:
+
+```yaml
+- name: Create nginx dirs
+  file:
+    path: "{{ item.value }}"
+    owner: "{{ nginx_app_user }}"
+    group: "{{ nginx_app_user }}"
+    mode: 0755
+    state: directory
+  loop: "{{ nginx_dirs | dict2items }}"
+```
+
+in this example `loop` value is always calculated even if `file` task is not
+run in the end - but if `nginx_dirs` is undefined, error will be raised.
+
+it's not what you generally want since if you're not going to execute `nginx`
+role at all, you don't care about any variables used inside the role.
+
+#### role parameters
+
+1. <https://serverfault.com/a/758391>
+
+when I import another role I define its parameters in _vars/_ directory
+(in a separate file named after imported role) - instead of passing these
+parameters to the role directly in `vars` section.
+
+so now role parameters are not available to imported role only - they just
+happen to be used in that role only because of role prefix. and on another
+side imported role verifies required variables are defined.
+
+### tasks
+
+#### `pre_tasks` section
+
+> <https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html#play>
+>
+> pre_tasks
+>   A list of tasks to execute before roles.
+
+> <https://github.com/Mohitsharma44/ansible-playbooks/wiki/vars-pre-post-and-handlers#pre_tasks-and-post_tasks>
+>
+> A general use case for pre_task could be when you need to make sure that your
+> system package manager's cache is updated.
+
+### variables
+
+1. <https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html>
+
+passed variables propagate to all included roles: say, role A → role B → role C.
+if role A passes `foo` variable to role B, this variable is available in role C
+too without passing it to role C explicitly - it's true for both `include_role`
+and `import_role` modules.
+
+read more about flat namespace in `style guide` section (the rule about using
+role prefix for all variables).
+
+#### `vars` section
+
+> <https://stackoverflow.com/a/42109037>
+>
+> Role variables defined in `vars` have a very high precedence - they can only
+> be overwritten by passing them on the command line, in the specific task or in
+> a block. Therefore, almost all your variables should be defined in `defaults`.
+
+#### `vars` directory
+
+> <https://codereviewvideos.com/course/ansible-tutorial/video/variable-precedence-where-to-put-your-role-vars>
+>
+> I use `vars` directory for system specific variables.
+>
+> Everything else - all standard, shared variables we would need and anything
+> we want the user of our Role to override should go in `defaults/main.yml`.
+
+=> use _vars/_ directory for all app role variables which are not meant to be
+configured from outside and for role parameters (see above).
+
+### templates
+
+{% raw %}
+for some reason both `{% if ... %}` and `{% endif %}` statements indent the
+next line - use `{% if ... -%}` to disable indentation of the first line of
+the block and `{%- endif %}` with empty line to disable indentation of the
+first line after the block (it's kind of a hack: `{%- endif %}` effectively
+removes the next empty line by removing newline at the end of current line):
+{% endraw %}
+
+{% raw %}
+```conf
+# roles/nginx/templates/app_site.j2
+
+server {
+  # ...
+
+  {% if use_ssl -%}
+  ssl_certificate {{ ssl_certificate }};
+  ssl_certificate_key {{ ssl_certificate_key }};
+
+  ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers "RC4:HIGH:!aNULL:!MD5:!kEDH";
+  {%- endif %}
+
+}
+```
+{% endraw %}
+
+### file and template paths
+
+NOTE: template paths would use _templates/_ directory instead -
+      all the rules below still apply.
+
+file paths can be specified relative to:
+
+- _files/_ directory (inside current role)
+
+  {% raw %}
+  ```yaml
+  # roles/sithexapp/tasks/secrets.yml
+
+  - name: Create secrets file
+    copy:
+      # => roles/sithexapp/files/prod.secret.exs
+      src: "{{ env }}.secret.exs"
+      dest: "/var/{{ env }}.secret.exs"
+      owner: "{{ sithexapp_app_user }}"
+      group: "{{ sithexapp_app_user }}"
+      mode: 0660
+  ```
+  {% endraw %}
+
+- Ansible project root
+
+  {% raw %}
+  ```yaml
+  # roles/sithexapp/tasks/secrets.yml
+
+  - name: Create secrets file
+    copy:
+      # => roles/sithexapp/files/prod.secret.exs
+      src: "roles/sithexapp/files/{{ env }}.secret.exs"
+      dest: "/var/{{ env }}.secret.exs"
+      owner: "{{ sithexapp_app_user }}"
+      group: "{{ sithexapp_app_user }}"
+      mode: 0660
+  ```
+  {% endraw %}
+
+  this path can be passed as an argument to another role:
+
+  {% raw %}
+  ```yaml
+  # roles/sithexapp/tasks/main.yml
+
+  - include_role: name=elixirapp
+    vars:
+      app_name: "{{ sithexapp_app_user }}"
+      app_user: "{{ sithexapp_app_user }}"
+      secrets_path: "roles/sithexapp/files/{{ env }}.secret.exs"
+  ```
+  {% endraw %}
+
+#### trailing slashes
+
+1. <https://docs.ansible.com/ansible/2.6/modules/copy_module.html>
+
+file and template paths should never end with `/` in variables - add
+trailing slash in task arguments only (so that it's easy to say if
+task argument has trailing slash or not without looking up variable
+definition).
+
+```yaml
+# roles/lainapp/vars/elixirapp.yml
+
+elixirapp_secrets_dir: "roles/lainapp/files/config"
+```
+
+{% raw %}
+```yaml
+# roles/elixirapp/tasks/secrets.yml
+
+- name: Upload secret files
+  copy:
+    src: "{{ elixirapp_secrets_dir }}"
+    dest: "/var/{{ elixirapp_app_name }}"
+```
+{% endraw %}
+
+### handlers
+
+1. <http://codeheaven.io/15-things-you-should-know-about-ansible/#handlers-are-special-types-of-tasks>
+
+in some guides use of handlers is discouraged but still they can be useful in
+that they are not run if the task that triggers them hasn't changed the state.
+
+***UPDATE (2019-02-27)***
+
+hanlders are run on change only (when corresponding task makes a change on the
+remote system) and at the very end of play (after all roles are executed).
+
+tips
+----
+
+1. <http://codeheaven.io/15-things-you-should-know-about-ansible/>
+
+### common roles directory for Ansible projects
+
+> <https://docs.ansible.com/ansible/devel/user_guide/playbooks_reuse_roles.html#role-search-path>
+>
+> In Ansible 1.4 and later you can configure an additional roles_path to
+> search for roles. Use this to check all of your common roles out to one
+> location, and share them easily between multiple playbook projects.
+
+### (how to) omit parameters when executing the role
+
+> <https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#omitting-parameters>
+>
+> it is possible to use the default filter to omit variables and module
+> parameters using the special `omit` variable
+
+it may be useful, say, to take advantage of optional parameters with default
+values - they will spring into action only when variable is not passed at all:
+
+{% raw %}
+```yaml
+# roles/elixirapp/tasks/main.yml
+
+- import_role: name=nginx
+  vars:
+    nginx_port: "{{ undefined_variable | default(omit) }}"
+    # or
+    nginx_port: "{{ dict['non_existing_key'] | default(omit) }}"
+```
+{% endraw %}
+
+### (how to) override `changed` status
+
+1. <https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html#overriding-the-changed-result>
+2. <https://www.middlewareinventory.com/blog/ansible-changed_when-and-failed_when-examples>
+
+for example shell command to generate locale always returns `changed` status
+which is not very useful.
+
+{% raw %}
+```yaml
+# report `changed` status only when shell command output doesn't contain
+# 'already the newest version' string
+- name: Install Python
+  raw: apt-get -y install python-minimal
+  register: result
+  changed_when: "'already the newest version' not in result.stdout"
+
+# never report `changed` status
+- name: Generate locale
+  shell: "locale-gen {{ common_locale }}"
+  changed_when: false
+
+# report `changed` status when command failed (its exit status is not 0)
+- name: Check nginx config
+  command: nginx -t
+  register: result
+  ignore_errors: true
+  changed_when: result is failed
+  # same as:
+  # changed_when: "result.rc != 0"
+```
+{% endraw %}
+
+(how to) print error or warning
+-------------------------------
+
+1. <https://medium.com/opsops/how-to-print-warning-from-a-task-3286ebb39f40>
+
+`fail` module is better suited to print errors or warnings than `debug` module
+in that the former uses a red color:
+
+```yaml
+- name: Redeploy application
+  fail:
+    msg: Redeploy application for changes to take effect
+  ignore_errors: true
+```
+
+style guide
+-----------
+
+1. <https://openedx.atlassian.net/wiki/spaces/OpenOPS/pages/26837527/Ansible+Code+Conventions>
+
+### don't extract variables into _vars/*.yml_ files unless necessary
+
+it's necessary if these variables are used/included in many places or they
+contain lots of data which might be hard to inline (say, SSH keys).
+
+don't extract, say, packages to install or directories to create which are
+used in one task only:
+
+{% raw %}
+```diff
+  # roles/common/tasks/packages.yml
+
+  - include_vars: file=packages.yml
+
+  - name: Install common packages
+    apt:
+      name: "{{ item }}"
+      update_cache: yes
+      cache_valid_time: 3600
+      state: present
+-   loop: "{{ common_packages }}"
++   loop:
++     - git
++     - htop
++     - mc
++     - ccze
+```
+{% endraw %}
+
+### update package index implicitly with caching
+
+1. <https://github.com/LunarLogic/ansible-elixir-playbooks/blob/master/roles/install_postgresql/0.0.1/tasks/main.yml>
+
+NOTE: package index is known as `apt cache` in Ansible docs:
+
+> <https://docs.ansible.com/ansible/latest/modules/apt_module.html>
+>
+> cache_valid_time
+>   Update the apt cache if its older than the cache_valid_time.
+
+{% raw %}
+```yaml
+# roles/common/tasks/packages.yml
+
+# update explicitly
+- name: Update package index
+  apt:
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+# [RECOMMENDED] update implicitly
+- name: Install common packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  loop: "{{ packages }}"
+```
+{% endraw %}
+
+### never pass `env` variable to roles and templates explicitly
+
+treat it like a global variable which is available everywhere and
+don't check it's defined before role execution - assume it always is.
+
+### use role prefix for all variables inside the role
+
+1. <https://github.com/ansible/ansible/issues/12373>
+2. <https://www.reddit.com/r/ansible/comments/7dd56v/flat_namespace_why>
+
+> <https://blog.opsfactory.rocks/ansible-roles-and-default-variables-9bcd379bae3f>
+>
+> When writing your default variables, namespace them. Ansible’s
+> memory model for variables is essentially flat and global.
+
+prefix all role variables (both passed to the role from outside and defined
+inside _vars/*.yml_ files) with a role name and use single underscore as a
+delimiter (in this case it's preferable to have terse role names consisting
+of one word if possible):
+
+{% raw %}
+```yaml
+# roles/postgresql/vars/databases.yml
+
+postgresql_databases:
+  - name: "{{ postgresql_app_name }}_{{ env }}"
+```
+{% endraw %}
+
+alternatively use double underscore as a delimiter (say, when role names contain
+underscores themselves):
+
+{% raw %}
+```yaml
+# roles/postgresql/vars/databases.yml
+
+postgresql__databases:
+  - name: "{{ postgresql__app_name }}_{{ env }}"
+```
+{% endraw %}
+
+=> anyway ALL variables inside any given role MUST have a role prefix!
+
+the only exception is `env` variable which I've decided to make available
+globally (see the previous rule).
+
+NOTE: using role-prefixed variables allows to avoid recursive loop error
+      (see `troubleshooting` section).
+
+### always pass local variables to templates
+
+1. <https://stackoverflow.com/a/38653180/3632318>
+
+just like when rendering partials in Rails: pass all local variables
+explicitly and don't reference global variables inside partials (even
+though they will be available there) - except for `env` variable (see
+the previous rule).
+
+`vars` section is used to pass local variables to the template:
+
+{% raw %}
+```yaml
+# roles/sithexapp/tasks/foo.yml
+
+- template:
+    src: "foo_{{ env }}.conf"
+    dest: "/etc/foo_{{ env }}.conf"
+    vars:
+      app_name: "{{ sithexapp_app_name }}"
+```
+{% endraw %}
+
+don't use role-prefixed variables inside the template: local variables
+must be passed to the template without a role prefix - I hope these
+variables stay local to the template and cannot sneak into other roles
+potentially causing mayhem there.
+
+{% raw %}
+```yaml
+# roles/nginx/tasks/configure.yml
+
+- name: Create app site
+  template:
+    src: app_site.j2
+    dest: "/etc/nginx/sites-available/{{ nginx_app_site }}"
+    # ...
+  vars:
+    # role-prefixed variables must be referenced through local variables
+    app_site: "{{ nginx_app_site }}"
+    # local variables cannot have a role prefix
+    ssl_certificate: "{{ nginx_ssl_dir }}/{{ nginx_app_name }}.pem"
+    ssl_certificate_key: "{{ nginx_ssl_dir }}/{{ nginx_app_name }}.key"
+    # ...
+```
+{% endraw %}
+
+NOTE: passing through variables to templates might lead to recursive
+      loop - just like when passing through variables to included roles
+      (see `troubleshooting` section below).
+
+### don't use shorthand syntax for `include_vars` module
+
+in general always use parameter names to avoid ambiguity:
+
+{% raw %}
+```yaml
+# bad
+- include_vars: dirs.yml
+
+# good
+- include_vars:
+    file: dirs.yml
+
+# also good
+- include_vars: file=dirs.yml
+```
+{% endraw %}
+
+### don't use bare conditional variables
+
+{% raw %}
+```yaml
+# bad
+- name: Upload SSL files
+  copy:
+    src: "{{ ssl_dir }}/"
+    dest: "{{ env_dir }}/nginx/ssl"
+  when: use_ssl
+
+# good
+- name: Upload SSL files
+  copy:
+    src: "{{ ssl_dir }}/"
+    dest: "{{ env_dir }}/nginx/ssl"
+  when: use_ssl | bool
+```
+{% endraw %}
+
+### when to use double-curly braces and double quotes
+
+1. <http://jinja.pocoo.org/docs/2.10/templates/>
+
+<dl>
+  <dt>Jinja2 delimiters for expressions</dt>
+  <dd>double-curly braces, literal variable delimiters</dd>
+
+  <dt>Jinja2 template</dt>
+  <dd>a string which contains variables and/or expressions</dd>
+
+  <dt>bare string</dt>
+  <dd>not Jinja2 template</dd>
+</dl>
+
+{% raw %}
+
+> <https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#when-should-i-use-also-how-to-interpolate-variables-or-dynamic-variable-names>
+>
+> A steadfast rule is 'always use {{ }} except when `when:`'. Conditionals
+> are always run through Jinja2 as to resolve the expression, so `when:`,
+> `failed_when:` and `changed_when:` are always templated and you should
+> avoid adding {{ }}.
+
+{% endraw %}
+
+- conditional statements
+
+  1. <https://github.com/ansible/ansible/issues/22397>
+
+  - don't use double-curly braces for variables
+  - don't quote templates
+  - quote string literals with single quotes
+
+  {% raw %}
+  ```yaml
+  - name: Upload SSL files
+    copy:
+      src: "{{ ssl_dir }}/"
+      dest: "{{ env_dir }}/nginx/ssl"
+    when: use_ssl | bool
+  ```
+  {% endraw %}
+
+  {% raw %}
+  ```yaml
+  - name: Install Elixir (latest)
+    apt:
+      name: elixir
+      update_cache: yes
+      cache_valid_time: 3600
+      state: latest
+    when: elixir_elixir_version == 'latest'
+  ```
+  {% endraw %}
+
+- not conditional statements
+
+  {% raw %}
+
+  > <https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#hey-wait-a-yaml-gotcha>
+  >
+  > YAML syntax requires that if you start a value with {{ foo }} you quote
+  > the whole line, since it wants to be sure you aren’t trying to start a
+  > YAML dictionary.
+
+  {% endraw %}
+
+  - use double-curly braces for variables
+  - quote templates with double quotes
+  - don't quote bare strings (including paths)
+
+  {% raw %}
+  ```yaml
+  - name: Create AWS CLI dir
+    file:
+      path: "/home/{{ backup_app_user }}/.aws"
+      owner: "{{ backup_app_user }}"
+      group: "{{ backup_app_user }}"
+      mode: 0755
+      state: directory
+  ```
+  {% endraw %}
+
+  {% raw %}
+  ```yaml
+  elixirapp_secrets:
+    dir: roles/aliceapp/files/config
+  ```
+  {% endraw %}
+
+### declare role variables
+
+1. <https://github.com/cycloidio/ansible-backup/blob/master/defaults/main.yml>
+
+I will refrain from using `role parameter` term since it's just a role variable
+defined outside the role which is meant to define variable used inside the role
+or to override default variable with the same name.
+
+types of role variables:
+
+- required variables
+- optional variables
+- default variables
+
+all role variables should be declared in _defaults/main.yml_ (it's my convention
+which is not enforced by Ansible anyhow).
+
+#### required variables
+
+required variables are checked they're defined right before role execution:
+
+> <https://coderleaf.wordpress.com/2017/07/06/ansible-check-for-required-variables-before-role-execution/>
+>
+> Ansible does not provide a standard way to check that required variables
+> are defined before executing a task.
+>
+> Ansible, relies instead on the standard mechanism of a task failing if a
+> variable being used has not been defined.
+>
+> Sometimes you want to make sure that all required variables are defined
+> before starting the tasks for a role.
+
+```yaml
+# roles/elixirapp/defaults/main.yml
+
+elixirapp_required_vars:
+  - elixirapp_app_name
+  - elixirapp_app_user
+  - elixirapp_secrets_dir
+  - elixirapp_nginx
+```
+
+{% raw %}
+```yaml
+# roles/elixirapp/tasks/main.yml
+
+- name: Check required vars
+  fail: msg="Variable '{{ item }}' is not defined"
+  when: item not in vars
+  loop: "{{ elixirapp_required_vars }}"
+
+# other tasks...
+```
+{% endraw %}
+
+#### optional variables
+
+to declare variable as optional, just exclude it from `*_required_vars`:
+
+```yaml
+# roles/elixirapp/defaults/main.yml
+
+elixirapp_required_vars:
+  - elixirapp_app_name
+  # more required vars
+
+elixirapp_optional_vars:
+  - elixirapp_backup
+```
+
+`*_optional_vars` list is used for documentation purposes only - to outline
+role's interface.
+
+still it will be necessary to check whether this variable is defined or not
+somewhere in the role:
+
+```yaml
+- import_role: name=backup
+  when: elixirapp_backup is defined
+```
+
+don't declare default variables as optional and vice versa - optional variables
+have no default values.
+
+```yaml
+# roles/elixirapp/defaults/main.yml
+
+elixirapp_required_vars:
+  - elixirapp_app_name
+  - elixirapp_app_user
+
+elixirapp_optional_vars:
+  - elixirapp_backup
+
+elixirapp_ssh:
+  keys: |-
+    ssh-rsa AAAAB3N...
+    ssh-rsa AAAAB3N...
+```
+
+#### default variables
+
+1. <https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-default-variables>
+
+default variables (`role defaults`) define role variables and initialize them
+with default values.
+
+default variables can be overridden by role parameters with the same name:
+
+> <https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html>
+>
+> Basically, anything that goes into “role defaults” (the defaults folder
+> inside the role) is the most malleable and easily overridden. Anything
+> in the vars directory of the role overrides previous versions of that
+> variable in namespace.
+
+```yaml
+# roles/nginx/defaults/main.yml
+
+nginx_required_vars:
+  - nginx_domain
+  # more required vars
+
+nginx_port: 4000
+```
+
+note that default value is used only if default variable is not overridden.
+otherwise role parameter value will be used even if it's null or undefined.
+
+however when the value of role parameter can be undefined it's possible to
+omit (ignore) this parameter when executing the role and use provided default
+value from _defaults/main.yml_ - see the tip above on how to omit parameters.
+
+***UPDATE (2019-05-30)***
+
+when I executed the role with default variables for the 2nd time during the
+same playbook run, default variable turned out undefined. maybe the error is
+caused by something else but it was gone after I replaced default variables
+with required and optional variables.
+
+### don't use tests as filters
+
+```
+$ ansible-playbook -i inventories/prod/hosts -v site.yml
+...
+[DEPRECATION WARNING]: Using tests as filters is deprecated. Instead of using
+`result|failed` use `result is failed`. This feature will be removed in version
+2.9. Deprecation warnings can be disabled by setting deprecation_warnings=False
+in ansible.cfg.
+```
+
+### use ansible-vault to encrypt sensitive information
+
+1. <https://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html>
+2. <http://codeheaven.io/15-things-you-should-know-about-ansible#use-ansible-vault-when-you-want-to-store-sensitive-information>
+
+NOTE: vaulted files and variables will be decrypted on the fly using supplied
+      vault password when playbook is run.
+
+#### configuration
+
+```diff
+  # ansible.cfg
+
+  [defaults]
+
+  remote_user = root
++ vault_password_file = .vault_pass.txt
+```
+
+```diff
+  # .gitignore
+
+  *.retry
++ .vault_pass.txt
+```
+
+_.vault_pass.txt_:
+
+```txt
+<MY_VAULT_PASSWORD>
+```
+
+#### encrypt the whole file (create vaulted file)
+
+```sh
+$ ansible-vault encrypt roles/sithexapp/files/prod.secret.exs
+```
+
+decrypt the whole file:
+
+```sh
+$ ansible-vault decrypt roles/sithexapp/files/prod.secret.exs
+```
+
+edit decrypted file:
+
+```sh
+$ EDITOR=vim ansible-vault edit roles/sithexapp/files/prod.secret.exs
+```
+
+view decrypted file:
+
+```sh
+$ PAGER=less ansible-vault view roles/sithexapp/files/prod.secret.exs
+```
+
+#### encrypt single variable (create vaulted variable)
+
+```sh
+$ ansible-vault encrypt_string AWS_SECRET_ACCESS_KEY
+!vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62383638653063373733343561376337623736343737393366353864623866613039383430393563
+          3038303761663735633163666535376165353436393566340a313166626363633539663464333132
+          61353561396636336432313364643865333630613365356333373132393961633638366231353961
+          3234316636663734640a623030643566373935346132396663336563343138303261636135656562
+          61383766346665623866653738386630613433373539396437656638633033333334653134616462
+          3165363062646530313965636364353331393436393236353834
+Encryption successful
+```
+
+encrypted string is now ready to be included in a YAML file:
+
+```yaml
+# roles/sithexapp/vars/elixirapp.yml
+
+elixirapp_awscli:
+  # ...
+  aws_secret_access_key: !vault |
+    $ANSIBLE_VAULT;1.1;AES256
+    62383638653063373733343561376337623736343737393366353864623866613039383430393563
+    3038303761663735633163666535376165353436393566340a313166626363633539663464333132
+    61353561396636336432313364643865333630613365356333373132393961633638366231353961
+    3234316636663734640a623030643566373935346132396663336563343138303261636135656562
+    61383766346665623866653738386630613433373539396437656638633033333334653134616462
+    3165363062646530313965636364353331393436393236353834
+```
+
+I guess it doesn't matter how pasted encrypted string is indented.
+
+### `template` vs. `blockinfile` vs. `lineinfile`
+
+- prefer `template` over `blockinfile`
+- prefer `blockinfile` over `lineinfile`
+
+environments
+------------
+
+1. <https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout>
+2. <https://www.digitalocean.com/community/tutorials/how-to-manage-multistage-environments-with-ansible#using-ansible-constructs-that-allow-explicit-loading-order>
+
+```yaml
+# inventories/prod/group_vars/all
+# inventories/prod/host_vars/all
+
+env: prod
+```
+
+```yaml
+# inventories/stage/group_vars/all
+# inventories/stage/host_vars/all
+
+env: stage
+```
+
+most likely it's not necessary to specify environment in _host\_vars/all_
+files (and create them too) since `all` group contains every host.
+
+now `env` variable is available in all plays and roles when inventory file
+from corresponding directory is used:
+
+```ini
+# inventories/prod/hosts
+# inventories/stage/hosts
+
+sithex
+
+[webservers]
+
+[dbservers]
+```
+
+```sh
+$ ansible-playbook -i inventories/prod/hosts -v site.yml
+```
+
+multiple applications
+---------------------
+
+there're at least 2 way to run master playbook against selected
+host (and application as a result):
+
+- *[RECOMMENDED]* use `-l`/`--limit` option to select application host
+
+  add hosts to environment-specific inventory files:
+
+  ```ini
+  # inventories/prod/hosts
+  # inventories/stage/hosts
+
+  lain
+  sithex
+  ```
+
+  add plays to master playbook:
+
+  ```yaml
+  # site.yml
+
+  - hosts: lain
+    tasks:
+      - import_role: name=lainapp
+
+  - hosts: sithex
+    tasks:
+      - import_role: name=sithexapp
+  ```
+
+  run master playbook against selected host with `-l`/`--limit` option:
+
+  ```sh
+  $ ansible-playbook -i inventories/prod/hosts -l lain -v site.yml
+  ```
+
+- create a separate inventory file for each application
+
+  these files are created in application subdirectories of _inventories/_
+  directory - each inventory file contains a single application host only
+  (as a rule - application can be deployed to multiple hosts of course):
+
+  ```ini
+  # inventories/lain/prod/hosts
+  # inventories/lain/stage/hosts
+
+  lain
+  ```
+
+  ```ini
+  # inventories/sithex/prod/hosts
+  # inventories/sithex/stage/hosts
+
+  sithex
+  ```
+
+  master playbook remains the same:
+
+  ```yaml
+  # site.yml
+
+  - hosts: lain
+    tasks:
+      - import_role: name=lainapp
+
+  - hosts: sithex
+    tasks:
+      - import_role: name=sithexapp
+  ```
+
+  run master playbook using application-specific inventory file:
+
+  ```sh
+  $ ansible-playbook -i inventories/lain/prod/hosts -v site.yml
+  ```
+
+troubleshooting
+---------------
+
+### recursive loop detected in template string
+
+1. <https://stackoverflow.com/a/21738751>
+
+passing through variables to included roles might lead to recursive loop
+inside the template:
+
+{% raw %}
+```yaml
+- template:
+    # ...
+  vars:
+    app_name: "{{ app_name }}"
+    app_user: "{{ app_user }}"
+```
+{% endraw %}
+
+{% raw %}
+```
+$ ansible-playbook -i inventories/prod/hosts -v site.yml
+...
+recursive loop detected in template string: {{ app_user }}
+```
+{% endraw %}
+
+**solution**
+
+1. <https://coderleaf.wordpress.com/2017/07/06/ansible-check-for-required-variables-before-role-execution/>
+
+there at least 2 ways to solve this problem:
+
+- don't pass through variables to roles and templates and use all currently
+  defined variables in included roles and templates without all the hassle
+  of passing them explicitly
+
+  if role A includes role B, all variables included in role A become
+  available to role B.
+
+  a major drawback of this solution is that you are not explicit about role
+  parameters and you never know right away what your role parameters are.
+
+- use unique namespace (usually a role prefix) for all variables to avoid
+  name clashes and recursive loop errors as a result
+
+  this is a recommended approach now (see `style guide` section).
+
+### variable can't be resolved when passed between more than 3 roles
+
+role A → role B → role C → role D (→ means `imports`) and variable `foo` is
+passed between roles with corresponding role prefixes: `a_foo` → `b_foo` →
+`c_foo` → `d_foo`. in the end `d_foo` should reference `a_foo` variable via
+all intermediate variables but `a_foo` turns out to be not defined in role D
+(`vars` variable doesn't contain it while it contains `b_foo` and `c_foo`):
+
+```
+d_foo = c_foo
+c_foo = b_foo
+b_foo = a_foo
+a_foo = undefined
+```
+
+**solution**
+
+TODO: still not resolved.
+
+my temporary solution is to shorten this chain of role imports by turning
+role D into a separate task inside role C.
+
+### Unable to correct problems, you have held broken packages
+
+```
+$ ansible-playbook -i inventories/prod/hosts -l eva -v site.yml
+TASK [elixir : Install Erlang] *****************************************************************
+fatal: [eva]: FAILED! => {... E: Unable to correct problems, you have held broken packages. ...}
+```
+
+**solution**
+
+try to bump Erlang version to be installed - most likely it's outdated or
+cannot be installed due to broken dependencies (in my case it was listed
+in output of `apt-cache policy erlang` command but still caused the error
+above - using the latest version helped to fix the problem).
+
+debugging
+---------
+
+### debug variables or expressions
+
+1. <https://docs.ansible.com/ansible/latest/modules/debug_module.html>
+2. <https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#defaulting-undefined-variables>
+3. <https://stackoverflow.com/a/41356234/3632318>
+
+{% raw %}
+```yaml
+# site.yml
+
+- hosts: alice
+  vars:
+    foo: 123
+  tasks:
+    - debug: msg="{{ foo }}"
+```
+{% endraw %}

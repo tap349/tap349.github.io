@@ -9,7 +9,6 @@ categories: [elasticsearch]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

@@ -9,7 +9,6 @@ categories: [react, graphql]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

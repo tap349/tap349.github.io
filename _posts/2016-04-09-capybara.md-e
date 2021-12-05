@@ -1,0 +1,657 @@
+---
+layout: post
+title: Capybara
+date: 2016-04-09 21:47:40 +0300
+access: public
+comments: true
+categories: [capybara]
+---
+
+extracts from <https://github.com/jnicklas/capybara>.
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+about
+-----
+
+key benefits:
+
+- no setup (works out of the box for Rails and Rack applications)
+- intuitive API (mimics user language)
+- switch backends without changes to tests
+- no need to manually wait for async process to complete
+
+Capybara:
+
+- is just an API that provides a layer of abstraction on top of
+  actual automation library (driver) - like Selenium WebDriver
+- is written in ruby
+- supports testing web applications written in many languages and frameworks
+  (though originally was created for testing Rails applications)
+- provides DSL for test automation
+- allows to write tests once and run them in any compatible driver
+- has built-in drivers - additional drivers are available as gems
+- handles asynchronous JS without the user even noticing
+
+installation
+------------
+
+_Gemfile_:
+
+```ruby
+gem 'capybara'
+```
+
+_rails_helper.rb_ (not required indeed):
+
+```ruby
+require 'capybara/rails'
+```
+
+RSpec integration
+-----------------
+
+_rails_helper.rb_ (not required indeed):
+
+```ruby
+require 'capybara/rspec'
+```
+
+RSpec can be configured to infer spec type from a file location (Rails only):
+
+```ruby
+RSpec.configure do |config|
+  config.infer_spec_type_from_file_location!
+end
+```
+
+in this case all specs in _spec/features/_ have type `feature` automatically
+(Capybara specs).
+
+or else just tag example groups with `type: :feature` manually
+if file location is different.
+
+drivers
+-------
+
+### using JS driver
+
+use `js: true` (or just `:js` when there are no other options) option
+to switch to JS driver (`selenium` by default).
+
+### switching drivers
+
+- set default driver globally in _rails_helper.rb_:
+
+  ```ruby
+  Capybara.default_driver = :selenium
+  # default JS driver - when `js: true` is used
+  Capybara.javascript_driver = :webkit
+  ```
+
+- set current driver temporarily in before/after blocks:
+
+  ```ruby
+  Capybara.current_driver = :webkit # before block
+  Capybara.use_default_driver       # after block
+  ```
+
+- set driver for specific test using `driver` option:
+
+  ```ruby
+  describe 'some stuff which requires js', js: true do
+    it 'will use the default js driver'
+    it 'will switch to one specific driver', driver: :webkit
+  end
+  ```
+
+switching driver creates a new session -
+you may not be able to switch in the middle of a test.
+
+### driver types
+
+headless drivers don't require display server (X11, Xvfb, etc.) -
+all drivers mentioned below except Selenium are headless.
+
+#### RackTest
+
+- default driver (`rack_test`) - fast but limited
+- doesn't support executing JS
+- headless driver
+- directly interacts with Rack interfaces -
+  doesn't require a server to be started
+- can be used with Rack applications only
+- cannot access HTTP resources outside of Rack app
+  (e.g., redirects to external sites, external APIs)
+
+for RSpec it's better to have RackTest as default driver and
+mark tests that require JS support with `js: true` to use default JS driver.
+
+#### [Selenium](https://rubygems.org/gems/selenium-webdriver)
+
+- `selenium-webdriver` gem
+- `Capybara.javascript_driver = :selenium`
+- supports executing JS
+- not headless driver (by default uses Firefox - the latter must be installed)
+
+install `chromedriver` to use Selenium with Chrome browser
+(see [below](#customizing-drivers) on how to change browser for Selenium):
+
+```sh
+$ brew install chromedriver
+```
+
+#### [Capybara-webkit](https://github.com/thoughtbot/capybara-webkit)
+
+- `capybara-webkit` gem
+- `Capybara.javascript_driver = :selenium`
+- supports executing JS
+- not pure headless driver (still relies on X11 being present in Linux)
+- wraps QtWebKit
+- requires Qt system libraries:
+
+  ```sh
+  $ brew install qt
+  ```
+
+#### [Poltergeist](https://github.com/teampoltergeist/poltergeist)
+
+- `poltergeist` gem
+- `Capybara.javascript_driver = :poltergeist`
+- supports executing JS
+- pure headless driver (no need for X11)
+- wraps PhantomJS (uses QtWebKit but makes it purely headless)
+- requires PhantomJS (installs QtWebKit as dependency):
+
+  ```sh
+  $ brew install phantomjs
+  ```
+
+require `capybara/poltergeist` in _rails_helper.rb_ to use it.
+
+### customizing drivers
+
+Capybara allows to override standard driver configuration:
+
+```ruby
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+```
+
+or register customized standard driver as a new driver:
+
+```ruby
+Capybara.register_driver :selenium_chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+```
+
+now it's possible to use `selenium_chrome` driver
+whenever you would use a standard driver.
+
+DSL
+---
+
+- by default Capybara will only locate visible elements
+- all searches are case-sensitive (because XPath is case-sensitive)
+
+### RSpec method aliases
+
+Capybara alias   | RSpec method
+-----------------|-------------------------------
+`feature`        | `describe ..., type: :feature`
+`background`     | `before`
+`scenario`       | `it`
+`given`/`given!` |  `let`/`let!`
+
+### finding elements
+
+precedence of locators (attributes or texts) elements are found by:
+
+locator    | element
+-----------|--------------------------------------------------------
+name       | inputs (file, checkbox, radio, text), textarea, select
+id         | all
+value      | inputs (submit, reset, image, button), button
+label text | inputs (file, checkbox, radio, text), select
+text       | button, link, select option
+title      | inputs (submit, reset, image, button), button, link
+
+only generic methods (`find`/`all` matchers) or methods whose name implies
+that they work with either CSS or XPath selector
+(`has_selector?`/`has_css?`/`has_xpath?` matchers) use selectors as locators.
+
+all other methods designed to work with specific elements
+(`click_link`, `has_field?`, `find_button`, etc.)
+use attribute values and texts to find corresponding elements only -
+they don't accept CSS or XPath selectors!
+
+### selectors
+
+CSS is default selector.
+
+XPath selector can be specified inline:
+
+```ruby
+find(:xpath, '//ul/li').text
+```
+
+or set as default selector:
+
+```ruby
+Capybara.default_selector = :xpath
+find('//ul/li').text
+```
+
+#### custom selectors
+
+definition:
+
+```ruby
+Capybara.add_selector(:row) do
+  xpath { |num| ".//tbody/tr[#{num}]" }
+end
+
+Capybara.add_selector(:flash_type) do
+  css { |type| "#flash.#{type}" }
+end
+```
+
+usage:
+
+```ruby
+find(:row, 3)
+find(:flash_type, :notice)
+```
+
+### navigation
+
+- `visit`:
+
+  ```ruby
+  visit('/projects')
+  visit(post_comments_path(post))
+  ```
+
+### actions (clicking)
+
+<http://www.rubydoc.info/github/jnicklas/capybara/master/Capybara/Node/Actions>
+
+- `click_button`
+- `click_link`
+- `click_link_or_button` (also: `click_on`)
+
+### actions (interacting with forms)
+
+<http://www.rubydoc.info/github/jnicklas/capybara/master/Capybara/Node/Actions>
+
+common actions:
+
+- `fill_in` (fill text input or textarea)
+- `choose` (mark radio button as checked)
+- `check` / `uncheck` (mark checkbox as checked or unchecked)
+- `select` (select particular option from select box)
+- `attach_file` (attach file given its path)
+
+### matchers (querying)
+
+<http://www.rubydoc.info/github/jnicklas/capybara/master/Capybara/Node/Matchers>
+
+matchers check if page or current node have specified elements or text.
+
+generic Capybara matchers:
+
+- `has_selector?` (`has_xpath?`/`has_css?`)
+- `has_text?` (also: `has_content?`)
+
+specific matchers (not all):
+
+- `has_field?`
+- `has_link?`
+- `has_button?`
+
+all Capybara matchers have corresponding Capybara RSpec matchers:
+
+- `has_selector?` -> `have_selector`
+- `has_text?` -> `have_text`
+
+### finders
+
+<http://www.rubydoc.info/github/jnicklas/capybara/master/Capybara/Node/Finders>
+
+finders like actions or matchers use selectors to find elements.
+
+generic finders:
+
+- `find` to find one element
+- `all` to find all elements
+
+specific finders (not all):
+
+- `find_field`
+- `find_link`
+- `find_button`
+- `find_by_id`
+
+### scoping
+
+generic method is `within` - it uses selector to restrict actions
+within a specific area of the page or node.
+
+specific scoping methods:
+
+- `within_fieldset`
+- `within_table`
+
+### scripting
+
+**NOTE**: only if driver supports executing JS.
+
+- `execute_script` (doesn't returt the result - for complicated scripts)
+- `evaluate_script` (return the result of the script - for simple scripts)
+
+```ruby
+page.execute_script("$('body').empty()")
+result = page.evaluate_script('4 + 4')
+```
+
+### modals
+
+**NOTE**: only if supported by driver.
+
+wrap code that produces modal in a block:
+
+- `accept_alert` / `dismiss_alert`
+- `accept_confirm` / `dismiss_confirm`
+- `accept_prompt` / `dismiss_prompt`
+
+example:
+
+```ruby
+accept_alert do
+  click_link('Show Alert')
+end
+```
+
+### debugging
+
+- `save_and_open_page` - open page in browser as it currently is
+- `print page.html` - get current state of DOM as a string
+
+if supported by driver and `capybara-screenshot` gem is installed:
+
+- `page.save_screenshot('screenshot.png')`
+- `save_and_open_screenshot`
+
+matching
+--------
+
+how Capybara finds elements is customized using 2 options:
+
+- `Capybara.exact`
+- `Capybara.match`
+
+### exactness (`Capybara.exact`)
+
+- if `true` partial matches are not allowed
+- false by default
+
+can be set:
+
+- in _rspec_helper.rb_:
+
+  ```ruby
+  Capybara.exact = true
+  ```
+
+- inline for particular test (overrides global value):
+
+  ```ruby
+  click_link("Password", exact: false)
+  ```
+
+### strategy  (`Capybara.match`)
+
+- controls how Capybara behaves when multiple elements match a query
+
+4 strategies:
+
+- `first` - pick the 1st element that matches (either exact or partial match)
+- `one` - raise error if >1 element matches (default for Capybara 2.0.x)
+- `smart` (default for current Capybara - 2.7.0):
+  - `exact` is `true` (the same as `one`):
+    1. try to find exact match - raise error if >1 element matches
+  - `exact` is `false`:
+    1. try to find exact match - raise error if >1 element matches
+    2. try to find partial match - raise error if >1 element matches
+- `prefer_exact` - pick the 1st exactly matching element (default for Capybara 1.x)
+
+transactions
+------------
+
+1. <https://relishapp.com/rspec/rspec-rails/docs/transactions>
+
+for some drivers (Selenium) Capybara starts an actual HTTP server in
+the same process but in a separate thread.
+RackTest is not one of these drivers - it uses Rack interface to interact
+with your application.
+
+this might pose a problem when accessing DB since transactions are not
+shared among threads - Capybara will not see changes made to DB.
+
+**solution**
+
+- turn off running each test (example) within a transaction by RSpec
+  (`use_transactional_fixtures` option must be `false`)
+- use database truncation instead of wrapping specs in transactions
+  for all drivers but RackTest
+  (configure this with `database_cleaner` gem)
+
+_spec/rails_helper.rb_
+(DatabaseCleaner configuration section is from DatabaseCleaner's
+[README](https://github.com/DatabaseCleaner/database_cleaner#rspec-with-capybara-example)):
+
+```ruby
+RSpec.configure do |config|
+  # true by default
+  config.use_transactional_fixtures = false
+end
+
+#------------------------------------------------------------------------------
+# DatabaseCleaner
+#------------------------------------------------------------------------------
+
+RSpec.configure do |config|
+  config.before(:suite) do
+    if config.use_transactional_fixtures?
+      raise(<<-MSG)
+        Don't let RSpec run examples in transactions -
+        let DatabaseCleaner decide whether to do it or not.
+      MSG
+    end
+
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, type: :feature) do
+    if Capybara.current_driver != :rack_test
+      DatabaseCleaner.strategy = :truncation
+    end
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.append_after(:each) do
+    DatabaseCleaner.clean
+  end
+end
+```
+
+Ajax
+----
+
+Capybara waits for elements to appear on page - it retries finding the element
+for a brief period of time (2 seconds by default) before giving up and throwing
+error. this period can be adjusted:
+
+```ruby
+Capybara.default_max_wait_time = 5
+```
+
+Capybara retries finding the element for 2 seconds only if it's not found.
+if it's necessary to check that the element is not present after Ajax request
+use `has_no_XXX?` matchers instead since they wait for the asynchronous process
+to complete while `has_XXX?` matchers check presence of the element immediately
+and falsely return true:
+
+```ruby
+!page.has_xpath?('a')   # finds <a> element (but shouldn't)
+page.has_no_xpath?('a') # doesn't find <a> element (okay)
+```
+
+this doesn't concern Capybara RSpec matchers - these statements are equivalent:
+
+```ruby
+expect(page).not_to have_xpath('a')
+expect(page).to have_no_xpath('a')
+```
+
+both of them wait for the asynchronous process to complete before checking
+the element for the presence.
+
+calling remote servers
+----------------------
+
+RackTest driver doesn't support calling remote servers -
+in-process Rack applications only.
+
+to work with remote server:
+
+```ruby
+Capybara.current_driver = :selenium
+Capybara.app_host = 'http://www.google.com'
+...
+visit('/')
+```
+
+or else visit URL directly:
+
+```ruby
+visit('http://www.google.com')
+```
+
+if working with remote server it's not necessary to boot rack application -
+you can configure Capybara not to do it automatically:
+
+```ruby
+Capybara.run_server = false
+```
+
+structure of feature specs
+--------------------------
+
+- **feature** - some UI step that is tested (sign in, sign out, payment, etc.)
+- **scenario** - user path (success, failure, robokassa payment, bank payment, etc.)
+
+steps to implement feature spec:
+
+- visit page
+- do user action (click UI element, fill in the form and submit it, etc.)
+- check the result:
+  - current path (using `current_path` helper)
+  - presence or absence of UI elements (using matchers) -
+    either on the whole page (`page`) or
+    inside container UI elements found with finders
+  - database state (if relevant)
+
+don't test internal application logic that doesn't depend on user actions -
+e.g. redirects that depend on system state managed by application itself.
+
+if something is easier to test with unit tests then it shouldn't be tested
+with feature specs.
+
+troubleshooting
+---------------
+
+### domain is set to `example.com` in tests
+
+- <http://stackoverflow.com/a/23235547>
+- <http://stefan.magnuson.co/articles/rails/robust-integration-testing-in-rails-4-with-rspec-capybara-and-selenium/>
+
+all in all don't test against domain - use `_path` helpers only.
+
+### `login_as` method doesn't log in user
+
+TODO: still not resolved.
+
+***UPDATE***
+
+try [this](https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara#capybara-and-poltergeist).
+
+### assets (both CSS and JS) are not served when using any JS driver
+
+in my case the problem was that both CSS and JS application manifests were not
+linked using asset tag helpers (`stylesheet_link_tag` and `javascript_include_tag`)
+in application layout file (_application.html.slim_) for test Rails environment:
+
+```ruby
+- unless Rails.env.test?
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+```
+
+also rendering jivosite partial resulted in JS error about `$` being undefined:
+
+```ruby
+= render 'application/jivosite'
+```
+
+but this is not critical and doesn't influence loading application manifests.
+
+### debugging commands hang when using `binding.pry` with `webkit` driver
+
+use `selenium` driver or first insert debugging commands before `binding.pry`
+and only then run your specs (hang occurs only when issuing debugging commands
+after code execution has been paused by `binding.pry`).
+
+### `selenium` driver sometimes fails to locate elements
+
+when using `selenium` driver Capybara sometimes fails to locate elements
+(links in my case) on page.
+increasing `Capybara.default_max_wait_time` doesn't help.
+
+for some reason it doesn't happen when using `webkit` driver.
+
+### most likely `find_field` doesn't work with submit inputs
+
+just find submit inputs with `find`: `find("input[type='submit']")`.
+
+### persisted data is not available in tests
+
+sure there might be different reasons for this including wrapping tests
+in transactions (see [transactions](#transactios)) but it my case the problem
+was as following:
+
+- click link that submits form to payments controller
+- get payment persisted in payments controller action
+
+but the payment is `nil`.
+
+the point is that when reading database in spec you don't wait till controller
+action is completed and page fully rendered - unlike Capybara matchers or finders.
+
+that is why it's necessary to wait till new page is ready and the simplest way
+to do it is to use some Capybara matcher (e.g. checking `current_page` before
+reading database).

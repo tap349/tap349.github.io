@@ -11,7 +11,6 @@ categories: [jekyll]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

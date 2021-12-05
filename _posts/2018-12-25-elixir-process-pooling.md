@@ -9,7 +9,6 @@ categories: [poolboy, flow]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

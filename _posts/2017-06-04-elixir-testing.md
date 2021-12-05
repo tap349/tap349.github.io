@@ -9,7 +9,6 @@ categories: [elixir, testing]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

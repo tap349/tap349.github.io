@@ -1,0 +1,106 @@
+---
+layout: post
+title: MacVim
+date: 2019-06-21 02:29:09 +0200
+access: public
+comments: true
+categories: [macvim]
+---
+
+<!-- @format -->
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+## compilation
+
+NOTE: use the same Ruby version to compile MacVim and Command-T!
+
+### manually
+
+1. <https://github.com/macvim-dev/macvim/wiki/Building>
+
+if you don't specify Ruby version with `ASDF_RUBY_VERSION`, Ruby version from
+_~/.tool-versions_ is used.
+
+if system Ruby version and Ruby version from _~/.tool-versions_ differ, prefer
+system Ruby because its version changes less frequently.
+
+MacVim:
+
+```sh
+$ ASDF_RUBY_VERSION=system ./configure --enable-rubyinterp \
+                                       --enable-pythoninterp \
+                                       --enable-perlinterp \
+                                       --enable-cscope
+$ ASDF_RUBY_VERSION=system make
+```
+
+Command-T:
+
+```sh
+$ ASDF_RUBY_VERSION=system ruby extconf.rb && make
+```
+
+### via Homebrew
+
+MacVim Homebrew formula has `ruby` dependency but current Ruby version in
+Homebrew is 2.6.5. MacVim bottle (binary package) must have been compiled
+against this Ruby version => it's necessary to install Ruby 2.6.5 locally
+too to compile Command-T extension so that Ruby versions match.
+
+MacVim:
+
+```sh
+$ asdf plugin-update ruby
+$ asdf install ruby 2.6.5
+$ asdf global ruby 2.6.5
+$ brew install macvim
+```
+
+Command-T:
+
+```sh
+$ ruby extconf.rb && make
+```
+
+NOTE: even when building MacVim from source (`brew install macvim --HEAD`),
+Ruby installed via Homebrew is used => it doesn't make sense to set specific
+Ruby version with `ASDF_RUBY_VERSION` or via _~/.tool-versions_ - it will be
+ignored.
+
+## preferences
+
+1. <https://github.com/macvim-dev/macvim/wiki/FAQ>
+2. `:h macvim-prefs` (in vim)
+
+### set preferences
+
+in general preferences are set by specifying their type and value:
+
+```sh
+$ default write org.vim.MacVim MMShowAddTabButton -bool false
+```
+
+in most cases, I guess, type can be omitted:
+
+```sh
+$ default write org.vim.MacVim MMShowAddTabButton 0
+$ default write org.vim.MacVim MMShowAddTabButton false
+```
+
+### reset current preferences
+
+```sh
+$ defaults delete org.vim.MacVim
+```
+
+### show current preferences
+
+```sh
+$ defaults read org.vim.MacVim
+```

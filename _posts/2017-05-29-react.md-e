@@ -1,0 +1,66 @@
+---
+layout: post
+title: React
+date: 2017-05-29 10:12:57 +0300
+access: public
+comments: true
+categories: [react]
+---
+
+extracts from React's 'Quick Start'.
+
+<!-- more -->
+
+<!-- prettier-ignore -->
+* TOC
+{:toc}
+<hr>
+
+tutorial
+--------
+
+<https://facebook.github.io/react/docs/rendering-elements.html>:
+
+> thinking about how the UI should look at any given moment rather
+> than how to change it over time eliminates a whole class of bugs
+
+<https://facebook.github.io/react/docs/components-and-props.html>:
+
+> Components accept arbitrary inputs (called "props") and return
+> React elements describing what should appear on the screen.
+
+components can be defined using plain function or ES6 class:
+
+```javascript
+// functional component
+function Welcome (props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+// class component
+class Welcome extends React.Component {
+  render () {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+```
+
+elements can also represent user-defined components:
+
+```javascript
+const element = <Welcome name="Sara" />;
+```
+
+> When React sees an element representing a user-defined component,
+> it passes JSX attributes to this component as a single object called "props".
+
+> Components must return a single root element.
+
+> if a part of your UI is used several times (Button, Panel) or is complex enough
+> on its own (App, Comment), it is a good candidate to be a reusable component.
+
+> All React components must act like pure functions with respect to their props.
+
+<https://facebook.github.io/react/docs/state-and-lifecycle.html>:
+
+class components have additional features: local state and lifecycle hooks.

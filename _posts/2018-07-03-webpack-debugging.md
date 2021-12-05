@@ -9,7 +9,6 @@ categories: [webpack]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

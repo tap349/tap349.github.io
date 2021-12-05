@@ -9,7 +9,6 @@ categories: [rpi]
 
 <!-- more -->
 
-<!-- prettier-ignore -->
 * TOC
 {:toc}
 <hr>

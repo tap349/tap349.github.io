@@ -13,7 +13,7 @@ categories: []
 {:toc}
 <hr>
 
-## Print result in threading macros
+## Print intermediate result in threading macros
 
 ```clojure
 (→ "foo"

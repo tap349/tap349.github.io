@@ -228,6 +228,8 @@ iOS emulator.
     - [x] Select the previous input source: Command-Space
   - Spotlight:
     - [x] Show Spotlight search: Control-Space
+  - Keyboard:
+    - [ ] Show contextual menu
 - Input Sources (tab):
   - Dvorak
   - Russian - PC
